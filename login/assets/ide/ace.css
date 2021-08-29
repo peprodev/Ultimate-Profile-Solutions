@@ -1,0 +1,29 @@
+/**
+ * @Author: Amirhosseinhpv
+ * @Date:   2021/08/16 11:04:32
+ * @Email:  its@hpv.im
+ * @Last modified by:   Amirhosseinhpv
+ * @Last modified time: 2021/08/16 11:43:14
+ * @License: GPLv2
+ * @Copyright: Copyright © Amirhosseinhpv (https://hpv.im), all rights reserved.
+ */
+
+
+.ace_editor {
+	height: 400px !important;
+	min-height: 400px !important;
+	border-radius: 4px;
+	-webkit-user-select: text !important;
+     -moz-user-select: text !important;
+      -ms-user-select: text !important;
+          user-select: text !important;
+}
+
+.ace-monokai {
+    height: 400px !important;
+    min-height: 400px !important;
+}
+
+.ace_editor * {
+    font-family: "Monaco", "Menlo", "Ubuntu Mono", "Consolas", "source-code-pro", monospace !important;
+}

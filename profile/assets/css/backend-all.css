@@ -1,0 +1,33 @@
+.dashicons-small::before {
+  font-size: 1rem !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+  color: inherit !important;
+}
+
+.toplevel_page_dlsync .wp-menu-image img {
+  width: 18px;
+  margin: 2px 0;
+  padding: 6px !important;
+  filter: grayscale(1);
+  transition: all 0.3s ease-in-out;
+}
+
+.toplevel_page_dlsync:hover .wp-menu-image img {
+  filter: grayscale(0);
+}
+
+.toplevel_page_dlsync.current .wp-menu-image img {
+  filter: grayscale(0);
+  opacity: 1 !important;
+}
+
+
+.wpdberror {
+	text-align: left;
+	direction: ltr;
+	padding: 1rem;
+	max-width: 90%;
+	float: left;
+	border: 1px gray solid;
+}

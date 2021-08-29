@@ -1,0 +1,51 @@
+/**
+ * @Author: Amirhosseinhpv
+ * @Date:   2020/05/03 13:33:07
+ * @Email:  its@hpv.im
+ * @Last modified by:   Amirhosseinhpv
+ * @Last modified time: 2020/11/04 12:32:57
+ * @License: GPLv2
+ * @Copyright: Copyright © 2020 Amirhosseinhpv, All rights reserved.
+ */
+
+
+.form-check .form-check-label span {
+	right: -1px;
+	left: auto;
+}
+.form-check {
+	display: flex;
+	place-items: center;
+	flex-direction: row-reverse;
+	place-content: flex-start;
+}
+
+.lds-ring2 {
+	display: none;
+	position: relative;
+	right: auto;
+	left: 64px;
+	float: left;
+	top: 2px;
+}
+
+.tooltip[role="tooltip"] {
+	font-family: iranyekan, roboto, Arial !important;
+}
+
+.table .form-check .form-check-sign {
+	top: 0;
+}
+
+.form-check-inline {
+	display: inline-flex;
+}
+
+.img-cir.img-40 {
+	float: right;
+}
+
+.loadingRings .lds-ring2 {
+	left: auto;
+	right: .5rem;
+}

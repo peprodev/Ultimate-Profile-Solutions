@@ -1,0 +1,22 @@
+/* #ProductMegaMenucustom_cssRfitor {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    left: 1rem;
+    width: 100% !important;
+    min-height: 400px !important;
+} */
+
+#ProductMegaMenucustom_css {
+    display: none;
+}
+
+.ace-monokai {
+    height: 400px !important;
+    min-height: 400px !important;
+}
+
+.ace_editor * {
+    font-family: "Monaco", "Menlo", "Ubuntu Mono", "Consolas", "source-code-pro", monospace !important;
+}

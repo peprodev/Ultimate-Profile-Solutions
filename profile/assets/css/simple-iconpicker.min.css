@@ -1,0 +1,268 @@
+/**
+ * @Author: Amirhosseinhpv
+ * @Date:   2020/05/03 13:33:07
+ * @Email:  its@hpv.im
+ * @Last modified by:   Amirhosseinhpv
+ * @Last modified time: 2020/12/14 05:37:02
+ * @License: GPLv2
+ * @Copyright: Copyright © 2020 Amirhosseinhpv, All rights reserved.
+ */
+
+
+/* Icon Picker by QueryLoop
+ * Author: @eliorivero
+ * URL: http://queryloop.com/
+ * License: GPLv2
+ */
+.icon-set {
+	display: none;
+	background: #fff;
+	overflow-y: auto;
+	box-shadow: 0 1px 5px rgba(0,0,0,0.15);
+}
+
+.icon-set ul {
+	list-style: none;
+	padding-bottom: 2rem;
+	margin: 0;
+	display: flex;
+	flex-wrap: wrap;
+	place-content: center;
+	place-items: center;
+}
+
+.icon-set li {
+	display: inline-block;
+	cursor: pointer;
+	margin: 0 0 5px;
+	width: 64px;
+	height: 64px;
+	text-align: center;
+	line-height: 2;
+}
+
+.icon-set li:hover::before,.icon-set .icon-selected::before {
+	/* font-size: larger; */
+}
+
+.icon-set.large li {
+	width: 32px;
+	height: 32px;
+	font-size: 32px;
+}
+
+.icon-set.large li:hover:before,.icon-set.large .icon-selected:before {
+	font-size: 48px;
+	width: 48px;
+	line-height: 24px;
+}
+
+.icon-highlight {
+	background: var(--accent-primary);
+	color: white;
+}
+
+.icon-selected {
+	background: var(--accent-primary3);
+	color: white;
+}
+.fontawesome-icon-picker.dialog {
+	overflow-x: hidden;
+	display: block;
+	margin: auto;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	max-height: 100vh;
+	max-width: 100vw;
+	z-index: 19998;
+	visibility: hidden;
+	opacity: 0;
+	transform: scale(0.7) translateZ(0);
+	transition: all .2s;
+	border-radius: 0 !important;
+	left: 0;
+	top: 0;
+	padding: 1rem 5rem 5rem 5rem;
+}
+
+.faselectorsticky{
+		margin-bottom: 1rem;
+		position: sticky;
+		position: -webkit-sticky;
+		top: -1rem;
+		background: white;
+		display: block;
+		width: 100%;
+		padding: 1rem;
+}
+
+.nav.nav-search .bmd-form-group,
+.nav.nav-search .bmd-form-group input{
+	width: 100%;
+}
+
+.faselectorsticky::after {
+	content: '';
+	display: block;
+	box-shadow: 0 1px 5px rgba(0,0,0,0.15);
+	width: 100vw;
+	height: 5.5rem;
+	position: absolute;
+	left: -7.5rem;
+	top: -1rem;
+	z-index: -1;
+}
+[dir="rtl"] .faselectorsticky::after {
+	right: -7.5rem;
+	left: auto;
+}
+
+.dialog-open {
+	padding: 10px;
+	visibility: visible !important;
+	transform: scale(1) !important;
+	opacity: 1 !important;
+	box-shadow: 0 .5rem 1rem rgba(0,0,0,.5);
+	border-radius: 5px !important;
+}
+
+.icon-set-wrap {
+	position: relative;
+}
+
+.inline {
+	display: block;
+	width: 276px;
+	height: 0;
+	opacity: 0;
+	visibility: hidden;
+	transform: scaleX(0.5) rotateX(90deg);
+	transform-style: preserve-3d;
+	transform-origin: 50% 0;
+	transition: transform .3s ease-out;
+}
+
+.inline-open {
+	padding: 10px;
+	border: 1px solid #eee;
+	height: auto;
+	visibility: visible;
+	transform: scaleX(1) rotateY(0);
+	opacity: 1;
+}
+
+.icon-picker-close {
+	top: 1rem;
+	right: 1rem;
+	margin-left: auto;
+}
+
+.icon-picker-close {
+	opacity: 0;
+	visibility: hidden;
+	display: block;
+	width: 20px;
+	height: 20px;
+	margin: 30px 0 0 20px;
+	position: fixed;
+	z-index: 19999;
+}
+
+.icon-picker-overlay {
+	opacity: 0;
+	visibility: hidden;
+	background: #222;
+	background: rgba(0,0,0,0.5);
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 19997;
+	transition: all .2s;
+}
+
+.icon-picker-close.make-visible {
+	margin: 10px 0 0 -10px;
+}
+
+.inline .icon-picker-close {
+	position: absolute;
+	z-index: 8;
+	top: 0;
+	right: 0;
+	left: auto;
+	opacity: 1;
+	visibility: visible;
+	margin: 0;
+}
+
+.make-visible {
+	visibility: visible;
+	opacity: 1;
+}
+
+
+.icon-preview {
+	width: auto;
+	display: none;
+	margin: 10px 0;
+	position: relative;
+}
+
+.icon-preview-on {
+	display: block;
+	margin-inline: 2rem;
+}
+
+.icon-picker {
+	display: flex;
+	place-items: center;
+	flex-direction: row-reverse;
+	place-content: flex-end;
+}
+.icon-preview i {
+	font-size: 2rem;
+	width: auto;
+	height: auto;
+	text-align: center;
+	background: transparent;
+	padding: 0;
+}
+
+.remove-icon {
+	position: absolute;
+	top: -5px;
+	left: -7px;
+  margin: 0;
+}
+
+
+.fa-title {
+	flex: 0 1 100%;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	margin: 0;
+}
+
+.fontawesome-icon-picker .tab-content > div.active {
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	display: flex !important;
+}
+
+.icon-set li::before {
+	font-size: 32px;
+	line-height: ;
+}
+
+[dir="rtl"] .nav.nav-tabs {
+	float: right !important;
+}
+.nav.nav-search {
+	max-width: 1300px;
+}

@@ -1,0 +1,112 @@
+/**
+ * @Author: Amirhosseinhpv
+ * @Date:   2020/05/03 13:33:06
+ * @Email:  its@hpv.im
+ * @Last modified by:   Amirhosseinhpv
+ * @Last modified time: 2021/07/24 15:24:31
+ * @License: GPLv2
+ * @Copyright: Copyright © 2020 Amirhosseinhpv, All rights reserved.
+ */
+
+
+.composer-inner-switch {
+    margin: 10px 0 0 0;
+    vertical-align: middle;
+    direction: ltr;
+}
+
+.pepro-ui-hide {
+    display: none;
+}
+
+.vc_col-sm-6.pp-bottom {
+    border-bottom: 1px solid #ececec;
+    padding-bottom: 1rem;
+}
+
+.pepro-footerlink-vc img {
+    margin: 0 10px 0 0;
+}
+
+.pepro-footerlink-vc {
+    direction: ltr;
+    float: right;
+    background: linear-gradient(120deg, #032031, #0d498a) !important;
+    border: none !important;
+    align-items: center;
+    padding: 10px 22px 10px 10px !important;
+}
+
+[dir="rtl"] .pepro-footerlink-vc {
+    float: left;
+}
+
+.pepro-footerlink-vc {
+    display: none !important;
+}
+
+
+/* common vc css fix for rtl-ready */
+
+.select2-container {
+    z-index: 9999999999999;
+}
+
+.select2-container .select2-search--inline .select2-search__field {
+    margin: 0 !important;
+    height: 0 !important;
+}
+
+.vc_ui-panel-content-container select {
+    width: 100% !important;
+    max-width: 100% !important;
+    line-height: 1;
+}
+
+[dir="rtl"] .vc_ui-panel-content-container select {
+    text-align: right !important;
+    padding: 8px 6px 8px 24px;
+}
+
+[dir="rtl"] .vc_general.vc_ui-tabs-line>li {
+    float: right;
+}
+
+[dir="rtl"] .vc_ui-panel-header .vc_ui-panel-header-controls {
+    float: left;
+    margin: 2px 12px 0 0;
+}
+
+[dir="rtl"] .vc_ui-panel-header .vc_ui-panel-header-heading {
+    margin: 0 0 1rem 1rem;
+}
+
+[dir="rtl"] .vc_add-element-container .wpb-content-layouts li {
+    float: right;
+}
+
+[dir="rtl"] .vc_add-element-container .vc_element-icon {
+    position: absolute;
+    top: 20px;
+    right: 8px;
+}
+
+[dir="rtl"] .vc_add-element-container .wpb-content-layouts a {
+    padding: 2px 47px 4px 2px;
+}
+
+.toplevel_page_pepro .wp-menu-image img {
+  width: 24px;
+  margin: 0;
+  padding: 6px !important;
+}
+
+.order_actions {
+	width: 100%;
+}
+
+.nav-link .far::before,
+.nav-link .fas::before,
+.nav-link .fa::before {
+	font-size: 1.1rem;
+}

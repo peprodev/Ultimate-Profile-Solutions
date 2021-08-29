@@ -1,0 +1,55 @@
+/**
+ * @Author: Amirhosseinhpv
+ * @Date:   2021/08/03 22:21:00
+ * @Email:  its@hpv.im
+ * @Last modified by:   Amirhosseinhpv
+ * @Last modified time: 2021/08/10 19:24:22
+ * @License: GPLv2
+ * @Copyright: Copyright © Amirhosseinhpv (https://hpv.im), all rights reserved.
+ */
+
+
+@font-face {
+  font-family: dana;
+  font-style: normal;
+  font-weight: bold;
+  src: url("fonts/woff/dana-bold.woff") format('woff');
+}
+@font-face {
+  font-family: dana;
+  font-style: normal;
+  font-weight: normal;
+  src: url("fonts/woff/dana-regular.woff") format('woff');
+}
+@font-face {
+  font-family: dana;
+  font-style: italic;
+  font-weight: bold;
+  src: url("fonts/woff/dana-bolditalic.woff") format('woff');
+}
+@font-face {
+  font-family: dana;
+  font-style: italic;
+  font-weight: normal;
+  src: url("fonts/woff/dana-regularitalic.woff") format('woff');
+}
+
+body {
+  font-family: dana,Tahoma,sans-serif !important;
+}
+
+.au-inbox-wrap.show-chat-box {
+  transform: translateX(50%);
+}
+.fas::before, .fab::before, .active i::before {
+	color: currentColor !important;
+}
+
+.mess-dropdown::before, .email-dropdown::before, .notifi-dropdown::before, .setting-dropdown::before {
+	right: auto;
+	left: 1rem;
+}
+.mess-dropdown {
+	left: -1rem;
+	right: auto;
+}

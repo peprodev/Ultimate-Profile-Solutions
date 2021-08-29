@@ -1,0 +1,205 @@
+/**
+ * @Author: Amirhosseinhpv
+ * @Date:   2021/08/17 09:27:55
+ * @Email:  its@hpv.im
+ * @Last modified by:   Amirhosseinhpv
+ * @Last modified time: 2021/08/25 23:07:03
+ * @License: GPLv2
+ * @Copyright: Copyright © Amirhosseinhpv (https://hpv.im), all rights reserved.
+ */
+:root{
+	--tippy-color: #bf1e2e;
+}
+toast {
+	display: block;
+	position: fixed;
+	bottom: 0;
+	padding: 0.5rem 2rem;
+	background: #2b2b2b;
+	color: #e8e8e8;
+	border-radius: 57px;
+	text-align: center;
+	left: calc(50%);
+	box-shadow: 0 2px 11px 0 rgba(0, 0,0, 0.5);
+	cursor: pointer;
+	transition: all 0.28s ease-in-out;
+	transform: translateX(-50%) translateY(110%);
+	z-index: 9999999999999999 !important;
+}
+
+toast.active {
+	transform: translateX(-50%) translateY(-20%);
+}
+
+[data-pepro-reglogin]>form .force-ltr {
+	direction: ltr;
+	text-align: left;
+}
+
+[data-pepro-reglogin]>form .pepro-login-reg-field {
+	margin: .8rem 0;
+	text-align: start;
+	position: relative;
+}
+
+[data-pepro-reglogin] > form.inline error {
+	position: absolute;
+	left: 0;
+	top: 3px;
+	display: block;
+	width: 18px;
+	height: 18px;
+	background: #d63638;
+	text-align: center;
+	border-radius: 100%;
+	color: white;
+	font-weight: 800;
+	font-size: small;
+	cursor: help;
+}
+
+.tippy-box[data-theme~='error'] {
+  background-color: var(--tippy-color);
+}
+.tippy-box[data-theme~='error'][data-placement^='top'] > .tippy-arrow::before {
+  border-top-color: var(--tippy-color);
+}
+.tippy-box[data-theme~='error'][data-placement^='bottom'] > .tippy-arrow::before {
+  border-bottom-color: var(--tippy-color);
+}
+.tippy-box[data-theme~='error'][data-placement^='left'] > .tippy-arrow::before {
+  border-left-color: var(--tippy-color);
+}
+.tippy-box[data-theme~='error'][data-placement^='right'] > .tippy-arrow::before {
+  border-right-color: var(--tippy-color);
+}
+
+.jconfirm.jconfirm-modern .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+	transform: scale(1) !important;
+}
+
+[data-pepro-reglogin]>form #login_error:empty {
+	display: none;
+}
+
+[data-pepro-reglogin]>form #login_error {
+	display: block;
+	border-right: 4px solid #72aee6;
+	padding: 12px;
+	margin-right: 0;
+	margin-bottom: 20px;
+	background-color: #fff;
+	box-shadow: 0 1px 1px 0 #0000001a;
+	border-right-color: #d63638;
+}
+
+[data-pepro-reglogin]>form #login_error.info {
+	border-right-color: #72aee6;
+}
+
+[data-pepro-reglogin]>form #login_error.success {
+	border-right-color: #00a32a;
+}
+
+[data-pepro-reglogin]>form #login_error.error {
+	border-right-color: #d63638;
+}
+
+.pepro-verify-container,
+[data-pepro-reglogin] {
+	display: block;
+	overflow: hidden;
+}
+
+.popup-active {
+	display: block !important;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: #00000085;
+	z-index: 99997 !important;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+.popup-active .pepro-verify-container,
+.popup-active [data-pepro-reglogin] {
+	display: block !important;
+	position: fixed;
+	cursor: auto;
+	left: 0;
+	top: 0;
+	width: 400px;
+	background: white;
+	color: black;
+	box-shadow: 0 0 8px -2px #000;
+	padding: 1rem;
+	border-radius: 4px;
+	transform: translate(calc(50vw - 200px), 10vh);
+	max-height: 90vh;
+	overflow: auto;
+	z-index: 99999 !important;
+}
+
+[data-pepro-reglogin]>form .form-text.button.button-primary {
+	min-width: 100%;
+}
+
+[data-pepro-reglogin]>form .pepro-login-reg-field.hide {
+	display: none;
+}
+
+[data-pepro-reglogin]>form textarea:hover,
+[data-pepro-reglogin]>form textarea:active,
+[data-pepro-reglogin]>form textarea:focus,
+[data-pepro-reglogin]>form textarea,
+[data-pepro-reglogin]>form select:hover,
+[data-pepro-reglogin]>form select:active,
+[data-pepro-reglogin]>form select:focus,
+[data-pepro-reglogin]>form select,
+[data-pepro-reglogin]>form input:hover,
+[data-pepro-reglogin]>form input:active,
+[data-pepro-reglogin]>form input:focus,
+[data-pepro-reglogin]>form input {
+	border-color: #e8e8e8 !important;
+	box-shadow: 0px 0px 0px 1px #e8e8e8 inset;
+}
+
+[data-pepro-reglogin]>form textarea:valid,
+[data-pepro-reglogin]>form select:valid,
+[data-pepro-reglogin]>form input:valid {
+	border-color: #61f599 !important;
+	box-shadow: 0px 0px 0px 1px #61f599 inset;
+}
+
+[data-pepro-reglogin]>form textarea:invalid,
+[data-pepro-reglogin]>form select:invalid,
+[data-pepro-reglogin]>form input:invalid {
+	border-color: #f56171 !important;
+	box-shadow: 0px 0px 0px 1px #f56171 inset;
+}
+
+[data-pepro-reglogin]>form .form-required label::after {
+	content: " *";
+	color: #c7254e;
+}
+
+[data-pepro-reglogin]>form .pepro-form-links {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 1.5rem;
+}
+
+[data-pepro-reglogin]>form {
+	display: none;
+}
+
+[data-pepro-reglogin]>form.inline {
+	display: block;
+}
+
+.login-action-rp .button.wp-generate-pw {
+	color: initial !important;
+}
