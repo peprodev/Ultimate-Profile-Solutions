@@ -1,7 +1,7 @@
 /**
  * @Date:   2021/08/17 09:28:22
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/08/28 23:12:14
+ * @Last modified time: 2021/08/31 19:54:39
  * @License: GPLv2
  */
 jQuery.noConflict();
@@ -124,6 +124,7 @@ jQuery.noConflict();
         e.preventDefault();
         login_form = $(this);
         $(login_form).find("#login_error").empty();
+        scroll_element();
         $(login_form).find("error").remove();
         error_occured = false;
         if (!$(`#${_pepro_dev.instance} form#pepro-login-inline`)[0].checkValidity()) {
@@ -143,7 +144,6 @@ jQuery.noConflict();
           error_occured = true;
           return false;
         }
-
         $recaps = $(login_form).find("div[data-recaptcha]");
         if ($recaps.length){
           $.each($recaps, function(index, val) {
@@ -162,7 +162,6 @@ jQuery.noConflict();
         $(login_form).find(":input").prop("disabled", true)
         show_toast(_pepro_dev.loading);
         $(login_form).find("#login_error").removeClass("info success error").addClass("info").html(_pepro_dev.loading);
-
         _pepro_dev._ajax_req = $.ajax({
           type: "POST",
           dataType: "json",
@@ -175,9 +174,7 @@ jQuery.noConflict();
           },
           success: function(e) {
             if (e.success === true) {
-
               $(login_form).find("#login_error").removeClass("info success error").addClass("success").html(e.data.msg);
-
               if (e.data.is_otp){
                 $(login_form).find("#login_error").removeClass("info success error").addClass("info").html(e.data.msg);
                 $(login_form).find(".optverify-wrap").removeClass("hide");
@@ -253,7 +250,6 @@ jQuery.noConflict();
 
             }
             else {
-
               if (e.data.is_otp){
                 if (e.data.focus){
                   setTimeout(function () { $(login_form).find(e.data.focus).get(0).focus(); }, 100);
@@ -262,7 +258,6 @@ jQuery.noConflict();
                   setTimeout(function () { $(login_form).find(e.data.focus).get(0).select(); }, 100);
                 }
               }
-
               $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(e.data.msg);
             }
           },
@@ -271,6 +266,7 @@ jQuery.noConflict();
             $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(_pepro_dev.error);
           },
           complete: function(e) {
+            scroll_element();
             $(login_form).removeClass("loading");
             $(login_form).find(":input").prop("disabled", false)
           },
@@ -291,6 +287,7 @@ jQuery.noConflict();
         e.preventDefault();
         login_form = $(this);
         $(login_form).find("#login_error").empty();
+        scroll_element();
         $(login_form).find("error").remove();
         error_occured = false;
         if (!$(`#${_pepro_dev.instance} form#pepro-verify-inline`)[0].checkValidity()) {
@@ -315,6 +312,7 @@ jQuery.noConflict();
           $.each($recaps, function(index, val) {
             if ($(val).find(".g-recaptcha-response").val() === "") {
               $(login_form).find("#login_error").append(_pepro_dev.catpcha);
+
               error_occured = true;
               show_toast(_pepro_dev.catpcha);
               return false;
@@ -340,9 +338,7 @@ jQuery.noConflict();
           },
           success: function(e) {
             if (e.success === true) {
-
               $(login_form).find("#login_error").removeClass("info success error").addClass("success").html(e.data.msg);
-
               if (e.data.is_otp){
                 $(login_form).find("#login_error").removeClass("info success error").addClass("info").html(e.data.msg);
                 $(login_form).find(".verification-wrap").removeClass("hide");
@@ -391,10 +387,8 @@ jQuery.noConflict();
                   buttons: obj_buttons,
                 });
               }
-
             }
             else {
-
               if (e.data.is_otp){
                 if (e.data.focus){
                   setTimeout(function () { $(login_form).find(e.data.focus).get(0).focus(); }, 100);
@@ -403,7 +397,6 @@ jQuery.noConflict();
                   setTimeout(function () { $(login_form).find(e.data.focus).get(0).select(); }, 100);
                 }
               }
-
               $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(e.data.msg);
             }
           },
@@ -412,14 +405,15 @@ jQuery.noConflict();
             $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(_pepro_dev.error);
           },
           complete: function(e) {
+            scroll_element();
             $(login_form).removeClass("loading");
             $(login_form).find(":input").prop("disabled", false)
           },
         });
       });
 
-      // register
-      $(document).on("change keyup", `#${_pepro_dev.instance} form#pepro-reg-inline input[name=optverify]`, function(e) {
+      // verify/change mobile
+      $(document).on("change keyup", `#${_pepro_dev.instance} form#pepro-verify-inline-force input[name=verification]`, function(e) {
         $submitBtn = $(this).parents("form").find(".submit-wrap #submit[type=submit]")
         if ($(this).val() !== ""){
           $submitBtn.text($submitBtn.data("verify"));
@@ -427,14 +421,146 @@ jQuery.noConflict();
           $submitBtn.text($submitBtn.data("send"));
         }
       });
+      $(document).on("submit", `#${_pepro_dev.instance} form#pepro-verify-inline-force`, function(e) {
+        e.preventDefault();
+        login_form = $(this);
+        $(login_form).find("#login_error").empty();
+        scroll_element();
+        $(login_form).find("error").remove();
+        error_occured = false;
+        if (!$(`#${_pepro_dev.instance} form#pepro-verify-inline-force`)[0].checkValidity()) {
+          $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(_pepro_dev.fixerr);
+          show_toast(_pepro_dev.fixerr);
+          $(login_form).find(":input:visible:invalid").each(function(index, val) {
+            $errortext = $(val).data("error-text");
+            if(!$errortext || "" == $errortext){
+              $errortext = _pepro_dev.check_validity;
+              if ($(val).attr("required") !== undefined) {
+                $errortext = _pepro_dev.check_required;
+              }
+            }
+            $(val).parent().append(`<error data-tippy-content="${$errortext}">?</error>`);
+          });
+          tippy('[data-tippy-content]',{allowHTML: true, theme: 'error',});
+          error_occured = true;
+          return false;
+        }
+        $recaps = $(login_form).find("div[data-recaptcha]");
+        if ($recaps.length){
+          $.each($recaps, function(index, val) {
+            if ($(val).find(".g-recaptcha-response").val() === "") {
+              $(login_form).find("#login_error").append(_pepro_dev.catpcha);
+
+              error_occured = true;
+              show_toast(_pepro_dev.catpcha);
+              return false;
+            }
+          });
+          if (error_occured){return false;}
+        }
+        if (_pepro_dev._ajax_req != null) { _pepro_dev._ajax_req.abort(); }
+        form_params = $(login_form).find(":input").serialize();
+        $(login_form).addClass("loading");
+        $(login_form).find(":input").prop("disabled", true)
+        show_toast(_pepro_dev.loading);
+        $(login_form).find("#login_error").removeClass("info success error").addClass("info").html(_pepro_dev.loading);
+        _pepro_dev._ajax_req = $.ajax({
+          type: "POST",
+          dataType: "json",
+          url: _pepro_dev.ajaxurl,
+          data: {
+            order: "verifyforce",
+            action: "pepro_reglogin",
+            nonce: _pepro_dev.nonce,
+            param: form_params,
+          },
+          success: function(e) {
+            if (e.success === true) {
+              $(login_form).find("#login_error").removeClass("info success error").addClass("success").html(e.data.msg);
+              if (e.data.is_otp){
+                $(login_form).find("#login_error").removeClass("info success error").addClass("info").html(e.data.msg);
+                $(login_form).find(".verification-wrap").removeClass("hide");
+                if (e.data.focus){
+                  setTimeout(function () { $(login_form).find(e.data.focus).get(0).focus(); }, 100);
+                }
+                if (e.data.select){
+                  setTimeout(function () { $(login_form).find(e.data.focus).get(0).select(); }, 100);
+                }
+              }
+              else{
+                $(".popup-active").removeClass("popup-active");
+                $(login_form).find(".pepro-login-reg-field").addClass("hide");
+                $submitBtn = $(login_form).find(".submit-wrap #submit[type=submit]");
+                obj_buttons = {
+                  close: {
+                    btnClass: "btn-green",
+                    text: _pepro_dev.closeTxt,
+                    keys: ["esc"],
+                    action: function(res) {
+                      jc.close();
+                    }
+                  },
+                  custom: {
+                    btnClass: "btn-green",
+                    text: e.data.redirect_text,
+                    keys: ["enter"],
+                    action: function(res) {
+                      if (true === e.data.redirect){
+                        window.location.href = window.location.href;
+                      }else{
+                        window.location.href = e.data.redirect;
+                      }
+                      jc.close();
+                    }
+                  },
+                };
+                $url = true === e.data.redirect ? window.location.href : e.data.redirect;
+                $(login_form).append(`<div class='pepro-login-reg-field'><button href='${$url}' class='ahrefbtn ${$submitBtn.attr("class")}' target='_self' type='submit'>${e.data.redirect_text}</button></div>`);
+                jc = $.confirm({
+                  title: "",
+                  content: e.data.msg,
+                  icon: 'fas fa-check-circle',
+                  type: 'green',
+                  boxWidth: "500px",
+                  buttons: obj_buttons,
+                });
+              }
+            }
+            else {
+              if (e.data.is_otp){
+                if (e.data.focus){
+                  setTimeout(function () { $(login_form).find(e.data.focus).get(0).focus(); }, 100);
+                }
+                if (e.data.select){
+                  setTimeout(function () { $(login_form).find(e.data.focus).get(0).select(); }, 100);
+                }
+              }
+              $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(e.data.msg);
+            }
+          },
+          error: function(e) {
+            console.error(e);
+            $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(_pepro_dev.error);
+          },
+          complete: function(e) {
+            scroll_element();
+            $(login_form).removeClass("loading");
+            $(login_form).find(":input").prop("disabled", false)
+          },
+        });
+      });
+
+      // register
       $(document).on("submit", `#${_pepro_dev.instance} form#pepro-reg-inline`, function(e) {
         e.preventDefault();
         login_form = $(this);
         $(login_form).find("#login_error").empty();
+        scroll_element();
         $(login_form).find("error").remove();
         error_occured = false;
         if (!$(`#${_pepro_dev.instance} form#pepro-reg-inline`)[0].checkValidity()) {
           $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(_pepro_dev.fixerr);
+          console.log("err");
           show_toast(_pepro_dev.fixerr);
           $(login_form).find(":input:visible:invalid").each(function(index, val) {
             $errortext = $(val).data("error-text");
@@ -497,7 +623,7 @@ jQuery.noConflict();
                 if (e.data.redirect_text){
                   obj_buttons = {
                     close: {
-                      btnClass: "btn-green",
+                      btnClass: "btn-default",
                       text: _pepro_dev.closeTxt,
                       keys: ["esc"],
                       action: function(res) {
@@ -547,17 +673,97 @@ jQuery.noConflict();
                 if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).select(); }, 100); }
               }
               $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(e.data.msg);
+              show_toast(e.data.msg);
             }
           },
           error: function(e) {
             console.error(e);
             $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(_pepro_dev.error);
+            show_toast(_pepro_dev.error);
           },
           complete: function(e) {
+            scroll_element();
             $(login_form).removeClass("loading");
             $(login_form).find(":input").prop("disabled", false)
           },
         });
+      });
+      $(document).on("change keyup", `#${_pepro_dev.instance} form#pepro-reg-inline input[name=optverify]`, function(e) {
+        $submitBtn = $(this).parents("form").find(".submit-wrap #submit[type=submit]")
+        if ($(this).val() !== ""){
+          $submitBtn.text($submitBtn.data("verify"));
+        }else{
+          $submitBtn.text($submitBtn.data("send"));
+        }
+      });
+      $(document).on("change keyup", `#${_pepro_dev.instance} form#pepro-reg-inline [name=billing_country]`, function(e){
+        e.preventDefault();
+        var login_form = $(`#${_pepro_dev.instance} form#pepro-reg-inline`);
+        var states = JSON.parse( _pepro_dev.countries.replace( /&quot;/g, '"' ));
+        var country = $(this).val();
+        var cur_state = $(login_form).find("[name=billing_state]").val();
+        if ( ! $.isEmptyObject(states[country])) {
+          var state = states[country],
+          $defaultOption = $("<option value=''></option>").text( _pepro_dev.select_state_text );
+          $newstate = $("<select></select>")
+          .prop("id", "billing_state")
+          .prop("name", "billing_state")
+          .attr("required","")
+          .addClass("js_field-state")
+          .append( $defaultOption );
+
+          $.each( state, function( index ) {
+            var $option = $( '<option></option>' ).prop("value", index).text( state[ index ] );
+            $newstate.append( $option );
+          });
+
+          $newstate.val("");
+          $(login_form).find("[name=billing_state]").replaceWith( $newstate );
+          $newstate.show().trigger('change');
+          $(login_form).find("[name=billing_state]").trigger('change');
+        }
+        else {
+          $newstate = $( '<input type="text" />' )
+          .prop( 'id', "billing_state" )
+          .prop( 'name', "billing_state" )
+          .attr( 'required', "" )
+          .prop( 'placeholder', _pepro_dev.placeholder_state )
+          .addClass('form-text')
+          .val( "" );
+          $(login_form).find("[name=billing_state]").replaceWith( $newstate );
+        }
+
+      });
+      $(document).on("change keyup", `#${_pepro_dev.instance} form#pepro-reg-inline [name=billing_state]`, function(e){
+        e.preventDefault();
+        let login_form = $(`#${_pepro_dev.instance} form#pepro-reg-inline`);
+        let country = $(login_form).find("#billing_country").val();
+        let cur_state = $(this).val();
+
+        if ("IR" === country && !$.isEmptyObject(_pepro_dev.iran_cities[cur_state]) ){
+          $defaultOption = $('<option value=""></option>').text( _pepro_dev.select_state_text );
+          $newstate = $('<select></select>')
+          .prop('id',"billing_city")
+          .prop('name',"billing_city")
+          .attr('required',"")
+          .append( $defaultOption );
+          $.each(_pepro_dev.iran_cities[cur_state], function( v, index ) {
+            var $option = $('<option></option>').prop( 'value', index ).text(index);
+            $newstate.append( $option );
+          });
+          $newstate.val("");
+          $(login_form).find("[name=billing_city]").replaceWith( $newstate );
+          $newstate.show().trigger('change');
+        }else{
+          $newstate = $('<input type="text" />')
+          .prop('id',"billing_city")
+          .prop('name',"billing_city")
+          .attr('required',"")
+          .prop('placeholder',_pepro_dev.placeholder_city )
+          .addClass('form-text').val("");
+          $(login_form).find("[name=billing_city]").replaceWith( $newstate );
+        }
+
       });
 
       // resetpass
@@ -565,6 +771,7 @@ jQuery.noConflict();
         e.preventDefault();
         login_form = $(this);
         $(login_form).find("#login_error").empty();
+        scroll_element();
         $(login_form).find("error").remove();
         error_occured = false;
         if (!$(`#${_pepro_dev.instance} form#pepro-pass-inline`)[0].checkValidity()) {
@@ -616,7 +823,6 @@ jQuery.noConflict();
             if (e.success === true) {
               $(login_form).find("#login_error").removeClass("info success error").addClass("success").html(e.data.msg);
               $(".popup-active").removeClass("popup-active");
-              // $(login_form).find(".pepro-login-reg-field").addClass("hide");
               jc = $.confirm({
                 title: "",
                 content: e.data.msg,
@@ -642,11 +848,13 @@ jQuery.noConflict();
             $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(_pepro_dev.error);
           },
           complete: function(e) {
+            scroll_element();
             $(login_form).removeClass("loading");
             $(login_form).find(":input").prop("disabled", false)
           },
         });
       });
+
 
     });
 
@@ -687,14 +895,20 @@ jQuery.noConflict();
       e.preventDefault();
       $(this).parents(".pepro-login-reg-container").find("form").removeClass("inline");
       $(this).parents(".pepro-login-reg-container").find("#pepro-reg-inline").addClass("inline");
+      $(this).parents(".pepro-login-reg-container").find("#pepro-reg-inline input").trigger("change");
     });
+    $(".pepro-login-reg-container").find("#pepro-reg-inline").find("#billing_country,#billing_state,#billing_city").attr("required","required").trigger("change");
+    $(".pepro-login-reg-container").find("#pepro-reg-inline").find("#billing_country").trigger("change");
+
     $(document).on("click tap", ".switch-form-lost-pass", function(e){
       e.preventDefault();
       $(this).parents(".pepro-login-reg-container").find("form").removeClass("inline");
       $(this).parents(".pepro-login-reg-container").find("#pepro-pass-inline").addClass("inline");
     });
-    function scroll_element(element, offset = 0) {
-      $("html, body").animate({ scrollTop: element.offset().top - offset }, 500);
+    function scroll_element() {
+      if ($(".pepro-login-reg-container").length){
+        $(".pepro-login-reg-container").animate({scrollTop: $(".pepro-login-reg-container").offset().top-100});
+      }
     }
     function show_toast(data = "Sample Toast!", delay = 1500) {
       if (!$("toast").length){$(document.body).append($("<toast>"));}

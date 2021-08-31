@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/08/29 01:12:18
+# @Last modified time: 2021/08/31 18:19:09
 if (!class_exists("PeproDevUPS_Core")){
   class PeproDevUPS_Core
   {
@@ -201,7 +201,8 @@ if (!class_exists("PeproDevUPS_Core")){
       add_filter( "peprocore_dashboard_nav_menuitems", array($this, "peprocore_dashboard_nav_menuitems"));
       do_action( "peprocore_dashboard_before_initiated");
     }
-    function peprocore_dashboard_nav_menuitems($menuitems) {
+    function peprocore_dashboard_nav_menuitems($menuitems)
+    {
       return array_merge($menuitems, array(
         array(
           "title"    => __("Dashboard","pepro"),

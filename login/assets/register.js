@@ -3,7 +3,7 @@
  * @Date:   2021/08/02 22:04:09
  * @Email:  its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/08/29 12:55:57
+ * @Last modified time: 2021/08/31 17:59:48
  * @License: GPLv2
  * @Copyright: Copyright © Amirhosseinhpv (https://hpv.im), all rights reserved.
  */
@@ -64,10 +64,10 @@ jQuery.noConflict();
       escapeKey: true,
     };
 
+
     setTimeout(function () { $(document).trigger("pepro_register_fields_load_json"); }, 100);
     setTimeout(function () { $(document).trigger("pepro_redirection_fields_load_json"); }, 100);
-    setTimeout(function () { $("[name='verify_mobile'], [name='login_mobile_otp']").trigger("change"); }, 100);
-    setTimeout(function () { $("[name='verify_email']").trigger("change"); }, 100);
+    setTimeout(function () { $("[name='reglogin_type']").trigger("refesh", [true]); }, 100);
 
     $('input[colorpicker]').each(function(){
       $(this).wpColorPicker({ palettes: _register_fields._palett});
@@ -154,7 +154,7 @@ jQuery.noConflict();
       editor_footer.getSession().on('change', function() {$('#footerhtml').val(editor_footer.getSession().getValue()); });
     }
 
-    hotkeys('ctrl+s, command+s', function(event, handler){
+    shortcut("Ctrl+S",function() {
       event.preventDefault()
       show_toast(_register_fields.saving);
       $(".login-section-save").first().trigger("click");
@@ -177,9 +177,9 @@ jQuery.noConflict();
               is_checkbox = "checkbox" == $el.attr("type");
               if (is_checkbox){
                 $value = "yes" === value;
-                $el.prop("checked", $value).trigger("change");
+                $el.prop("checked", $value).trigger("change", true);
               }else{
-                $el.val(value).trigger("change");
+                $el.val(value).trigger("change", true);
               }
             });
             $(newWriter).find(".register-field-single-content").addClass("slide-up");
@@ -192,17 +192,17 @@ jQuery.noConflict();
       $(".register-workspace .register-field-single").each(function(index, val){
         details = {};
         $(val).find(":input").each(function(index, val) {
-          $id         = $(val).attr("name");
-          $value      = $(val).val();
-          is_checkbox = "checkbox" == $(val).attr("type");
-          if (is_checkbox){
-            $value = $(val).prop("checked") ? "yes" : "no";
-          }
-          details[$id] = $value;
-        });
-        $writers.push(details)
+            $id         = $(val).attr("name");
+            $value      = $(val).val();
+            is_checkbox = "checkbox" == $(val).attr("type");
+            if (is_checkbox){
+              $value = $(val).prop("checked") ? "yes" : "no";
+            }
+            details[$id] = $value;
+          });
+        if (!$.isEmptyObject(details)){ $writers.push(details) }
       });
-      $("#register_fileds").val(JSON.stringify($writers)).trigger("change");
+      $("#register_fileds").val(JSON.stringify($writers));
       editor_fields.setValue(JSON.stringify($writers, null, ' '));
     });
 
@@ -223,9 +223,9 @@ jQuery.noConflict();
               is_checkbox = "checkbox" == $el.attr("type");
               if (is_checkbox){
                 $value = "yes" === value;
-                $el.prop("checked", $value).trigger("change");
+                $el.prop("checked", $value).trigger("change", true);
               }else{
-                $el.val(value).trigger("change");
+                $el.val(value).trigger("change", true);
               }
             });
             $(newWriter).find(".redirection-field-single-content").addClass("slide-up");
@@ -244,21 +244,49 @@ jQuery.noConflict();
           if (is_checkbox){ $value = $(val).prop("checked") ? "yes" : "no"; }
           details[$id] = $value;
         });
-        $writers.push(details)
+        if (!$.isEmptyObject(details)){ $writers.push(details) }
       });
-      $("#redirection_fileds").val(JSON.stringify($writers)).trigger("change");
+      $("#redirection_fileds").val(JSON.stringify($writers));
       redirection_fields.setValue(JSON.stringify($writers, null, ' '));
     });
 
-    $(document).on("change keyup", ".register-field-single :input", function(e){
-      $(document).trigger("pepro_register_fields_make_json");
+    $(document).on("change keyup", ".register-field-single :input, .iostoggle", function(e, muted){
+      if (!muted){ $(document).trigger("pepro_register_fields_make_json"); }
     });
-    $(document).on("change keyup", ".redirection-field-single :input", function(e){
-      $(document).trigger("pepro_redirection_fields_make_json");
+    $(document).on("change keyup", ".redirection-field-single :input", function(e, muted){
+      if (!muted){ $(document).trigger("pepro_redirection_fields_make_json"); }
     });
 
     $(document).on("change keyup", ".form-input.meta-name", function(e){
       this.value = hasArabic(this.value).replace(/ /g, "_").toLowerCase();
+    });
+    $(document).on("change keyup refesh", "[name='reglogin_type']", function(e, mute){
+      switch ($("[name='reglogin_type']:checked").val()) {
+        case "mobile":
+          $('._regdef_mobile [name="_regdef_mobile"]').prop("checked", true).trigger("change").prop("disabled", true);
+          $('._regdef_mobile .is_required').prop("checked", true).trigger("change").prop("disabled", true);
+          if (!mute){
+            $('._regdef_email [name="_regdef_email"]').prop("checked", false).trigger("change").prop("disabled", false);
+            $('._regdef_email .is_required').prop("checked", false).trigger("change").prop("disabled", false);
+            $('._regdef_passwords [name="_regdef_passwords"]').prop("checked", false).trigger("change").prop("disabled", false);
+            $('._regdef_passwords .is_required').prop("checked", false).trigger("change").prop("disabled", false);
+          }
+          break;
+        case "email":
+          if (!mute){
+            $('._regdef_mobile [name="_regdef_mobile"]').prop("checked", false).trigger("change").prop("disabled", false);
+            $('._regdef_mobile .is_required').prop("checked", false).trigger("change").prop("disabled", false);
+          }
+          $('._regdef_email [name="_regdef_email"]').prop("checked", true).trigger("change").prop("disabled", true);
+          $('._regdef_email .is_required').prop("checked", true).trigger("change").prop("disabled", true);
+          $('._regdef_passwords [name="_regdef_passwords"]').prop("checked", true).trigger("change").prop("disabled", true);
+          $('._regdef_passwords .is_required').prop("checked", true).trigger("change").prop("disabled", true);
+          break;
+        default:
+      }
+    });
+    $(document).on("change keyup", "._no_opt_fields .is_required", function(e){
+      if ($(this).prop("checked")){ $(this).parents("._no_opt_fields").find(".main_checkbox").prop("checked",true).trigger("change"); }
     });
     $(document).on("change keyup", "[name='title']", function(e){
       $title = $(this).parents(".register-field-single").find(".live-title");
@@ -282,26 +310,13 @@ jQuery.noConflict();
       $title.text( $title.data("default") + $(this).parents(".redirection-field-single").find("select[name='role'] option:selected").text() );
       $(document).trigger("pepro_redirection_fields_make_json");
     });
-    $(document).on("change keyup", "[name='verify_mobile'], [name='login_mobile_otp']", function(e){
-      if ($("[name='verify_mobile']").prop("checked") || $("[name='login_mobile_otp']").prop("checked") ){
-        $(".save_sms_settings").show();
-      }else{
-        $(".save_sms_settings").hide();
-      }
-    });
-    $(document).on("change keyup", "[name='verify_email']", function(e){
-      if ($("[name='verify_email']").prop("checked")){
-        $(".save_email_settings").show();
-      }else{
-        $(".save_email_settings").hide();
-      }
-    });
 
     $(document).on("click tap", ".register--add-field", function(e){
       e.preventDefault();
       var me = $(this);
-      $($("template#raw_field").html()).appendTo(".register-workspace").find("select").trigger("change");
-
+      newfild = $($("template#raw_field").html()).appendTo(".register-workspace");
+      newfild.find("select").trigger("change");
+      $(newfild).glow();
       show_toast(_register_fields._added);
       $(document).trigger("pepro_register_fields_make_json");
     });
@@ -337,11 +352,18 @@ jQuery.noConflict();
         }
       });
     });
+    $(document).on("click tap", ".register--duplicate-field", function(e){
+      e.preventDefault();
+      cloned = $(this).parents(".register-field-single").clone();
+      cloned.find('[name="type"]').val($(this).parents(".register-field-single").find('[name="type"]').val()).trigger("change");
+      $(cloned).insertAfter($(this).parents(".register-field-single")).glow();
+      $(document).trigger("pepro_register_fields_make_json");
+    });
 
     $(document).on("click tap", ".redirection--add-field", function(e){
       e.preventDefault();
       var me = $(this);
-      $(".redirection-workspace").append($("template#redirection_raw_field").html());
+      $($("template#redirection_raw_field").html()).appendTo($(".redirection-workspace")).glow();
       $("[name='role']").trigger("change");
       show_toast(_register_fields._added);
       $(document).trigger("pepro_redirection_fields_make_json");
@@ -368,7 +390,7 @@ jQuery.noConflict();
           yes: { text: _register_fields.txtYes, btnClass: 'btn-red', keys: ['enter'], action: function() {
               jc.showLoading(true);
               $(".redirection-workspace").empty();
-              
+
               $(document).trigger("pepro_redirection_fields_make_json");
               show_modal_alert(_register_fields.successTtl, _register_fields.successCap,"fas fa-check-circle", "green");
               jc.close();
@@ -377,6 +399,14 @@ jQuery.noConflict();
           },
         }
       });
+    });
+    $(document).on("click tap", ".redirection--duplicate-field", function(e){
+      e.preventDefault();
+      cloned = $(this).parents(".redirection-field-single").clone();
+      cloned.find('[name="role"]').val($(this).parents(".redirection-field-single").find('[name="role"]').val()).trigger("change");
+      newitem = $(cloned).insertAfter($(this).parents(".redirection-field-single"));
+      newitem.glow();
+      $(document).trigger("pepro_redirection_fields_make_json");
     });
 
     $(document).on("click tap", ".register-field-single-title .live-title", function(e){
@@ -465,44 +495,44 @@ jQuery.noConflict();
     $(document).on("click tap", ".login-section-save", function(e) {
       e.preventDefault();
       datatosave           = {
-        "style":                $("#login-section-style").val(),
-        "loginslug":            $("#login-section-loginslug").val(),
-        "redirectslug":         $("#login-section-redirectslug").val(),
-        "force-style":          $("#login-section-style-force").attr("data-checked"),
-        "showlogo":             $("#login-section-show-logo").attr("data-checked"),
-        "logo":                 $("#login-section-logo").val(),
-        "logo-id":              $("#login-section-logo").attr("data-id"),
-        "logo-w":               $("#login-section-logo-w").val(),
-        "logo-h":               $("#login-section-logo-h").val(),
-        "logo-title":           $("#login-section-logotitle").val(),
-        "logo-href":            $("#login-section-logohref").val(),
-        "shake":                $("#login-section-shake").attr("data-checked"),
-        "error":                $("#login-section-error").attr("data-checked"),
-        "msg":                  $("#login-section-msg").attr("data-checked"),
-        "rmc":                  $("#login-section-rmc").attr("data-checked"),
-        "b2b":                  $("#login-section-b2b").attr("data-checked"),
-        "privacy":              $("#login-section-privacy").attr("data-checked"),
-        "nav":                  $("#login-section-nav").attr("data-checked"),
-        "spb":                  $("#login-section-spb").attr("data-checked"),
-        "forcebg":              $("#login-section-forcebg").attr("data-checked"),
-        "bgtype":               $("#login-section-bgtype").val(),
-        "bg-solid":             $("#login-section-bg-solid").val(),
-        "bg-gradient1":         $("#login-section-bg-gradient1").val(),
-        "bg-gradient2":         $("#login-section-bg-gradient2").val(),
-        "bg-gradient3":         $("#login-section-bg-gradient3").val(),
-        "bg-img":               $("#login-section-bg-img").val(),
-        "bg-img-id":            $("#login-section-bg-img").attr("data-id"),
-        "bg-video":             $("#login-section-bg-video").val(),
-        "bg-video-id":          $("#login-section-bg-video").attr("data-id"),
-        "bg-video-autoplay":    $("#login-section-bg-video-autoplay").attr("data-checked"),
-        "bg-video-muted":       $("#login-section-bg-video-muted").attr("data-checked"),
-        "bg-video-loop":        $("#login-section-bg-video-loop").attr("data-checked"),
-        "link-separator":       $("#login-section-link-separator").val(),
-        "html-header":          $("#headerhtml").val(),
-        "html-footer":          $("#footerhtml").val(),
-        "register_fileds":      $("#register_fileds").val(),
-        "redirection_fileds":   $("#redirection_fileds").val(),
-        "customcss":            $("#customcss").val(),
+        "style":              $("#login-section-style").val(),
+        "loginslug":          $("#login-section-loginslug").val(),
+        "redirectslug":       $("#login-section-redirectslug").val(),
+        "force-style":        $("#login-section-style-force").attr("data-checked"),
+        "showlogo":           $("#login-section-show-logo").attr("data-checked"),
+        "logo":               $("#login-section-logo").val(),
+        "logo-id":            $("#login-section-logo").attr("data-id"),
+        "logo-w":             $("#login-section-logo-w").val(),
+        "logo-h":             $("#login-section-logo-h").val(),
+        "logo-title":         $("#login-section-logotitle").val(),
+        "logo-href":          $("#login-section-logohref").val(),
+        "shake":              $("#login-section-shake").attr("data-checked"),
+        "error":              $("#login-section-error").attr("data-checked"),
+        "msg":                $("#login-section-msg").attr("data-checked"),
+        "rmc":                $("#login-section-rmc").attr("data-checked"),
+        "b2b":                $("#login-section-b2b").attr("data-checked"),
+        "privacy":            $("#login-section-privacy").attr("data-checked"),
+        "nav":                $("#login-section-nav").attr("data-checked"),
+        "spb":                $("#login-section-spb").attr("data-checked"),
+        "forcebg":            $("#login-section-forcebg").attr("data-checked"),
+        "bgtype":             $("#login-section-bgtype").val(),
+        "bg-solid":           $("#login-section-bg-solid").val(),
+        "bg-gradient1":       $("#login-section-bg-gradient1").val(),
+        "bg-gradient2":       $("#login-section-bg-gradient2").val(),
+        "bg-gradient3":       $("#login-section-bg-gradient3").val(),
+        "bg-img":             $("#login-section-bg-img").val(),
+        "bg-img-id":          $("#login-section-bg-img").attr("data-id"),
+        "bg-video":           $("#login-section-bg-video").val(),
+        "bg-video-id":        $("#login-section-bg-video").attr("data-id"),
+        "bg-video-autoplay":  $("#login-section-bg-video-autoplay").attr("data-checked"),
+        "bg-video-muted":     $("#login-section-bg-video-muted").attr("data-checked"),
+        "bg-video-loop":      $("#login-section-bg-video-loop").attr("data-checked"),
+        "html-header":        $("#headerhtml").val(),
+        "html-footer":        $("#footerhtml").val(),
+        "reglogin_type":      $("[name='reglogin_type']:checked").val(),
+        "register_fileds":    $("#register_fileds").val(),
+        "redirection_fileds": $("#redirection_fileds").val(),
+        "customcss":          $("#customcss").val(),
       };
       if($(".save_checkboxes").length){
         $(".save_checkboxes input[type=checkbox]").each(function(index, val) {
@@ -626,6 +656,10 @@ jQuery.noConflict();
      buttons: { close: { btnClass: "btn-"+type, text: _register_fields.closeTxt, keys: ["enter", "esc"], action: $fn } },
      });
     }
+
+    $.fn.glow = function(){this.each(function(){$(this).stop().addClass("glow").delay(1500).queue(function() {$(this).removeClass("glow").dequeue();});});};
+
+
 
   });
 })(jQuery);

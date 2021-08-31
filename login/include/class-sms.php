@@ -1,7 +1,7 @@
 <?php
 
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/08/28 23:58:55
+# @Last modified time: 2021/08/31 19:43:40
 
 namespace PeproDev\PeproCore\RegLogin;
 class SendSMS
@@ -23,7 +23,6 @@ class SendSMS
       try {
         @$SendDateTime = date("Y-m-d")."T".date("H:i:s");
         $SendMessage = $this->sendMessage($MobileNumbers, $Messages, $SendDateTime);
-        $recpetant = implode(", ", (array) ($MobileNumbers));
         return $SendMessage;
       }
       catch (Exeption $e) {
@@ -65,10 +64,10 @@ class SendSMS
       $token = $this->_getToken($this->api_key, $this->secret_key);
       if ($token != false) {
         $postData = array(
-          'Messages' => $Messages,
-          'MobileNumbers' => $MobileNumbers,
-          'LineNumber' => $this->line_number,
-          'SendDateTime' => $SendDateTime,
+          'Messages'                 => $Messages,
+          'MobileNumbers'            => $MobileNumbers,
+          'LineNumber'               => $this->line_number,
+          'SendDateTime'             => $SendDateTime,
           'CanContinueInCaseOfError' => 'false'
         );
         $url = $this->getAPIMessageSendUrl();
@@ -91,8 +90,8 @@ class SendSMS
         'method'      => 'POST',
         'body'        => array(
           'UserApiKey' => $this->api_key,
-          'SecretKey' => $this->secret_key,
-          'System' => 'php_rest_v_2_0'
+          'SecretKey'  => $this->secret_key,
+          'System'     => 'php_rest_v_2_0'
         ),
         'httpversion' => '1.0',
         'headers'     => array(

@@ -3,7 +3,7 @@
  * @Date:   2021/08/17 09:27:55
  * @Email:  its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/08/25 23:07:03
+ * @Last modified time: 2021/08/31 00:15:46
  * @License: GPLv2
  * @Copyright: Copyright © Amirhosseinhpv (https://hpv.im), all rights reserved.
  */
@@ -138,8 +138,9 @@ toast.active {
 	padding: 1rem;
 	border-radius: 4px;
 	transform: translate(calc(50vw - 200px), 10vh);
-	max-height: 90vh;
+	max-height: 80vh;
 	overflow: auto;
+	scrollbar-width: thin;
 	z-index: 99999 !important;
 }
 

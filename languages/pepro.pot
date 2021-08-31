@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: PeproDev Ultimate Profile Solutions\n"
-"POT-Creation-Date: 2021-08-29 12:53+0430\n"
+"POT-Creation-Date: 2021-08-30 19:16+0430\n"
 "PO-Revision-Date: 2021-08-29 00:03+0430\n"
 "Last-Translator: Amirhosseinhpv <its@hpv.im>\n"
 "Language-Team: Amirhosseinhpv <its@hpv.im>\n"
@@ -26,7 +26,7 @@ msgctxt "peprocore-appearance-setting"
 msgid "PeproDev Ultimate Profile Solutions"
 msgstr ""
 
-#: core/apps/home.php:53 login/login.php:2661
+#: core/apps/home.php:53 login/login.php:2758
 msgid "WordPress Admin"
 msgstr ""
 
@@ -67,7 +67,7 @@ msgstr ""
 msgid "Documentation"
 msgstr ""
 
-#: core/main.php:135 core/main.php:207 profile/profile.php:2238
+#: core/main.php:135 core/main.php:207 profile/profile.php:2246
 msgid "Dashboard"
 msgstr ""
 
@@ -92,13 +92,13 @@ msgstr ""
 msgid "Please wait ..."
 msgstr ""
 
-#: core/main.php:267 core/main.php:283 profile/profile.php:3004
+#: core/main.php:267 core/main.php:283 profile/profile.php:3012
 #, php-format
 msgctxt "footer-copyright"
 msgid "Thanks for using %s products"
 msgstr ""
 
-#: core/main.php:270 profile/profile.php:3009
+#: core/main.php:270 profile/profile.php:3017
 #, php-format
 msgctxt "footer-copyright"
 msgid "Version %s"
@@ -132,7 +132,7 @@ msgstr ""
 msgid "Empty Database"
 msgstr ""
 
-#: core/main.php:352 login/login.php:3215 profile/profile.php:1556
+#: core/main.php:352 login/login.php:3312 profile/profile.php:1564
 msgid "Settings Successfully Saved."
 msgstr ""
 
@@ -140,13 +140,13 @@ msgstr ""
 msgid "PeproDev UPS"
 msgstr ""
 
-#: core/main.php:410 profile/profile.php:3091
+#: core/main.php:410 profile/profile.php:3099
 #, php-format
 msgctxt "setting-page"
 msgid "Enter %s"
 msgstr ""
 
-#: core/main.php:420 profile/profile.php:3101
+#: core/main.php:420 profile/profile.php:3109
 #, php-format
 msgctxt "setting-page"
 msgid "Choose %s"
@@ -346,28 +346,28 @@ msgstr ""
 msgid "Saving ..."
 msgstr ""
 
-#: login/include/class-activated.php:21 login/login.php:292
-#: login/login.php:2313
+#: login/include/class-activated.php:21 login/login.php:346
+#: login/login.php:2409
 msgctxt "js-translate"
 msgid "Please wait ..."
 msgstr ""
 
-#: login/include/class-activated.php:22 login/login.php:293
+#: login/include/class-activated.php:22 login/login.php:347
 msgctxt "js-translate"
 msgid "An unknown error occured."
 msgstr ""
 
-#: login/include/class-activated.php:23 login/login.php:294
+#: login/include/class-activated.php:23 login/login.php:348
 msgctxt "js-translate"
 msgid "Error"
 msgstr ""
 
-#: login/include/class-activated.php:24 login/login.php:295
+#: login/include/class-activated.php:24 login/login.php:349
 msgctxt "js-translate"
 msgid "Go Home"
 msgstr ""
 
-#: login/include/class-activated.php:25 login/login.php:297
+#: login/include/class-activated.php:25 login/login.php:354
 msgctxt "js-translate"
 msgid "Confirm"
 msgstr ""
@@ -377,12 +377,12 @@ msgctxt "js-translate"
 msgid "You sure to clear out all items?<red>THIS CANNOT BE UNDONE."
 msgstr ""
 
-#: login/include/class-activated.php:27 login/login.php:298
+#: login/include/class-activated.php:27 login/login.php:355
 msgctxt "js-translate"
 msgid "Success"
 msgstr ""
 
-#: login/include/class-activated.php:28 login/login.php:306
+#: login/include/class-activated.php:28 login/login.php:363
 msgctxt "js-translate"
 msgid "Close"
 msgstr ""
@@ -392,27 +392,27 @@ msgctxt "js-translate"
 msgid "All items deleted successfully"
 msgstr ""
 
-#: login/include/class-activated.php:30 login/login.php:299
+#: login/include/class-activated.php:30 login/login.php:356
 msgctxt "js-translate"
 msgid "Submit"
 msgstr ""
 
-#: login/include/class-activated.php:31 login/login.php:301
+#: login/include/class-activated.php:31 login/login.php:358
 msgctxt "js-translate"
 msgid "Okay"
 msgstr ""
 
-#: login/include/class-activated.php:32 login/login.php:302
+#: login/include/class-activated.php:32 login/login.php:359
 msgctxt "js-translate"
 msgid "Yes"
 msgstr ""
 
-#: login/include/class-activated.php:33 login/login.php:303
+#: login/include/class-activated.php:33 login/login.php:360
 msgctxt "js-translate"
 msgid "No"
 msgstr ""
 
-#: login/include/class-activated.php:34 login/login.php:304
+#: login/include/class-activated.php:34 login/login.php:361
 msgctxt "js-translate"
 msgid "Cancel"
 msgstr ""
@@ -880,7 +880,7 @@ msgid "Registeration: Verify E-mail"
 msgstr ""
 
 #: login/include/class-activated.php:524
-msgid "Registeration: Verify Mobile by SMS (meta: user_mobile)?"
+msgid "Registeration: Verify Mobile by SMS?"
 msgstr ""
 
 #: login/include/class-activated.php:532
@@ -1253,7 +1253,7 @@ msgstr ""
 
 #. Author of the plugin/theme
 #: login/login.php:76 login/login.php:77 profile/profile.php:71
-#: profile/profile.php:72 profile/profile.php:3004
+#: profile/profile.php:72 profile/profile.php:3012
 msgid "Pepro Dev. Group"
 msgstr ""
 
@@ -1278,637 +1278,653 @@ msgstr ""
 msgid "Display Name"
 msgstr ""
 
-#: login/login.php:300
+#: login/login.php:286
+msgid "State / County"
+msgstr ""
+
+#: login/login.php:297
+msgid "Country / Region"
+msgstr ""
+
+#: login/login.php:352
+msgid "Select an option&hellip;"
+msgstr ""
+
+#: login/login.php:353
+msgid "Enter State / County &hellip;"
+msgstr ""
+
+#: login/login.php:357
 msgctxt "js-translate"
 msgid "Login"
 msgstr ""
 
-#: login/login.php:305
+#: login/login.php:362
 msgctxt "js-translate"
 msgid "One or more fields have an error. Please check and try again."
 msgstr ""
 
-#: login/login.php:307
+#: login/login.php:364
 msgctxt "js-translate"
 msgid "Please check this field validity"
 msgstr ""
 
-#: login/login.php:308
+#: login/login.php:365
 msgctxt "js-translate"
 msgid "This field is required, Please check its validity"
 msgstr ""
 
-#: login/login.php:310 login/login.php:1073 login/login.php:1286
-#: login/login.php:2447 login/login.php:2449 login/login.php:3007
+#: login/login.php:367 login/login.php:1130 login/login.php:1343
+#: login/login.php:2544 login/login.php:2546 login/login.php:3104
 msgctxt "reg-form-error"
 msgid "<strong>Error:</strong> Please check the reCAPTCHA challenge."
 msgstr ""
 
-#: login/login.php:327 login/login.php:362
+#: login/login.php:384 login/login.php:419
 msgid "Verify your account"
 msgstr ""
 
-#: login/login.php:456
+#: login/login.php:513
 msgid "Login/Register Inline form"
 msgstr ""
 
-#: login/login.php:458 login/login.php:474
+#: login/login.php:515 login/login.php:531
 msgid "Content before form"
 msgstr ""
 
-#: login/login.php:459 login/login.php:475
+#: login/login.php:516 login/login.php:532
 msgid "Content after form"
 msgstr ""
 
-#: login/login.php:460 login/login.php:478
+#: login/login.php:517 login/login.php:535
 msgid "Login Form title"
 msgstr ""
 
-#: login/login.php:461 login/login.php:479
+#: login/login.php:518 login/login.php:536
 msgid "Default active form: login/register/resetpass"
 msgstr ""
 
-#: login/login.php:462 login/login.php:480
+#: login/login.php:519 login/login.php:537
 msgid "Register Form title"
 msgstr ""
 
-#: login/login.php:463 login/login.php:481
+#: login/login.php:520 login/login.php:538
 msgid "Reset Password Form title"
 msgstr ""
 
-#: login/login.php:464 login/login.php:483 login/login.php:494
-#: login/login.php:502 login/login.php:510 profile/profile.php:357
+#: login/login.php:521 login/login.php:540 login/login.php:551
+#: login/login.php:559 login/login.php:567 profile/profile.php:357
 msgid "content between shortcode tags"
 msgstr ""
 
-#: login/login.php:464
+#: login/login.php:521
 msgid "Content to show to logged in users"
 msgstr ""
 
-#: login/login.php:469
+#: login/login.php:526
 msgid "Login/Register Popup form"
 msgstr ""
 
-#: login/login.php:471
+#: login/login.php:528
 msgid "A jQuery selector to trigger popup"
 msgstr ""
 
-#: login/login.php:472
+#: login/login.php:529
 msgid "Trigger call-to-action anchor text, leave empty to use jQuery trigger"
 msgstr ""
 
-#: login/login.php:473
+#: login/login.php:530
 msgid "Trigger call-to-action anchor class"
 msgstr ""
 
-#: login/login.php:476
+#: login/login.php:533
 msgid "Content before popup form"
 msgstr ""
 
-#: login/login.php:477
+#: login/login.php:534
 msgid "Content after popup form"
 msgstr ""
 
-#: login/login.php:482 login/login.php:483
+#: login/login.php:539 login/login.php:540
 msgid "Content instead of trigger call-to-action"
 msgstr ""
 
-#: login/login.php:488
+#: login/login.php:545
 msgid "Returns Logout URL/Link"
 msgstr ""
 
-#: login/login.php:490
+#: login/login.php:547
 msgid "URL to redirect on logout"
 msgstr ""
 
-#: login/login.php:491
+#: login/login.php:548
 msgid "Logout call-to-action anchor text, leave empty to return url"
 msgstr ""
 
-#: login/login.php:492
+#: login/login.php:549
 msgid "Logout call-to-action anchor class"
 msgstr ""
 
-#: login/login.php:493 login/login.php:494
+#: login/login.php:550 login/login.php:551
 msgid ""
 "Content instead of Logout call-to-action, use {url} to replace with logout "
 "link"
 msgstr ""
 
-#: login/login.php:499
+#: login/login.php:556
 msgid "Show content if user has verified Email"
 msgstr ""
 
-#: login/login.php:501 login/login.php:509
+#: login/login.php:558 login/login.php:566
 msgid "Show Content between tags if opposite of the condition is true"
 msgstr ""
 
-#: login/login.php:502 login/login.php:510
+#: login/login.php:559 login/login.php:567
 msgid "Content to show if condition were true, can use other shortcodes too"
 msgstr ""
 
-#: login/login.php:507
+#: login/login.php:564
 msgid "Show content if user has verified Mobile"
 msgstr ""
 
-#: login/login.php:537 login/login.php:583 login/login.php:605
-#: login/login.php:1680 login/login.php:2146
+#: login/login.php:594 login/login.php:640 login/login.php:662
+#: login/login.php:1758 login/login.php:2242
 msgid "Login"
 msgstr ""
 
-#: login/login.php:554 login/login.php:569 login/login.php:1834
+#: login/login.php:611 login/login.php:626 login/login.php:1912
 msgid "Register"
 msgstr ""
 
-#: login/login.php:559
+#: login/login.php:616
 msgid "Lost Password?"
 msgstr ""
 
-#: login/login.php:591
+#: login/login.php:648
 msgid "Reset Password"
 msgstr ""
 
-#: login/login.php:621 login/login.php:727 login/login.php:812
-#: login/login.php:1152 login/login.php:1242
+#: login/login.php:678 login/login.php:784 login/login.php:869
+#: login/login.php:1209 login/login.php:1299
 #: profile/libs/templates/tmplt-topbar.php:50
 msgid "Logout"
 msgstr ""
 
-#: login/login.php:679
+#: login/login.php:736
 msgid "Unauthorized Access!"
 msgstr ""
 
-#: login/login.php:683
+#: login/login.php:740
 msgid "You are already logged-in."
 msgstr ""
 
-#: login/login.php:686 login/login.php:824 login/login.php:1253
+#: login/login.php:743 login/login.php:881 login/login.php:1310
 msgid "Source data is not valid."
 msgstr ""
 
-#: login/login.php:691 login/login.php:831
+#: login/login.php:748 login/login.php:888
 msgid "Please check the reCAPTCHA challenge."
 msgstr ""
 
-#: login/login.php:704
+#: login/login.php:761
 msgid "The mobile number is not currently in use by any account."
 msgstr ""
 
-#: login/login.php:724 login/login.php:809
+#: login/login.php:781 login/login.php:866
 #, php-format
 msgid "Hi %s, You have successfully logged in!"
 msgstr ""
 
-#: login/login.php:732
+#: login/login.php:789
 msgid "Login verification code is incorrect/expired!"
 msgstr ""
 
-#: login/login.php:756 login/login.php:890
+#: login/login.php:813 login/login.php:947
 #, php-format
 msgid "Error Sending Verification to %s. Try again."
 msgstr ""
 
-#: login/login.php:763 login/login.php:898 login/login.php:994
+#: login/login.php:820 login/login.php:955 login/login.php:1051
 #, php-format
 msgid "Error Sending Verification, you can request one code every %s seconds."
 msgstr ""
 
-#: login/login.php:773 login/login.php:908 login/login.php:980
-#: login/login.php:1003 login/login.php:1206
+#: login/login.php:830 login/login.php:965 login/login.php:1037
+#: login/login.php:1060 login/login.php:1263
 #, php-format
 msgid "Verification code sent to %s."
 msgstr ""
 
-#: login/login.php:779 login/login.php:915 login/login.php:986
-#: login/login.php:1009
+#: login/login.php:836 login/login.php:972 login/login.php:1043
+#: login/login.php:1066
 msgid "Error Sending Verification code. Try again."
 msgstr ""
 
-#: login/login.php:790 login/login.php:924
+#: login/login.php:847 login/login.php:981
 msgid "Please enter a valid mobile number."
 msgstr ""
 
-#: login/login.php:817
+#: login/login.php:874
 msgid "Password does not match!"
 msgstr ""
 
-#: login/login.php:839
+#: login/login.php:896
 msgid "You mobile is already verified!"
 msgstr ""
 
-#: login/login.php:845
+#: login/login.php:902
 msgid "The mobile number is currently in use by another account."
 msgstr ""
 
-#: login/login.php:859
+#: login/login.php:916
 #, php-format
 msgid "Hi %s, You have successfully verified your mobile number!"
 msgstr ""
 
-#: login/login.php:861 login/login.php:954
+#: login/login.php:918 login/login.php:1011
 msgid "Go Home"
 msgstr ""
 
-#: login/login.php:865
+#: login/login.php:922
 msgid "Mobile verification code is incorrect/expired!"
 msgstr ""
 
-#: login/login.php:883 login/login.php:1181
+#: login/login.php:940 login/login.php:1238
 msgid "Verification code sent, Enter in field below."
 msgstr ""
 
-#: login/login.php:929
+#: login/login.php:986
 msgid "You Email address is already verified!"
 msgstr ""
 
-#: login/login.php:931
+#: login/login.php:988
 msgid "E-mail address could not be validated!"
 msgstr ""
 
-#: login/login.php:952
+#: login/login.php:1009
 #, php-format
 msgid "Hi %s, You have successfully verified your email address!"
 msgstr ""
 
-#: login/login.php:960
+#: login/login.php:1017
 msgid "Email verification code is incorrect/expired!"
 msgstr ""
 
-#: login/login.php:1024
+#: login/login.php:1081
 msgid "<strong>Error:</strong> Source data is not valid."
 msgstr ""
 
-#: login/login.php:1026
+#: login/login.php:1083
 msgid "<strong>Error:</strong> User registration is not allowed!"
 msgstr ""
 
-#: login/login.php:1035
+#: login/login.php:1092
 msgctxt "reg-form-error"
 msgid "<strong>Error:</strong> Please enter a username."
 msgstr ""
 
-#: login/login.php:1038
+#: login/login.php:1095
 msgctxt "reg-form-error"
 msgid ""
 "<strong>Error</strong>: This username is already registered. Please choose "
 "another one."
 msgstr ""
 
-#: login/login.php:1041
+#: login/login.php:1098
 msgctxt "reg-form-error"
 msgid ""
 "<strong>Error</strong>: This username is invalid because it uses illegal "
 "characters. Please enter a valid username."
 msgstr ""
 
-#: login/login.php:1045
+#: login/login.php:1102
 msgctxt "reg-form-error"
 msgid "<strong>Error</strong>: Sorry, that username is not allowed."
 msgstr ""
 
-#: login/login.php:1052
+#: login/login.php:1109
 msgctxt "reg-form-error"
 msgid "<strong>Error</strong>: Please enter an email address."
 msgstr ""
 
-#: login/login.php:1055 login/login.php:1058
+#: login/login.php:1112 login/login.php:1115
 msgctxt "reg-form-error"
 msgid "<strong>Error</strong>: The given email address is not valid."
 msgstr ""
 
-#: login/login.php:1061
+#: login/login.php:1118
 msgctxt "reg-form-error"
 msgid ""
 "<strong>Error</strong>: This email is already registered. Please choose "
 "another one."
 msgstr ""
 
-#: login/login.php:1082 login/login.php:1095 login/login.php:1293
-#: login/login.php:2457 login/login.php:2459 login/login.php:2485
-#: login/login.php:2487 login/login.php:2547 login/login.php:2593
+#: login/login.php:1139 login/login.php:1152 login/login.php:1350
+#: login/login.php:2554 login/login.php:2556 login/login.php:2582
+#: login/login.php:2584 login/login.php:2644 login/login.php:2690
 #, php-format
 msgctxt "reg-form-error"
 msgid "<strong>Error:</strong> Please enter %s."
 msgstr ""
 
-#: login/login.php:1086 login/login.php:2466 login/login.php:2468
-#: login/login.php:2558
+#: login/login.php:1143 login/login.php:2563 login/login.php:2565
+#: login/login.php:2655
 msgctxt "reg-form-error"
 msgid "<strong>Error:</strong> Please enter a valid mobile number."
 msgstr ""
 
-#: login/login.php:1090
+#: login/login.php:1147
 msgctxt "reg-form-error"
 msgid ""
 "<strong>Error:</strong> This mobile number is already registered. Please "
 "choose another one."
 msgstr ""
 
-#: login/login.php:1103 login/login.php:2515 login/login.php:2517
+#: login/login.php:1160 login/login.php:2612 login/login.php:2614
 msgctxt "reg-form-error"
 msgid "<strong>ERROR</strong>: Password field is required."
 msgstr ""
 
-#: login/login.php:1106 login/login.php:2522 login/login.php:2524
+#: login/login.php:1163 login/login.php:2619 login/login.php:2621
 msgctxt "reg-form-error"
 msgid "<strong>ERROR</strong>: Confirm Password field is required."
 msgstr ""
 
-#: login/login.php:1109
+#: login/login.php:1166
 msgctxt "reg-form-error"
 msgid "<strong>Error</strong>: Passwords may not contain the character \"\\\"."
 msgstr ""
 
-#: login/login.php:1112 login/login.php:2529 login/login.php:2531
+#: login/login.php:1169 login/login.php:2626 login/login.php:2628
 msgctxt "reg-form-error"
 msgid ""
 "<strong>ERROR</strong>: Password field and Confirm Password field do not "
 "match."
 msgstr ""
 
-#: login/login.php:1132
+#: login/login.php:1189
 msgid ""
 "<strong>Error:</strong> The mobile number is currently in use by another "
 "account."
 msgstr ""
 
-#: login/login.php:1149 login/login.php:1239
+#: login/login.php:1206 login/login.php:1296
 #, php-format
 msgid "Hi %s, You have successfully registered!"
 msgstr ""
 
-#: login/login.php:1156 login/login.php:1247 login/login.php:1315
+#: login/login.php:1213 login/login.php:1304 login/login.php:1372
 msgid "<strong>Error:</strong> There was an error processing your request!"
 msgstr ""
 
-#: login/login.php:1163
+#: login/login.php:1220
 msgid "<strong>Error:</strong> Verification code is incorrect/expired!"
 msgstr ""
 
-#: login/login.php:1188
+#: login/login.php:1245
 #, php-format
 msgid "<strong>Error:</strong> Sending Verification to %s failed. Try again."
 msgstr ""
 
-#: login/login.php:1196
+#: login/login.php:1253
 #, php-format
 msgid ""
 "<strong>Error:</strong> Sending Verification failed, you can request one "
 "code every %s seconds."
 msgstr ""
 
-#: login/login.php:1213
+#: login/login.php:1270
 msgid "<strong>Error:</strong> Sending Verification code failed. Try again."
 msgstr ""
 
-#: login/login.php:1224
+#: login/login.php:1281
 msgid "<strong>Error:</strong> Please enter a valid mobile number."
 msgstr ""
 
-#: login/login.php:1258 login/login.php:1262
+#: login/login.php:1315 login/login.php:1319
 msgctxt "reg-form-error"
 msgid "<strong>Error</strong>: Please enter a username or email address."
 msgstr ""
 
-#: login/login.php:1266
+#: login/login.php:1323
 msgctxt "reg-form-error"
 msgid ""
 "<strong>Error</strong>: There is no account with that username or email "
 "address."
 msgstr ""
 
-#: login/login.php:1274
+#: login/login.php:1331
 msgctxt "reg-form-error"
 msgid "<strong>Error</strong>: There is no email address linked to username."
 msgstr ""
 
-#: login/login.php:1277
+#: login/login.php:1334
 msgctxt "reg-form-error"
 msgid "<strong>Error</strong>: The given email address is not registered."
 msgstr ""
 
-#: login/login.php:1311
+#: login/login.php:1368
 msgid "A password-reset mail sent to you, Check your inbox."
 msgstr ""
 
-#: login/login.php:1324 login/login.php:1331
+#: login/login.php:1381 login/login.php:1388
 msgid "An unknown error occured."
 msgstr ""
 
-#: login/login.php:1327
+#: login/login.php:1384
 msgid "User details successfully changed."
 msgstr ""
 
-#: login/login.php:1352
+#: login/login.php:1412
 msgid "Dear user"
 msgstr ""
 
-#: login/login.php:1519
+#: login/login.php:1598
 msgid "VERIFY"
 msgstr ""
 
-#: login/login.php:1594 login/login.php:2052
+#: login/login.php:1672 login/login.php:2148
 msgid "Username/Email"
 msgstr ""
 
-#: login/login.php:1594 login/login.php:1700
+#: login/login.php:1672 login/login.php:1778
 msgid "Username"
 msgstr ""
 
-#: login/login.php:1602 login/login.php:2002 login/login.php:2060
+#: login/login.php:1680 login/login.php:2098 login/login.php:2156
 msgid "Enter username or email address correctly"
 msgstr ""
 
-#: login/login.php:1607 login/login.php:1799 login/login.php:2626
+#: login/login.php:1685 login/login.php:1877 login/login.php:2723
 msgid "Password"
 msgstr ""
 
-#: login/login.php:1610
+#: login/login.php:1688
 msgid "You have to enter a password"
 msgstr ""
 
-#: login/login.php:1623 login/login.php:1735 login/login.php:2091
+#: login/login.php:1701 login/login.php:1813 login/login.php:2187
 msgid "Mobile"
 msgstr ""
 
-#: login/login.php:1631 login/login.php:1743 login/login.php:1782
-#: login/login.php:1788 login/login.php:2099
+#: login/login.php:1709 login/login.php:1821 login/login.php:1860
+#: login/login.php:1866 login/login.php:2195
 msgid "Enter mobile number with English numbers,<br>e.g. 09123456789"
 msgstr ""
 
-#: login/login.php:1636 login/login.php:1748 login/login.php:2104
+#: login/login.php:1714 login/login.php:1826 login/login.php:2200
 msgid "OTP Code"
 msgstr ""
 
-#: login/login.php:1645 login/login.php:1757 login/login.php:2113
+#: login/login.php:1723 login/login.php:1835 login/login.php:2209
 msgid ""
 "You have to enter an OTP code or leave it empty and press Enter to receive a "
 "new one"
 msgstr ""
 
-#: login/login.php:1673 login/login.php:2139
+#: login/login.php:1751 login/login.php:2235
 msgid "Receive OTP Code"
 msgstr ""
 
-#: login/login.php:1674 login/login.php:2140
+#: login/login.php:1752 login/login.php:2236
 msgid "Verify OTP Code"
 msgstr ""
 
-#: login/login.php:1704
+#: login/login.php:1782
 msgid "Enter username correctly"
 msgstr ""
 
-#: login/login.php:1716 login/login.php:1994
+#: login/login.php:1794 login/login.php:2090
 msgid "Email"
 msgstr ""
 
-#: login/login.php:1720
+#: login/login.php:1798
 msgid "Enter email address correctly"
 msgstr ""
 
-#: login/login.php:1809 login/login.php:2630
+#: login/login.php:1887 login/login.php:2727
 msgid "Confirm Password"
 msgstr ""
 
-#: login/login.php:1827
+#: login/login.php:1905
 msgid "Receive OTP & Register"
 msgstr ""
 
-#: login/login.php:1828
+#: login/login.php:1906
 msgid "Verify OTP & Register"
 msgstr ""
 
-#: login/login.php:2007
+#: login/login.php:2103
 msgid "Verification Code"
 msgstr ""
 
-#: login/login.php:2016
+#: login/login.php:2112
 msgid ""
 "You have to enter a Verification code or leave it empty and press Enter to "
 "receive a new one"
 msgstr ""
 
-#: login/login.php:2028
+#: login/login.php:2124
 msgid "Receive Code"
 msgstr ""
 
-#: login/login.php:2029
+#: login/login.php:2125
 msgid "Verify Code"
 msgstr ""
 
-#: login/login.php:2069
+#: login/login.php:2165
 msgid "Send reset password Email"
 msgstr ""
 
-#: login/login.php:2254
+#: login/login.php:2350
 msgctxt "metabox"
 msgid "Email Verified"
 msgstr ""
 
-#: login/login.php:2255
+#: login/login.php:2351
 msgctxt "metabox"
 msgid "SMS Verified"
 msgstr ""
 
-#: login/login.php:2296
+#: login/login.php:2392
 msgid "Read value"
 msgstr ""
 
-#: login/login.php:2314
+#: login/login.php:2410
 msgctxt "wc-setting-js"
 msgid "Operation done successfully"
 msgstr ""
 
-#: login/login.php:2315
+#: login/login.php:2411
 msgctxt "js-translate"
 msgid "An unknown error occured"
 msgstr ""
 
-#: login/login.php:2316
+#: login/login.php:2412
 msgctxt "js-translate"
 msgid "Plese fix errors in form"
 msgstr ""
 
-#: login/login.php:2328 login/login.php:2778
+#: login/login.php:2425 login/login.php:2875
 msgid "Personal Information"
 msgstr ""
 
-#: login/login.php:2475 login/login.php:2477
+#: login/login.php:2572 login/login.php:2574
 msgctxt "reg-form-error"
 msgid "<strong>Error:</strong> This mobile number is currently in use."
 msgstr ""
 
-#: login/login.php:2582
+#: login/login.php:2679
 #, php-format
 msgctxt "reg-form-error"
 msgid "<strong>Error:</strong> This mobile number is currently in use by %s."
 msgstr ""
 
-#: login/login.php:2649
+#: login/login.php:2746
 msgid "Home page"
 msgstr ""
 
-#: login/login.php:2653
+#: login/login.php:2750
 msgid "Pepro Profile page"
 msgstr ""
 
-#: login/login.php:2657
+#: login/login.php:2754
 msgid "Pepro Profile Edit page"
 msgstr ""
 
-#: login/login.php:2716
+#: login/login.php:2813
 msgid "Everyone"
 msgstr ""
 
-#: login/login.php:2736
+#: login/login.php:2833
 msgid "Text field"
 msgstr ""
 
-#: login/login.php:2737
+#: login/login.php:2834
 msgid "Textarea field"
 msgstr ""
 
-#: login/login.php:2738
+#: login/login.php:2835
 msgid "Number field"
 msgstr ""
 
-#: login/login.php:2739
+#: login/login.php:2836
 msgid "Email field"
 msgstr ""
 
-#: login/login.php:2740
+#: login/login.php:2837
 msgid "Mobile field"
 msgstr ""
 
-#: login/login.php:2741
+#: login/login.php:2838
 msgid "TinyMCE Editor"
 msgstr ""
 
-#: login/login.php:2742
+#: login/login.php:2839
 msgid "Dropdown list"
 msgstr ""
 
-#: login/login.php:2745
+#: login/login.php:2842
 msgid "reCaptcha"
 msgstr ""
 
-#: login/login.php:2801
+#: login/login.php:2898
 #, php-format
 msgid "Your verification Code [OTP] — %s"
 msgstr ""
 
-#: login/login.php:2888
+#: login/login.php:2985
 msgctxt "loginregister"
 msgid "Manage Login/Register"
 msgstr ""
 
-#: login/login.php:3218
+#: login/login.php:3315
 #, php-format
 msgctxt "login-section"
 msgid "%1$s Your login page is now here: %2$s. Bookmark this page!"
 msgstr ""
 
-#: login/login.php:3219
+#: login/login.php:3316
 msgctxt "login-section"
 msgid "Warning!"
 msgstr ""
@@ -1948,7 +1964,7 @@ msgctxt "profile-section"
 msgid "Dashboard page"
 msgstr ""
 
-#: profile/libs/general/activated.php:48 profile/profile.php:1542
+#: profile/libs/general/activated.php:48 profile/profile.php:1550
 #, php-format
 msgid ""
 "Current selected dashboard page's template should be 'PeproDev Ultimate "
@@ -1956,7 +1972,7 @@ msgid ""
 msgstr ""
 
 #: profile/libs/general/activated.php:51
-#: profile/libs/templates/wc/my-address.php:68 profile/profile.php:1545
+#: profile/libs/templates/wc/my-address.php:68 profile/profile.php:1553
 msgid "Edit"
 msgstr ""
 
@@ -2062,31 +2078,31 @@ msgid "Global JS"
 msgstr ""
 
 #: profile/libs/general/notifs_panel.php:12
-#: profile/libs/general/sections_panel.php:11 profile/profile.php:2517
+#: profile/libs/general/sections_panel.php:11 profile/profile.php:2525
 msgctxt "notifications-priority"
 msgid "Urgent"
 msgstr ""
 
 #: profile/libs/general/notifs_panel.php:13
-#: profile/libs/general/sections_panel.php:12 profile/profile.php:2518
+#: profile/libs/general/sections_panel.php:12 profile/profile.php:2526
 msgctxt "notifications-priority"
 msgid "High"
 msgstr ""
 
 #: profile/libs/general/notifs_panel.php:14
-#: profile/libs/general/sections_panel.php:13 profile/profile.php:2519
+#: profile/libs/general/sections_panel.php:13 profile/profile.php:2527
 msgctxt "notifications-priority"
 msgid "Medium"
 msgstr ""
 
 #: profile/libs/general/notifs_panel.php:15
-#: profile/libs/general/sections_panel.php:14 profile/profile.php:2520
+#: profile/libs/general/sections_panel.php:14 profile/profile.php:2528
 msgctxt "notifications-priority"
 msgid "Low"
 msgstr ""
 
 #: profile/libs/general/notifs_panel.php:16
-#: profile/libs/general/sections_panel.php:15 profile/profile.php:2521
+#: profile/libs/general/sections_panel.php:15 profile/profile.php:2529
 msgctxt "notifications-priority"
 msgid "Normal"
 msgstr ""
@@ -3041,7 +3057,7 @@ msgstr ""
 msgid "Modern profile for users"
 msgstr ""
 
-#: profile/profile.php:167 profile/profile.php:2980
+#: profile/profile.php:167 profile/profile.php:2988
 msgid "User Dashboard"
 msgstr ""
 
@@ -3053,7 +3069,7 @@ msgstr ""
 msgid "Manage Sections"
 msgstr ""
 
-#: profile/profile.php:255 profile/profile.php:2279
+#: profile/profile.php:255 profile/profile.php:2287
 msgid "Notifications"
 msgstr ""
 
@@ -3258,55 +3274,55 @@ msgstr ""
 msgid "Done"
 msgstr ""
 
-#: profile/profile.php:1324
+#: profile/profile.php:1325
 msgid "There was a problem with your request. Error 0x10027"
 msgstr ""
 
-#: profile/profile.php:1327
+#: profile/profile.php:1328
 msgid "There was a problem with your request. Error 0x00010"
 msgstr ""
 
-#: profile/profile.php:1361
+#: profile/profile.php:1362
 msgid ""
 "There was an error uploading your file. Operation Aborted, Error 0x100953."
 msgstr ""
 
-#: profile/profile.php:1367
+#: profile/profile.php:1368
 msgid ""
 "There was an error uploading your file. Please check file type and size. "
 "Operation Aborted, Error 0x100954."
 msgstr ""
 
-#: profile/profile.php:1373
+#: profile/profile.php:1374
 msgid "First name"
 msgstr ""
 
-#: profile/profile.php:1374
+#: profile/profile.php:1375
 msgid "Last name"
 msgstr ""
 
-#: profile/profile.php:1375
+#: profile/profile.php:1376
 msgid "Display name"
 msgstr ""
 
-#: profile/profile.php:1376
+#: profile/profile.php:1377
 msgid "Email address"
 msgstr ""
 
-#: profile/profile.php:1383
+#: profile/profile.php:1384
 #, php-format
 msgid "%s is a required field."
 msgstr ""
 
-#: profile/profile.php:1407
+#: profile/profile.php:1408
 msgid "Please provide a valid email address."
 msgstr ""
 
-#: profile/profile.php:1410
+#: profile/profile.php:1411
 msgid "This email address is already registered."
 msgstr ""
 
-#: profile/profile.php:1420
+#: profile/profile.php:1421
 msgid "Display name cannot be changed to email address due to privacy concern."
 msgstr ""
 
@@ -3322,224 +3338,224 @@ msgstr ""
 msgid "Your current password is incorrect."
 msgstr ""
 
-#: profile/profile.php:1476
+#: profile/profile.php:1482
 msgid "Profile Updated successfully."
 msgstr ""
 
-#: profile/profile.php:1480
+#: profile/profile.php:1488
 msgid "There was a problem with your request. Error 0x10030"
 msgstr ""
 
-#: profile/profile.php:1484
+#: profile/profile.php:1492
 msgid "There was a problem with your request. Error 0x10028"
 msgstr ""
 
-#: profile/profile.php:1487
+#: profile/profile.php:1495
 msgid "There was a problem with your request. Error 0x10034"
 msgstr ""
 
-#: profile/profile.php:1505
+#: profile/profile.php:1513
 #, php-format
 msgid "%s Successfully Activated."
 msgstr ""
 
-#: profile/profile.php:1516
+#: profile/profile.php:1524
 #, php-format
 msgid "%s Successfully Deactivated."
 msgstr ""
 
-#: profile/profile.php:1566 profile/profile.php:1686
+#: profile/profile.php:1574 profile/profile.php:1694
 msgid "There was a problem with your request. Title field is required."
 msgstr ""
 
-#: profile/profile.php:1569 profile/profile.php:1572
+#: profile/profile.php:1577 profile/profile.php:1580
 msgid "There was a problem with your request. Unique Slug field is required."
 msgstr ""
 
-#: profile/profile.php:1575 profile/profile.php:1690
+#: profile/profile.php:1583 profile/profile.php:1698
 msgid "There was a problem with your request. Content field is required."
 msgstr ""
 
-#: profile/profile.php:1643 profile/profile.php:1789
+#: profile/profile.php:1651 profile/profile.php:1797
 msgid "Notification edited successfully."
 msgstr ""
 
-#: profile/profile.php:1646 profile/profile.php:1793
+#: profile/profile.php:1654 profile/profile.php:1801
 msgid "New notification created successfully."
 msgstr ""
 
-#: profile/profile.php:1648 profile/profile.php:1796
+#: profile/profile.php:1656 profile/profile.php:1804
 msgid "There was a problem with your request. Error 0x1001"
 msgstr ""
 
-#: profile/profile.php:1657 profile/profile.php:1677 profile/profile.php:1806
+#: profile/profile.php:1665 profile/profile.php:1685 profile/profile.php:1814
 msgid "There was a problem with your request."
 msgstr ""
 
-#: profile/profile.php:1664
+#: profile/profile.php:1672
 msgid "Section edited successfully."
 msgstr ""
 
-#: profile/profile.php:1669 profile/profile.php:1811
+#: profile/profile.php:1677 profile/profile.php:1819
 msgid "Notification searched successfully."
 msgstr ""
 
-#: profile/profile.php:1675
+#: profile/profile.php:1683
 msgid "Section removed successfully."
 msgstr ""
 
-#: profile/profile.php:1700
+#: profile/profile.php:1708
 msgid "There was a problem with your request. Priority field is required."
 msgstr ""
 
-#: profile/profile.php:1716
+#: profile/profile.php:1724
 msgid "There was a problem with your request. Users List is required."
 msgstr ""
 
-#: profile/profile.php:1734
+#: profile/profile.php:1742
 msgid "There was a problem with your request. Schedule date is required."
 msgstr ""
 
-#: profile/profile.php:1804
+#: profile/profile.php:1812
 msgid "Notification removed successfully."
 msgstr ""
 
-#: profile/profile.php:1923 profile/profile.php:1965 profile/profile.php:2044
-#: profile/profile.php:2090 profile/profile.php:2148
+#: profile/profile.php:1931 profile/profile.php:1973 profile/profile.php:2052
+#: profile/profile.php:2098 profile/profile.php:2156
 msgid "Priority: "
 msgstr ""
 
-#: profile/profile.php:1923 profile/profile.php:1969 profile/profile.php:1988
-#: profile/profile.php:2044 profile/profile.php:2094 profile/profile.php:2113
-#: profile/profile.php:2152 profile/profile.php:2171
+#: profile/profile.php:1931 profile/profile.php:1977 profile/profile.php:1996
+#: profile/profile.php:2052 profile/profile.php:2102 profile/profile.php:2121
+#: profile/profile.php:2160 profile/profile.php:2179
 #, php-format
 msgid "%s ago"
 msgstr ""
 
-#: profile/profile.php:2224
+#: profile/profile.php:2232
 msgid "User Dashboard Page"
 msgstr ""
 
-#: profile/profile.php:2247
+#: profile/profile.php:2255
 msgid "Orders"
 msgstr ""
 
-#: profile/profile.php:2253
+#: profile/profile.php:2261
 msgid "Downloads"
 msgstr ""
 
-#: profile/profile.php:2259
+#: profile/profile.php:2267
 msgid "Order Tracking"
 msgstr ""
 
-#: profile/profile.php:2269
+#: profile/profile.php:2277
 msgid "Wallet"
 msgstr ""
 
-#: profile/profile.php:2285
+#: profile/profile.php:2293
 msgid "Announcements"
 msgstr ""
 
-#: profile/profile.php:2296
+#: profile/profile.php:2304
 msgid "My Courses"
 msgstr ""
 
-#: profile/profile.php:2550
+#: profile/profile.php:2558
 #, php-format
 msgctxt "notifications-priority"
 msgid "No notification found! please consider %s."
 msgstr ""
 
-#: profile/profile.php:2551
+#: profile/profile.php:2559
 msgctxt "notifications-section"
 msgid "adding new one"
 msgstr ""
 
-#: profile/profile.php:2559 profile/profile.php:2661
+#: profile/profile.php:2567 profile/profile.php:2669
 #, php-format
 msgctxt "notifications-priority"
 msgid "Sorry, your search for \"%s\" didn't match any notification!"
 msgstr ""
 
-#: profile/profile.php:2570
+#: profile/profile.php:2578
 #, php-format
 msgctxt "notification-list-publishdate"
 msgid "Published at %s"
 msgstr ""
 
-#: profile/profile.php:2573
+#: profile/profile.php:2581
 #, php-format
 msgctxt "notification-list-publishdate"
 msgid "Scheduled for %s"
 msgstr ""
 
-#: profile/profile.php:2576
+#: profile/profile.php:2584
 msgctxt "notification-list-publishdate"
 msgid "Current and Future users"
 msgstr ""
 
-#: profile/profile.php:2579
+#: profile/profile.php:2587
 #, php-format
 msgctxt "notification-list-publishdate"
 msgid "For %s users"
 msgstr ""
 
-#: profile/profile.php:2614 profile/profile.php:2716
+#: profile/profile.php:2622 profile/profile.php:2724
 msgctxt "action-title"
 msgid "View"
 msgstr ""
 
-#: profile/profile.php:2615 profile/profile.php:2717 profile/profile.php:2781
+#: profile/profile.php:2623 profile/profile.php:2725 profile/profile.php:2789
 msgctxt "action-title"
 msgid "Edit"
 msgstr ""
 
-#: profile/profile.php:2616 profile/profile.php:2718 profile/profile.php:2782
+#: profile/profile.php:2624 profile/profile.php:2726 profile/profile.php:2790
 msgctxt "action-title"
 msgid "Remove"
 msgstr ""
 
-#: profile/profile.php:2627 profile/profile.php:2730
+#: profile/profile.php:2635 profile/profile.php:2738
 msgid "&laquo;"
 msgstr ""
 
-#: profile/profile.php:2628 profile/profile.php:2731
+#: profile/profile.php:2636 profile/profile.php:2739
 msgid "&raquo;"
 msgstr ""
 
-#: profile/profile.php:2655
+#: profile/profile.php:2663
 #, php-format
 msgctxt "notifications-priority"
 msgid "No section found! please consider %s."
 msgstr ""
 
-#: profile/profile.php:2655
+#: profile/profile.php:2663
 msgctxt "notifications-section"
 msgid "adding new section"
 msgstr ""
 
-#: profile/profile.php:2704
+#: profile/profile.php:2712
 #, php-format
 msgid "Enrolled users of Ld-course: %s"
 msgstr ""
 
-#: profile/profile.php:2713 profile/profile.php:2778
+#: profile/profile.php:2721 profile/profile.php:2786
 msgid "— Public —"
 msgstr ""
 
-#: profile/profile.php:2774 profile/profile.php:2776
+#: profile/profile.php:2782 profile/profile.php:2784
 msgid "— Built-in Section —"
 msgstr ""
 
-#: profile/profile.php:2808
+#: profile/profile.php:2816
 msgid "Search here ..."
 msgstr ""
 
-#: profile/profile.php:2954
+#: profile/profile.php:2962
 msgid "Adds Pepro Profile Dashoard to page"
 msgstr ""
 
-#: profile/profile.php:2960
+#: profile/profile.php:2968
 msgid "Pepro Elements"
 msgstr ""
 

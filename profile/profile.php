@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/08/29 12:12:04
+# @Last modified time: 2021/08/30 17:51:56
 if (!class_exists("PeproDevUPS_Profile")) {
     class PeproDevUPS_Profile
     {
@@ -1308,15 +1308,16 @@ if (!class_exists("PeproDevUPS_Profile")) {
                       $Ahtmldata = $this->get_user_announcements(get_current_user_id());
 
                       wp_send_json_success( array(
-                          "msg"=> __("Done",$this->td),
-                          "count" => $notif,
-                          "number" => $number,
-                          "tiny" => $shorts,
-                          "html"=> $htmldata,
-                          "Acount" => $Anotif,
+                          "msg"     => __("Done",$this->td),
+                          "count"   => $notif,
+                          "number"  => $number,
+                          "tiny"    => $shorts,
+                          "html"    => $htmldata,
+                          "Acount"  => $Anotif,
                           "Anumber" => $Anumber,
-                          "Atiny" => $Ashorts,
-                          "Ahtml"=> $Ahtmldata));
+                          "Atiny"   => $Ashorts,
+                          "Ahtml"   => $Ahtmldata)
+                        );
 
                     break;
                   case 'edit-profile':
@@ -1389,7 +1390,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                         global $PeproDevUPS_Login;
                         foreach ($PeproDevUPS_Login->get_register_fields() as $field) {
                           if ("yes" == $field["is-editable"]){
-                            update_user_meta( $user_id, $index["name"], sanitize_post( trim($index['value']) ));
+                            update_user_meta( $user_id, $index["name"], sanitize_post(sanitize_text_field(trim($index['value']))));
                           }
                         }
                       }
@@ -1441,7 +1442,6 @@ if (!class_exists("PeproDevUPS_Profile")) {
                               update_user_meta( $user_id, "height", $index['value']);
                               break;
                           default:
-
                             do_action( "peprofile_user_details_edit_loop_details", $_POST, $index);
                             break;
                       }
@@ -1468,12 +1468,20 @@ if (!class_exists("PeproDevUPS_Profile")) {
 
                     wp_update_user( $user );
 
-                    $retuen["avatar"] = get_avatar_url($user_id);
+                    add_filter("get_avatar_url", array( $this, "change_avatar_url"), 10, 3);
+                    $avatar_url = get_avatar_url($user_id, array("size" => "96", "default" => "images/icon/avatar-01.jpg",));
+                    remove_filter("get_avatar_url", array( $this, "change_avatar_url"), 10, 3);
+
+                    $retuen["avatar"] = $avatar_url;
                     $upload_dir   = wp_upload_dir();
 
                     do_action( "peprofile_user_details_edited", $user_id);
 
-                    wp_send_json_success( array("dir" => json_decode(stripslashes($_POST["dparam"])), 'msg' => __("Profile Updated successfully.", $this->td), "e"=>$retuen ));
+                    wp_send_json_success( array(
+                      "dir" => json_decode(stripslashes($_POST["dparam"])),
+                      'msg' => __("Profile Updated successfully.", $this->td),
+                      "e"   => $retuen )
+                    );
 
                     break;
                   default:
@@ -2993,7 +3001,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
               update_option("{$this->activation_status}-profile-dash-page-created", "yes");
             }
           }
-  
+
         }
         /* common functions
         */

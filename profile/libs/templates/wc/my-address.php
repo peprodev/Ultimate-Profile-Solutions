@@ -1,4 +1,13 @@
 <?php
+# @Author: Amirhosseinhpv
+# @Date:   2021/08/28 00:07:32
+# @Email:  its@hpv.im
+# @Last modified by:   Amirhosseinhpv
+# @Last modified time: 2021/08/31 19:51:51
+# @License: GPLv2
+# @Copyright: Copyright © Amirhosseinhpv (https://hpv.im), all rights reserved.
+
+
 /**
  * My Addresses
  *
@@ -54,7 +63,7 @@ $col    = 1;
 	?>
 
 
-	<div class="col-lg-6">
+	<div class="col-lg-4">
 			<div class="card">
 					<div class="card-header"><?php echo esc_html( $address_title ); ?></div>
 					<div class="card-body">

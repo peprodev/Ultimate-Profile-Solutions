@@ -1,7 +1,7 @@
 <?php
 
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/08/29 00:00:06
+# @Last modified time: 2021/08/31 19:53:28
 
 global $PeproDevUPS_Profile;
 $current_user = wp_get_current_user();
@@ -98,22 +98,17 @@ $PeproDevUPS_Profile->change_dashboard_title(_x("Edit", "user-dashboard", $Pepro
         </div>
     </div>
   </div>
-  <?php
-    if ($PeproDevUPS_Profile->_wc_activated()) {
-        ?>
-    <div class="row">
-      <div class="col-md-12">
-          <div class="overview-wrap">
-              <h2 class="title-1"><?php echo _x("Edit Woocommerce Addresses", "edit-user", $PeproDevUPS_Profile->td);?></h2>
-          </div>
-      </div>
-    </div>
-    <div class="row m-t-25">
-        <?php
+  <div class="row m-t-25">
+    <?php
+      if ($PeproDevUPS_Profile->_wc_activated()) {
         $PeproDevUPS_Profile->peprofile_get_template_part("wc/my-address");
-        ?>
-  </div>
-        <?php
-    }
+      }
+      if (class_exists("PeproDevUPS_Login")){
+        do_action("peprofile_user_details_before_verify_mobile");
+        global $PeproDevUPS_Login;
+        echo $PeproDevUPS_Login->verify_mobile_user_form_inline();
+        do_action("peprofile_user_details_after_verify_mobile");
+      }
     ?>
   </div>
+</div>

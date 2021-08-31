@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/08/29 12:43:58
+# @Last modified time: 2021/08/31 17:34:05
 add_thickbox();
 wp_enqueue_style("wp-color-picker");
 wp_enqueue_script("wp-color-picker");
@@ -26,6 +26,7 @@ wp_localize_script("pepro-register-fields",        "_register_fields", array(
   "confirmCap" => _x("You sure to clear out all items?<red>THIS CANNOT BE UNDONE.", "js-translate", $this->td),
   "successTtl" => _x("Success", "js-translate", $this->td),
   "closeTxt"   => _x("Close", "js-translate", $this->td),
+  "locked"   => _x("This item is locked! To unlock, Change Login/Registeration Type field.", "js-translate", $this->td),
   "successCap" => _x("All items deleted successfully", "js-translate", $this->td),
   "submitTxt"  => _x("Submit", "js-translate", $this->td),
   "okTxt"      => _x("Okay", "js-translate", $this->td),
@@ -54,25 +55,25 @@ foreach ($styleFiles as $style) {
         <div class="nav-tabs-wrapper">
           <ul class="nav nav-tabs">
             <li class="nav-item tab_login">
-              <a class="nav-link active show" href="#tab_login" ><i class="material-icons">format_list_bulleted</i> <?=_x("Login", "login-section", $this->td);?></a>
+              <a class="nav-link active show" href="#tab_login" ><i class="material-icons">login</i> <?=_x("Login", "login-section", $this->td);?></a>
             </li>
             <li class="nav-item tab_registration">
-              <a class="nav-link" href="#tab_registration" ><i class="material-icons">format_list_bulleted</i> <?=_x("Registration","login-section", $this->td);?></a>
+              <a class="nav-link" href="#tab_registration" ><i class="material-icons">app_registration</i> <?=_x("Registration","login-section", $this->td);?></a>
             </li>
             <li class="nav-item tab_redirection">
-              <a class="nav-link" href="#tab_redirection"  ><i class="material-icons">format_list_bulleted</i> <?=_x("Redirection","login-section", $this->td);?></a>
+              <a class="nav-link" href="#tab_redirection"  ><i class="material-icons">call_split</i> <?=_x("Redirection","login-section", $this->td);?></a>
             </li>
             <li class="nav-item tab_verification">
-              <a class="nav-link" href="#tab_verification" ><i class="material-icons">format_list_bulleted</i> <?=_x("Verification","login-section", $this->td);?></a>
+              <a class="nav-link" href="#tab_verification" ><i class="material-icons">how_to_reg</i> <?=_x("Verification","login-section", $this->td);?></a>
             </li>
             <li class="nav-item tab_security">
-              <a class="nav-link" href="#tab_security" ><i class="material-icons">format_list_bulleted</i> <?=_x("Security", "login-section", $this->td);?></a>
+              <a class="nav-link" href="#tab_security" ><i class="material-icons">security</i> <?=_x("Security", "login-section", $this->td);?></a>
             </li>
             <li class="nav-item tab_advanced">
-              <a class="nav-link" href="#tab_advanced" ><i class="material-icons">format_list_bulleted</i> <?=_x("Advanced", "login-section", $this->td);?></a>
+              <a class="nav-link" href="#tab_advanced" ><i class="material-icons">developer_board</i> <?=_x("Advanced", "login-section", $this->td);?></a>
             </li>
             <li class="nav-item tab_migrate">
-              <a class="nav-link" href="#tab_migrate" ><i class="material-icons">format_list_bulleted</i> <?=_x("Import/Export", "login-section", $this->td);?></a>
+              <a class="nav-link" href="#tab_migrate" ><i class="material-icons">cloud_done</i> <?=_x("Import/Export", "login-section", $this->td);?></a>
             </li>
           </ul>
         </div>
@@ -187,24 +188,6 @@ foreach ($styleFiles as $style) {
                         data-on='visibility'
                         data-off='visibility_off'
                         data-checked='<?=get_option("{$this->activation_status}-privacy", "true") === "true" ? "true" : "false";?>' id="login-section-privacy"></a>
-                  </td>
-                </tr>
-                <tr>
-                  <td><?=_x("Register/Lost Password Link", "login-section", $this->td);?></td>
-                  <td>
-                      <a class='btncheckbox'
-                        data-text-on='<?=_x("Yes, Show it", "login-section", $this->td);?>'
-                        data-text-off='<?=_x("No, Hide it", "login-section", $this->td);?>'
-                        data-togglel='[login-section-link-separator]'
-                        data-on='visibility'
-                        data-off='visibility_off'
-                        data-checked='<?=get_option("{$this->activation_status}-nav", "true") === "true" ? "true" : "false";?>' id="login-section-nav"></a>
-                  </td>
-                </tr>
-                <tr login-section-link-separator="true">
-                  <td><?=_x("Register/Lost Password Link Separator", "login-section", $this->td);?></td>
-                  <td>
-                    <input type="text" id="login-section-link-separator" value="<?=get_option("{$this->activation_status}-link-separator", " | ");?>" class="form-control primary" placeholder="<?=_x("Link Separator", "login-section", $this->td);?>" />
                   </td>
                 </tr>
                 <tr>
@@ -326,14 +309,6 @@ foreach ($styleFiles as $style) {
           </div>
           <div class="card-body">
             <div class="register-fields">
-              <?php
-              if (isset($_GET["debug"])){
-                echo "<pre style='user-select: text; text-align: left; direction: ltr; border:1px solid indianred; padding: 1rem; color: indianred;
-                display: block;z-index: 77777777777 !important;position: relative;background: white;'>get_register_fields".print_r($this->get_register_fields(),1)."</pre>";
-                echo "<pre style='user-select: text; text-align: left; direction: ltr; border:1px solid indianred; padding: 1rem; color: indianred;
-                display: block;z-index: 77777777777 !important;position: relative;background: white;'>get_redirection_fields".print_r($this->get_redirection_fields(),1)."</pre>";
-              }
-              ?>
               <template id="raw_field">
                 <div class="register-field-single p-2 mb-2 border">
                   <div class="register-field-single-title row justify-content-between align-items-center">
@@ -342,13 +317,14 @@ foreach ($styleFiles as $style) {
                     </div>
                     <div class="col-lg-3 <?=is_rtl()?"text-left":"text-right";?>">
                       <div class="btn-group m-0 p-0 ">
-                        <a href="javascript:;" class='btn btn-sm btn-primary register--arrow-up-field'><i class="fas fa-arrow-up"></i></a>
-                        <a href="javascript:;" class='btn btn-sm btn-primary register--arrow-down-field'><i class="fas fa-arrow-down"></i></a>
-                        <a href="javascript:;" class='btn btn-sm btn-primary register--clear-field'><i class="fas fa-trash"></i></a>
+                        <a href="javascript:;" class='btn btn-sm btn-primary register--duplicate-field'><span class="material-icons">content_copy</span></a>
+                        <a href="javascript:;" class='btn btn-sm btn-primary register--clear-field'><span class="material-icons">delete</span></a>
+                        <a href="javascript:;" class='btn btn-sm btn-primary register--arrow-down-field'><span class="material-icons">arrow_downward</span></a>
+                        <a href="javascript:;" class='btn btn-sm btn-primary register--arrow-up-field'><span class="material-icons">arrow_upward</span></a>
                       </div>
                     </div>
                   </div>
-                  <div class="register-field-single-content">
+                  <div class="register-field-single-content slide-up">
                     <!-- text|textarea|number|email|mobile|editor|date|select|color|recaptcha -->
                     <div class="fields-wrapper-inner row justify-content-between align-items-center mt-3 field-opt-meta_name mb-2"  data-show="all" >
                       <div class="col-lg-4"><?=__("Field Name (meta_name)",$this->td);?></div>
@@ -437,11 +413,11 @@ foreach ($styleFiles as $style) {
                       </div>
                     </div>
                     <div class="fields-wrapper-inner row justify-content-between align-items-center mb-3 field-opt-is-editable"     data-show="all" data-hide="recaptcha">
-                      <div class="col-lg-4"><?=__("Editable on Pepro Profile?",$this->td);?></div>
+                      <div class="col-lg-4"><?=__("Editable on Profile?",$this->td);?></div>
                       <div class="col-lg-8">
                         <label class="row w-100 align-items-center pl-3 pr-1">
                           <input autocomplete="off" type="checkbox" class='form-checkbox single-required mr-2' checked name="is-editable" />
-                          <?=__("Check to make field Editable on Pepro Profile",$this->td);?>
+                          <?=__("Check to make field Editable on Profile",$this->td);?>
                         </label>
                       </div>
                     </div>
@@ -467,20 +443,43 @@ foreach ($styleFiles as $style) {
                   </div>
                 </div>
               </template>
-              <div class="mt-3 mb-3">
-                <a href="javascript:;" class='btn btn-primary register--add-field'><?=__("Add Field",$this->td);?></a>
-                <a href="javascript:;" class='btn btn-primary register--toggle-fields'><?=__("Collapse / Expand",$this->td);?></a>
-                <a href="javascript:;" class='btn btn-danger ml-4 mr-4 register--clear-fields'><?=__("Clear Fields",$this->td);?></a>
+              <div class="row">
+                <div class="col-lg-4 col-md-12">
+                  <div class="mt-3 mb-3 fields--tools">
+                    <h4 class="mb-3"><?=__("Login/Registeration Type", $this->td);?></h4>
+                    <label class="row w-100 align-items-center m-0">
+                      <input autocomplete="off" type="radio" class='form-checkbox iostoggle single-required mr-2 reglogin_type' <?=checked($this->reglogin_type === "mobile", true);?> name="reglogin_type" value="mobile" /><?=__("Using Mobile OTP", $this->td);?>
+                    </label>
+                    <label class="row w-100 align-items-center m-0">
+                      <input autocomplete="off" type="radio" class='form-checkbox iostoggle single-required mr-2 reglogin_type' <?=checked($this->reglogin_type === "email", true);?> name="reglogin_type" value="email" /><?=__("Using Email/Username & Password", $this->td);?>
+                    </label>
+                  </div>
+                  <div class="workspace">
+                    <h4 class="mb-3 mt-4"><?=__("Registeration Default Fields", $this->td);?></h4>
+                    <p><?=__("To activate and show a field, click on its name and check it.", $this->td);?></p>
+                    <div class="save_checkboxes">
+                      <?php do_action( "pepro_reglogin_show_hide_defaul_registeration_fields"); ?>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-8 col-md-12">
+                  <div class="mt-3 mb-3 fields--tools">
+                  <h4 class="mb-3"><?=__("Registeration Additional Fields", $this->td);?></h4>
+                    <a href="javascript:;" class='btn btn-sm btn-primary register--add-field'><span class="material-icons">add_circle</span> <?=__("Add Field",$this->td);?></a>
+                    <a href="javascript:;" class='btn btn-sm btn-primary register--toggle-fields'><span class="material-icons">expand</span> <?=__("Collapse / Expand",$this->td);?></a>
+                    <a href="javascript:;" class='btn btn-sm btn-danger ml-4 mr-4 register--clear-fields'><span class="material-icons">delete_sweep</span> <?=__("Clear Fields",$this->td);?></a>
+                  </div>
+                  <div class="register-workspace workspace" data-empty="<?=__("No registerations field found.",$this->td);?>"></div>
+                </div>
               </div>
-              <div class="register-workspace workspace" data-empty="<?=__("No registerations field found.",$this->td);?>"></div>
+              <br>
+              <button
+                class="login-section-save btn btn-success btn-primary icn-btn btn-wide"
+                integrity="<?=wp_create_nonce('peprocorenounce')?>"
+                wparam="loginregister" lparam="savelogin" dparam="" fn="">
+                <i class='material-icons'>save</i> <?=_x("Save Settings", "login-section", $this->td);?>
+              </button>
             </div>
-            <br>
-            <button
-              class="login-section-save btn btn-success btn-primary icn-btn btn-wide"
-              integrity="<?=wp_create_nonce('peprocorenounce')?>"
-              wparam="loginregister" lparam="savelogin" dparam="" fn="">
-              <i class='material-icons'>save</i> <?=_x("Save Settings", "login-section", $this->td);?>
-            </button>
           </div>
         </div>
       </div>
@@ -493,14 +492,6 @@ foreach ($styleFiles as $style) {
           <div class="card-body">
             <br>
             <div class="row save_checkboxes justify-content-between">
-              <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-reg-show-password-fields '>
-                <div class="col-lg-12">
-                  <label class="row w-100 align-items-center pl-3 pr-1">
-                    <input autocomplete="off" type="checkbox" class='form-checkbox single-required mr-2' <?=checked( $this->show_password_field, true);?>
-                    id="show_password_field" name="show_password_field" /> <?=__("Registeration: Show Password Fields",$this->td);?>
-                  </label>
-                </div>
-              </div>
               <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-reg-auto-login '>
                 <div class="col-lg-12">
                   <label class="row w-100 align-items-center pl-3 pr-1">
@@ -521,7 +512,7 @@ foreach ($styleFiles as $style) {
                 <div class="col-lg-12">
                   <label class="row w-100 align-items-center pl-3 pr-1">
                     <input autocomplete="off" type="checkbox" class='form-checkbox single-required mr-2' <?=checked( $this->verify_mobile, true);?>
-                    id="verify_mobile" name="verify_mobile" /> <?=__("Registeration: Verify Mobile by SMS (meta: user_mobile)?",$this->td);?>
+                    id="verify_mobile" name="verify_mobile" /> <?=__("Registeration: Verify Mobile by SMS?",$this->td);?>
                   </label>
                 </div>
               </div>
@@ -541,163 +532,7 @@ foreach ($styleFiles as $style) {
                   </label>
                 </div>
               </div>
-              <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-reg-hide-email-field '>
-                <div class="col-lg-12">
-                  <label class="row w-100 align-items-center pl-3 pr-1">
-                    <input autocomplete="off" type="checkbox" class='form-checkbox single-required mr-2' <?=checked( $this->hide_email_field, true);?>
-                    id="hide_email_field" name="hide_email_field" /> <?=__("Registeration: Hide E-mail field",$this->td);?>
-                  </label>
-                </div>
-              </div>
-              <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-reg-hide-username-field '>
-                <div class="col-lg-12">
-                  <label class="row w-100 align-items-center pl-3 pr-1">
-                    <input autocomplete="off" type="checkbox" class='form-checkbox single-required mr-2' <?=checked( $this->hide_username_field, true);?>
-                    id="hide_username_field" name="hide_username_field" /> <?=__("Registeration: Hide Username field",$this->td);?>
-                  </label>
-                </div>
-              </div>
-              <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-login-mobile-otp '>
-                <div class="col-lg-12">
-                  <label class="row w-100 align-items-center pl-3 pr-1">
-                    <input autocomplete="off" type="checkbox" class='form-checkbox single-required mr-2' <?=checked( $this->login_mobile_otp, true);?>
-                    id="login_mobile_otp" name="login_mobile_otp" /> <?=__("Login/Register using Mobile OTP instead of Email/Username",$this->td);?>
-                  </label>
-                </div>
-              </div>
-              <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-login-mobile-otp '>
-                <div class="col-lg-12">
-                  <label class="row w-100 align-items-center pl-3 pr-1">
-                    <input autocomplete="off" type="checkbox" class='form-checkbox single-required mr-2' <?=checked( $this->reg_add_firstname, true);?>
-                    id="reg_add_firstname" name="reg_add_firstname" /> <?=__("Registeration: Add first_name field",$this->td);?>
-                  </label>
-                </div>
-              </div>
-              <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-login-mobile-otp '>
-                <div class="col-lg-12">
-                  <label class="row w-100 align-items-center pl-3 pr-1">
-                    <input autocomplete="off" type="checkbox" class='form-checkbox single-required mr-2' <?=checked( $this->reg_add_lastname, true);?>
-                    id="reg_add_lastname" name="reg_add_lastname" /> <?=__("Registeration: Add last_name field",$this->td);?>
-                  </label>
-                </div>
-              </div>
-              <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-login-mobile-otp '>
-                <div class="col-lg-12">
-                  <label class="row w-100 align-items-center pl-3 pr-1">
-                    <input autocomplete="off" type="checkbox" class='form-checkbox single-required mr-2' <?=checked( $this->reg_add_displayname, true);?>
-                    id="reg_add_displayname" name="reg_add_displayname" /> <?=__("Registeration: Add dispaly_name field",$this->td);?>
-                  </label>
-                </div>
-              </div>
               <?php do_action( "pepro_reglogin_verify_fields_inner_options"); ?>
-            </div>
-            <div class="row justify-content-between mt-4 save_sms_settings <?=$this->verify_mobile?"":"hide";?>">
-              <p class="font-weight-bold p-3"><?=__("Config SMS.ir WebAPI to send SMS Verification Codes", $this->td);?></p>
-              <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-sms_api_url '>
-                <div class="col-lg-6">
-                  <?=__("Sending Number",$this->td);?> <a href="https://ip.sms.ir/#/UserSetting" class="btn btn-sm btn-round btn-group btn-info float-left m-0" target="_blank"><i class="fas fa-external-link-alt"></i></a>
-                </div>
-                <div class="col-lg-6">
-                  <input autocomplete="off" type="text" id="sms_api_url" placeholder="<?=__("Sending Number",$this->td);?>" dir="ltr" class='form-input single-required mr-2' name="sms_api_url" value="<?=$this->sms_api_url;?>" />
-                </div>
-              </div>
-              <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-sms_secret_key '>
-                <div class="col-lg-6">
-                  <?=__("Security code",$this->td);?> <a href="https://ip.sms.ir/#/UserApiKey" class="btn btn-sm btn-round btn-group btn-info float-left m-0" target="_blank"><i class="fas fa-external-link-alt"></i></a>
-                </div>
-                <div class="col-lg-6">
-                  <input autocomplete="off" type="text" id="sms_secret_key" placeholder="<?=__("Security code",$this->td);?>" dir="ltr" class='form-input single-required mr-2' name="sms_secret_key" value="<?=$this->sms_secret_key;?>" />
-                </div>
-              </div>
-              <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-sms_api_key '>
-                <div class="col-lg-6">
-                  <?=__("API Key",$this->td);?>
-                </div>
-                <div class="col-lg-6">
-                  <input autocomplete="off" type="text" id="sms_api_key" placeholder="<?=__("API Key",$this->td);?>" dir="ltr" class='form-input single-required mr-2' name="sms_api_key" value="<?=$this->sms_api_key;?>" />
-                </div>
-              </div>
-              <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-sms_ultrafastsend_id '>
-                <div class="col-lg-6">
-                  <?=__("UltraFastSend ID or SMS text containing [OTP]",$this->td);?> <a href="https://ip.sms.ir/#/User/UltraFastSendSetting" class="btn btn-sm btn-round btn-group btn-info float-left m-0" target="_blank"><i class="fas fa-external-link-alt"></i></a>
-                </div>
-                <div class="col-lg-6">
-                  <input autocomplete="off" type="text" id="sms_ultrafastsend_id" placeholder="<?=__("UltraFastSend ID or SMS text containing [OTP]",$this->td);?>" dir="ltr" class='form-input single-required mr-2' name="sms_ultrafastsend_id" value="<?=$this->sms_ultrafastsend;?>" />
-                </div>
-              </div>
-              <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-sms_expiration '>
-                <div class="col-lg-6">
-                  <?=__("Verification expire duration (in seconds)",$this->td);?>
-                </div>
-                <div class="col-lg-6">
-                  <input autocomplete="off" type="text" id="sms_expiration" placeholder="<?=__("Verification expire duration",$this->td);?>" dir="ltr" class='form-input single-required mr-2' name="sms_expiration" value="<?=$this->sms_expiration;?>" />
-                </div>
-              </div>
-              <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-verification_digits '>
-                <div class="col-lg-6">
-                  <?=__("Verification Code length",$this->td);?>
-                </div>
-                <div class="col-lg-6">
-                  <input autocomplete="off" type="text" id="verification_digits" placeholder="<?=__("Verification Code length",$this->td);?>" dir="ltr" class='form-input single-required mr-2' name="verification_digits" value="<?=$this->verification_digits;?>" />
-                </div>
-              </div>
-            </div>
-            <div class="row justify-content-between mt-4 save_email_settings <?=$this->verify_email?"":"hide";?>">
-              <p class="font-weight-bold p-3"><?=__("Config Email Settings to send Verification Codes", $this->td);?></p>
-              <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-email_expiration '>
-                <div class="col-lg-6">
-                  <?=__("Verification expire duration (in seconds)",$this->td);?>
-                </div>
-                <div class="col-lg-6">
-                  <input autocomplete="off" type="text" id="email_expiration" placeholder="<?=__("Verification expire duration",$this->td);?>" dir="ltr" class='form-input single-required mr-2' name="email_expiration" value="<?=$this->email_expiration;?>" />
-                </div>
-              </div>
-              <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-verification_email_digits '>
-                <div class="col-lg-6">
-                  <?=__("Verification Code length",$this->td);?>
-                </div>
-                <div class="col-lg-6">
-                  <input autocomplete="off" type="text" id="verification_email_digits" placeholder="<?=__("Verification Code length",$this->td);?>" dir="ltr" class='form-input single-required mr-2' name="verification_email_digits" value="<?=$this->verification_email_digits;?>" />
-                </div>
-              </div>
-              <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-verification_email_sender_name '>
-                <div class="col-lg-6">
-                  <?=__("Verification Email Sender name",$this->td);?>
-                </div>
-                <div class="col-lg-6">
-                  <input autocomplete="off" type="text" id="verification_email_sender_name" placeholder="<?=__("Verification Email Sender name",$this->td);?>" dir="ltr" class='form-input single-required mr-2' name="verification_email_sender_name" value="<?=$this->verification_email_sender_name;?>" />
-                </div>
-              </div>
-              <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-verification_email_sender '>
-                <div class="col-lg-6">
-                  <?=__("Verification Email Sender address",$this->td);?>
-                </div>
-                <div class="col-lg-6">
-                  <input autocomplete="off" type="text" id="verification_email_sender" title="<?="e.g. Enter noreply to send mail from noreply@".parse_url(get_bloginfo('url'), PHP_URL_HOST);?>" placeholder="<?="e.g. Enter noreply to send mail from noreply@".parse_url(get_bloginfo('url'), PHP_URL_HOST);?>" dir="ltr" class='form-input single-required mr-2' name="verification_email_sender" value="<?=$this->verification_email_sender;?>" />
-                </div>
-              </div>
-              <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-verification_email_template '>
-                <div class="col-lg-12">
-                  <?=__("Verification Email Template",$this->td);?>
-                  <textarea class="codeditor" id="verification_email_template_editor" spellcheck="false" dir="ltr" rows="8" cols="80"><?=wp_unslash($this->verification_email_template);?></textarea>
-                  <textarea class="codeditor" id="verification_email_template" name="verification_email_template" spellcheck="false" dir="ltr" rows="8" cols="80" style="display:none !important;"><?=wp_unslash($this->verification_email_template);?></textarea>
-                  <?=__("Available tags: ",$this->td);?>
-                  <?php
-                    $tags = (array) apply_filters( "pepro_reglogin_verification_email_replacements", array(
-                            "[OTP]"           => "",
-                            "[request_email]" => "",
-                            "[username]"      => "",
-                            "[first_name]"    => "",
-                            "[last_name]"     => "",
-                            "[display_name]"  => "",
-                            "[user_email]"    => "",));
-                    foreach ($tags as $key => $value) {
-                      echo "<copy>$key</copy> ";
-                    }
-                  ?>
-                </div>
-              </div>
-
             </div>
             <br>
             <button
@@ -708,6 +543,130 @@ foreach ($styleFiles as $style) {
             </button>
           </div>
         </div>
+
+        <div class="row">
+          <div class="col-6">
+            <div class="card">
+              <div class="card-body">
+                <div class="row justify-content-between save_sms_settings ">
+                  <p class="font-weight-bold p-3"><?=__("Config SMS.ir WebAPI to send SMS Verification Codes", $this->td);?></p>
+                  <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-sms_api_url '>
+                    <div class="col-lg-6">
+                      <?=__("Sending Number",$this->td);?> <a href="https://ip.sms.ir/#/UserSetting" class="btn btn-sm btn-round btn-group btn-info float-left m-0" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                    <div class="col-lg-6">
+                      <input autocomplete="off" type="text" id="sms_api_url" placeholder="<?=__("Sending Number",$this->td);?>" dir="ltr" class='form-input single-required mr-2' name="sms_api_url" value="<?=$this->sms_api_url;?>" />
+                    </div>
+                  </div>
+                  <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-sms_secret_key '>
+                    <div class="col-lg-6">
+                      <?=__("Security code",$this->td);?> <a href="https://ip.sms.ir/#/UserApiKey" class="btn btn-sm btn-round btn-group btn-info float-left m-0" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                    <div class="col-lg-6">
+                      <input autocomplete="off" type="text" id="sms_secret_key" placeholder="<?=__("Security code",$this->td);?>" dir="ltr" class='form-input single-required mr-2' name="sms_secret_key" value="<?=$this->sms_secret_key;?>" />
+                    </div>
+                  </div>
+                  <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-sms_api_key '>
+                    <div class="col-lg-6">
+                      <?=__("API Key",$this->td);?>
+                    </div>
+                    <div class="col-lg-6">
+                      <input autocomplete="off" type="text" id="sms_api_key" placeholder="<?=__("API Key",$this->td);?>" dir="ltr" class='form-input single-required mr-2' name="sms_api_key" value="<?=$this->sms_api_key;?>" />
+                    </div>
+                  </div>
+                  <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-sms_ultrafastsend_id '>
+                    <div class="col-lg-6">
+                      <?=__("UltraFastSend ID or SMS text containing [OTP]",$this->td);?> <a href="https://ip.sms.ir/#/User/UltraFastSendSetting" class="btn btn-sm btn-round btn-group btn-info float-left m-0" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                    <div class="col-lg-6">
+                      <input autocomplete="off" type="text" id="sms_ultrafastsend_id" placeholder="<?=__("UltraFastSend ID or SMS text containing [OTP]",$this->td);?>" dir="ltr" class='form-input single-required mr-2' name="sms_ultrafastsend_id" value="<?=$this->sms_ultrafastsend;?>" />
+                    </div>
+                  </div>
+                  <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-sms_expiration '>
+                    <div class="col-lg-6">
+                      <?=__("Verification expire duration (in seconds)",$this->td);?>
+                    </div>
+                    <div class="col-lg-6">
+                      <input autocomplete="off" type="text" id="sms_expiration" placeholder="<?=__("Verification expire duration",$this->td);?>" dir="ltr" class='form-input single-required mr-2' name="sms_expiration" value="<?=$this->sms_expiration;?>" />
+                    </div>
+                  </div>
+                  <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-verification_digits '>
+                    <div class="col-lg-6">
+                      <?=__("Verification Code length",$this->td);?>
+                    </div>
+                    <div class="col-lg-6">
+                      <input autocomplete="off" type="text" id="verification_digits" placeholder="<?=__("Verification Code length",$this->td);?>" dir="ltr" class='form-input single-required mr-2' name="verification_digits" value="<?=$this->verification_digits;?>" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="card">
+              <div class="card-body">
+                <div class="row justify-content-between save_email_settings ">
+                  <p class="font-weight-bold p-3"><?=__("Config Email Settings to send Verification Codes", $this->td);?></p>
+                  <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-email_expiration '>
+                    <div class="col-lg-6">
+                      <?=__("Verification expire duration (in seconds)",$this->td);?>
+                    </div>
+                    <div class="col-lg-6">
+                      <input autocomplete="off" type="text" id="email_expiration" placeholder="<?=__("Verification expire duration",$this->td);?>" dir="ltr" class='form-input single-required mr-2' name="email_expiration" value="<?=$this->email_expiration;?>" />
+                    </div>
+                  </div>
+                  <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-verification_email_digits '>
+                    <div class="col-lg-6">
+                      <?=__("Verification Code length",$this->td);?>
+                    </div>
+                    <div class="col-lg-6">
+                      <input autocomplete="off" type="text" id="verification_email_digits" placeholder="<?=__("Verification Code length",$this->td);?>" dir="ltr" class='form-input single-required mr-2' name="verification_email_digits" value="<?=$this->verification_email_digits;?>" />
+                    </div>
+                  </div>
+                  <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-verification_email_sender_name '>
+                    <div class="col-lg-6">
+                      <?=__("Verification Email Sender name",$this->td);?>
+                    </div>
+                    <div class="col-lg-6">
+                      <input autocomplete="off" type="text" id="verification_email_sender_name" placeholder="<?=__("Verification Email Sender name",$this->td);?>" dir="ltr" class='form-input single-required mr-2' name="verification_email_sender_name" value="<?=$this->verification_email_sender_name;?>" />
+                    </div>
+                  </div>
+                  <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-verification_email_sender '>
+                    <div class="col-lg-6">
+                      <?=__("Verification Email Sender address",$this->td);?>
+                    </div>
+                    <div class="col-lg-6">
+                      <input autocomplete="off" type="text" id="verification_email_sender" title="<?="e.g. Enter noreply to send mail from noreply@".parse_url(get_bloginfo('url'), PHP_URL_HOST);?>" placeholder="<?="e.g. Enter noreply to send mail from noreply@".parse_url(get_bloginfo('url'), PHP_URL_HOST);?>" dir="ltr" class='form-input single-required mr-2' name="verification_email_sender" value="<?=$this->verification_email_sender;?>" />
+                    </div>
+                  </div>
+                  <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-verification_email_template '>
+                    <div class="col-lg-12">
+                      <?=__("Verification Email Template",$this->td);?>
+                      <textarea class="codeditor" id="verification_email_template_editor" autocomplete="off" spellcheck="false" dir="ltr" rows="8" cols="80"><?=wp_unslash($this->verification_email_template);?></textarea>
+                      <textarea class="codeditor" id="verification_email_template" autocomplete="off" name="verification_email_template" spellcheck="false" dir="ltr" rows="8" cols="80" style="display:none !important;"><?=wp_unslash($this->verification_email_template);?></textarea>
+                      <?=__("Available tags: ",$this->td);?>
+                      <?php
+                      $tags = (array) apply_filters( "pepro_reglogin_verification_email_replacements", array(
+                        "[OTP]"           => "",
+                        "[request_email]" => "",
+                        "[username]"      => "",
+                        "[first_name]"    => "",
+                        "[last_name]"     => "",
+                        "[display_name]"  => "",
+                        "[user_email]"    => "",));
+                        foreach ($tags as $key => $value) {
+                          echo "<copy>$key</copy> ";
+                        }
+                        ?>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
       </div>
       <div class="tab-pane" id="tab_redirection">
         <div class="card">
@@ -725,9 +684,10 @@ foreach ($styleFiles as $style) {
                     </div>
                     <div class="col-lg-3 <?=is_rtl()?"text-left":"text-right";?>">
                       <div class="btn-group m-0 p-0 ">
-                        <a href="javascript:;" class='btn btn-sm btn-primary redirection--arrow-up-field'><i class="fas fa-arrow-up"></i></a>
-                        <a href="javascript:;" class='btn btn-sm btn-primary redirection--arrow-down-field'><i class="fas fa-arrow-down"></i></a>
-                        <a href="javascript:;" class='btn btn-sm btn-primary redirection--clear-field'><i class="fas fa-trash"></i></a>
+                        <a href="javascript:;" class='btn btn-sm btn-primary redirection--duplicate-field'><span class="material-icons">content_copy</span></a>
+                        <a href="javascript:;" class='btn btn-sm btn-primary redirection--clear-field'><span class="material-icons">delete</span></a>
+                        <a href="javascript:;" class='btn btn-sm btn-primary redirection--arrow-down-field'><span class="material-icons">arrow_downward</span></a>
+                        <a href="javascript:;" class='btn btn-sm btn-primary redirection--arrow-up-field'><span class="material-icons">arrow_upward</span></a>
                       </div>
                     </div>
                   </div>
@@ -931,13 +891,13 @@ foreach ($styleFiles as $style) {
           <div class="card-body table-responsive">
             <div class="register-fields-import-export">
               <h4><?=__("Import/Export Fields as JSON data",$this->td);?></h4>
-              <textarea class="codeditor" id="register_fileds_editor" spellcheck="false" dir="ltr" rows="8" cols="80"><?=wp_unslash(get_option("pepro-profile-register-fileds"));?></textarea>
-              <textarea class="codeditor" id="register_fileds" spellcheck="false" dir="ltr" rows="8" cols="80" style="display:none !important;"><?=wp_unslash(get_option("pepro-profile-register-fileds"));?></textarea>
+              <textarea class="codeditor" id="register_fileds_editor" autocomplete="off" spellcheck="false" dir="ltr" rows="8" cols="80"><?=wp_unslash(get_option("pepro-profile-register-fileds"));?></textarea>
+              <textarea class="codeditor" id="register_fileds" autocomplete="off" spellcheck="false" dir="ltr" rows="8" cols="80" style="display:none !important;"><?=wp_unslash(get_option("pepro-profile-register-fileds"));?></textarea>
             </div>
             <div class="redirection-fields-import-export">
               <h4><?=__("Import/Export Redirection Rules as JSON data",$this->td);?></h4>
-              <textarea class="codeditor" id="redirection_fileds_editor" spellcheck="false" dir="ltr" rows="8" cols="80"><?=wp_unslash(get_option("pepro-profile-redirection-fileds"));?></textarea>
-              <textarea class="codeditor" id="redirection_fileds" spellcheck="false" dir="ltr" rows="8" cols="80" style="display:none !important;"><?=wp_unslash(get_option("pepro-profile-redirection-fileds"));?></textarea>
+              <textarea class="codeditor" id="redirection_fileds_editor" autocomplete="off" spellcheck="false" dir="ltr" rows="8" cols="80"><?=wp_unslash(get_option("pepro-profile-redirection-fileds"));?></textarea>
+              <textarea class="codeditor" id="redirection_fileds" autocomplete="off" spellcheck="false" dir="ltr" rows="8" cols="80" style="display:none !important;"><?=wp_unslash(get_option("pepro-profile-redirection-fileds"));?></textarea>
             </div>
             <br>
             <button
