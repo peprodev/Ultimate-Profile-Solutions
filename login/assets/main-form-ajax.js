@@ -1,7 +1,7 @@
 /**
  * @Date:   2021/08/17 09:28:22
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/08/31 19:54:39
+ * @Last modified time: 2021/08/31 20:08:35
  * @License: GPLv2
  */
 jQuery.noConflict();
@@ -141,6 +141,7 @@ jQuery.noConflict();
             $(val).parent().append(`<error data-tippy-content="${$errortext}">?</error>`);
           });
           tippy('[data-tippy-content]',{allowHTML: true, theme: 'error',});
+          scroll_element();
           error_occured = true;
           return false;
         }
@@ -304,6 +305,7 @@ jQuery.noConflict();
             $(val).parent().append(`<error data-tippy-content="${$errortext}">?</error>`);
           });
           tippy('[data-tippy-content]',{allowHTML: true, theme: 'error',});
+          scroll_element();
           error_occured = true;
           return false;
         }
@@ -442,6 +444,7 @@ jQuery.noConflict();
             $(val).parent().append(`<error data-tippy-content="${$errortext}">?</error>`);
           });
           tippy('[data-tippy-content]',{allowHTML: true, theme: 'error',});
+          scroll_element();
           error_occured = true;
           return false;
         }
@@ -560,7 +563,6 @@ jQuery.noConflict();
         error_occured = false;
         if (!$(`#${_pepro_dev.instance} form#pepro-reg-inline`)[0].checkValidity()) {
           $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(_pepro_dev.fixerr);
-          console.log("err");
           show_toast(_pepro_dev.fixerr);
           $(login_form).find(":input:visible:invalid").each(function(index, val) {
             $errortext = $(val).data("error-text");
@@ -573,6 +575,7 @@ jQuery.noConflict();
             $(val).parent().append(`<error data-tippy-content="${$errortext}">?</error>`);
           });
           tippy('[data-tippy-content]',{allowHTML: true, theme: 'error',});
+          scroll_element();
           error_occured = true;
           return false;
         }
@@ -788,6 +791,7 @@ jQuery.noConflict();
             $(val).parent().append(`<error data-tippy-content="${$errortext}">?</error>`);
           });
           tippy('[data-tippy-content]',{allowHTML: true, theme: 'error',});
+          scroll_element();
           error_occured = true;
           return false;
         }
@@ -907,7 +911,7 @@ jQuery.noConflict();
     });
     function scroll_element() {
       if ($(".pepro-login-reg-container").length){
-        $(".pepro-login-reg-container").animate({scrollTop: $(".pepro-login-reg-container").offset().top-100});
+        $("html, body, .pepro-login-reg-container").animate({scrollTop: $(".pepro-login-reg-container").offset().top-100});
       }
     }
     function show_toast(data = "Sample Toast!", delay = 1500) {

@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/08/31 19:56:05
+# @Last modified time: 2021/08/31 20:13:25
 include_once plugin_dir_path(__FILE__) . "/include/class-login-permalink.php";
 if (!class_exists("PeproDevUPS_Login")){
   class PeproDevUPS_Login
@@ -150,9 +150,9 @@ if (!class_exists("PeproDevUPS_Login")){
         '    </p>',
         '  </body>',
         '</html>'];
-        $this->def_mail_body             = implode(PHP_EOL, $this->def_mail_body);
-      $this->from_name                      = !empty($this->verification_email_sender_name) ? trim($this->verification_email_sender_name) : get_bloginfo('name','display');
-      $this->from_address                   = (!empty($this->verification_email_sender) ? trim($this->verification_email_sender) : "wordpress") . "@" . parse_url(get_bloginfo('url'), PHP_URL_HOST);
+      $this->def_mail_body = implode(PHP_EOL, $this->def_mail_body);
+      $this->from_name     = !empty($this->verification_email_sender_name) ? trim($this->verification_email_sender_name) : get_bloginfo('name','display');
+      $this->from_address  = (!empty($this->verification_email_sender) ? trim($this->verification_email_sender) : "wordpress") . "@" . parse_url(get_bloginfo('url'), PHP_URL_HOST);
 
       add_action("init",                              array( $this, "admin_init" ));
       add_action("wp_ajax_pepro_reglogin",            array( $this, "handel_ajax_req"));
@@ -235,7 +235,6 @@ if (!class_exists("PeproDevUPS_Login")){
           "_wc_billing_country" => __("WooCommerce Billing Country", $this->td),
           "_wc_billing_state"   => __("WooCommerce Billing State", $this->td),
           "_wc_billing_city"    => __("WooCommerce Billing City", $this->td),
-
           // '_wc_billing_company'     => __("WooCommerce Billing Company",$this->td),
           // '_wc_billing_address_1'   => __("WooCommerce Billing Address 1",$this->td),
           // '_wc_billing_address_2'   => __("WooCommerce Billing Address 2",$this->td),
@@ -254,7 +253,6 @@ if (!class_exists("PeproDevUPS_Login")){
           // '_wc_shipping_state'      => __("WooCommerce Shipping State",$this->td),
           // '_wc_shipping_city'       => __("WooCommerce Shipping City",$this->td),
           // '_wc_shipping_postcode'   => __("WooCommerce Shipping Postcode",$this->td),
-
         );
         $form_default_fiedls = array_merge($form_default_fiedls, $_wc_active);
       }
@@ -3185,19 +3183,12 @@ if (!class_exists("PeproDevUPS_Login")){
         array(
           "name"                                                   => "{$this->td}_general",
           "data"                                                   => array(
-            "{$this->activation_status}-show_password_field"            => "yes",
-            "{$this->activation_status}-auto_login_after_reg"           => "no",
             "{$this->activation_status}-verify_email"                   => "no",
             "{$this->activation_status}-verify_mobile"                  => "no",
             "{$this->activation_status}-use_mobile_as_username"         => "no",
             "{$this->activation_status}-use_email_as_username"          => "no",
             "{$this->activation_status}-hide_email_field"               => "no",
             "{$this->activation_status}-hide_username_field"            => "no",
-            "{$this->activation_status}-reg_add_mobile"                 => "yes",
-            "{$this->activation_status}-reg_add_firstname"              => "no",
-            "{$this->activation_status}-reg_add_lastname"               => "no",
-            "{$this->activation_status}-reg_add_displayname"            => "yes",
-            "{$this->activation_status}-login_mobile_otp"               => "no",
             "{$this->activation_status}-sms_ultrafastsend_id"           => sprintf(__("Your verification Code [OTP] — %s",$this->td), get_bloginfo("name")),
             "{$this->activation_status}-sms_expiration"                 => "90",
             "{$this->activation_status}-email_expiration"               => "120",
@@ -3206,6 +3197,24 @@ if (!class_exists("PeproDevUPS_Login")){
             "{$this->activation_status}-verification_email_sender"      => "noreply",
             "{$this->activation_status}-verification_email_sender_name" => get_bloginfo('name','display'),
             "{$this->activation_status}-verification_email_template"    => $this->def_mail_body,
+
+            "{$this->activation_status}-reglogin_type"                  => "email",
+            "{$this->activation_status}-auto_login_after_reg"           => "yes",
+            "{$this->activation_status}-_regdef_passwords"              => "yes",
+            "{$this->activation_status}-_regdef_passwords-req"          => "yes",
+            "{$this->activation_status}-_regdef_firstname"              => "yes",
+            "{$this->activation_status}-_regdef_firstname-req"          => "yes",
+            "{$this->activation_status}-_regdef_lastname"               => "yes",
+            "{$this->activation_status}-_regdef_lastname-req"           => "yes",
+            "{$this->activation_status}-_regdef_displayname"            => "",
+            "{$this->activation_status}-_regdef_displayname-req"        => "",
+            "{$this->activation_status}-_regdef_mobile"                 => "",
+            "{$this->activation_status}-_regdef_mobile-req"             => "",
+            "{$this->activation_status}-_regdef_email"                  => "yes",
+            "{$this->activation_status}-_regdef_email-req"              => "yes",
+            "{$this->activation_status}-_regdef_username"               => "yes",
+            "{$this->activation_status}-_regdef_username-req"           => "",
+
           )
         ),
       );
