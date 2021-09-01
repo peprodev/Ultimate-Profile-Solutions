@@ -3,7 +3,7 @@
  * @Date:   2021/08/02 22:04:09
  * @Email:  its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/08/31 17:59:48
+ * @Last modified time: 2021/09/01 22:19:12
  * @License: GPLv2
  * @Copyright: Copyright © Amirhosseinhpv (https://hpv.im), all rights reserved.
  */
@@ -595,6 +595,12 @@ jQuery.noConflict();
       history.replaceState(undefined, undefined, $(this).attr("href"))
     });
 
+    $(document).on("click tap", "#copyshortcode", function(e){
+      e.preventDefault();
+      var me = $(this);
+      copy_clipboard($(".smart_btn_workspace pre").text().replace(/\n/gi,""));
+      show_toast(_register_fields._copy);
+    });
     if ("" !== window.location.hash){
       $tab = $(`.tab-content>.tab-pane${window.location.hash}`);
       if ($tab.length){
@@ -638,7 +644,7 @@ jQuery.noConflict();
      }).on("click tap", function(e) { e.preventDefault(); $(this).stop().removeClass("active"); });
     }
     function copy_clipboard(data) {
-      var $temp = $("<input>");
+      var $temp = $("<textarea>");
       $("body").append($temp);
       $temp.val(data).select();
       document.execCommand("copy");

@@ -3,7 +3,7 @@
  * @Date:   2020/05/03 13:33:06
  * @Email:  its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/08/28 23:46:29
+ * @Last modified time: 2021/09/01 21:59:24
  * @License: GPLv2
  * @Copyright: Copyright © 2020 Amirhosseinhpv, All rights reserved.
  */
@@ -634,7 +634,7 @@ select {
   line-height: 22px !important;
 }
 
-.card *:not(input, textarea),
+.card *:not(input, textarea, pre, code, div),
 [data-notify="message"],
 a.btncheckbox,
 h5.modal-title,

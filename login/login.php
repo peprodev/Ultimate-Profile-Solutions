@@ -1,7 +1,8 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/08/31 20:13:25
+# @Last modified time: 2021/09/01 22:36:09
 include_once plugin_dir_path(__FILE__) . "/include/class-login-permalink.php";
+
 if (!class_exists("PeproDevUPS_Login")){
   class PeproDevUPS_Login
   {
@@ -183,7 +184,9 @@ if (!class_exists("PeproDevUPS_Login")){
       add_shortcode("logout-url",                     array( $this, "shortcode__logout_url"));
       add_shortcode("verified-mobile",                array( $this, "shortcode__user_verified_mobile"));
       add_shortcode("verified-email",                 array( $this, "shortcode__user_verified_email"));
-
+      add_shortcode("loggedin",                       array( $this, "shortcode__check_loggedin") );
+      add_shortcode("loggedout",                      array( $this, "shortcode__check_loggedout") );
+      add_shortcode("pepro-smart-btn",                array( $this, "shortcode__smart_btn") );
       add_filter("pepro_reglogin_get_register_fields",                   array( $this, "pepro_reglogin_get_register_fields" ), 1000);
       add_action("pepro_reglogin_show_hide_defaul_registeration_fields", array( $this, "form_defaul_registeration_fields" ), 1000);
 
@@ -193,6 +196,12 @@ if (!class_exists("PeproDevUPS_Login")){
       $this->login_fields                = $this->get_login_fields();
       $this->verify_email_fields         = $this->get_verify_email_fields();
       $this->verify_mobile_fields        = $this->get_verify_mobile_fields();
+
+      if (isset($_GET["test"])){
+        echo "<pre style='text-align: left; direction: ltr; border:1px solid gray; padding: 1rem; overflow: auto;'>". print_r(
+          $this->var_dump($this->redirect_after_login_register(home_url(), "ajax_register", 0))
+          ,1) ."</pre>";exit;
+      }
 
       if (is_user_logged_in()){
         if($this->verify_mobile){
@@ -210,6 +219,71 @@ if (!class_exists("PeproDevUPS_Login")){
       require_once plugin_dir_path(__FILE__) . "/include/class-sms.php";
       $this->sms = new \PeproDev\PeproCore\RegLogin\SendSMS("https://ws.sms.ir/", $this->sms_api_key, $this->sms_secret_key, $this->sms_api_url);
 
+    }
+    function shortcode__smart_btn($atts=array(), $content="") {
+      $atts = extract(shortcode_atts(array(
+        "loggedin_text"         => "Hi {display_name}",
+        "loggedin_href"         => "/profile",
+        "loggedin_avatar"       => "yes",
+        "loggedin_avatar_size"  => "32",
+        "loggedin_class"        => "button button-primary",
+        "loggedout_text"        => "Login/Register",
+        "loggedout_form"        => "login",
+        "loggedout_class"       => "button button-primary",
+        "login_popup_title"     => "Login",
+        "register_popup_title"  => "Register",
+        "resetpass_popup_title" => "Recover Password",
+      ),$atts));
+      ob_start();
+      $uniqid = uniqid("peprodev-smartbtn--");
+      if ( is_user_logged_in() ){
+        $avatar = "";
+        $cur_user = get_current_user_id();
+        if ("yes" == $loggedin_avatar){
+          $avatar = get_avatar( $cur_user, $loggedin_avatar_size);
+        }
+        $matches = array();
+        if (!empty($loggedin_text)){
+          preg_match('#\{(.*?)\}#', $loggedin_text, $matches);
+          foreach ($matches as $match) {
+            $user_meta = get_the_author_meta($match, $cur_user);
+            $loggedin_text = str_replace("{{$match}}", $user_meta, $loggedin_text);
+          }
+        }
+        echo "<a id='$uniqid' href='$loggedin_href' class='peprodev-ultimate-profile-solution peprodev-smart-btn logged-in $loggedin_class'>{$avatar}$loggedin_text</a>";
+      }
+      else{
+        echo "[pepro-login-popup trigger='#$uniqid' title='$login_popup_title' reg_title='$register_popup_title' reset_title='$resetpass_popup_title' active='$loggedout_form'] <a id='$uniqid' href='#' class='peprodev-ultimate-profile-solution peprodev-smart-btn logged-out $loggedout_class'>$loggedout_text</a>";
+      }
+
+      $htmloutput = ob_get_contents();
+      ob_end_clean();
+      return do_shortcode($htmloutput);
+    }
+    public function shortcode__check_loggedin ($params, $content = null)
+    {
+      if ( is_user_logged_in() ){ return do_shortcode($content); } return "";
+    }
+    public function shortcode__check_loggedout ($params, $content = null)
+    {
+      if ( !is_user_logged_in() ){ return do_shortcode($content); } return "";
+    }
+    public function convert_to_english($string)
+    {
+      $newNumbers = range(0, 9);
+      // 1. Persian HTML decimal
+      $persianDecimal = array('&#1776;', '&#1777;', '&#1778;', '&#1779;', '&#1780;', '&#1781;', '&#1782;', '&#1783;', '&#1784;', '&#1785;');
+      // 2. Arabic HTML decimal
+      $arabicDecimal = array('&#1632;', '&#1633;', '&#1634;', '&#1635;', '&#1636;', '&#1637;', '&#1638;', '&#1639;', '&#1640;', '&#1641;');
+      // 3. Arabic Numeric
+      $arabic = array('٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩');
+      // 4. Persian Numeric
+      $persian = array('۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹');
+
+      $string =  str_replace($persianDecimal, $newNumbers, $string);
+      $string =  str_replace($arabicDecimal, $newNumbers, $string);
+      $string =  str_replace($arabic, $newNumbers, $string);
+      return str_replace($persian, $newNumbers, $string);
     }
     public function var_dump($value='')
     {
@@ -889,7 +963,9 @@ if (!class_exists("PeproDevUPS_Login")){
     public function handel_ajax_req()
     {
       if (wp_doing_ajax() && "pepro_reglogin" === $_POST['action']) {
-        if (!isset($_POST["nonce"]) || !wp_verify_nonce($_POST["nonce"]??null, $this->td)){wp_send_json_error(array("msg"=>__("Unauthorized Access!", $this->td)));}
+        if (!isset($_POST["nonce"]) || !wp_verify_nonce($_POST["nonce"]??null, $this->td)){
+          wp_send_json_error(array("msg"=>__("Unauthorized Access!", $this->td)));
+        }
         switch ($_POST["order"]) {
 
           case 'login':
@@ -935,7 +1011,7 @@ if (!class_exists("PeproDevUPS_Login")){
 
                       wp_send_json_success(array(
                         "msg"           => sprintf(__("Hi %s, You have successfully logged in!", $this->td), $username),
-                        "redirect"      => apply_filters("login_redirect", true, "", $user),
+                        "redirect"      => $this->redirect_after_login_register(home_url(), "ajax_register", $user),
                         "redirect_text" => $this->redirect_after_login_register("", "ajax_text", $user),
                         "logout_txt"    => __("Logout",$this->td),
                         "logout_url"    => wp_logout_url(),
@@ -1020,7 +1096,7 @@ if (!class_exists("PeproDevUPS_Login")){
               $username = get_the_author_meta("display_name", $user->ID);
               wp_send_json_success(array(
                 "msg"           => sprintf(__("Hi %s, You have successfully logged in!", $this->td), $username),
-                "redirect"      => apply_filters("login_redirect", true, "", $user),
+                "redirect"      => $this->redirect_after_login_register(home_url(), "ajax_register", $user),
                 "redirect_text" => $this->redirect_after_login_register("", "ajax_text", $user),
                 "logout_txt"    => __("Logout",$this->td),
                 "logout_url"    => wp_logout_url(),
@@ -1351,12 +1427,12 @@ if (!class_exists("PeproDevUPS_Login")){
             $error_array = array();
             $username    = false;
             $email       = false;
-
             if (!$this->login_mobile_otp){
               if (!$this->hide_username_field){
-                if (empty($param["username"])){
+                if ($this->is_username_field_req && empty($param["username"])){
                   $error_array['pepro_dev_login_username'] = _x("<strong>Error:</strong> Please enter a username.", "reg-form-error", $this->td);
-                }else{
+                }
+                if ($this->is_username_field_req && isset($param["username"]) && !empty($param["username"])){
                   if (username_exists($param["username"])){
                     $error_array['pepro_dev_login_username_exists'] = _x("<strong>Error</strong>: This username is already registered. Please choose another one.", "reg-form-error", $this->td);
                   }
@@ -1387,7 +1463,6 @@ if (!class_exists("PeproDevUPS_Login")){
                 }
               }
             }
-
             foreach ($this->form_register_fields as $field) {
               if (in_array($field["meta_name"], ["username", "email", "password1", "password2"])) continue;
               switch ($field["type"]) {
@@ -1408,19 +1483,20 @@ if (!class_exists("PeproDevUPS_Login")){
                   if(!empty(trim($param[$field["meta_name"]])) && !$valid_mobile){
                     $error_array["pepro_dev_login_{$field["meta_name"]}_invalid"] = _x("<strong>Error:</strong> Please enter a valid mobile number.", "reg-form-error", $this->td);
                   }
-                  $get_user_by_mobile = $this->get_user_by_mobile($param[$field["meta_name"]]);
-                  if($get_user_by_mobile){
-                    $error_array["pepro_dev_login_{$field["meta_name"]}_exist"] = _x("<strong>Error:</strong> This mobile number is already registered. Please choose another one.", "reg-form-error", $this->td);
+                  if ($this->login_mobile_otp){
+                    $get_user_by_mobile = $this->get_user_by_mobile($param[$field["meta_name"]]);
+                    if($get_user_by_mobile){
+                      $error_array["pepro_dev_login_{$field["meta_name"]}_exist"] = _x("<strong>Error:</strong> This mobile number is already registered. Please choose another one.", "reg-form-error", $this->td);
+                    }
                   }
                 break;
                 default:
-                  if ("yes" == $field["is-required"] && empty(trim($param[$field["meta_name"]])) ){
+                  if ("yes" == $field["is-required"] && (!isset($param[$field["meta_name"]]) || empty(trim($param[$field["meta_name"]]))) ){
                     $error_array["pepro_dev_login_{$field["meta_name"]}"] = sprintf(_x("<strong>Error:</strong> Please enter %s.", "reg-form-error", $this->td), $field["title"]);
                   }
                 break;
               }
             }
-
             if ($this->show_password_field && $this->is_password_field_req) {
               if (empty(trim($param['password1']))){
                 $error_array['pepro_dev_login_password1_error'] = _x("<strong>ERROR</strong>: Password field is required.", "reg-form-error", $this->td);
@@ -1437,7 +1513,6 @@ if (!class_exists("PeproDevUPS_Login")){
                 $error_array['pepro_dev_login_password12_error'] = _x("<strong>ERROR</strong>: Password field and Confirm Password field do not match.", "reg-form-error", $this->td);
               }
             }
-
             if (!empty($error_array)){
               $error_msg = [];
               foreach ($error_array as $key => $value) {
@@ -1445,9 +1520,7 @@ if (!class_exists("PeproDevUPS_Login")){
               }
               wp_send_json_error(array( "msg" => implode("<br />", $error_msg), ));
             }
-
             if ($this->login_mobile_otp){
-
               if (isset($param["checkmobile"])){
                 $valid_mobile = $this->clean_mobile_number($param["user_mobile"]);
                 if ($valid_mobile){
@@ -1472,7 +1545,7 @@ if (!class_exists("PeproDevUPS_Login")){
                         $username = get_the_author_meta("display_name", $newUser->ID);
                         wp_send_json_success(array(
                           "msg"           => sprintf(__("Hi %s, You have successfully registered!", $this->td), $username),
-                          "redirect"      => apply_filters("login_redirect", true, "", $newUser),
+                          "redirect"      => $this->redirect_after_login_register(home_url(), "ajax_register", $newUser),
                           "redirect_text" => $this->redirect_after_login_register("", "ajax_text", $newUser),
                           "logout_txt"    => __("Logout",$this->td),
                           "logout_url"    => wp_logout_url(),
@@ -1552,23 +1625,19 @@ if (!class_exists("PeproDevUPS_Login")){
                   ));
                 }
               }
-
             }
-
             // register new user
             $newUser = $this->register_new_user($username, $email, false, $param);
-
             if ($newUser){
               $username = get_the_author_meta("display_name", $newUser->ID);
               wp_send_json_success(array(
                 "msg"           => sprintf(__("Hi %s, You have successfully registered!", $this->td), $username),
-                "redirect"      => apply_filters("login_redirect", true, "", $newUser),
+                "redirect"      => $this->redirect_after_login_register(home_url(), "ajax_register", $newUser),
                 "redirect_text" => $this->redirect_after_login_register("", "ajax_text", $newUser),
                 "logout_txt"    => __("Logout",$this->td),
                 "logout_url"    => wp_logout_url(),
               ));
             }
-
             wp_send_json_error(array("msg"=> __("<strong>Error:</strong> There was an error processing your request!", $this->td),));
           break;
 
@@ -1638,7 +1707,6 @@ if (!class_exists("PeproDevUPS_Login")){
               }
             }
             wp_send_json_error(array("msg"=> __("<strong>Error:</strong> There was an error processing your request!", $this->td),));
-
           break;
 
           case 'change_user_meta':
@@ -1685,16 +1753,28 @@ if (!class_exists("PeproDevUPS_Login")){
 
       $userdata['first_name']     = "";
       $userdata['last_name']      = "";
-      $userdata['display_name']   = __("Dear user",$this->td);
 
       if ($this->reg_add_firstname){
-        $userdata['first_name'] = $params["first_name"];
+        $userdata['first_name']   = $params["first_name"];
       }
       if ($this->reg_add_lastname){
-        $userdata['last_name'] = $params["last_name"];
+        $userdata['last_name']    = $params["last_name"];
       }
+
+      $userdata['display_name'] = $userdata['first_name']." ".$userdata['last_name'];
+
+      if (empty(trim($userdata['first_name'])) && empty(trim($userdata['first_name']))){
+        $userdata['display_name'] = $userdata['user_login'];
+        if ($mobile && !empty($mobile)){
+          $userdata['display_name'] = $mobile;
+        }
+        if (!empty($userdata['user_email'])){
+          $userdata['display_name'] = __("Dear user",$this->td);
+        }
+      }
+
       if ($this->reg_add_displayname){
-        $userdata['display_name'] = $params["display_name"];
+        $userdata['display_name'] = isset($params["display_name"]) && !empty($params["display_name"]) ? $userdata['first_name']." ".$userdata['last_name'] : $params["display_name"];
       }
 
       $user_id = wp_insert_user($userdata);
@@ -1787,7 +1867,7 @@ if (!class_exists("PeproDevUPS_Login")){
       if($today >= $expire){
         // expired
       } else {
-        if (trim($verification) == $_otp_code){
+        if ($this->convert_to_english(trim($verification)) == $_otp_code){
           return true;
         }
         // else ~> expired
@@ -1833,7 +1913,7 @@ if (!class_exists("PeproDevUPS_Login")){
       if($today >= $expire){
         // expired
       } else {
-        if (trim($verification) == $_otp_code){
+        if ($this->convert_to_english(trim($verification)) == $_otp_code){
           return true;
         }
         // else ~> expired
@@ -2148,7 +2228,6 @@ if (!class_exists("PeproDevUPS_Login")){
         }
       }
 
-
       foreach ((array)$this->register_fileds as $field) {
         if ("yes" == $field["is-public"] && "recaptcha" !== $field["type"]){
           $num++;
@@ -2196,8 +2275,10 @@ if (!class_exists("PeproDevUPS_Login")){
         if ("recaptcha" == $field["type"] && "yes" == $field["is-public"]){
           $num++;
           $field["attributes"] = "tabindex=$num " . $field["attributes"];
-          array_push($login_fields, $field);
         }
+        if ("tel" == $field["type"]) continue;
+        if ("mobile" == $field["type"]) continue;
+        array_push($login_fields, $field);
       }
       $textSend   = __("Receive OTP & Register",$this->td);
       $textVerify = __("Verify OTP & Register",$this->td);
@@ -2228,6 +2309,7 @@ if (!class_exists("PeproDevUPS_Login")){
         "label_class"     => "",
         "user_id"         => false,
         "skip_recaptcha"  => false,
+        "isourprofile"    => false,
         "skip_profile"    => false,
         ));
       extract($config);
@@ -2235,6 +2317,7 @@ if (!class_exists("PeproDevUPS_Login")){
       foreach ( $loop_fields as $field) {
         if ($skip_not_public && "yes" !== $field["is-public"]){ continue; }
         if ($skip_profile && "yes" !== $field["is-editable"]){ continue; }
+        if ($isourprofile && "user_mobile" == $field["meta_name"]){ continue; }
         if ($skip_recaptcha && "recaptcha" == $field["type"]){ continue; }
         if ($user_id){ $field["default"] = get_the_author_meta($field["meta_name"], $user_id); }
         $no_label = isset($field["no-label"]) && "yes" == $field["no-label"];
@@ -2562,7 +2645,6 @@ if (!class_exists("PeproDevUPS_Login")){
             }
           }
         }
-
         if ("ajax_text" === $requested_redirect_to && "yes" == $value["login"] ){
           if ("everyone" == $value["role"]){
             return isset($value["text"]) ? $value["text"] : false;
@@ -2574,15 +2656,14 @@ if (!class_exists("PeproDevUPS_Login")){
             }
           }
         }
-
         if (("ajax_register" === $requested_redirect_to || "registration_redirect" == current_action()) && "yes" == $value["register"] ){
           if ("everyone" == $value["role"]){
-            $redirect_to = $this->parse_redirection_url($value["url"]);
+            $redirect_to = $this->parse_redirection_url(trim($value["url"]));
             return $redirect_to;
           }else{
             $user = wp_get_current_user();
             if (in_array($value["role"], $user->roles)) {
-              $redirect_to = $this->parse_redirection_url($value["url"]);
+              $redirect_to = $this->parse_redirection_url(trim($value["url"]));
               return $redirect_to;
             }
           }
@@ -2622,7 +2703,8 @@ if (!class_exists("PeproDevUPS_Login")){
         return get_permalink(ltrim($url, "#"));
       }
       if ($this->startsWith($url, "@")){
-        return get_permalink(get_page_by_path(ltrim($url, "@")));
+        $slug = ltrim($url, "@");
+        return home_url("/$slug");
       }
       if ($this->startsWith($url, "{") && $this->endsWith($url, "}")){
         return $this->special_pages_to_url(rtrim(ltrim($url, "{"), "}"));
@@ -3157,6 +3239,7 @@ if (!class_exists("PeproDevUPS_Login")){
         "echo"            => true,
         "skip_not_public" => true,
         "skip_profile"    => true,
+        "isourprofile"    => true,
         "user_id"         => get_current_user_id(),
         "skip_recaptcha"  => true,
         ));
@@ -3181,8 +3264,8 @@ if (!class_exists("PeproDevUPS_Login")){
       $get_setting_options = array(
         // peproticket_general
         array(
-          "name"                                                   => "{$this->td}_general",
-          "data"                                                   => array(
+          "name" => "{$this->td}_general",
+          "data" => array(
             "{$this->activation_status}-verify_email"                   => "no",
             "{$this->activation_status}-verify_mobile"                  => "no",
             "{$this->activation_status}-use_mobile_as_username"         => "no",
@@ -3197,6 +3280,8 @@ if (!class_exists("PeproDevUPS_Login")){
             "{$this->activation_status}-verification_email_sender"      => "noreply",
             "{$this->activation_status}-verification_email_sender_name" => get_bloginfo('name','display'),
             "{$this->activation_status}-verification_email_template"    => $this->def_mail_body,
+
+            "pepro-profile-redirection-fileds" => '[{"role": "everyone", "url": "{profile}", "text": "'.__("Profile",$this->td).'", "login": "yes", "register": "yes", "logout": "no" }]',
 
             "{$this->activation_status}-reglogin_type"                  => "email",
             "{$this->activation_status}-auto_login_after_reg"           => "yes",

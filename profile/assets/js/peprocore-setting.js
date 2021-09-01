@@ -3,7 +3,7 @@
  * @Date:   2020/05/03 13:33:07
  * @Email:  its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/08/28 23:01:09
+ * @Last modified time: 2021/09/01 15:29:16
  * @License: GPLv2
  * @Copyright: Copyright © 2020 Amirhosseinhpv, All rights reserved.
  */
@@ -62,17 +62,19 @@
       if (tinymce.activeEditor){ tinymce.activeEditor.save(); }
       if ($(elID).hasClass("tmce-active")){ contentHTML = tinymce.activeEditor.getContent(); } else{ contentHTML = $(elID).val(); }
       datatosave = {
-        "css"                  :$("#css").val(),
-        "js"                   :$("#js").val(),
-        "logo"                 :$("#profile-section-logo").val(),
-        "logo-id"              :$("#profile-section-logo").attr("data-id"),
-        "showwelcome"          :$("#showwelcome").attr("data-checked"),
-        "woocommerceorders"    :$("#woocommerceorders").attr("data-checked"),
-        "woocommercestats"     :$("#woocommercestats").attr("data-checked"),
-        "showcustomtext"       :$("#showcustomtext").attr("data-checked"),
-        "customhtml"           :contentHTML,
-        "customposition"       :$("#customposition").val(),
-        "profile-dash-page"    :$("#profile_dash_page").val(),
+        "css":               $("#css").val(),
+        "js":                $("#js").val(),
+        "logo":              $("#profile-section-logo").val(),
+        "logo-id":           $("#profile-section-logo").attr("data-id"),
+        "showwelcome":       $("#showwelcome").attr("data-checked"),
+        "headerhook":        $("#headerhook").attr("data-checked"),
+        "footerhook":        $("#footerhook").attr("data-checked"),
+        "woocommerceorders": $("#woocommerceorders").attr("data-checked"),
+        "woocommercestats":  $("#woocommercestats").attr("data-checked"),
+        "showcustomtext":    $("#showcustomtext").attr("data-checked"),
+        "customhtml":        contentHTML,
+        "customposition":    $("#customposition").val(),
+        "profile-dash-page": $("#profile_dash_page").val(),
       };
       var me = $(this);
       let nonce = me.attr('integrity'),wparam = me.attr('wparam'),lparam = me.attr('lparam');
@@ -132,51 +134,51 @@
       image_frame.open();
     });
 
-    $(document).on("click tap", ".peprocoreprofile_shortcodehandler.peprofile-open-box",function(e){
+    $(document).on("click tap", ".pepro_shortcodehandler.peprofile-open-box",function(e){
       e.preventDefault();
       $(".popup-shortcode-select").toggleClass("hide");
     });
-    $(document).on("click tap", ".peprocoreprofile_shortcodehandler._shortcodehandlerwhitecard",function(e){
+    $(document).on("click tap", ".pepro_shortcodehandler._shortcodehandlerwhitecard",function(e){
       e.preventDefault();
       var me = $(this);
       window.send_to_editor('[profile-card-1]\r\nSample content\r\n[/profile-card-1]');
     });
-    $(document).on("click tap", ".peprocoreprofile_shortcodehandler._shortcodehandleruser",function(e){
+    $(document).on("click tap", ".pepro_shortcodehandler._shortcodehandleruser",function(e){
       e.preventDefault();
       var me = $(this);
       window.send_to_editor('[user meta="first_name" default="Dear Guest"]');
     });
-    $(document).on("click tap", ".peprocoreprofile_shortcodehandler._shortcodehandlercard",function(e){
+    $(document).on("click tap", ".pepro_shortcodehandler._shortcodehandlercard",function(e){
       e.preventDefault();
       var me = $(this);
       window.send_to_editor('[profile-card-2 title="Sample Title"]\r\nSample content\r\n[/profile-card-2]');
     });
-    $(document).on("click tap", ".peprocoreprofile_shortcodehandler._shortcodehandlerbigcard",function(e){
+    $(document).on("click tap", ".pepro_shortcodehandler._shortcodehandlerbigcard",function(e){
       e.preventDefault();
       var me = $(this);
       window.send_to_editor('[profile-card-3 title="Sample Title" icon="fas fa-newspaper" bg_color="#fc3144" padding="1rem 1.5rem 0.5rem"]\r\nSample content\r\n[/profile-card-3]');
     });
-    $(document).on("click tap", ".peprocoreprofile_shortcodehandler._shortcodehandlerblackcard",function(e){
+    $(document).on("click tap", ".pepro_shortcodehandler._shortcodehandlerblackcard",function(e){
       e.preventDefault();
       var me = $(this);
       window.send_to_editor('[profile-card-4 title="Sample Title"]\r\nSample content\r\n[/profile-card-4]');
     });
-    $(document).on("click tap", ".peprocoreprofile_shortcodehandler._shortcodehandlerstats",function(e){
+    $(document).on("click tap", ".pepro_shortcodehandler._shortcodehandlerstats",function(e){
       e.preventDefault();
       var me = $(this);
       window.send_to_editor('[profile-wc-stats]');
     });
-    $(document).on("click tap", ".peprocoreprofile_shortcodehandler._shortcodehandlerorders",function(e){
+    $(document).on("click tap", ".pepro_shortcodehandler._shortcodehandlerorders",function(e){
       e.preventDefault();
       var me = $(this);
       window.send_to_editor('[profile-wc-orders limit="10"]');
     });
-    $(document).on("click tap", ".peprocoreprofile_shortcodehandler._shortcodehandlerdownloads",function(e){
+    $(document).on("click tap", ".pepro_shortcodehandler._shortcodehandlerdownloads",function(e){
       e.preventDefault();
       var me = $(this);
       window.send_to_editor('[profile-wc-downloads category=nID]');
     });
-    $(document).on("click tap", ".peprocoreprofile_shortcodehandler._shortcodehandlerldenrolled",function(e){
+    $(document).on("click tap", ".pepro_shortcodehandler._shortcodehandlerldenrolled",function(e){
       e.preventDefault();
       var me = $(this);
       window.send_to_editor(

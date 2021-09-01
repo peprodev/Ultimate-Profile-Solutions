@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/08/30 17:51:56
+# @Last modified time: 2021/09/01 22:38:03
 if (!class_exists("PeproDevUPS_Profile")) {
     class PeproDevUPS_Profile
     {
@@ -96,20 +96,22 @@ if (!class_exists("PeproDevUPS_Profile")) {
                 array(
                   "name" => "{$this->db_slug}_general",
                   "data" => array(
-                      "{$this->activation_status}"                    => "0",
-                      "{$this->db_slug}-clearunistall"                => "no",
-                      "{$this->db_slug}-cleardbunistall"              => "no",
-                      "{$this->activation_status}-css"                => "",
-                      "{$this->activation_status}-js"                 => "",
-                      "{$this->activation_status}-logo"               => "",
-                      "{$this->activation_status}-profile-dash-page"  => "profile",
-                      "{$this->activation_status}-logo-id"            => "",
-                      "{$this->activation_status}-showwelcome"        => "true",
-                      "{$this->activation_status}-woocommercestats"   => "true",
-                      "{$this->activation_status}-woocommerceorders"  => "true",
-                      "{$this->activation_status}-showcustomtext"     => "true",
-                      "{$this->activation_status}-customhtml"         => "",
-                      "{$this->activation_status}-customposition"     => "p2",
+                      "{$this->activation_status}"                   => "0",
+                      "{$this->db_slug}-clearunistall"               => "no",
+                      "{$this->db_slug}-cleardbunistall"             => "no",
+                      "{$this->activation_status}-css"               => "",
+                      "{$this->activation_status}-js"                => "",
+                      "{$this->activation_status}-logo"              => "",
+                      "{$this->activation_status}-profile-dash-page" => "profile",
+                      "{$this->activation_status}-logo-id"           => "",
+                      "{$this->activation_status}-showwelcome"       => "true",
+                      "{$this->activation_status}-woocommercestats"  => "true",
+                      "{$this->activation_status}-woocommerceorders" => "true",
+                      "{$this->activation_status}-showcustomtext"    => "true",
+                      "{$this->activation_status}-customhtml"        => "",
+                      "{$this->activation_status}-headerhook"        => "no",
+                      "{$this->activation_status}-footerhook"        => "no",
+                      "{$this->activation_status}-customposition"    => "p2",
                   )
               ),
             );
@@ -130,11 +132,9 @@ if (!class_exists("PeproDevUPS_Profile")) {
               wp_dequeue_style( "font-awesome" );
             });
             add_action("admin_bar_menu",  array( $this, "admin_bar_menu_items"), 31);
-            // add_filter("avatar_defaults", array( $this, "avatar_defaults") );
-            if (!is_admin()){
-              add_filter("get_avatar_url",  array( $this, "change_avatar_url"), 10, 3);
-            }
+            add_filter("get_avatar_url",  array( $this, "change_avatar_url"), 10, 3);
         }
+
         public function template_redirect()
         {
           if (get_the_id() == $this->get_profile_page()){
@@ -425,14 +425,9 @@ if (!class_exists("PeproDevUPS_Profile")) {
           wp_dequeue_style("revslider-material-icons");
 
         }
-        public function avatar_defaults($avatar_defaults)
-        {
-          $myavatar = esc_url("{$this->assets_url}assets/img/account.png");
-          $avatar_defaults[$myavatar] = $this->title;
-          return $avatar_defaults;
-        }
         public function change_avatar_url($url, $id_or_email, $args)
         {
+          $local = esc_url("{$this->assets_url}assets/img/account.png");
           if (is_numeric($id_or_email)) {
             $user = get_user_by('id', absint( $id_or_email ));
           }
@@ -587,6 +582,8 @@ if (!class_exists("PeproDevUPS_Profile")) {
               exit;
             }
           }
+          wp_enqueue_script( "jquery" );
+
           add_filter( "the_content", function ( $content ) { $this->peprofile_get_template_part("dash-index"); return; }, 999 );
         }
         public function peprofile_shortcode_wc_downloads($atts=array(),$content="")
@@ -1170,21 +1167,21 @@ if (!class_exists("PeproDevUPS_Profile")) {
         {
             $this->remove_us_css();
             $this->enqueue_scripts_and_styles();
-            wp_enqueue_style(__CLASS__."simple-fapro", plugins_url("libs/templates/vendor/fa-pro/css/all.css", __FILE__));
+            wp_enqueue_style(__CLASS__."simple-fapro", plugins_url("libs/templates/vendas/fa-pro/css/all.css", __FILE__));
             include plugin_dir_path(__FILE__) . "/libs/general/activated.php";
         }
         public function htmlwrapper_shortcodes()
         {
             $this->remove_us_css();
             $this->enqueue_scripts_and_styles();
-            wp_enqueue_style(__CLASS__."simple-fapro", plugins_url("libs/templates/vendor/fa-pro/css/all.css", __FILE__));
+            wp_enqueue_style(__CLASS__."simple-fapro", plugins_url("libs/templates/vendas/fa-pro/css/all.css", __FILE__));
             include plugin_dir_path(__FILE__) . "/libs/general/shortcodes_panel.php";
         }
         public function htmlwrapper_sections()
         {
           $this->remove_us_css();
           $this->enqueue_scripts_and_styles();
-          wp_enqueue_style(__CLASS__."simple-fapro", plugins_url("libs/templates/vendor/fa-pro/css/all.css", __FILE__));
+          wp_enqueue_style(__CLASS__."simple-fapro", plugins_url("libs/templates/vendas/fa-pro/css/all.css", __FILE__));
           include plugin_dir_path(__FILE__) . "/libs/general/sections_panel.php";
           wp_enqueue_script(__CLASS__."date", plugins_url("/assets/js/persian-date.min.js", __FILE__), array("jquery"), "3.0.0", true);
           wp_enqueue_script(__CLASS__."datepicker", plugins_url("/assets/js/persian-datepicker.min.js", __FILE__), array("jquery"), "3.0.0", true);
@@ -1204,7 +1201,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
         {
           $this->remove_us_css();
           $this->enqueue_scripts_and_styles();
-          wp_enqueue_style(__CLASS__."simple-fapro", plugins_url("libs/templates/vendor/fa-pro/css/all.css", __FILE__));
+          wp_enqueue_style(__CLASS__."simple-fapro", plugins_url("libs/templates/vendas/fa-pro/css/all.css", __FILE__));
           include plugin_dir_path(__FILE__) . "/libs/general/notifs_panel.php";
           wp_enqueue_script(__CLASS__."date", plugins_url("/assets/js/persian-date.min.js", __FILE__), array("jquery"), "3.0.0", true);
           wp_enqueue_script(__CLASS__."datepicker", plugins_url("/assets/js/persian-datepicker.min.js", __FILE__), array("jquery"), "3.0.0", true);
@@ -1469,7 +1466,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                     wp_update_user( $user );
 
                     add_filter("get_avatar_url", array( $this, "change_avatar_url"), 10, 3);
-                    $avatar_url = get_avatar_url($user_id, array("size" => "96", "default" => "images/icon/avatar-01.jpg",));
+                    $avatar_url = get_avatar_url($user_id, array("size" => "96", "default" => "$this->assets/images/icon/avatar-01.jpg",));
                     remove_filter("get_avatar_url", array( $this, "change_avatar_url"), 10, 3);
 
                     $retuen["avatar"] = $avatar_url;
@@ -1531,20 +1528,60 @@ if (!class_exists("PeproDevUPS_Profile")) {
                     break;
                   case 'save_setting':
 
-                      $setting_slug = "css";                  isset($_POST["dparam"][$setting_slug]) AND update_option("{$this->activation_status}-{$setting_slug}", $_POST["dparam"][$setting_slug]);
-                      $setting_slug = "js";                   isset($_POST["dparam"][$setting_slug]) AND update_option("{$this->activation_status}-{$setting_slug}", $_POST["dparam"][$setting_slug]);
-                      $setting_slug = "logo";                 isset($_POST["dparam"][$setting_slug]) && !empty($_POST["dparam"][$setting_slug]) AND update_option("{$this->activation_status}-{$setting_slug}", $_POST["dparam"][$setting_slug]);
-                      $setting_slug = "logo-id";              isset($_POST["dparam"][$setting_slug]) && !empty($_POST["dparam"][$setting_slug]) AND update_option("{$this->activation_status}-{$setting_slug}", $_POST["dparam"][$setting_slug]);
-                      $setting_slug = "showwelcome";          isset($_POST["dparam"][$setting_slug]) && !empty($_POST["dparam"][$setting_slug]) AND update_option("{$this->activation_status}-{$setting_slug}", $_POST["dparam"][$setting_slug]);
-                      $setting_slug = "profile-dash-page";    isset($_POST["dparam"][$setting_slug]) && !empty($_POST["dparam"][$setting_slug]) AND update_option("{$this->activation_status}-{$setting_slug}", $_POST["dparam"][$setting_slug]);
-                      $setting_slug = "woocommercestats";     isset($_POST["dparam"][$setting_slug]) && !empty($_POST["dparam"][$setting_slug]) AND update_option("{$this->activation_status}-{$setting_slug}", $_POST["dparam"][$setting_slug]);
-                      $setting_slug = "showcustomtext";       isset($_POST["dparam"][$setting_slug]) && !empty($_POST["dparam"][$setting_slug]) AND update_option("{$this->activation_status}-{$setting_slug}", $_POST["dparam"][$setting_slug]);
-                      $setting_slug = "woocommerceorders";    isset($_POST["dparam"][$setting_slug]) && !empty($_POST["dparam"][$setting_slug]) AND update_option("{$this->activation_status}-{$setting_slug}", $_POST["dparam"][$setting_slug]);
-                      $setting_slug = "customhtml";           isset($_POST["dparam"][$setting_slug]) && !empty($_POST["dparam"][$setting_slug]) AND update_option("{$this->activation_status}-{$setting_slug}", $_POST["dparam"][$setting_slug]);
-                      $setting_slug = "customposition";       isset($_POST["dparam"][$setting_slug]) && !empty($_POST["dparam"][$setting_slug]) AND update_option("{$this->activation_status}-{$setting_slug}", $_POST["dparam"][$setting_slug]);
+                      $setting_slug = "css";
+                      if(isset($_POST["dparam"][$setting_slug])){
+                        update_option("{$this->activation_status}-{$setting_slug}", wp_slash($_POST["dparam"][$setting_slug]));
+                      }
+                      $setting_slug = "js";
+                      if(isset($_POST["dparam"][$setting_slug])){
+                        update_option("{$this->activation_status}-{$setting_slug}", sanitize_textarea_field($_POST["dparam"][$setting_slug]));
+                      }
+                      $setting_slug = "logo";
+                      if(isset($_POST["dparam"][$setting_slug]) && !empty($_POST["dparam"][$setting_slug])){
+                        update_option("{$this->activation_status}-{$setting_slug}", sanitize_text_field($_POST["dparam"][$setting_slug]));
+                      }
+                      $setting_slug = "logo-id";
+                      if(isset($_POST["dparam"][$setting_slug]) && !empty($_POST["dparam"][$setting_slug])){
+                        update_option("{$this->activation_status}-{$setting_slug}", sanitize_text_field($_POST["dparam"][$setting_slug]));
+                      }
+                      $setting_slug = "showwelcome";
+                      if(isset($_POST["dparam"][$setting_slug]) && !empty($_POST["dparam"][$setting_slug])){
+                        update_option("{$this->activation_status}-{$setting_slug}", sanitize_text_field($_POST["dparam"][$setting_slug]));
+                      }
+                      $setting_slug = "headerhook";
+                      if(isset($_POST["dparam"][$setting_slug]) && !empty($_POST["dparam"][$setting_slug])){
+                        update_option("{$this->activation_status}-{$setting_slug}", sanitize_text_field($_POST["dparam"][$setting_slug]));
+                      }
+                      $setting_slug = "footerhook";
+                      if(isset($_POST["dparam"][$setting_slug]) && !empty($_POST["dparam"][$setting_slug])){
+                        update_option("{$this->activation_status}-{$setting_slug}", sanitize_text_field($_POST["dparam"][$setting_slug]));
+                      }
+                      $setting_slug = "profile-dash-page";
+                      if(isset($_POST["dparam"][$setting_slug]) && !empty($_POST["dparam"][$setting_slug])){
+                        update_option("{$this->activation_status}-{$setting_slug}", sanitize_text_field($_POST["dparam"][$setting_slug]));
+                      }
+                      $setting_slug = "woocommercestats";
+                      if(isset($_POST["dparam"][$setting_slug]) && !empty($_POST["dparam"][$setting_slug])){
+                        update_option("{$this->activation_status}-{$setting_slug}", sanitize_text_field($_POST["dparam"][$setting_slug]));
+                      }
+                      $setting_slug = "showcustomtext";
+                      if(isset($_POST["dparam"][$setting_slug]) && !empty($_POST["dparam"][$setting_slug])){
+                        update_option("{$this->activation_status}-{$setting_slug}", sanitize_text_field($_POST["dparam"][$setting_slug]));
+                      }
+                      $setting_slug = "woocommerceorders";
+                      if(isset($_POST["dparam"][$setting_slug]) && !empty($_POST["dparam"][$setting_slug])){
+                        update_option("{$this->activation_status}-{$setting_slug}", sanitize_text_field($_POST["dparam"][$setting_slug]));
+                      }
+                      $setting_slug = "customhtml";
+                      if(isset($_POST["dparam"][$setting_slug]) && !empty($_POST["dparam"][$setting_slug])){
+                        update_option("{$this->activation_status}-{$setting_slug}", stripslashes($_POST["dparam"][$setting_slug]));
+                      }
+                      $setting_slug = "customposition";
+                      if(isset($_POST["dparam"][$setting_slug]) && !empty($_POST["dparam"][$setting_slug])){
+                        update_option("{$this->activation_status}-{$setting_slug}", sanitize_text_field($_POST["dparam"][$setting_slug]));
+                      }
 
-
-                      $dashpage = get_option("{$this->activation_status}-profile-dash-page","");
+                      $dashpage = get_option("{$this->activation_status}-profile-dash-page");
                       $slug = get_page_template_slug($dashpage);
                       $notify_user_of_page_template = sprintf(
                         __("Current selected dashboard page's template should be 'PeproDev Ultimate Profile Solutions — Profile'. %s",$this->td),

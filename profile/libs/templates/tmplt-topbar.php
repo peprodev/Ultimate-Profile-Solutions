@@ -1,14 +1,11 @@
 <?php
 
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/08/29 00:31:38
+# @Last modified time: 2021/09/01 22:40:07
 
 global $PeproDevUPS_Profile,$wp;
 $current_user = wp_get_current_user();
-$avatar_url = get_avatar_url( get_current_user_id(), array(
-  "size"=> "96",
-  "default"=> "images/icon/avatar-01.jpg",
-));
+$avatar_url = get_avatar_url( get_current_user_id(), array("size"=> "96",));
 
 ?>
 
@@ -31,7 +28,7 @@ $avatar_url = get_avatar_url( get_current_user_id(), array(
                 <h5 class="name">
                     <a href="<?php echo home_url( $wp->request ) . "?section=me";?>"><?=esc_html( $current_user->display_name );?></a>
                 </h5>
-                <span class="email"><?=esc_html( $current_user->user_email );?></span>
+                <span class="email"><?=esc_html( !empty($current_user->user_email) ? $current_user->user_email : (!empty($current_user->user_login) ? $current_user->user_login : $current_user->display_name) );?></span>
             </div>
         </div>
         <div class="account-dropdown__body">

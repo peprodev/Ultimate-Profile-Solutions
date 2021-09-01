@@ -3,7 +3,7 @@
  * @Date:   2021/08/02 22:05:01
  * @Email:  its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/08/31 17:58:04
+ * @Last modified time: 2021/08/31 23:24:46
  * @License: GPLv2
  * @Copyright: Copyright © Amirhosseinhpv (https://hpv.im), all rights reserved.
  */
@@ -330,4 +330,11 @@ input[type="checkbox"].iostoggle[disabled]:checked {
   scrollbar-width: thin;
   -webkit-padding-end: .5rem;
           padding-inline-end: .5rem;
+}
+
+.float-left {
+	float: right !important;
+}
+[dir="rtl"] .float-left {
+	float: left !important;
 }

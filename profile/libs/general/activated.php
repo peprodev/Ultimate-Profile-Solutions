@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/08/28 22:55:27
+# @Last modified time: 2021/09/01 15:38:45
 ?>
 <div class="row">
   <div class="col-lg-6 col-md-6">
@@ -80,6 +80,28 @@
                   data-checked='<?=get_option("{$this->activation_status}-showwelcome","true") === "true" ? "true" : "false";?>' id="showwelcome"></a>
                 </td>
               </tr>
+              <tr>
+                <td><?=_x("Use Header Hook on Profile Dashboard page","profile-section", $this->td);?></td>
+                <td>
+                  <a class='btncheckbox'
+                  data-text-on='<?=_x("Yes, Fire this hook","profile-section", $this->td);?>'
+                  data-text-off='<?=_x("No, Do NOT use it","profile-section", $this->td);?>'
+                  data-on='check_box'
+                  data-off='check_box_outline_blank'
+                  data-checked='<?=get_option("{$this->activation_status}-headerhook","true") === "true" ? "true" : "false";?>' id="headerhook"></a>
+                </td>
+              </tr>
+              <tr>
+                <td><?=_x("Use Footer Hook on Profile Dashboard page","profile-section", $this->td);?></td>
+                <td>
+                  <a class='btncheckbox'
+                  data-text-on='<?=_x("Yes, Fire this hook","profile-section", $this->td);?>'
+                  data-text-off='<?=_x("No, Do NOT use it","profile-section", $this->td);?>'
+                  data-on='check_box'
+                  data-off='check_box_outline_blank'
+                  data-checked='<?=get_option("{$this->activation_status}-footerhook","true") === "true" ? "true" : "false";?>' id="footerhook"></a>
+                </td>
+              </tr>
               <?php if ($this->_wc_activated()){ ?>
                 <!-- Show WooCommerce Stats -->
                 <tr>
@@ -134,7 +156,8 @@
                   <td colspan="2">
                     <?php
                       wp_editor(
-                          stripslashes(get_option("{$this->activation_status}-customhtml")), "{$this->activation_status}-customhtml",
+                          stripslashes(get_option("{$this->activation_status}-customhtml")),
+                          "{$this->activation_status}-customhtml",
                           array(
                           'textarea_name'    => "{$this->activation_status}-customhtml",
                           'editor_height'    => 350,
@@ -143,7 +166,7 @@
                           'teeny'            => false,  // Whether to output the minimal editor configuration used in PressThis
                           'dfw'              => false,  // Whether to replace the default fullscreen editor with DFW (needs specific DOM elements and CSS)
                           'media_buttons'    => true,   // Whether to display media insert/upload buttons
-                          'wpautop'          => true,   // Whether to use wpautop for adding in paragraphs. Note that the paragraphs are added automatically when wpautop is false.
+                          'wpautop'          => false,   // Whether to use wpautop for adding in paragraphs. Note that the paragraphs are added automatically when wpautop is false.
                           'tinymce'          => true,   // Load TinyMCE, can be used to pass settings directly to TinyMCE using an array
                           'quicktags'        => true,   // Load Quicktags, can be used to pass settings directly to Quicktags using an array. Set to false to remove your editor's Visual and Text tabs.
                           'drag_drop_upload' => true,   // Enable Drag & Drop Upload Support (since WordPress 3.9)
@@ -178,15 +201,15 @@
               <tr>
                 <td colspan="2">
                   <?=_x("Global CSS","profile-section", $this->td);?>
-                  <textarea name="<?="{$this->activation_status}-css";?>" class="codeditor" id="csseditor" spellcheck="false" dir="ltr" rows="8" cols="80"><?=stripslashes(get_option("{$this->activation_status}-css",""));?></textarea>
-                  <textarea name="<?="{$this->activation_status}-css";?>" style="display:none !important;" class="codeditor" id="css" spellcheck="false" dir="ltr" rows="8" cols="80"><?=stripslashes(get_option("{$this->activation_status}-css",""));?></textarea>
+                  <textarea name="<?="{$this->activation_status}-css";?>" class="codeditor" id="csseditor" spellcheck="false" dir="ltr" rows="8" cols="80"><?=wp_unslash(get_option("{$this->activation_status}-css",""));?></textarea>
+                  <textarea name="<?="{$this->activation_status}-css";?>" style="display:none !important;" class="codeditor" id="css" spellcheck="false" dir="ltr" rows="8" cols="80"><?=wp_unslash(get_option("{$this->activation_status}-css",""));?></textarea>
                 </td>
               </tr>
               <tr>
                 <td colspan="2">
                   <?=_x("Global JS","profile-section", $this->td);?>
-                  <textarea name="<?="{$this->activation_status}-css";?>" class="codeditor" id="jseditor" spellcheck="false" dir="ltr" rows="8" cols="80"><?=stripslashes(get_option("{$this->activation_status}-js",""));?></textarea>
-                  <textarea name="<?="{$this->activation_status}-js";?>" style="display:none !important;" class="codeditor" id="js" spellcheck="false" dir="ltr" rows="8" cols="80"><?=stripslashes(get_option("{$this->activation_status}-js",""));?></textarea>
+                  <textarea name="<?="{$this->activation_status}-css";?>" class="codeditor" id="jseditor" spellcheck="false" dir="ltr" rows="8" cols="80"><?=wp_unslash(get_option("{$this->activation_status}-js",""));?></textarea>
+                  <textarea name="<?="{$this->activation_status}-js";?>" style="display:none !important;" class="codeditor" id="js" spellcheck="false" dir="ltr" rows="8" cols="80"><?=wp_unslash(get_option("{$this->activation_status}-js",""));?></textarea>
                 </td>
               </tr>
           </tbody>

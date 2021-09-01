@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/08/31 17:34:05
+# @Last modified time: 2021/09/01 22:24:35
 add_thickbox();
 wp_enqueue_style("wp-color-picker");
 wp_enqueue_script("wp-color-picker");
@@ -26,7 +26,7 @@ wp_localize_script("pepro-register-fields",        "_register_fields", array(
   "confirmCap" => _x("You sure to clear out all items?<red>THIS CANNOT BE UNDONE.", "js-translate", $this->td),
   "successTtl" => _x("Success", "js-translate", $this->td),
   "closeTxt"   => _x("Close", "js-translate", $this->td),
-  "locked"   => _x("This item is locked! To unlock, Change Login/Registeration Type field.", "js-translate", $this->td),
+  "locked"     => _x("This item is locked! To unlock, Change Login/Registeration Type field.", "js-translate", $this->td),
   "successCap" => _x("All items deleted successfully", "js-translate", $this->td),
   "submitTxt"  => _x("Submit", "js-translate", $this->td),
   "okTxt"      => _x("Okay", "js-translate", $this->td),
@@ -74,6 +74,9 @@ foreach ($styleFiles as $style) {
             </li>
             <li class="nav-item tab_migrate">
               <a class="nav-link" href="#tab_migrate" ><i class="material-icons">cloud_done</i> <?=_x("Import/Export", "login-section", $this->td);?></a>
+            </li>
+            <li class="nav-item tab_samrt_button">
+              <a class="nav-link" href="#tab_samrt_button" ><i class="material-icons">auto_fix_high</i> <?=_x("Samrt Button", "login-section", $this->td);?></a>
             </li>
           </ul>
         </div>
@@ -906,6 +909,32 @@ foreach ($styleFiles as $style) {
               wparam="loginregister" lparam="savelogin" dparam="" fn="">
               <i class='material-icons'>save</i> <?=_x("Import (Overwrite) Settings", "login-section", $this->td);?>
             </button>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="tab_samrt_button">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title"><?=_x("Samrt Button","login-section", $this->td);?></h4>
+            <p class="card-category"><?=_x("Use this button to show login/register popup to guests and welcome logged in users","login-section", $this->td);?></p>
+          </div>
+          <div class="card-body table-responsive">
+            <div class="row justify-content-between smart_btn_workspace">
+              <div class="col-lg-6 justify-content-between mt-3 mb-3">
+                <pre style="direction: ltr;text-align: left;" class="border p-3">[pepro-smart-btn
+  loggedin_text="Hi {display_name}"
+  loggedin_href="/profile"
+  loggedin_avatar="yes"
+  loggedin_avatar_size="32"
+  loggedin_class="button button-primary"
+  loggedout_text="Login/Register"
+  loggedout_form="login"
+  loggedout_class="button button-primary"
+  login_popup_title="Login"
+  register_popup_title="Register" ]</pre>
+<button type="button" id="copyshortcode" class="btn btn-primary" style="position: relative;transform: translate(-0.5rem, -4.5rem);"><span class="material-icons">content_copy</span></button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

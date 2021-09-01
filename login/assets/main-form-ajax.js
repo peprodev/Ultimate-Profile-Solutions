@@ -1,7 +1,7 @@
 /**
  * @Date:   2021/08/17 09:28:22
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/08/31 20:08:35
+ * @Last modified time: 2021/09/01 12:49:32
  * @License: GPLv2
  */
 jQuery.noConflict();
@@ -83,7 +83,7 @@ jQuery.noConflict();
         closeIconClass: false,
         watchInterval: 100,
         columnClass: 'm',
-        boxWidth: '700px',
+        boxWidth: '400px',
         scrollToPreviousElement: true,
         scrollToPreviousElementAnimate: true,
         useBootstrap: false,
@@ -175,6 +175,7 @@ jQuery.noConflict();
           },
           success: function(e) {
             if (e.success === true) {
+              $(".popup-active").removeClass("popup-active");
               $(login_form).find("#login_error").removeClass("info success error").addClass("success").html(e.data.msg);
               if (e.data.is_otp){
                 $(login_form).find("#login_error").removeClass("info success error").addClass("info").html(e.data.msg);
@@ -190,9 +191,7 @@ jQuery.noConflict();
                 $(".popup-active").removeClass("popup-active");
                 $(login_form).find(".pepro-login-reg-field").addClass("hide");
                 $submitBtn = $(login_form).find(".submit-wrap #submit[type=submit]");
-
                 $(login_form).append(`<div class='pepro-login-reg-field'><button href='${e.data.logout_url}' class='ahrefbtn ${$submitBtn.attr("class")}' target='_self' type='submit'>${e.data.logout_txt}</button></div>`);
-
                 if (e.data.redirect_text){
                   obj_buttons = {
                     close: {
@@ -242,11 +241,9 @@ jQuery.noConflict();
                   content: e.data.msg,
                   icon: 'fas fa-check-circle',
                   type: 'green',
-                  boxWidth: "500px",
+                  boxWidth: "400px",
                   buttons: obj_buttons,
                 });
-
-
               }
 
             }
@@ -340,6 +337,7 @@ jQuery.noConflict();
           },
           success: function(e) {
             if (e.success === true) {
+              $(".popup-active").removeClass("popup-active");
               $(login_form).find("#login_error").removeClass("info success error").addClass("success").html(e.data.msg);
               if (e.data.is_otp){
                 $(login_form).find("#login_error").removeClass("info success error").addClass("info").html(e.data.msg);
@@ -385,7 +383,7 @@ jQuery.noConflict();
                   content: e.data.msg,
                   icon: 'fas fa-check-circle',
                   type: 'green',
-                  boxWidth: "500px",
+                  boxWidth: "400px",
                   buttons: obj_buttons,
                 });
               }
@@ -524,7 +522,7 @@ jQuery.noConflict();
                   content: e.data.msg,
                   icon: 'fas fa-check-circle',
                   type: 'green',
-                  boxWidth: "500px",
+                  boxWidth: "400px",
                   buttons: obj_buttons,
                 });
               }
@@ -610,6 +608,7 @@ jQuery.noConflict();
           success: function(e) {
             if (e.success === true) {
               $(login_form).find("#login_error").removeClass("info success error").addClass("success").html(e.data.msg);
+              $(".popup-active").removeClass("popup-active");
               if (e.data.is_otp){
                 $(login_form).find("#login_error").removeClass("info success error").addClass("info").html(e.data.msg);
                 $(login_form).find(".pepro-login-reg-field").addClass("hide");
@@ -618,7 +617,6 @@ jQuery.noConflict();
                 if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).select(); }, 100); }
               }
               else{
-                $(".popup-active").removeClass("popup-active");
                 $(login_form).find(".pepro-login-reg-field, .pepro-form-links").addClass("hide");
                 $submitBtn = $(login_form).find(".submit-wrap #submit[type=submit]");
                 $(login_form).append(`<div class='pepro-login-reg-field'><button href='${_pepro_dev.gohome_url}' class='ahrefbtn ${$submitBtn.attr("class")}' target='_self' type='submit'>${_pepro_dev.gohome_txt}</button></div>`);
@@ -667,7 +665,7 @@ jQuery.noConflict();
                     },
                   };
                 }
-                jc = $.confirm({ title: "", content: e.data.msg, icon: 'fas fa-check-circle', type: 'green', boxWidth: "500px", buttons: obj_buttons, });
+                jc = $.confirm({ title: "", content: e.data.msg, icon: 'fas fa-check-circle', type: 'green', boxWidth: "400px", buttons: obj_buttons, });
               }
             }
             else {
@@ -832,7 +830,7 @@ jQuery.noConflict();
                 content: e.data.msg,
                 icon: 'fas fa-check-circle',
                 type: 'green',
-                boxWidth: "500px",
+                boxWidth: "400px",
                 buttons: {
                   close: {
                     btnClass: "btn-green",
@@ -920,7 +918,7 @@ jQuery.noConflict();
         $(this).removeClass("active").dequeue().off("click tap");
       }).on("click tap", function(e) { e.preventDefault(); $(this).stop().removeClass("active"); });
     }
-    function show_modal_alert(title = "", content = "", icon = "fas fa-info-circle", type = "blue", boxWidth = "500px", $fn = null, theme="modern") {
+    function show_modal_alert(title = "", content = "", icon = "fas fa-info-circle", type = "blue", boxWidth = "400px", $fn = null, theme="modern") {
       $.confirm({
         title: title?"<br>"+title:"",
         content: content,
