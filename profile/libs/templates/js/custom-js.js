@@ -15,7 +15,7 @@
  * @Date:2020/05/03 13:33:07
  * @Email:its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/08/21 18:10:45
+ * @Last modified time: 2021/09/02 12:09:49
  * @License:GPLv2
  * @Copyright:Copyright © 2020 Amirhosseinhpv,All rights reserved.
  */
@@ -37,7 +37,7 @@ $ = jQuery;!function(e,t){"object"==typeof exports&&"object"==typeof module?modu
  * @Date:   2020/09/28 17:58:05
  * @Email:  its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/08/21 18:10:45
+ * @Last modified time: 2021/09/02 12:09:49
  * @License: GPLv2
  * @Copyright: Copyright © 2020 Amirhosseinhpv, All rights reserved.
  */
@@ -313,7 +313,6 @@ $ = jQuery;!function(e,t){"object"==typeof exports&&"object"==typeof module?modu
         success: function(e) {
           if (e.success === true) {
             $(".save-user-details").html(e.data.msg).removeClass("error info success").addClass("success").slideDown();
-            console.log();
             if (e.data.e){
               if (e.data.e.display_name){
                   $(".account-item .js-acc-btn, .account-dropdown .content h5.name").text(e.data.e.display_name);

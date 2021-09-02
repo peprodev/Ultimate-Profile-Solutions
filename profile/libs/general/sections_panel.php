@@ -1,30 +1,25 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/08/29 00:33:20
-
+# @Last modified time: 2021/09/02 12:38:35
 global $PeproDevUPS_Profile;
-$td = $PeproDevUPS_Profile->td;
-$rtl = is_rtl() ? "right" : "left";
-$page = isset($_GET['cpage']) ? abs((int) $_GET['cpage']) : 1;
-$srch = isset($_GET['s']) ? sanitize_text_field(esc_html(trim($_GET['s']))) : "";
-$integrity = wp_create_nonce('peprocorenounce');
-$trUrgent =_x("Urgent", "notifications-priority", "pepro");
-$trHigh =_x("High", "notifications-priority", "pepro");
-$trMedium =_x("Medium", "notifications-priority", "pepro");
-$trLow =_x("Low", "notifications-priority", "pepro");
-$trNormal =_x("Normal", "notifications-priority", "pepro");
-$trRed =_x("Red", "section-panel", "pepro");
-$trOrange =_x("Orange", "section-panel", "pepro");
-$trBlue =_x("Blue", "section-panel", "pepro");
-$trGreen =_x("Green", "section-panel", "pepro");
-$trDark =_x("Dark", "section-panel", "pepro");
+$td          = $PeproDevUPS_Profile->td;
+$rtl         = is_rtl() ? "right" : "left";
+$page        = isset($_GET['cpage']) ? abs((int) $_GET['cpage']) : 1;
+$srch        = isset($_GET['s']) ? sanitize_text_field(esc_html(trim($_GET['s']))) : "";
+$integrity   = wp_create_nonce('peprocorenounce');
+$trUrgent    = _x("Urgent", "notifications-priority", "pepro");
+$trHigh      = _x("High", "notifications-priority", "pepro");
+$trMedium    = _x("Medium", "notifications-priority", "pepro");
+$trLow       = _x("Low", "notifications-priority", "pepro");
+$trNormal    = _x("Normal", "notifications-priority", "pepro");
+$trRed       = _x("Red", "section-panel", "pepro");
+$trOrange    = _x("Orange", "section-panel", "pepro");
+$trBlue      = _x("Blue", "section-panel", "pepro");
+$trGreen     = _x("Green", "section-panel", "pepro");
+$trDark      = _x("Dark", "section-panel", "pepro");
 $loadingRing = '<div class="lds-ring2"><div></div><div></div><div></div><div></div></div>';
-
 ?>
-
 <div class="fa-set icon-set fontawesome-icon-picker"> <ul> <?php echo $PeproDevUPS_Profile->get_fontawesomepro_class_list();?> </ul> </div>
-
-
 <div class="row">
   <div class="col-lg-12 col-md-12">
     <div class="card">
@@ -61,35 +56,35 @@ $loadingRing = '<div class="lds-ring2"><div></div><div></div><div></div><div></d
                     <tbody>
                     <?php
 
-                      $t = _x("Menu Label", "section-panel", "pepro");
+                      $t  = _x("Menu Label", "section-panel", "pepro");
                       $tt = sprintf(_x("Enter %s", "section-panel", "pepro"), $t);
                       $PeproDevUPS_Profile->add_notif_input( "is-required", "notifaddedit-title", $t, $tt );
 
-                      $t = _x("Unique Slug", "section-panel", "pepro");
+                      $t  = _x("Unique Slug", "section-panel", "pepro");
                       $tt = sprintf(_x("Enter %s", "section-panel", "pepro"), $t);
                       $PeproDevUPS_Profile->add_notif_input( "is-required", "notifaddedit-slug", $t, $tt );
 
-                      $t = _x("Subject", "section-panel", "pepro");
+                      $t  = _x("Subject", "section-panel", "pepro");
                       $tt = sprintf(_x("Enter %s", "section-panel", "pepro"), $t);
                       $PeproDevUPS_Profile->add_notif_input( "is-required", "notifaddedit-subject", $t, $tt );
 
-                      $t = _x("Content", "section-panel", "pepro");
+                      $t  = _x("Content", "section-panel", "pepro");
                       $tt = sprintf(_x("Enter %s", "section-panel", "pepro"), $t);
                       $PeproDevUPS_Profile->add_notif_editor( "is-required", "notifaddedit-content", $t, $tt );
 
-                      $title = _x("Icon", "section-panel", "pepro");
+                      $title  = _x("Icon", "section-panel", "pepro");
                       $titles = _x("Pick icon (provided by FontAwesome)", "section-panel", "pepro");
                       echo "<tr is-required><td><label class=\"text-primary\" for=\"notifaddedit-icon\">$title</label></td>
                               <td><div class=\"icon-picker\" data-pickerid=\"fa\" data-iconsets='{\"fa\":\"$titles\"}'>
                                 <input id=\"notifaddedit-icon\" type=\"hidden\" /></div>
                               </td></tr>";
 
-                      $title = _x("Priority (number)", "section-panel", "pepro");
+                      $title  = _x("Priority (number)", "section-panel", "pepro");
                       $toltip = sprintf(_x("Enter %s", "section-panel", "pepro"), $title);
                       $PeproDevUPS_Profile->add_notif_input("is-required","notifaddedit-priority",$title,$toltip,"number","",300,"min='0'");
 
                       $Yes = _x("Hide Advanced Setting","profile-section","pepro");
-                      $No = _x("Show Advanced Setting","profile-section","pepro");
+                      $No  = _x("Show Advanced Setting","profile-section","pepro");
                       echo "<tr><td colspan='2'>
                               <a
                                 class='btncheckbox'
@@ -153,15 +148,15 @@ $loadingRing = '<div class="lds-ring2"><div></div><div></div><div></div><div></d
                     type="button"
                     id="add_notif"
                     class="add_edit_save_notification btn btn-primary loadingRings"
-                    integrity="<?php echo $integrity;?>"
-                    wparam="<?php echo $PeproDevUPS_Profile->setting_slug;?>"
+                    integrity="<?php echo esc_attr( $integrity );?>"
+                    wparam="<?php echo esc_attr( $PeproDevUPS_Profile->setting_slug );?>"
                     lparam="add_new_section"><?php echo $loadingRing . _x("Add New", "section-panel", "pepro");?></button>
                   <button
                     type="button"
                     id="edit_notif"
                     class="add_edit_save_notification btn btn-primary loadingRings"
-                    integrity="<?php echo $integrity;?>"
-                    wparam="<?php echo $PeproDevUPS_Profile->setting_slug;?>"
+                    integrity="<?php echo esc_attr( $integrity );?>"
+                    wparam="<?php echo esc_attr( $PeproDevUPS_Profile->setting_slug );?>"
                     lparam="add_new_section"><?php echo $loadingRing . _x("Save Edits", "section-panel", "pepro");?></button>
                   <button type="button" id="clear_notif_form" class="btn btn-action"><?php echo _x("Clear form", "section-panel", "pepro");?></button>
                   <button type="button" id='close_add_new_notifications' class="btn btn-action" data-dismiss="modal"><?php echo _x("Close", "section-panel", "pepro");?></button>

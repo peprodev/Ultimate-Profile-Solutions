@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/01 22:36:09
+# @Last modified time: 2021/09/02 14:31:02
 include_once plugin_dir_path(__FILE__) . "/include/class-login-permalink.php";
 
 if (!class_exists("PeproDevUPS_Login")){
@@ -117,6 +117,7 @@ if (!class_exists("PeproDevUPS_Login")){
       $this->reg_add_mobile         = "yes" == get_option("{$this->activation_status}-_regdef_mobile");
       $this->is_add_mobile_req      = "yes" == get_option("{$this->activation_status}-_regdef_mobile-req");
       $this->hide_email_field       = "yes" !== get_option("{$this->activation_status}-_regdef_email");
+      $this->show_email_field       = "yes" == get_option("{$this->activation_status}-_regdef_email");
       $this->is_email_field_req     = "yes" == get_option("{$this->activation_status}-_regdef_email-req");
       $this->hide_username_field    = "yes" !== get_option("{$this->activation_status}-_regdef_username");
       $this->is_username_field_req  = "yes" == get_option("{$this->activation_status}-_regdef_username-req");
@@ -155,38 +156,38 @@ if (!class_exists("PeproDevUPS_Login")){
       $this->from_name     = !empty($this->verification_email_sender_name) ? trim($this->verification_email_sender_name) : get_bloginfo('name','display');
       $this->from_address  = (!empty($this->verification_email_sender) ? trim($this->verification_email_sender) : "wordpress") . "@" . parse_url(get_bloginfo('url'), PHP_URL_HOST);
 
-      add_action("init",                              array( $this, "admin_init" ));
-      add_action("wp_ajax_pepro_reglogin",            array( $this, "handel_ajax_req"));
-      add_action("wp_ajax_nopriv_pepro_reglogin",     array( $this, "handel_ajax_req"));
-      add_action("register_form",                     array( $this, "register_form" ));
-      add_action("user_new_form",                     array( $this, "register_form_admin" ));
-      add_action("user_register",                     array( $this, "user_register" ));
-      add_action("edit_user_created_user",            array( $this, "user_register" ));
-      add_action("show_user_profile",                 array( $this, "show_profile_custom_fields" ), 10, 3);
-      add_action("edit_user_profile",                 array( $this, "show_profile_custom_fields" ), 10, 3);
-      add_action("personal_options_update",           array( $this, "update_profile_custom_fields" ));
-      add_action("edit_user_profile_update",          array( $this, "update_profile_custom_fields" ));
-      add_action("registration_errors",               array( $this, "registration_errors" ), 10, 3);
-      add_action("user_profile_update_errors",        array( $this, "registration_errors_admin" ), 10, 3);
-      add_action("manage_users_columns",              array( $this, "manage_users_columns" ));
-      add_action("manage_users_custom_column",        array( $this, "manage_users_custom_column" ), 100, 3);
-      add_action("wp_logout",                         array( $this, "redirect_after_logout" ), 10, 2);
-      add_action("admin_enqueue_scripts",             array( $this, "admin_enqueue_scripts" ));
-      add_action("login_form_register",               array( $this, "login_form_register"));
-      add_filter("login_redirect",                    array( $this, "redirect_after_login_register" ), 10, 3);
-      add_filter("registration_redirect",             array( $this, "redirect_after_login_register" ), 10, 3);
-      add_filter("woocommerce_login_redirect",        array( $this, "redirect_after_login_register" ), 10, 3);
-      add_filter("woocommerce_registration_redirect", array( $this, "redirect_after_login_register" ), 10, 3);
-      add_filter("peprofile_shortcodes",              array( $this, "add_peprofile_shortcodes" ), 11000);
-      add_filter("teeny_mce_plugins",                 array( $this, "teeny_mce_plugins" ), 10, 2 );
-      add_shortcode("pepro-login-form",               array( $this, "shortcode__pepro_login_form"));
-      add_shortcode("pepro-login-popup",              array( $this, "shortcode__pepro_login_popup"));
-      add_shortcode("logout-url",                     array( $this, "shortcode__logout_url"));
-      add_shortcode("verified-mobile",                array( $this, "shortcode__user_verified_mobile"));
-      add_shortcode("verified-email",                 array( $this, "shortcode__user_verified_email"));
-      add_shortcode("loggedin",                       array( $this, "shortcode__check_loggedin") );
-      add_shortcode("loggedout",                      array( $this, "shortcode__check_loggedout") );
-      add_shortcode("pepro-smart-btn",                array( $this, "shortcode__smart_btn") );
+      add_action("init",                                                 array( $this, "admin_init" ));
+      add_action("wp_ajax_pepro_reglogin",                               array( $this, "handel_ajax_req"));
+      add_action("wp_ajax_nopriv_pepro_reglogin",                        array( $this, "handel_ajax_req"));
+      add_action("register_form",                                        array( $this, "register_form" ));
+      add_action("user_new_form",                                        array( $this, "register_form_admin" ));
+      add_action("user_register",                                        array( $this, "user_register" ));
+      add_action("edit_user_created_user",                               array( $this, "user_register" ));
+      add_action("show_user_profile",                                    array( $this, "show_profile_custom_fields" ), 10, 3);
+      add_action("edit_user_profile",                                    array( $this, "show_profile_custom_fields" ), 10, 3);
+      add_action("personal_options_update",                              array( $this, "update_profile_custom_fields" ));
+      add_action("edit_user_profile_update",                             array( $this, "update_profile_custom_fields" ));
+      add_action("registration_errors",                                  array( $this, "registration_errors" ), 10, 3);
+      add_action("user_profile_update_errors",                           array( $this, "registration_errors_admin" ), 10, 3);
+      add_action("manage_users_columns",                                 array( $this, "manage_users_columns" ));
+      add_action("manage_users_custom_column",                           array( $this, "manage_users_custom_column" ), 100, 3);
+      add_action("wp_logout",                                            array( $this, "redirect_after_logout" ), 10, 2);
+      add_action("admin_enqueue_scripts",                                array( $this, "admin_enqueue_scripts" ));
+      add_action("login_form_register",                                  array( $this, "login_form_register"));
+      add_filter("login_redirect",                                       array( $this, "redirect_after_login_register" ), 10, 3);
+      add_filter("registration_redirect",                                array( $this, "redirect_after_login_register" ), 10, 3);
+      add_filter("woocommerce_login_redirect",                           array( $this, "redirect_after_login_register" ), 10, 3);
+      add_filter("woocommerce_registration_redirect",                    array( $this, "redirect_after_login_register" ), 10, 3);
+      add_filter("peprofile_shortcodes",                                 array( $this, "add_peprofile_shortcodes" ), 11000);
+      add_filter("teeny_mce_plugins",                                    array( $this, "teeny_mce_plugins" ), 10, 2 );
+      add_shortcode("pepro-login-form",                                  array( $this, "shortcode__pepro_login_form"));
+      add_shortcode("pepro-login-popup",                                 array( $this, "shortcode__pepro_login_popup"));
+      add_shortcode("logout-url",                                        array( $this, "shortcode__logout_url"));
+      add_shortcode("verified-mobile",                                   array( $this, "shortcode__user_verified_mobile"));
+      add_shortcode("verified-email",                                    array( $this, "shortcode__user_verified_email"));
+      add_shortcode("loggedin",                                          array( $this, "shortcode__check_loggedin") );
+      add_shortcode("loggedout",                                         array( $this, "shortcode__check_loggedout") );
+      add_shortcode("pepro-smart-btn",                                   array( $this, "shortcode__smart_btn") );
       add_filter("pepro_reglogin_get_register_fields",                   array( $this, "pepro_reglogin_get_register_fields" ), 1000);
       add_action("pepro_reglogin_show_hide_defaul_registeration_fields", array( $this, "form_defaul_registeration_fields" ), 1000);
 
@@ -196,12 +197,6 @@ if (!class_exists("PeproDevUPS_Login")){
       $this->login_fields                = $this->get_login_fields();
       $this->verify_email_fields         = $this->get_verify_email_fields();
       $this->verify_mobile_fields        = $this->get_verify_mobile_fields();
-
-      if (isset($_GET["test"])){
-        echo "<pre style='text-align: left; direction: ltr; border:1px solid gray; padding: 1rem; overflow: auto;'>". print_r(
-          $this->var_dump($this->redirect_after_login_register(home_url(), "ajax_register", 0))
-          ,1) ."</pre>";exit;
-      }
 
       if (is_user_logged_in()){
         if($this->verify_mobile){
@@ -217,7 +212,7 @@ if (!class_exists("PeproDevUPS_Login")){
       }
 
       require_once plugin_dir_path(__FILE__) . "/include/class-sms.php";
-      $this->sms = new \PeproDev\PeproCore\RegLogin\SendSMS("https://ws.sms.ir/", $this->sms_api_key, $this->sms_secret_key, $this->sms_api_url);
+      $this->sms = new \PeproDev\PeproCore\RegLogin\peproSendSMS("https://ws.sms.ir/", $this->sms_api_key, $this->sms_secret_key, $this->sms_api_url);
 
     }
     function shortcode__smart_btn($atts=array(), $content="") {
@@ -524,7 +519,7 @@ if (!class_exists("PeproDevUPS_Login")){
       wp_enqueue_style("pepro-login-reg-formaction",    "{$this->assets_url}/assets/main-form.css", array(), current_time("timestamp"));
       wp_enqueue_style("pepro-login-reg-formconfirm",   "{$this->assets_url}/assets/jquery-confirm.css", array(), current_time("timestamp"));
       wp_enqueue_script("pepro-login-reg-formconfirm",  "{$this->assets_url}/assets/jquery-confirm.js", array("jquery"), current_time("timestamp"), true);
-      wp_enqueue_script("pepro-login-reg-popper",       "{$this->assets_url}/assets/popper.min.js", array("jquery"), current_time("timestamp"), true);
+      wp_enqueue_script("pepro-login-reg-popper",       "//unpkg.com/@popperjs/core@latest", array("jquery"), current_time("timestamp"), true);
       wp_enqueue_script("pepro-login-reg-tippy-bundle", "{$this->assets_url}/assets/tippy-bundle.umd.min.js", array("jquery"), current_time("timestamp"), true);
       wp_enqueue_script("pepro-login-reg-formaction",   "{$this->assets_url}/assets/main-form-ajax.js", array("jquery"), current_time("timestamp"), true);
       wp_localize_script("pepro-login-reg-formaction",  $args["uniqd"], array(
@@ -2743,7 +2738,7 @@ if (!class_exists("PeproDevUPS_Login")){
           $verfied = "yes" == get_the_author_meta( "pepro_user_is_email_verified", $user_id);
           ?>
             <div class="pepro-reg-login-checkbox-wrapper">
-              <input class="pepro-reg-login-checkbox edit-user" style="transform: scale(0.75);" data-id="<?=$user_id;?>" data-param="pepro_user_is_email_verified" data-nonce="<?=wp_create_nonce($this->td);?>" type="checkbox" autocomplete="off" value="yes" <?=checked(true, $verfied, false);?> >
+              <input class="pepro-reg-login-checkbox edit-user" style="transform: scale(0.75);" data-id="<?=$user_id;?>" data-param="pepro_user_is_email_verified" data-nonce="<?php echo esc_atrr(wp_create_nonce($this->td));?>" type="checkbox" autocomplete="off" value="yes" <?=checked(true, $verfied, false);?> >
             </div>
           <?php
           $return = ob_get_contents();
@@ -2756,7 +2751,7 @@ if (!class_exists("PeproDevUPS_Login")){
           ?>
             <div class="pepro-reg-login-checkbox-wrapper">
               <?=$mobile;?>
-              <input class="pepro-reg-login-checkbox edit-user" style="transform: scale(0.75);" data-id="<?=$user_id;?>" data-param="pepro_user_is_sms_verified" data-nonce="<?=wp_create_nonce($this->td);?>" type="checkbox" autocomplete="off" value="yes" <?=checked(true, $verfied, false);?> >
+              <input class="pepro-reg-login-checkbox edit-user" style="transform: scale(0.75);" data-id="<?=$user_id;?>" data-param="pepro_user_is_sms_verified" data-nonce="<?=esc_atrr(wp_create_nonce($this->td));?>" type="checkbox" autocomplete="off" value="yes" <?=checked(true, $verfied, false);?> >
             </div>
           <?php
           $return = ob_get_contents();
@@ -3525,145 +3520,145 @@ if (!class_exists("PeproDevUPS_Login")){
               if(isset($_POST["dparam"]["redirectslug"]) && !empty($_POST["dparam"]["redirectslug"])) { update_option("whl_redirect_admin", $_POST["dparam"]["redirectslug"]);}
 
               $data    = "style";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", $_POST["dparam"][$data]); }
+              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
-              $data    = "force-style"; $slutter = "wp";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$slutter}", $_POST["dparam"][$data]); }
+              $data    = "force-style";
+              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-wp",     sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data    = "showlogo";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", $_POST["dparam"][$data]); }
+              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data    = "logo";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", $_POST["dparam"][$data]); }
+              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data    = "logo-id";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", $_POST["dparam"][$data]); }
+              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data    = "logo-w";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", $_POST["dparam"][$data]); }
+              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data    = "logo-h";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", $_POST["dparam"][$data]); }
+              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data    = "logo-title";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", $_POST["dparam"][$data]); }
+              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data    = "logo-href";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", $_POST["dparam"][$data]); }
+              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data    = "shake";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", $_POST["dparam"][$data]); }
+              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data    = "spb";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", $_POST["dparam"][$data]); }
+              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data    = "b2b";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", $_POST["dparam"][$data]); }
+              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data    = "privacy";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", $_POST["dparam"][$data]); }
+              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data    = "nav";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", $_POST["dparam"][$data]); }
+              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data    = "rmc";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", $_POST["dparam"][$data]); }
+              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data    = "msg";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", $_POST["dparam"][$data]); }
+              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data    = "error";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", $_POST["dparam"][$data]); }
+              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data    = "forcebg";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", $_POST["dparam"][$data]); }
+              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data    = "bgtype";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", $_POST["dparam"][$data]); }
+              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data    = "bg-solid";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", $_POST["dparam"][$data]); }
+              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data    = "bg-gradient1";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", $_POST["dparam"][$data]); }
+              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data    = "bg-gradient2";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", $_POST["dparam"][$data]); }
+              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data    = "bg-gradient3";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", $_POST["dparam"][$data]); }
+              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data    = "bg-img";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", $_POST["dparam"][$data]); }
+              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data    = "bg-img-id";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", $_POST["dparam"][$data]); }
+              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data    = "bg-video";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", $_POST["dparam"][$data]); }
+              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data    = "bg-video-id";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", $_POST["dparam"][$data]); }
+              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data    = "bg-video-autoplay";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", $_POST["dparam"][$data]); }
+              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data    = "bg-video-muted";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", $_POST["dparam"][$data]); }
+              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data    = "bg-video-loop";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", $_POST["dparam"][$data]); }
+              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data    = "link-separator";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", $_POST["dparam"][$data]); }
+              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data    = "html-header"; $slutter = "headerhtml";
-              if(isset($_POST["dparam"][$data])) { update_option("{$this->activation_status}-{$slutter}", $_POST["dparam"][$data]);}
+              if(isset($_POST["dparam"][$data])) { update_option("{$this->activation_status}-{$slutter}", sanitize_textarea_field($_POST["dparam"][$data]));}
 
               $data    = "html-footer"; $slutter = "footerhtml";
-              if(isset($_POST["dparam"][$data])) { update_option("{$this->activation_status}-{$slutter}", $_POST["dparam"][$data]);}
+              if(isset($_POST["dparam"][$data])) { update_option("{$this->activation_status}-{$slutter}", sanitize_textarea_field($_POST["dparam"][$data]));}
 
               $data = "customcss";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", $_POST["dparam"][$data]); }
+              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data = "show_password_field";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", ($_POST["dparam"][$data])); }
+              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data = "auto_login_after_reg";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", ($_POST["dparam"][$data])); }
+              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data = "verify_email";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", ($_POST["dparam"][$data])); }
+              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data = "verify_mobile";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", ($_POST["dparam"][$data])); }
+              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data = "use_mobile_as_username";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", ($_POST["dparam"][$data])); }
+              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data = "use_email_as_username";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", ($_POST["dparam"][$data])); }
+              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data = "hide_email_field";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", ($_POST["dparam"][$data])); }
+              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data = "hide_username_field";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", ($_POST["dparam"][$data])); }
+              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data = "reg_add_mobile";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", ($_POST["dparam"][$data])); }
+              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data = "reg_add_firstname";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", ($_POST["dparam"][$data])); }
+              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data = "reg_add_lastname";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", ($_POST["dparam"][$data])); }
+              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data = "reg_add_displayname";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", ($_POST["dparam"][$data])); }
+              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data = "login_mobile_otp";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", ($_POST["dparam"][$data])); }
+              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
 
               $data = "redirection_fileds";
               if(isset($_POST["dparam"][$data])){ update_option("pepro-profile-redirection-fileds", (wp_filter_nohtml_kses($_POST["dparam"][$data]))); }
@@ -3697,9 +3692,9 @@ if (!class_exists("PeproDevUPS_Login")){
 
               $data = "verification_email_template";
               if(isset($_POST["dparam"][$data])){
-                update_option("{$this->activation_status}-{$data}", $_POST["dparam"][$data]);
+                update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data]));
                 if (empty($_POST["dparam"][$data])){
-                  update_option("{$this->activation_status}-{$data}", $this->def_mail_body);
+                  update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($this->def_mail_body));
                 }
               }
 

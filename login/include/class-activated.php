@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/01 22:24:35
+# @Last modified time: 2021/09/02 12:54:02
 add_thickbox();
 wp_enqueue_style("wp-color-picker");
 wp_enqueue_script("wp-color-picker");
@@ -297,7 +297,7 @@ foreach ($styleFiles as $style) {
             <br>
             <button
               class="login-section-save btn btn-success btn-primary icn-btn btn-wide"
-              integrity="<?=wp_create_nonce('peprocorenounce')?>"
+              integrity="<?php echo esc_attr(wp_create_nonce('peprocorenounce')); ?>"
               wparam="loginregister" lparam="savelogin" dparam="" fn="">
               <i class='material-icons'>save</i> <?=_x("Save Settings", "login-section", $this->td);?>
             </button>
@@ -478,7 +478,7 @@ foreach ($styleFiles as $style) {
               <br>
               <button
                 class="login-section-save btn btn-success btn-primary icn-btn btn-wide"
-                integrity="<?=wp_create_nonce('peprocorenounce')?>"
+                integrity="<?php echo esc_attr(wp_create_nonce('peprocorenounce')); ?>"
                 wparam="loginregister" lparam="savelogin" dparam="" fn="">
                 <i class='material-icons'>save</i> <?=_x("Save Settings", "login-section", $this->td);?>
               </button>
@@ -540,7 +540,7 @@ foreach ($styleFiles as $style) {
             <br>
             <button
               class="login-section-save btn btn-success btn-primary icn-btn btn-wide"
-              integrity="<?=wp_create_nonce('peprocorenounce')?>"
+              integrity="<?php echo esc_attr(wp_create_nonce('peprocorenounce')); ?>"
               wparam="loginregister" lparam="savelogin" dparam="" fn="">
               <i class='material-icons'>save</i> <?=_x("Save Settings", "login-section", $this->td);?>
             </button>
@@ -769,7 +769,7 @@ foreach ($styleFiles as $style) {
             <br>
             <button
               class="login-section-save btn btn-success btn-primary icn-btn btn-wide"
-              integrity="<?=wp_create_nonce('peprocorenounce')?>"
+              integrity="<?php echo esc_attr(wp_create_nonce('peprocorenounce')); ?>"
               wparam="loginregister" lparam="savelogin" dparam="" fn="">
               <i class='material-icons'>save</i> <?=_x("Save Settings", "login-section", $this->td);?>
             </button>
@@ -811,7 +811,7 @@ foreach ($styleFiles as $style) {
             <br>
             <button
               class="login-section-save btn btn-success btn-primary icn-btn btn-wide"
-              integrity="<?=wp_create_nonce('peprocorenounce')?>"
+              integrity="<?php echo esc_attr(wp_create_nonce('peprocorenounce')); ?>"
               wparam="loginregister" lparam="savelogin" dparam="" fn="">
               <i class='material-icons'>save</i> <?=_x("Save Settings", "login-section", $this->td);?>
             </button>
@@ -878,7 +878,7 @@ foreach ($styleFiles as $style) {
             <br>
             <button
               class="login-section-save btn btn-success btn-primary icn-btn btn-wide"
-              integrity="<?=wp_create_nonce('peprocorenounce')?>"
+              integrity="<?php echo esc_attr(wp_create_nonce('peprocorenounce')); ?>"
               wparam="loginregister" lparam="savelogin" dparam="" fn="">
               <i class='material-icons'>save</i> <?=_x("Save Settings", "login-section", $this->td);?>
             </button>
@@ -905,7 +905,7 @@ foreach ($styleFiles as $style) {
             <br>
             <button
               class="login-section-save btn btn-success btn-primary icn-btn btn-wide"
-              integrity="<?=wp_create_nonce('peprocorenounce')?>"
+              integrity="<?php echo esc_attr(wp_create_nonce('peprocorenounce')); ?>"
               wparam="loginregister" lparam="savelogin" dparam="" fn="">
               <i class='material-icons'>save</i> <?=_x("Import (Overwrite) Settings", "login-section", $this->td);?>
             </button>

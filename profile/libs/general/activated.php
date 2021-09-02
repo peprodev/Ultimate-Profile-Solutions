@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/01 15:38:45
+# @Last modified time: 2021/09/02 12:55:09
 ?>
 <div class="row">
   <div class="col-lg-6 col-md-6">
@@ -182,7 +182,7 @@
           <button type="button" style="padding: 12px; display: inline-block; width: 49%;" id="profile-section-logo-new" data-title="<?=_x("Upload Theme Zip file","profile-section",$this->td);?>" class="btn btn-primary icn-btn"><i class='material-icons'>cloud_upload</i> <?=_x("Upload New Style","profile-section", $this->td)?></button>
           <button type="button" style="padding: 12px; display: inline-block; width: 49%;" id="profile-section-logo-del" class="btn btn-primary icn-btn"><i class='material-icons'>delete_forever</i> <?=_x("Delete Style","profile-section", $this->td)?></button>
         </div>
-        <button type="button" id="profile-section-save" class="login-section-save btn btn-primary icn-btn btn-wide" integrity="<?=wp_create_nonce('peprocorenounce')?>" wparam="profile" lparam="save_setting" dparam="" fn=""><i class='material-icons'>save</i> <?=_x("Save Settings","profile-section", $this->td);?></button>
+        <button type="button" id="profile-section-save" class="login-section-save btn btn-primary icn-btn btn-wide" integrity="<?=esc_atrr(wp_create_nonce('peprocorenounce'));?>" wparam="profile" lparam="save_setting" dparam="" fn=""><i class='material-icons'>save</i> <?=_x("Save Settings","profile-section", $this->td);?></button>
 
       </div>
     </div>

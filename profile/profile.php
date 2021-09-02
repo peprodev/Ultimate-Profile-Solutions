@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/01 22:38:03
+# @Last modified time: 2021/09/02 13:00:37
 if (!class_exists("PeproDevUPS_Profile")) {
     class PeproDevUPS_Profile
     {
@@ -1374,11 +1374,21 @@ if (!class_exists("PeproDevUPS_Profile")) {
                 				'email'         => __( 'Email address', $this->td ),
                 			)
                 		);
+                    $show_email_field   = "yes" == get_option("PeproDevUPS_Core___loginregister-_regdef_email");
+                    $is_email_field_req = "yes" == get_option("PeproDevUPS_Core___loginregister-_regdef_email-req");
+
+                    if (!$show_email_field || ($show_email_field && !$is_email_field_req)){
+                      unset($required_fields["email"]);
+                    }
+
                     foreach (json_decode(stripslashes($_POST["dparam"]),true) as $index) {
+
+                      $index["name"]  = sanitize_key($index["name"]);
+                      $index["value"] = sanitize_textarea_field($index["value"]);
 
                       foreach ($required_fields as $key => $value) {
                         if ( $index["name"] == $key && empty($index['value']) ){
-                          wp_send_json_error(array( "msg" => sprintf( __( '%s is a required field.', $this->td ), '<strong>' . esc_html( $value ) . '</strong>' )));
+                          wp_send_json_error(array("msg" => sprintf( __( '%s is a required field.', $this->td ), '<strong>' . esc_html( $value ) . '</strong>' )));
                           return;
                         }
                       }
@@ -1387,11 +1397,10 @@ if (!class_exists("PeproDevUPS_Profile")) {
                         global $PeproDevUPS_Login;
                         foreach ($PeproDevUPS_Login->get_register_fields() as $field) {
                           if ("yes" == $field["is-editable"]){
-                            update_user_meta( $user_id, $index["name"], sanitize_post(sanitize_text_field(trim($index['value']))));
+                            update_user_meta( $user_id, $index["name"], sanitize_text_field(trim($index['value'])));
                           }
                         }
                       }
-
                       switch ($index["name"]) {
                           case 'firstname':
                             $user->first_name = wp_unslash( $index['value'] );
@@ -1400,13 +1409,22 @@ if (!class_exists("PeproDevUPS_Profile")) {
                             $user->last_name = wp_unslash( $index['value'] );
                             break;
                           case 'email':
-                              $account_email = sanitize_email( $index['value'] );
-                              if ( ! is_email( $account_email ) ) {
+                              $account_email = sanitize_email($index['value']);
+                              if (!$is_email_field_req && (!empty($index['value']) && !filter_var($account_email, FILTER_VALIDATE_EMAIL)) ) {
                                 wp_send_json_error(array( "msg" => __('Please provide a valid email address.', $this->td)));
                                 return;
-                              } elseif ( email_exists( $account_email ) && $account_email !== $current_user->user_email ) {
+                              }
+                              if ($is_email_field_req && (empty($account_email) || !filter_var($account_email, FILTER_VALIDATE_EMAIL)) ) {
+                                wp_send_json_error(array( "msg" => __('Please provide a valid email address.', $this->td)));
+                                return;
+                              }
+                              if ((!empty($account_email) && email_exists( $account_email ) && $account_email !== $current_user->user_email )) {
                                 wp_send_json_error(array( "msg" => __('This email address is already registered.', $this->td)));
                                 return;
+                              }
+
+                              if (empty($account_email) || empty($index['value'])) {
+                                $account_email = $current_user->user_email;
                               }
                               $user->user_email = $account_email;
                               $retuen["user_email"] = $user->user_email;
@@ -1464,21 +1482,17 @@ if (!class_exists("PeproDevUPS_Profile")) {
                     do_action( "peprofile_user_details_edit_save_details", $_POST, $user_id);
 
                     wp_update_user( $user );
-
-                    add_filter("get_avatar_url", array( $this, "change_avatar_url"), 10, 3);
-                    $avatar_url = get_avatar_url($user_id, array("size" => "96", "default" => "$this->assets/images/icon/avatar-01.jpg",));
-                    remove_filter("get_avatar_url", array( $this, "change_avatar_url"), 10, 3);
-
+                    $avatar_url = get_avatar_url($user_id, array("size" => "96"));
                     $retuen["avatar"] = $avatar_url;
                     $upload_dir   = wp_upload_dir();
 
                     do_action( "peprofile_user_details_edited", $user_id);
 
                     wp_send_json_success( array(
-                      "dir" => json_decode(stripslashes($_POST["dparam"])),
+                      "fileds" => json_decode(stripslashes($_POST["dparam"])),
                       'msg' => __("Profile Updated successfully.", $this->td),
-                      "e"   => $retuen )
-                    );
+                      "e"   => $retuen
+                      ));
 
                     break;
                   default:
@@ -2656,9 +2670,9 @@ if (!class_exists("PeproDevUPS_Profile")) {
                             <td>{$userRange}</td>
                             <td>{$priority}</td>
                             <td class=\"td-actions\">
-                              <!-- button type=\"button\" title=\"".esc_attr_x("View", "action-title", $this->td) ."\" class=\"btn btn-primary btn-sm view_notif_modal\" data-id=\"{$notif->id}\" integrity=\"$integrity\" wparam=\"$this->setting_slug\" lparam=\"view_notif\"><i class=\"fa fa-eye\"></i></button -->
-                              <button type=\"button\" title=\"".esc_attr_x("Edit", "action-title", $this->td) ."\" class=\"btn btn-primary btn-sm edit_notif_modal\" data-id=\"{$notif->id}\" integrity=\"$integrity\" wparam=\"$this->setting_slug\" lparam=\"edit_notif\"><i class=\"fa fa-pencil\"></i></button>
-                              <button type=\"button\" title=\"".esc_attr_x("Remove", "action-title", $this->td) ."\" class=\"btn btn-primary btn-sm remove_notif_modal\" data-id=\"{$notif->id}\" integrity=\"$integrity\" wparam=\"$PeproDevUPS_Profile->setting_slug\" lparam=\"remove_notif\"><i class=\"fa fa-trash-alt\"></i></button>
+                              <!-- button type=\"button\" title=\"".esc_attr_x("View", "action-title", $this->td) ."\" class=\"btn btn-primary btn-sm view_notif_modal\" data-id=\"{$notif->id}\" integrity=\"".esc_attr($integrity)."\" wparam=\"".esc_attr($this->setting_slug)."\" lparam=\"view_notif\"><i class=\"fa fa-eye\"></i></button -->
+                              <button type=\"button\" title=\"".esc_attr_x("Edit", "action-title", $this->td) ."\" class=\"btn btn-primary btn-sm edit_notif_modal\" data-id=\"{$notif->id}\" integrity=\"".esc_attr($integrity)."\" wparam=\"".esc_attr($this->setting_slug)."\" lparam=\"edit_notif\"><i class=\"fa fa-pencil\"></i></button>
+                              <button type=\"button\" title=\"".esc_attr_x("Remove", "action-title", $this->td) ."\" class=\"btn btn-primary btn-sm remove_notif_modal\" data-id=\"{$notif->id}\" integrity=\"".esc_attr($integrity)."\" wparam=\"".esc_attr($PeproDevUPS_Profile->setting_slug)."\" lparam=\"remove_notif\"><i class=\"fa fa-trash-alt\"></i></button>
                             </td>
                           </tr>";
                 }
@@ -2758,9 +2772,9 @@ if (!class_exists("PeproDevUPS_Profile")) {
                             <td>". (empty($notif_access_str) ? __("— Public —",$this->td) : implode(" / ", $notif_access_str)) ."</td>
                             <td>{$notif->priority}</td>
                             <td class=\"td-actions\">
-                              <!-- button type=\"button\" title=\"".esc_attr_x("View","action-title",$this->td)."\" class=\"btn btn-primary btn-sm view_notif_modal\" data-id=\"{$notif->id}\" integrity=\"$integrity\" wparam=\"$this->setting_slug\" lparam=\"view_section\"><i class=\"fa fa-eye\"></i></button -->
-                              <button type=\"button\" title=\"".esc_attr_x("Edit","action-title",$this->td)."\" class=\"btn btn-primary btn-sm edit_notif_modal\" data-id=\"{$notif->id}\" integrity=\"$integrity\" wparam=\"$this->setting_slug\" lparam=\"edit_section\"><i class=\"fa fa-pencil\"></i></button>
-                              <button type=\"button\" title=\"".esc_attr_x("Remove","action-title",$this->td)."\" class=\"btn btn-primary btn-sm remove_notif_modal\" data-id=\"{$notif->id}\" integrity=\"$integrity\" wparam=\"$PeproDevUPS_Profile->setting_slug\" lparam=\"remove_section\"><i class=\"fa fa-trash-alt\"></i></button>
+                              <!-- button type=\"button\" title=\"".esc_attr_x("View","action-title",$this->td)."\" class=\"btn btn-primary btn-sm view_notif_modal\" data-id=\"{$notif->id}\" integrity=\"".esc_attr($integrity)."\" wparam=\"".esc_attr($this->setting_slug)."\" lparam=\"view_section\"><i class=\"fa fa-eye\"></i></button -->
+                              <button type=\"button\" title=\"".esc_attr_x("Edit","action-title",$this->td)."\" class=\"btn btn-primary btn-sm edit_notif_modal\" data-id=\"{$notif->id}\" integrity=\"".esc_attr($integrity)."\" wparam=\"".esc_attr($this->setting_slug)."\" lparam=\"edit_section\"><i class=\"fa fa-pencil\"></i></button>
+                              <button type=\"button\" title=\"".esc_attr_x("Remove","action-title",$this->td)."\" class=\"btn btn-primary btn-sm remove_notif_modal\" data-id=\"{$notif->id}\" integrity=\"".esc_attr($integrity)."\" wparam=\"".esc_attr($PeproDevUPS_Profile->setting_slug)."\" lparam=\"remove_section\"><i class=\"fa fa-trash-alt\"></i></button>
                             </td>
                           </tr>";
                 }
@@ -2823,7 +2837,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                       <td>".__("— Public —",$this->td)."</td>
                       <td class='priority'>{$notif["priority"]}</td>
                       <td class=\"td-actions\">
-                        <button type=\"button\" title=\"".esc_attr_x("Edit","action-title",$this->td)."\" class=\"btn btn-primary btn-sm edit_notif_builtin\" data-id=\"{$notif_id}\" integrity=\"$integrity\" wparam=\"$this->setting_slug\" lparam=\"edit_section_builtin\"><i class=\"fa fa-pencil\"></i></button>
+                        <button type=\"button\" title=\"".esc_attr_x("Edit","action-title",$this->td)."\" class=\"btn btn-primary btn-sm edit_notif_builtin\" data-id=\"{$notif_id}\" integrity=\"".esc_attr($integrity)."\" wparam=\"".esc_attr($this->setting_slug)."\" lparam=\"edit_section_builtin\"><i class=\"fa fa-pencil\"></i></button>
                         <button type=\"button\" disabled title=\"".esc_attr_x("Remove","action-title",$this->td)."\" class=\"btn btn-gray btn-sm disabled\"><i class=\"fa fa-trash-alt\"></i></button>
                       </td>
                     </tr>";

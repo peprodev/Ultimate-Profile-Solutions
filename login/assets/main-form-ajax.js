@@ -1,7 +1,7 @@
 /**
  * @Date:   2021/08/17 09:28:22
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/09/01 12:49:32
+ * @Last modified time: 2021/09/02 10:25:48
  * @License: GPLv2
  */
 jQuery.noConflict();
@@ -175,7 +175,6 @@ jQuery.noConflict();
           },
           success: function(e) {
             if (e.success === true) {
-              $(".popup-active").removeClass("popup-active");
               $(login_form).find("#login_error").removeClass("info success error").addClass("success").html(e.data.msg);
               if (e.data.is_otp){
                 $(login_form).find("#login_error").removeClass("info success error").addClass("info").html(e.data.msg);
@@ -195,7 +194,7 @@ jQuery.noConflict();
                 if (e.data.redirect_text){
                   obj_buttons = {
                     close: {
-                      btnClass: "btn-green",
+                      btnClass: "btn-default",
                       text: _pepro_dev.closeTxt,
                       keys: ["esc"],
                       action: function(res) {
@@ -212,6 +211,7 @@ jQuery.noConflict();
                         }else{
                           window.location.href = e.data.redirect;
                         }
+                        $(".popup-active").removeClass("popup-active");
                         jc.close();
                       }
                     },
@@ -231,6 +231,7 @@ jQuery.noConflict();
                         }else{
                           window.location.href = e.data.redirect;
                         }
+                        $(".popup-active").removeClass("popup-active");
                         jc.close();
                       }
                     },
@@ -355,7 +356,7 @@ jQuery.noConflict();
                 $submitBtn = $(login_form).find(".submit-wrap #submit[type=submit]");
                 obj_buttons = {
                   close: {
-                    btnClass: "btn-green",
+                    btnClass: "btn-default",
                     text: _pepro_dev.closeTxt,
                     keys: ["esc"],
                     action: function(res) {
@@ -608,7 +609,6 @@ jQuery.noConflict();
           success: function(e) {
             if (e.success === true) {
               $(login_form).find("#login_error").removeClass("info success error").addClass("success").html(e.data.msg);
-              $(".popup-active").removeClass("popup-active");
               if (e.data.is_otp){
                 $(login_form).find("#login_error").removeClass("info success error").addClass("info").html(e.data.msg);
                 $(login_form).find(".pepro-login-reg-field").addClass("hide");
@@ -628,6 +628,7 @@ jQuery.noConflict();
                       text: _pepro_dev.closeTxt,
                       keys: ["esc"],
                       action: function(res) {
+                        $(".popup-active").removeClass("popup-active");
                         jc.close();
                       }
                     },
@@ -641,6 +642,7 @@ jQuery.noConflict();
                         }else{
                           window.location.href = e.data.redirect;
                         }
+                        $(".popup-active").removeClass("popup-active");
                         jc.close();
                       }
                     },
@@ -660,6 +662,7 @@ jQuery.noConflict();
                         }else{
                           window.location.href = e.data.redirect;
                         }
+                        $(".popup-active").removeClass("popup-active");
                         jc.close();
                       }
                     },

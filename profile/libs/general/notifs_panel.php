@@ -1,29 +1,26 @@
 <?php
 
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/08/29 00:33:48
+# @Last modified time: 2021/09/02 12:36:49
 
 global $PeproDevUPS_Profile;
-$td = $PeproDevUPS_Profile->td;
-$rtl = is_rtl() ? "right" : "left";
-$page = isset($_GET['cpage']) ? abs((int) $_GET['cpage']) : 1;
-$srch = isset($_GET['s']) ? sanitize_text_field(esc_html(trim($_GET['s']))) : "";
-$integrity = wp_create_nonce('peprocorenounce');
-$trUrgent =_x("Urgent", "notifications-priority", "pepro");
-$trHigh =_x("High", "notifications-priority", "pepro");
-$trMedium =_x("Medium", "notifications-priority", "pepro");
-$trLow =_x("Low", "notifications-priority", "pepro");
-$trNormal =_x("Normal", "notifications-priority", "pepro");
-$trRed =_x("Red", "notif-panel", "pepro");
-$trOrange =_x("Orange", "notif-panel", "pepro");
-$trBlue =_x("Blue", "notif-panel", "pepro");
-$trGreen =_x("Green", "notif-panel", "pepro");
-$trDark =_x("Dark", "notif-panel", "pepro");
+$td          = $PeproDevUPS_Profile->td;
+$rtl         = is_rtl() ? "right" : "left";
+$page        = isset($_GET['cpage']) ? abs((int) sanitize_text_field($_GET['cpage'])) : 1;
+$srch        = isset($_GET['s']) ? sanitize_text_field(esc_html(trim($_GET['s']))) : "";
+$integrity   = wp_create_nonce('peprocorenounce');
+$trUrgent    = _x("Urgent", "notifications-priority", "pepro");
+$trHigh      = _x("High", "notifications-priority", "pepro");
+$trMedium    = _x("Medium", "notifications-priority", "pepro");
+$trLow       = _x("Low", "notifications-priority", "pepro");
+$trNormal    = _x("Normal", "notifications-priority", "pepro");
+$trRed       = _x("Red", "notif-panel", "pepro");
+$trOrange    = _x("Orange", "notif-panel", "pepro");
+$trBlue      = _x("Blue", "notif-panel", "pepro");
+$trGreen     = _x("Green", "notif-panel", "pepro");
+$trDark      = _x("Dark", "notif-panel", "pepro");
 $loadingRing = '<div class="lds-ring2"><div></div><div></div><div></div><div></div></div>';
-$otif404 = sprintf(
-    _x("No notification found! please consider %s.", "notif-panel", "pepro"),
-    '<a data-toggle="modal" id="add_notifpopup" data-target="#add_new_notifications" href="#">'._x("adding new one", "notif-panel", "pepro").'</a>'
-);
+$otif404     = sprintf( _x("No notification found! please consider %s.", "notif-panel", "pepro"), '<a data-toggle="modal" id="add_notifpopup" data-target="#add_new_notifications" href="#">'._x("adding new one", "notif-panel", "pepro").'</a>' );
 
 ?>
 
@@ -45,7 +42,7 @@ $otif404 = sprintf(
       <div class="card-body">
         <div id="toggle_search_container" class="hide">
           <div class="input-group search mb-3">
-            <input class="search-here form-control" type="text" id="search-here" placeholder="<?php echo _x("Search here and hit Enter ...", "notif-panel", "pepro");?>" style="padding-inline: 0.7rem;" integrity="<?php echo $integrity;?>" wparam="<?php echo $PeproDevUPS_Profile->setting_slug;?>" lparam="search" value="<?php echo $srch;?>" />
+            <input class="search-here form-control" type="text" id="search-here" placeholder="<?php echo _x("Search here and hit Enter ...", "notif-panel", "pepro");?>" style="padding-inline: 0.7rem;" integrity="<?php echo esc_attr( $integrity );?>" wparam="<?php echo esc_attr( $PeproDevUPS_Profile->setting_slug );?>" lparam="search" value="<?php echo $srch;?>" />
             <div class="input-group-append">
               <button class="btn btn-primary clear_search btn-sm" title="<?php echo _x("Clear search", "notif-panel", "pepro");?>"><i class="material-icons">close</i></button>
             </div>
@@ -68,22 +65,12 @@ $otif404 = sprintf(
                     <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
                     <tbody>
                     <?php
-                      $t = _x("Title", "notif-panel", "pepro");
+                      $t  = _x("Title", "notif-panel", "pepro");
                       $tt = sprintf(_x("Enter %s", "notif-panel", "pepro"), $t);
-                      $PeproDevUPS_Profile->add_notif_input(
-                          "is-required",
-                          "notifaddedit-title",
-                          $t,
-                          $tt
-                      );
-                      $t = _x("Content", "notif-panel", "pepro");
+                      $PeproDevUPS_Profile->add_notif_input( "is-required", "notifaddedit-title", $t, $tt );
+                      $t  = _x("Content", "notif-panel", "pepro");
                       $tt = sprintf(_x("Enter %s", "notif-panel", "pepro"), $t);
-                      $PeproDevUPS_Profile->add_notif_editor(
-                          "is-required",
-                          "notifaddedit-content",
-                          $t,
-                          $tt
-                      );
+                      $PeproDevUPS_Profile->add_notif_editor( "is-required", "notifaddedit-content", $t, $tt );
 
 
                       $title = _x("Icon", "notif-panel", "pepro");
@@ -173,20 +160,20 @@ $otif404 = sprintf(
                         </td>
                       </tr>";
 
-                      $t = _x("Action 1 Title", "notif-panel", "pepro");
+                      $t  = _x("Action 1 Title", "notif-panel", "pepro");
                       $tt = sprintf(_x("Enter %s", "notif-panel", "pepro"), $t);
                       $PeproDevUPS_Profile->add_notif_input("", "notifaddedit-act1", $t, $tt);
-                      $t = _x("Action 1 URL", "notif-panel", "pepro");
+                      $t  = _x("Action 1 URL", "notif-panel", "pepro");
                       $tt = sprintf(_x("Enter %s", "notif-panel", "pepro"), $t);
                       $PeproDevUPS_Profile->add_notif_input("", "notifaddedit-act1url", $t, $tt);
-                      $t = _x("Action 2 Title", "notif-panel", "pepro");
+                      $t  = _x("Action 2 Title", "notif-panel", "pepro");
                       $tt = sprintf(_x("Enter %s", "notif-panel", "pepro"), $t);
                       $PeproDevUPS_Profile->add_notif_input("", "notifaddedit-act2", $t, $tt);
-                      $t = _x("Action 2 URL", "notif-panel", "pepro");
+                      $t  = _x("Action 2 URL", "notif-panel", "pepro");
                       $tt = sprintf(_x("Enter %s", "notif-panel", "pepro"), $t);
                       $PeproDevUPS_Profile->add_notif_input("", "notifaddedit-act2url", $t, $tt);
                       $usersarray = "";
-                      $users = get_users(array( 'fields' => array( "id","display_name" ) ));
+                      $users      = get_users(array( 'fields' => array( "id","display_name" ) ));
                       foreach ($users as $user) {
                           $usersarray.= "<option value='$user->id'>$user->display_name (#$user->id)</option>";
                       }
@@ -243,16 +230,16 @@ $otif404 = sprintf(
                     type="button"
                     id="add_notif"
                     class="add_edit_save_notification btn btn-primary loadingRings"
-                    integrity="<?php echo $integrity;?>"
-                    wparam="<?php echo $PeproDevUPS_Profile->setting_slug;?>"
-                    lparam="add_new"><?php echo $loadingRing . _x("Add New", "notif-panel", "pepro");?></button>
+                    integrity="<?php echo esc_attr( $integrity );?>"
+                    wparam="<?php echo esc_attr( $PeproDevUPS_Profile->setting_slug );?>"
+                    lparam="add_new"><?php echo esc_html( $loadingRing ) . _x("Add New", "notif-panel", "pepro");?></button>
                   <button
                     type="button"
                     id="edit_notif"
                     class="add_edit_save_notification btn btn-primary loadingRings"
-                    integrity="<?php echo $integrity;?>"
-                    wparam="<?php echo $PeproDevUPS_Profile->setting_slug;?>"
-                    lparam="add_new"><?php echo $loadingRing . _x("Save Edits", "notif-panel", "pepro");?></button>
+                    integrity="<?php echo esc_attr( $integrity );?>"
+                    wparam="<?php echo esc_attr( $PeproDevUPS_Profile->setting_slug );?>"
+                    lparam="add_new"><?php echo esc_html( $loadingRing ) . _x("Save Edits", "notif-panel", "pepro");?></button>
                   <button type="button" id="clear_notif_form" class="btn btn-action"><?php echo _x("Clear form", "notif-panel", "pepro");?></button>
                   <button type="button" id='close_add_new_notifications' class="btn btn-action" data-dismiss="modal"><?php echo _x("Close", "notif-panel", "pepro");?></button>
                 </div>

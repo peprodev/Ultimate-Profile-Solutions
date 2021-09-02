@@ -1,10 +1,10 @@
 <?php
 
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/08/31 19:43:40
+# @Last modified time: 2021/09/02 14:30:52
 
 namespace PeproDev\PeproCore\RegLogin;
-class SendSMS
+class peproSendSMS
 {
     private $api_url;
     private $api_key;

@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/08/31 18:19:09
+# @Last modified time: 2021/09/02 13:12:49
 if (!class_exists("PeproDevUPS_Core")){
   class PeproDevUPS_Core
   {
@@ -228,7 +228,7 @@ if (!class_exists("PeproDevUPS_Core")){
     {
       // Core JS Files
       wp_enqueue_script('jquery');
-      wp_enqueue_script("popper",                     "{$this->assets_url}js/core/popper.min.js", array( 'jquery' ), current_time( "timestamp" ), true); //'1.16.0'
+      wp_enqueue_script("popper",                     "//unpkg.com/@popperjs/core@latest", array( 'jquery' ), current_time( "timestamp" ), true); //'1.16.0'
       wp_enqueue_script("bootstrap-material-design",  "{$this->assets_url}js/core/bootstrap-material-design.min.js", array( 'jquery' ), current_time( "timestamp" ), true); //'3.0.2'
       wp_enqueue_script("default-passive-events",     "{$this->assets_url}js/default-passive-events.js", array( 'jquery' ), current_time( "timestamp" ), true); //'1.0.10'
       // wp_enqueue_script("perfect-scrollbar", "{$this->assets_url}js/plugins/perfect-scrollbar.jquery.min.js", array( 'jquery' ), '1.0.2', true);
@@ -330,28 +330,33 @@ if (!class_exists("PeproDevUPS_Core")){
           switch ($_POST["lparam"]) {
             case 'savesettings':
 
-              isset($_POST["dparam"]["theme-scheme"]) && !empty($_POST["dparam"]["theme-scheme"]) AND
-                update_option( __CLASS__."___theme-scheme", $_POST["dparam"]["theme-scheme"]);
+              if (isset($_POST["dparam"]["theme-scheme"]) && !empty($_POST["dparam"]["theme-scheme"])){
+                update_option( __CLASS__."___theme-scheme", sanitize_text_field( $_POST["dparam"]["theme-scheme"] ));
+              }
 
-              isset($_POST["dparam"]["theme-color"]) && !empty($_POST["dparam"]["theme-color"]) AND
-                update_option( __CLASS__."___theme-color", $_POST["dparam"]["theme-color"]);
+              if (isset($_POST["dparam"]["theme-color"]) && !empty($_POST["dparam"]["theme-color"])){
+                update_option( __CLASS__."___theme-color", sanitize_text_field( $_POST["dparam"]["theme-color"] ));
+              }
 
-              isset($_POST["dparam"]["sidebar-image"]) && !empty($_POST["dparam"]["sidebar-image"]) AND
-                update_option( __CLASS__."___theme-sidebar-image", $_POST["dparam"]["sidebar-image"]);
+              if (isset($_POST["dparam"]["sidebar-image"]) && !empty($_POST["dparam"]["sidebar-image"])){
+                update_option( __CLASS__."___theme-sidebar-image", sanitize_text_field( $_POST["dparam"]["sidebar-image"] ));
+              }
 
-              isset($_POST["dparam"]["sidebar-image-custom"]) && !empty($_POST["dparam"]["sidebar-image-custom"]) AND
-                update_option( __CLASS__."___theme-sidebar-image-custom", $_POST["dparam"]["sidebar-image-custom"]);
+              if (isset($_POST["dparam"]["sidebar-image-custom"]) && !empty($_POST["dparam"]["sidebar-image-custom"])){
+                update_option( __CLASS__."___theme-sidebar-image-custom", sanitize_text_field( $_POST["dparam"]["sidebar-image-custom"] ));
+              }
 
-              isset($_POST["dparam"]["sidebar-image-custom-id"]) && !empty($_POST["dparam"]["sidebar-image-custom-id"]) AND
-                update_option( __CLASS__."___theme-sidebar-image-custom-id", $_POST["dparam"]["sidebar-image-custom-id"]);
+              if (isset($_POST["dparam"]["sidebar-image-custom-id"]) && !empty($_POST["dparam"]["sidebar-image-custom-id"])){
+                update_option( __CLASS__."___theme-sidebar-image-custom-id", sanitize_text_field( $_POST["dparam"]["sidebar-image-custom-id"] ));
+              }
 
-              isset($_POST["dparam"]["dashboard-title"]) && !empty($_POST["dparam"]["dashboard-title"]) AND
-                update_option( __CLASS__."___dashboard-title", $_POST["dparam"]["dashboard-title"]);
+              if (isset($_POST["dparam"]["dashboard-title"]) && !empty($_POST["dparam"]["dashboard-title"])){
+                update_option( __CLASS__."___dashboard-title", sanitize_text_field( $_POST["dparam"]["dashboard-title"] ));
+              }
 
               wp_send_json_success(
                 array(
                   "msg"=>__("Settings Successfully Saved.",$this->td),
-                  "dparam" => $_POST["dparam"]
                 )
               );
               break;
@@ -634,7 +639,7 @@ if (!class_exists("PeproDevUPS_Core")){
                   <button type="button"
                   id="pepc-settings-save"
                   class="btn btn-primary icn-btn btn-wide"
-                  integrity="<?=wp_create_nonce('peprocorenounce')?>"
+                  integrity="<?php echo esc_attr( wp_create_nonce('peprocorenounce') );?>"
                   wparam="peprocore"
                   lparam="savesettings"
                   style="text-align: start; max-width: 450px;"

@@ -1,9 +1,9 @@
 <?php
 
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/01 14:22:23
+# @Last modified time: 2021/09/02 11:36:02
 
-global $PeproDevUPS_Profile;
+global $PeproDevUPS_Profile, $PeproDevUPS_Login;
 $current_user = wp_get_current_user();
 $PeproDevUPS_Profile->change_dashboard_title(_x("Edit", "user-dashboard", $PeproDevUPS_Profile->td));
 ?>
@@ -38,37 +38,43 @@ $PeproDevUPS_Profile->change_dashboard_title(_x("Edit", "user-dashboard", $Pepro
                       </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6 col-md-12">
+                        <div class="col-lg-4 col-md-12">
                           <?php
                             $PeproDevUPS_Profile->add_input(_x("First Name", "edit-user", $PeproDevUPS_Profile->td), "firstname", "$current_user->user_firstname", "required ", "");
                           ?>
                         </div>
-                        <div class="col-lg-6 col-md-12">
+                        <div class="col-lg-4 col-md-12">
                           <?php
                             $PeproDevUPS_Profile->add_input(_x("Last Name", "edit-user", $PeproDevUPS_Profile->td), "lastname", "$current_user->user_lastname", "required ", "");
                           ?>
                         </div>
-                        <div class="col-lg-6 col-md-12">
+                        <div class="col-lg-4 col-md-12">
                           <?php
                             $PeproDevUPS_Profile->add_input(_x("Display Publicly as", "edit-user", $PeproDevUPS_Profile->td), "display_name", "$current_user->display_name", "required ", "");
                           ?>
-                        </div>
-                        <div class="col-lg-6 col-md-12">
-                          <?php
-                            $PeproDevUPS_Profile->add_input(_x("Email", "edit-user", $PeproDevUPS_Profile->td), "email", "$current_user->user_email", 'required autocomplete="off" ', "", "email");
-                            ?>
                         </div>
                     </div>
                     <?php
                       do_action("peprofile_user_details_edit_form_before_password");
                     ?>
                     <div class="row">
-                        <div class="col-lg-6 col-md-12">
+                          <?php
+                          if ($PeproDevUPS_Login->show_email_field){
+                            ?>
+                            <div class="col-lg-4 col-md-12">
+                              <?php
+                                $PeproDevUPS_Profile->add_input(_x("Email", "edit-user", $PeproDevUPS_Profile->td), "email", "$current_user->user_email", ($PeproDevUPS_Login->is_email_field_req ? "required" : "") . ' autocomplete="off" ', "", "email");
+                              ?>
+                            </div>
+                            <?php
+                          }
+                          ?>
+                        <div class="col-lg-4 col-md-12">
                           <?php
                             $PeproDevUPS_Profile->add_input(_x("Current Password", "edit-user", $PeproDevUPS_Profile->td), "password_current", "", 'autocomplete="off" ', "", "password");
                             ?>
                         </div>
-                        <div class="col-lg-6 col-md-12">
+                        <div class="col-lg-4 col-md-12">
                           <?php
                             $PeproDevUPS_Profile->add_input(_x("New Password", "edit-user", $PeproDevUPS_Profile->td), "password_new", "", 'autocomplete="off" ', "", "password");
                             ?>
