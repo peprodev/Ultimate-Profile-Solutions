@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/03 00:04:35
+# @Last modified time: 2021/09/03 00:28:55
 include_once plugin_dir_path(__FILE__) . "/include/class-login-permalink.php";
 
 if (!class_exists("PeproDevUPS_Login")){
@@ -2233,9 +2233,13 @@ if (!class_exists("PeproDevUPS_Login")){
           if ($this->login_mobile_otp){
             if ("user_mobile" != $field["meta_name"] && ("tel" == $field["type"] || "mobile" == $field["type"]) ){
               $field["attributes"] = " data-error-text=\"".esc_attr__("Enter mobile number with English numbers,<br>e.g. 09123456789", $this->td)."\" tabindex=$num " . $field["attributes"];
+              // array_push($login_fields, $field);
+            }elseif ("user_mobile" != $field["meta_name"]){
+              $field["attributes"] = "tabindex=$num " . $field["attributes"];
               array_push($login_fields, $field);
             }
-          }else{
+          }
+          else{
             if ("user_mobile" == $field["meta_name"] && ("tel" == $field["type"] || "mobile" == $field["type"]) ){
               $field["classes"]    = "mobile-verification force-ltr";
               $field["attributes"] = " data-error-text=\"".esc_attr__("Enter mobile number with English numbers,<br>e.g. 09123456789", $this->td)."\" tabindex=$num pattern=".esc_attr("^(\+98|0098|98|0)?9\d{9}$")." maxlength=14";
