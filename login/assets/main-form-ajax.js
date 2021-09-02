@@ -1,7 +1,7 @@
 /**
  * @Date:   2021/08/17 09:28:22
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/09/02 10:25:48
+ * @Last modified time: 2021/09/02 19:00:24
  * @License: GPLv2
  */
 jQuery.noConflict();
@@ -189,6 +189,7 @@ jQuery.noConflict();
               else{
                 $(".popup-active").removeClass("popup-active");
                 $(login_form).find(".pepro-login-reg-field").addClass("hide");
+                $(login_form).find(".pepro-form-links").hide();
                 $submitBtn = $(login_form).find(".submit-wrap #submit[type=submit]");
                 $(login_form).append(`<div class='pepro-login-reg-field'><button href='${e.data.logout_url}' class='ahrefbtn ${$submitBtn.attr("class")}' target='_self' type='submit'>${e.data.logout_txt}</button></div>`);
                 if (e.data.redirect_text){
@@ -617,7 +618,8 @@ jQuery.noConflict();
                 if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).select(); }, 100); }
               }
               else{
-                $(login_form).find(".pepro-login-reg-field, .pepro-form-links").addClass("hide");
+                $(login_form).find(".pepro-login-reg-field").addClass("hide");
+                $(login_form).find(".pepro-form-links").hide();
                 $submitBtn = $(login_form).find(".submit-wrap #submit[type=submit]");
                 $(login_form).append(`<div class='pepro-login-reg-field'><button href='${_pepro_dev.gohome_url}' class='ahrefbtn ${$submitBtn.attr("class")}' target='_self' type='submit'>${_pepro_dev.gohome_txt}</button></div>`);
                 $(login_form).append(`<div class='pepro-login-reg-field'><button href='${e.data.logout_url}' class='ahrefbtn ${$submitBtn.attr("class")}' target='_self' type='submit'>${e.data.logout_txt}</button></div>`);

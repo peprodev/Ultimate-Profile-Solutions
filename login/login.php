@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/02 16:21:27
+# @Last modified time: 2021/09/02 19:04:06
 include_once plugin_dir_path(__FILE__) . "/include/class-login-permalink.php";
 
 if (!class_exists("PeproDevUPS_Login")){
@@ -198,6 +198,8 @@ if (!class_exists("PeproDevUPS_Login")){
       $this->verify_email_fields         = $this->get_verify_email_fields();
       $this->verify_mobile_fields        = $this->get_verify_mobile_fields();
 
+
+
       if (is_user_logged_in()){
         if($this->verify_mobile){
           if ("yes" != get_the_author_meta("pepro_user_is_sms_verified", get_current_user_id())){
@@ -245,6 +247,7 @@ if (!class_exists("PeproDevUPS_Login")){
             $loggedin_text = str_replace("{{$match}}", $user_meta, $loggedin_text);
           }
         }
+        echo "<style>.peprodev-smart-btn.logged-in .avatar.photo { border-radius: 34px; float: right; margin-left: 0.4rem; } .peprodev-smart-btn.logged-in{ vertical-align: middle; line-height: 32px; }</style>";
         echo "<a id='$uniqid' href='$loggedin_href' class='peprodev-ultimate-profile-solution peprodev-smart-btn logged-in $loggedin_class'>{$avatar}$loggedin_text</a>";
       }
       else{
