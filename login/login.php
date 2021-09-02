@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/03 00:28:55
+# @Last modified time: 2021/09/03 00:31:44
 include_once plugin_dir_path(__FILE__) . "/include/class-login-permalink.php";
 
 if (!class_exists("PeproDevUPS_Login")){
@@ -3338,7 +3338,7 @@ if (!class_exists("PeproDevUPS_Login")){
             "{$this->activation_status}-verification_email_digits"      => "8",
             "{$this->activation_status}-verification_email_sender"      => "noreply",
             "{$this->activation_status}-verification_email_sender_name" => get_bloginfo('name','display'),
-            "{$this->activation_status}-verification_email_template"    => $this->def_mail_body,
+            "{$this->activation_status}-verification_email_template"    => esc_html( $this->def_mail_body ),
 
             "pepro-profile-redirection-fileds" => '[{"role": "everyone", "url": "{profile}", "text": "'.__("Profile",$this->td).'", "login": "yes", "register": "yes", "logout": "no" }]',
 
