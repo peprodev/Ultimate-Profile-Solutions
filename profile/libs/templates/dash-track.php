@@ -71,15 +71,15 @@ is_rtl() AND $PeproDevUPS_Profile->dashboard_add_css_inline('
   <div class="row">
     <div class="col-md-12">
         <div class="overview-wrap">
-            <h2 class="title-1"><?=_x("Order Tracking","user-dashboard",$PeproDevUPS_Profile->td);?></h2>
+            <h2 class="title-1"><?php echo _x("Order Tracking","user-dashboard",$PeproDevUPS_Profile->td);?></h2>
         </div>
     </div>
   </div>
   <div class="row m-t-25">
     <div class="col-12">
         <div class="card">
-            <div class="card-header"><?=_x("Order Tracking","user-dashboard",$PeproDevUPS_Profile->td);?>
-             <a class="back-to-top btn btn-warning btn-sm mr-2 ml-2" style="padding: 0 0.3rem; font-size: 0.8rem; display:none;" href="<?=$current_page;?>">
+            <div class="card-header"><?php echo _x("Order Tracking","user-dashboard",$PeproDevUPS_Profile->td);?>
+             <a class="back-to-top btn btn-warning btn-sm mr-2 ml-2" style="padding: 0 0.3rem; font-size: 0.8rem; display:none;" href="<?php echo $current_page;?>">
              <i class="zmdi zmdi-long-arrow-return"></i>
            </a>
             </div>
@@ -98,11 +98,11 @@ is_rtl() AND $PeproDevUPS_Profile->dashboard_add_css_inline('
     var divs = document.querySelectorAll(`.track_order .form-row>label`), i;for (i = 0; i < divs.length; ++i) {divs[i].className = 'mb-2 mt-4';}
     var divs = document.querySelectorAll(`.track_order button[name="track"]`), i;for (i = 0; i < divs.length; ++i) {divs[i].className = 'mt-4 btn btn-lg btn-info btn-block';}
     var divs = document.querySelectorAll(`.woocommerce-MyAccount-downloads-file`), i;for (i = 0; i < divs.length; ++i) {
-      divs[i].className = 'btn btn-outline-primary btn-sm btn-block <?=("text-left")?>';
+      divs[i].className = 'btn btn-outline-primary btn-sm btn-block <?php echo ("text-left")?>';
       divs[i].innerHTML = '<i class="fa fa-download mr-10 ml-10"></i> ' + divs[i].innerHTML;
     }
     var divs = document.querySelectorAll(`p.order-again>a.button`), i;for (i = 0; i < divs.length; ++i) {divs[i].className = 'btn btn-outline-primary btn-block active';}
-    var divs = document.querySelectorAll(`form.track_order`), i;for (i = 0; i < divs.length; ++i) {divs[i].action = '<?=$current_page;?>';}
+    var divs = document.querySelectorAll(`form.track_order`), i;for (i = 0; i < divs.length; ++i) {divs[i].action = '<?php echo $current_page;?>';}
     if (document.querySelector(`p.order-info`)){
       document.querySelector(`a.back-to-top`).style.display = "";
     }

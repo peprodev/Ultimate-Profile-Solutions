@@ -1,7 +1,7 @@
 <?php
 
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/08/29 00:00:35
+# @Last modified time: 2021/09/02 16:24:47
 
 global $PeproDevUPS_Profile, $wp;
 if (class_exists("WPSEO_Options")){
@@ -15,8 +15,8 @@ if (class_exists("WPSEO_Options")){
       <div class="header-mobile__bar">
           <div class="container-fluid">
               <div class="header-mobile-inner">
-                  <a class="logo" href="<?=home_url();?>" style="height: 100%;">
-                      <img style="max-height: 100%;" src="<?=!empty(get_option("{$PeproDevUPS_Profile->activation_status}-logo")) ? esc_url( get_option("{$PeproDevUPS_Profile->activation_status}-logo")) : $PeproDevUPS_Profile->icon ;?>" alt="<?=get_bloginfo("name");?>" />
+                  <a class="logo" href="<?php echo home_url();?>" style="height: 100%;">
+                      <img style="max-height: 100%;" src="<?php echo !empty(get_option("{$PeproDevUPS_Profile->activation_status}-logo")) ? esc_url( get_option("{$PeproDevUPS_Profile->activation_status}-logo")) : $PeproDevUPS_Profile->icon ;?>" alt="<?php echo get_bloginfo("name");?>" />
                   </a>
                   <button class="hamburger hamburger--slider" type="button">
                       <span class="hamburger-box">
@@ -39,8 +39,8 @@ if (class_exists("WPSEO_Options")){
   <!-- MENU SIDEBAR-->
   <aside class="menu-sidebar d-none d-lg-block">
       <div class="logo">
-          <a href="<?=home_url();?>" style="position: relative;">
-              <img style="margin: auto;" src="<?=!empty(get_option("{$PeproDevUPS_Profile->activation_status}-logo")) ? esc_url( get_option("{$PeproDevUPS_Profile->activation_status}-logo")) : $PeproDevUPS_Profile->icon;?>" alt="<?=get_bloginfo("name");?>" />
+          <a href="<?php echo home_url();?>" style="position: relative;">
+              <img style="margin: auto;" src="<?php echo !empty(get_option("{$PeproDevUPS_Profile->activation_status}-logo")) ? esc_url( get_option("{$PeproDevUPS_Profile->activation_status}-logo")) : $PeproDevUPS_Profile->icon;?>" alt="<?php echo get_bloginfo("name");?>" />
           </a>
       </div>
       <div class="menu-sidebar__content js-scrollbar1">
@@ -85,7 +85,7 @@ if (class_exists("WPSEO_Options")){
             <?php
               $allowed_slugs_whitelist = array_unique(apply_filters( "peprofile_dashboard_slugs", array("edit","me")));
 
-              $current_requested_slug = isset($_GET['section']) ? trim($_GET['section']) : "";
+              $current_requested_slug = isset($_GET['section']) ? sanitize_text_field(trim($_GET['section'])) : "";
 
               if (empty($current_requested_slug) || !in_array($current_requested_slug, $allowed_slugs_whitelist)){
                 $PeproDevUPS_Profile->peprofile_get_template_part("dash","home");

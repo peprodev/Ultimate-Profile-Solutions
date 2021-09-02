@@ -16,10 +16,10 @@
       <div class="card-body table-responsive">
         <table class="table pepcappearance table-striped">
           <thead>
-            <th><?=__("Shortcode",$this->td);?></th>
-            <th><?=__("Description",$this->td);?></th>
-            <th><?=__("Syntax",$this->td);?></th>
-            <th><?=__("Sample",$this->td);?></th>
+            <th><?php echo __("Shortcode",$this->td);?></th>
+            <th><?php echo __("Description",$this->td);?></th>
+            <th><?php echo __("Syntax",$this->td);?></th>
+            <th><?php echo __("Sample",$this->td);?></th>
           </thead>
           <tbody>
             <?php

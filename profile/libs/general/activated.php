@@ -6,8 +6,8 @@
   <div class="col-lg-6 col-md-6">
     <div class="card">
       <div class="card-header card-header-primary">
-        <h4 class="card-title"><?=_x("Profile Dashboard","profile-section",$this->td);?></h4>
-        <p class="card-category"><?=_x("You can control profile front-end style from here.","profile-section",$this->td);?></p>
+        <h4 class="card-title"><?php echo _x("Profile Dashboard","profile-section",$this->td);?></h4>
+        <p class="card-category"><?php echo _x("You can control profile front-end style from here.","profile-section",$this->td);?></p>
       </div>
 
       <div class="card-body table-responsive">
@@ -18,22 +18,22 @@
 
               <!-- Profile Logo Image -->
               <tr>
-                <td><?=_x("Profile Logo Image","profile-section", $this->td);?></td>
+                <td><?php echo _x("Profile Logo Image","profile-section", $this->td);?></td>
                 <td>
-                  <input type="hidden" data-id="<?=get_option("{$this->activation_status}-logo-id","");?>" id="profile-section-logo" value="<?=get_option("{$this->activation_status}-logo", $this->icon);?>" class="form-control primary" placeholder="<?=_x("Logo URL","profile-section",$this->td);?>" />
+                  <input type="hidden" data-id="<?php echo get_option("{$this->activation_status}-logo-id","");?>" id="profile-section-logo" value="<?php echo get_option("{$this->activation_status}-logo", $this->icon);?>" class="form-control primary" placeholder="<?php echo _x("Logo URL","profile-section",$this->td);?>" />
                   <div class="flex flex-sb">
-                    <img style="border-radius: 5px;" src="<?=get_option("{$this->activation_status}-logo","");?>" id="profile-img" width="86px"/>
+                    <img style="border-radius: 5px;" src="<?php echo get_option("{$this->activation_status}-logo","");?>" id="profile-img" width="86px"/>
                     <button type="button" id="selectlogoimg" style="padding: 12px; display: block;" class="btn btn-primary mediapicker icn-btn"
                     data-ref="#profile-section-logo"
                     data-ref4="#profile-img"
-                    data-title="<?=_x("Select Custom Image","profile-section", $this->td);?>"
-                    ><i class='material-icons'>cloud_upload</i> <?=_x("Select or Upload Custom Image","profile-section", $this->td);?></button>
+                    data-title="<?php echo _x("Select Custom Image","profile-section", $this->td);?>"
+                    ><i class='material-icons'>cloud_upload</i> <?php echo _x("Select or Upload Custom Image","profile-section", $this->td);?></button>
                   </div>
                 </td>
               </tr>
               <!-- Dashboard page -->
               <tr>
-                <td><?=_x("Dashboard page","profile-section", $this->td);?></td>
+                <td><?php echo _x("Dashboard page","profile-section", $this->td);?></td>
                 <td>
                   <?php
                     $dashpage = get_option("{$this->activation_status}-profile-dash-page","");
@@ -62,93 +62,93 @@
                 </td>
 
               </tr>
-                <?="<div class='alert dashpagetemplatenotice alert-inverse'>$notify_user_of_page_template</div>";?>
+                <?php echo "<div class='alert dashpagetemplatenotice alert-inverse'>$notify_user_of_page_template</div>";?>
                 <script type="text/javascript">
                   (function($) {
-                    $(".dashpagetemplatenotice").<?=$show_alert?"show":"hide";?>();
+                    $(".dashpagetemplatenotice").<?php echo $show_alert?"show":"hide";?>();
                   })(jQuery);
                 </script>
               <!-- Show Welcome message -->
               <tr>
-                <td><?=_x("Show Welcome message","profile-section", $this->td);?></td>
+                <td><?php echo _x("Show Welcome message","profile-section", $this->td);?></td>
                 <td>
                   <a class='btncheckbox'
-                  data-text-on='<?=_x("Yes, Show it","profile-section", $this->td);?>'
-                  data-text-off='<?=_x("No, Hide it","profile-section", $this->td);?>'
+                  data-text-on='<?php echo _x("Yes, Show it","profile-section", $this->td);?>'
+                  data-text-off='<?php echo _x("No, Hide it","profile-section", $this->td);?>'
                   data-on='check_box'
                   data-off='check_box_outline_blank'
-                  data-checked='<?=get_option("{$this->activation_status}-showwelcome","true") === "true" ? "true" : "false";?>' id="showwelcome"></a>
+                  data-checked='<?php echo get_option("{$this->activation_status}-showwelcome","true") === "true" ? "true" : "false";?>' id="showwelcome"></a>
                 </td>
               </tr>
               <tr>
-                <td><?=_x("Use Header Hook on Profile Dashboard page","profile-section", $this->td);?></td>
+                <td><?php echo _x("Use Header Hook on Profile Dashboard page","profile-section", $this->td);?></td>
                 <td>
                   <a class='btncheckbox'
-                  data-text-on='<?=_x("Yes, Fire this hook","profile-section", $this->td);?>'
-                  data-text-off='<?=_x("No, Do NOT use it","profile-section", $this->td);?>'
+                  data-text-on='<?php echo _x("Yes, Fire this hook","profile-section", $this->td);?>'
+                  data-text-off='<?php echo _x("No, Do NOT use it","profile-section", $this->td);?>'
                   data-on='check_box'
                   data-off='check_box_outline_blank'
-                  data-checked='<?=get_option("{$this->activation_status}-headerhook","true") === "true" ? "true" : "false";?>' id="headerhook"></a>
+                  data-checked='<?php echo get_option("{$this->activation_status}-headerhook","true") === "true" ? "true" : "false";?>' id="headerhook"></a>
                 </td>
               </tr>
               <tr>
-                <td><?=_x("Use Footer Hook on Profile Dashboard page","profile-section", $this->td);?></td>
+                <td><?php echo _x("Use Footer Hook on Profile Dashboard page","profile-section", $this->td);?></td>
                 <td>
                   <a class='btncheckbox'
-                  data-text-on='<?=_x("Yes, Fire this hook","profile-section", $this->td);?>'
-                  data-text-off='<?=_x("No, Do NOT use it","profile-section", $this->td);?>'
+                  data-text-on='<?php echo _x("Yes, Fire this hook","profile-section", $this->td);?>'
+                  data-text-off='<?php echo _x("No, Do NOT use it","profile-section", $this->td);?>'
                   data-on='check_box'
                   data-off='check_box_outline_blank'
-                  data-checked='<?=get_option("{$this->activation_status}-footerhook","true") === "true" ? "true" : "false";?>' id="footerhook"></a>
+                  data-checked='<?php echo get_option("{$this->activation_status}-footerhook","true") === "true" ? "true" : "false";?>' id="footerhook"></a>
                 </td>
               </tr>
               <?php if ($this->_wc_activated()){ ?>
                 <!-- Show WooCommerce Stats -->
                 <tr>
-                  <td><?=_x("Show WooCommerce Stats","profile-section", $this->td);?></td>
+                  <td><?php echo _x("Show WooCommerce Stats","profile-section", $this->td);?></td>
                   <td>
                     <a class='btncheckbox'
-                    data-text-on='<?=_x("Yes, Show it","profile-section", $this->td);?>'
-                    data-text-off='<?=_x("No, Hide it","profile-section", $this->td);?>'
+                    data-text-on='<?php echo _x("Yes, Show it","profile-section", $this->td);?>'
+                    data-text-off='<?php echo _x("No, Hide it","profile-section", $this->td);?>'
                     data-on='check_box'
                     data-off='check_box_outline_blank'
-                    data-checked='<?=get_option("{$this->activation_status}-woocommercestats","true") === "true" ? "true" : "false";?>' id="woocommercestats"></a>
+                    data-checked='<?php echo get_option("{$this->activation_status}-woocommercestats","true") === "true" ? "true" : "false";?>' id="woocommercestats"></a>
                   </td>
                 </tr>
                 <!-- Show WooCommerce Orders -->
                 <tr>
-                  <td><?=_x("Show WooCommerce Orders","profile-section", $this->td);?></td>
+                  <td><?php echo _x("Show WooCommerce Orders","profile-section", $this->td);?></td>
                   <td>
                     <a class='btncheckbox'
-                    data-text-on='<?=_x("Yes, Show it","profile-section", $this->td);?>'
-                    data-text-off='<?=_x("No, Hide it","profile-section", $this->td);?>'
+                    data-text-on='<?php echo _x("Yes, Show it","profile-section", $this->td);?>'
+                    data-text-off='<?php echo _x("No, Hide it","profile-section", $this->td);?>'
                     data-on='check_box'
                     data-off='check_box_outline_blank'
-                    data-checked='<?=get_option("{$this->activation_status}-woocommerceorders","true") === "true" ? "true" : "false";?>' id="woocommerceorders"></a>
+                    data-checked='<?php echo get_option("{$this->activation_status}-woocommerceorders","true") === "true" ? "true" : "false";?>' id="woocommerceorders"></a>
                   </td>
                 </tr>
               <?php } ?>
               <!-- Show Custom Content -->
               <tr>
-                <td><?=_x("Show Custom Content","profile-section", $this->td);?></td>
+                <td><?php echo _x("Show Custom Content","profile-section", $this->td);?></td>
                 <td>
                   <a class='btncheckbox'
-                  data-text-on='<?=_x("Yes, Show it","profile-section", $this->td);?>'
-                  data-text-off='<?=_x("No, Hide it","profile-section", $this->td);?>'
+                  data-text-on='<?php echo _x("Yes, Show it","profile-section", $this->td);?>'
+                  data-text-off='<?php echo _x("No, Hide it","profile-section", $this->td);?>'
                   data-on='check_box'
                   data-off='check_box_outline_blank'
                   data-togglel='[showoncustomcontent]'
-                  data-checked='<?=get_option("{$this->activation_status}-showcustomtext","true") === "true" ? "true" : "false";?>' id="showcustomtext"></a>
+                  data-checked='<?php echo get_option("{$this->activation_status}-showcustomtext","true") === "true" ? "true" : "false";?>' id="showcustomtext"></a>
                 </td>
               </tr>
               <tr showoncustomcontent>
-                <td><?=_x("Content Position","profile-section", $this->td);?></td>
+                <td><?php echo _x("Content Position","profile-section", $this->td);?></td>
                 <td>
                   <select id="customposition">
-                    <?="<option " . selected(get_option("{$this->activation_status}-customposition","p2"),"p1",false)." value='p1'>" . _x("Before Welcome message","profile-section",$this->td) . "</option>";?>
-                    <?="<option " . selected(get_option("{$this->activation_status}-customposition","p2"),"p2",false)." value='p2'>" . _x("After Welcome message","profile-section",$this->td) . "</option>";?>
-                    <?="<option " . selected(get_option("{$this->activation_status}-customposition","p2"),"p3",false)." value='p3'>" . _x("After WooCommerce Stats","profile-section",$this->td) . "</option>";?>
-                    <?="<option " . selected(get_option("{$this->activation_status}-customposition","p2"),"p4",false)." value='p4'>" . _x("After WooCommerce Orders","profile-section",$this->td) . "</option>";?>
+                    <?php echo "<option " . selected(get_option("{$this->activation_status}-customposition","p2"),"p1",false)." value='p1'>" . _x("Before Welcome message","profile-section",$this->td) . "</option>";?>
+                    <?php echo "<option " . selected(get_option("{$this->activation_status}-customposition","p2"),"p2",false)." value='p2'>" . _x("After Welcome message","profile-section",$this->td) . "</option>";?>
+                    <?php echo "<option " . selected(get_option("{$this->activation_status}-customposition","p2"),"p3",false)." value='p3'>" . _x("After WooCommerce Stats","profile-section",$this->td) . "</option>";?>
+                    <?php echo "<option " . selected(get_option("{$this->activation_status}-customposition","p2"),"p4",false)." value='p4'>" . _x("After WooCommerce Orders","profile-section",$this->td) . "</option>";?>
                   </select>
                 </td>
               </tr>
@@ -179,10 +179,10 @@
             </tbody>
         </table>
         <div class="flex flex-sb hide">
-          <button type="button" style="padding: 12px; display: inline-block; width: 49%;" id="profile-section-logo-new" data-title="<?=_x("Upload Theme Zip file","profile-section",$this->td);?>" class="btn btn-primary icn-btn"><i class='material-icons'>cloud_upload</i> <?=_x("Upload New Style","profile-section", $this->td)?></button>
-          <button type="button" style="padding: 12px; display: inline-block; width: 49%;" id="profile-section-logo-del" class="btn btn-primary icn-btn"><i class='material-icons'>delete_forever</i> <?=_x("Delete Style","profile-section", $this->td)?></button>
+          <button type="button" style="padding: 12px; display: inline-block; width: 49%;" id="profile-section-logo-new" data-title="<?php echo _x("Upload Theme Zip file","profile-section",$this->td);?>" class="btn btn-primary icn-btn"><i class='material-icons'>cloud_upload</i> <?php echo _x("Upload New Style","profile-section", $this->td)?></button>
+          <button type="button" style="padding: 12px; display: inline-block; width: 49%;" id="profile-section-logo-del" class="btn btn-primary icn-btn"><i class='material-icons'>delete_forever</i> <?php echo _x("Delete Style","profile-section", $this->td)?></button>
         </div>
-        <button type="button" id="profile-section-save" class="login-section-save btn btn-primary icn-btn btn-wide" integrity="<?=esc_atrr(wp_create_nonce('peprocorenounce'));?>" wparam="profile" lparam="save_setting" dparam="" fn=""><i class='material-icons'>save</i> <?=_x("Save Settings","profile-section", $this->td);?></button>
+        <button type="button" id="profile-section-save" class="login-section-save btn btn-primary icn-btn btn-wide" integrity="<?php echo esc_atrr(wp_create_nonce('peprocorenounce'));?>" wparam="profile" lparam="save_setting" dparam="" fn=""><i class='material-icons'>save</i> <?php echo _x("Save Settings","profile-section", $this->td);?></button>
 
       </div>
     </div>
@@ -200,16 +200,16 @@
             <tbody>
               <tr>
                 <td colspan="2">
-                  <?=_x("Global CSS","profile-section", $this->td);?>
-                  <textarea name="<?="{$this->activation_status}-css";?>" class="codeditor" id="csseditor" spellcheck="false" dir="ltr" rows="8" cols="80"><?=wp_unslash(get_option("{$this->activation_status}-css",""));?></textarea>
-                  <textarea name="<?="{$this->activation_status}-css";?>" style="display:none !important;" class="codeditor" id="css" spellcheck="false" dir="ltr" rows="8" cols="80"><?=wp_unslash(get_option("{$this->activation_status}-css",""));?></textarea>
+                  <?php echo _x("Global CSS","profile-section", $this->td);?>
+                  <textarea name="<?php echo "{$this->activation_status}-css";?>" class="codeditor" id="csseditor" spellcheck="false" dir="ltr" rows="8" cols="80"><?php echo wp_unslash(get_option("{$this->activation_status}-css",""));?></textarea>
+                  <textarea name="<?php echo "{$this->activation_status}-css";?>" style="display:none !important;" class="codeditor" id="css" spellcheck="false" dir="ltr" rows="8" cols="80"><?php echo wp_unslash(get_option("{$this->activation_status}-css",""));?></textarea>
                 </td>
               </tr>
               <tr>
                 <td colspan="2">
-                  <?=_x("Global JS","profile-section", $this->td);?>
-                  <textarea name="<?="{$this->activation_status}-css";?>" class="codeditor" id="jseditor" spellcheck="false" dir="ltr" rows="8" cols="80"><?=wp_unslash(get_option("{$this->activation_status}-js",""));?></textarea>
-                  <textarea name="<?="{$this->activation_status}-js";?>" style="display:none !important;" class="codeditor" id="js" spellcheck="false" dir="ltr" rows="8" cols="80"><?=wp_unslash(get_option("{$this->activation_status}-js",""));?></textarea>
+                  <?php echo _x("Global JS","profile-section", $this->td);?>
+                  <textarea name="<?php echo "{$this->activation_status}-css";?>" class="codeditor" id="jseditor" spellcheck="false" dir="ltr" rows="8" cols="80"><?php echo wp_unslash(get_option("{$this->activation_status}-js",""));?></textarea>
+                  <textarea name="<?php echo "{$this->activation_status}-js";?>" style="display:none !important;" class="codeditor" id="js" spellcheck="false" dir="ltr" rows="8" cols="80"><?php echo wp_unslash(get_option("{$this->activation_status}-js",""));?></textarea>
                 </td>
               </tr>
           </tbody>

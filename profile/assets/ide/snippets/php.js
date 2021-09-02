@@ -358,8 +358,8 @@ snippet <?\n\
 snippet <?e\n\
 	<?php echo ${1} ?>\n\
 # this one is for php5.4\n\
-snippet <?=\n\
-	<?=${1}?>\n\
+snippet <?php echo \n\
+	<?php echo ${1}?>\n\
 snippet ifil\n\
 	<?php if (${1:/* condition */}): ?>\n\
 		${2:<!-- code... -->}\n\

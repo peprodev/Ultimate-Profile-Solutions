@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/02 13:00:37
+# @Last modified time: 2021/09/02 16:32:22
 if (!class_exists("PeproDevUPS_Profile")) {
     class PeproDevUPS_Profile
     {
@@ -510,53 +510,53 @@ if (!class_exists("PeproDevUPS_Profile")) {
           $current_screen = get_current_screen();
           if ( $current_screen && 'toplevel_page_pepro' === $current_screen->base ){
             ?>
-            <button href="#" class="button <?=$this->td;?>_shortcodehandler peprofile-open-box">
+            <button href="#" class="button <?php echo $this->td;?>_shortcodehandler peprofile-open-box">
               <i class='fa fa-external-link'></i>
-              <?=$this->title;?>
+              <?php echo $this->title;?>
             </button>
             <div class="popup-shortcode-select hide">
-              <button href="#" class="button <?=$this->td;?>_shortcodehandler _shortcodehandleruser">
+              <button href="#" class="button <?php echo $this->td;?>_shortcodehandler _shortcodehandleruser">
                 <i class='fa fa-'></i>
-                <?=__("User info",$this->td);?>
+                <?php echo __("User info",$this->td);?>
               </button>
-              <button href="#" class="button <?=$this->td;?>_shortcodehandler _shortcodehandlerwhitecard">
+              <button href="#" class="button <?php echo $this->td;?>_shortcodehandler _shortcodehandlerwhitecard">
                 <i class='fa fa-'></i>
-                <?=__("White Card",$this->td);?>
+                <?php echo __("White Card",$this->td);?>
               </button>
-              <button href="#" class="button <?=$this->td;?>_shortcodehandler _shortcodehandlercard">
+              <button href="#" class="button <?php echo $this->td;?>_shortcodehandler _shortcodehandlercard">
                 <i class='fa fa-'></i>
-                <?=__("Grey Card",$this->td);?>
+                <?php echo __("Grey Card",$this->td);?>
               </button>
-              <button href="#" class="button <?=$this->td;?>_shortcodehandler _shortcodehandlerbigcard">
+              <button href="#" class="button <?php echo $this->td;?>_shortcodehandler _shortcodehandlerbigcard">
                 <i class='fa fa-'></i>
-                <?=__("Colored Card",$this->td);?>
+                <?php echo __("Colored Card",$this->td);?>
               </button>
-              <button href="#" class="button <?=$this->td;?>_shortcodehandler _shortcodehandlerblackcard">
+              <button href="#" class="button <?php echo $this->td;?>_shortcodehandler _shortcodehandlerblackcard">
                 <i class='fa fa-'></i>
-                <?=__("Black Card",$this->td);?>
+                <?php echo __("Black Card",$this->td);?>
               </button>
               <?php
               if ($this->_wc_activated()) {
                 ?>
-                  <button href="#" class="button <?=$this->td;?>_shortcodehandler _shortcodehandlerstats">
+                  <button href="#" class="button <?php echo $this->td;?>_shortcodehandler _shortcodehandlerstats">
                     <i class='fa fa-'></i>
-                    <?=__("WC Stats",$this->td);?>
+                    <?php echo __("WC Stats",$this->td);?>
                   </button>
-                  <button href="#" class="button <?=$this->td;?>_shortcodehandler _shortcodehandlerorders">
+                  <button href="#" class="button <?php echo $this->td;?>_shortcodehandler _shortcodehandlerorders">
                     <i class='fa fa-'></i>
-                    <?=__("WC Orders",$this->td);?>
+                    <?php echo __("WC Orders",$this->td);?>
                   </button>
-                  <button href="#" class="button <?=$this->td;?>_shortcodehandler _shortcodehandlerdownloads">
+                  <button href="#" class="button <?php echo $this->td;?>_shortcodehandler _shortcodehandlerdownloads">
                     <i class='fa fa-'></i>
-                    <?=__("WC Downloads",$this->td);?>
+                    <?php echo __("WC Downloads",$this->td);?>
                   </button>
                 <?php
               }
               if ($this->_ld_activated()) {
                 ?>
-                <button href="#" class="button <?=$this->td;?>_shortcodehandler _shortcodehandlerldenrolled">
+                <button href="#" class="button <?php echo $this->td;?>_shortcodehandler _shortcodehandlerldenrolled">
                     <i class='fa fa-'></i>
-                    <?=__("Learndash Enrolled Courses",$this->td);?>
+                    <?php echo __("Learndash Enrolled Courses",$this->td);?>
                 </button>
                 <?php
               }
@@ -617,7 +617,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                 ?>
                 <div class="container-fluid">
                   <div class="row">
-                    <div class="col-md-12"><div class="overview-wrap"><h2 class="title-2"><?=$catName?></h2></div></div>
+                    <div class="col-md-12"><div class="overview-wrap"><h2 class="title-2"><?php echo $catName?></h2></div></div>
                   </div>
                   <div class="row m-t-25">
                     <div class="col-lg-12">
@@ -754,7 +754,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
               ?>
               <div class="container-fluid">
                 <div class="row">
-                  <div class="col-md-12"><div class="overview-wrap"><h2 class="title-2"><?=$catName?></h2></div></div>
+                  <div class="col-md-12"><div class="overview-wrap"><h2 class="title-2"><?php echo $catName?></h2></div></div>
                 </div>
                 <div class="row m-t-25">
                   <div class="col-lg-12">
@@ -895,7 +895,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
           ob_start();
           ?>
             <div class="row <?php echo esc_attr( $class ); ?>">
-              <div class="<?=(!class_exists('Woo_Wallet_Wallet')) ? "col-sm-6 col-lg-4" : "col-sm-6 col-lg-3";?>">
+              <div class="<?php echo (!class_exists('Woo_Wallet_Wallet')) ? "col-sm-6 col-lg-4" : "col-sm-6 col-lg-3";?>">
                   <div class="overview-item overview-item--c3">
                       <div class="overview__inner">
                           <div class="overview-box clearfix">
@@ -903,8 +903,8 @@ if (!class_exists("PeproDevUPS_Profile")) {
                                   <i class="fa fa-box-open"></i>
                               </div>
                               <div class="text">
-                                <h2><?=$this->get_customer_total_orders_by_status("wc-on-hold");?></h2>
-                                <span><?=__("on-hold orders",$this->td);?></span>
+                                <h2><?php echo $this->get_customer_total_orders_by_status("wc-on-hold");?></h2>
+                                <span><?php echo __("on-hold orders",$this->td);?></span>
                               </div>
                           </div>
                           <div class="overview-chart">
@@ -912,7 +912,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                       </div>
                   </div>
               </div>
-              <div class="<?=(!class_exists('Woo_Wallet_Wallet')) ? "col-sm-6 col-lg-4" : "col-sm-6 col-lg-3";?>">
+              <div class="<?php echo (!class_exists('Woo_Wallet_Wallet')) ? "col-sm-6 col-lg-4" : "col-sm-6 col-lg-3";?>">
                   <div class="overview-item overview-item--c1">
                       <div class="overview__inner">
                           <div class="overview-box clearfix">
@@ -920,8 +920,8 @@ if (!class_exists("PeproDevUPS_Profile")) {
                                   <i class="fas fa-shipping-fast"></i>
                               </div>
                               <div class="text">
-                                <h2><?=$this->get_customer_total_orders_by_status("wc-processing");?></h2>
-                                <span><?=__("processing orders",$this->td);?></span>
+                                <h2><?php echo $this->get_customer_total_orders_by_status("wc-processing");?></h2>
+                                <span><?php echo __("processing orders",$this->td);?></span>
                               </div>
                           </div>
                           <div class="overview-chart">
@@ -929,7 +929,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                       </div>
                   </div>
               </div>
-              <div class="<?=(!class_exists('Woo_Wallet_Wallet')) ? "col-sm-6 col-lg-4" : "col-sm-6 col-lg-3";?>">
+              <div class="<?php echo (!class_exists('Woo_Wallet_Wallet')) ? "col-sm-6 col-lg-4" : "col-sm-6 col-lg-3";?>">
                   <div class="overview-item overview-item--c2">
                       <div class="overview__inner">
                           <div class="overview-box clearfix">
@@ -937,8 +937,8 @@ if (!class_exists("PeproDevUPS_Profile")) {
                                   <i class="fa fa-shopping-bag"></i>
                               </div>
                               <div class="text">
-                                <h2><?=$this->get_customer_total_orders_by_status("wc-complete");?></h2>
-                                <span><?=__("completed orders",$this->td);?></span>
+                                <h2><?php echo $this->get_customer_total_orders_by_status("wc-complete");?></h2>
+                                <span><?php echo __("completed orders",$this->td);?></span>
                               </div>
                           </div>
                           <div class="overview-chart">
@@ -949,7 +949,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
               <?php
               if  (class_exists('Woo_Wallet_Wallet')){
                 ?>
-                <div class="<?=(!class_exists('Woo_Wallet_Wallet')) ? "" : "col-sm-6 col-lg-3";?>" >
+                <div class="<?php echo (!class_exists('Woo_Wallet_Wallet')) ? "" : "col-sm-6 col-lg-3";?>" >
                   <div class="overview-item overview-item--c4">
                     <div class="overview__inner">
                       <div class="overview-box clearfix">
@@ -957,8 +957,8 @@ if (!class_exists("PeproDevUPS_Profile")) {
                           <i class="fa fa-wallet"></i>
                         </div>
                         <div class="text">
-                          <h2><?=$this->get_customer_get_credit_balance();?></h2>
-                          <span><?=__("your wallet balance",$this->td);?></span>
+                          <h2><?php echo $this->get_customer_get_credit_balance();?></h2>
+                          <span><?php echo __("your wallet balance",$this->td);?></span>
                         </div>
                       </div>
                       <div class="overview-chart">
@@ -1401,7 +1401,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                           }
                         }
                       }
-                      switch ($index["name"]) {
+                      switch (sanitize_key($index["name"])) {
                           case 'firstname':
                             $user->first_name = wp_unslash( $index['value'] );
                             break;
@@ -1742,32 +1742,35 @@ if (!class_exists("PeproDevUPS_Profile")) {
 
 
                     $title = isset($_POST["dparam"]["title"]) ? trim($_POST["dparam"]["title"]) : null;
-                    if (empty(trim($title))) {wp_send_json_error(array( "msg"=>__("There was a problem with your request. Title field is required.", $this->td)));return false;
+                    if (empty(trim($title))) {
+                      wp_send_json_error(
+                        array( "msg"=>__("There was a problem with your request. Title field is required.", $this->td))
+                      );
+                      return false;
                     }
-
                     $content = isset($_POST["dparam"]["content"]) ? trim($_POST["dparam"]["content"]) : null;
-                    if (empty(trim($content))) {wp_send_json_error(array( "msg"=>__("There was a problem with your request. Content field is required.", $this->td)));return false;
+                    if (empty(trim($content))) {
+                      wp_send_json_error(
+                        array( "msg"=>__("There was a problem with your request. Content field is required.", $this->td))
+                      );
+                      return false;
                     }
-
                     $icon = isset($_POST["dparam"]["icon"]) ? trim($_POST["dparam"]["icon"]) : null;
-                    if (empty(trim($icon))) {$icon = "zmdi zmdi-email"; }
-
+                    if (empty(trim($icon))) {$icon    = "zmdi zmdi-email"; }
                     $color = isset($_POST["dparam"]["color"]) ? trim($_POST["dparam"]["color"]) : null;
                     if (empty(trim($color))) { $color = "bg-c1"; }
-
                     $priority = isset($_POST["dparam"]["priority"]) ? trim($_POST["dparam"]["priority"]) : null;
-                    if (empty(trim($priority))) {wp_send_json_error(array( "msg"=>__("There was a problem with your request. Priority field is required.", $this->td)));return false; }
-
-                    $act1 = isset($_POST["dparam"]["act1"]) ? trim($_POST["dparam"]["act1"]) : null;
-
-                    $act1url = isset($_POST["dparam"]["act1url"]) ? trim($_POST["dparam"]["act1url"]) : null;
-
-                    $act2 = isset($_POST["dparam"]["act2"]) ? trim($_POST["dparam"]["act2"]) : null;
-
-                    $act2url = isset($_POST["dparam"]["act2url"]) ? trim($_POST["dparam"]["act2url"]) : null;
-
+                    if (empty(trim($priority))) {
+                      wp_send_json_error(
+                        array( "msg" => __("There was a problem with your request. Priority field is required.", $this->td))
+                      );
+                      return false; }
+                    $act1       = isset($_POST["dparam"]["act1"]) ? trim($_POST["dparam"]["act1"]) : null;
+                    $act1url    = isset($_POST["dparam"]["act1url"]) ? trim($_POST["dparam"]["act1url"]) : null;
+                    $act2       = isset($_POST["dparam"]["act2"]) ? trim($_POST["dparam"]["act2"]) : null;
+                    $act2url    = isset($_POST["dparam"]["act2url"]) ? trim($_POST["dparam"]["act2url"]) : null;
                     $usersCheck = isset($_POST["dparam"]["users-check"]) ? trim($_POST["dparam"]["users-check"]) : null;
-                    $usersList = isset($_POST["dparam"]["usersList"]) ? $_POST["dparam"]["usersList"] : null;
+                    $usersList  = isset($_POST["dparam"]["usersList"]) ? $_POST["dparam"]["usersList"] : null;
                     if ($usersCheck == "0") {
                         if (empty($usersList)) {
                             wp_send_json_error(
@@ -1779,14 +1782,15 @@ if (!class_exists("PeproDevUPS_Profile")) {
                         }
                         $usersListArray = $usersList;
                         $usersList = implode(",", $usersList);
-                    }else{
+                    }
+                    else{
                         $usersListArray = array();
                         $usersList = "all";
                     }
 
                     $scheduleCheck = isset($_POST["dparam"]["schedule-check"]) ? trim($_POST["dparam"]["schedule-check"]) : null;
-                    $schedule = isset($_POST["dparam"]["schedule"]) ? trim($_POST["dparam"]["schedule"]) : null;
-                    $scheduleFA = isset($_POST["dparam"]["scheduleFA"]) ? trim($_POST["dparam"]["scheduleFA"]) : null;
+                    $schedule      = isset($_POST["dparam"]["schedule"]) ? trim($_POST["dparam"]["schedule"]) : null;
+                    $scheduleFA    = isset($_POST["dparam"]["scheduleFA"]) ? trim($_POST["dparam"]["scheduleFA"]) : null;
 
                     if ($scheduleCheck == "1") {
                         if (empty(trim($schedule))) {
@@ -1842,7 +1846,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                     if (isset($pageURLquery['s']) && !empty($pageURLquery['s'])){
                       $pageSrch = $pageURLquery['s'];
                     }
-                    $htmltabledata = $this->show_notifications_edit_panel($pageNum, $pageSrch, $_POST["dparam"]["url"]);
+                    $htmltabledata = $this->show_notifications_edit_panel($pageNum, $pageSrch, sanitize_text_field($_POST["dparam"]["url"]));
 
                     if (false !== $update) {
                         wp_send_json_success(array( "msg"=>__("Notification edited successfully.", $this->td), "type"=> "update", "htmlupdate" => $htmltabledata, "status"=> $update));
@@ -2438,7 +2442,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
         {
           global $wpdb;
           $allowed_slugs_whitelist = array_unique(apply_filters( "peprofile_dashboard_slugs", array("edit","me")));
-          $current_requested_slug = isset($_GET['section']) ? trim($_GET['section']) : "";
+          $current_requested_slug = isset($_GET['section']) ? sanitize_text_field(trim($_GET['section'])) : "";
 
           if (!empty($current_requested_slug) && in_array($current_requested_slug, $allowed_slugs_whitelist)){
             $notifs = $wpdb->get_row($wpdb->prepare("SELECT * FROM `$this->tbl_sections` WHERE `slug` = '%s' ORDER BY `date_created` DESC LIMIT 1", $current_requested_slug));
@@ -2458,11 +2462,11 @@ if (!class_exists("PeproDevUPS_Profile")) {
               ?>
               <style media="screen">
                 /* Inline CSS @ Pepro Profile // https://pepro.dev/ */
-                <?=stripslashes($notifs->css);?>
+                <?php echo stripslashes($notifs->css);?>
               </style>
               <div class="container-fluid">
-                <div class="row"><div class="col-md-12"><div class="overview-wrap"><h2 class="title-1"><?=$notifs->subject;?></h2></div></div></div>
-                <?=$this->filter_content($notifs->content);?>
+                <div class="row"><div class="col-md-12"><div class="overview-wrap"><h2 class="title-1"><?php echo $notifs->subject;?></h2></div></div></div>
+                <?php echo $this->filter_content($notifs->content);?>
               </div>
 
               <?php
@@ -2491,7 +2495,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
         public function peprofile_get_template_part_nav()
         {
             global $wp;
-            $ssection = isset($_GET['section']) ? trim($_GET['section']) : "home";
+            $ssection = isset($_GET['section']) ? sanitize_text_field(trim($_GET['section'])) : "home";
             foreach ($this->peprofile_get_nav_items_array() as $key => $value) {
                 echo "<li data-ref='$key' class='item-priority-{$value["priority"]}'><a href='{$value["url"]}'>{$value["title"]}</a></li>";
             }

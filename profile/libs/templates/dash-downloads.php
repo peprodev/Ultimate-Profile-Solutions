@@ -6,7 +6,7 @@ $PeproDevUPS_Profile->change_dashboard_title(_x("Downloads","user-dashboard",$Pe
   <div class="row">
     <div class="col-md-12">
         <div class="overview-wrap">
-            <h2 class="title-1"><?=_x("Downloads","user-dashboard",$PeproDevUPS_Profile->td);?></h2>
+            <h2 class="title-1"><?php echo _x("Downloads","user-dashboard",$PeproDevUPS_Profile->td);?></h2>
         </div>
     </div>
   </div>
@@ -34,7 +34,7 @@ $PeproDevUPS_Profile->change_dashboard_title(_x("Downloads","user-dashboard",$Pe
               <div class="card-body">
                 <div class="woocommerce-Message woocommerce-Message--info woocommerce-info">
                   <?php esc_html_e( 'No downloads available yet.', 'woocommerce' ); ?>
-                  <a class="woocommerce-Button button btn btn-outline-primary <?=is_rtl() ? "float-right" : "float-left";?>" href="<?php echo esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ); ?>">
+                  <a class="woocommerce-Button button btn btn-outline-primary <?php echo is_rtl() ? "float-right" : "float-left";?>" href="<?php echo esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ); ?>">
                     <?php esc_html_e( 'Browse products', 'woocommerce' ); ?>
                   </a>
                 </div>

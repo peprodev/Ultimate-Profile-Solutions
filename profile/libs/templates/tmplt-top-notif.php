@@ -33,7 +33,7 @@ if ($Anumber > 0) {  $Anotif = sprintf(__("You have %s unread announcements.", $
         } ?>
 
         <div class="notifi__footer">
-            <a href="<?php echo "{$current_page}/?section=notifications";?>"><?=__("All notifications",$PeproDevUPS_Profile->td);?></a>
+            <a href="<?php echo "{$current_page}/?section=notifications";?>"><?php echo __("All notifications",$PeproDevUPS_Profile->td);?></a>
         </div>
     </div>
 </div>
@@ -53,7 +53,7 @@ if ($Anumber > 0) {  $Anotif = sprintf(__("You have %s unread announcements.", $
         } ?>
 
         <div class="notifi__footer">
-            <a href="<?php echo "{$current_page}/?section=announcements";?>"><?=__("All announcements",$PeproDevUPS_Profile->td);?></a>
+            <a href="<?php echo "{$current_page}/?section=announcements";?>"><?php echo __("All announcements",$PeproDevUPS_Profile->td);?></a>
         </div>
     </div>
 </div>

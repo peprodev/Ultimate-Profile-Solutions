@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/02 13:12:49
+# @Last modified time: 2021/09/02 16:24:05
 if (!class_exists("PeproDevUPS_Core")){
   class PeproDevUPS_Core
   {
@@ -38,12 +38,8 @@ if (!class_exists("PeproDevUPS_Core")){
         $this->title_w         = sprintf(__("%2\$s ver. %1\$s", $this->td), $this->version, $this->title);
 
         if (isset($_GET['page'])){
-          if($this->db_slug == $_GET['page']){
-            if (isset($_GET['section'])){
-              if(empty($_GET['section'])){
-                wp_safe_redirect( admin_url("admin.php?page=$this->db_slug&section=home"), 301); die();
-              }
-            }else{
+          if($this->db_slug == sanitize_text_field($_GET['page'])){
+            if (!isset($_GET['section']) || empty($_GET['section'])){
               wp_safe_redirect( admin_url("admin.php?page=$this->db_slug&section=home"), 301); die();
             }
           }
@@ -488,8 +484,8 @@ if (!class_exists("PeproDevUPS_Core")){
         <div class="col-lg-12 col-md-12">
           <div class="card">
             <div class="card-header card-header-primary">
-              <h4 class="card-title"><?=__("Dude !!", "pepro");?></h4>
-              <p class="card-category"><?=__("Guess what! There is nothing to show here.", "pepro");?></p>
+              <h4 class="card-title"><?php echo __("Dude !!", "pepro");?></h4>
+              <p class="card-category"><?php echo __("Guess what! There is nothing to show here.", "pepro");?></p>
             </div>
             <div class="card-body">
               <?php
@@ -510,14 +506,14 @@ if (!class_exists("PeproDevUPS_Core")){
           <div class="row">
           <div class="col-lg-6 col-md-12">
             <div class="card card-nav-tabs text-center">
-              <div class="card-header card-header-primary"><?=__("PeproDev Ultimate Profile Solutions", "pepro");?></div>
+              <div class="card-header card-header-primary"><?php echo __("PeproDev Ultimate Profile Solutions", "pepro");?></div>
               <div class="card-body">
                 <p class="card-text">
-                  <h2><?=sprintf(__("Welcome to v.%s", "pepro"),"<strong>$this->version</strong>");?></h2>
+                  <h2><?php echo sprintf(__("Welcome to v.%s", "pepro"),"<strong>$this->version</strong>");?></h2>
                 </p>
-                <a href="<?=admin_url();?>" class="btn btn-primary"><?=__("WordPress Admin Dashboard", "pepro");?></a>
-                <a href="<?=admin_url("/plugins.php");?>" class="btn btn-primary"><?=__("WordPress Plugins", "pepro");?></a>
-                <a href="<?=home_url();?>" class="btn btn-primary"><?=__("Website Home Page", "pepro");?></a>
+                <a href="<?php echo admin_url();?>" class="btn btn-primary"><?php echo __("WordPress Admin Dashboard", "pepro");?></a>
+                <a href="<?php echo admin_url("/plugins.php");?>" class="btn btn-primary"><?php echo __("WordPress Plugins", "pepro");?></a>
+                <a href="<?php echo home_url();?>" class="btn btn-primary"><?php echo __("Website Home Page", "pepro");?></a>
                 <?php
                 if (class_exists("PeproDevUPS_Profile")){
                   echo "<a href='".$PeproDevUPS_Profile->get_profile_page(["i"=>current_time("timestamp")])."' class='btn btn-primary'>".__("Profile Page", "pepro")."</a>";
@@ -545,7 +541,7 @@ if (!class_exists("PeproDevUPS_Core")){
             ?>
             <div class="card">
               <div class="card-header card-header-primary">
-                <h4 class="card-title flex no-margin"><i class='material-icons'>brush</i><?=_x("Appearance","peprocore-appearance-setting","pepro");?></h4>
+                <h4 class="card-title flex no-margin"><i class='material-icons'>brush</i><?php echo _x("Appearance","peprocore-appearance-setting","pepro");?></h4>
                 <!-- <p class="card-category">extra info</p> -->
               </div>
                 <div class="card-body table-responsive">
@@ -557,30 +553,30 @@ if (!class_exists("PeproDevUPS_Core")){
                         <?php
                         do_action( "peprocore_after_first_setting_row" );
                          ?>
-                        <td><?=_x("Theme Scheme","peprocore-appearance-setting","pepro");?></td>
+                        <td><?php echo _x("Theme Scheme","peprocore-appearance-setting","pepro");?></td>
                         <td>
                           <a class='btncheckbox'
-                            data-text-on='<?=_x("Dark Mode","peprocore-appearance-setting","pepro");?>'
-                            data-text-off='<?=_x("Light Mode","peprocore-appearance-setting","pepro");?>'
+                            data-text-on='<?php echo _x("Dark Mode","peprocore-appearance-setting","pepro");?>'
+                            data-text-off='<?php echo _x("Light Mode","peprocore-appearance-setting","pepro");?>'
                             data-on='brightness_4'
                             data-off='brightness_low'
                             data-checked='<?php echo $this->read_opt(__CLASS__."___theme-scheme","dark-edition") === "dark-edition" ? "true" : "false";?>' id="pepc-settings-theme-scheme"></a>
                         </td>
                       </tr>
                       <tr>
-                        <td><?=_x("Theme Color","peprocore-appearance-setting","pepro");?></td>
+                        <td><?php echo _x("Theme Color","peprocore-appearance-setting","pepro");?></td>
                         <td>
                           <select id="pepc-settings-theme-color">
-                              <option <?php selected( $this->read_opt(__CLASS__."___theme-color"), "purple"); ?> value="purple"><?=_x("Purple","peprocore-appearance-setting","pepro");?></option>
-                              <option <?php selected( $this->read_opt(__CLASS__."___theme-color"), "azure"); ?> value="azure"><?=_x("Azure","peprocore-appearance-setting","pepro");?></option>
-                              <option <?php selected( $this->read_opt(__CLASS__."___theme-color"), "green"); ?> value="green"><?=_x("Green","peprocore-appearance-setting","pepro");?></option>
-                              <option <?php selected( $this->read_opt(__CLASS__."___theme-color"), "orange"); ?> value="orange"><?=_x("Orange","peprocore-appearance-setting","pepro");?></option>
-                              <option <?php selected( $this->read_opt(__CLASS__."___theme-color"), "danger"); ?> value="danger"><?=_x("Red","peprocore-appearance-setting","pepro");?></option>
+                              <option <?php selected( $this->read_opt(__CLASS__."___theme-color"), "purple"); ?> value="purple"><?php echo _x("Purple","peprocore-appearance-setting","pepro");?></option>
+                              <option <?php selected( $this->read_opt(__CLASS__."___theme-color"), "azure"); ?> value="azure"><?php echo _x("Azure","peprocore-appearance-setting","pepro");?></option>
+                              <option <?php selected( $this->read_opt(__CLASS__."___theme-color"), "green"); ?> value="green"><?php echo _x("Green","peprocore-appearance-setting","pepro");?></option>
+                              <option <?php selected( $this->read_opt(__CLASS__."___theme-color"), "orange"); ?> value="orange"><?php echo _x("Orange","peprocore-appearance-setting","pepro");?></option>
+                              <option <?php selected( $this->read_opt(__CLASS__."___theme-color"), "danger"); ?> value="danger"><?php echo _x("Red","peprocore-appearance-setting","pepro");?></option>
                           </select>
                         </td>
                       </tr>
                       <tr>
-                        <td><?=_x("Sidebar Image","peprocore-appearance-setting","pepro");?></td>
+                        <td><?php echo _x("Sidebar Image","peprocore-appearance-setting","pepro");?></td>
                         <td>
                           <div class="flex flex-sb">
                             <?php
@@ -589,23 +585,23 @@ if (!class_exists("PeproDevUPS_Core")){
                             get_option(__CLASS__."___theme-sidebar-image-custom","0") :
                             get_option(__CLASS__."___theme-sidebar-image","$this->assets_url/img/one.jpg");
                             $imagew = $this->read_opt(__CLASS__."___theme-sidebar-image-custom-id","0");
-                            ?><img style="border-radius: 5px;" src="<?=$image;?>" id="sidebar--img" width="86px"/>
+                            ?><img style="border-radius: 5px;" src="<?php echo $image;?>" id="sidebar--img" width="86px"/>
                             <div class="" style="width: calc(100% - 100px);">
                             <select id="pepc-settings-theme-sidebar-image">
-                                <option <?php selected( $this->read_opt(__CLASS__."___theme-sidebar-image"), "$this->assets_url/img/one.jpg"); ?> value="<?="$this->assets_url/img/one.jpg";?>"><?=_x("Sidebar 1","peprocore-appearance-setting","pepro");?></option>
-                                <option <?php selected( $this->read_opt(__CLASS__."___theme-sidebar-image"), "$this->assets_url/img/two.jpg"); ?> value="<?="$this->assets_url/img/two.jpg";?>"><?=_x("Sidebar 2","peprocore-appearance-setting","pepro");?></option>
-                                <option <?php selected( $this->read_opt(__CLASS__."___theme-sidebar-image"), "$this->assets_url/img/three.jpg"); ?> value="<?="$this->assets_url/img/three.jpg";?>"><?=_x("Sidebar 3","peprocore-appearance-setting","pepro");?></option>
-                                <option <?php selected( $this->read_opt(__CLASS__."___theme-sidebar-image"), "$this->assets_url/img/four.jpg"); ?> value="<?="$this->assets_url/img/four.jpg";?>"><?=_x("Sidebar 4","peprocore-appearance-setting","pepro");?></option>
-                                <option <?php selected( $this->read_opt(__CLASS__."___theme-sidebar-image"), "$this->assets_url/img/38577535.jpg"); ?> value="<?="$this->assets_url/img/38577535.jpg";?>"><?=_x("Sidebar 5","peprocore-appearance-setting","pepro");?></option>
-                                <option <?php selected( $this->read_opt(__CLASS__."___theme-sidebar-image"), "$this->assets_url/img/38577536.jpg"); ?> value="<?="$this->assets_url/img/38577536.jpg";?>"><?=_x("Sidebar 6","peprocore-appearance-setting","pepro");?></option>
-                                <option <?php selected( $this->read_opt(__CLASS__."___theme-sidebar-image"), "$this->assets_url/img/38577537.jpg"); ?> value="<?="$this->assets_url/img/38577537.jpg";?>"><?=_x("Sidebar 7","peprocore-appearance-setting","pepro");?></option>
-                                <option <?php selected( $this->read_opt(__CLASS__."___theme-sidebar-image"), "$this->assets_url/img/38577538.jpg"); ?> value="<?="$this->assets_url/img/38577538.jpg";?>"><?=_x("Sidebar 8","peprocore-appearance-setting","pepro");?></option>
-                                <option <?php selected( $this->read_opt(__CLASS__."___theme-sidebar-image"), "$this->assets_url/img/38577539.jpg"); ?> value="<?="$this->assets_url/img/38577539.jpg";?>"><?=_x("Sidebar 9","peprocore-appearance-setting","pepro");?></option>
-                                <option <?php selected( $this->read_opt(__CLASS__."___theme-sidebar-image"), "$this->assets_url/img/38577534.jpg"); ?> value="<?="$this->assets_url/img/38577534.jpg";?>"><?=_x("Sidebar 10","peprocore-appearance-setting","pepro");?></option>
-                                <option <?php selected( $this->read_opt(__CLASS__."___theme-sidebar-image"), "$this->assets_url/img/38577533.jpg"); ?> value="<?="$this->assets_url/img/38577533.jpg";?>"><?=_x("Sidebar 11","peprocore-appearance-setting","pepro");?></option>
-                                <option <?php selected( $this->read_opt(__CLASS__."___theme-sidebar-image"), "$this->assets_url/img/3857753.jpg"); ?> value="<?="$this->assets_url/img/3857753.jpg";?>"><?=_x("Sidebar 12","peprocore-appearance-setting","pepro");?></option>
-                                <option <?php selected( $this->read_opt(__CLASS__."___theme-sidebar-image"), "$this->assets_url/img/38577532.jpg"); ?> value="<?="$this->assets_url/img/38577532.jpg";?>"><?=_x("Sidebar 13","peprocore-appearance-setting","pepro");?></option>
-                                <option <?php selected( $this->read_opt(__CLASS__."___theme-sidebar-image"), "custom"); ?> value="custom"><?=_x("Sidebar Custom","peprocore-appearance-setting","pepro");?></option>
+                                <option <?php selected( $this->read_opt(__CLASS__."___theme-sidebar-image"), "$this->assets_url/img/one.jpg"); ?> value="<?php echo "$this->assets_url/img/one.jpg";?>"><?php echo _x("Sidebar 1","peprocore-appearance-setting","pepro");?></option>
+                                <option <?php selected( $this->read_opt(__CLASS__."___theme-sidebar-image"), "$this->assets_url/img/two.jpg"); ?> value="<?php echo "$this->assets_url/img/two.jpg";?>"><?php echo _x("Sidebar 2","peprocore-appearance-setting","pepro");?></option>
+                                <option <?php selected( $this->read_opt(__CLASS__."___theme-sidebar-image"), "$this->assets_url/img/three.jpg"); ?> value="<?php echo "$this->assets_url/img/three.jpg";?>"><?php echo _x("Sidebar 3","peprocore-appearance-setting","pepro");?></option>
+                                <option <?php selected( $this->read_opt(__CLASS__."___theme-sidebar-image"), "$this->assets_url/img/four.jpg"); ?> value="<?php echo "$this->assets_url/img/four.jpg";?>"><?php echo _x("Sidebar 4","peprocore-appearance-setting","pepro");?></option>
+                                <option <?php selected( $this->read_opt(__CLASS__."___theme-sidebar-image"), "$this->assets_url/img/38577535.jpg"); ?> value="<?php echo "$this->assets_url/img/38577535.jpg";?>"><?php echo _x("Sidebar 5","peprocore-appearance-setting","pepro");?></option>
+                                <option <?php selected( $this->read_opt(__CLASS__."___theme-sidebar-image"), "$this->assets_url/img/38577536.jpg"); ?> value="<?php echo "$this->assets_url/img/38577536.jpg";?>"><?php echo _x("Sidebar 6","peprocore-appearance-setting","pepro");?></option>
+                                <option <?php selected( $this->read_opt(__CLASS__."___theme-sidebar-image"), "$this->assets_url/img/38577537.jpg"); ?> value="<?php echo "$this->assets_url/img/38577537.jpg";?>"><?php echo _x("Sidebar 7","peprocore-appearance-setting","pepro");?></option>
+                                <option <?php selected( $this->read_opt(__CLASS__."___theme-sidebar-image"), "$this->assets_url/img/38577538.jpg"); ?> value="<?php echo "$this->assets_url/img/38577538.jpg";?>"><?php echo _x("Sidebar 8","peprocore-appearance-setting","pepro");?></option>
+                                <option <?php selected( $this->read_opt(__CLASS__."___theme-sidebar-image"), "$this->assets_url/img/38577539.jpg"); ?> value="<?php echo "$this->assets_url/img/38577539.jpg";?>"><?php echo _x("Sidebar 9","peprocore-appearance-setting","pepro");?></option>
+                                <option <?php selected( $this->read_opt(__CLASS__."___theme-sidebar-image"), "$this->assets_url/img/38577534.jpg"); ?> value="<?php echo "$this->assets_url/img/38577534.jpg";?>"><?php echo _x("Sidebar 10","peprocore-appearance-setting","pepro");?></option>
+                                <option <?php selected( $this->read_opt(__CLASS__."___theme-sidebar-image"), "$this->assets_url/img/38577533.jpg"); ?> value="<?php echo "$this->assets_url/img/38577533.jpg";?>"><?php echo _x("Sidebar 11","peprocore-appearance-setting","pepro");?></option>
+                                <option <?php selected( $this->read_opt(__CLASS__."___theme-sidebar-image"), "$this->assets_url/img/3857753.jpg"); ?> value="<?php echo "$this->assets_url/img/3857753.jpg";?>"><?php echo _x("Sidebar 12","peprocore-appearance-setting","pepro");?></option>
+                                <option <?php selected( $this->read_opt(__CLASS__."___theme-sidebar-image"), "$this->assets_url/img/38577532.jpg"); ?> value="<?php echo "$this->assets_url/img/38577532.jpg";?>"><?php echo _x("Sidebar 13","peprocore-appearance-setting","pepro");?></option>
+                                <option <?php selected( $this->read_opt(__CLASS__."___theme-sidebar-image"), "custom"); ?> value="custom"><?php echo _x("Sidebar Custom","peprocore-appearance-setting","pepro");?></option>
                             </select>
                             <input type="hidden" id="pepc-settings-theme-sidebar-image-custom" value="<?php echo esc_attr( get_option(__CLASS__."___theme-sidebar-image-custom","0") ); ?>" data-id="<?php echo esc_attr( $imagew ); ?>" class="regular-text" />
                             <button type="button" style="padding: 12px; display: block; width: 100%;" id="pepc-settings-load-sidebar-image" class="btn btn-primary mediapicker icn-btn"
@@ -614,16 +610,16 @@ if (!class_exists("PeproDevUPS_Core")){
                             data-ref2=".sidebar[data-image]"
                             data-ref3=".sidebar .sidebar-background"
                             data-ref4="#sidebar--img"
-                            data-title="<?=_x("Select Custom Image","peprocore-appearance-setting","pepro")?>"
-                            ><i class='material-icons'>cloud_upload</i> <?=_x("Select or Upload Custom Image","peprocore-appearance-setting","pepro")?></button>
+                            data-title="<?php echo _x("Select Custom Image","peprocore-appearance-setting","pepro")?>"
+                            ><i class='material-icons'>cloud_upload</i> <?php echo _x("Select or Upload Custom Image","peprocore-appearance-setting","pepro")?></button>
                             </div>
                           </div>
                         </td>
                       </tr>
                       <tr>
-                        <td><?=_x("Dashboard Title","peprocore-appearance-setting","pepro")?></td>
+                        <td><?php echo _x("Dashboard Title","peprocore-appearance-setting","pepro")?></td>
                         <td>
-                          <input type="text" id="pepc-settings-dashboard-title" data-textupdatelemnt="" data-orig="<?=$this->read_opt(__CLASS__."___dashboard-title",_x("PeproDev UPS","peprocore-appearance-setting","pepro"));?>" value="<?=$this->read_opt(__CLASS__."___dashboard-title",_x("PeproDev UPS","peprocore-appearance-setting","pepro"));?>" class="form-control primary" placeholder="<?=_x("Dashboard Title","peprocore-appearance-setting","pepro")?>"/>
+                          <input type="text" id="pepc-settings-dashboard-title" data-textupdatelemnt="" data-orig="<?php echo $this->read_opt(__CLASS__."___dashboard-title",_x("PeproDev UPS","peprocore-appearance-setting","pepro"));?>" value="<?php echo $this->read_opt(__CLASS__."___dashboard-title",_x("PeproDev UPS","peprocore-appearance-setting","pepro"));?>" class="form-control primary" placeholder="<?php echo _x("Dashboard Title","peprocore-appearance-setting","pepro")?>"/>
                         </td>
                       </tr>
                       <?php
@@ -644,7 +640,7 @@ if (!class_exists("PeproDevUPS_Core")){
                   lparam="savesettings"
                   style="text-align: start; max-width: 450px;"
                   dparam=""
-                  fn=""><i class='material-icons'>save</i> <?=_x("Save Settings","peprocore-appearance-setting","pepro");?></button>
+                  fn=""><i class='material-icons'>save</i> <?php echo _x("Save Settings","peprocore-appearance-setting","pepro");?></button>
 
                   <?php
                   do_action( "peprocore_after_save_setting" );

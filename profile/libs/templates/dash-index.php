@@ -17,14 +17,14 @@ if ("true" === get_option("{$PeproDevUPS_Profile->activation_status}-footerhook"
 ?>
 <html lang="en" dir="<?php echo is_rtl() ? "rtl" : "ltr";?>">
 <head>
-  <title><?=$title;?></title>
-  <base href="<?=home_url($wp->request);?>">
+  <title><?php echo $title;?></title>
+  <base href="<?php echo home_url($wp->request);?>">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <?php $PeproDevUPS_Profile->peprofile_get_template_part("tmplt", "head"); ?>
   <style media="screen">.wc-order-pagination {display: none;}</style>
 </head>
-<body data-loading-class="<?=$loadingCLASS;?>" class="<?=$classes;?>">
+<body data-loading-class="<?php echo $loadingCLASS;?>" class="<?php echo $classes;?>">
   <?php $PeproDevUPS_Profile->peprofile_get_template_part("tmplt", "body"); ?>
 </body>
 <?php

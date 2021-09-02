@@ -145,7 +145,7 @@ do_action( 'woocommerce_before_account_orders', $has_orders ); ?>
 					<div class="card-body">
 						<div class="woocommerce-message woocommerce-message--info woocommerce-Message woocommerce-Message--info woocommerce-info">
 							<?php esc_html_e( 'No order has been made yet.', 'woocommerce' ); ?>
-							<a class="woocommerce-Button button btn btn-outline-primary <?=is_rtl() ? "float-right" : "float-left";?>" href="<?php echo esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ); ?>">
+							<a class="woocommerce-Button button btn btn-outline-primary <?php echo is_rtl() ? "float-right" : "float-left";?>" href="<?php echo esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ); ?>">
 								<?php esc_html_e( 'Browse products', 'woocommerce' ); ?>
 							</a>
 						</div>

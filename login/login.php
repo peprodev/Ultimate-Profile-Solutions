@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/02 14:31:02
+# @Last modified time: 2021/09/02 16:21:27
 include_once plugin_dir_path(__FILE__) . "/include/class-login-permalink.php";
 
 if (!class_exists("PeproDevUPS_Login")){
@@ -346,19 +346,19 @@ if (!class_exists("PeproDevUPS_Login")){
       $form_default_fiedls = $this->get_registeration_form_defaul_fields();
       foreach ($form_default_fiedls as $key => $value) {
         ?>
-        <div class="register-field-single p-2 mb-2 border _no_opt_fields <?=esc_attr($key);?> ">
+        <div class="register-field-single p-2 mb-2 border _no_opt_fields <?php echo esc_attr($key);?> ">
           <div class="register-field-single-title">
-            <div class="field-opt-<?=esc_attr($key);?> checkbox-wrapper">
+            <div class="field-opt-<?php echo esc_attr($key);?> checkbox-wrapper">
               <div class="row justify-content-between align-items-center">
               <div class="col-8">
                 <label class="row w-100 align-items-center m-0">
-                  <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required mr-2 main_checkbox <?=esc_attr($key);?>' <?=checked(get_option("{$this->activation_status}-{$key}") === "yes", true);?> name="<?=esc_attr($key);?>" /> <?=esc_html($value);?>
-                  <input name="type" value="<?=esc_attr($key);?>" autocomplete="off" type="hidden" class="form-input meta-name" />
+                  <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required mr-2 main_checkbox <?php echo esc_attr($key);?>' <?php echo checked(get_option("{$this->activation_status}-{$key}") === "yes", true);?> name="<?php echo esc_attr($key);?>" /> <?php echo esc_html($value);?>
+                  <input name="type" value="<?php echo esc_attr($key);?>" autocomplete="off" type="hidden" class="form-input meta-name" />
                 </label>
               </div>
               <div class="col-4">
                 <label class="row w-100 align-items-center m-0">
-                  <input autocomplete="off" type="checkbox" class='form-checkbox single-required mr-2 is_required' <?=checked(get_option("{$this->activation_status}-{$key}-req") === "yes", true);?> name="<?=esc_attr($key);?>-req" /> <?=__("Required?", $this->td);?>
+                  <input autocomplete="off" type="checkbox" class='form-checkbox single-required mr-2 is_required' <?php echo checked(get_option("{$this->activation_status}-{$key}-req") === "yes", true);?> name="<?php echo esc_attr($key);?>-req" /> <?php echo __("Required?", $this->td);?>
                 </label>
               </div>
             </div>
@@ -567,7 +567,7 @@ if (!class_exists("PeproDevUPS_Login")){
       echo do_shortcode(wp_unslash(get_option("{$this->activation_status}-headerhtml")));
       if (get_current_user_id()){
         ?>
-          <h6 style="margin-bottom: 1rem; border-bottom: 1px solid #ccc;padding: 0 0 1rem 0;"><?=__("Verify your account", $this->td);?></h6>
+          <h6 style="margin-bottom: 1rem; border-bottom: 1px solid #ccc;padding: 0 0 1rem 0;"><?php echo __("Verify your account", $this->td);?></h6>
           <form class="pepro-verify inline" id="pepro-verify-inline" method="post">
             <div id="login_error"></div>
             <?php
@@ -602,7 +602,7 @@ if (!class_exists("PeproDevUPS_Login")){
       echo do_shortcode(wp_unslash(get_option("{$this->activation_status}-headerhtml")));
       if (get_current_user_id()){
         ?>
-          <h6 style="margin-bottom: 1rem; border-bottom: 1px solid #ccc;padding: 0 0 1rem 0;"><?=__("Verify your account", $this->td);?></h6>
+          <h6 style="margin-bottom: 1rem; border-bottom: 1px solid #ccc;padding: 0 0 1rem 0;"><?php echo __("Verify your account", $this->td);?></h6>
           <form class="pepro-verify inline" id="pepro-verify-inline" method="post">
             <div id="login_error"></div>
             <?php
@@ -637,7 +637,7 @@ if (!class_exists("PeproDevUPS_Login")){
         ?>
         <div class="col-lg-4">
           <div class="card">
-            <div class="card-header"><?=__("Verify/Change your mobile number", $this->td);?></div>
+            <div class="card-header"><?php echo __("Verify/Change your mobile number", $this->td);?></div>
             <div class="card-body">
               <?php echo '<div class="pepro-verify-container" id="'.esc_attr($uniqd).'" data-pepro-reglogin="'.esc_attr($uniqd).'">'; ?>
                 <form class="pepro-verify inline" id="pepro-verify-inline-force" method="post">
@@ -815,8 +815,8 @@ if (!class_exists("PeproDevUPS_Login")){
       if (!is_user_logged_in()){
         echo "$before";
         ?>
-          <form novalidate class="pepro-login-reg <?=("login" === $active?"inline":"");?>" id="pepro-login-inline" method="post">
-            <h6 style="margin-bottom: 1rem; border-bottom: 1px solid #ccc;padding: 0 0 1rem 0;"><?=(!empty($title) ? $title : __("Login", $this->td));?></h6>
+          <form novalidate class="pepro-login-reg <?php echo ("login" === $active?"inline":"");?>" id="pepro-login-inline" method="post">
+            <h6 style="margin-bottom: 1rem; border-bottom: 1px solid #ccc;padding: 0 0 1rem 0;"><?php echo (!empty($title) ? $title : __("Login", $this->td));?></h6>
             <div id="login_error"></div>
             <?php
               $this->printout_fields(array(
@@ -833,12 +833,12 @@ if (!class_exists("PeproDevUPS_Login")){
               <?php
               if (get_option('users_can_register')){
                 ?>
-                  <a class="switch-form-register"  href="javascript:;"><?=__("Register", $this->td);?></a>
+                  <a class="switch-form-register"  href="javascript:;"><?php echo __("Register", $this->td);?></a>
                 <?php
               }
               if (!$this->login_mobile_otp){
                 ?>
-                  <a class="switch-form-lost-pass" href="javascript:;"><?=__("Lost Password?", $this->td);?></a>
+                  <a class="switch-form-lost-pass" href="javascript:;"><?php echo __("Lost Password?", $this->td);?></a>
                 <?php
               }
               ?>
@@ -847,8 +847,8 @@ if (!class_exists("PeproDevUPS_Login")){
           <?php
           if (get_option('users_can_register')){
             ?>
-            <form novalidate class="pepro-login-reg <?=("register" === $active?"inline":"");?>" id="pepro-reg-inline" method="post">
-              <h6 style="margin-bottom: 1rem; border-bottom: 1px solid #ccc;padding: 0 0 1rem 0;"><?=(!empty($reg_title) ? $reg_title : __("Register", $this->td));?></h6>
+            <form novalidate class="pepro-login-reg <?php echo ("register" === $active?"inline":"");?>" id="pepro-reg-inline" method="post">
+              <h6 style="margin-bottom: 1rem; border-bottom: 1px solid #ccc;padding: 0 0 1rem 0;"><?php echo (!empty($reg_title) ? $reg_title : __("Register", $this->td));?></h6>
               <div id="login_error"></div>
               <?php
                 $this->printout_fields(array(
@@ -862,15 +862,15 @@ if (!class_exists("PeproDevUPS_Login")){
                 ));
               ?>
               <div class="pepro-form-links">
-                <a class="switch-form-login" href="javascript:;"><?=__("Login", $this->td);?></a>
+                <a class="switch-form-login" href="javascript:;"><?php echo __("Login", $this->td);?></a>
               </div>
             </form>
             <?php
           }
           if (!$this->login_mobile_otp){
             ?>
-            <form novalidate class="pepro-login-reg <?=("resetpass" === $active?"inline":"");?>" id="pepro-pass-inline" method="post">
-              <h6 style="margin-bottom: 1rem; border-bottom: 1px solid #ccc;padding: 0 0 1rem 0;"><?=(!empty($reset_title) ? $reset_title : __("Reset Password", $this->td));?></h6>
+            <form novalidate class="pepro-login-reg <?php echo ("resetpass" === $active?"inline":"");?>" id="pepro-pass-inline" method="post">
+              <h6 style="margin-bottom: 1rem; border-bottom: 1px solid #ccc;padding: 0 0 1rem 0;"><?php echo (!empty($reset_title) ? $reset_title : __("Reset Password", $this->td));?></h6>
               <div id="login_error"></div>
               <?php
                 $this->printout_fields(array(
@@ -884,7 +884,7 @@ if (!class_exists("PeproDevUPS_Login")){
                 ));
               ?>
               <div class="pepro-form-links">
-                <a class="switch-form-login" href="javascript:;"><?=__("Login", $this->td);?></a>
+                <a class="switch-form-login" href="javascript:;"><?php echo __("Login", $this->td);?></a>
               </div>
             </form>
             <?php
@@ -900,7 +900,7 @@ if (!class_exists("PeproDevUPS_Login")){
           echo $contnent;
         }else{
           if ("yes" == $loggedout){
-            ?><a href="<?=wp_logout_url();?>" class="button button-primary"><?=__("Logout", $this->td);?></a><?php
+            ?><a href="<?php echo wp_logout_url();?>" class="button button-primary"><?php echo __("Logout", $this->td);?></a><?php
           }
         }
       }
@@ -961,7 +961,7 @@ if (!class_exists("PeproDevUPS_Login")){
         if (!isset($_POST["nonce"]) || !wp_verify_nonce($_POST["nonce"]??null, $this->td)){
           wp_send_json_error(array("msg"=>__("Unauthorized Access!", $this->td)));
         }
-        switch ($_POST["order"]) {
+        switch (sanitize_text_field($_POST["order"])) {
 
           case 'login':
             if (is_user_logged_in()){ wp_send_json_error(array("msg" => __("You are already logged-in.", $this->td))); }
@@ -2738,7 +2738,7 @@ if (!class_exists("PeproDevUPS_Login")){
           $verfied = "yes" == get_the_author_meta( "pepro_user_is_email_verified", $user_id);
           ?>
             <div class="pepro-reg-login-checkbox-wrapper">
-              <input class="pepro-reg-login-checkbox edit-user" style="transform: scale(0.75);" data-id="<?=$user_id;?>" data-param="pepro_user_is_email_verified" data-nonce="<?php echo esc_atrr(wp_create_nonce($this->td));?>" type="checkbox" autocomplete="off" value="yes" <?=checked(true, $verfied, false);?> >
+              <input class="pepro-reg-login-checkbox edit-user" style="transform: scale(0.75);" data-id="<?php echo $user_id;?>" data-param="pepro_user_is_email_verified" data-nonce="<?php echo esc_atrr(wp_create_nonce($this->td));?>" type="checkbox" autocomplete="off" value="yes" <?php echo checked(true, $verfied, false);?> >
             </div>
           <?php
           $return = ob_get_contents();
@@ -2750,8 +2750,8 @@ if (!class_exists("PeproDevUPS_Login")){
           $verfied = "yes" == get_the_author_meta( "pepro_user_is_sms_verified", $user_id);
           ?>
             <div class="pepro-reg-login-checkbox-wrapper">
-              <?=$mobile;?>
-              <input class="pepro-reg-login-checkbox edit-user" style="transform: scale(0.75);" data-id="<?=$user_id;?>" data-param="pepro_user_is_sms_verified" data-nonce="<?=esc_atrr(wp_create_nonce($this->td));?>" type="checkbox" autocomplete="off" value="yes" <?=checked(true, $verfied, false);?> >
+              <?php echo $mobile;?>
+              <input class="pepro-reg-login-checkbox edit-user" style="transform: scale(0.75);" data-id="<?php echo $user_id;?>" data-param="pepro_user_is_sms_verified" data-nonce="<?php echo esc_atrr(wp_create_nonce($this->td));?>" type="checkbox" autocomplete="off" value="yes" <?php echo checked(true, $verfied, false);?> >
             </div>
           <?php
           $return = ob_get_contents();
@@ -3098,11 +3098,11 @@ if (!class_exists("PeproDevUPS_Login")){
         $password2 = ( ! empty( $_POST['password2'] ) ) ? trim( $_POST['password2'] ) : '';
         ?>
         <p>
-          <label for="password1"><?=__('Password',$this->td);?></label>
+          <label for="password1"><?php echo __('Password',$this->td);?></label>
           <input type="password" name="password1" id="password1" class="input" value="<?php echo esc_attr( wp_unslash( $password1 ) ); ?>" size="25" />
         </p>
         <p>
-          <label for="password2"><?=__('Confirm Password',$this->td);?></label>
+          <label for="password2"><?php echo __('Confirm Password',$this->td);?></label>
           <input type="password" name="password2" id="password2" class="input" value="<?php echo esc_attr( wp_unslash( $password2 ) ); ?>" size="25" />
         </p>
         <?php

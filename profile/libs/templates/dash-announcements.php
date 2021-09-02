@@ -20,29 +20,29 @@ if ($number > 0) {
   <div class="row">
     <div class="col-md-12">
         <div class="overview-wrap">
-            <h2 class="title-1"><?=_x("Announcements","user-dashboard",$PeproDevUPS_Profile->td);?></h2>
+            <h2 class="title-1"><?php echo _x("Announcements","user-dashboard",$PeproDevUPS_Profile->td);?></h2>
         </div>
     </div>
   </div>
   <div class="row m-t-25">
     <div class="col-lg-12">
         <div class="au-card au-card--no-shadow au-card--no-pad m-b-40">
-            <div class="au-card-title" style="background-image:url('<?=plugins_url('images/bg-title-01.jpg',__FILE__);?>');">
+            <div class="au-card-title" style="background-image:url('<?php echo plugins_url('images/bg-title-01.jpg',__FILE__);?>');">
                 <div class="bg-overlay bg-overlay--blue"></div>
-                <h3> <i class="zmdi zmdi-comment-text"></i><?=_x("Latest Announcements for you","user-dashboard",$PeproDevUPS_Profile->td);?></h3>
+                <h3> <i class="zmdi zmdi-comment-text"></i><?php echo _x("Latest Announcements for you","user-dashboard",$PeproDevUPS_Profile->td);?></h3>
                 <button class="au-btn-plus backtonotifs"> <i class="far fa-chevron-left"></i> </button>
             </div>
             <div class="au-inbox-wrap js-inbox-wrap">
               <div class="au-message js-list-load">
                   <div class="au-message__noti announcements">
-                      <p><?=$notif_unread_count;?></p>
+                      <p><?php echo $notif_unread_count;?></p>
                   </div>
                   <div class="au-message-list announcements">
-                      <?=$titles;?>
+                      <?php echo $titles;?>
                   </div>
               </div>
 
-              <?=$notifs;?>
+              <?php echo $notifs;?>
             </div>
         </div>
     </div>
