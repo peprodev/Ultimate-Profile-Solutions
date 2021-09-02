@@ -2738,7 +2738,7 @@ if (!class_exists("PeproDevUPS_Login")){
           $verfied = "yes" == get_the_author_meta( "pepro_user_is_email_verified", $user_id);
           ?>
             <div class="pepro-reg-login-checkbox-wrapper">
-              <input class="pepro-reg-login-checkbox edit-user" style="transform: scale(0.75);" data-id="<?php echo $user_id;?>" data-param="pepro_user_is_email_verified" data-nonce="<?php echo esc_atrr(wp_create_nonce($this->td));?>" type="checkbox" autocomplete="off" value="yes" <?php echo checked(true, $verfied, false);?> >
+              <input class="pepro-reg-login-checkbox edit-user" style="transform: scale(0.75);" data-id="<?php echo $user_id;?>" data-param="pepro_user_is_email_verified" data-nonce="<?php echo esc_attr(wp_create_nonce($this->td));?>" type="checkbox" autocomplete="off" value="yes" <?php echo checked(true, $verfied, false);?> >
             </div>
           <?php
           $return = ob_get_contents();
@@ -2751,7 +2751,7 @@ if (!class_exists("PeproDevUPS_Login")){
           ?>
             <div class="pepro-reg-login-checkbox-wrapper">
               <?php echo $mobile;?>
-              <input class="pepro-reg-login-checkbox edit-user" style="transform: scale(0.75);" data-id="<?php echo $user_id;?>" data-param="pepro_user_is_sms_verified" data-nonce="<?php echo esc_atrr(wp_create_nonce($this->td));?>" type="checkbox" autocomplete="off" value="yes" <?php echo checked(true, $verfied, false);?> >
+              <input class="pepro-reg-login-checkbox edit-user" style="transform: scale(0.75);" data-id="<?php echo $user_id;?>" data-param="pepro_user_is_sms_verified" data-nonce="<?php echo esc_attr(wp_create_nonce($this->td));?>" type="checkbox" autocomplete="off" value="yes" <?php echo checked(true, $verfied, false);?> >
             </div>
           <?php
           $return = ob_get_contents();
