@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/02 19:04:06
+# @Last modified time: 2021/09/03 00:04:35
 include_once plugin_dir_path(__FILE__) . "/include/class-login-permalink.php";
 
 if (!class_exists("PeproDevUPS_Login")){
@@ -171,7 +171,8 @@ if (!class_exists("PeproDevUPS_Login")){
       add_action("user_profile_update_errors",                           array( $this, "registration_errors_admin" ), 10, 3);
       add_action("manage_users_columns",                                 array( $this, "manage_users_columns" ));
       add_action("manage_users_custom_column",                           array( $this, "manage_users_custom_column" ), 100, 3);
-      add_action("wp_logout",                                            array( $this, "redirect_after_logout" ), 10, 2);
+      // add_action("wp_logout",                                            array( $this, "redirect_after_logout"));
+      add_action("login_form_logout",                                    array( $this, "login_form_logout"));
       add_action("admin_enqueue_scripts",                                array( $this, "admin_enqueue_scripts" ));
       add_action("login_form_register",                                  array( $this, "login_form_register"));
       add_filter("login_redirect",                                       array( $this, "redirect_after_login_register" ), 10, 3);
@@ -560,7 +561,7 @@ if (!class_exists("PeproDevUPS_Login")){
     }
     public function verify_email_user_form($content='')
     {
-      if (has_shortcode($content,"pepro-profile"))return $content;
+      if (has_shortcode($content,"pepro-profile")) return "<meta http-equiv=\"refresh\" content=\"0;url=".home_url()."\" />";
       ob_start();
       $uniqd = uniqid("pepro_verify_");
       echo '<div class="pepro-verify-container" id="'.esc_attr($uniqd).'" data-pepro-reglogin="'.esc_attr($uniqd).'">';
@@ -595,7 +596,7 @@ if (!class_exists("PeproDevUPS_Login")){
     }
     public function verify_mobile_user_form($content='')
     {
-      if (has_shortcode($content,"pepro-profile")) return $content;
+      if (has_shortcode($content,"pepro-profile")) return "<meta http-equiv=\"refresh\" content=\"0;url=".home_url()."\" />";
       ob_start();
       $uniqd = uniqid("pepro_verify_");
       echo '<div class="pepro-verify-container" id="'.esc_attr($uniqd).'" data-pepro-reglogin="'.esc_attr($uniqd).'">';
@@ -2238,6 +2239,8 @@ if (!class_exists("PeproDevUPS_Login")){
             if ("user_mobile" == $field["meta_name"] && ("tel" == $field["type"] || "mobile" == $field["type"]) ){
               $field["classes"]    = "mobile-verification force-ltr";
               $field["attributes"] = " data-error-text=\"".esc_attr__("Enter mobile number with English numbers,<br>e.g. 09123456789", $this->td)."\" tabindex=$num pattern=".esc_attr("^(\+98|0098|98|0)?9\d{9}$")." maxlength=14";
+            }else{
+              $field["attributes"] = "tabindex=$num " . $field["attributes"];
             }
             array_push($login_fields, $field);
           }
@@ -2269,15 +2272,15 @@ if (!class_exists("PeproDevUPS_Login")){
           )
         );
       }
+
       foreach ($this->register_fileds as $field) {
         if ("recaptcha" == $field["type"] && "yes" == $field["is-public"]){
           $num++;
           $field["attributes"] = "tabindex=$num " . $field["attributes"];
+          array_push($login_fields, $field);
         }
-        if ("tel" == $field["type"]) continue;
-        if ("mobile" == $field["type"]) continue;
-        array_push($login_fields, $field);
       }
+
       $textSend   = __("Receive OTP & Register",$this->td);
       $textVerify = __("Verify OTP & Register",$this->td);
       $num++;
@@ -2672,26 +2675,80 @@ if (!class_exists("PeproDevUPS_Login")){
     public function redirect_after_logout($user_id=0, $return=false)
     {
       $redirect_to = home_url();
+      $user_id = get_current_user_id();
       foreach ((array) $this->get_redirection_fields() as $key => $value) {
         if ("everyone" == $value["role"] && "yes" == $value["logout"]){
           $redirect_to = $this->parse_redirection_url($value["url"]);
           if ($return){ return $redirect_to; }
-          wp_redirect($redirect_to);
+          wp_safe_redirect($redirect_to);
           exit();
-        }else{
+        }
+        else{
           if ("yes" == $value["logout"]){
             $user = new \WP_User($user_id);
             if (is_a($user, 'WP_User' ) && $user->exists()){
               if (in_array($value["role"], $user->roles) || "everyone" == $value["role"] ) {
                 $redirect_to = $this->parse_redirection_url($value["url"]);
                 if ($return){ return $redirect_to; }
-                wp_redirect($redirect_to);
+                wp_safe_redirect($redirect_to);
                 exit();
               }
             }
           }
         }
       }
+      wp_safe_redirect(home_url());
+      exit();
+    }
+    public function logout_redirect($redirect_to, $requested_redirect_to, $user)
+    {
+      foreach ((array) $this->get_redirection_fields() as $key => $value) {
+        if ("everyone" == $value["role"] && "yes" == $value["logout"]){
+          $redirect_to = $this->parse_redirection_url($value["url"]);
+          return $redirect_to;
+        }
+        else{
+          if ("yes" == $value["logout"]){
+            $user = new \WP_User($user);
+            if (is_a($user, 'WP_User' ) && $user->exists()){
+              if (in_array($value["role"], $user->roles) || "everyone" == $value["role"] ) {
+                $redirect_to = $this->parse_redirection_url($value["url"]);
+                return $redirect_to;
+              }
+            }
+          }
+        }
+      }
+      return home_url();
+    }
+    public function login_form_logout($user_id=0, $return=false)
+    {
+      $redirect_to = home_url();
+      $user_id = get_current_user_id();
+      wp_logout();
+      foreach ((array) $this->get_redirection_fields() as $key => $value) {
+        if ("everyone" == $value["role"] && "yes" == $value["logout"]){
+          $redirect_to = $this->parse_redirection_url($value["url"]);
+          if ($return){ return $redirect_to; }
+          wp_safe_redirect($redirect_to);
+          exit();
+        }
+        else{
+          if ("yes" == $value["logout"]){
+            $user = new \WP_User($user_id);
+            if (is_a($user, 'WP_User' ) && $user->exists()){
+              if (in_array($value["role"], $user->roles) || "everyone" == $value["role"] ) {
+                $redirect_to = $this->parse_redirection_url($value["url"]);
+                if ($return){ return $redirect_to; }
+                wp_safe_redirect($redirect_to);
+                exit();
+              }
+            }
+          }
+        }
+      }
+      wp_safe_redirect(home_url());
+      exit();
     }
     public function parse_redirection_url($url="")
     {
@@ -3697,7 +3754,7 @@ if (!class_exists("PeproDevUPS_Login")){
               if(isset($_POST["dparam"][$data])){
                 update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data]));
                 if (empty($_POST["dparam"][$data])){
-                  update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($this->def_mail_body));
+                  update_option("{$this->activation_status}-{$data}", $this->def_mail_body);
                 }
               }
 
