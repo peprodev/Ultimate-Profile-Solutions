@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/03 14:39:15
+# @Last modified time: 2021/09/03 15:40:57
 include_once plugin_dir_path(__FILE__) . "/include/class-login-permalink.php";
 
 if (!class_exists("PeproDevUPS_Login")){
@@ -3324,7 +3324,7 @@ if (!class_exists("PeproDevUPS_Login")){
       echo "<div class='row'>";
       $this->printout_fields(array(
         "style"           => "div",
-        "row_class"       => "col-6 form-group",
+        "row_class"       => "col-lg-4 col-md-12 mt-3 form-group",
         "item_class"      => "form-control",
         "label_class"     => "control-label mb-1",
         "loop_fields"     => $this->register_fileds,

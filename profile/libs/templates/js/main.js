@@ -3,7 +3,7 @@
  * @Date:   2020/05/03 13:33:07
  * @Email:  its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2020/11/20 05:51:38
+ * @Last modified time: 2021/09/03 15:40:13
  * @License: GPLv2
  * @Copyright: Copyright © 2020 Amirhosseinhpv, All rights reserved.
  */
@@ -112,14 +112,6 @@
 (function ($) {
   // USE STRICT
   "use strict";
-
-  try {
-
-    $('[data-toggle="tooltip"]').tooltip();
-
-  } catch (error) {
-    console.log(error);
-  }
 
   // Chatbox
   try {

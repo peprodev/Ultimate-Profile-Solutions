@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/03 10:28:41
+# @Last modified time: 2021/09/03 15:46:19
 if (!class_exists("PeproDevUPS_Profile")) {
     class PeproDevUPS_Profile
     {
@@ -1167,29 +1167,29 @@ if (!class_exists("PeproDevUPS_Profile")) {
         {
             $this->remove_us_css();
             $this->enqueue_scripts_and_styles();
-            wp_enqueue_style(__CLASS__."simple-fapro", plugins_url("libs/templates/vendas/fa-pro/css/all.css", __FILE__));
+            wp_enqueue_style(__CLASS__."simple-fapro", plugins_url("libs/templates/fonts/fa-pro/css/all.css", __FILE__));
             include plugin_dir_path(__FILE__) . "/libs/general/activated.php";
         }
         public function htmlwrapper_shortcodes()
         {
             $this->remove_us_css();
             $this->enqueue_scripts_and_styles();
-            wp_enqueue_style(__CLASS__."simple-fapro", plugins_url("libs/templates/vendas/fa-pro/css/all.css", __FILE__));
+            wp_enqueue_style(__CLASS__."simple-fapro", plugins_url("libs/templates/fonts/fa-pro/css/all.css", __FILE__));
             include plugin_dir_path(__FILE__) . "/libs/general/shortcodes_panel.php";
         }
         public function htmlwrapper_sections()
         {
           $this->remove_us_css();
           $this->enqueue_scripts_and_styles();
-          wp_enqueue_style(__CLASS__."simple-fapro", plugins_url("libs/templates/vendas/fa-pro/css/all.css", __FILE__));
+          wp_enqueue_style(__CLASS__."simple-fapro", plugins_url("libs/templates/fonts/fa-pro/css/all.css", __FILE__));
           include plugin_dir_path(__FILE__) . "/libs/general/sections_panel.php";
-          wp_enqueue_script(__CLASS__."date", plugins_url("/assets/js/persian-date.min.js", __FILE__), array("jquery"), "3.0.0", true);
-          wp_enqueue_script(__CLASS__."datepicker", plugins_url("/assets/js/persian-datepicker.min.js", __FILE__), array("jquery"), "3.0.0", true);
-          wp_enqueue_style(__CLASS__."datepicker", plugins_url("/assets/css/persian-datepicker.min.css", __FILE__));
+          wp_enqueue_script(__CLASS__."date",              plugins_url("/assets/js/persian-date.min.js", __FILE__), array("jquery"), "3.0.0", true);
+          wp_enqueue_script(__CLASS__."datepicker",        plugins_url("/assets/js/persian-datepicker.min.js", __FILE__), array("jquery"), "3.0.0", true);
+          wp_enqueue_style(__CLASS__."datepicker",         plugins_url("/assets/css/persian-datepicker.min.css", __FILE__));
           wp_enqueue_script(__CLASS__."simple-iconpicker", plugins_url("/assets/js/simple-iconpicker.min.js", __FILE__), array("jquery"), "3.0.0", true);
-          wp_enqueue_style(__CLASS__."simple-iconpicker", plugins_url("/assets/css/simple-iconpicker.min.css", __FILE__));
-          wp_enqueue_script(__CLASS__."notifs_panel", plugins_url("/assets/js/peprocore-sections-panel.js", __FILE__), array("jquery"), $this->current_version);
-          wp_localize_script(__CLASS__."notifs_panel", "peprofile", array(
+          wp_enqueue_style(__CLASS__."simple-iconpicker",  plugins_url("/assets/css/simple-iconpicker.min.css", __FILE__));
+          wp_enqueue_script(__CLASS__."notifs_panel",      plugins_url("/assets/js/peprocore-sections-panel.js", __FILE__), array("jquery"), $this->current_version);
+          wp_localize_script(__CLASS__."notifs_panel",     "peprofile", array(
             "ajax" => admin_url('admin-ajax.php'),
             "wparam"=>$this->setting_slug,
             "error_validate_form"=> __("Error validating form, please check marked fields.",$this->td),
@@ -1201,15 +1201,15 @@ if (!class_exists("PeproDevUPS_Profile")) {
         {
           $this->remove_us_css();
           $this->enqueue_scripts_and_styles();
-          wp_enqueue_style(__CLASS__."simple-fapro", plugins_url("libs/templates/vendas/fa-pro/css/all.css", __FILE__));
+          wp_enqueue_style(__CLASS__."simple-fapro", plugins_url("libs/templates/fonts/fa-pro/css/all.css", __FILE__));
           include plugin_dir_path(__FILE__) . "/libs/general/notifs_panel.php";
-          wp_enqueue_script(__CLASS__."date", plugins_url("/assets/js/persian-date.min.js", __FILE__), array("jquery"), "3.0.0", true);
-          wp_enqueue_script(__CLASS__."datepicker", plugins_url("/assets/js/persian-datepicker.min.js", __FILE__), array("jquery"), "3.0.0", true);
-          wp_enqueue_style(__CLASS__."datepicker", plugins_url("/assets/css/persian-datepicker.min.css", __FILE__));
+          wp_enqueue_script(__CLASS__."date",              plugins_url("/assets/js/persian-date.min.js", __FILE__), array("jquery"), "3.0.0", true);
+          wp_enqueue_script(__CLASS__."datepicker",        plugins_url("/assets/js/persian-datepicker.min.js", __FILE__), array("jquery"), "3.0.0", true);
+          wp_enqueue_style(__CLASS__."datepicker",         plugins_url("/assets/css/persian-datepicker.min.css", __FILE__));
           wp_enqueue_script(__CLASS__."simple-iconpicker", plugins_url("/assets/js/simple-iconpicker.min.js", __FILE__), array("jquery"), "3.0.0", true);
-          wp_enqueue_style(__CLASS__."simple-iconpicker", plugins_url("/assets/css/simple-iconpicker.min.css", __FILE__));
-          wp_enqueue_script(__CLASS__."notifs_panel", plugins_url("/assets/js/peprocore-notifs-panel.js", __FILE__), array("jquery"), $this->current_version);
-          wp_localize_script(__CLASS__."notifs_panel", "peprofile", array(
+          wp_enqueue_style(__CLASS__."simple-iconpicker",  plugins_url("/assets/css/simple-iconpicker.min.css", __FILE__));
+          wp_enqueue_script(__CLASS__."notifs_panel",      plugins_url("/assets/js/peprocore-notifs-panel.js", __FILE__), array("jquery"), $this->current_version);
+          wp_localize_script(__CLASS__."notifs_panel",     "peprofile", array(
             "ajax" => admin_url('admin-ajax.php'),
             "wparam"=>$this->setting_slug,
             "error_validate_form"=> __("Error validating form, please check marked fields.",$this->td),

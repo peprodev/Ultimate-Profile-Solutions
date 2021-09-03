@@ -2,7 +2,7 @@
 <?php
 
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/02 13:13:04
+# @Last modified time: 2021/09/03 15:33:00
 
 global $PeproDevUPS_Profile, $rtl, $wp, $PeproDevUPS_ProfileStripslashesNotifsJs;
 $current_section                = isset($_GET["section"]) ? sanitize_text_field(trim($_GET["section"])) : "";

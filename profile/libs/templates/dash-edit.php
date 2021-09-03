@@ -1,7 +1,7 @@
 <?php
 
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/02 11:36:02
+# @Last modified time: 2021/09/03 15:39:31
 
 global $PeproDevUPS_Profile, $PeproDevUPS_Login;
 $current_user = wp_get_current_user();
@@ -22,7 +22,7 @@ $PeproDevUPS_Profile->change_dashboard_title(_x("Edit", "user-dashboard", $Pepro
             <div class="card-header"><?php echo _x("Edit Personal Info", "edit-user", $PeproDevUPS_Profile->td);?></div>
             <div class="card-body">
                 <form class="edit-profile-form" method="post">
-                    <div class="row">
+                    <div class="row mt-3">
                       <div class="col-lg-12 col-md-12">
                         <?php
                           $saved     = get_avatar_url( get_current_user_id(), array( "size" => 96));
@@ -37,7 +37,7 @@ $PeproDevUPS_Profile->change_dashboard_title(_x("Edit", "user-dashboard", $Pepro
                         ?>
                       </div>
                     </div>
-                    <div class="row">
+                    <div class="row mt-3">
                         <div class="col-lg-4 col-md-12">
                           <?php
                             $PeproDevUPS_Profile->add_input(_x("First Name", "edit-user", $PeproDevUPS_Profile->td), "firstname", "$current_user->user_firstname", "required ", "");
@@ -57,7 +57,7 @@ $PeproDevUPS_Profile->change_dashboard_title(_x("Edit", "user-dashboard", $Pepro
                     <?php
                       do_action("peprofile_user_details_edit_form_before_password");
                     ?>
-                    <div class="row">
+                    <div class="row mt-3">
                           <?php
                           if ($PeproDevUPS_Login->show_email_field){
                             ?>
@@ -80,20 +80,16 @@ $PeproDevUPS_Profile->change_dashboard_title(_x("Edit", "user-dashboard", $Pepro
                             ?>
                         </div>
                     </div>
-
                     <?php do_action("peprofile_user_details_edit_form_after_password"); ?>
-
-                   <?php
+                    <?php
                     if (class_exists("PeproDevUPS_Login")){
                       do_action("peprofile_user_details_before_custom_fields");
                       global $PeproDevUPS_Login; $PeproDevUPS_Login->pepro_profile_sections();
                       do_action("peprofile_user_details_after_custom_fields");
                     }
                     ?>
-
                     <?php do_action("peprofile_user_details_edit_form_end"); ?>
-
-                    <div>
+                    <div class=" mt-3">
                       <button id="submit-profile-changes" href="#" class="btn btn-lg btn-info btn-block loadingRings" type="submit">
                           <?php echo _x("Save Edit", "edit-user", $PeproDevUPS_Profile->td);?>
                       </button>

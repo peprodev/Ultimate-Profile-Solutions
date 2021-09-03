@@ -1,7 +1,7 @@
 <?php
 
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/03 00:09:28
+# @Last modified time: 2021/09/03 15:31:44
 
 global $PeproDevUPS_Profile, $current_profile_url, $PeproDevUPS_ProfileStripslashesNotifsJs;
 wp_enqueue_script( "jquery" );
