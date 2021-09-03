@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/03 00:31:44
+# @Last modified time: 2021/09/03 14:39:15
 include_once plugin_dir_path(__FILE__) . "/include/class-login-permalink.php";
 
 if (!class_exists("PeproDevUPS_Login")){
@@ -199,7 +199,9 @@ if (!class_exists("PeproDevUPS_Login")){
       $this->verify_email_fields         = $this->get_verify_email_fields();
       $this->verify_mobile_fields        = $this->get_verify_mobile_fields();
 
-
+      if (isset($_GET["gubm"])){
+        echo "<pre style='text-align: left; direction: ltr; border:1px solid gray; padding: 1rem; overflow: auto;'>". print_r($this->get_user_by_mobile($_GET["gubm"]),1) ."</pre>";
+      }
 
       if (is_user_logged_in()){
         if($this->verify_mobile){
@@ -218,7 +220,8 @@ if (!class_exists("PeproDevUPS_Login")){
       $this->sms = new \PeproDev\PeproCore\RegLogin\peproSendSMS("https://ws.sms.ir/", $this->sms_api_key, $this->sms_secret_key, $this->sms_api_url);
 
     }
-    function shortcode__smart_btn($atts=array(), $content="") {
+    function shortcode__smart_btn($atts=array(), $content="")
+    {
       $atts = extract(shortcode_atts(array(
         "loggedin_text"         => "Hi {display_name}",
         "loggedin_href"         => "/profile",
@@ -433,8 +436,7 @@ if (!class_exists("PeproDevUPS_Login")){
           "placeholder" => "",
           "classes"     => "mobile-verification force-ltr",
           "attributes"  => "pattern=".esc_attr("^(\+98|0098|98|0)?9\d{9}$")." data-error-text=\"".esc_attr__("Enter mobile number with English numbers,<br>e.g. 09123456789", $this->td)."\" maxlength=14",
-        )
-      );
+        ));
       }
 
       if ($this->_wc_activated()){
@@ -673,7 +675,7 @@ if (!class_exists("PeproDevUPS_Login")){
       $users = get_users(
         array(
           "meta_key"     => 'user_mobile',
-          "meta_value"   => $mobile,
+          "meta_value"   => $this->clean_mobile_number($mobile),
           "meta_compare" => '=',
           "order"        => 'ASC',
           "orderby"      => 'registered',
@@ -703,7 +705,7 @@ if (!class_exists("PeproDevUPS_Login")){
       if (empty($mobile)){
         $preg_match = false;
       }else{
-        $preg_match = preg_match('/^(\+98|0098|98|0)?9\d{9}$/', $mobile);
+        $preg_match = preg_match('/^(\+98|0098|98|0)?9\d{9}$/', $this->convert_to_english($mobile));
       }
       return apply_filters( "pepro_reglogin_mobile_is_valid", $preg_match, $mobile, $field_id);
     }
@@ -840,6 +842,9 @@ if (!class_exists("PeproDevUPS_Login")){
                   <a class="switch-form-register"  href="javascript:;"><?php echo __("Register", $this->td);?></a>
                 <?php
               }
+              ?>
+              <a href="javascript:;" style="display: none;" class="otp-resend"><?=__("Resend Code", $this->td);?></a>
+              <?php
               if (!$this->login_mobile_otp){
                 ?>
                   <a class="switch-form-lost-pass" href="javascript:;"><?php echo __("Lost Password?", $this->td);?></a>
@@ -867,6 +872,7 @@ if (!class_exists("PeproDevUPS_Login")){
               ?>
               <div class="pepro-form-links">
                 <a class="switch-form-login" href="javascript:;"><?php echo __("Login", $this->td);?></a>
+                <a href="javascript:;" style="display: none;" class="otp-resend"><?=__("Resend Code", $this->td);?></a>
               </div>
             </form>
             <?php
@@ -889,6 +895,7 @@ if (!class_exists("PeproDevUPS_Login")){
               ?>
               <div class="pepro-form-links">
                 <a class="switch-form-login" href="javascript:;"><?php echo __("Login", $this->td);?></a>
+                <a href="javascript:;" style="display: none;" class="otp-resend"><?=__("Resend Code", $this->td);?></a>
               </div>
             </form>
             <?php
@@ -982,110 +989,121 @@ if (!class_exists("PeproDevUPS_Login")){
               }
             }
 
-            if (!filter_var($param["username"], FILTER_VALIDATE_EMAIL)) {
-              // login by mobile
-              if (isset($param["checkmobile"])){
-                $valid_mobile = $this->clean_mobile_number($param["username"]);
-                if ($valid_mobile){
-                  $user_id = $this->get_user_by_mobile($valid_mobile);
-                  if (!$user_id){ wp_send_json_error(array(
-                    "msg"    => __("The mobile number is not currently in use by any account.", $this->td),
-                    "is_otp" => true,
-                    "focus"  => ".mobile-verification",
-                    "select" => ".mobile-verification",
-                  )); }
-                  // verify sms if OTP passed
-                  if (isset($param["optverify"]) && !empty($param["optverify"])){
-                    $verified = $this->check_verification_sms($user_id, $param["optverify"]);
-                    if ($verified){
-                      wp_clear_auth_cookie();
-                      $user = new \WP_User($user_id);
-                      wp_set_current_user($user->ID);
-                      wp_set_auth_cookie($user->ID);
-                      $username = get_the_author_meta("display_name", $user->ID);
+            // login by email
+            if (isset($param["username"]) && filter_var(sanitize_email($param["username"]), FILTER_VALIDATE_EMAIL)) {
+              $user = get_user_by('email', $param["username"] );
+            }
+            // login by mobile/username
+            else{
+              // login by username
+              $user = get_user_by('login', $param["username"]);
+              if (!$user){
+                // login by mobile
+                if (isset($param["checkmobile"])){
+                  $valid_mobile = $this->clean_mobile_number($param["mobile"]);
+                  if ($valid_mobile){
+                    $user_id = $this->get_user_by_mobile($valid_mobile);
+                    if (false == $user_id){ wp_send_json_error(array(
+                      "msg"      => __("The mobile number is not currently in use by any account.", $this->td),
+                      "is_otp"   => true,
+                      "focus"    => ".mobile-verification",
+                      "select"   => ".mobile-verification",
+                    )); }
+                    // verify sms if OTP passed
+                    if (isset($param["optverify"]) && !empty($param["optverify"])){
+                      $verified = $this->check_verification_sms($user_id, $param["optverify"]);
+                      if ($verified){
+                        wp_clear_auth_cookie();
+                        $user = new \WP_User($user_id);
+                        wp_set_current_user($user->ID);
+                        wp_set_auth_cookie($user->ID);
+                        $username = get_the_author_meta("display_name", $user->ID);
 
-                      if ($this->verify_mobile && "yes" !== get_the_author_meta("pepro_user_is_sms_verified", $user->ID)){
-                        update_user_meta($user->ID, "pepro_user_is_sms_verified", "yes");
-                      }
-
-                      wp_send_json_success(array(
-                        "msg"           => sprintf(__("Hi %s, You have successfully logged in!", $this->td), $username),
-                        "redirect"      => $this->redirect_after_login_register(home_url(), "ajax_register", $user),
-                        "redirect_text" => $this->redirect_after_login_register("", "ajax_text", $user),
-                        "logout_txt"    => __("Logout",$this->td),
-                        "logout_url"    => wp_logout_url(),
-                      ));
-                    }else{
-                      wp_send_json_error(array(
-                        "msg"    => __("Login verification code is incorrect/expired!", $this->td),
-                        "is_otp" => true,
-                        "focus"  => ".otp-verification",
-                        "select" => ".otp-verification",
-                      ));
-                    }
-                  }
-                  else{
-                    // send verification
-                    $_otp_date = get_the_author_meta("_sms_otp_date", $user_id);
-                    $_otp_now = date_i18n("Y/m/d H:i:s", current_time("timestamp"));
-                    if ($_otp_date){
-                      $today = strtotime($_otp_now);
-                      $expire = strtotime($_otp_date . " + $this->sms_expiration sec");
-                      if($today >= $expire){
-                        $sms = $this->send_verification_sms($user_id);
-                        if ($sms){
-                          wp_send_json_success(array(
-                            "msg"    => __("Verification code sent, Enter in field below.$test", $this->td),
-                            "is_otp" => true,
-                            "focus"  => ".otp-verification",
-                          ));
-                        }else{
-                          wp_send_json_error(array(
-                            "msg"    => sprintf(__("Error Sending Verification to %s. Try again.", $this->td), $valid_mobile),
-                            "is_otp" => true,
-                            "focus"  => ".mobile-verification",
-                          ));
+                        if ($this->verify_mobile && "yes" !== get_the_author_meta("pepro_user_is_sms_verified", $user->ID)){
+                          update_user_meta($user->ID, "pepro_user_is_sms_verified", "yes");
                         }
-                      } else {
+
+                        wp_send_json_success(array(
+                          "msg"           => sprintf(__("Hi %s, You have successfully logged in!", $this->td), $username),
+                          "redirect"      => $this->redirect_after_login_register(home_url(), "ajax_register", $user),
+                          "redirect_text" => $this->redirect_after_login_register("", "ajax_text", $user),
+                          "logout_txt"    => __("Logout",$this->td),
+                          "logout_url"    => wp_logout_url(),
+                        ));
+                      }else{
                         wp_send_json_error(array(
-                          "msg"    => sprintf(__("Error Sending Verification, you can request one code every %s seconds.", $this->td), $this->sms_expiration),
+                          "msg"    => __("Login verification code is incorrect/expired!", $this->td),
                           "is_otp" => true,
-                          "focus"  => ".mobile-verification",
+                          "focus"  => ".otp-verification",
+                          "select" => ".otp-verification",
+                          "show"   => ".otp-resend",
                         ));
                       }
                     }
                     else{
-                      $sms = $this->send_verification_sms($user_id);
-                      if ($sms){
-                        wp_send_json_success(array(
-                          "msg"    => sprintf(__("Verification code sent to %s.", $this->td), $valid_mobile),
-                          "is_otp" => true,
-                          "focus"  => ".otp-verification",
-                        ));
-                      }else{
-                        wp_send_json_error(array(
-                          "msg"    => __("Error Sending Verification code. Try again.", $this->td),
+                      // send verification
+                      $_otp_date = get_the_author_meta("_sms_otp_date", $user_id);
+                      $_otp_now = date_i18n("Y/m/d H:i:s", current_time("timestamp"));
+                      if ($_otp_date){
+                        $today = strtotime($_otp_now);
+                        $expire = strtotime($_otp_date . " + $this->sms_expiration sec");
+                        if($today >= $expire){
+                          $sms = $this->send_verification_sms($user_id);
+                          if ($sms){
+                            wp_send_json_success(array(
+                            "msg"    => __("Verification code sent, Enter in field below.$test", $this->td),
+                            "is_otp" => true,
+                            "focus"  => ".otp-verification",
+                            "show"   => ".otp-resend",
+                            ));
+                          }else{
+                            wp_send_json_error(array(
+                            "msg"    => sprintf(__("Error Sending Verification to %s. Try again.", $this->td), $valid_mobile),
+                            "is_otp" => true,
+                            "focus"  => ".mobile-verification",
+                            "show"   => ".otp-resend",
+                            ));
+                          }
+                        } else {
+                          wp_send_json_error(array(
+                          "msg"    => sprintf(__("Error Sending Verification, you can request one code every %s seconds.", $this->td), $this->sms_expiration),
                           "is_otp" => true,
                           "focus"  => ".mobile-verification",
-                        ));
+                          "show"   => ".otp-resend",
+                          ));
+                        }
                       }
+                      else{
+                        $sms = $this->send_verification_sms($user_id);
+                        if ($sms){
+                          wp_send_json_success(array(
+                          "msg"    => sprintf(__("Verification code sent to %s.", $this->td), $valid_mobile),
+                          "is_otp" => true,
+                          "show"   => ".otp-resend",
+                          "focus"  => ".otp-verification",
+                          ));
+                        }else{
+                          wp_send_json_error(array(
+                          "msg"    => __("Error Sending Verification code. Try again.", $this->td),
+                          "is_otp" => true,
+                          "show"   => ".otp-resend",
+                          "focus"  => ".mobile-verification",
+                          ));
+                        }
+                      }
+
                     }
 
                   }
-
+                  else{
+                    if (isset($param["username"])){
+                      wp_send_json_error(array("msg" => __("Please enter a valid email/username/mobile.", $this->td), ));
+                    }
+                    wp_send_json_error(array("msg" => __("Please enter a valid mobile number.", $this->td), ));
+                  }
                 }
-                else{
-                  wp_send_json_error(array("msg" => __("Please enter a valid mobile number.", $this->td), ));
-                }
+                wp_send_json_error(array("msg" => __("Please enter a valid email/username.", $this->td), ));
               }
-              // login by username
-              else{
-                $user = get_user_by('login', $param["username"] );
-              }
-            }
-            // login by email
-            else{
-              $user = get_user_by('email', $param["username"] );
             }
 
             if ( $user && wp_check_password( $param["password"], $user->data->user_pass, $user->ID )){
@@ -1104,6 +1122,7 @@ if (!class_exists("PeproDevUPS_Login")){
             else {
               wp_send_json_error(array("msg" => __("Password does not match!", $this->td), ));
             }
+
           break;
 
           case 'verify':
@@ -1154,6 +1173,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       "is_otp" => true,
                       "focus"  => ".code-verification",
                       "select" => ".code-verification",
+                      "show"   => ".otp-resend",
                       ));
                   }
                 }
@@ -1170,6 +1190,7 @@ if (!class_exists("PeproDevUPS_Login")){
                         wp_send_json_success(array(
                           "msg"    => __("Verification code sent, Enter in field below.", $this->td),
                           "is_otp" => true,
+                          "show"   => ".otp-resend",
                           "focus"  => ".code-verification",
                         ));
                       }
@@ -1177,6 +1198,7 @@ if (!class_exists("PeproDevUPS_Login")){
                         wp_send_json_error(array(
                           "msg"    => sprintf(__("Error Sending Verification to %s. Try again.", $this->td), $valid_mobile),
                           "is_otp" => true,
+                          "show"   => ".otp-resend",
                           "focus"  => ".mobile-verification",
                         ));
                       }
@@ -1195,6 +1217,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       wp_send_json_success(array(
                         "msg"    => sprintf(__("Verification code sent to %s.", $this->td), $valid_mobile),
                         "is_otp" => true,
+                        "show"   => ".otp-resend",
                         "focus"  => ".code-verification",
                       ));
                     }
@@ -1202,6 +1225,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       wp_send_json_error(array(
                         "msg"    => __("Error Sending Verification code. Try again.", $this->td),
                         "is_otp" => true,
+                        "show"   => ".otp-resend",
                         "focus"  => ".mobile-verification",
                       ));
                     }
@@ -1249,6 +1273,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       "is_otp" => true,
                       "focus"  => ".code-verification",
                       "select" => ".code-verification",
+                      "show"   => ".otp-resend",
                     ));
                   }
 
@@ -1267,6 +1292,7 @@ if (!class_exists("PeproDevUPS_Login")){
                         wp_send_json_success(array(
                           "msg"    => sprintf(__("Verification code sent to %s.", $this->td), $param["username"]),
                           "is_otp" => true,
+                          "show"   => ".otp-resend",
                           "focus"  => ".code-verification",
                         ));
                       }else{
@@ -1274,12 +1300,14 @@ if (!class_exists("PeproDevUPS_Login")){
                           "msg"    => __("Error Sending Verification code. Try again.", $this->td),
                           "is_otp" => true,
                           "focus"  => ".email-verification",
-                          "select"  => ".email-verification",
+                          "select" => ".email-verification",
+                          "show"   => ".otp-resend",
                         ));
                       }
                     } else {
                       wp_send_json_error(array(
                         "msg"    => sprintf(__("Error Sending Verification, you can request one code every %s seconds.", $this->td), $this->email_expiration),
+                        "show"   => ".otp-resend",
                         "is_otp" => true,
                         "focus"  => ".email-verification",
                       ));
@@ -1289,6 +1317,7 @@ if (!class_exists("PeproDevUPS_Login")){
                     if ($email){
                       wp_send_json_success(array(
                         "msg"    => sprintf(__("Verification code sent to %s.", $this->td), $param["username"]),
+                        "show"   => ".otp-resend",
                         "is_otp" => true,
                         "focus"  => ".code-verification",
                       ));
@@ -1297,7 +1326,8 @@ if (!class_exists("PeproDevUPS_Login")){
                         "msg"    => __("Error Sending Verification code. Try again.", $this->td),
                         "is_otp" => true,
                         "focus"  => ".email-verification",
-                        "select"  => ".email-verification",
+                        "select" => ".email-verification",
+                        "show"   => ".otp-resend",
                       ));
                     }
                   }
@@ -1356,6 +1386,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       "is_otp" => true,
                       "focus"  => ".code-verification",
                       "select" => ".code-verification",
+                      "show"   => ".otp-resend",
                       ));
                   }
                 }
@@ -1371,6 +1402,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       if ($sms){
                         wp_send_json_success(array(
                           "msg"    => __("Verification code sent, Enter in field below.", $this->td),
+                          "show"   => ".otp-resend",
                           "is_otp" => true,
                           "focus"  => ".code-verification",
                         ));
@@ -1378,6 +1410,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       else{
                         wp_send_json_error(array(
                           "msg"    => sprintf(__("Error Sending Verification to %s. Try again.", $this->td), $valid_mobile),
+                          "show"   => ".otp-resend",
                           "is_otp" => true,
                           "focus"  => ".mobile-verification",
                         ));
@@ -1386,6 +1419,7 @@ if (!class_exists("PeproDevUPS_Login")){
                     else{
                       wp_send_json_error(array(
                         "msg"    => sprintf(__("Error Sending Verification, you can request one code every %s seconds.", $this->td), $this->sms_expiration),
+                        "show"   => ".otp-resend",
                         "is_otp" => true,
                         "focus"  => ".mobile-verification",
                       ));
@@ -1396,6 +1430,7 @@ if (!class_exists("PeproDevUPS_Login")){
                     if ($sms){
                       wp_send_json_success(array(
                         "msg"    => sprintf(__("Verification code sent to %s.", $this->td), $valid_mobile),
+                        "show"   => ".otp-resend",
                         "is_otp" => true,
                         "focus"  => ".code-verification",
                       ));
@@ -1403,6 +1438,7 @@ if (!class_exists("PeproDevUPS_Login")){
                     else{
                       wp_send_json_error(array(
                         "msg"    => __("Error Sending Verification code. Try again.", $this->td),
+                        "show"   => ".otp-resend",
                         "is_otp" => true,
                         "focus"  => ".mobile-verification",
                       ));
@@ -1561,6 +1597,7 @@ if (!class_exists("PeproDevUPS_Login")){
                         "is_otp" => true,
                         "focus"  => ".otp-verification",
                         "select" => ".otp-verification",
+                        "show"   => ".otp-resend",
                       ));
                     }
                   }
@@ -1576,6 +1613,7 @@ if (!class_exists("PeproDevUPS_Login")){
                         if ($sms){
                           wp_send_json_success(array(
                             "msg"    => __("Verification code sent, Enter in field below.", $this->td),
+                            "show"   => ".otp-resend",
                             "is_otp" => true,
                             "focus"  => ".otp-verification",
                           ));
@@ -1583,6 +1621,7 @@ if (!class_exists("PeproDevUPS_Login")){
                         else{
                           wp_send_json_error(array(
                             "msg"    => sprintf(__("<strong>Error:</strong> Sending Verification to %s failed. Try again.", $this->td), $valid_mobile),
+                            "show"   => ".otp-resend",
                             "is_otp" => true,
                             "focus"  => ".mobile-verification",
                           ));
@@ -1601,6 +1640,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       if ($sms){
                         wp_send_json_success(array(
                           "msg"    => sprintf(__("Verification code sent to %s.", $this->td), $valid_mobile),
+                          "show"   => ".otp-resend",
                           "is_otp" => true,
                           "focus"  => ".otp-verification",
                         ));
@@ -1608,6 +1648,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       else{
                         wp_send_json_error(array(
                           "msg"    => __("<strong>Error:</strong> Sending Verification code failed. Try again.", $this->td),
+                          "show"   => ".otp-resend",
                           "is_otp" => true,
                           "focus"  => ".mobile-verification",
                         ));
@@ -2024,9 +2065,9 @@ if (!class_exists("PeproDevUPS_Login")){
         array(
           "meta_name"   => "username",
           "type"        => "text",
-          "title"       => $this->use_email_as_username ? __("Username/Email",$this->td) : __("Username",$this->td),
+          "title"       => __("Username/Email",$this->td),
           "default"     => isset($_GET["username"]) && !empty($_GET["username"]) ? sanitize_text_field( esc_html( trim($_GET["username"]) ) ) : "",
-          "is-required" => "yes",
+          "is-required" => ($this->login_mobile_otp && $this->show_email_field ? "no" : "yes"),
           "is-public"   => "yes",
           "is-editable" => "no",
           "in-column"   => "no",
@@ -2042,58 +2083,61 @@ if (!class_exists("PeproDevUPS_Login")){
           "classes"     => "password-input",
           "attributes"  => "tabindex=2 autocomplete=off size=20 data-error-text=\"".esc_attr__("You have to enter a password", $this->td)."\"",
           "default"     => "",
-          "is-required" => "yes",
+          "is-required" => $this->login_mobile_otp ? "no" : "yes",
           "is-public"   => "yes",
           "is-editable" => "no",
           "in-column"   => "no"
         ));
+      $mobile_fields = array(
+        array(
+          "meta_name"   => "mobile",
+          "type"        => "mobile",
+          "title"       => __("Mobile",$this->td),
+          "default"     => isset($_GET["username"]) && !empty($_GET["username"]) ? sanitize_text_field( esc_html( trim($_GET["username"]) ) ) : "",
+          "is-required" => ($this->login_mobile_otp && $this->show_email_field ? "no" : "yes"),
+          "is-public"   => "yes",
+          "is-editable" => "no",
+          "in-column"   => "no",
+          "placeholder" => "",
+          "classes"     => "mobile-verification force-ltr",
+          "attributes"  => "tabindex=1 data-error-text=\"".esc_attr__("Enter mobile number with English numbers,<br>e.g. 09123456789", $this->td)."\" pattern=".esc_attr("^(\+98|0098|98|0)?9\d{9}$")." maxlength=14",
+        ),
+        array(
+          "meta_name"   => "optverify",
+          "type"        => "text",
+          "title"       => __("OTP Code",$this->td),
+          "row-class"   => "hide",
+          "is-public"   => "yes",
+          "is-required" => "no",
+          "is-editable" => "no",
+          "in-column"   => "no",
+          "no-label"    => "no",
+          "placeholder" => "",
+          "classes"     => "otp-verification force-ltr",
+          "attributes"  => "autocomplete=off tabindex=2 data-error-text=\"".esc_attr__("You have to enter an OTP code or leave it empty and press Enter to receive a new one", $this->td)."\" pattern=".esc_attr("^\d{{$this->verification_digits}}$")." maxlength=$this->verification_digits minlength=$this->verification_digits",
+          "default"     => "",
+        ),
+        array(
+          "meta_name"   => "checkmobile",
+          "type"        => "hidden",
+          "title"       => "",
+          "row-class"   => "hide",
+          "default"     => "1",
+          "is-public"   => "yes",
+          "is-required" => "no",
+          "is-editable" => "no",
+          "in-column"   => "no",
+          "placeholder" => "",
+          "classes"     => "",
+          "attributes"  => "",
+        ),
+      );
       // default otp-login
-      if ($this->login_mobile_otp){
-        $login_fields = array(
-          array(
-            "meta_name"   => "username",
-            "type"        => "mobile",
-            "title"       => __("Mobile",$this->td),
-            "default"     => isset($_GET["username"]) && !empty($_GET["username"]) ? sanitize_text_field( esc_html( trim($_GET["username"]) ) ) : "",
-            "is-required" => "yes",
-            "is-public"   => "yes",
-            "is-editable" => "no",
-            "in-column"   => "no",
-            "placeholder" => "",
-            "classes"     => "mobile-verification force-ltr",
-            "attributes"  => "tabindex=1 data-error-text=\"".esc_attr__("Enter mobile number with English numbers,<br>e.g. 09123456789", $this->td)."\" pattern=".esc_attr("^(\+98|0098|98|0)?9\d{9}$")." maxlength=14",
-          ),
-          array(
-            "meta_name"   => "optverify",
-            "type"        => "text",
-            "title"       => __("OTP Code",$this->td),
-            "row-class"   => "hide",
-            "is-public"   => "yes",
-            "is-required" => "no",
-            "is-editable" => "no",
-            "in-column"   => "no",
-            "no-label"    => "no",
-            "placeholder" => "",
-            "classes"     => "otp-verification force-ltr",
-            "attributes"  => "autocomplete=off tabindex=2 data-error-text=\"".esc_attr__("You have to enter an OTP code or leave it empty and press Enter to receive a new one", $this->td)."\" pattern=".esc_attr("^\d{{$this->verification_digits}}$")." maxlength=$this->verification_digits minlength=$this->verification_digits",
-            "default"     => "",
-          ),
-          array(
-            "meta_name"   => "checkmobile",
-            "type"        => "hidden",
-            "title"       => "",
-            "row-class"   => "hide",
-            "default"     => "1",
-            "is-public"   => "yes",
-            "is-required" => "no",
-            "is-editable" => "no",
-            "in-column"   => "no",
-            "placeholder" => "",
-            "classes"     => "",
-            "attributes"  => "",
-          ),
-          );
+      if ($this->login_mobile_otp && !$this->show_email_field){$login_fields = $mobile_fields;}
+      if ($this->login_mobile_otp && $this->show_email_field){
+        $login_fields = array_merge($login_fields, $mobile_fields);
       }
+
       $num = 2;
       // add reCaptcha
       foreach ($this->register_fileds as $field) {
@@ -2105,6 +2149,9 @@ if (!class_exists("PeproDevUPS_Login")){
 
       $textSend   = __("Receive OTP Code",$this->td);
       $textVerify = __("Verify OTP Code",$this->td);
+      if ($this->login_mobile_otp && $this->show_email_field){
+        $textSend = __("Login via OTP/Password",$this->td);
+      }
       $num++;
       array_push($login_fields, array(
           "meta_name"   => "submit",
@@ -2141,7 +2188,6 @@ if (!class_exists("PeproDevUPS_Login")){
           )
         );
       }
-
       if (!$this->hide_email_field){
         $num++;
         array_push($login_fields,
@@ -2157,7 +2203,6 @@ if (!class_exists("PeproDevUPS_Login")){
           )
         );
       }
-
       // default otp-login
       if ($this->login_mobile_otp){
         $num++;
@@ -2227,28 +2272,17 @@ if (!class_exists("PeproDevUPS_Login")){
         }
       }
 
-      foreach ((array)$this->register_fileds as $field) {
-        if ("yes" == $field["is-public"] && "recaptcha" !== $field["type"]){
-          $num++;
-          if ($this->login_mobile_otp){
-            if ("user_mobile" != $field["meta_name"] && ("tel" == $field["type"] || "mobile" == $field["type"]) ){
-              $field["attributes"] = " data-error-text=\"".esc_attr__("Enter mobile number with English numbers,<br>e.g. 09123456789", $this->td)."\" tabindex=$num " . $field["attributes"];
-              // array_push($login_fields, $field);
-            }elseif ("user_mobile" != $field["meta_name"]){
-              $field["attributes"] = "tabindex=$num " . $field["attributes"];
-              array_push($login_fields, $field);
-            }
-          }
-          else{
-            if ("user_mobile" == $field["meta_name"] && ("tel" == $field["type"] || "mobile" == $field["type"]) ){
-              $field["classes"]    = "mobile-verification force-ltr";
-              $field["attributes"] = " data-error-text=\"".esc_attr__("Enter mobile number with English numbers,<br>e.g. 09123456789", $this->td)."\" tabindex=$num pattern=".esc_attr("^(\+98|0098|98|0)?9\d{9}$")." maxlength=14";
-            }else{
-              $field["attributes"] = "tabindex=$num " . $field["attributes"];
-            }
-            array_push($login_fields, $field);
-          }
+      foreach ( (array) $this->register_fileds as $field) {
+        if ("tel" == $field["type"] || "mobile" == $field["type"]){
+          $field["classes"]    = $field["classes"] . " mobile-verification force-ltr";
+          $field["attributes"] = " data-error-text=\"".esc_attr__("Enter mobile number with English numbers,<br>e.g. 09123456789", $this->td)."\" tabindex=$num pattern=".esc_attr("^(\+98|0098|98|0)?9\d{9}$")." maxlength=14";
         }
+        if ($this->login_mobile_otp && "user_mobile" == $field["meta_name"]) continue;
+        if ("recaptcha" == $field["type"] && "yes" == $field["is-public"]) continue;
+
+        $num++;
+        $field["attributes"] = "tabindex=$num " . $field["attributes"];
+        array_push($login_fields, $field);
       }
 
       if ($this->show_password_field){
@@ -2276,7 +2310,6 @@ if (!class_exists("PeproDevUPS_Login")){
           )
         );
       }
-
       foreach ($this->register_fileds as $field) {
         if ("recaptcha" == $field["type"] && "yes" == $field["is-public"]){
           $num++;
@@ -2299,7 +2332,7 @@ if (!class_exists("PeproDevUPS_Login")){
           "no-label"    => "yes",
           "is-public"   => "yes",
         ));
-      return apply_filters("pepro_reglogin_get_login_fields", $login_fields);
+      return apply_filters("pepro_reglogin_get_form_register_fields", $login_fields);
     }
     public function printout_fields($config)
     {
@@ -2521,7 +2554,7 @@ if (!class_exists("PeproDevUPS_Login")){
           "is-public"   => "yes",
         ));
 
-      return apply_filters("pepro_reglogin_get_login_fields", $login_fields);
+      return apply_filters("pepro_reglogin_get_verify_email_fields", $login_fields);
     }
     public function get_form_resetpass_fields()
     {
@@ -2560,7 +2593,7 @@ if (!class_exists("PeproDevUPS_Login")){
           "is-public"   => "yes",
         ));
 
-      return apply_filters("pepro_reglogin_get_login_fields", $login_fields);
+      return apply_filters("pepro_reglogin_get_form_resetpass_fields", $login_fields);
     }
     public function get_verify_mobile_fields($class="button button-primary", $force=false)
     {
@@ -2632,7 +2665,7 @@ if (!class_exists("PeproDevUPS_Login")){
           "is-public"   => "yes",
         ));
 
-      return apply_filters("pepro_reglogin_get_login_fields", $login_fields);
+      return apply_filters("pepro_reglogin_get_verify_mobile_fields", $login_fields);
     }
     public function redirect_after_login_register($redirect_to="", $requested_redirect_to="", $user=0)
     {

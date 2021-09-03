@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/02 16:24:05
+# @Last modified time: 2021/09/03 15:03:29
 if (!class_exists("PeproDevUPS_Core")){
   class PeproDevUPS_Core
   {
@@ -31,7 +31,7 @@ if (!class_exists("PeproDevUPS_Core")){
         $this->assets_url      = plugins_url("/assets/", __FILE__);
         $this->plugin_basename = plugin_basename(__FILE__);
         $this->plugin_file     = __FILE__;
-        $this->version         = "1.0.0";
+        $this->version         = "1.5.5";
         $this->db_slug         = $this->td;
         $this->db_table        = $wpdb->prefix . $this->db_slug;
         $this->title           = __("PeproDev Ultimate Profile Solutions", $this->td);
