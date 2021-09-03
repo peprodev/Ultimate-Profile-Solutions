@@ -5,4 +5,4 @@ The most complete and THE Ultimate Profile Solutions for WordPress
 
 ##### **Developed by** [Perpro Development Group](https://pepro.dev/)
 
-*Current Version: 1.5.3* \| *Lead Programmer:* [Amirhosseinhpv](https://hpv.im/)
+*Current Version: 1.5.4* \| *Lead Programmer:* [Amirhosseinhpv](https://hpv.im/)

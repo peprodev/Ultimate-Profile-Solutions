@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/02 16:32:22
+# @Last modified time: 2021/09/03 10:28:41
 if (!class_exists("PeproDevUPS_Profile")) {
     class PeproDevUPS_Profile
     {
@@ -1620,34 +1620,24 @@ if (!class_exists("PeproDevUPS_Profile")) {
                     (int) $id = ( isset($_POST["dparam"]["id"]) && !empty(trim($_POST["dparam"]["id"])) && is_numeric(trim($_POST["dparam"]["id"])) ) ? trim($_POST["dparam"]["id"]) : "-1";
 
                     $query = $wpdb->get_row($wpdb->prepare("SELECT id FROM {$this->tbl_sections} WHERE `id`=%d", $id));
-
-                    $title = isset($_POST["dparam"]["title"]) ? trim($_POST["dparam"]["title"]) : null;
+                    $title = isset($_POST["dparam"]["title"]) ? sanitize_text_field(trim($_POST["dparam"]["title"])) : null;
                     if (empty(trim($title))) {wp_send_json_error(array( "msg"=>__("There was a problem with your request. Title field is required.", $this->td)));return false; }
-
-                    $slug = isset($_POST["dparam"]["slug"]) ? trim($_POST["dparam"]["slug"]) : null;
+                    $slug = isset($_POST["dparam"]["slug"]) ? sanitize_title(trim($_POST["dparam"]["slug"])) : null;
                     if (empty(trim($slug))) {wp_send_json_error(array( "msg"=>__("There was a problem with your request. Unique Slug field is required.", $this->td)));return false; }
-
-                    $subject = isset($_POST["dparam"]["subject"]) ? trim($_POST["dparam"]["subject"]) : null;
+                    $subject = isset($_POST["dparam"]["subject"]) ? sanitize_text_field(trim($_POST["dparam"]["subject"])) : null;
                     if (empty(trim($subject))) {wp_send_json_error(array( "msg"=>__("There was a problem with your request. Unique Slug field is required.", $this->td)));return false; }
-
-                    $content = isset($_POST["dparam"]["content"]) ? trim($_POST["dparam"]["content"]) : null;
+                    $content = isset($_POST["dparam"]["content"]) ? sanitize_text_field(trim($_POST["dparam"]["content"])) : null;
                     if (empty(trim($content))) {wp_send_json_error(array( "msg"=>__("There was a problem with your request. Content field is required.", $this->td)));return false; }
-
-                    $icon = isset($_POST["dparam"]["icon"]) ? trim($_POST["dparam"]["icon"]) : null;
+                    $icon = isset($_POST["dparam"]["icon"]) ? sanitize_text_field(trim($_POST["dparam"]["icon"])) : null;
                     if (empty(trim($icon))) {$icon = "zmdi zmdi-email"; }
-
-                    $priority = isset($_POST["dparam"]["priority"]) ? trim($_POST["dparam"]["priority"]) : null;
+                    $priority = isset($_POST["dparam"]["priority"]) ? sanitize_text_field(trim($_POST["dparam"]["priority"])) : null;
                     if (empty(trim($priority))) { $priority = 1000; }
-
-                    $active = isset($_POST["dparam"]["active"]) ? trim($_POST["dparam"]["active"]) : null;
+                    $active = isset($_POST["dparam"]["active"]) ? sanitize_text_field(trim($_POST["dparam"]["active"])) : null;
                     if (empty(trim($active))) { $active = "no"; }
-
-                    $access = isset($_POST["dparam"]["access"]) ? trim($_POST["dparam"]["access"]) : null;
-
-                    $ld_lms = isset($_POST["dparam"]["ld_lms"]) ? trim($_POST["dparam"]["ld_lms"]) : "";
-
-                    $css  = isset($_POST["dparam"]["css"]) ? trim($_POST["dparam"]["css"]) : null;
-                    $js   = isset($_POST["dparam"]["js"]) ? trim($_POST["dparam"]["js"]) : null;
+                    $access = isset($_POST["dparam"]["access"]) ? sanitize_text_field(trim($_POST["dparam"]["access"])) : null;
+                    $ld_lms = isset($_POST["dparam"]["ld_lms"]) ? sanitize_text_field(trim($_POST["dparam"]["ld_lms"])) : "";
+                    $css    = isset($_POST["dparam"]["css"]) ? sanitize_text_field(trim($_POST["dparam"]["css"])) : null;
+                    $js     = isset($_POST["dparam"]["js"]) ? sanitize_text_field(trim($_POST["dparam"]["js"])) : null;
 
                     $dataArray = array(
                       'content'     => $content,
@@ -1741,44 +1731,38 @@ if (!class_exists("PeproDevUPS_Profile")) {
                     (int) $id = ( isset($_POST["dparam"]["id"]) && !empty(trim($_POST["dparam"]["id"])) && is_numeric(trim($_POST["dparam"]["id"])) ) ? trim($_POST["dparam"]["id"]) : "-1";
 
 
-                    $title = isset($_POST["dparam"]["title"]) ? trim($_POST["dparam"]["title"]) : null;
+                    $title = isset($_POST["dparam"]["title"]) ? sanitize_text_field(trim($_POST["dparam"]["title"])) : null;
                     if (empty(trim($title))) {
-                      wp_send_json_error(
-                        array( "msg"=>__("There was a problem with your request. Title field is required.", $this->td))
-                      );
+                      wp_send_json_error( array( "msg"=>__("There was a problem with your request. Title field is required.", $this->td)) );
                       return false;
                     }
-                    $content = isset($_POST["dparam"]["content"]) ? trim($_POST["dparam"]["content"]) : null;
+                    $content = isset($_POST["dparam"]["content"]) ? sanitize_text_field(trim($_POST["dparam"]["content"])) : null;
                     if (empty(trim($content))) {
                       wp_send_json_error(
                         array( "msg"=>__("There was a problem with your request. Content field is required.", $this->td))
                       );
                       return false;
                     }
-                    $icon = isset($_POST["dparam"]["icon"]) ? trim($_POST["dparam"]["icon"]) : null;
+                    $icon = isset($_POST["dparam"]["icon"]) ? sanitize_text_field(trim($_POST["dparam"]["icon"])) : null;
                     if (empty(trim($icon))) {$icon    = "zmdi zmdi-email"; }
-                    $color = isset($_POST["dparam"]["color"]) ? trim($_POST["dparam"]["color"]) : null;
+                    $color = isset($_POST["dparam"]["color"]) ? sanitize_text_field(trim($_POST["dparam"]["color"])) : null;
                     if (empty(trim($color))) { $color = "bg-c1"; }
-                    $priority = isset($_POST["dparam"]["priority"]) ? trim($_POST["dparam"]["priority"]) : null;
+                    $priority = isset($_POST["dparam"]["priority"]) ? sanitize_text_field(trim($_POST["dparam"]["priority"])) : null;
                     if (empty(trim($priority))) {
                       wp_send_json_error(
                         array( "msg" => __("There was a problem with your request. Priority field is required.", $this->td))
                       );
                       return false; }
-                    $act1       = isset($_POST["dparam"]["act1"]) ? trim($_POST["dparam"]["act1"]) : null;
-                    $act1url    = isset($_POST["dparam"]["act1url"]) ? trim($_POST["dparam"]["act1url"]) : null;
-                    $act2       = isset($_POST["dparam"]["act2"]) ? trim($_POST["dparam"]["act2"]) : null;
-                    $act2url    = isset($_POST["dparam"]["act2url"]) ? trim($_POST["dparam"]["act2url"]) : null;
-                    $usersCheck = isset($_POST["dparam"]["users-check"]) ? trim($_POST["dparam"]["users-check"]) : null;
+                    $act1       = isset($_POST["dparam"]["act1"]) ? sanitize_text_field(trim($_POST["dparam"]["act1"])) : null;
+                    $act1url    = isset($_POST["dparam"]["act1url"]) ? sanitize_text_field(trim($_POST["dparam"]["act1url"])) : null;
+                    $act2       = isset($_POST["dparam"]["act2"]) ? sanitize_text_field(trim($_POST["dparam"]["act2"])) : null;
+                    $act2url    = isset($_POST["dparam"]["act2url"]) ? sanitize_text_field(trim($_POST["dparam"]["act2url"])) : null;
+                    $usersCheck = isset($_POST["dparam"]["users-check"]) ? sanitize_text_field(trim($_POST["dparam"]["users-check"])) : null;
                     $usersList  = isset($_POST["dparam"]["usersList"]) ? $_POST["dparam"]["usersList"] : null;
                     if ($usersCheck == "0") {
                         if (empty($usersList)) {
-                            wp_send_json_error(
-                                array(
-                                "msg"=>__("There was a problem with your request. Users List is required.", $this->td),
-                                )
-                            );
-                            return false;
+                          wp_send_json_error( array( "msg"=>__("There was a problem with your request. Users List is required.", $this->td), ) );
+                          return false;
                         }
                         $usersListArray = $usersList;
                         $usersList = implode(",", $usersList);
@@ -1788,9 +1772,9 @@ if (!class_exists("PeproDevUPS_Profile")) {
                         $usersList = "all";
                     }
 
-                    $scheduleCheck = isset($_POST["dparam"]["schedule-check"]) ? trim($_POST["dparam"]["schedule-check"]) : null;
-                    $schedule      = isset($_POST["dparam"]["schedule"]) ? trim($_POST["dparam"]["schedule"]) : null;
-                    $scheduleFA    = isset($_POST["dparam"]["scheduleFA"]) ? trim($_POST["dparam"]["scheduleFA"]) : null;
+                    $scheduleCheck = isset($_POST["dparam"]["schedule-check"]) ? sanitize_text_field(trim($_POST["dparam"]["schedule-check"])) : null;
+                    $schedule      = isset($_POST["dparam"]["schedule"]) ? sanitize_text_field(trim($_POST["dparam"]["schedule"])) : null;
+                    $scheduleFA    = isset($_POST["dparam"]["scheduleFA"]) ? sanitize_text_field(trim($_POST["dparam"]["scheduleFA"])) : null;
 
                     if ($scheduleCheck == "1") {
                         if (empty(trim($schedule))) {
