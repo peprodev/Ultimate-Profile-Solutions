@@ -1,11 +1,12 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/02 12:38:35
+# @Last modified time: 2021/09/04 14:45:29
 global $PeproDevUPS_Profile;
 $td          = $PeproDevUPS_Profile->td;
 $rtl         = is_rtl() ? "right" : "left";
-$page        = isset($_GET['cpage']) ? abs((int) $_GET['cpage']) : 1;
-$srch        = isset($_GET['s']) ? sanitize_text_field(esc_html(trim($_GET['s']))) : "";
+$page        = (int) isset($_GET['cpage']) ? sanitize_text_field($_GET['cpage']) : 1;
+$page        = abs($page);
+$srch        = isset($_GET['s']) ? sanitize_text_field(trim($_GET['s'])) : "";
 $integrity   = wp_create_nonce('peprocorenounce');
 $trUrgent    = _x("Urgent", "notifications-priority", "pepro");
 $trHigh      = _x("High", "notifications-priority", "pepro");

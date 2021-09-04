@@ -1,12 +1,6 @@
 <?php
-# @Author: Amirhosseinhpv
-# @Date:   2021/08/28 00:07:32
-# @Email:  its@hpv.im
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/01 22:38:53
-# @License: GPLv2
-# @Copyright: Copyright © Amirhosseinhpv (https://hpv.im), all rights reserved.
-
+# @Last modified time: 2021/09/04 14:56:02
 
 global $PeproDevUPS_Profile;
 $current_user = wp_get_current_user();

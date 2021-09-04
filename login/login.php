@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/03 15:40:57
+# @Last modified time: 2021/09/04 14:49:36
 include_once plugin_dir_path(__FILE__) . "/include/class-login-permalink.php";
 
 if (!class_exists("PeproDevUPS_Login")){
@@ -198,10 +198,6 @@ if (!class_exists("PeproDevUPS_Login")){
       $this->login_fields                = $this->get_login_fields();
       $this->verify_email_fields         = $this->get_verify_email_fields();
       $this->verify_mobile_fields        = $this->get_verify_mobile_fields();
-
-      if (isset($_GET["gubm"])){
-        echo "<pre style='text-align: left; direction: ltr; border:1px solid gray; padding: 1rem; overflow: auto;'>". print_r($this->get_user_by_mobile($_GET["gubm"]),1) ."</pre>";
-      }
 
       if (is_user_logged_in()){
         if($this->verify_mobile){
@@ -522,12 +518,13 @@ if (!class_exists("PeproDevUPS_Login")){
     }
     public function enqueue_shortcode_styles($args=array())
     {
-      wp_enqueue_style("pepro-login-reg-formaction",    "{$this->assets_url}/assets/main-form.css", array(), current_time("timestamp"));
-      wp_enqueue_style("pepro-login-reg-formconfirm",   "{$this->assets_url}/assets/jquery-confirm.css", array(), current_time("timestamp"));
-      wp_enqueue_script("pepro-login-reg-formconfirm",  "{$this->assets_url}/assets/jquery-confirm.js", array("jquery"), current_time("timestamp"), true);
-      wp_enqueue_script("pepro-login-reg-popper",       "//unpkg.com/@popperjs/core@latest", array("jquery"), current_time("timestamp"), true);
-      wp_enqueue_script("pepro-login-reg-tippy-bundle", "{$this->assets_url}/assets/tippy-bundle.umd.min.js", array("jquery"), current_time("timestamp"), true);
-      wp_enqueue_script("pepro-login-reg-formaction",   "{$this->assets_url}/assets/main-form-ajax.js", array("jquery"), current_time("timestamp"), true);
+      global $PeproDevUPS_Login;
+      wp_enqueue_style("pepro-login-reg-formaction",    "{$this->assets_url}/assets/main-form.css", array(), "1.5.5");
+      wp_enqueue_style("pepro-login-reg-formconfirm",   "{$this->assets_url}/assets/jquery-confirm.css", array(), "1.5.5");
+      wp_enqueue_script("pepro-login-reg-formconfirm",  "{$this->assets_url}/assets/jquery-confirm.js", array("jquery"), "1.5.5", true);
+      wp_enqueue_script("pepro-login-reg-popper",       "{$PeproDevUPS_Login->assets_url}assets/popper.min.js", array("jquery"), "1.5.5", true);
+      wp_enqueue_script("pepro-login-reg-tippy-bundle", "{$this->assets_url}/assets/tippy-bundle.umd.min.js", array("jquery"), "1.5.5", true);
+      wp_enqueue_script("pepro-login-reg-formaction",   "{$this->assets_url}/assets/main-form-ajax.js", array("jquery"), "1.5.5", true);
       wp_localize_script("pepro-login-reg-formaction",  $args["uniqd"], array(
         "instance"          => $args["uniqd"],
         "trigger"           => $args["trigger"]??"",
@@ -843,7 +840,7 @@ if (!class_exists("PeproDevUPS_Login")){
                 <?php
               }
               ?>
-              <a href="javascript:;" style="display: none;" class="otp-resend"><?=__("Resend Code", $this->td);?></a>
+              <a href="javascript:;" style="display: none;" class="otp-resend"><?php echo __("Resend Code", $this->td);?></a>
               <?php
               if (!$this->login_mobile_otp){
                 ?>
@@ -872,7 +869,7 @@ if (!class_exists("PeproDevUPS_Login")){
               ?>
               <div class="pepro-form-links">
                 <a class="switch-form-login" href="javascript:;"><?php echo __("Login", $this->td);?></a>
-                <a href="javascript:;" style="display: none;" class="otp-resend"><?=__("Resend Code", $this->td);?></a>
+                <a href="javascript:;" style="display: none;" class="otp-resend"><?php echo __("Resend Code", $this->td);?></a>
               </div>
             </form>
             <?php
@@ -895,7 +892,7 @@ if (!class_exists("PeproDevUPS_Login")){
               ?>
               <div class="pepro-form-links">
                 <a class="switch-form-login" href="javascript:;"><?php echo __("Login", $this->td);?></a>
-                <a href="javascript:;" style="display: none;" class="otp-resend"><?=__("Resend Code", $this->td);?></a>
+                <a href="javascript:;" style="display: none;" class="otp-resend"><?php echo __("Resend Code", $this->td);?></a>
               </div>
             </form>
             <?php
@@ -2991,9 +2988,9 @@ if (!class_exists("PeproDevUPS_Login")){
 
       if ($this->use_email_as_username){
         if(isset($_POST['user_email']) && !empty($_POST['user_email'])){
-          $user = get_user_by('email', $_POST['user_email'] );
+          $user = get_user_by('email', sanitize_email( $_POST['user_email'] ) );
           if (!$user){
-            $_POST['user_login'] = $_POST['user_email'];
+            $_POST['user_login'] = sanitize_email( $_POST['user_email'] );
           }
         }
       }

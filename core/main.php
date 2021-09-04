@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/03 15:03:29
+# @Last modified time: 2021/09/04 14:58:35
 if (!class_exists("PeproDevUPS_Core")){
   class PeproDevUPS_Core
   {
@@ -31,7 +31,7 @@ if (!class_exists("PeproDevUPS_Core")){
         $this->assets_url      = plugins_url("/assets/", __FILE__);
         $this->plugin_basename = plugin_basename(__FILE__);
         $this->plugin_file     = __FILE__;
-        $this->version         = "1.5.5";
+        $this->version         = defined('PeproDevUPS') ? PeproDevUPS : "1.0.0";
         $this->db_slug         = $this->td;
         $this->db_table        = $wpdb->prefix . $this->db_slug;
         $this->title           = __("PeproDev Ultimate Profile Solutions", $this->td);
@@ -222,11 +222,12 @@ if (!class_exists("PeproDevUPS_Core")){
     }
     public function load_dashboard_after_initiated()
     {
+      global $PeproDevUPS_Login;
       // Core JS Files
       wp_enqueue_script('jquery');
-      wp_enqueue_script("popper",                     "//unpkg.com/@popperjs/core@latest", array( 'jquery' ), current_time( "timestamp" ), true); //'1.16.0'
-      wp_enqueue_script("bootstrap-material-design",  "{$this->assets_url}js/core/bootstrap-material-design.min.js", array( 'jquery' ), current_time( "timestamp" ), true); //'3.0.2'
-      wp_enqueue_script("default-passive-events",     "{$this->assets_url}js/default-passive-events.js", array( 'jquery' ), current_time( "timestamp" ), true); //'1.0.10'
+      wp_enqueue_script("popper",                     "{$PeproDevUPS_Login->assets_url}assets/popper.min.js", array( 'jquery' ), "1.5.5", true); //'1.16.0'
+      wp_enqueue_script("bootstrap-material-design",  "{$this->assets_url}js/core/bootstrap-material-design.min.js", array( 'jquery' ), "1.5.5", true); //'3.0.2'
+      wp_enqueue_script("default-passive-events",     "{$this->assets_url}js/default-passive-events.js", array( 'jquery' ), "1.5.5", true); //'1.0.10'
       // wp_enqueue_script("perfect-scrollbar", "{$this->assets_url}js/plugins/perfect-scrollbar.jquery.min.js", array( 'jquery' ), '1.0.2', true);
       // Google Maps Plugin
       // wp_enqueue_script("google-map", "https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE", array( 'jquery' ), '1.0.0', true);
@@ -238,7 +239,7 @@ if (!class_exists("PeproDevUPS_Core")){
       // Control Center for Material Dashboard: parallax effects, scripts for the example pages etc
       // Material Dashboard DEMO methods, don't include it in your project!
 
-      wp_enqueue_script("material-dashboard", "{$this->assets_url}js/material-dashboard.js", array( 'jquery' ), current_time( "timestamp" ), true); //'2.1.0'
+      wp_enqueue_script("material-dashboard", "{$this->assets_url}js/material-dashboard.js", array( 'jquery' ), "1.5.5", true); //'2.1.0'
 
       wp_enqueue_script("dashboard-back", "{$this->assets_url}js/dashboard-back.js", array('jquery'), '1.0.2', true);
       wp_localize_script( "dashboard-back", "pepc",
@@ -279,7 +280,7 @@ if (!class_exists("PeproDevUPS_Core")){
         add_filter('admin_footer_text', function () {
             return sprintf(_x("Thanks for using %s products", "footer-copyright", $this->td), "<b><a href='https://pepro.dev' target='_blank' >".__("Pepro Dev", $this->td)."</a></b>");
         }, 11);
-        echo "<h1>".$this->title_w."</h1>";
+        echo "<h1>".esc_html( $this->title_w )."</h1>";
         echo '<div class="wrap"><hr class=\'hr2\'>';
         /*
         if (isset($_GET["empty"]) && $_GET["empty"] === "true") {
@@ -311,7 +312,7 @@ if (!class_exists("PeproDevUPS_Core")){
         submit_button(__("Save setting", $this->td),"primary peprosubmt","submit",false);
         echo '<a href="'.admin_url("admin.php?page=pepro").'&empty=true" onclick="return confirm(\''.__("Are you sure you want to clear all searches history (trend items) from database?",$this->td).'\');" class="button button-primary peprosubmt">'.__("Empty Database", $this->td).'</a>';
         echo "</div>";
-        echo '</form><hr class=\'hr2\'>'.$hll.'</div>';
+        echo '</form><hr class=\'hr2\'>'. wp_kses_post( $hll ) .'</div>';
         $tcona = ob_get_contents();
         ob_end_clean();
         print $tcona;
@@ -409,29 +410,28 @@ if (!class_exists("PeproDevUPS_Core")){
     }
     public function print_setting_iput($SLUG="", $CAPTION="", $extraHtml="", $type="text",$extraClass="")
     {
-      $ON = sprintf(_x("Enter %s", "setting-page", $this->td), $CAPTION);
+      $ON = sprintf(_x("Enter %s", "setting-page", $this->td), wp_kses_post($CAPTION));
       echo "<tr>
-  			<th scope='row'>
-  				<label for='$SLUG'>$CAPTION</label>
-  			</th>
-  			<td><input name='$SLUG' $extraHtml type='$type' id='$SLUG' placeholder='$CAPTION' title='$ON' value='" . $this->read_opt($SLUG) . "' class='regular-text $extraClass' /></td>
+  			<th scope='row'><label for='".esc_attr( $SLUG )."'>".wp_kses_post($CAPTION)."</label></th>
+  			<td><input name='".esc_attr( $SLUG )."' ".esc_attr( $extraHtml )." type='".esc_attr( $type )."' id='".esc_attr( $SLUG )."'
+        placeholder='".esc_attr( $CAPTION )."' title='".esc_attr( $ON )."' value='" . esc_attr($this->read_opt($SLUG)) . "' class='regular-text ".esc_attr( $extraClass )."' /></td>
   		</tr>";
     }
     public function print_setting_select($SLUG, $CAPTION, $dataArray=array())
     {
-        $ON = sprintf(_x("Choose %s", "setting-page", $this->td), $CAPTION);
+        $ON = sprintf(_x("Choose %s", "setting-page", $this->td), wp_kses_post($CAPTION));
         $OPTS = "";
         foreach ($dataArray as $key => $value) {
             if ($key == "EMPTY") {
                 $key = "";
             }
-            $OPTS .= "<option value='$key' ". selected($this->read_opt($SLUG), $key, false) .">$value</option>";
+            $OPTS .= "<option value='".esc_attr( $key )."' ". selected($this->read_opt($SLUG), $key, false) .">".esc_html( $value )."</option>";
         }
         echo "<tr>
     			<th scope='row'>
-    				<label for='$SLUG'>$CAPTION</label>
+    				<label for='".esc_attr( $SLUG )."'>".wp_kses_post($CAPTION)."</label>
     			</th>
-    			<td><select name='$SLUG' id='$SLUG' title='$ON' class='regular-text'>
+    			<td><select name='".esc_attr( $SLUG )."' id='".esc_attr( $SLUG )."' title='".esc_attr( $ON )."' class='regular-text'>
           ".$OPTS."
           </select>
           </td>
@@ -439,11 +439,11 @@ if (!class_exists("PeproDevUPS_Core")){
     }
     public function print_setting_editor($SLUG, $CAPTION, $re="")
     {
-        echo "<tr><th><label for='$SLUG'>$CAPTION</label></th><td>";
+        echo "<tr><th><label for='".esc_attr( $SLUG )."'>".wp_kses_post($CAPTION)."</label></th><td>";
         wp_editor($this->read_opt($SLUG, ''), strtolower(str_replace(array('-', '_', ' ', '*'), '', $SLUG)), array(
         'textarea_name' => $SLUG
-      ));
-        echo "<p class='$SLUG'>$re</p></td></tr>";
+          ));
+        echo "<p class='".esc_attr( $SLUG )."'>".wp_kses_post( $re )."</p></td></tr>";
     }
     public function _callback($a)
     {

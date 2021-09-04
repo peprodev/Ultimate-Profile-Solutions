@@ -1,7 +1,7 @@
 <?php
 
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/08/29 00:32:32
+# @Last modified time: 2021/09/04 14:34:37
 
 
 global $PeproDevUPS_Profile , $wp , $current_profile_url;
@@ -24,7 +24,7 @@ if ($Anumber > 0) {  $Anotif = sprintf(__("You have %s unread announcements.", $
       echo "<span class=\"quantity\">$number</span>";
     }
     ?>
-    <div class="mess-dropdown js-dropdown">
+    <div class="mess-dropdown js-dropdown" style="transform: scale(0);">
         <div class="mess__title">
             <p><?php echo $notif;?></p>
         </div>
@@ -44,7 +44,7 @@ if ($Anumber > 0) {  $Anotif = sprintf(__("You have %s unread announcements.", $
       echo "<span class=\"quantity\">$Anumber</span>";
     }
     ?>
-    <div class="mess-dropdown js-dropdown">
+    <div class="mess-dropdown js-dropdown" style="transform: scale(0);">
         <div class="mess__title">
             <p><?php echo $Anotif;?></p>
         </div>

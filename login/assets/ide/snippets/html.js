@@ -1,3 +1,14 @@
+/**
+ * @Author: Amirhosseinhpv
+ * @Date:   2021/08/28 00:07:49
+ * @Email:  its@hpv.im
+ * @Last modified by:   Amirhosseinhpv
+ * @Last modified time: 2021/09/04 14:21:51
+ * @License: GPLv2
+ * @Copyright: Copyright © Amirhosseinhpv (https://hpv.im), all rights reserved.
+ */
+
+
 define("ace/snippets/html",["require","exports","module"], function(require, exports, module) {
 "use strict";
 
@@ -98,15 +109,6 @@ snippet docxt\n\
 snippet docx\n\
 	<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\"\n\
 	\"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">\n\
-# html5shiv\n\
-snippet html5shiv\n\
-	<!--[if lte IE 8]>\n\
-		<script src=\"https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js\"></script>\n\
-	<![endif]-->\n\
-snippet html5printshiv\n\
-	<!--[if lte IE 8]>\n\
-		<script src=\"https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js\"></script>\n\
-	<![endif]-->\n\
 # Attributes\n\
 snippet attr\n\
 	${1:attribute}=\"${2:property}\"\n\
@@ -866,4 +868,3 @@ exports.scope = "html";
                         }
                     });
                 })();
-            

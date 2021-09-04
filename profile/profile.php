@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/03 15:46:19
+# @Last modified time: 2021/09/04 14:48:02
 if (!class_exists("PeproDevUPS_Profile")) {
     class PeproDevUPS_Profile
     {
@@ -1676,8 +1676,8 @@ if (!class_exists("PeproDevUPS_Profile")) {
 
                     $pageNum = 1; $pageSrch = "";
 
-                    $parts = parse_url($_POST["dparam"]["url"]);
-
+                    $reqURL = sanitize_url($_POST["dparam"]["url"]);
+                    $parts = parse_url($reqURL);
                     parse_str($parts['query'], $pageURLquery);
 
                     if (isset($pageURLquery['cpage']) && !empty($pageURLquery['cpage']) && 0 < (int) $pageURLquery['cpage'])
@@ -1686,7 +1686,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                     if (isset($pageURLquery['s']) && !empty($pageURLquery['s']))
                       $pageSrch = $pageURLquery['s'];
 
-                    $htmltabledata = $this->show_sections_edit_panel($pageNum, $pageSrch, $_POST["dparam"]["url"]);
+                    $htmltabledata = $this->show_sections_edit_panel($pageNum, $pageSrch, $reqURL);
 
                     if (false !== $update)
                       wp_send_json_success(array( "msg"=>__("Notification edited successfully.", $this->td), "type"=> "update", "htmlupdate" => $htmltabledata, "status"=> $update));
@@ -1698,16 +1698,16 @@ if (!class_exists("PeproDevUPS_Profile")) {
 
                     break;
                   case 'edit_section_builtin':
-                    $id = ( isset($_POST["dparam"]) && !empty(trim($_POST["dparam"])) ) ? trim($_POST["dparam"]) : "";
-                    $active = ( isset($_POST["aparam"]) && !empty(trim($_POST["aparam"])) ) ? trim($_POST["aparam"]) : "";
-                    (int) $priority = ( isset($_POST["pparam"]) && !empty(trim($_POST["pparam"])) ) ? trim($_POST["pparam"]) : "";
+                    $id       = ( isset($_POST["dparam"]) && !empty(trim($_POST["dparam"])) ) ? sanitize_text_field(trim($_POST["dparam"])) : "";
+                    $active   = ( isset($_POST["aparam"]) && !empty(trim($_POST["aparam"])) ) ? sanitize_text_field(trim($_POST["aparam"])) : "";
+                    $priority = (int) ( isset($_POST["pparam"]) && !empty(trim($_POST["pparam"])) ) ? sanitize_text_field(trim($_POST["pparam"])) : "";
 
                     if (empty($id))
                       wp_send_json_error(array( "msg"=>__("There was a problem with your request.", $this->td)));
 
-                    add_option( "peprofile_builtin_{$id}_priority", ($priority?$priority:""));
-                    add_option( "peprofile_builtin_{$id}_is_enabled", ($active=="yes"?true:false));
-                    update_option( "peprofile_builtin_{$id}_priority", ($priority?$priority:"") );
+                    add_option( "peprofile_builtin_{$id}_priority",      ($priority?$priority:""));
+                    add_option( "peprofile_builtin_{$id}_is_enabled",    ($active=="yes"?true:false));
+                    update_option( "peprofile_builtin_{$id}_priority",   ($priority?$priority:"") );
                     update_option( "peprofile_builtin_{$id}_is_enabled", ($active=="yes"?true:false) );
 
                     wp_send_json_success(array( "msg"=>__("Section edited successfully.", $this->td)));

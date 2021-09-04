@@ -1,7 +1,7 @@
 <?php
 
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/08/28 23:58:50
+# @Last modified time: 2021/09/04 14:49:03
 
 define( 'PEPROCORELOGINSLUGCHANGERBASENAMME', plugin_basename( __FILE__ ) );
 class PeproCoreLoginSlugChangerClass {
@@ -359,8 +359,8 @@ class PeproCoreLoginSlugChangerClass {
 			if ( ! is_wp_error( $result ) ) {
 				wp_redirect( add_query_arg( array(
 					'action'      => 'confirmaction',
-					'request_id'  => $_GET['request_id'],
-					'confirm_key' => $_GET['confirm_key']
+					'request_id'  => sanitize_text_field($_GET['request_id']),
+					'confirm_key' => sanitize_text_field($_GET['confirm_key']),
 				), $this->new_login_url()
 				) );
 				exit();

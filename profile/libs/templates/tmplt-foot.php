@@ -1,14 +1,14 @@
 <?php
 
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/03 15:31:44
+# @Last modified time: 2021/09/04 14:40:16
 
-global $PeproDevUPS_Profile, $current_profile_url, $PeproDevUPS_ProfileStripslashesNotifsJs;
+global $PeproDevUPS_Profile, $current_profile_url, $PeproDevUPS_Login, $PeproDevUPS_ProfileStripslashesNotifsJs;
 wp_enqueue_script( "jquery" );
-wp_enqueue_script( "peprodev-popper",    "//unpkg.com/@popperjs/core@latest", array("jquery"));
-wp_enqueue_script( "peprodev-bootstrap", "//unpkg.com/bootstrap@latest", array("jquery"));
+wp_enqueue_script( "peprodev-popper",    "{$PeproDevUPS_Login->assets_url}assets/popper.min.js", array("jquery"));
+wp_enqueue_script( "peprodev-bootstrap", "{$PeproDevUPS_Login->assets_url}assets/bootstrap.min.js", array("jquery"));
 wp_enqueue_script( "peprodev-main",      plugins_url("/js/main.js", __FILE__), array("jquery"));
-wp_register_script( "peprodev--custom",  plugins_url("/js/custom-js.js", __FILE__), array("jquery"), current_time( "timestamp" ), true);
+wp_register_script( "peprodev--custom",  plugins_url("/js/custom-js.js", __FILE__), array("jquery"), "1.5.5", true);
 wp_localize_script( "peprodev--custom",  "_i18n", array(
   "td"                  => "peprocoreprofile",
   "ajax"                => admin_url( "admin-ajax.php"),
@@ -29,3 +29,5 @@ wp_add_inline_script("peprodev--custom", '(function ($) {"use strict";
   '.$js1.'
   '.$js2.'
 })(jQuery);', "after");
+
+echo "<pre>".print_r("{$PeproDevUPS_Login->assets_url}bootstrap.min.js",1)."</pre>";

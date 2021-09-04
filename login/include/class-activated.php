@@ -1,17 +1,17 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/02 12:54:02
+# @Last modified time: 2021/09/04 14:40:37
 add_thickbox();
 wp_enqueue_style("wp-color-picker");
 wp_enqueue_script("wp-color-picker");
-wp_enqueue_style("pepro-register-fields-ide",      "$this->assets_url/assets/ide/ace.css" , array(), current_time("timestamp"));
-wp_enqueue_style("pepro-register-fields",          "$this->assets_url/assets/register.css", array(), current_time("timestamp"));
-wp_enqueue_style("pepro-register-jqconfirm",       "$this->assets_url/assets/jquery-confirm.css", array(), current_time("timestamp"));
-wp_enqueue_script("pepro-register-jqconfirm",      "$this->assets_url/assets/jquery-confirm.js", array('jquery'), current_time("timestamp"));
-wp_enqueue_script("color-picker-alpha",            "$this->assets_url/assets/wp-color-picker-alpha.min.js", array("jquery"), current_time("timestamp"));
-wp_enqueue_script("pepro-register-fields-hotkeys", "$this->assets_url/assets/hotkeys.min.js", array('jquery'), current_time("timestamp"));
-wp_enqueue_script("pepro-register-fields-ide",     "$this->assets_url/assets/ide/ace.js", array('jquery'), current_time("timestamp"));
-wp_enqueue_script("pepro-register-fields",         "$this->assets_url/assets/register.js", array("jquery"), current_time("timestamp"));
+wp_enqueue_style("pepro-register-fields-ide",      "$this->assets_url/assets/ide/ace.css" , array(), "1.5.5");
+wp_enqueue_style("pepro-register-fields",          "$this->assets_url/assets/register.css", array(), "1.5.5");
+wp_enqueue_style("pepro-register-jqconfirm",       "$this->assets_url/assets/jquery-confirm.css", array(), "1.5.5");
+wp_enqueue_script("pepro-register-jqconfirm",      "$this->assets_url/assets/jquery-confirm.js", array('jquery'), "1.5.5");
+wp_enqueue_script("color-picker-alpha",            "$this->assets_url/assets/wp-color-picker-alpha.min.js", array("jquery"), "1.5.5");
+wp_enqueue_script("pepro-register-fields-hotkeys", "$this->assets_url/assets/hotkeys.min.js", array('jquery'), "1.5.5");
+wp_enqueue_script("pepro-register-fields-ide",     "$this->assets_url/assets/ide/ace.js", array('jquery'), "1.5.5");
+wp_enqueue_script("pepro-register-fields",         "$this->assets_url/assets/register.js", array("jquery"), "1.5.5");
 wp_localize_script("pepro-register-fields",        "_register_fields", array(
   "_added"     => __("New Field Successfully Added", $this->td),
   "_removed"   => __("Field Successfully Removed",   $this->td),

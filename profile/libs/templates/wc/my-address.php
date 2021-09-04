@@ -1,12 +1,6 @@
 <?php
-# @Author: Amirhosseinhpv
-# @Date:   2021/08/28 00:07:32
-# @Email:  its@hpv.im
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/08/31 19:51:51
-# @License: GPLv2
-# @Copyright: Copyright © Amirhosseinhpv (https://hpv.im), all rights reserved.
-
+# @Last modified time: 2021/09/04 14:56:24
 
 /**
  * My Addresses

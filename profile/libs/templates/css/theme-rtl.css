@@ -3,7 +3,7 @@
  * @Date:2020/05/03 13:33:07
  * @Email:its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/09/01 15:58:08
+ * @Last modified time: 2021/09/04 14:36:47
  * @License:GPLv2
  * @Copyright:Copyright © 2020 Amirhosseinhpv,All rights reserved.
  */
@@ -181,7 +181,7 @@ a:hover,a:focus,a:active {
 }
 
 a:hover,a {
-	transition: all 0.3s ease;
+	transition: color 0.3s ease;
 }
 
 /*-----------------------------------------------------*/
@@ -1205,10 +1205,10 @@ section {
 	left: 0;
 	background: #fff;
 	box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.1);
-	transform: scale(0);
-	transition: all 0.4s ease;
-	transform-origin: top left;
 	z-index: 3;
+	transform: scale(0);
+	transform-origin: top left;
+	transition: all 0.4s ease;
 }
 
 .account-dropdown .info {
@@ -1735,7 +1735,7 @@ section {
 }
 
 .show-dropdown .js-dropdown {
-	transform: scale(1);
+	transform: scale(1) !important;
 }
 
 .menu-sidebar-min {
