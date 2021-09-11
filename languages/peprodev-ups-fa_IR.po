@@ -1,15 +1,13 @@
 msgid ""
 msgstr ""
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
 "Project-Id-Version: PeproDev Ultimate Profile Solutions\n"
-"POT-Creation-Date: 2021-09-03 15:00+0430\n"
-"PO-Revision-Date: 2021-09-03 15:03+0430\n"
-"Last-Translator: Amirhosseinhpv <its@hpv.im>\n"
+"POT-Creation-Date: 2021-09-11 11:37+0430\n"
+"PO-Revision-Date: 2021-09-11 11:38+0430\n"
 "Language-Team: Amirhosseinhpv <its@hpv.im>\n"
-"Language: fa_IR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
 "X-Generator: Poedit 2.2\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
@@ -18,6 +16,8 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
 "esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
 "_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Last-Translator: Amirhosseinhpv <its@hpv.im>\n"
+"Language: fa_IR\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
@@ -26,29 +26,41 @@ msgctxt "peprocore-appearance-setting"
 msgid "PeproDev Ultimate Profile Solutions"
 msgstr "سولوشن کامل پروفایل پپرو"
 
-#: core/apps/home.php:53 login/login.php:3233
+#: core/apps/home.php:52 login/login.php:3230
 msgid "WordPress Admin"
 msgstr "مدیریت وردپرس"
 
-#: core/apps/home.php:54
+#: core/apps/home.php:52
+msgid "<i class='material-icons'>wordpress</i>"
+msgstr "<i class='material-icons'>wordpress</i>"
+
+#: core/apps/home.php:53
 msgid "Homepage"
 msgstr "صفحه اصلی"
 
-#: core/apps/home.php:55
+#: core/apps/home.php:53
+msgid "<i class='material-icons'>home</i>"
+msgstr "<i class='material-icons'>home</i>"
+
+#: core/apps/home.php:54
 msgid "User Profile"
 msgstr "پروفایل کاربر"
 
-#: core/apps/home.php:82 core/apps/home.php:89 core/main.php:264
-#: core/main.php:280
+#: core/apps/home.php:54
+msgid "<i class='material-icons'>supervised_user_circle</i>"
+msgstr "<i class='material-icons'>supervised_user_circle</i>"
+
+#: core/apps/home.php:80 core/apps/home.php:87 core/main.php:265
+#: core/main.php:281
 msgid "Pepro Dev"
 msgstr "گروه توسعه پپرو"
 
-#: core/apps/home.php:83
+#: core/apps/home.php:81
 msgid "Support"
 msgstr "پشتیبانی این محصول"
 
 #. translators: %1$s: Date / %2$s: love icon / by %3$s: copyright holder
-#: core/apps/home.php:89
+#: core/apps/home.php:87
 #, php-format
 msgid "Copyright %1$s, made with %2$s by %3$s for a better web."
 msgstr ""
@@ -56,7 +68,7 @@ msgstr ""
 "بهتر."
 
 #. Plugin Name of the plugin/theme
-#: core/main.php:37 core/main.php:509
+#: core/main.php:37 core/main.php:491
 msgid "PeproDev Ultimate Profile Solutions"
 msgstr "سولوشن کامل پروفایل پپرو"
 
@@ -73,7 +85,7 @@ msgstr "مستندات"
 msgid "Dashboard"
 msgstr "پیشخوان"
 
-#: core/main.php:150 core/main.php:622
+#: core/main.php:150 core/main.php:607 core/main.php:608
 msgctxt "peprocore-appearance-setting"
 msgid "PeproDev UPS"
 msgstr "سولوشن پروفایل"
@@ -90,27 +102,27 @@ msgstr "تنظیمات"
 msgid "PeproDev UPS Settings"
 msgstr "تنظیمات سولوشن کامل پروفایل پپرو"
 
-#: core/main.php:252
+#: core/main.php:253
 msgid "Please wait ..."
 msgstr "لطفا صبر کنید ..."
 
-#: core/main.php:264 core/main.php:280 profile/profile.php:3051
+#: core/main.php:265 core/main.php:281 profile/profile.php:3051
 #, php-format
 msgctxt "footer-copyright"
 msgid "Thanks for using %s products"
 msgstr "بابت استفاده از محصولات %s سپاسگزاریم"
 
-#: core/main.php:267 profile/profile.php:3056
+#: core/main.php:268 profile/profile.php:3056
 #, php-format
 msgctxt "footer-copyright"
 msgid "Version %s"
 msgstr "نسخه %s"
 
-#: core/main.php:304
+#: core/main.php:287
 msgid "Shortcode and Hooks for Developers"
 msgstr "شورت‌کد و هوک ها برای توسعه دهندگان"
 
-#: core/main.php:307
+#: core/main.php:290
 msgid ""
 "Set maximum number of suggestion for each item. Use 0 to trun off item "
 "display."
@@ -118,15 +130,15 @@ msgstr ""
 "حداکثر موارد نمایشی در نتایج جستجو را مشخص کنید. برای مخفی سازی 0 را وارد "
 "کنید."
 
-#: core/main.php:308
+#: core/main.php:291
 msgid "Trend items age (day)"
 msgstr "عمر جستجوهای ترند (روز)"
 
-#: core/main.php:311
+#: core/main.php:294
 msgid "Save setting"
 msgstr "ذخیره تنظیمات"
 
-#: core/main.php:312
+#: core/main.php:295
 msgid ""
 "Are you sure you want to clear all searches history (trend items) from "
 "database?"
@@ -134,204 +146,180 @@ msgstr ""
 "آیا مطمئن هستید میخواهید جداول پایگاه داده ( داده جستجوهای ترند ) را حذف "
 "کنید؟؟"
 
-#: core/main.php:312
+#: core/main.php:295
 msgid "Empty Database"
 msgstr "خالی کردن دیتابیس"
 
-#: core/main.php:355 login/login.php:3817 profile/profile.php:1615
+#: core/main.php:338 login/login.php:3814 profile/profile.php:1615
 msgid "Settings Successfully Saved."
 msgstr "تنظیمات با موفقیت ذخیره شد."
 
-#: core/main.php:371
+#: core/main.php:354
 msgid "PeproDev UPS"
 msgstr "سولوشن پروفایل"
 
-#: core/main.php:412 profile/profile.php:3138
+#: core/main.php:395 profile/profile.php:3138
 #, php-format
 msgctxt "setting-page"
 msgid "Enter %s"
 msgstr "%s را وارد کنید"
 
-#: core/main.php:422 profile/profile.php:3148
+#: core/main.php:404 profile/profile.php:3148
 #, php-format
 msgctxt "setting-page"
 msgid "Choose %s"
 msgstr "%s را انتخاب کنید"
 
-#: core/main.php:487
-msgid "Dude !!"
-msgstr "هی مشتی!"
-
-#: core/main.php:488
-msgid "Guess what! There is nothing to show here."
-msgstr "متاسفانه چیزی برای نمایش وجود ندارد."
-
-#: core/main.php:492
+#: core/main.php:474
 msgid "Contact support@pepro.dev for more information"
 msgstr "برای اطلاعات بیشتر با ایمیل support@pepro.co در تماس باشید"
 
-#: core/main.php:512
+#: core/main.php:494
 #, php-format
 msgid "Welcome to v.%s"
 msgstr "به نسخه %s خوش آمدید"
 
-#: core/main.php:514
+#: core/main.php:496
 msgid "WordPress Admin Dashboard"
 msgstr "داشبورد مدیریت وردپرس"
 
-#: core/main.php:515
+#: core/main.php:497
 msgid "WordPress Plugins"
 msgstr "افزونه های وردپرس"
 
-#: core/main.php:516
+#: core/main.php:498
 msgid "Website Home Page"
 msgstr "صفحه اصلی وبسایت"
 
-#: core/main.php:519
+#: core/main.php:501
 msgid "Profile Page"
 msgstr "صفحه پروفایل کاربر"
 
-#: core/main.php:544
+#: core/main.php:526
 msgctxt "peprocore-appearance-setting"
 msgid "Appearance"
 msgstr "نمایش"
 
-#: core/main.php:556
+#: core/main.php:538
 msgctxt "peprocore-appearance-setting"
 msgid "Theme Scheme"
 msgstr "طرح تم"
 
-#: core/main.php:559
+#: core/main.php:541
 msgctxt "peprocore-appearance-setting"
 msgid "Dark Mode"
 msgstr "حالت تاریک"
 
-#: core/main.php:560
+#: core/main.php:542
 msgctxt "peprocore-appearance-setting"
 msgid "Light Mode"
 msgstr "حالت روشن"
 
-#: core/main.php:567
+#: core/main.php:549
 msgctxt "peprocore-appearance-setting"
 msgid "Theme Color"
 msgstr "رنگ قالب"
 
-#: core/main.php:570
+#: core/main.php:552
 msgctxt "peprocore-appearance-setting"
 msgid "Purple"
 msgstr "بنفش"
 
-#: core/main.php:571
+#: core/main.php:553
 msgctxt "peprocore-appearance-setting"
 msgid "Azure"
 msgstr "آبی"
 
-#: core/main.php:572
+#: core/main.php:554
 msgctxt "peprocore-appearance-setting"
 msgid "Green"
 msgstr "سبز"
 
-#: core/main.php:573
+#: core/main.php:555
 msgctxt "peprocore-appearance-setting"
 msgid "Orange"
 msgstr "نارنجی"
 
-#: core/main.php:574
+#: core/main.php:556
 msgctxt "peprocore-appearance-setting"
 msgid "Red"
 msgstr "قرمز"
 
-#: core/main.php:579
+#: core/main.php:561
 msgctxt "peprocore-appearance-setting"
 msgid "Sidebar Image"
 msgstr "عکس سایدبار"
 
-#: core/main.php:591
-msgctxt "peprocore-appearance-setting"
+#: core/main.php:573
 msgid "Sidebar 1"
 msgstr "سایدبار 1"
 
-#: core/main.php:592
-msgctxt "peprocore-appearance-setting"
+#: core/main.php:574
 msgid "Sidebar 2"
 msgstr "سایدبار 2"
 
-#: core/main.php:593
-msgctxt "peprocore-appearance-setting"
+#: core/main.php:575
 msgid "Sidebar 3"
 msgstr "سایدبار 3"
 
-#: core/main.php:594
-msgctxt "peprocore-appearance-setting"
+#: core/main.php:576
 msgid "Sidebar 4"
 msgstr "سایدبار 4"
 
-#: core/main.php:595
-msgctxt "peprocore-appearance-setting"
+#: core/main.php:577
 msgid "Sidebar 5"
 msgstr "سایدبار 5"
 
-#: core/main.php:596
-msgctxt "peprocore-appearance-setting"
+#: core/main.php:578
 msgid "Sidebar 6"
 msgstr "سایدبار 6"
 
-#: core/main.php:597
-msgctxt "peprocore-appearance-setting"
+#: core/main.php:579
 msgid "Sidebar 7"
 msgstr "سایدبار 7"
 
-#: core/main.php:598
-msgctxt "peprocore-appearance-setting"
+#: core/main.php:580
 msgid "Sidebar 8"
 msgstr "سایدبار 8"
 
-#: core/main.php:599
-msgctxt "peprocore-appearance-setting"
+#: core/main.php:581
 msgid "Sidebar 9"
 msgstr "سایدبار 9"
 
-#: core/main.php:600
-msgctxt "peprocore-appearance-setting"
+#: core/main.php:582
 msgid "Sidebar 10"
 msgstr "سایدبار 10"
 
-#: core/main.php:601
-msgctxt "peprocore-appearance-setting"
+#: core/main.php:583
 msgid "Sidebar 11"
 msgstr "سایدبار 11"
 
-#: core/main.php:602
-msgctxt "peprocore-appearance-setting"
+#: core/main.php:584
 msgid "Sidebar 12"
 msgstr "سایدبار 12"
 
-#: core/main.php:603
-msgctxt "peprocore-appearance-setting"
+#: core/main.php:585
 msgid "Sidebar 13"
 msgstr "سایدبار 13"
 
-#: core/main.php:604
-msgctxt "peprocore-appearance-setting"
+#: core/main.php:586
 msgid "Sidebar Custom"
 msgstr "عکس شخصی سازی شده"
 
-#: core/main.php:613
-msgctxt "peprocore-appearance-setting"
+#: core/main.php:595
 msgid "Select Custom Image"
 msgstr "انتخاب عکس دیگر"
 
-#: core/main.php:614
-msgctxt "peprocore-appearance-setting"
+#: core/main.php:596
 msgid "Select or Upload Custom Image"
 msgstr "انتخاب یا آپلود عکس دیگر"
 
-#: core/main.php:620 core/main.php:622
+#: core/main.php:602
 msgctxt "peprocore-appearance-setting"
 msgid "Dashboard Title"
 msgstr "عنوان داشبورد"
 
-#: core/main.php:643
+#: core/main.php:630
 msgctxt "peprocore-appearance-setting"
 msgid "Save Settings"
 msgstr "ذخیره تنظیمات"
@@ -352,28 +340,28 @@ msgstr "کپی شد!"
 msgid "Saving ..."
 msgstr "ذخیره سازی ..."
 
-#: login/include/class-activated.php:21 login/login.php:536
-#: login/login.php:2882
+#: login/include/class-activated.php:21 login/login.php:533
+#: login/login.php:2879
 msgctxt "js-translate"
 msgid "Please wait ..."
 msgstr "لطفا صبر کنید ..."
 
-#: login/include/class-activated.php:22 login/login.php:537
+#: login/include/class-activated.php:22 login/login.php:534
 msgctxt "js-translate"
 msgid "An unknown error occured."
 msgstr "خطای ناشناخته رخ داد."
 
-#: login/include/class-activated.php:23 login/login.php:538
+#: login/include/class-activated.php:23 login/login.php:535
 msgctxt "js-translate"
 msgid "Error"
 msgstr "خطایی رخ داد"
 
-#: login/include/class-activated.php:24 login/login.php:539
+#: login/include/class-activated.php:24 login/login.php:536
 msgctxt "js-translate"
 msgid "Go Home"
 msgstr "رفتن به خانه"
 
-#: login/include/class-activated.php:25 login/login.php:546
+#: login/include/class-activated.php:25 login/login.php:543
 msgctxt "js-translate"
 msgid "Confirm"
 msgstr "تایید کنید"
@@ -385,12 +373,12 @@ msgstr ""
 "آیا مطمئن هستید میخواهید همه موارد را پاک کنید؟ <red>این عملیات قابل بازگشت "
 "نیست."
 
-#: login/include/class-activated.php:27 login/login.php:547
+#: login/include/class-activated.php:27 login/login.php:544
 msgctxt "js-translate"
 msgid "Success"
 msgstr "عملیات موفق"
 
-#: login/include/class-activated.php:28 login/login.php:555
+#: login/include/class-activated.php:28 login/login.php:552
 msgctxt "js-translate"
 msgid "Close"
 msgstr "بستن"
@@ -403,29 +391,29 @@ msgstr "این مورد قفل شده است، برای تغییر نحوه لا
 #: login/include/class-activated.php:30
 msgctxt "js-translate"
 msgid "All items deleted successfully"
-msgstr "تمامی موارد با موفقیت حذف شدند."
+msgstr "تمامی موارد با موفقیت حذف شدند"
 
-#: login/include/class-activated.php:31 login/login.php:548
+#: login/include/class-activated.php:31 login/login.php:545
 msgctxt "js-translate"
 msgid "Submit"
 msgstr "ثبت"
 
-#: login/include/class-activated.php:32 login/login.php:550
+#: login/include/class-activated.php:32 login/login.php:547
 msgctxt "js-translate"
 msgid "Okay"
 msgstr "باشه"
 
-#: login/include/class-activated.php:33 login/login.php:551
+#: login/include/class-activated.php:33 login/login.php:548
 msgctxt "js-translate"
 msgid "Yes"
-msgstr "بله"
+msgstr "بلی"
 
-#: login/include/class-activated.php:34 login/login.php:552
+#: login/include/class-activated.php:34 login/login.php:549
 msgctxt "js-translate"
 msgid "No"
 msgstr "خیر"
 
-#: login/include/class-activated.php:35 login/login.php:553
+#: login/include/class-activated.php:35 login/login.php:550
 msgctxt "js-translate"
 msgid "Cancel"
 msgstr "لغو"
@@ -446,7 +434,7 @@ msgctxt "login-section"
 msgid "Registration"
 msgstr "ثبت نام"
 
-#: login/include/class-activated.php:64 login/include/class-activated.php:677
+#: login/include/class-activated.php:64 login/include/class-activated.php:684
 msgctxt "login-section"
 msgid "Redirection"
 msgstr "ریدایرکت ها"
@@ -466,12 +454,12 @@ msgctxt "login-section"
 msgid "Advanced"
 msgstr "پیشرفته"
 
-#: login/include/class-activated.php:76 login/include/class-activated.php:891
+#: login/include/class-activated.php:76 login/include/class-activated.php:898
 msgctxt "login-section"
 msgid "Import/Export"
 msgstr "برون بری / درون ریزی"
 
-#: login/include/class-activated.php:79 login/include/class-activated.php:918
+#: login/include/class-activated.php:79 login/include/class-activated.php:925
 msgctxt "login-section"
 msgid "Samrt Button"
 msgstr "دکمه جادویی"
@@ -506,16 +494,16 @@ msgctxt "login-section"
 msgid "Show Logo"
 msgstr "نمایش لوگو"
 
-#: login/include/class-activated.php:119 login/include/class-activated.php:167
-#: login/include/class-activated.php:178 login/include/class-activated.php:189
-#: login/include/class-activated.php:200
+#: login/include/class-activated.php:119 login/include/class-activated.php:169
+#: login/include/class-activated.php:180 login/include/class-activated.php:191
+#: login/include/class-activated.php:202
 msgctxt "login-section"
 msgid "Yes, Show it"
 msgstr "بله، نمایش بده"
 
-#: login/include/class-activated.php:120 login/include/class-activated.php:168
-#: login/include/class-activated.php:179 login/include/class-activated.php:190
-#: login/include/class-activated.php:201
+#: login/include/class-activated.php:120 login/include/class-activated.php:170
+#: login/include/class-activated.php:181 login/include/class-activated.php:192
+#: login/include/class-activated.php:203
 msgctxt "login-section"
 msgid "No, Hide it"
 msgstr "خیر، نمایش نده"
@@ -545,104 +533,104 @@ msgctxt "login-section"
 msgid "Logo Dimensions"
 msgstr "ابعاد لوگو"
 
-#: login/include/class-activated.php:145
+#: login/include/class-activated.php:145 login/include/class-activated.php:146
 msgctxt "login-section"
 msgid "Logo Width (e.g. 84px)"
 msgstr "عرض لوگو به پیکسل (px)"
 
-#: login/include/class-activated.php:147
+#: login/include/class-activated.php:148 login/include/class-activated.php:149
 msgctxt "login-section"
 msgid "Logo Height (e.g. 84px)"
 msgstr "ارتفاع لوگو به پیکسل (px)"
 
-#: login/include/class-activated.php:152
+#: login/include/class-activated.php:154
 msgctxt "login-section"
 msgid "Logo Href"
 msgstr "لینک کلیک لوگو"
 
-#: login/include/class-activated.php:154 login/include/class-activated.php:160
-#: login/include/class-activated.php:834
+#: login/include/class-activated.php:156 login/include/class-activated.php:162
+#: login/include/class-activated.php:841
 msgctxt "login-section"
 msgid "Login slug"
 msgstr "اسلاگ لاگین"
 
-#: login/include/class-activated.php:158
+#: login/include/class-activated.php:160
 msgctxt "login-section"
 msgid "Logo Title"
 msgstr "متن هاور لوگو"
 
-#: login/include/class-activated.php:164
+#: login/include/class-activated.php:166
 msgctxt "login-section"
 msgid "'Remeber Me' Checkbox"
 msgstr "چک باکس \"مرا به خاطر داشته باش\""
 
-#: login/include/class-activated.php:175
+#: login/include/class-activated.php:177
 msgctxt "login-section"
 msgid "Back to Blog Link"
 msgstr "لینک بازگشت به سایت"
 
-#: login/include/class-activated.php:186
+#: login/include/class-activated.php:188
 msgctxt "login-section"
 msgid "Privacy Link"
 msgstr "لینک حریم خصوصی"
 
-#: login/include/class-activated.php:197
+#: login/include/class-activated.php:199
 msgctxt "login-section"
 msgid "Show Password Button"
 msgstr "دکمه \"نمایش رمز\""
 
-#: login/include/class-activated.php:208
+#: login/include/class-activated.php:210
 msgctxt "login-section"
 msgid "Force Background?"
 msgstr "اعمال اجباری تنظیمات پس‌زمینه؟"
 
-#: login/include/class-activated.php:211
+#: login/include/class-activated.php:213
 msgctxt "login-section"
 msgid "Yes, Apply My Setting for Background"
 msgstr "بله، تنظیمات پس‌زمینه را به استایل تم ترجیح بده"
 
-#: login/include/class-activated.php:212
+#: login/include/class-activated.php:214
 msgctxt "login-section"
 msgid "No, Use Default Login Theme's Background setting"
 msgstr "خیر، استفاده از تنظیمات پیشفرض تم برای پس‌زمینه"
 
-#: login/include/class-activated.php:221
+#: login/include/class-activated.php:223
 msgctxt "login-section"
 msgid "Background Type"
 msgstr "نوع پس‌زمینه"
 
-#: login/include/class-activated.php:224
+#: login/include/class-activated.php:226
 msgctxt "login-section"
 msgid "Solid Color"
 msgstr "تک رنگ"
 
-#: login/include/class-activated.php:225
+#: login/include/class-activated.php:227
 msgctxt "login-section"
 msgid "Gradient Color"
 msgstr "رنگ گرادینت"
 
-#: login/include/class-activated.php:226
+#: login/include/class-activated.php:228
 msgctxt "login-section"
 msgid "Image"
 msgstr "عکس"
 
-#: login/include/class-activated.php:227
+#: login/include/class-activated.php:229
 msgctxt "login-section"
 msgid "Video"
 msgstr "ویدئو"
 
-#: login/include/class-activated.php:231 login/include/class-activated.php:235
-#: login/include/class-activated.php:236
+#: login/include/class-activated.php:233 login/include/class-activated.php:237
+#: login/include/class-activated.php:238
 msgctxt "login-section"
 msgid "Background Solid Color"
 msgstr "پس‌زمینه تک رنگ"
 
-#: login/include/class-activated.php:237
+#: login/include/class-activated.php:239
 msgctxt "login-section"
 msgid "Linear Gradient direction or Angels"
 msgstr "جهت یا درجه رنگ های گرادینت"
 
-#: login/include/class-activated.php:238
+#: login/include/class-activated.php:242
 #, php-format
 msgctxt "login-section"
 msgid ""
@@ -652,7 +640,7 @@ msgstr ""
 "جهت یا درجه رنگ های گرادینت (و رنگ های اضافی)%sمثال: to left | to top | "
 "65deg | 90deg, blue, green, rgba(203, 24, 201, 0.86), #13c253"
 
-#: login/include/class-activated.php:238
+#: login/include/class-activated.php:243
 msgctxt "login-section"
 msgid ""
 "e.g. to left | to top | 65deg | 90deg, blue, green, rgba(203, 24, 201, "
@@ -661,342 +649,342 @@ msgstr ""
 "e.g. to left | to top | 65deg | 90deg, blue, green, rgba(203, 24, 201, "
 "0.86), #13c253"
 
-#: login/include/class-activated.php:248
+#: login/include/class-activated.php:254
 msgctxt "login-section"
 msgid "Select Custom Background Image"
 msgstr "انتخاب عکس پس‌زمینه"
 
-#: login/include/class-activated.php:249
+#: login/include/class-activated.php:255
 msgctxt "login-section"
 msgid "Select or Upload Background Image"
 msgstr "انتخاب یا آپلود عکس پس‌زمینه"
 
-#: login/include/class-activated.php:264
+#: login/include/class-activated.php:270
 msgctxt "login-section"
 msgid "Select Custom Background Video"
 msgstr "انتخاب ویدئو پس‌زمینه"
 
-#: login/include/class-activated.php:265
+#: login/include/class-activated.php:271
 msgctxt "login-section"
 msgid "Upload Video"
 msgstr "آپلود ویدئو"
 
-#: login/include/class-activated.php:270
+#: login/include/class-activated.php:276
 msgctxt "login-section"
 msgid "Autoplay: ON"
 msgstr "پخش خودکار: روشن"
 
-#: login/include/class-activated.php:271
+#: login/include/class-activated.php:277
 msgctxt "login-section"
 msgid "Autoplay: OFF"
 msgstr "پخش خودکار: خاموش"
 
-#: login/include/class-activated.php:277
+#: login/include/class-activated.php:283
 msgctxt "login-section"
 msgid "Muted"
 msgstr "حالت بی‌صدا"
 
-#: login/include/class-activated.php:278
+#: login/include/class-activated.php:284
 msgctxt "login-section"
 msgid "Sound"
 msgstr "با صدا"
 
-#: login/include/class-activated.php:284
+#: login/include/class-activated.php:290
 msgctxt "login-section"
 msgid "Loop: ON"
 msgstr "تکرار: روشن"
 
-#: login/include/class-activated.php:285
+#: login/include/class-activated.php:291
 msgctxt "login-section"
 msgid "Loop: OFF"
 msgstr "تکرار: خاموش"
 
-#: login/include/class-activated.php:302 login/include/class-activated.php:483
-#: login/include/class-activated.php:545 login/include/class-activated.php:774
-#: login/include/class-activated.php:816 login/include/class-activated.php:883
+#: login/include/class-activated.php:308 login/include/class-activated.php:489
+#: login/include/class-activated.php:551 login/include/class-activated.php:781
+#: login/include/class-activated.php:823 login/include/class-activated.php:890
 msgctxt "login-section"
 msgid "Save Settings"
 msgstr "ذخیره تنظیمات"
 
-#: login/include/class-activated.php:310
+#: login/include/class-activated.php:316
 msgctxt "login-section"
 msgid "Registration Configuration"
 msgstr "تنظیمات ثبت نام"
 
-#: login/include/class-activated.php:311
+#: login/include/class-activated.php:317
 msgctxt "login-section"
 msgid "You can control wordpress registeration fields from this section."
 msgstr "شما میتوانید تنظیمات فیلد های فرم ثبت نام را از اینجا مدیریت کنید."
 
-#: login/include/class-activated.php:319
+#: login/include/class-activated.php:325
 msgid "New Field"
 msgstr "فیلد جدید"
 
-#: login/include/class-activated.php:333 login/include/class-activated.php:334
+#: login/include/class-activated.php:339 login/include/class-activated.php:340
 msgid "Field Name (meta_name)"
 msgstr "نام متا (فقط حروف انگلیسی و _ )"
 
-#: login/include/class-activated.php:337
+#: login/include/class-activated.php:343
 msgid "Field Type"
 msgstr "نوع فیلد"
 
-#: login/include/class-activated.php:348 login/include/class-activated.php:349
+#: login/include/class-activated.php:354 login/include/class-activated.php:355
 msgid "Field Title"
 msgstr "عنوان"
 
-#: login/include/class-activated.php:352 login/include/class-activated.php:353
+#: login/include/class-activated.php:358 login/include/class-activated.php:359
 msgid "Field Placeholder"
 msgstr "متن راهنما"
 
-#: login/include/class-activated.php:356 login/include/class-activated.php:357
+#: login/include/class-activated.php:362 login/include/class-activated.php:363
 msgid "Field Classes"
 msgstr "کلاس"
 
-#: login/include/class-activated.php:360 login/include/class-activated.php:361
+#: login/include/class-activated.php:366 login/include/class-activated.php:367
 msgid "Field HTML attributes"
 msgstr "خصوصیات"
 
-#: login/include/class-activated.php:364 login/include/class-activated.php:365
+#: login/include/class-activated.php:370 login/include/class-activated.php:371
 msgid "Site key"
 msgstr "کلید سایت"
 
-#: login/include/class-activated.php:368 login/include/class-activated.php:369
+#: login/include/class-activated.php:374 login/include/class-activated.php:375
 msgid "Secret key"
 msgstr "کلید امنیتی"
 
-#: login/include/class-activated.php:372
+#: login/include/class-activated.php:378
 msgid "Theme Color"
 msgstr "رنگ قالب"
 
-#: login/include/class-activated.php:374
+#: login/include/class-activated.php:380
 msgid "Normal"
 msgstr "معمولی"
 
-#: login/include/class-activated.php:375
+#: login/include/class-activated.php:381
 msgid "Compact"
 msgstr "کوچک"
 
-#: login/include/class-activated.php:379
+#: login/include/class-activated.php:385
 msgid "Widget Size"
 msgstr "اندازه ویجت"
 
-#: login/include/class-activated.php:381
+#: login/include/class-activated.php:387
 msgid "Light"
 msgstr "روشن"
 
-#: login/include/class-activated.php:382
+#: login/include/class-activated.php:388
 msgid "Dark"
 msgstr "تاریک"
 
-#: login/include/class-activated.php:386
+#: login/include/class-activated.php:392
 msgid "Select Field Options"
 msgstr "تنظیمات لیست کرکره ای"
 
-#: login/include/class-activated.php:387
+#: login/include/class-activated.php:393
 msgid "Field Options per line, e.g. value:Title"
 msgstr "لیست آپشن ها در هر خط یکی وارد شود، نمونه: value:Title"
 
-#: login/include/class-activated.php:390 login/include/class-activated.php:391
+#: login/include/class-activated.php:396 login/include/class-activated.php:397
 msgid "Field Default Value"
 msgstr "داده پیشفرض"
 
-#: login/include/class-activated.php:394
+#: login/include/class-activated.php:400
 msgid "Use in Login form?"
 msgstr "استفاده در فرم ورود؟"
 
-#: login/include/class-activated.php:397
+#: login/include/class-activated.php:403
 msgid "Check to Use in Login form"
 msgstr "برای استفاده در فرم ورود تیک بزنید"
 
-#: login/include/class-activated.php:402
+#: login/include/class-activated.php:408
 msgid "Use in Verification form?"
 msgstr "استفاده در فرم اعتبار سنجی؟"
 
-#: login/include/class-activated.php:405
+#: login/include/class-activated.php:411
 msgid "Check to Use in Verification form"
 msgstr "برای استفاده در فرم اعتبار سنجی تیک بزنید"
 
-#: login/include/class-activated.php:410
+#: login/include/class-activated.php:416
 msgid "Is Required field?"
 msgstr "فیلد ضروری است؟"
 
-#: login/include/class-activated.php:414
+#: login/include/class-activated.php:420
 msgid "Check to mark field as Required"
 msgstr "برای اجباری کردن فیلد تیک بزنید"
 
-#: login/include/class-activated.php:419
+#: login/include/class-activated.php:425
 msgid "Editable on Profile?"
 msgstr "قابل ویرایش در پروفایل؟"
 
-#: login/include/class-activated.php:423
+#: login/include/class-activated.php:429
 msgid "Check to make field Editable on Profile"
 msgstr "برای ویرایش فیلد در پروفایل تیک بزنید"
 
-#: login/include/class-activated.php:428
+#: login/include/class-activated.php:434
 msgid "Show in Registeration form?"
 msgstr "نمایش در فرم ثبت نام؟"
 
-#: login/include/class-activated.php:432
+#: login/include/class-activated.php:438
 msgid "Check to Show field in Registeration form"
 msgstr "برای نمایش در فرم ثبت نام تیک بزنید"
 
-#: login/include/class-activated.php:437
+#: login/include/class-activated.php:443
 msgid "Show in Admin Column?"
 msgstr "نمایش در ستون ادمین؟"
 
-#: login/include/class-activated.php:441
+#: login/include/class-activated.php:447
 msgid "Check to Show field in Admin Column"
 msgstr "برای نمایش در ستون ادمین تیک بزنید"
 
-#: login/include/class-activated.php:452
+#: login/include/class-activated.php:458
 msgid "Login/Registeration Type"
 msgstr "نحوه لاگین / ریجستر"
 
-#: login/include/class-activated.php:454
+#: login/include/class-activated.php:460
 msgid "Using Mobile OTP"
 msgstr "توسط کد یکبار مصرف پیامکی"
 
-#: login/include/class-activated.php:457
+#: login/include/class-activated.php:463
 msgid "Using Email/Username & Password"
 msgstr "توسط ایمیل/نام کاربری و رمز عبور"
 
-#: login/include/class-activated.php:461
+#: login/include/class-activated.php:467
 msgid "Registeration Default Fields"
 msgstr "فیلد های پیشفرض فرم ثبت نام"
 
-#: login/include/class-activated.php:462
+#: login/include/class-activated.php:468
 msgid "To activate and show a field, click on its name and check it."
 msgstr "برای فعال سازی یک فیلد، تاگل کنار نام آن را روشن کنید."
 
-#: login/include/class-activated.php:470
+#: login/include/class-activated.php:476
 msgid "Registeration Additional Fields"
 msgstr "فیلد های اضافی ثبت نام"
 
-#: login/include/class-activated.php:471
+#: login/include/class-activated.php:477
 msgid "Add Field"
 msgstr "افزودن فیلد"
 
-#: login/include/class-activated.php:472 login/include/class-activated.php:764
+#: login/include/class-activated.php:478 login/include/class-activated.php:771
 msgid "Collapse / Expand"
 msgstr "بستن / بازکردن"
 
-#: login/include/class-activated.php:473
+#: login/include/class-activated.php:479
 msgid "Clear Fields"
 msgstr "حذف همه"
 
-#: login/include/class-activated.php:475
+#: login/include/class-activated.php:481
 msgid "No registerations field found."
 msgstr "هیچ فیلد ثبت نامی یافت نشد."
 
-#: login/include/class-activated.php:492
+#: login/include/class-activated.php:498
 msgctxt "login-section"
 msgid "Verification & Extras"
 msgstr "تایید حساب و غیره"
 
-#: login/include/class-activated.php:493
+#: login/include/class-activated.php:499
 msgctxt "login-section"
 msgid "You can control how verification and some extra feature works from here"
 msgstr ""
 "شما میتوانید تنظیمات تایید حساب و برخی دیگر قابلیات را از اینجا مدیریت کنید"
 
-#: login/include/class-activated.php:502
+#: login/include/class-activated.php:508
 msgid "Registeration: Auto-login after signup"
 msgstr "فرم ثبت نام: ورود خودکار پس از ثبت نام"
 
-#: login/include/class-activated.php:510
+#: login/include/class-activated.php:516
 msgid "Registeration: Verify E-mail"
 msgstr "فرم ثبت نام: وریفای کردن ایمیل پس از ثبت نام"
 
-#: login/include/class-activated.php:518
+#: login/include/class-activated.php:524
 msgid "Registeration: Verify Mobile by SMS?"
-msgstr "فرم ثبت نام: وریفای کردن موبایل پس از ثبت نام"
+msgstr "فرم ثبت نام: وریفای کردن موبایل پس از ثبت نام؟"
 
-#: login/include/class-activated.php:526
+#: login/include/class-activated.php:532
 msgid "Registeration: Use E-mail as Username"
 msgstr "فرم ثبت نام: استفاده از ایمیل بجای نام کاربری پس از ثبت نام"
 
-#: login/include/class-activated.php:534
+#: login/include/class-activated.php:540
 msgid "Registeration: Use Mobile as Username"
 msgstr "فرم ثبت نام: استفاده از موبایل بجای نام کاربری پس از ثبت نام"
 
-#: login/include/class-activated.php:555
+#: login/include/class-activated.php:561
 msgid "Config SMS.ir WebAPI to send SMS Verification Codes"
 msgstr "تنظیمات پنل پیامکی SMS.ir برای ارسال کد اعتبار سنجی"
 
-#: login/include/class-activated.php:558 login/include/class-activated.php:561
+#: login/include/class-activated.php:564 login/include/class-activated.php:567
 msgid "Sending Number"
 msgstr "سر شماره ارسال"
 
-#: login/include/class-activated.php:566 login/include/class-activated.php:569
+#: login/include/class-activated.php:572 login/include/class-activated.php:575
 msgid "Security code"
 msgstr "کلید امنیتی"
 
-#: login/include/class-activated.php:574 login/include/class-activated.php:577
+#: login/include/class-activated.php:580 login/include/class-activated.php:583
 msgid "API Key"
 msgstr "کلید API"
 
-#: login/include/class-activated.php:582 login/include/class-activated.php:585
+#: login/include/class-activated.php:588 login/include/class-activated.php:591
 msgid "UltraFastSend ID or SMS text containing [OTP]"
 msgstr "شناسه قالب ارسال سریع یا متن پیامک محتوی [OTP]"
 
-#: login/include/class-activated.php:590 login/include/class-activated.php:615
+#: login/include/class-activated.php:596 login/include/class-activated.php:621
 msgid "Verification expire duration (in seconds)"
 msgstr "مدت انقضای کد (ثانیه)"
 
-#: login/include/class-activated.php:593 login/include/class-activated.php:618
+#: login/include/class-activated.php:599 login/include/class-activated.php:624
 msgid "Verification expire duration"
 msgstr "مدت انقضای کد (ثانیه)"
 
-#: login/include/class-activated.php:598 login/include/class-activated.php:601
-#: login/include/class-activated.php:623 login/include/class-activated.php:626
+#: login/include/class-activated.php:604 login/include/class-activated.php:607
+#: login/include/class-activated.php:629 login/include/class-activated.php:632
 msgid "Verification Code length"
 msgstr "طول کد اعتبار سنجی"
 
-#: login/include/class-activated.php:612
+#: login/include/class-activated.php:618
 msgid "Config Email Settings to send Verification Codes"
 msgstr "تنظیمات ایمیل برای ارسال کد اعتبار سنجی"
 
-#: login/include/class-activated.php:631 login/include/class-activated.php:634
+#: login/include/class-activated.php:637 login/include/class-activated.php:640
 msgid "Verification Email Sender name"
 msgstr "نام فرستنده ایمیل"
 
-#: login/include/class-activated.php:639
+#: login/include/class-activated.php:645
 msgid "Verification Email Sender address"
 msgstr "آدرس فرستنده ایمیل"
 
-#: login/include/class-activated.php:647
+#: login/include/class-activated.php:654
 msgid "Verification Email Template"
 msgstr "قالب ایمیل اعتبار سنجی"
 
-#: login/include/class-activated.php:650
+#: login/include/class-activated.php:657
 msgid "Available tags: "
 msgstr "تگ های مجاز: "
 
-#: login/include/class-activated.php:678
+#: login/include/class-activated.php:685
 msgctxt "login-section"
 msgid "You can control wordpress redirection hooks from this section."
 msgstr ""
 "شما میتوانید تنظیمات ریدایرکت پس از ثبت نام / ورود را از اینجا مدیریت کنید."
 
-#: login/include/class-activated.php:686
+#: login/include/class-activated.php:693
 msgid "Redirection for: "
 msgstr "ریدایرکت برای: "
 
-#: login/include/class-activated.php:686
+#: login/include/class-activated.php:693
 msgid "New Redirection"
 msgstr "ریدایرکت جدید"
 
-#: login/include/class-activated.php:699
+#: login/include/class-activated.php:706
 msgid "User Role"
 msgstr "نقش کاربر"
 
-#: login/include/class-activated.php:715
+#: login/include/class-activated.php:722
 msgid "You can use page ID as <b>#page_id</b>, e.g. for ID 275 use <b>#275</b>"
 msgstr ""
 "شما میتوانید ایدی صفحه را بصورت<b>#page_id</b> استفاده کنید، مثال برای ایدی "
 "275 بزنید <b>#275</b>"
 
-#: login/include/class-activated.php:716
+#: login/include/class-activated.php:723
 msgid ""
 "You can use page slug as <b>@page_slug</b>, e.g. for slug about-us use "
 "<b>@about-us</b>"
@@ -1004,93 +992,93 @@ msgstr ""
 "شما میتوانید نامک صفحه را بصورت<b>@page_slug</b> استفاده کنید، مثال برای "
 "نامک about-us بزنید <b>@about-us</b>"
 
-#: login/include/class-activated.php:717
+#: login/include/class-activated.php:724
 msgid ""
 "You can also enter full URL for external addresses, e.g. https://google.com/"
 msgstr ""
 "همچنین میتوانید آدرس های خارج وبسایت را بصورت کامل وارد کنید، مثال https://"
 "google.com/"
 
-#: login/include/class-activated.php:718
+#: login/include/class-activated.php:725
 msgid "And use following macros too:"
 msgstr "و همچنین میتوانید از ماکرو های آماده زیر نیز استفاده کنید:"
 
-#: login/include/class-activated.php:721
+#: login/include/class-activated.php:728
 msgid "Redirect to"
 msgstr "ریدایرکت به"
 
-#: login/include/class-activated.php:723
+#: login/include/class-activated.php:730
 msgid "#page_id / @page_slug / {special_pages} / Full URL"
 msgstr "#page_id / @page_slug / {special_pages} / آدرس کامل صفحه"
 
-#: login/include/class-activated.php:727 login/include/class-activated.php:729
+#: login/include/class-activated.php:734 login/include/class-activated.php:736
 msgid "Ajax Popup Button text"
 msgstr "متن دکمه در پیام پاپ آپ"
 
-#: login/include/class-activated.php:729
+#: login/include/class-activated.php:736
 msgid "Let's go"
 msgstr "بزن بریم"
 
-#: login/include/class-activated.php:733
+#: login/include/class-activated.php:740
 msgid "Used for"
 msgstr "استفاده برای"
 
-#: login/include/class-activated.php:738
+#: login/include/class-activated.php:745
 msgid "Login Redirect"
 msgstr "ریدایرکت پس از ورود"
 
-#: login/include/class-activated.php:745
+#: login/include/class-activated.php:752
 msgid "Registeration Redirect"
 msgstr "ریدایرکت پس از ثبت نام"
 
-#: login/include/class-activated.php:752
+#: login/include/class-activated.php:759
 msgid "Logout Redirect"
 msgstr "ریدایرکت پس از خروج"
 
-#: login/include/class-activated.php:763
+#: login/include/class-activated.php:770
 msgid "Add Rule"
 msgstr "افزودن قانون"
 
-#: login/include/class-activated.php:765
+#: login/include/class-activated.php:772
 msgid "Clear Rules"
 msgstr "حذف همه"
 
-#: login/include/class-activated.php:767
+#: login/include/class-activated.php:774
 msgid "No redirections rule found."
 msgstr "هیچ قانون ریدایرکت یافت نشد."
 
-#: login/include/class-activated.php:782
+#: login/include/class-activated.php:789
 msgctxt "login-section"
 msgid "Custom Codes"
 msgstr "کد های شخصی سازی شده"
 
-#: login/include/class-activated.php:783
+#: login/include/class-activated.php:790
 msgctxt "login-section"
 msgid "Add extra CSS or Custom Heading/Footer (supports shortcodes)"
 msgstr ""
 "کد های شخصی سازی شده CSS و یا سربرگ/پاصفحه (شورتکد مجاز است) را ویرایش کنید"
 
-#: login/include/class-activated.php:790
+#: login/include/class-activated.php:797
 msgctxt "login-section"
 msgid "Custom CSS Codes"
 msgstr "کد شخصی سازی شده CSS"
 
-#: login/include/class-activated.php:797
+#: login/include/class-activated.php:804
 msgctxt "login-section"
 msgid "Heading HTML Content"
 msgstr "محتوای HTML سربرگ"
 
-#: login/include/class-activated.php:804
+#: login/include/class-activated.php:811
 msgctxt "login-section"
 msgid "Footer HTML Content"
 msgstr "محتوای HTML پا صفحه"
 
-#: login/include/class-activated.php:824
+#: login/include/class-activated.php:831
 msgctxt "login-section"
 msgid "Security & Permalinks"
 msgstr "امنیت و پرمالینک"
 
-#: login/include/class-activated.php:825
+#: login/include/class-activated.php:832
 msgctxt "login-section"
 msgid ""
 "You can control wordpress login, register and lost password permalinks from "
@@ -1099,93 +1087,93 @@ msgstr ""
 "شما میتوانید تنظیمات پرمالینک لاگین، ثبت نام و فراموشی رمز وردپرسی را از "
 "اینجا مدیریت کنید"
 
-#: login/include/class-activated.php:828
+#: login/include/class-activated.php:835
 #, php-format
 msgctxt "login-section"
 msgid "%1$s Your login page is: %2$s. Bookmark this page!"
 msgstr "%1$s صفحه لاگین جدید شما: %2$s. این آدرس را ذخیره کنید!"
 
-#: login/include/class-activated.php:828
+#: login/include/class-activated.php:835
 msgctxt "login-section"
 msgid "Attention!"
 msgstr "توجه!"
 
-#: login/include/class-activated.php:832
+#: login/include/class-activated.php:839
 msgctxt "login-section"
 msgid "Login Base Slug"
 msgstr "اسلاگ پایه لاگین بجای استفاده از wp-login.php"
 
-#: login/include/class-activated.php:838
+#: login/include/class-activated.php:845
 msgctxt "login-section"
 msgid "Redirect Slug"
 msgstr "اسلاگ صفحه ریدایرکت دسترسی مستقیم به wp-login.php"
 
-#: login/include/class-activated.php:840
+#: login/include/class-activated.php:847
 msgctxt "login-section"
 msgid "Redirect slug"
 msgstr "اسلاگ صفحه ریدایرکت"
 
-#: login/include/class-activated.php:844
+#: login/include/class-activated.php:851
 msgctxt "login-section"
 msgid "Shake Effect"
 msgstr "افکت لرزش صفحه"
 
-#: login/include/class-activated.php:847
+#: login/include/class-activated.php:854
 msgctxt "login-section"
 msgid "Yes, Keep it"
 msgstr "بله، حفظ شود"
 
-#: login/include/class-activated.php:848
+#: login/include/class-activated.php:855
 msgctxt "login-section"
 msgid "No, Remove it"
 msgstr "خیر، حذف شود"
 
-#: login/include/class-activated.php:855
+#: login/include/class-activated.php:862
 msgctxt "login-section"
 msgid "Login Errors"
 msgstr "خطاهای لاگین"
 
-#: login/include/class-activated.php:858 login/include/class-activated.php:869
+#: login/include/class-activated.php:865 login/include/class-activated.php:876
 msgctxt "login-section"
 msgid "Yes, Show them"
 msgstr "بله، نمایش بده"
 
-#: login/include/class-activated.php:859 login/include/class-activated.php:870
+#: login/include/class-activated.php:866 login/include/class-activated.php:877
 msgctxt "login-section"
 msgid "No, Hide them"
 msgstr "خیر، مخفی کن"
 
-#: login/include/class-activated.php:866
+#: login/include/class-activated.php:873
 msgctxt "login-section"
 msgid "Login Messages"
 msgstr "پیام های لاگین"
 
-#: login/include/class-activated.php:892
+#: login/include/class-activated.php:899
 msgctxt "login-section"
 msgid "Sync settings between your sites or make a backup for future"
 msgstr "دیتای تنظیمات را بین سایت های خود همگام سازی کنید"
 
-#: login/include/class-activated.php:896
+#: login/include/class-activated.php:903
 msgid "Import/Export Fields as JSON data"
 msgstr "برون بری و درون ریزی فیلد ها بصورت JSON"
 
-#: login/include/class-activated.php:901
+#: login/include/class-activated.php:908
 msgid "Import/Export Redirection Rules as JSON data"
 msgstr "برون بری و درون ریزی ریدایرکت ها بصورت JSON"
 
-#: login/include/class-activated.php:910
+#: login/include/class-activated.php:917
 msgctxt "login-section"
 msgid "Import (Overwrite) Settings"
 msgstr "درون ریزی دیتا (اجبار به نوشتن)"
 
-#: login/include/class-activated.php:919
+#: login/include/class-activated.php:926
 msgctxt "login-section"
 msgid ""
 "Use this button to show login/register popup to guests and welcome logged in "
 "users"
 msgstr ""
-"توسط این دکمه میتوانید فرم لاگین/ریجستر پاپ آپ را به کاربران لاگ اوت شده و "
-"متن دلخواه با آواتار را به کاربران لاگین شده نشان دهید."
+"؟توسط این دکمه میتوانید فرم لاگین/ریجستر پاپ آپ را به کاربران لاگ اوت شده و "
+"متن دلخواه با آواتار را به کاربران لاگین شده نشان دهید"
 
 #: login/include/class-login-permalink.php:146
 msgid "Please upgrade to the latest version of WordPress to activate"
@@ -1297,213 +1285,213 @@ msgstr "لایسنس پپرو"
 msgid "Copyright (c) %s Pepro Dev, All rights reserved"
 msgstr "تمامی حقوق مادی و معنوی تا سال (%s) برای مرکز توسعه پپرو محفوظ است"
 
-#: login/login.php:301
+#: login/login.php:297
 msgid "Email Field"
 msgstr "فیلد ایمیل"
 
-#: login/login.php:302
+#: login/login.php:298
 msgid "Username Field"
 msgstr "فیلد نام کاربری"
 
-#: login/login.php:303
+#: login/login.php:299
 msgid "Mobile Field"
 msgstr "فیلد موبایل"
 
-#: login/login.php:304
+#: login/login.php:300
 msgid "Password Fields"
 msgstr "فیلد کلمه عبور"
 
-#: login/login.php:305
+#: login/login.php:301
 msgid "User First name"
 msgstr "فیلد نام کوچک"
 
-#: login/login.php:306
+#: login/login.php:302
 msgid "User Last name"
 msgstr "فیلد نام خانوادگی"
 
-#: login/login.php:307
+#: login/login.php:303
 msgid "User Display name"
 msgstr "فیلد نام نمایشی"
 
-#: login/login.php:311
+#: login/login.php:307
 msgid "WooCommerce Billing Country"
 msgstr "ووکامرس: فیلد کشور/منطقه"
 
-#: login/login.php:312
+#: login/login.php:308
 msgid "WooCommerce Billing State"
 msgstr "ووکامرس: فیلد استان/ایالت"
 
-#: login/login.php:313
+#: login/login.php:309
 msgid "WooCommerce Billing City"
 msgstr "ووکامرس: فیلد شهر"
 
-#: login/login.php:368
+#: login/login.php:364
 msgid "Required?"
 msgstr "ضروری است؟"
 
-#: login/login.php:383
+#: login/login.php:379
 msgid "First Name"
 msgstr "نام کوچک"
 
-#: login/login.php:398
+#: login/login.php:394
 msgid "Last Name"
 msgstr "نام خانوادگی"
 
-#: login/login.php:413
+#: login/login.php:409
 msgid "Display Name"
 msgstr "نام نمایشی"
 
-#: login/login.php:430 login/login.php:2095 login/login.php:2213
-#: login/login.php:2261 login/login.php:2605
+#: login/login.php:426 login/login.php:2092 login/login.php:2210
+#: login/login.php:2258 login/login.php:2602
 msgid "Mobile"
 msgstr "موبایل"
 
-#: login/login.php:438 login/login.php:2103 login/login.php:2221
-#: login/login.php:2269 login/login.php:2278 login/login.php:2613
+#: login/login.php:434 login/login.php:2100 login/login.php:2218
+#: login/login.php:2266 login/login.php:2275 login/login.php:2610
 msgid "Enter mobile number with English numbers,<br>e.g. 09123456789"
 msgstr "شماره موبایل را با اعداد انگلیسی وارد کنید،<br> مثال: 09123456789"
 
-#: login/login.php:447
+#: login/login.php:443
 msgid "City"
 msgstr "شهر"
 
-#: login/login.php:459
+#: login/login.php:455
 msgid "State / County"
 msgstr "استان / ایالت"
 
-#: login/login.php:471
+#: login/login.php:467
 msgid "Country / Region"
 msgstr "کشور / منطقه"
 
-#: login/login.php:543
+#: login/login.php:540
 msgid "Select an option&hellip;"
 msgstr "یک گزینه انتخاب نمائید&hellip;"
 
-#: login/login.php:544
+#: login/login.php:541
 msgid "Enter State / County &hellip;"
 msgstr "نام استان / ایالت را وارد کنید &hellip;"
 
-#: login/login.php:545
+#: login/login.php:542
 msgid "Enter City &hellip;"
 msgstr "نام شهر را وارد کنید &hellip;"
 
-#: login/login.php:549
+#: login/login.php:546
 msgctxt "js-translate"
 msgid "Login"
 msgstr "ورود"
 
-#: login/login.php:554
+#: login/login.php:551
 msgctxt "js-translate"
 msgid "One or more fields have an error. Please check and try again."
 msgstr "یک یا چند فیلد خطا دارند، لطفاً بررسی کنید و مجدد تلاش کنید."
 
-#: login/login.php:556
+#: login/login.php:553
 msgctxt "js-translate"
 msgid "Please check this field validity"
 msgstr "لطفاً چک کنید داده فیلد معتبر باشد"
 
-#: login/login.php:557
+#: login/login.php:554
 msgctxt "js-translate"
 msgid "This field is required, Please check its validity"
 msgstr "این فیلد ضروری است، لطفاً چک کنید داده فیلد معتبر باشد"
 
-#: login/login.php:559 login/login.php:1506 login/login.php:1720
-#: login/login.php:3017 login/login.php:3019 login/login.php:3593
+#: login/login.php:556 login/login.php:1503 login/login.php:1717
+#: login/login.php:3014 login/login.php:3016 login/login.php:3590
 msgctxt "reg-form-error"
 msgid "<strong>Error:</strong> Please check the reCAPTCHA challenge."
 msgstr "<strong>خطا:</strong> لطفا تایید کنید ربات نیستید."
 
-#: login/login.php:576 login/login.php:611
+#: login/login.php:573 login/login.php:608
 msgid "Verify your account"
 msgstr "اعتبار سنجی حساب"
 
-#: login/login.php:646
+#: login/login.php:643
 msgid "Verify/Change your mobile number"
 msgstr "تایید/تغییر شماره موبایل"
 
-#: login/login.php:744
+#: login/login.php:741
 msgid "Login/Register Inline form"
 msgstr "فرم لاگین / ریجستر خطی"
 
-#: login/login.php:746 login/login.php:762
+#: login/login.php:743 login/login.php:759
 msgid "Content before form"
 msgstr "محتوای قبل فرم"
 
-#: login/login.php:747 login/login.php:763
+#: login/login.php:744 login/login.php:760
 msgid "Content after form"
 msgstr "محتوای بعد فرم"
 
-#: login/login.php:748 login/login.php:766
+#: login/login.php:745 login/login.php:763
 msgid "Login Form title"
 msgstr "عنوان فرم لاگین"
 
-#: login/login.php:749 login/login.php:767
+#: login/login.php:746 login/login.php:764
 msgid "Default active form: login/register/resetpass"
 msgstr "فرم فعال پیشفرض: login/register/resetpass"
 
-#: login/login.php:750 login/login.php:768
+#: login/login.php:747 login/login.php:765
 msgid "Register Form title"
 msgstr "عنوان فرم ثبت نام"
 
-#: login/login.php:751 login/login.php:769
+#: login/login.php:748 login/login.php:766
 msgid "Reset Password Form title"
 msgstr "عنوان فرم فراموشی رمز"
 
-#: login/login.php:752 login/login.php:771 login/login.php:782
-#: login/login.php:790 login/login.php:798 profile/profile.php:357
+#: login/login.php:749 login/login.php:768 login/login.php:779
+#: login/login.php:787 login/login.php:795 profile/profile.php:357
 msgid "content between shortcode tags"
 msgstr "محتوای بین دو تگ شورتکد"
 
-#: login/login.php:752
+#: login/login.php:749
 msgid "Content to show to logged in users"
 msgstr "محتوای برای نمایش به کاربران لاگین شده"
 
-#: login/login.php:757
+#: login/login.php:754
 msgid "Login/Register Popup form"
 msgstr "فرم لاگین / ریجستر پاپ آپ"
 
-#: login/login.php:759
+#: login/login.php:756
 msgid "A jQuery selector to trigger popup"
 msgstr "انتخابگر جیکوئری برای تریگر کردن پاپ آپ"
 
-#: login/login.php:760
+#: login/login.php:757
 msgid "Trigger call-to-action anchor text, leave empty to use jQuery trigger"
 msgstr ""
 "متن انکر لینک تریگر پاپ آپ، برای استفاده از تریگر جیکوئری خالی رها کنید"
 
-#: login/login.php:761
+#: login/login.php:758
 msgid "Trigger call-to-action anchor class"
 msgstr "کلاس انکر لینک تریگر پاپ آپ"
 
-#: login/login.php:764
+#: login/login.php:761
 msgid "Content before popup form"
 msgstr "محتوای قبل فرم پاپ آپ"
 
-#: login/login.php:765
+#: login/login.php:762
 msgid "Content after popup form"
 msgstr "محتوای بعد فرم پاپ آپ"
 
-#: login/login.php:770 login/login.php:771
+#: login/login.php:767 login/login.php:768
 msgid "Content instead of trigger call-to-action"
 msgstr "محتوای جایگزین دکمه تریگر"
 
-#: login/login.php:776
+#: login/login.php:773
 msgid "Returns Logout URL/Link"
 msgstr "آدرس صفحه / لینک خروج از حساب کاربری"
 
-#: login/login.php:778
+#: login/login.php:775
 msgid "URL to redirect on logout"
 msgstr "آدرس انتقال پس از خروج"
 
-#: login/login.php:779
+#: login/login.php:776
 msgid "Logout call-to-action anchor text, leave empty to return url"
 msgstr "متن انکر لینک خروج، برای دریافت لینک خروج خالی رها کنید"
 
-#: login/login.php:780
+#: login/login.php:777
 msgid "Logout call-to-action anchor class"
 msgstr "کلاس انکر لینک خروج"
 
-#: login/login.php:781 login/login.php:782
+#: login/login.php:778 login/login.php:779
 msgid ""
 "Content instead of Logout call-to-action, use {url} to replace with logout "
 "link"
@@ -1511,180 +1499,180 @@ msgstr ""
 "محتوای جایگزین دکمه خروج از حساب، برای استفاده از لینک خروج {url} را وارد "
 "کنید"
 
-#: login/login.php:787
+#: login/login.php:784
 msgid "Show content if user has verified Email"
 msgstr "نمایش محتوا اگر ایمیل کاربر تایید شده است"
 
-#: login/login.php:789 login/login.php:797
+#: login/login.php:786 login/login.php:794
 msgid "Show Content between tags if opposite of the condition is true"
 msgstr "نمایش محتوای بین دو تگ شورتکد اگر شرط متضاد درست بود"
 
-#: login/login.php:790 login/login.php:798
+#: login/login.php:787 login/login.php:795
 msgid "Content to show if condition were true, can use other shortcodes too"
 msgstr "نمایش محتوای بین دو تگ شورتکد اگر شرط متضاد درست بود"
 
-#: login/login.php:795
+#: login/login.php:792
 msgid "Show content if user has verified Mobile"
 msgstr "نمایش محتوا اگر موبایل کاربر تایید شده است"
 
-#: login/login.php:825 login/login.php:874 login/login.php:897
-#: login/login.php:2160 login/login.php:2660
+#: login/login.php:822 login/login.php:871 login/login.php:894
+#: login/login.php:2157 login/login.php:2657
 msgid "Login"
 msgstr "ورود"
 
-#: login/login.php:842 login/login.php:860 login/login.php:2328
+#: login/login.php:839 login/login.php:857 login/login.php:2325
 msgid "Register"
 msgstr "ثبت نام"
 
-#: login/login.php:846 login/login.php:875 login/login.php:898
+#: login/login.php:843 login/login.php:872 login/login.php:895
 msgid "Resend Code"
 msgstr "ارسال مجدد کد"
 
-#: login/login.php:850
+#: login/login.php:847
 msgid "Lost Password?"
 msgstr "فراموشی رمز؟"
 
-#: login/login.php:883
+#: login/login.php:880
 msgid "Reset Password"
 msgstr "فراموشی رمز"
 
-#: login/login.php:914 login/login.php:1030 login/login.php:1118
-#: login/login.php:1585 login/login.php:1677
+#: login/login.php:911 login/login.php:1027 login/login.php:1115
+#: login/login.php:1582 login/login.php:1674
 #: profile/libs/templates/tmplt-topbar.php:47
 msgid "Logout"
 msgstr "خروج"
 
-#: login/login.php:973
+#: login/login.php:970
 msgid "Unauthorized Access!"
 msgstr "دسترسی غیرمجاز!"
 
-#: login/login.php:978
+#: login/login.php:975
 msgid "You are already logged-in."
 msgstr "شما قبلا وارد حساب شده اید."
 
-#: login/login.php:981 login/login.php:1131 login/login.php:1342
-#: login/login.php:1687
+#: login/login.php:978 login/login.php:1128 login/login.php:1339
+#: login/login.php:1684
 msgid "Source data is not valid."
 msgstr "داده وارد شده نا معتبر است."
 
-#: login/login.php:986 login/login.php:1138 login/login.php:1349
+#: login/login.php:983 login/login.php:1135 login/login.php:1346
 msgid "Please check the reCAPTCHA challenge."
 msgstr "<strong>خطا:</strong> لطفا تایید کنید ربات نیستید."
 
-#: login/login.php:1007
+#: login/login.php:1004
 msgid "The mobile number is not currently in use by any account."
 msgstr "شماره موبایل به هیچ حسابی متصل نیست."
 
-#: login/login.php:1027 login/login.php:1115
+#: login/login.php:1024 login/login.php:1112
 #, php-format
 msgid "Hi %s, You have successfully logged in!"
 msgstr "سلام %s، شما با موفقیت وارد شدید!"
 
-#: login/login.php:1035
+#: login/login.php:1032
 msgid "Login verification code is incorrect/expired!"
 msgstr "کد تایید نادرست است یا منقضی شده!"
 
-#: login/login.php:1061 login/login.php:1199 login/login.php:1412
+#: login/login.php:1058 login/login.php:1196 login/login.php:1409
 #, php-format
 msgid "Error Sending Verification to %s. Try again."
 msgstr "خطا در ارسال کد تایید به %s، مجددا تلاش کنید."
 
-#: login/login.php:1069 login/login.php:1208 login/login.php:1309
-#: login/login.php:1421
+#: login/login.php:1066 login/login.php:1205 login/login.php:1306
+#: login/login.php:1418
 #, php-format
 msgid "Error Sending Verification, you can request one code every %s seconds."
 msgstr "خطا در ارسال کد، شما مجاز به ارسال یک درخواست در هر %s ثانیه هستید."
 
-#: login/login.php:1080 login/login.php:1218 login/login.php:1293
-#: login/login.php:1319 login/login.php:1432 login/login.php:1642
+#: login/login.php:1077 login/login.php:1215 login/login.php:1290
+#: login/login.php:1316 login/login.php:1429 login/login.php:1639
 #, php-format
 msgid "Verification code sent to %s."
 msgstr "کد تایید به %s ارسال شد."
 
-#: login/login.php:1087 login/login.php:1226 login/login.php:1300
-#: login/login.php:1326 login/login.php:1440
+#: login/login.php:1084 login/login.php:1223 login/login.php:1297
+#: login/login.php:1323 login/login.php:1437
 msgid "Error Sending Verification code. Try again."
 msgstr "خطا در ارسال کد تایید، مجددا تلاش کنید."
 
-#: login/login.php:1100
+#: login/login.php:1097
 msgid "Please enter a valid email/username/mobile."
 msgstr "لطفا نام کاربری/ایمیل/شماره موبایل معتبر وارد کنید."
 
-#: login/login.php:1102 login/login.php:1236 login/login.php:1450
+#: login/login.php:1099 login/login.php:1233 login/login.php:1447
 msgid "Please enter a valid mobile number."
 msgstr "لطفا شماره موبایل معتبر وارد کنید."
 
-#: login/login.php:1105
+#: login/login.php:1102
 msgid "Please enter a valid email/username."
 msgstr "لطفا نام کاربری/ایمیل معتبر وارد کنید."
 
-#: login/login.php:1123
+#: login/login.php:1120
 msgid "Password does not match!"
 msgstr "متاسفانه رمز عبور صحیح نمیباشد!"
 
-#: login/login.php:1146 login/login.php:1359
+#: login/login.php:1143 login/login.php:1356
 msgid "You mobile is already verified!"
 msgstr "شماره موبایل شما قبلا تایید شده است!"
 
-#: login/login.php:1152 login/login.php:1365
+#: login/login.php:1149 login/login.php:1362
 msgid "The mobile number is currently in use by another account."
 msgstr "شماره موبایل وارد شده درحال استفاده توسط حساب دیگری است."
 
-#: login/login.php:1166 login/login.php:1379
+#: login/login.php:1163 login/login.php:1376
 #, php-format
 msgid "Hi %s, You have successfully verified your mobile number!"
 msgstr "سلام %s، حساب شما با موفقیت اعتبار سنجی شد!"
 
-#: login/login.php:1168 login/login.php:1266 login/login.php:1381
+#: login/login.php:1165 login/login.php:1263 login/login.php:1378
 msgid "Go Home"
 msgstr "رفتن به خانه"
 
-#: login/login.php:1172 login/login.php:1385
+#: login/login.php:1169 login/login.php:1382
 msgid "Mobile verification code is incorrect/expired!"
 msgstr "کد یکبار مصرف پیامکی نادرست است یا منقضی شده!"
 
-#: login/login.php:1191 login/login.php:1404 login/login.php:1615
+#: login/login.php:1188 login/login.php:1401 login/login.php:1612
 msgid "Verification code sent, Enter in field below."
 msgstr "کد یکبار مصرف ارسال شد. در زیر وارد کنید."
 
-#: login/login.php:1241
+#: login/login.php:1238
 msgid "You Email address is already verified!"
 msgstr "آدرس ایمیل حساب شما قبلا تایید شده است!"
 
-#: login/login.php:1243
+#: login/login.php:1240
 msgid "E-mail address could not be validated!"
 msgstr "آدرس ایمیل انتخابی را نمیتوان تایید کرد!"
 
-#: login/login.php:1264
+#: login/login.php:1261
 #, php-format
 msgid "Hi %s, You have successfully verified your email address!"
 msgstr "سلام %s، حساب شما با موفقیت اعتبار سنجی شد!"
 
-#: login/login.php:1272
+#: login/login.php:1269
 msgid "Email verification code is incorrect/expired!"
 msgstr "کد یکبار مصرف ایمیلی نادرست است یا منقضی شده!"
 
-#: login/login.php:1458
+#: login/login.php:1455
 msgid "<strong>Error:</strong> Source data is not valid."
 msgstr "<strong>خطا:</strong> داده نادرست وارد شده است."
 
-#: login/login.php:1460
+#: login/login.php:1457
 msgid "<strong>Error:</strong> User registration is not allowed!"
 msgstr "<strong>خطا:</strong> ثبت نام در وبسایت مجاز نیست!"
 
-#: login/login.php:1468
+#: login/login.php:1465
 msgctxt "reg-form-error"
 msgid "<strong>Error:</strong> Please enter a username."
 msgstr "<strong>خطا:</strong> لطفا یک نام کاربری وارد کنید."
 
-#: login/login.php:1472
+#: login/login.php:1469
 msgctxt "reg-form-error"
 msgid ""
 "<strong>Error</strong>: This username is already registered. Please choose "
 "another one."
 msgstr "<strong>خطا:</strong> نام کاربری قبلا ثبت شده است."
 
-#: login/login.php:1475
+#: login/login.php:1472
 msgctxt "reg-form-error"
 msgid ""
 "<strong>Error</strong>: This username is invalid because it uses illegal "
@@ -1693,43 +1681,43 @@ msgstr ""
 "<strong>خطا:</strong> نام کاربری با کاراکتر های نادرست وارد شده است. لطفا "
 "نام کاربری صحیح وارد کنید."
 
-#: login/login.php:1479
+#: login/login.php:1476
 msgctxt "reg-form-error"
 msgid "<strong>Error</strong>: Sorry, that username is not allowed."
 msgstr "<strong>خطا:</strong> نام کاربری انتخاب شده غیرمجاز است."
 
-#: login/login.php:1486
+#: login/login.php:1483
 msgctxt "reg-form-error"
 msgid "<strong>Error</strong>: Please enter an email address."
 msgstr "<strong>خطا:</strong> لطفا آدرس ایمیل معتبر وارد کنید."
 
-#: login/login.php:1489 login/login.php:1492
+#: login/login.php:1486 login/login.php:1489
 msgctxt "reg-form-error"
 msgid "<strong>Error</strong>: The given email address is not valid."
 msgstr "<strong>خطا:</strong> آدرس ایمیل معتبر نیست."
 
-#: login/login.php:1495
+#: login/login.php:1492
 msgctxt "reg-form-error"
 msgid ""
 "<strong>Error</strong>: This email is already registered. Please choose "
 "another one."
 msgstr "<strong>خطا:</strong> آدرس ایمیل قبلا ثبت شده است."
 
-#: login/login.php:1515 login/login.php:1530 login/login.php:1727
-#: login/login.php:3027 login/login.php:3029 login/login.php:3055
-#: login/login.php:3057 login/login.php:3119 login/login.php:3165
+#: login/login.php:1512 login/login.php:1527 login/login.php:1724
+#: login/login.php:3024 login/login.php:3026 login/login.php:3052
+#: login/login.php:3054 login/login.php:3116 login/login.php:3162
 #, php-format
 msgctxt "reg-form-error"
 msgid "<strong>Error:</strong> Please enter %s."
 msgstr "<strong>خطا:</strong> لطفا %s را وارد کنید."
 
-#: login/login.php:1519 login/login.php:3036 login/login.php:3038
-#: login/login.php:3130
+#: login/login.php:1516 login/login.php:3033 login/login.php:3035
+#: login/login.php:3127
 msgctxt "reg-form-error"
 msgid "<strong>Error:</strong> Please enter a valid mobile number."
 msgstr "<strong>خطا:</strong> لطفا شماره موبایل معتبر وارد کنید."
 
-#: login/login.php:1524
+#: login/login.php:1521
 msgctxt "reg-form-error"
 msgid ""
 "<strong>Error:</strong> This mobile number is already registered. Please "
@@ -1737,54 +1725,54 @@ msgid ""
 msgstr ""
 "<strong>خطا:</strong> شماره موبایل قبلا ثبت شده است. یک شماره جدید وارد کنید."
 
-#: login/login.php:1537 login/login.php:3085 login/login.php:3087
+#: login/login.php:1534 login/login.php:3082 login/login.php:3084
 msgctxt "reg-form-error"
 msgid "<strong>ERROR</strong>: Password field is required."
 msgstr "<strong>خطا:</strong> لطفا رمز عبور را وارد کنید."
 
-#: login/login.php:1540 login/login.php:3092 login/login.php:3094
+#: login/login.php:1537 login/login.php:3089 login/login.php:3091
 msgctxt "reg-form-error"
 msgid "<strong>ERROR</strong>: Confirm Password field is required."
 msgstr "<strong>خطا:</strong> لطفا تایید رمز عبور را وارد کنید."
 
-#: login/login.php:1545
+#: login/login.php:1542
 msgctxt "reg-form-error"
 msgid "<strong>Error</strong>: Passwords may not contain the character \"\\\"."
 msgstr "<strong>خطا:</strong> شما نباید در رمز عبور از \"\\\" استفاده کنید."
 
-#: login/login.php:1548 login/login.php:3101 login/login.php:3103
+#: login/login.php:1545 login/login.php:3098 login/login.php:3100
 msgctxt "reg-form-error"
 msgid ""
 "<strong>ERROR</strong>: Password field and Confirm Password field do not "
 "match."
 msgstr "<strong>خطا:</strong> رمز عبور و تایید رمز عبور یکسان نیستند."
 
-#: login/login.php:1565
+#: login/login.php:1562
 msgid ""
 "<strong>Error:</strong> The mobile number is currently in use by another "
 "account."
 msgstr "<strong>خطا:</strong> شماره موبایل توسط حساب دیگری در حال استفاده است."
 
-#: login/login.php:1582 login/login.php:1674
+#: login/login.php:1579 login/login.php:1671
 #, php-format
 msgid "Hi %s, You have successfully registered!"
 msgstr "سلام %s، شما با موفقیت ثبت نام شدید!"
 
-#: login/login.php:1589 login/login.php:1681 login/login.php:1749
+#: login/login.php:1586 login/login.php:1678 login/login.php:1746
 msgid "<strong>Error:</strong> There was an error processing your request!"
 msgstr "<strong>خطا:</strong> خطایی در پردازش درخواست شما رخ داد!"
 
-#: login/login.php:1596
+#: login/login.php:1593
 msgid "<strong>Error:</strong> Verification code is incorrect/expired!"
 msgstr "<strong>خطا:</strong> کد تایید نادرست است یا منقضی شده!"
 
-#: login/login.php:1623
+#: login/login.php:1620
 #, php-format
 msgid "<strong>Error:</strong> Sending Verification to %s failed. Try again."
 msgstr ""
 "<strong>خطا:</strong> در ارسال کد تایید به %s خطایی رخ داد، مجددا تلاش کنید."
 
-#: login/login.php:1632
+#: login/login.php:1629
 #, php-format
 msgid ""
 "<strong>Error:</strong> Sending Verification failed, you can request one "
@@ -1793,20 +1781,20 @@ msgstr ""
 "<strong>خطا:</strong> خطا در ارسال کد، شما مجاز به ارسال یک درخواست در هر %s "
 "ثانیه هستید."
 
-#: login/login.php:1650
+#: login/login.php:1647
 msgid "<strong>Error:</strong> Sending Verification code failed. Try again."
 msgstr "<strong>خطا:</strong> خطا در ارسال کد تایید، مجددا تلاش کنید."
 
-#: login/login.php:1662
+#: login/login.php:1659
 msgid "<strong>Error:</strong> Please enter a valid mobile number."
 msgstr "<strong>خطا:</strong> لطفا شماره موبایل معتبر وارد کنید."
 
-#: login/login.php:1692 login/login.php:1696
+#: login/login.php:1689 login/login.php:1693
 msgctxt "reg-form-error"
 msgid "<strong>Error</strong>: Please enter a username or email address."
 msgstr "<strong>خطا:</strong> لطفا آدرس ایمیل یا نام کاربری را وارد کنید."
 
-#: login/login.php:1700
+#: login/login.php:1697
 msgctxt "reg-form-error"
 msgid ""
 "<strong>Error</strong>: There is no account with that username or email "
@@ -1814,59 +1802,59 @@ msgid ""
 msgstr ""
 "<strong>خطا:</strong> هیچ حسابی با این نام کاربری یا آدرس ایمیل وجود ندارد."
 
-#: login/login.php:1708
+#: login/login.php:1705
 msgctxt "reg-form-error"
 msgid "<strong>Error</strong>: There is no email address linked to username."
 msgstr "<strong>خطا:</strong> آدرس ایمیلی برای این کاربر ثبت نشده است."
 
-#: login/login.php:1711
+#: login/login.php:1708
 msgctxt "reg-form-error"
 msgid "<strong>Error</strong>: The given email address is not registered."
 msgstr "<strong>خطا:</strong> آدرس ایمیل معتبر نیست."
 
-#: login/login.php:1745
+#: login/login.php:1742
 msgid "A password-reset mail sent to you, Check your inbox."
 msgstr ""
 "یک ایمیل حاوی لینک بازیابی رمز برای شما ارسال شده است، صندوق ورودی را چک "
 "کنید."
 
-#: login/login.php:1757 login/login.php:1764
+#: login/login.php:1754 login/login.php:1761
 msgid "An unknown error occured."
 msgstr "خطای ناشناخته رخ داد."
 
-#: login/login.php:1760
+#: login/login.php:1757
 msgid "User details successfully changed."
 msgstr "تنظیمات کاربر با موفقیت ذخیره شد."
 
-#: login/login.php:1812
+#: login/login.php:1809
 msgid "Dear user"
 msgstr "کاربر عزیز"
 
-#: login/login.php:1994
+#: login/login.php:1991
 msgid "VERIFY"
 msgstr "تایید حساب"
 
-#: login/login.php:2068 login/login.php:2566
+#: login/login.php:2065 login/login.php:2563
 msgid "Username/Email"
 msgstr "نام کاربری/ایمیل"
 
-#: login/login.php:2076 login/login.php:2516 login/login.php:2574
+#: login/login.php:2073 login/login.php:2513 login/login.php:2571
 msgid "Enter username or email address correctly"
 msgstr "نام کاربری و ایمیل را به درستی وارد کنید"
 
-#: login/login.php:2081 login/login.php:2292 login/login.php:3198
+#: login/login.php:2078 login/login.php:2289 login/login.php:3195
 msgid "Password"
 msgstr "کلمه عبور"
 
-#: login/login.php:2084
+#: login/login.php:2081
 msgid "You have to enter a password"
 msgstr "شما باید یک کلمه عبور وارد کنید"
 
-#: login/login.php:2108 login/login.php:2226 login/login.php:2618
+#: login/login.php:2105 login/login.php:2223 login/login.php:2615
 msgid "OTP Code"
 msgstr "کد یکبار مصرف"
 
-#: login/login.php:2117 login/login.php:2235 login/login.php:2627
+#: login/login.php:2114 login/login.php:2232 login/login.php:2624
 msgid ""
 "You have to enter an OTP code or leave it empty and press Enter to receive a "
 "new one"
@@ -1874,51 +1862,51 @@ msgstr ""
 "شما باید کد یکبار مصرف را وارد کنید، یا فیلد را خالی کرده و اینتر را بزنید "
 "تا کد مجددا ارسال شود"
 
-#: login/login.php:2150 login/login.php:2653
+#: login/login.php:2147 login/login.php:2650
 msgid "Receive OTP Code"
 msgstr "دریافت کد یکبار مصرف"
 
-#: login/login.php:2151 login/login.php:2654
+#: login/login.php:2148 login/login.php:2651
 msgid "Verify OTP Code"
 msgstr "تایید کد یکبار مصرف"
 
-#: login/login.php:2153
+#: login/login.php:2150
 msgid "Login via OTP/Password"
 msgstr "ورود با کد یکبار مصرف / رمز عبور"
 
-#: login/login.php:2180
+#: login/login.php:2177
 msgid "Username"
 msgstr "نام کاربری"
 
-#: login/login.php:2184
+#: login/login.php:2181
 msgid "Enter username correctly"
 msgstr "نام کاربری را به درستی وارد کنید"
 
-#: login/login.php:2195 login/login.php:2508
+#: login/login.php:2192 login/login.php:2505
 msgid "Email"
 msgstr "ایمیل"
 
-#: login/login.php:2199
+#: login/login.php:2196
 msgid "Enter email address correctly"
 msgstr "ایمیل را به درستی وارد کنید"
 
-#: login/login.php:2302 login/login.php:3202
+#: login/login.php:2299 login/login.php:3199
 msgid "Confirm Password"
 msgstr "تایید رمز عبور"
 
-#: login/login.php:2321
+#: login/login.php:2318
 msgid "Receive OTP & Register"
 msgstr "دریافت کد یکبار مصرف ثبت نام"
 
-#: login/login.php:2322
+#: login/login.php:2319
 msgid "Verify OTP & Register"
 msgstr "تایید کد یکبار مصرف و ثبت نام"
 
-#: login/login.php:2521
+#: login/login.php:2518
 msgid "Verification Code"
 msgstr "کد یکبار مصرف"
 
-#: login/login.php:2530
+#: login/login.php:2527
 msgid ""
 "You have to enter a Verification code or leave it empty and press Enter to "
 "receive a new one"
@@ -1926,131 +1914,131 @@ msgstr ""
 "شما باید کد اعتبار سنجی را وارد کنید، یا فیلد را خالی کرده و اینتر را بزنید "
 "تا کد مجددا ارسال شود"
 
-#: login/login.php:2542
+#: login/login.php:2539
 msgid "Receive Code"
 msgstr "دریافت کد یکبار مصرف"
 
-#: login/login.php:2543
+#: login/login.php:2540
 msgid "Verify Code"
 msgstr "تایید کد یکبار مصرف"
 
-#: login/login.php:2583
+#: login/login.php:2580
 msgid "Send reset password Email"
 msgstr "ارسال لینک بازیابی رمز به ایمیل"
 
-#: login/login.php:2821
+#: login/login.php:2818
 msgctxt "metabox"
 msgid "Email Verified"
 msgstr "ایمیل تایید شده"
 
-#: login/login.php:2822
+#: login/login.php:2819
 msgctxt "metabox"
 msgid "SMS Verified"
 msgstr "موبایل تایید شده"
 
-#: login/login.php:2865
+#: login/login.php:2862
 msgid "Read value"
 msgstr "مشاهده"
 
-#: login/login.php:2883
+#: login/login.php:2880
 msgctxt "wc-setting-js"
 msgid "Operation done successfully"
 msgstr "عملیات با موفقیت انجام شد"
 
-#: login/login.php:2884
+#: login/login.php:2881
 msgctxt "js-translate"
 msgid "An unknown error occured"
 msgstr "خطای ناشناخته رخ داد"
 
-#: login/login.php:2885
+#: login/login.php:2882
 msgctxt "js-translate"
 msgid "Plese fix errors in form"
 msgstr "خطاهای فرم را برطرف کنید"
 
-#: login/login.php:2898 login/login.php:3351
+#: login/login.php:2895 login/login.php:3348
 msgid "Personal Information"
 msgstr "اطلاعات شخصی"
 
-#: login/login.php:3045 login/login.php:3047
+#: login/login.php:3042 login/login.php:3044
 msgctxt "reg-form-error"
 msgid "<strong>Error:</strong> This mobile number is currently in use."
 msgstr "<strong>خطا:</strong> شماره موبایل قبلا ثبت شده است."
 
-#: login/login.php:3154
+#: login/login.php:3151
 #, php-format
 msgctxt "reg-form-error"
 msgid "<strong>Error:</strong> This mobile number is currently in use by %s."
 msgstr "<strong>خطا:</strong> شماره موبایل توسط %s در حال استفاده است."
 
-#: login/login.php:3221
+#: login/login.php:3218
 msgid "Home page"
 msgstr "صفحه اصلی"
 
-#: login/login.php:3225
+#: login/login.php:3222
 msgid "Pepro Profile page"
 msgstr "صفحه پروفایل کاربر در پروفایل پپرو"
 
-#: login/login.php:3229
+#: login/login.php:3226
 msgid "Pepro Profile Edit page"
 msgstr "صفحه ویرایش حساب کاربر در پروفایل پپرو"
 
-#: login/login.php:3288
+#: login/login.php:3285
 msgid "Everyone"
 msgstr "هر کاربری با هر نقشی"
 
-#: login/login.php:3308
+#: login/login.php:3305
 msgid "Text field"
 msgstr "فیلد متنی"
 
-#: login/login.php:3309
+#: login/login.php:3306
 msgid "Textarea field"
 msgstr "فیلد چندخطی"
 
-#: login/login.php:3310
+#: login/login.php:3307
 msgid "Number field"
 msgstr "فیلد عددی"
 
-#: login/login.php:3311
+#: login/login.php:3308
 msgid "Email field"
 msgstr "فیلد ایمیل"
 
-#: login/login.php:3312
+#: login/login.php:3309
 msgid "Mobile field"
 msgstr "فیلد موبایل"
 
-#: login/login.php:3313
+#: login/login.php:3310
 msgid "TinyMCE Editor"
 msgstr "فیلد ویرایشگر پیشرفته"
 
-#: login/login.php:3314
+#: login/login.php:3311
 msgid "Dropdown list"
 msgstr "لیست کرکره ای"
 
-#: login/login.php:3317
+#: login/login.php:3314
 msgid "reCaptcha"
 msgstr "ریکپچای گوگل"
 
-#: login/login.php:3367
+#: login/login.php:3364
 #, php-format
 msgid "Your verification Code [OTP] — %s"
 msgstr "کد تایید حساب شما: [OTP] — %s"
 
-#: login/login.php:3376 profile/profile.php:68
+#: login/login.php:3373 profile/profile.php:68
 msgid "Profile"
 msgstr "پروفایل"
 
-#: login/login.php:3474
+#: login/login.php:3471
 msgctxt "loginregister"
 msgid "Manage Login/Register"
 msgstr "مدیریت لاگین/ریجستر"
 
-#: login/login.php:3820
+#: login/login.php:3817
 #, php-format
 msgctxt "login-section"
 msgid "%1$s Your login page is now here: %2$s. Bookmark this page!"
 msgstr "%1$s صفحه لاگین فعلی شما: %2$s. این آدرس را ذخیره کنید!"
 
-#: login/login.php:3821
+#: login/login.php:3818
 msgctxt "login-section"
 msgid "Warning!"
 msgstr "اخطار!"
@@ -2070,27 +2058,27 @@ msgctxt "profile-section"
 msgid "Profile Logo Image"
 msgstr "تصویر لوگو"
 
-#: profile/libs/general/activated.php:23
+#: profile/libs/general/activated.php:25
 msgctxt "profile-section"
 msgid "Logo URL"
 msgstr "پیوند لوگو"
 
-#: profile/libs/general/activated.php:29
+#: profile/libs/general/activated.php:31
 msgctxt "profile-section"
 msgid "Select Custom Image"
 msgstr "انتخاب عکس دیگر"
 
-#: profile/libs/general/activated.php:30
+#: profile/libs/general/activated.php:32
 msgctxt "profile-section"
 msgid "Select or Upload Custom Image"
 msgstr "انتخاب یا آپلود عکس دیگر"
 
-#: profile/libs/general/activated.php:36
+#: profile/libs/general/activated.php:38
 msgctxt "profile-section"
 msgid "Dashboard page"
 msgstr "پیشخوان کاربر"
 
-#: profile/libs/general/activated.php:48 profile/profile.php:1601
+#: profile/libs/general/activated.php:50 profile/profile.php:1601
 #, php-format
 msgid ""
 "Current selected dashboard page's template should be 'PeproDev Ultimate "
@@ -2099,116 +2087,116 @@ msgstr ""
 "قالب صفحه پیشخوان کاربر انتخاب شده از نوع سولوشن کامل پروفایل پپرو نمیباشد. "
 "%s"
 
-#: profile/libs/general/activated.php:51
-#: profile/libs/templates/wc/my-address.php:77 profile/profile.php:1604
+#: profile/libs/general/activated.php:53
+#: profile/libs/templates/wc/my-address.php:71 profile/profile.php:1604
 msgid "Edit"
 msgstr "ویرایش"
 
-#: profile/libs/general/activated.php:73
+#: profile/libs/general/activated.php:75
 msgctxt "profile-section"
 msgid "Show Welcome message"
 msgstr "نمایش پیغام خوش آمد گویی"
 
-#: profile/libs/general/activated.php:76 profile/libs/general/activated.php:111
-#: profile/libs/general/activated.php:123
-#: profile/libs/general/activated.php:136
+#: profile/libs/general/activated.php:78 profile/libs/general/activated.php:113
+#: profile/libs/general/activated.php:125
+#: profile/libs/general/activated.php:138
 msgctxt "profile-section"
 msgid "Yes, Show it"
 msgstr "بله، نمایش بده"
 
-#: profile/libs/general/activated.php:77 profile/libs/general/activated.php:112
-#: profile/libs/general/activated.php:124
-#: profile/libs/general/activated.php:137
+#: profile/libs/general/activated.php:79 profile/libs/general/activated.php:114
+#: profile/libs/general/activated.php:126
+#: profile/libs/general/activated.php:139
 msgctxt "profile-section"
 msgid "No, Hide it"
 msgstr "خیر، نمایش نده"
 
-#: profile/libs/general/activated.php:84
+#: profile/libs/general/activated.php:86
 msgctxt "profile-section"
 msgid "Use Header Hook on Profile Dashboard page"
 msgstr "اجرای هوک wp_header در پیشخوان"
 
-#: profile/libs/general/activated.php:87 profile/libs/general/activated.php:98
+#: profile/libs/general/activated.php:89 profile/libs/general/activated.php:100
 msgctxt "profile-section"
 msgid "Yes, Fire this hook"
 msgstr "بله، این هوک را اجرا کن"
 
-#: profile/libs/general/activated.php:88 profile/libs/general/activated.php:99
+#: profile/libs/general/activated.php:90 profile/libs/general/activated.php:101
 msgctxt "profile-section"
 msgid "No, Do NOT use it"
 msgstr "خیر، این هوک را اجرا نکن"
 
-#: profile/libs/general/activated.php:95
+#: profile/libs/general/activated.php:97
 msgctxt "profile-section"
 msgid "Use Footer Hook on Profile Dashboard page"
 msgstr "اجرای هوکwp_footer در پیشخوان"
 
-#: profile/libs/general/activated.php:108
+#: profile/libs/general/activated.php:110
 msgctxt "profile-section"
 msgid "Show WooCommerce Stats"
 msgstr "نمایش آمار ووکامرس"
 
-#: profile/libs/general/activated.php:120
+#: profile/libs/general/activated.php:122
 msgctxt "profile-section"
 msgid "Show WooCommerce Orders"
 msgstr "نمایش سفارشات ووکامرس"
 
-#: profile/libs/general/activated.php:133
+#: profile/libs/general/activated.php:135
 msgctxt "profile-section"
 msgid "Show Custom Content"
 msgstr "نمایش محتوای شخصی سازی شده"
 
-#: profile/libs/general/activated.php:145
+#: profile/libs/general/activated.php:147
 msgctxt "profile-section"
 msgid "Content Position"
 msgstr "مکان محتوا"
 
-#: profile/libs/general/activated.php:148
+#: profile/libs/general/activated.php:150
 msgctxt "profile-section"
 msgid "Before Welcome message"
 msgstr "قبل از پیام خوش آمد گویی"
 
-#: profile/libs/general/activated.php:149
+#: profile/libs/general/activated.php:151
 msgctxt "profile-section"
 msgid "After Welcome message"
 msgstr "پس از پیام خوش آمد گویی"
 
-#: profile/libs/general/activated.php:150
+#: profile/libs/general/activated.php:152
 msgctxt "profile-section"
 msgid "After WooCommerce Stats"
 msgstr "پس از آمار ووکامرس"
 
-#: profile/libs/general/activated.php:151
+#: profile/libs/general/activated.php:153
 msgctxt "profile-section"
 msgid "After WooCommerce Orders"
 msgstr "پس از سفارشات ووکامرس"
 
-#: profile/libs/general/activated.php:182
+#: profile/libs/general/activated.php:184
 msgctxt "profile-section"
 msgid "Upload Theme Zip file"
 msgstr "آپلود فایل آرشیو تم"
 
-#: profile/libs/general/activated.php:182
+#: profile/libs/general/activated.php:184
 msgctxt "profile-section"
 msgid "Upload New Style"
 msgstr "آپلود استایل جدید"
 
-#: profile/libs/general/activated.php:183
+#: profile/libs/general/activated.php:185
 msgctxt "profile-section"
 msgid "Delete Style"
 msgstr "حذف استایل"
 
-#: profile/libs/general/activated.php:185
+#: profile/libs/general/activated.php:187
 msgctxt "profile-section"
 msgid "Save Settings"
 msgstr "ذخیره تنظیمات"
 
-#: profile/libs/general/activated.php:194
+#: profile/libs/general/activated.php:196
 msgctxt "profile-section"
 msgid "Front-end Customization"
 msgstr "شخصی سازی فرانت-اند"
 
-#: profile/libs/general/activated.php:195
+#: profile/libs/general/activated.php:197
 msgctxt "profile-section"
 msgid ""
 "You can add your custom javascript or css content blow to load on every "
@@ -2217,42 +2205,42 @@ msgstr ""
 "شما میتوانید استایل CSS و اسکریپت JS را بصورت گلوبال برای تمامی صفحات "
 "پروفایل از اینجا اضافه کنید."
 
-#: profile/libs/general/activated.php:203
+#: profile/libs/general/activated.php:205
 msgctxt "profile-section"
 msgid "Global CSS"
 msgstr "کد CSS گلوبال"
 
-#: profile/libs/general/activated.php:210
+#: profile/libs/general/activated.php:212
 msgctxt "profile-section"
 msgid "Global JS"
 msgstr "کد JS گلوبال"
 
 #: profile/libs/general/notifs_panel.php:12
-#: profile/libs/general/sections_panel.php:10 profile/profile.php:2564
+#: profile/libs/general/sections_panel.php:11 profile/profile.php:2564
 msgctxt "notifications-priority"
 msgid "Urgent"
 msgstr "فوری"
 
 #: profile/libs/general/notifs_panel.php:13
-#: profile/libs/general/sections_panel.php:11 profile/profile.php:2565
+#: profile/libs/general/sections_panel.php:12 profile/profile.php:2565
 msgctxt "notifications-priority"
 msgid "High"
 msgstr "مهم"
 
 #: profile/libs/general/notifs_panel.php:14
-#: profile/libs/general/sections_panel.php:12 profile/profile.php:2566
+#: profile/libs/general/sections_panel.php:13 profile/profile.php:2566
 msgctxt "notifications-priority"
 msgid "Medium"
 msgstr "متوسط"
 
 #: profile/libs/general/notifs_panel.php:15
-#: profile/libs/general/sections_panel.php:13 profile/profile.php:2567
+#: profile/libs/general/sections_panel.php:14 profile/profile.php:2567
 msgctxt "notifications-priority"
 msgid "Low"
 msgstr "کم"
 
 #: profile/libs/general/notifs_panel.php:16
-#: profile/libs/general/sections_panel.php:14 profile/profile.php:2568
+#: profile/libs/general/sections_panel.php:15 profile/profile.php:2568
 msgctxt "notifications-priority"
 msgid "Normal"
 msgstr "معمولی"
@@ -2323,7 +2311,7 @@ msgstr "پاک کردن جستجو"
 #: profile/libs/general/notifs_panel.php:235
 msgctxt "notif-panel"
 msgid "Add New"
-msgstr "افزودن اطلاع رسانی"
+msgstr "افزودن بخش جدید"
 
 #: profile/libs/general/notifs_panel.php:53
 msgctxt "notif-panel"
@@ -2448,7 +2436,7 @@ msgstr "نزدیک"
 #: profile/libs/general/notifs_panel.php:253
 msgctxt "notif-panel"
 msgid "Date"
-msgstr "تاریخ"
+msgstr "تاريخ"
 
 #: profile/libs/general/notifs_panel.php:255
 msgctxt "notif-panel"
@@ -2489,37 +2477,37 @@ msgctxt "notif-panel"
 msgid "Cancel"
 msgstr "لغو"
 
-#: profile/libs/general/sections_panel.php:15
+#: profile/libs/general/sections_panel.php:16
 msgctxt "section-panel"
 msgid "Red"
 msgstr "قرمز"
 
-#: profile/libs/general/sections_panel.php:16
+#: profile/libs/general/sections_panel.php:17
 msgctxt "section-panel"
 msgid "Orange"
 msgstr "نارنجی"
 
-#: profile/libs/general/sections_panel.php:17
+#: profile/libs/general/sections_panel.php:18
 msgctxt "section-panel"
 msgid "Blue"
 msgstr "آبی"
 
-#: profile/libs/general/sections_panel.php:18
+#: profile/libs/general/sections_panel.php:19
 msgctxt "section-panel"
 msgid "Green"
 msgstr "سبز"
 
-#: profile/libs/general/sections_panel.php:19
+#: profile/libs/general/sections_panel.php:20
 msgctxt "section-panel"
 msgid "Dark"
 msgstr "تاریک"
 
-#: profile/libs/general/sections_panel.php:28
+#: profile/libs/general/sections_panel.php:29
 msgctxt "section-panel"
 msgid "Profile Sections"
 msgstr "بخش های پروفایل"
 
-#: profile/libs/general/sections_panel.php:29
+#: profile/libs/general/sections_panel.php:30
 msgctxt "section-panel"
 msgid ""
 "You can manage sections from here. Add, Delete, and Edit sections on the fly "
@@ -2528,197 +2516,197 @@ msgstr ""
 "از این صفحه میتوانید بخش های پروفایل را مدیریت کنید. افزودن، حذف و ویرایش "
 "کردن بصورت آنی از پنل جاری انجام خواهد شد."
 
-#: profile/libs/general/sections_panel.php:34
+#: profile/libs/general/sections_panel.php:35
 msgctxt "section-panel"
 msgid "Search here and hit Enter ..."
 msgstr "برای جستجو، کلمه مورد نظر را تایپ کرده و Enter را بفشارید ..."
 
-#: profile/libs/general/sections_panel.php:36
+#: profile/libs/general/sections_panel.php:37
 msgctxt "section-panel"
 msgid "Clear search"
 msgstr "پاک کردن جستجو"
 
-#: profile/libs/general/sections_panel.php:41
-#: profile/libs/general/sections_panel.php:153
+#: profile/libs/general/sections_panel.php:42
+#: profile/libs/general/sections_panel.php:154
 msgctxt "section-panel"
 msgid "Add New"
-msgstr "افزودن اطلاع رسانی"
+msgstr "افزودن بخش جدید"
 
-#: profile/libs/general/sections_panel.php:42
+#: profile/libs/general/sections_panel.php:43
 msgctxt "section-panel"
 msgid "Toggle Built-in"
 msgstr "نمایش / مخفی سازی موقت بخش های پیشفرض"
 
-#: profile/libs/general/sections_panel.php:43
+#: profile/libs/general/sections_panel.php:44
 msgctxt "section-panel"
 msgid "Search"
 msgstr "جستجو"
 
-#: profile/libs/general/sections_panel.php:49
+#: profile/libs/general/sections_panel.php:50
 msgctxt "section-panel"
 msgid "Add New Section"
 msgstr "افزودن بخش جدید"
 
-#: profile/libs/general/sections_panel.php:50
+#: profile/libs/general/sections_panel.php:51
 msgctxt "section-panel"
 msgid "Edit Section: "
 msgstr "ویرایش بخش: "
 
-#: profile/libs/general/sections_panel.php:59
+#: profile/libs/general/sections_panel.php:60
 msgctxt "section-panel"
 msgid "Menu Label"
 msgstr "عنوان در منو"
 
-#: profile/libs/general/sections_panel.php:60
-#: profile/libs/general/sections_panel.php:64
-#: profile/libs/general/sections_panel.php:68
-#: profile/libs/general/sections_panel.php:72
-#: profile/libs/general/sections_panel.php:83
-#: profile/libs/general/sections_panel.php:230
+#: profile/libs/general/sections_panel.php:61
+#: profile/libs/general/sections_panel.php:65
+#: profile/libs/general/sections_panel.php:69
+#: profile/libs/general/sections_panel.php:73
+#: profile/libs/general/sections_panel.php:84
+#: profile/libs/general/sections_panel.php:231
 #, php-format
 msgctxt "section-panel"
 msgid "Enter %s"
 msgstr "%s را وارد کنید"
 
-#: profile/libs/general/sections_panel.php:63
+#: profile/libs/general/sections_panel.php:64
 msgctxt "section-panel"
 msgid "Unique Slug"
 msgstr "نامک یکتا"
 
-#: profile/libs/general/sections_panel.php:67
-#: profile/libs/general/sections_panel.php:173
+#: profile/libs/general/sections_panel.php:68
+#: profile/libs/general/sections_panel.php:174
 msgctxt "section-panel"
 msgid "Subject"
 msgstr "موضوع"
 
-#: profile/libs/general/sections_panel.php:71
+#: profile/libs/general/sections_panel.php:72
 msgctxt "section-panel"
 msgid "Content"
 msgstr "محتوا"
 
-#: profile/libs/general/sections_panel.php:75
+#: profile/libs/general/sections_panel.php:76
 msgctxt "section-panel"
 msgid "Icon"
 msgstr "آیکون"
 
-#: profile/libs/general/sections_panel.php:76
+#: profile/libs/general/sections_panel.php:77
 msgctxt "section-panel"
 msgid "Pick icon (provided by FontAwesome)"
 msgstr "انتخاب آیکون (تهیه شده توسط FontAwesome )"
 
-#: profile/libs/general/sections_panel.php:82
-#: profile/libs/general/sections_panel.php:229
+#: profile/libs/general/sections_panel.php:83
+#: profile/libs/general/sections_panel.php:230
 msgctxt "section-panel"
 msgid "Priority (number)"
 msgstr "اهمیت (عدد)"
 
-#: profile/libs/general/sections_panel.php:86
+#: profile/libs/general/sections_panel.php:87
 msgctxt "profile-section"
 msgid "Hide Advanced Setting"
 msgstr "مخفی سازی تنظیمات پیشرفته"
 
-#: profile/libs/general/sections_panel.php:87
+#: profile/libs/general/sections_panel.php:88
 msgctxt "profile-section"
 msgid "Show Advanced Setting"
 msgstr "نمایش تنظیمات پیشرفته"
 
-#: profile/libs/general/sections_panel.php:103
-#: profile/libs/general/sections_panel.php:233
+#: profile/libs/general/sections_panel.php:104
+#: profile/libs/general/sections_panel.php:234
 msgctxt "section-panel"
 msgid "Section is active?"
 msgstr "بخش فعال است؟"
 
-#: profile/libs/general/sections_panel.php:104
-#: profile/libs/general/sections_panel.php:234
+#: profile/libs/general/sections_panel.php:105
+#: profile/libs/general/sections_panel.php:235
 msgctxt "section-panel"
 msgid "Check to activate section and show it on front-end"
 msgstr "برای نمایش این بخش در پروفایل تیک بزنید"
 
-#: profile/libs/general/sections_panel.php:120
+#: profile/libs/general/sections_panel.php:121
 msgctxt "notif-panel"
 msgid "Restrict Access to User Roles"
 msgstr "محدودیت دسترسی توسط نقش کاربر"
 
-#: profile/libs/general/sections_panel.php:123
+#: profile/libs/general/sections_panel.php:124
 msgid "Select none to show section for everyone (make public)"
 msgstr "برای نمایش به همه کاربران با هر نقشی، هیچ گزینه ای را انتخاب نکنید"
 
-#: profile/libs/general/sections_panel.php:125
+#: profile/libs/general/sections_panel.php:126
 msgid "— None"
 msgstr "— هیچ"
 
-#: profile/libs/general/sections_panel.php:128
+#: profile/libs/general/sections_panel.php:129
 msgctxt "notif-panel"
 msgid "Restrict Access to Ld-Course"
 msgstr "محدودیت دسترسی توسط دوره لرن‌دش"
 
-#: profile/libs/general/sections_panel.php:132
+#: profile/libs/general/sections_panel.php:133
 msgid "Restrict Access to Ld-Course enrolled users in addition to User Roles"
 msgstr ""
 "به همراه اعمال محدودیت نقش کاربری میتوانید دسترسی را به کاربران عضو یکی از "
 "دوره های لرن‌دش محدود کنید"
 
-#: profile/libs/general/sections_panel.php:134
+#: profile/libs/general/sections_panel.php:135
 msgctxt "profile-section"
 msgid "Custom CSS"
 msgstr "استایل شخصی سازی شده (CSS)"
 
-#: profile/libs/general/sections_panel.php:138
+#: profile/libs/general/sections_panel.php:139
 msgctxt "profile-section"
 msgid "Custom JS"
 msgstr "اسکریپت شخصی سازی شده (JS)"
 
-#: profile/libs/general/sections_panel.php:160
+#: profile/libs/general/sections_panel.php:161
 msgctxt "section-panel"
 msgid "Save Edits"
 msgstr "ذخیره تنظیمات"
 
-#: profile/libs/general/sections_panel.php:161
+#: profile/libs/general/sections_panel.php:162
 msgctxt "section-panel"
 msgid "Clear form"
 msgstr "خالی کردن فرم"
 
-#: profile/libs/general/sections_panel.php:162
+#: profile/libs/general/sections_panel.php:163
 msgctxt "section-panel"
 msgid "Close"
 msgstr "نزدیک"
 
-#: profile/libs/general/sections_panel.php:171
+#: profile/libs/general/sections_panel.php:172
 msgctxt "section-panel"
 msgid "Date"
-msgstr "تاریخ"
+msgstr "تاريخ"
 
-#: profile/libs/general/sections_panel.php:172
+#: profile/libs/general/sections_panel.php:173
 msgctxt "section-panel"
 msgid "Title"
 msgstr "عنوان"
 
-#: profile/libs/general/sections_panel.php:174
+#: profile/libs/general/sections_panel.php:175
 msgctxt "section-panel"
 msgid "Slug"
 msgstr "نامک"
 
-#: profile/libs/general/sections_panel.php:175
+#: profile/libs/general/sections_panel.php:176
 msgctxt "section-panel"
 msgid "Access Roles"
 msgstr "دسترسی کاربران"
 
-#: profile/libs/general/sections_panel.php:176
+#: profile/libs/general/sections_panel.php:177
 msgctxt "section-panel"
 msgid "Priority"
 msgstr "اهمیت"
 
-#: profile/libs/general/sections_panel.php:177
+#: profile/libs/general/sections_panel.php:178
 msgctxt "section-panel"
 msgid "Action"
 msgstr "عملیات"
 
-#: profile/libs/general/sections_panel.php:198
+#: profile/libs/general/sections_panel.php:199
 msgctxt "section-panel"
 msgid "Permanently Remove Sections"
 msgstr "حذف بخش برای همیشه"
 
-#: profile/libs/general/sections_panel.php:204
+#: profile/libs/general/sections_panel.php:205
 msgctxt "section-panel"
 msgid ""
 "Are you sure you want to permanently remove this section?<br>There is no "
@@ -2727,23 +2715,23 @@ msgstr ""
 "آیا مطمئن هستید میخواهید این بخش را حدف کنید؟<br>توجه داشته باشید گزینه ی "
 "بازگشتی وجود ندارد."
 
-#: profile/libs/general/sections_panel.php:208
-#: profile/libs/general/sections_panel.php:255
+#: profile/libs/general/sections_panel.php:209
+#: profile/libs/general/sections_panel.php:256
 msgctxt "section-panel"
 msgid "Cancel"
 msgstr "لغو"
 
-#: profile/libs/general/sections_panel.php:209
+#: profile/libs/general/sections_panel.php:210
 msgctxt "section-panel"
 msgid "Yes, Remove"
 msgstr "بله، حذف شود"
 
-#: profile/libs/general/sections_panel.php:219
+#: profile/libs/general/sections_panel.php:220
 msgctxt "section-panel"
 msgid "Edit Built-in Section: "
 msgstr "ویرایش بخش پیشفرض: "
 
-#: profile/libs/general/sections_panel.php:256
+#: profile/libs/general/sections_panel.php:257
 msgctxt "section-panel"
 msgid "Save Changes"
 msgstr "ذخیره تنظیمات"
@@ -2879,7 +2867,7 @@ msgctxt "edit-user"
 msgid "New Password"
 msgstr "کلمه عبور جدید"
 
-#: profile/libs/templates/dash-edit.php:98
+#: profile/libs/templates/dash-edit.php:94
 msgctxt "edit-user"
 msgid "Save Edit"
 msgstr "ذخیره تنظیمات"
@@ -2912,47 +2900,47 @@ msgctxt "user-dashboard"
 msgid "Latest 10 purchases"
 msgstr "سفارشات اخیر"
 
-#: profile/libs/templates/dash-me.php:14
+#: profile/libs/templates/dash-me.php:8
 msgctxt "user-dashboard"
 msgid "Profile"
 msgstr "پروفایل"
 
-#: profile/libs/templates/dash-me.php:20
+#: profile/libs/templates/dash-me.php:14
 msgctxt "user-dashboard"
 msgid "You"
 msgstr "شما"
 
-#: profile/libs/templates/dash-me.php:27
+#: profile/libs/templates/dash-me.php:21
 msgctxt "user-dashboard"
 msgid "Personal Info"
 msgstr "اطلاعات شخصی"
 
-#: profile/libs/templates/dash-me.php:35
+#: profile/libs/templates/dash-me.php:29
 msgctxt "edit-profile"
 msgid "Name"
 msgstr "نام"
 
-#: profile/libs/templates/dash-me.php:36
+#: profile/libs/templates/dash-me.php:30
 msgctxt "edit-profile"
 msgid "Last Name"
 msgstr "نام خانوادگی"
 
-#: profile/libs/templates/dash-me.php:37
+#: profile/libs/templates/dash-me.php:31
 msgctxt "edit-profile"
 msgid "Publicly Known as"
 msgstr "نمایش به عنوان"
 
-#: profile/libs/templates/dash-me.php:38
+#: profile/libs/templates/dash-me.php:32
 msgctxt "edit-profile"
 msgid "Registered on"
 msgstr "تاریخ ثبت نام"
 
-#: profile/libs/templates/dash-me.php:39
+#: profile/libs/templates/dash-me.php:33
 msgctxt "edit-profile"
 msgid "Email"
 msgstr "ایمیل"
 
-#: profile/libs/templates/dash-me.php:40
+#: profile/libs/templates/dash-me.php:34
 msgctxt "edit-profile"
 msgid "Username"
 msgstr "نام کاربری"
@@ -3080,7 +3068,7 @@ msgid "Enter amount"
 msgstr "مقدار را وارد کنید"
 
 #: profile/libs/templates/dash-wallet.php:62
-#: profile/libs/templates/wc/my-address.php:77
+#: profile/libs/templates/wc/my-address.php:71
 msgid "Add"
 msgstr "افزودن"
 
@@ -3146,16 +3134,16 @@ msgstr "تغییر کلمه عبور"
 msgid "WP Dashboard"
 msgstr "پیشخوان وردپرس"
 
-#: profile/libs/templates/wc/my-address.php:36
-#: profile/libs/templates/wc/my-address.php:45
+#: profile/libs/templates/wc/my-address.php:30
+#: profile/libs/templates/wc/my-address.php:39
 msgid "Billing address"
 msgstr "آدرس صورتحساب"
 
-#: profile/libs/templates/wc/my-address.php:37
+#: profile/libs/templates/wc/my-address.php:31
 msgid "Shipping address"
 msgstr "آدرس حمل و نقل"
 
-#: profile/libs/templates/wc/my-address.php:72
+#: profile/libs/templates/wc/my-address.php:66
 msgid "You have not set up this type of address yet."
 msgstr "شما هنوز این نوع آدرس را ایجاد نکردید."
 
@@ -3756,47 +3744,3 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "https://pepro.dev/"
 msgstr "https://pepro.dev/"
-
-#~ msgctxt "login-section"
-#~ msgid "Register/Lost Password Link"
-#~ msgstr "لینک ثبت‌نام / فراموشی رمز"
-
-#~ msgctxt "login-section"
-#~ msgid "Register/Lost Password Link Separator"
-#~ msgstr "جداکننده لینک ثبت‌نام / فراموشی رمز"
-
-#~ msgctxt "login-section"
-#~ msgid "Link Separator"
-#~ msgstr "جداکننده لینک ثبت‌نام / فراموشی رمز"
-
-#~ msgid "Registeration: Show Password Fields"
-#~ msgstr "فرم ثبت نام: نمایش فیلد رمز عبور"
-
-#~ msgid "Registeration: Hide Username field"
-#~ msgstr "فرم ثبت نام: مخفی سازی نام کاربری"
-
-#~ msgid "Login/Register using Mobile OTP instead of Email/Username"
-#~ msgstr "ثبت نام/ورود توسط ارسال کد یکبار مصرف پیامکی بجای ایمیل/نام کاربری"
-
-#~ msgid "Registeration: Add last_name field"
-#~ msgstr "فرم ثبت نام: افزودن فیلد نام خانوادگی"
-
-#~ msgid "Registeration: Add dispaly_name field"
-#~ msgstr "فرم ثبت نام: افزودن فیلد نام نمایشی"
-
-#~ msgctxt "edit-user"
-#~ msgid "Edit Woocommerce Addresses"
-#~ msgstr "ویرایش آدرس‌ها"
-
-#~ msgid "Import/Export"
-#~ msgstr "برون بری / درون ریزی"
-
-#~ msgid "Black Swan Lab"
-#~ msgstr "مرکز توسعه نرم افزاری قوی سیاه"
-
-#~ msgid ""
-#~ "Complete login/registeration/verification with user defined custom "
-#~ "fields, OTP login and popup forms."
-#~ msgstr ""
-#~ "سولوشن کامل ورود/ثبت نام/وریفای به همراه فیلد های شخصی کاربر و ورود "
-#~ "پیامکی و پاپ آپ"
