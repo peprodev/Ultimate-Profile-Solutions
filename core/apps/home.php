@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/02 16:22:45
+# @Last modified time: 2021/09/11 11:23:38
 
 global $PeproDevUPS_Profile;
 $assets      = plugins_url("/assets/", dirname(__FILE__));
@@ -43,19 +43,17 @@ if (!isset($ssection) || empty($ssection)  || !in_array($ssection,$allowedAdds))
 }
 
 ?>
-<div class="wrapper" data-color="<?php echo $colorScheme;?>">
-  <div class="sidebar" data-color="<?php echo $colorScheme;?>" data-background-color="black" data-image="<?php echo $assetsImg;?>">
-    <div class="logo"><a href="<?php echo admin_url("?page=pepro&section=home");?>" class="simple-text logo-normal"><?php echo $dashttle;?></a></div>
+<div class="wrapper" data-color="<?php esc_attr_e($colorScheme);?>">
+  <div class="sidebar" data-color="<?php esc_attr_e($colorScheme);?>" data-background-color="black" data-image="<?php esc_attr_e($assetsImg);?>">
+    <div class="logo"><a href="<?php esc_attr_e(admin_url("?page=pepro&section=home"));?>" class="simple-text logo-normal"><?php esc_attr_e($dashttle);?></a></div>
     <div class="sidebar-wrapper">
       <ul class="nav">
-
         <li class="nav-item multiple">
-          <a class="nav-link" title="<?php echo __("WordPress Admin", $this->td);?>" href="<?php echo admin_url();?>"><?php echo "<i class='material-icons'>wordpress</i>";?></a>
-          <a class="nav-link" title="<?php echo __("Homepage", $this->td);?>" href="<?php echo home_url();?>"><?php echo "<i class='material-icons'>home</i>";?></a>
-          <a class="nav-link" title="<?php echo __("User Profile", $this->td);?>" href="<?php echo $PeproDevUPS_Profile->url;?>"><?php echo "<i class='material-icons'>supervised_user_circle</i>";?></a>
+          <a class="nav-link" title="<?php esc_attr_e("WordPress Admin", "peprodev-ups");?>" href="<?php esc_attr_e(admin_url());?>"><?php esc_html_e("<i class='material-icons'>wordpress</i>");?></a>
+          <a class="nav-link" title="<?php esc_attr_e("Homepage", "peprodev-ups");?>" href="<?php esc_attr_e(home_url());?>"><?php esc_html_e("<i class='material-icons'>home</i>");?></a>
+          <a class="nav-link" title="<?php esc_attr_e("User Profile", "peprodev-ups");?>" href="<?php esc_attr_e($PeproDevUPS_Profile->url);?>"><?php esc_html_e("<i class='material-icons'>supervised_user_circle</i>");?></a>
         </li>
-
-        <?php echo $navs;?>
+        <?php echo wp_kses_post( $navs );?>
       </ul>
     </div>
   </div>
@@ -63,7 +61,7 @@ if (!isset($ssection) || empty($ssection)  || !in_array($ssection,$allowedAdds))
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
       <div class="container-fluid">
-        <div class="navbar-wrapper"><a class="navbar-brand" href="javascript:void(0)"><?php echo $pageTitle;?></a></div>
+        <div class="navbar-wrapper"><a class="navbar-brand" href="javascript:void(0)"><?php esc_attr_e($pageTitle);?></a></div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
           <span class="sr-only">Toggle navigation</span>
           <span class="navbar-toggler-icon icon-bar"></span>
@@ -79,8 +77,8 @@ if (!isset($ssection) || empty($ssection)  || !in_array($ssection,$allowedAdds))
       <div class="container-fluid">
         <nav class="float-left">
           <ul>
-            <li><a href="https://pepro.dev/"><?php echo __("Pepro Dev","pepro");?></a></li>
-            <li><a href="https://pepro.dev/support"><?php echo __("Support","pepro");?></a></li>
+            <li><a href="https://pepro.dev/"><?php esc_html_e("Pepro Dev","pepro");?></a></li>
+            <li><a href="https://pepro.dev/support"><?php esc_html_e("Support","pepro");?></a></li>
           </ul>
         </nav>
         <div class="copyright float-right">

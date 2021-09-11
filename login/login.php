@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/04 14:49:36
+# @Last modified time: 2021/09/11 11:28:14
 include_once plugin_dir_path(__FILE__) . "/include/class-login-permalink.php";
 
 if (!class_exists("PeproDevUPS_Login")){
@@ -70,13 +70,13 @@ if (!class_exists("PeproDevUPS_Login")){
       $this->hwnd              = __CLASS__;
       $this->setting_slug      = "loginregister";
       $this->id                = "loginregister";
-      $this->td                = "pepro";
-      $this->title             = __("PeproDev Ultimate Profile Solutions — Login","$this->td");
-      $this->menu_label        = __("Login/Register","$this->td");
-      $this->page_label        = __("Login Setting","$this->td");
-      $this->developer         = __("Pepro Dev. Group",$this->td);
-      $this->author            = __("Pepro Dev. Group",$this->td);
-      $this->license           = __("Pepro Dev License",$this->td);
+      $this->td                = "peprodev-ups";
+      $this->title             = __("PeproDev Ultimate Profile Solutions — Login","peprodev-ups");
+      $this->menu_label        = __("Login/Register","peprodev-ups");
+      $this->page_label        = __("Login Setting","peprodev-ups");
+      $this->developer         = __("Pepro Dev. Group","peprodev-ups");
+      $this->author            = __("Pepro Dev. Group","peprodev-ups");
+      $this->license           = __("Pepro Dev License","peprodev-ups");
       $this->icon_html         = "<i class=\"material-icons\">fingerprint</i>";
       $this->current_version   = "3.5.0";
       $this->date_last_edit    = "1400/06/03";
@@ -96,7 +96,7 @@ if (!class_exists("PeproDevUPS_Login")){
       $this->licenseURI        = "https://pepro.dev/license";
       $this->pluginURI         = "https://pepro.dev/ups";
       $this->lang              = dirname(plugin_basename(__FILE__))."/languages/";
-      $this->copyright         = sprintf(__("Copyright (c) %s Pepro Dev, All rights reserved",$this->td),date("Y"));
+      $this->copyright         = sprintf(__("Copyright (c) %s Pepro Dev, All rights reserved","peprodev-ups"),date("Y"));
 
       $this->auto_login_after_reg   = "yes" == get_option("{$this->activation_status}-auto_login_after_reg");
       $this->verify_email           = "yes" == get_option("{$this->activation_status}-verify_email");
@@ -294,37 +294,37 @@ if (!class_exists("PeproDevUPS_Login")){
     public function get_registeration_form_defaul_fields()
     {
       $form_default_fiedls = array(
-        "_regdef_email"           => __("Email Field", $this->td),
-        "_regdef_username"        => __("Username Field", $this->td),
-        "_regdef_mobile"          => __("Mobile Field", $this->td),
-        "_regdef_passwords"       => __("Password Fields", $this->td),
-        "_regdef_firstname"       => __("User First name", $this->td),
-        "_regdef_lastname"        => __("User Last name", $this->td),
-        "_regdef_displayname"     => __("User Display name", $this->td),
+        "_regdef_email"           => __("Email Field", "peprodev-ups"),
+        "_regdef_username"        => __("Username Field", "peprodev-ups"),
+        "_regdef_mobile"          => __("Mobile Field", "peprodev-ups"),
+        "_regdef_passwords"       => __("Password Fields", "peprodev-ups"),
+        "_regdef_firstname"       => __("User First name", "peprodev-ups"),
+        "_regdef_lastname"        => __("User Last name", "peprodev-ups"),
+        "_regdef_displayname"     => __("User Display name", "peprodev-ups"),
       );
       if ($this->_wc_activated()){
         $_wc_active = array(
-          "_wc_billing_country" => __("WooCommerce Billing Country", $this->td),
-          "_wc_billing_state"   => __("WooCommerce Billing State", $this->td),
-          "_wc_billing_city"    => __("WooCommerce Billing City", $this->td),
-          // '_wc_billing_company'     => __("WooCommerce Billing Company",$this->td),
-          // '_wc_billing_address_1'   => __("WooCommerce Billing Address 1",$this->td),
-          // '_wc_billing_address_2'   => __("WooCommerce Billing Address 2",$this->td),
-          // '_wc_billing_country'     => __("WooCommerce Billing Country",$this->td),
-          // '_wc_billing_state'       => __("WooCommerce Billing State",$this->td),
-          // '_wc_billing_city'        => __("WooCommerce Billing City",$this->td),
-          // '_wc_billing_postcode'    => __("WooCommerce Billing Postcode",$this->td),
-          // '_wc_billing_phone'       => __("WooCommerce Billing Phone",$this->td),
-          // '_wc_billing_email'       => __("WooCommerce Billing Email",$this->td),
-          // '_wc_shipping_first_name' => __("WooCommerce Shipping First Name",$this->td),
-          // '_wc_shipping_last_name'  => __("WooCommerce Shipping Last Name",$this->td),
-          // '_wc_shipping_company'    => __("WooCommerce Shipping Company",$this->td),
-          // '_wc_shipping_address_1'  => __("WooCommerce Shipping Address 1",$this->td),
-          // '_wc_shipping_address_2'  => __("WooCommerce Shipping Address 2",$this->td),
-          // '_wc_shipping_country'    => __("WooCommerce Shipping Country",$this->td),
-          // '_wc_shipping_state'      => __("WooCommerce Shipping State",$this->td),
-          // '_wc_shipping_city'       => __("WooCommerce Shipping City",$this->td),
-          // '_wc_shipping_postcode'   => __("WooCommerce Shipping Postcode",$this->td),
+          "_wc_billing_country" => __("WooCommerce Billing Country", "peprodev-ups"),
+          "_wc_billing_state"   => __("WooCommerce Billing State", "peprodev-ups"),
+          "_wc_billing_city"    => __("WooCommerce Billing City", "peprodev-ups"),
+          // '_wc_billing_company'     => __("WooCommerce Billing Company","peprodev-ups"),
+          // '_wc_billing_address_1'   => __("WooCommerce Billing Address 1","peprodev-ups"),
+          // '_wc_billing_address_2'   => __("WooCommerce Billing Address 2","peprodev-ups"),
+          // '_wc_billing_country'     => __("WooCommerce Billing Country","peprodev-ups"),
+          // '_wc_billing_state'       => __("WooCommerce Billing State","peprodev-ups"),
+          // '_wc_billing_city'        => __("WooCommerce Billing City","peprodev-ups"),
+          // '_wc_billing_postcode'    => __("WooCommerce Billing Postcode","peprodev-ups"),
+          // '_wc_billing_phone'       => __("WooCommerce Billing Phone","peprodev-ups"),
+          // '_wc_billing_email'       => __("WooCommerce Billing Email","peprodev-ups"),
+          // '_wc_shipping_first_name' => __("WooCommerce Shipping First Name","peprodev-ups"),
+          // '_wc_shipping_last_name'  => __("WooCommerce Shipping Last Name","peprodev-ups"),
+          // '_wc_shipping_company'    => __("WooCommerce Shipping Company","peprodev-ups"),
+          // '_wc_shipping_address_1'  => __("WooCommerce Shipping Address 1","peprodev-ups"),
+          // '_wc_shipping_address_2'  => __("WooCommerce Shipping Address 2","peprodev-ups"),
+          // '_wc_shipping_country'    => __("WooCommerce Shipping Country","peprodev-ups"),
+          // '_wc_shipping_state'      => __("WooCommerce Shipping State","peprodev-ups"),
+          // '_wc_shipping_city'       => __("WooCommerce Shipping City","peprodev-ups"),
+          // '_wc_shipping_postcode'   => __("WooCommerce Shipping Postcode","peprodev-ups"),
         );
         $form_default_fiedls = array_merge($form_default_fiedls, $_wc_active);
       }
@@ -361,7 +361,7 @@ if (!class_exists("PeproDevUPS_Login")){
               </div>
               <div class="col-4">
                 <label class="row w-100 align-items-center m-0">
-                  <input autocomplete="off" type="checkbox" class='form-checkbox single-required mr-2 is_required' <?php echo checked(get_option("{$this->activation_status}-{$key}-req") === "yes", true);?> name="<?php echo esc_attr($key);?>-req" /> <?php echo __("Required?", $this->td);?>
+                  <input autocomplete="off" type="checkbox" class='form-checkbox single-required mr-2 is_required' <?php echo checked(get_option("{$this->activation_status}-{$key}-req") === "yes", true);?> name="<?php echo esc_attr($key);?>-req" /> <?php esc_html_e("Required?", "peprodev-ups");?>
                 </label>
               </div>
             </div>
@@ -376,7 +376,7 @@ if (!class_exists("PeproDevUPS_Login")){
       $reg_add_firstname   = array(
         "meta_name"    => "first_name",
         "type"         => "text",
-        "title"        => __("First Name",$this->td),
+        "title"        => __("First Name","peprodev-ups"),
         "placeholder"  => "",
         "classes"      => "",
         "attributes"   => "",
@@ -391,7 +391,7 @@ if (!class_exists("PeproDevUPS_Login")){
       $reg_add_lastname    = array(
         "meta_name"    => "last_name",
         "type"         => "text",
-        "title"        => __("Last Name",$this->td),
+        "title"        => __("Last Name","peprodev-ups"),
         "placeholder"  => "",
         "classes"      => "",
         "attributes"   => "",
@@ -406,7 +406,7 @@ if (!class_exists("PeproDevUPS_Login")){
       $reg_add_displayname = array(
         "meta_name"    => "display_name",
         "type"         => "text",
-        "title"        => __("Display Name",$this->td),
+        "title"        => __("Display Name","peprodev-ups"),
         "placeholder"  => "",
         "classes"      => "",
         "attributes"   => "",
@@ -423,7 +423,7 @@ if (!class_exists("PeproDevUPS_Login")){
         array_push($fields, array(
           "meta_name"   => "user_mobile",
           "type"        => "mobile",
-          "title"       => __("Mobile",$this->td),
+          "title"       => __("Mobile","peprodev-ups"),
           "default"     => "",
           "is-required" => $this->is_add_mobile_req ? "yes" : "no",
           "is-public"   => "yes",
@@ -431,7 +431,7 @@ if (!class_exists("PeproDevUPS_Login")){
           "in-column"   => "no",
           "placeholder" => "",
           "classes"     => "mobile-verification force-ltr",
-          "attributes"  => "pattern=".esc_attr("^(\+98|0098|98|0)?9\d{9}$")." data-error-text=\"".esc_attr__("Enter mobile number with English numbers,<br>e.g. 09123456789", $this->td)."\" maxlength=14",
+          "attributes"  => "pattern=".esc_attr("^(\+98|0098|98|0)?9\d{9}$")." data-error-text=\"".esc_attr__("Enter mobile number with English numbers,<br>e.g. 09123456789", "peprodev-ups")."\" maxlength=14",
         ));
       }
 
@@ -440,7 +440,7 @@ if (!class_exists("PeproDevUPS_Login")){
           $reg_add_city = array(
             "meta_name"   => "billing_city",
             "type"        => "text",
-            "title"       => __("City",$this->td),
+            "title"       => __("City","peprodev-ups"),
             "is-required" => "yes" == get_option("{$this->activation_status}-_wc_billing_city-req") ? "yes" : "no",
             "is-public"   => "yes",
             "is-editable" => "no",
@@ -452,7 +452,7 @@ if (!class_exists("PeproDevUPS_Login")){
           $reg_add_state = array(
             "meta_name"   => "billing_state",
             "type"        => "wc_state",
-            "title"       => __("State / County",$this->td),
+            "title"       => __("State / County","peprodev-ups"),
             "is-required" => "yes" == get_option("{$this->activation_status}-_wc_billing_state-req") ? "yes" : "no",
             "is-public"   => "yes",
             "is-editable" => "no",
@@ -464,7 +464,7 @@ if (!class_exists("PeproDevUPS_Login")){
           $reg_add_country = array(
             "meta_name"   => "billing_country",
             "type"        => "wc_country",
-            "title"       => __("Country / Region",$this->td),
+            "title"       => __("Country / Region","peprodev-ups"),
             "is-required" => "yes" == get_option("{$this->activation_status}-_wc_billing_country-req") ? "yes" : "no",
             "is-public"   => "yes",
             "is-editable" => "no",
@@ -529,31 +529,31 @@ if (!class_exists("PeproDevUPS_Login")){
         "instance"          => $args["uniqd"],
         "trigger"           => $args["trigger"]??"",
         "ajaxurl"           => admin_url('admin-ajax.php'),
-        "nonce"             => wp_create_nonce($this->td),
-        "loading"           => _x("Please wait ...", "js-translate", $this->td),
-        "error"             => _x("An unknown error occured.", "js-translate", $this->td),
-        "errorTxt"          => _x("Error", "js-translate", $this->td),
-        "gohome_txt"        => _x("Go Home", "js-translate", $this->td),
+        "nonce"             => wp_create_nonce("peprodev-ups"),
+        "loading"           => _x("Please wait ...", "js-translate", "peprodev-ups"),
+        "error"             => _x("An unknown error occured.", "js-translate", "peprodev-ups"),
+        "errorTxt"          => _x("Error", "js-translate", "peprodev-ups"),
+        "gohome_txt"        => _x("Go Home", "js-translate", "peprodev-ups"),
         "gohome_url"        => home_url(),
         "countries"         => $this->get_wc_countries(),
         "iran_cities"       => $this->get_wc_iran_cities(),
-        'select_state_text' => esc_attr__("Select an option&hellip;", $this->td ),
-        'placeholder_state' => esc_attr__("Enter State / County &hellip;", $this->td ),
-        'placeholder_city'  => esc_attr__("Enter City &hellip;", $this->td ),
-        "confirmTxt"        => _x("Confirm", "js-translate", $this->td),
-        "successTtl"        => _x("Success", "js-translate", $this->td),
-        "submitTxt"         => _x("Submit", "js-translate", $this->td),
-        "loginTxt"          => _x("Login", "js-translate", $this->td),
-        "okTxt"             => _x("Okay", "js-translate", $this->td),
-        "txtYes"            => _x("Yes", "js-translate", $this->td),
-        "txtNop"            => _x("No", "js-translate", $this->td),
-        "cancelbTn"         => _x("Cancel", "js-translate", $this->td),
-        "fixerr"            => _x("One or more fields have an error. Please check and try again.", "js-translate", $this->td),
-        "closeTxt"          => _x("Close", "js-translate", $this->td),
-        "check_validity"    => _x("Please check this field validity", "js-translate", $this->td),
-        "check_required"    => _x("This field is required, Please check its validity", "js-translate", $this->td),
+        'select_state_text' => esc_attr__("Select an option&hellip;", "peprodev-ups" ),
+        'placeholder_state' => esc_attr__("Enter State / County &hellip;", "peprodev-ups" ),
+        'placeholder_city'  => esc_attr__("Enter City &hellip;", "peprodev-ups" ),
+        "confirmTxt"        => _x("Confirm", "js-translate", "peprodev-ups"),
+        "successTtl"        => _x("Success", "js-translate", "peprodev-ups"),
+        "submitTxt"         => _x("Submit", "js-translate", "peprodev-ups"),
+        "loginTxt"          => _x("Login", "js-translate", "peprodev-ups"),
+        "okTxt"             => _x("Okay", "js-translate", "peprodev-ups"),
+        "txtYes"            => _x("Yes", "js-translate", "peprodev-ups"),
+        "txtNop"            => _x("No", "js-translate", "peprodev-ups"),
+        "cancelbTn"         => _x("Cancel", "js-translate", "peprodev-ups"),
+        "fixerr"            => _x("One or more fields have an error. Please check and try again.", "js-translate", "peprodev-ups"),
+        "closeTxt"          => _x("Close", "js-translate", "peprodev-ups"),
+        "check_validity"    => _x("Please check this field validity", "js-translate", "peprodev-ups"),
+        "check_required"    => _x("This field is required, Please check its validity", "js-translate", "peprodev-ups"),
 
-        "catpcha"    => _x("<strong>Error:</strong> Please check the reCAPTCHA challenge.", "reg-form-error", $this->td),
+        "catpcha"    => _x("<strong>Error:</strong> Please check the reCAPTCHA challenge.", "reg-form-error", "peprodev-ups"),
         ));
       wp_add_inline_style("pepro-login-reg-formaction", get_option("{$this->activation_status}-customcss"));
       wp_enqueue_script( "pepro_reglogin_recaptcha",    "https://www.google.com/recaptcha/api.js", array(), current_time("timestamp"), true);
@@ -570,7 +570,7 @@ if (!class_exists("PeproDevUPS_Login")){
       echo do_shortcode(wp_unslash(get_option("{$this->activation_status}-headerhtml")));
       if (get_current_user_id()){
         ?>
-          <h6 style="margin-bottom: 1rem; border-bottom: 1px solid #ccc;padding: 0 0 1rem 0;"><?php echo __("Verify your account", $this->td);?></h6>
+          <h6 style="margin-bottom: 1rem; border-bottom: 1px solid #ccc;padding: 0 0 1rem 0;"><?php esc_html_e("Verify your account", "peprodev-ups");?></h6>
           <form class="pepro-verify inline" id="pepro-verify-inline" method="post">
             <div id="login_error"></div>
             <?php
@@ -605,7 +605,7 @@ if (!class_exists("PeproDevUPS_Login")){
       echo do_shortcode(wp_unslash(get_option("{$this->activation_status}-headerhtml")));
       if (get_current_user_id()){
         ?>
-          <h6 style="margin-bottom: 1rem; border-bottom: 1px solid #ccc;padding: 0 0 1rem 0;"><?php echo __("Verify your account", $this->td);?></h6>
+          <h6 style="margin-bottom: 1rem; border-bottom: 1px solid #ccc;padding: 0 0 1rem 0;"><?php esc_html_e("Verify your account", "peprodev-ups");?></h6>
           <form class="pepro-verify inline" id="pepro-verify-inline" method="post">
             <div id="login_error"></div>
             <?php
@@ -640,7 +640,7 @@ if (!class_exists("PeproDevUPS_Login")){
         ?>
         <div class="col-lg-4">
           <div class="card">
-            <div class="card-header"><?php echo __("Verify/Change your mobile number", $this->td);?></div>
+            <div class="card-header"><?php esc_html_e("Verify/Change your mobile number", "peprodev-ups");?></div>
             <div class="card-body">
               <?php echo '<div class="pepro-verify-container" id="'.esc_attr($uniqd).'" data-pepro-reglogin="'.esc_attr($uniqd).'">'; ?>
                 <form class="pepro-verify inline" id="pepro-verify-inline-force" method="post">
@@ -738,61 +738,61 @@ if (!class_exists("PeproDevUPS_Login")){
     {
       $array["pepro-login-form"] = array(
             "sample" => "[pepro-login-form]".PHP_EOL."Hi [user meta='user_firstname'], to sign out [logout-url button='Click here']".PHP_EOL."You can also check your profile from [pepro-profile-url button='here']".PHP_EOL."[/pepro-login-form]",
-            "title"  => __("Login/Register Inline form",$this->td),
+            "title"  => __("Login/Register Inline form","peprodev-ups"),
             "syntax" => array(
-              "before"       => __("Content before form",$this->td),
-              "after"        => __("Content after form",$this->td),
-              "title"        => __("Login Form title",$this->td),
-              'active'       => __("Default active form: login/register/resetpass",$this->td),
-              "reg_title"    => __("Register Form title",$this->td),
-              "reset_title"  => __("Reset Password Form title",$this->td),
-              __("content between shortcode tags",$this->td) => __("Content to show to logged in users",$this->td),
+              "before"       => __("Content before form","peprodev-ups"),
+              "after"        => __("Content after form","peprodev-ups"),
+              "title"        => __("Login Form title","peprodev-ups"),
+              'active'       => __("Default active form: login/register/resetpass","peprodev-ups"),
+              "reg_title"    => __("Register Form title","peprodev-ups"),
+              "reset_title"  => __("Reset Password Form title","peprodev-ups"),
+              __("content between shortcode tags","peprodev-ups") => __("Content to show to logged in users","peprodev-ups"),
             ),
           );
       $array["pepro-login-popup"] = array(
             "sample" => "[pepro-login-popup button='Open Login']".PHP_EOL."[pepro-login-popup trigger='#popup']<a id='popup' href='#'>Login/Register</a>",
-            "title"  => __("Login/Register Popup form",$this->td),
+            "title"  => __("Login/Register Popup form","peprodev-ups"),
             "syntax" => array(
-              "trigger"      => __("A jQuery selector to trigger popup",$this->td),
-              "button"       => __("Trigger call-to-action anchor text, leave empty to use jQuery trigger",$this->td),
-              "class"        => __("Trigger call-to-action anchor class",$this->td),
-              "before"       => __("Content before form",$this->td),
-              "after"        => __("Content after form",$this->td),
-              "before_popup" => __("Content before popup form",$this->td),
-              "after_popup"  => __("Content after popup form",$this->td),
-              "title"        => __("Login Form title",$this->td),
-              'active'       => __("Default active form: login/register/resetpass",$this->td),
-              "reg_title"    => __("Register Form title",$this->td),
-              "reset_title"  => __("Reset Password Form title",$this->td),
-              "extras"       => __("Content instead of trigger call-to-action",$this->td),
-              __("content between shortcode tags",$this->td) => __("Content instead of trigger call-to-action",$this->td),
+              "trigger"      => __("A jQuery selector to trigger popup","peprodev-ups"),
+              "button"       => __("Trigger call-to-action anchor text, leave empty to use jQuery trigger","peprodev-ups"),
+              "class"        => __("Trigger call-to-action anchor class","peprodev-ups"),
+              "before"       => __("Content before form","peprodev-ups"),
+              "after"        => __("Content after form","peprodev-ups"),
+              "before_popup" => __("Content before popup form","peprodev-ups"),
+              "after_popup"  => __("Content after popup form","peprodev-ups"),
+              "title"        => __("Login Form title","peprodev-ups"),
+              'active'       => __("Default active form: login/register/resetpass","peprodev-ups"),
+              "reg_title"    => __("Register Form title","peprodev-ups"),
+              "reset_title"  => __("Reset Password Form title","peprodev-ups"),
+              "extras"       => __("Content instead of trigger call-to-action","peprodev-ups"),
+              __("content between shortcode tags","peprodev-ups") => __("Content instead of trigger call-to-action","peprodev-ups"),
             ),
           );
       $array["logout-url"] = array(
             "sample" => "[logout-url]",
-            "title"  => __("Returns Logout URL/Link",$this->td),
+            "title"  => __("Returns Logout URL/Link","peprodev-ups"),
             "syntax" => array(
-              "redirect" => __("URL to redirect on logout",$this->td),
-              "button"  => __("Logout call-to-action anchor text, leave empty to return url",$this->td),
-              "class"   => __("Logout call-to-action anchor class",$this->td),
-              "extras"  => __("Content instead of Logout call-to-action, use {url} to replace with logout link",$this->td),
-              __("content between shortcode tags",$this->td)  => __("Content instead of Logout call-to-action, use {url} to replace with logout link",$this->td),
+              "redirect" => __("URL to redirect on logout","peprodev-ups"),
+              "button"  => __("Logout call-to-action anchor text, leave empty to return url","peprodev-ups"),
+              "class"   => __("Logout call-to-action anchor class","peprodev-ups"),
+              "extras"  => __("Content instead of Logout call-to-action, use {url} to replace with logout link","peprodev-ups"),
+              __("content between shortcode tags","peprodev-ups")  => __("Content instead of Logout call-to-action, use {url} to replace with logout link","peprodev-ups"),
             ),
           );
       $array["verified-email"] = array(
             "sample" => "[verified-email]Content for users with verified email[/verified-email]",
-            "title"  => __("Show content if user has verified Email",$this->td),
+            "title"  => __("Show content if user has verified Email","peprodev-ups"),
             "syntax" => array(
-              "reverse=1" => __("Show Content between tags if opposite of the condition is true",$this->td),
-              __("content between shortcode tags",$this->td)  => __("Content to show if condition were true, can use other shortcodes too",$this->td),
+              "reverse=1" => __("Show Content between tags if opposite of the condition is true","peprodev-ups"),
+              __("content between shortcode tags","peprodev-ups")  => __("Content to show if condition were true, can use other shortcodes too","peprodev-ups"),
             ),
           );
       $array["verified-mobile"] = array(
             "sample" => "[verified-mobile]Content for users with verified mobile[/verified-mobile]",
-            "title"  => __("Show content if user has verified Mobile",$this->td),
+            "title"  => __("Show content if user has verified Mobile","peprodev-ups"),
             "syntax" => array(
-              "reverse=1" => __("Show Content between tags if opposite of the condition is true",$this->td),
-              __("content between shortcode tags",$this->td)  => __("Content to show if condition were true, can use other shortcodes too",$this->td),
+              "reverse=1" => __("Show Content between tags if opposite of the condition is true","peprodev-ups"),
+              __("content between shortcode tags","peprodev-ups")  => __("Content to show if condition were true, can use other shortcodes too","peprodev-ups"),
             ),
           );
       return $array;
@@ -819,7 +819,7 @@ if (!class_exists("PeproDevUPS_Login")){
         echo "$before";
         ?>
           <form novalidate class="pepro-login-reg <?php echo ("login" === $active?"inline":"");?>" id="pepro-login-inline" method="post">
-            <h6 style="margin-bottom: 1rem; border-bottom: 1px solid #ccc;padding: 0 0 1rem 0;"><?php echo (!empty($title) ? $title : __("Login", $this->td));?></h6>
+            <h6 style="margin-bottom: 1rem; border-bottom: 1px solid #ccc;padding: 0 0 1rem 0;"><?php echo (!empty($title) ? $title : __("Login", "peprodev-ups"));?></h6>
             <div id="login_error"></div>
             <?php
               $this->printout_fields(array(
@@ -836,15 +836,15 @@ if (!class_exists("PeproDevUPS_Login")){
               <?php
               if (get_option('users_can_register')){
                 ?>
-                  <a class="switch-form-register"  href="javascript:;"><?php echo __("Register", $this->td);?></a>
+                  <a class="switch-form-register"  href="javascript:;"><?php esc_html_e("Register", "peprodev-ups");?></a>
                 <?php
               }
               ?>
-              <a href="javascript:;" style="display: none;" class="otp-resend"><?php echo __("Resend Code", $this->td);?></a>
+              <a href="javascript:;" style="display: none;" class="otp-resend"><?php esc_html_e("Resend Code", "peprodev-ups");?></a>
               <?php
               if (!$this->login_mobile_otp){
                 ?>
-                  <a class="switch-form-lost-pass" href="javascript:;"><?php echo __("Lost Password?", $this->td);?></a>
+                  <a class="switch-form-lost-pass" href="javascript:;"><?php esc_html_e("Lost Password?", "peprodev-ups");?></a>
                 <?php
               }
               ?>
@@ -854,7 +854,7 @@ if (!class_exists("PeproDevUPS_Login")){
           if (get_option('users_can_register')){
             ?>
             <form novalidate class="pepro-login-reg <?php echo ("register" === $active?"inline":"");?>" id="pepro-reg-inline" method="post">
-              <h6 style="margin-bottom: 1rem; border-bottom: 1px solid #ccc;padding: 0 0 1rem 0;"><?php echo (!empty($reg_title) ? $reg_title : __("Register", $this->td));?></h6>
+              <h6 style="margin-bottom: 1rem; border-bottom: 1px solid #ccc;padding: 0 0 1rem 0;"><?php echo (!empty($reg_title) ? $reg_title : __("Register", "peprodev-ups"));?></h6>
               <div id="login_error"></div>
               <?php
                 $this->printout_fields(array(
@@ -868,8 +868,8 @@ if (!class_exists("PeproDevUPS_Login")){
                 ));
               ?>
               <div class="pepro-form-links">
-                <a class="switch-form-login" href="javascript:;"><?php echo __("Login", $this->td);?></a>
-                <a href="javascript:;" style="display: none;" class="otp-resend"><?php echo __("Resend Code", $this->td);?></a>
+                <a class="switch-form-login" href="javascript:;"><?php esc_html_e("Login", "peprodev-ups");?></a>
+                <a href="javascript:;" style="display: none;" class="otp-resend"><?php esc_html_e("Resend Code", "peprodev-ups");?></a>
               </div>
             </form>
             <?php
@@ -877,7 +877,7 @@ if (!class_exists("PeproDevUPS_Login")){
           if (!$this->login_mobile_otp){
             ?>
             <form novalidate class="pepro-login-reg <?php echo ("resetpass" === $active?"inline":"");?>" id="pepro-pass-inline" method="post">
-              <h6 style="margin-bottom: 1rem; border-bottom: 1px solid #ccc;padding: 0 0 1rem 0;"><?php echo (!empty($reset_title) ? $reset_title : __("Reset Password", $this->td));?></h6>
+              <h6 style="margin-bottom: 1rem; border-bottom: 1px solid #ccc;padding: 0 0 1rem 0;"><?php echo (!empty($reset_title) ? $reset_title : __("Reset Password", "peprodev-ups"));?></h6>
               <div id="login_error"></div>
               <?php
                 $this->printout_fields(array(
@@ -891,8 +891,8 @@ if (!class_exists("PeproDevUPS_Login")){
                 ));
               ?>
               <div class="pepro-form-links">
-                <a class="switch-form-login" href="javascript:;"><?php echo __("Login", $this->td);?></a>
-                <a href="javascript:;" style="display: none;" class="otp-resend"><?php echo __("Resend Code", $this->td);?></a>
+                <a class="switch-form-login" href="javascript:;"><?php esc_html_e("Login", "peprodev-ups");?></a>
+                <a href="javascript:;" style="display: none;" class="otp-resend"><?php esc_html_e("Resend Code", "peprodev-ups");?></a>
               </div>
             </form>
             <?php
@@ -908,7 +908,7 @@ if (!class_exists("PeproDevUPS_Login")){
           echo $contnent;
         }else{
           if ("yes" == $loggedout){
-            ?><a href="<?php echo wp_logout_url();?>" class="button button-primary"><?php echo __("Logout", $this->td);?></a><?php
+            ?><a href="<?php echo wp_logout_url();?>" class="button button-primary"><?php esc_html_e("Logout", "peprodev-ups");?></a><?php
           }
         }
       }
@@ -966,21 +966,21 @@ if (!class_exists("PeproDevUPS_Login")){
     public function handel_ajax_req()
     {
       if (wp_doing_ajax() && "pepro_reglogin" === $_POST['action']) {
-        if (!isset($_POST["nonce"]) || !wp_verify_nonce($_POST["nonce"]??null, $this->td)){
-          wp_send_json_error(array("msg"=>__("Unauthorized Access!", $this->td)));
+        if (!isset($_POST["nonce"]) || !wp_verify_nonce($_POST["nonce"]??null, "peprodev-ups")){
+          wp_send_json_error(array("msg"=>__("Unauthorized Access!", "peprodev-ups")));
         }
         switch (sanitize_text_field($_POST["order"])) {
 
           case 'login':
-            if (is_user_logged_in()){ wp_send_json_error(array("msg" => __("You are already logged-in.", $this->td))); }
+            if (is_user_logged_in()){ wp_send_json_error(array("msg" => __("You are already logged-in.", "peprodev-ups"))); }
             $param = sanitize_post( $_POST["param"] );
             parse_str(stripslashes_deep( $param ), $param);
-            if (empty($param)){ wp_send_json_error(array("msg" => __("Source data is not valid.", $this->td))); }
+            if (empty($param)){ wp_send_json_error(array("msg" => __("Source data is not valid.", "peprodev-ups"))); }
 
             foreach ($this->login_fields as $field) {
               if ("recaptcha" == $field["type"]){
                 if(!isset($param['g-recaptcha-response']) || empty($param['g-recaptcha-response'])){
-                  wp_send_json_error(array("msg" => __("Please check the reCAPTCHA challenge.", $this->td),));
+                  wp_send_json_error(array("msg" => __("Please check the reCAPTCHA challenge.", "peprodev-ups"),));
                   return false;
                 }
               }
@@ -1001,7 +1001,7 @@ if (!class_exists("PeproDevUPS_Login")){
                   if ($valid_mobile){
                     $user_id = $this->get_user_by_mobile($valid_mobile);
                     if (false == $user_id){ wp_send_json_error(array(
-                      "msg"      => __("The mobile number is not currently in use by any account.", $this->td),
+                      "msg"      => __("The mobile number is not currently in use by any account.", "peprodev-ups"),
                       "is_otp"   => true,
                       "focus"    => ".mobile-verification",
                       "select"   => ".mobile-verification",
@@ -1021,15 +1021,15 @@ if (!class_exists("PeproDevUPS_Login")){
                         }
 
                         wp_send_json_success(array(
-                          "msg"           => sprintf(__("Hi %s, You have successfully logged in!", $this->td), $username),
+                          "msg"           => sprintf(__("Hi %s, You have successfully logged in!", "peprodev-ups"), $username),
                           "redirect"      => $this->redirect_after_login_register(home_url(), "ajax_register", $user),
                           "redirect_text" => $this->redirect_after_login_register("", "ajax_text", $user),
-                          "logout_txt"    => __("Logout",$this->td),
+                          "logout_txt"    => __("Logout","peprodev-ups"),
                           "logout_url"    => wp_logout_url(),
                         ));
                       }else{
                         wp_send_json_error(array(
-                          "msg"    => __("Login verification code is incorrect/expired!", $this->td),
+                          "msg"    => __("Login verification code is incorrect/expired!", "peprodev-ups"),
                           "is_otp" => true,
                           "focus"  => ".otp-verification",
                           "select" => ".otp-verification",
@@ -1048,14 +1048,14 @@ if (!class_exists("PeproDevUPS_Login")){
                           $sms = $this->send_verification_sms($user_id);
                           if ($sms){
                             wp_send_json_success(array(
-                            "msg"    => __("Verification code sent, Enter in field below.$test", $this->td),
+                            "msg"    => __("Verification code sent, Enter in field below.$test", "peprodev-ups"),
                             "is_otp" => true,
                             "focus"  => ".otp-verification",
                             "show"   => ".otp-resend",
                             ));
                           }else{
                             wp_send_json_error(array(
-                            "msg"    => sprintf(__("Error Sending Verification to %s. Try again.", $this->td), $valid_mobile),
+                            "msg"    => sprintf(__("Error Sending Verification to %s. Try again.", "peprodev-ups"), $valid_mobile),
                             "is_otp" => true,
                             "focus"  => ".mobile-verification",
                             "show"   => ".otp-resend",
@@ -1063,7 +1063,7 @@ if (!class_exists("PeproDevUPS_Login")){
                           }
                         } else {
                           wp_send_json_error(array(
-                          "msg"    => sprintf(__("Error Sending Verification, you can request one code every %s seconds.", $this->td), $this->sms_expiration),
+                          "msg"    => sprintf(__("Error Sending Verification, you can request one code every %s seconds.", "peprodev-ups"), $this->sms_expiration),
                           "is_otp" => true,
                           "focus"  => ".mobile-verification",
                           "show"   => ".otp-resend",
@@ -1074,14 +1074,14 @@ if (!class_exists("PeproDevUPS_Login")){
                         $sms = $this->send_verification_sms($user_id);
                         if ($sms){
                           wp_send_json_success(array(
-                          "msg"    => sprintf(__("Verification code sent to %s.", $this->td), $valid_mobile),
+                          "msg"    => sprintf(__("Verification code sent to %s.", "peprodev-ups"), $valid_mobile),
                           "is_otp" => true,
                           "show"   => ".otp-resend",
                           "focus"  => ".otp-verification",
                           ));
                         }else{
                           wp_send_json_error(array(
-                          "msg"    => __("Error Sending Verification code. Try again.", $this->td),
+                          "msg"    => __("Error Sending Verification code. Try again.", "peprodev-ups"),
                           "is_otp" => true,
                           "show"   => ".otp-resend",
                           "focus"  => ".mobile-verification",
@@ -1094,12 +1094,12 @@ if (!class_exists("PeproDevUPS_Login")){
                   }
                   else{
                     if (isset($param["username"])){
-                      wp_send_json_error(array("msg" => __("Please enter a valid email/username/mobile.", $this->td), ));
+                      wp_send_json_error(array("msg" => __("Please enter a valid email/username/mobile.", "peprodev-ups"), ));
                     }
-                    wp_send_json_error(array("msg" => __("Please enter a valid mobile number.", $this->td), ));
+                    wp_send_json_error(array("msg" => __("Please enter a valid mobile number.", "peprodev-ups"), ));
                   }
                 }
-                wp_send_json_error(array("msg" => __("Please enter a valid email/username.", $this->td), ));
+                wp_send_json_error(array("msg" => __("Please enter a valid email/username.", "peprodev-ups"), ));
               }
             }
 
@@ -1109,15 +1109,15 @@ if (!class_exists("PeproDevUPS_Login")){
               wp_set_auth_cookie($user->ID);
               $username = get_the_author_meta("display_name", $user->ID);
               wp_send_json_success(array(
-                "msg"           => sprintf(__("Hi %s, You have successfully logged in!", $this->td), $username),
+                "msg"           => sprintf(__("Hi %s, You have successfully logged in!", "peprodev-ups"), $username),
                 "redirect"      => $this->redirect_after_login_register(home_url(), "ajax_register", $user),
                 "redirect_text" => $this->redirect_after_login_register("", "ajax_text", $user),
-                "logout_txt"    => __("Logout",$this->td),
+                "logout_txt"    => __("Logout","peprodev-ups"),
                 "logout_url"    => wp_logout_url(),
               ));
             }
             else {
-              wp_send_json_error(array("msg" => __("Password does not match!", $this->td), ));
+              wp_send_json_error(array("msg" => __("Password does not match!", "peprodev-ups"), ));
             }
 
           break;
@@ -1125,14 +1125,14 @@ if (!class_exists("PeproDevUPS_Login")){
           case 'verify':
             $param = sanitize_post( $_POST["param"] );
             parse_str(stripslashes_deep( $param ), $param);
-            if (empty($param)){ wp_send_json_error(array("msg" => __("Source data is not valid.", $this->td))); }
+            if (empty($param)){ wp_send_json_error(array("msg" => __("Source data is not valid.", "peprodev-ups"))); }
             $user = false;
             $user = wp_get_current_user();
             $user_id = $user->ID;
             foreach ($this->login_fields as $field) {
               if ("recaptcha" == $field["type"]){
                 if(!isset($param['g-recaptcha-response']) || empty($param['g-recaptcha-response'])){
-                  wp_send_json_error(array("msg" => __("Please check the reCAPTCHA challenge.", $this->td),));
+                  wp_send_json_error(array("msg" => __("Please check the reCAPTCHA challenge.", "peprodev-ups"),));
                   return false;
                 }
               }
@@ -1140,13 +1140,13 @@ if (!class_exists("PeproDevUPS_Login")){
 
             // VERIFY MOBILE SMSM
             if (isset($param["checkemobile"])){
-              if ("yes" == get_the_author_meta( "pepro_user_is_sms_verified", get_current_user_id())){ wp_send_json_error(array("msg" => __("You mobile is already verified!", $this->td))); }
+              if ("yes" == get_the_author_meta( "pepro_user_is_sms_verified", get_current_user_id())){ wp_send_json_error(array("msg" => __("You mobile is already verified!", "peprodev-ups"))); }
               $valid_mobile = $this->clean_mobile_number($param["username"]);
               if ($valid_mobile){
                 $user_id = $this->get_user_by_mobile($valid_mobile);
                 if ($user_id && (int) $user_id !== (int) $user->ID){
                   wp_send_json_error(array(
-                    "msg"    => __("The mobile number is currently in use by another account.", $this->td),
+                    "msg"    => __("The mobile number is currently in use by another account.", "peprodev-ups"),
                     "is_otp" => true,
                     "focus"  => ".mobile-verification",
                     "select" => ".mobile-verification",
@@ -1160,13 +1160,13 @@ if (!class_exists("PeproDevUPS_Login")){
                     update_user_meta($user->ID, "user_mobile", $valid_mobile);
                     update_user_meta($user->ID, "pepro_user_is_sms_verified", "yes");
                     $username = get_the_author_meta("display_name", $user->ID);
-                    wp_send_json_success(array( "msg" => sprintf(__("Hi %s, You have successfully verified your mobile number!", $this->td), $username),
+                    wp_send_json_success(array( "msg" => sprintf(__("Hi %s, You have successfully verified your mobile number!", "peprodev-ups"), $username),
                       "redirect"      => home_url(),
-                      "redirect_text" => __("Go Home",$this->td),
+                      "redirect_text" => __("Go Home","peprodev-ups"),
                       ));
                   }
                   else{
-                    wp_send_json_error(array( "msg" => __("Mobile verification code is incorrect/expired!", $this->td),
+                    wp_send_json_error(array( "msg" => __("Mobile verification code is incorrect/expired!", "peprodev-ups"),
                       "is_otp" => true,
                       "focus"  => ".code-verification",
                       "select" => ".code-verification",
@@ -1185,7 +1185,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       $sms = $this->send_verification_sms($user->ID, $valid_mobile);
                       if ($sms){
                         wp_send_json_success(array(
-                          "msg"    => __("Verification code sent, Enter in field below.", $this->td),
+                          "msg"    => __("Verification code sent, Enter in field below.", "peprodev-ups"),
                           "is_otp" => true,
                           "show"   => ".otp-resend",
                           "focus"  => ".code-verification",
@@ -1193,7 +1193,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       }
                       else{
                         wp_send_json_error(array(
-                          "msg"    => sprintf(__("Error Sending Verification to %s. Try again.", $this->td), $valid_mobile),
+                          "msg"    => sprintf(__("Error Sending Verification to %s. Try again.", "peprodev-ups"), $valid_mobile),
                           "is_otp" => true,
                           "show"   => ".otp-resend",
                           "focus"  => ".mobile-verification",
@@ -1202,7 +1202,7 @@ if (!class_exists("PeproDevUPS_Login")){
                     }
                     else{
                       wp_send_json_error(array(
-                        "msg"    => sprintf(__("Error Sending Verification, you can request one code every %s seconds.", $this->td), $this->sms_expiration),
+                        "msg"    => sprintf(__("Error Sending Verification, you can request one code every %s seconds.", "peprodev-ups"), $this->sms_expiration),
                         "is_otp" => true,
                         "focus"  => ".mobile-verification",
                       ));
@@ -1212,7 +1212,7 @@ if (!class_exists("PeproDevUPS_Login")){
                     $sms = $this->send_verification_sms($user->ID, $valid_mobile);
                     if ($sms){
                       wp_send_json_success(array(
-                        "msg"    => sprintf(__("Verification code sent to %s.", $this->td), $valid_mobile),
+                        "msg"    => sprintf(__("Verification code sent to %s.", "peprodev-ups"), $valid_mobile),
                         "is_otp" => true,
                         "show"   => ".otp-resend",
                         "focus"  => ".code-verification",
@@ -1220,7 +1220,7 @@ if (!class_exists("PeproDevUPS_Login")){
                     }
                     else{
                       wp_send_json_error(array(
-                        "msg"    => __("Error Sending Verification code. Try again.", $this->td),
+                        "msg"    => __("Error Sending Verification code. Try again.", "peprodev-ups"),
                         "is_otp" => true,
                         "show"   => ".otp-resend",
                         "focus"  => ".mobile-verification",
@@ -1230,14 +1230,14 @@ if (!class_exists("PeproDevUPS_Login")){
                 }
               }
               else{
-                wp_send_json_error(array("msg" => __("Please enter a valid mobile number.", $this->td), ));
+                wp_send_json_error(array("msg" => __("Please enter a valid mobile number.", "peprodev-ups"), ));
               }
             }
             // VERIFY EMAIL
             else{
-              if ("yes" == get_the_author_meta( "pepro_user_is_email_verified", get_current_user_id())){ wp_send_json_error(array("msg" => __("You Email address is already verified!", $this->td))); }
+              if ("yes" == get_the_author_meta( "pepro_user_is_email_verified", get_current_user_id())){ wp_send_json_error(array("msg" => __("You Email address is already verified!", "peprodev-ups"))); }
               if (!filter_var($param["username"], FILTER_VALIDATE_EMAIL)) {
-                wp_send_json_error(array("msg" => __("E-mail address could not be validated!", $this->td), ));
+                wp_send_json_error(array("msg" => __("E-mail address could not be validated!", "peprodev-ups"), ));
               }
               else{
                 // verify email if OTP passed
@@ -1258,15 +1258,15 @@ if (!class_exists("PeproDevUPS_Login")){
 
                     $username = get_the_author_meta("display_name", $user_id);
                     wp_send_json_success(array(
-                      "msg"           => sprintf(__("Hi %s, You have successfully verified your email address!", $this->td), $username),
+                      "msg"           => sprintf(__("Hi %s, You have successfully verified your email address!", "peprodev-ups"), $username),
                       "redirect"      => home_url(),
-                      "redirect_text" => __("Go Home",$this->td),
+                      "redirect_text" => __("Go Home","peprodev-ups"),
                     ));
 
                   }
                   else{
                     wp_send_json_error(array(
-                      "msg"    => __("Email verification code is incorrect/expired!", $this->td),
+                      "msg"    => __("Email verification code is incorrect/expired!", "peprodev-ups"),
                       "is_otp" => true,
                       "focus"  => ".code-verification",
                       "select" => ".code-verification",
@@ -1287,14 +1287,14 @@ if (!class_exists("PeproDevUPS_Login")){
                       $email = $this->send_verification_email($param["username"]);
                       if ($email){
                         wp_send_json_success(array(
-                          "msg"    => sprintf(__("Verification code sent to %s.", $this->td), $param["username"]),
+                          "msg"    => sprintf(__("Verification code sent to %s.", "peprodev-ups"), $param["username"]),
                           "is_otp" => true,
                           "show"   => ".otp-resend",
                           "focus"  => ".code-verification",
                         ));
                       }else{
                         wp_send_json_error(array(
-                          "msg"    => __("Error Sending Verification code. Try again.", $this->td),
+                          "msg"    => __("Error Sending Verification code. Try again.", "peprodev-ups"),
                           "is_otp" => true,
                           "focus"  => ".email-verification",
                           "select" => ".email-verification",
@@ -1303,7 +1303,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       }
                     } else {
                       wp_send_json_error(array(
-                        "msg"    => sprintf(__("Error Sending Verification, you can request one code every %s seconds.", $this->td), $this->email_expiration),
+                        "msg"    => sprintf(__("Error Sending Verification, you can request one code every %s seconds.", "peprodev-ups"), $this->email_expiration),
                         "show"   => ".otp-resend",
                         "is_otp" => true,
                         "focus"  => ".email-verification",
@@ -1313,14 +1313,14 @@ if (!class_exists("PeproDevUPS_Login")){
                     $email = $this->send_verification_email($param["username"]);
                     if ($email){
                       wp_send_json_success(array(
-                        "msg"    => sprintf(__("Verification code sent to %s.", $this->td), $param["username"]),
+                        "msg"    => sprintf(__("Verification code sent to %s.", "peprodev-ups"), $param["username"]),
                         "show"   => ".otp-resend",
                         "is_otp" => true,
                         "focus"  => ".code-verification",
                       ));
                     }else{
                       wp_send_json_error(array(
-                        "msg"    => __("Error Sending Verification code. Try again.", $this->td),
+                        "msg"    => __("Error Sending Verification code. Try again.", "peprodev-ups"),
                         "is_otp" => true,
                         "focus"  => ".email-verification",
                         "select" => ".email-verification",
@@ -1336,14 +1336,14 @@ if (!class_exists("PeproDevUPS_Login")){
           case 'verifyforce':
             $param = sanitize_post( $_POST["param"] );
             parse_str(stripslashes_deep( $param ), $param);
-            if (empty($param)){ wp_send_json_error(array("msg" => __("Source data is not valid.", $this->td))); }
+            if (empty($param)){ wp_send_json_error(array("msg" => __("Source data is not valid.", "peprodev-ups"))); }
             $user = false;
             $user = wp_get_current_user();
             $user_id = $user->ID;
             foreach ($this->login_fields as $field) {
               if ("recaptcha" == $field["type"]){
                 if(!isset($param['g-recaptcha-response']) || empty($param['g-recaptcha-response'])){
-                  wp_send_json_error(array("msg" => __("Please check the reCAPTCHA challenge.", $this->td),));
+                  wp_send_json_error(array("msg" => __("Please check the reCAPTCHA challenge.", "peprodev-ups"),));
                   return false;
                 }
               }
@@ -1353,13 +1353,13 @@ if (!class_exists("PeproDevUPS_Login")){
             if (isset($param["checkemobile"])){
               $valid_mobile = $this->clean_mobile_number($param["username"]);
               if ($valid_mobile == get_the_author_meta("user_mobile", get_current_user_id())){
-                wp_send_json_error(array("msg" => __("You mobile is already verified!", $this->td)));
+                wp_send_json_error(array("msg" => __("You mobile is already verified!", "peprodev-ups")));
               }
               if ($valid_mobile){
                 $user_id = $this->get_user_by_mobile($valid_mobile);
                 if ($user_id && (int) $user_id !== (int) $user->ID){
                   wp_send_json_error(array(
-                    "msg"    => __("The mobile number is currently in use by another account.", $this->td),
+                    "msg"    => __("The mobile number is currently in use by another account.", "peprodev-ups"),
                     "is_otp" => true,
                     "focus"  => ".mobile-verification",
                     "select" => ".mobile-verification",
@@ -1373,13 +1373,13 @@ if (!class_exists("PeproDevUPS_Login")){
                     update_user_meta($user->ID, "user_mobile", $valid_mobile);
                     update_user_meta($user->ID, "pepro_user_is_sms_verified", "yes");
                     $username = get_the_author_meta("display_name", $user->ID);
-                    wp_send_json_success(array( "msg" => sprintf(__("Hi %s, You have successfully verified your mobile number!", $this->td), $username),
+                    wp_send_json_success(array( "msg" => sprintf(__("Hi %s, You have successfully verified your mobile number!", "peprodev-ups"), $username),
                       "redirect"      => home_url(),
-                      "redirect_text" => __("Go Home",$this->td),
+                      "redirect_text" => __("Go Home","peprodev-ups"),
                       ));
                   }
                   else{
-                    wp_send_json_error(array( "msg" => __("Mobile verification code is incorrect/expired!", $this->td),
+                    wp_send_json_error(array( "msg" => __("Mobile verification code is incorrect/expired!", "peprodev-ups"),
                       "is_otp" => true,
                       "focus"  => ".code-verification",
                       "select" => ".code-verification",
@@ -1398,7 +1398,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       $sms = $this->send_verification_sms($user->ID, $valid_mobile);
                       if ($sms){
                         wp_send_json_success(array(
-                          "msg"    => __("Verification code sent, Enter in field below.", $this->td),
+                          "msg"    => __("Verification code sent, Enter in field below.", "peprodev-ups"),
                           "show"   => ".otp-resend",
                           "is_otp" => true,
                           "focus"  => ".code-verification",
@@ -1406,7 +1406,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       }
                       else{
                         wp_send_json_error(array(
-                          "msg"    => sprintf(__("Error Sending Verification to %s. Try again.", $this->td), $valid_mobile),
+                          "msg"    => sprintf(__("Error Sending Verification to %s. Try again.", "peprodev-ups"), $valid_mobile),
                           "show"   => ".otp-resend",
                           "is_otp" => true,
                           "focus"  => ".mobile-verification",
@@ -1415,7 +1415,7 @@ if (!class_exists("PeproDevUPS_Login")){
                     }
                     else{
                       wp_send_json_error(array(
-                        "msg"    => sprintf(__("Error Sending Verification, you can request one code every %s seconds.", $this->td), $this->sms_expiration),
+                        "msg"    => sprintf(__("Error Sending Verification, you can request one code every %s seconds.", "peprodev-ups"), $this->sms_expiration),
                         "show"   => ".otp-resend",
                         "is_otp" => true,
                         "focus"  => ".mobile-verification",
@@ -1426,7 +1426,7 @@ if (!class_exists("PeproDevUPS_Login")){
                     $sms = $this->send_verification_sms($user->ID, $valid_mobile);
                     if ($sms){
                       wp_send_json_success(array(
-                        "msg"    => sprintf(__("Verification code sent to %s.", $this->td), $valid_mobile),
+                        "msg"    => sprintf(__("Verification code sent to %s.", "peprodev-ups"), $valid_mobile),
                         "show"   => ".otp-resend",
                         "is_otp" => true,
                         "focus"  => ".code-verification",
@@ -1434,7 +1434,7 @@ if (!class_exists("PeproDevUPS_Login")){
                     }
                     else{
                       wp_send_json_error(array(
-                        "msg"    => __("Error Sending Verification code. Try again.", $this->td),
+                        "msg"    => __("Error Sending Verification code. Try again.", "peprodev-ups"),
                         "show"   => ".otp-resend",
                         "is_otp" => true,
                         "focus"  => ".mobile-verification",
@@ -1444,7 +1444,7 @@ if (!class_exists("PeproDevUPS_Login")){
                 }
               }
               else{
-                wp_send_json_error(array("msg" => __("Please enter a valid mobile number.", $this->td), ));
+                wp_send_json_error(array("msg" => __("Please enter a valid mobile number.", "peprodev-ups"), ));
               }
             }
           break;
@@ -1452,9 +1452,9 @@ if (!class_exists("PeproDevUPS_Login")){
           case 'register':
             $param = sanitize_post( $_POST["param"] );
             parse_str(stripslashes_deep( $param ), $param);
-            if (empty($param)){ wp_send_json_error(array("msg" => __("<strong>Error:</strong> Source data is not valid.", $this->td))); }
+            if (empty($param)){ wp_send_json_error(array("msg" => __("<strong>Error:</strong> Source data is not valid.", "peprodev-ups"))); }
             if (!get_option('users_can_register')){
-              wp_send_json_error(array("msg" => __("<strong>Error:</strong> User registration is not allowed!", $this->td)));
+              wp_send_json_error(array("msg" => __("<strong>Error:</strong> User registration is not allowed!", "peprodev-ups")));
             }
             $error_array = array();
             $username    = false;
@@ -1462,34 +1462,34 @@ if (!class_exists("PeproDevUPS_Login")){
             if (!$this->login_mobile_otp){
               if (!$this->hide_username_field){
                 if ($this->is_username_field_req && empty($param["username"])){
-                  $error_array['pepro_dev_login_username'] = _x("<strong>Error:</strong> Please enter a username.", "reg-form-error", $this->td);
+                  $error_array['pepro_dev_login_username'] = _x("<strong>Error:</strong> Please enter a username.", "reg-form-error", "peprodev-ups");
                 }
                 if ($this->is_username_field_req && isset($param["username"]) && !empty($param["username"])){
                   if (username_exists($param["username"])){
-                    $error_array['pepro_dev_login_username_exists'] = _x("<strong>Error</strong>: This username is already registered. Please choose another one.", "reg-form-error", $this->td);
+                    $error_array['pepro_dev_login_username_exists'] = _x("<strong>Error</strong>: This username is already registered. Please choose another one.", "reg-form-error", "peprodev-ups");
                   }
                   if (!validate_username($param["username"])) {
-                    $error_array['pepro_dev_login_invalid_username'] = _x("<strong>Error</strong>: This username is invalid because it uses illegal characters. Please enter a valid username.", "reg-form-error", $this->td);
+                    $error_array['pepro_dev_login_invalid_username'] = _x("<strong>Error</strong>: This username is invalid because it uses illegal characters. Please enter a valid username.", "reg-form-error", "peprodev-ups");
                   }
                   $illegal_logins = (array) apply_filters( 'illegal_user_logins', array() );
                   if (in_array(strtolower($param["username"]), array_map('strtolower', $illegal_logins ), true )) {
-                    $error_array['pepro_dev_login_invalid_username'] = _x("<strong>Error</strong>: Sorry, that username is not allowed.", "reg-form-error", $this->td);
+                    $error_array['pepro_dev_login_invalid_username'] = _x("<strong>Error</strong>: Sorry, that username is not allowed.", "reg-form-error", "peprodev-ups");
                   }
                   $username = sanitize_user(wp_unslash(strtolower($param["username"])), true);
                 }
               }
               if (!$this->hide_email_field || ($this->hide_email_field && $this->hide_username_field)){
                 if (empty($param["email"])){
-                  $error_array['pepro_dev_login_invalid_email'] = _x("<strong>Error</strong>: Please enter an email address.", "reg-form-error", $this->td);
+                  $error_array['pepro_dev_login_invalid_email'] = _x("<strong>Error</strong>: Please enter an email address.", "reg-form-error", "peprodev-ups");
                 }else{
                   if (!filter_var($param["email"], FILTER_VALIDATE_EMAIL)){
-                    $error_array['pepro_dev_login_invalid_email'] = _x("<strong>Error</strong>: The given email address is not valid.", "reg-form-error", $this->td);
+                    $error_array['pepro_dev_login_invalid_email'] = _x("<strong>Error</strong>: The given email address is not valid.", "reg-form-error", "peprodev-ups");
                   }
                   if (!is_email($param["email"])){
-                    $error_array['pepro_dev_login_invalid_email'] = _x("<strong>Error</strong>: The given email address is not valid.", "reg-form-error", $this->td);
+                    $error_array['pepro_dev_login_invalid_email'] = _x("<strong>Error</strong>: The given email address is not valid.", "reg-form-error", "peprodev-ups");
                   }
                   if (email_exists($param["email"])){
-                    $error_array['pepro_dev_login_email_exists'] = _x("<strong>Error</strong>: This email is already registered. Please choose another one.", "reg-form-error", $this->td);
+                    $error_array['pepro_dev_login_email_exists'] = _x("<strong>Error</strong>: This email is already registered. Please choose another one.", "reg-form-error", "peprodev-ups");
                   }
                   $email = sanitize_text_field(wp_unslash(strtolower($param["email"])));
                 }
@@ -1500,7 +1500,7 @@ if (!class_exists("PeproDevUPS_Login")){
               switch ($field["type"]) {
                 case 'recaptcha':
                   if(!isset($param['g-recaptcha-response']) || empty($param['g-recaptcha-response'])){
-                    $error_array["pepro_dev_login_{$field["meta_name"]}"] = _x("<strong>Error:</strong> Please check the reCAPTCHA challenge.", "reg-form-error", $this->td);
+                    $error_array["pepro_dev_login_{$field["meta_name"]}"] = _x("<strong>Error:</strong> Please check the reCAPTCHA challenge.", "reg-form-error", "peprodev-ups");
                   }
                 break;
                 case 'button':
@@ -1509,40 +1509,40 @@ if (!class_exists("PeproDevUPS_Login")){
                 case 'tel':
                 case 'mobile':
                   if ("yes" == $field["is-required"] && empty(trim($param[$field["meta_name"]])) ){
-                    $error_array["pepro_dev_login_{$field["meta_name"]}"] = sprintf(_x("<strong>Error:</strong> Please enter %s.", "reg-form-error", $this->td), $field["title"]) ;
+                    $error_array["pepro_dev_login_{$field["meta_name"]}"] = sprintf(_x("<strong>Error:</strong> Please enter %s.", "reg-form-error", "peprodev-ups"), $field["title"]) ;
                   }
                   $valid_mobile = $this->clean_mobile_number($param[$field["meta_name"]], $field["meta_name"]);
                   if(!empty(trim($param[$field["meta_name"]])) && !$valid_mobile){
-                    $error_array["pepro_dev_login_{$field["meta_name"]}_invalid"] = _x("<strong>Error:</strong> Please enter a valid mobile number.", "reg-form-error", $this->td);
+                    $error_array["pepro_dev_login_{$field["meta_name"]}_invalid"] = _x("<strong>Error:</strong> Please enter a valid mobile number.", "reg-form-error", "peprodev-ups");
                   }
                   if ($this->login_mobile_otp){
                     $get_user_by_mobile = $this->get_user_by_mobile($param[$field["meta_name"]]);
                     if($get_user_by_mobile){
-                      $error_array["pepro_dev_login_{$field["meta_name"]}_exist"] = _x("<strong>Error:</strong> This mobile number is already registered. Please choose another one.", "reg-form-error", $this->td);
+                      $error_array["pepro_dev_login_{$field["meta_name"]}_exist"] = _x("<strong>Error:</strong> This mobile number is already registered. Please choose another one.", "reg-form-error", "peprodev-ups");
                     }
                   }
                 break;
                 default:
                   if ("yes" == $field["is-required"] && (!isset($param[$field["meta_name"]]) || empty(trim($param[$field["meta_name"]]))) ){
-                    $error_array["pepro_dev_login_{$field["meta_name"]}"] = sprintf(_x("<strong>Error:</strong> Please enter %s.", "reg-form-error", $this->td), $field["title"]);
+                    $error_array["pepro_dev_login_{$field["meta_name"]}"] = sprintf(_x("<strong>Error:</strong> Please enter %s.", "reg-form-error", "peprodev-ups"), $field["title"]);
                   }
                 break;
               }
             }
             if ($this->show_password_field && $this->is_password_field_req) {
               if (empty(trim($param['password1']))){
-                $error_array['pepro_dev_login_password1_error'] = _x("<strong>ERROR</strong>: Password field is required.", "reg-form-error", $this->td);
+                $error_array['pepro_dev_login_password1_error'] = _x("<strong>ERROR</strong>: Password field is required.", "reg-form-error", "peprodev-ups");
               }
               if (empty(trim($param['password2']))){
-                $error_array['pepro_dev_login_password2_error'] = _x("<strong>ERROR</strong>: Confirm Password field is required.", "reg-form-error", $this->td);
+                $error_array['pepro_dev_login_password2_error'] = _x("<strong>ERROR</strong>: Confirm Password field is required.", "reg-form-error", "peprodev-ups");
               }
             }
             if ($this->show_password_field){
             	if (false !== strpos(wp_unslash($param['password1']), '\\')) {
-            		$error_array['pepro_dev_login_password_error'] = _x('<strong>Error</strong>: Passwords may not contain the character "\\".', "reg-form-error", $this->td);
+            		$error_array['pepro_dev_login_password_error'] = _x('<strong>Error</strong>: Passwords may not contain the character "\\".', "reg-form-error", "peprodev-ups");
             	}
               if ( $param['password1'] != $param['password2'] ) {
-                $error_array['pepro_dev_login_password12_error'] = _x("<strong>ERROR</strong>: Password field and Confirm Password field do not match.", "reg-form-error", $this->td);
+                $error_array['pepro_dev_login_password12_error'] = _x("<strong>ERROR</strong>: Password field and Confirm Password field do not match.", "reg-form-error", "peprodev-ups");
               }
             }
             if (!empty($error_array)){
@@ -1559,7 +1559,7 @@ if (!class_exists("PeproDevUPS_Login")){
                   $user_id = $this->get_user_by_mobile($valid_mobile);
                   if ($user_id){
                     wp_send_json_error(array(
-                    "msg"    => __("<strong>Error:</strong> The mobile number is currently in use by another account.", $this->td),
+                    "msg"    => __("<strong>Error:</strong> The mobile number is currently in use by another account.", "peprodev-ups"),
                     "is_otp" => true,
                     "focus"  => ".mobile-verification",
                     "select" => ".mobile-verification",
@@ -1576,21 +1576,21 @@ if (!class_exists("PeproDevUPS_Login")){
                       if ($newUser){
                         $username = get_the_author_meta("display_name", $newUser->ID);
                         wp_send_json_success(array(
-                          "msg"           => sprintf(__("Hi %s, You have successfully registered!", $this->td), $username),
+                          "msg"           => sprintf(__("Hi %s, You have successfully registered!", "peprodev-ups"), $username),
                           "redirect"      => $this->redirect_after_login_register(home_url(), "ajax_register", $newUser),
                           "redirect_text" => $this->redirect_after_login_register("", "ajax_text", $newUser),
-                          "logout_txt"    => __("Logout",$this->td),
+                          "logout_txt"    => __("Logout","peprodev-ups"),
                           "logout_url"    => wp_logout_url(),
                         ));
                       }else{
-                        wp_send_json_error(array("msg"=> __("<strong>Error:</strong> There was an error processing your request!", $this->td),));
+                        wp_send_json_error(array("msg"=> __("<strong>Error:</strong> There was an error processing your request!", "peprodev-ups"),));
                       }
 
 
                     }
                     else{
                       wp_send_json_error(array(
-                        "msg"    => __("<strong>Error:</strong> Verification code is incorrect/expired!", $this->td),
+                        "msg"    => __("<strong>Error:</strong> Verification code is incorrect/expired!", "peprodev-ups"),
                         "is_otp" => true,
                         "focus"  => ".otp-verification",
                         "select" => ".otp-verification",
@@ -1609,7 +1609,7 @@ if (!class_exists("PeproDevUPS_Login")){
                         $sms = $this->send_dummyuser_verification_sms($valid_mobile);
                         if ($sms){
                           wp_send_json_success(array(
-                            "msg"    => __("Verification code sent, Enter in field below.", $this->td),
+                            "msg"    => __("Verification code sent, Enter in field below.", "peprodev-ups"),
                             "show"   => ".otp-resend",
                             "is_otp" => true,
                             "focus"  => ".otp-verification",
@@ -1617,7 +1617,7 @@ if (!class_exists("PeproDevUPS_Login")){
                         }
                         else{
                           wp_send_json_error(array(
-                            "msg"    => sprintf(__("<strong>Error:</strong> Sending Verification to %s failed. Try again.", $this->td), $valid_mobile),
+                            "msg"    => sprintf(__("<strong>Error:</strong> Sending Verification to %s failed. Try again.", "peprodev-ups"), $valid_mobile),
                             "show"   => ".otp-resend",
                             "is_otp" => true,
                             "focus"  => ".mobile-verification",
@@ -1626,7 +1626,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       }
                       else {
                         wp_send_json_error(array(
-                          "msg"    => sprintf(__("<strong>Error:</strong> Sending Verification failed, you can request one code every %s seconds.", $this->td), $this->sms_expiration),
+                          "msg"    => sprintf(__("<strong>Error:</strong> Sending Verification failed, you can request one code every %s seconds.", "peprodev-ups"), $this->sms_expiration),
                           "is_otp" => true,
                           "focus"  => ".mobile-verification",
                         ));
@@ -1636,7 +1636,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       $sms = $this->send_dummyuser_verification_sms($valid_mobile);
                       if ($sms){
                         wp_send_json_success(array(
-                          "msg"    => sprintf(__("Verification code sent to %s.", $this->td), $valid_mobile),
+                          "msg"    => sprintf(__("Verification code sent to %s.", "peprodev-ups"), $valid_mobile),
                           "show"   => ".otp-resend",
                           "is_otp" => true,
                           "focus"  => ".otp-verification",
@@ -1644,7 +1644,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       }
                       else{
                         wp_send_json_error(array(
-                          "msg"    => __("<strong>Error:</strong> Sending Verification code failed. Try again.", $this->td),
+                          "msg"    => __("<strong>Error:</strong> Sending Verification code failed. Try again.", "peprodev-ups"),
                           "show"   => ".otp-resend",
                           "is_otp" => true,
                           "focus"  => ".mobile-verification",
@@ -1656,7 +1656,7 @@ if (!class_exists("PeproDevUPS_Login")){
                 }
                 else{
                   wp_send_json_error(array(
-                    "msg"    => sprintf(__("<strong>Error:</strong> Please enter a valid mobile number.", $this->td), $valid_mobile),
+                    "msg"    => sprintf(__("<strong>Error:</strong> Please enter a valid mobile number.", "peprodev-ups"), $valid_mobile),
                     "is_otp" => true,
                     "focus"  => ".mobile-verification",
                   ));
@@ -1668,33 +1668,33 @@ if (!class_exists("PeproDevUPS_Login")){
             if ($newUser){
               $username = get_the_author_meta("display_name", $newUser->ID);
               wp_send_json_success(array(
-                "msg"           => sprintf(__("Hi %s, You have successfully registered!", $this->td), $username),
+                "msg"           => sprintf(__("Hi %s, You have successfully registered!", "peprodev-ups"), $username),
                 "redirect"      => $this->redirect_after_login_register(home_url(), "ajax_register", $newUser),
                 "redirect_text" => $this->redirect_after_login_register("", "ajax_text", $newUser),
-                "logout_txt"    => __("Logout",$this->td),
+                "logout_txt"    => __("Logout","peprodev-ups"),
                 "logout_url"    => wp_logout_url(),
               ));
             }
-            wp_send_json_error(array("msg"=> __("<strong>Error:</strong> There was an error processing your request!", $this->td),));
+            wp_send_json_error(array("msg"=> __("<strong>Error:</strong> There was an error processing your request!", "peprodev-ups"),));
           break;
 
           case 'resetpass':
             $param = sanitize_post( $_POST["param"] );
             parse_str(stripslashes_deep( $param ), $param);
-            if (empty($param)){ wp_send_json_error(array("msg" => __("Source data is not valid.", $this->td))); }
+            if (empty($param)){ wp_send_json_error(array("msg" => __("Source data is not valid.", "peprodev-ups"))); }
             $error_array = array();
             $user_id     = false;
             $user_login  = false;
             if (empty($param["username"])){
-              $error_array['pepro_dev_login_invalid_email'] = _x("<strong>Error</strong>: Please enter a username or email address.", "reg-form-error", $this->td);
+              $error_array['pepro_dev_login_invalid_email'] = _x("<strong>Error</strong>: Please enter a username or email address.", "reg-form-error", "peprodev-ups");
             }else{
               $user_login = sanitize_text_field(wp_unslash(strtolower($param["username"])));
               if ( empty( $user_login ) ) {
-                $error_array['pepro_dev_login_empty_username'] = _x("<strong>Error</strong>: Please enter a username or email address.", "reg-form-error", $this->td);
+                $error_array['pepro_dev_login_empty_username'] = _x("<strong>Error</strong>: Please enter a username or email address.", "reg-form-error", "peprodev-ups");
               } elseif ( strpos( $user_login, '@' ) ) {
                 $user_data = get_user_by( 'email', trim( wp_unslash( $user_login ) ) );
                 if ( empty( $user_data ) ) {
-                  $error_array['pepro_dev_login_invalid_email'] = _x("<strong>Error</strong>: There is no account with that username or email address.", "reg-form-error", $this->td);
+                  $error_array['pepro_dev_login_invalid_email'] = _x("<strong>Error</strong>: There is no account with that username or email address.", "reg-form-error", "peprodev-ups");
                 }
               } else {
                 $user_data = get_user_by( 'login', trim( wp_unslash( $user_login ) ) );
@@ -1702,10 +1702,10 @@ if (!class_exists("PeproDevUPS_Login")){
 
               if ( $user_data ) {
                 if (empty($user_data->user_email)){
-                  $error_array['pepro_dev_login_email_exists'] = _x("<strong>Error</strong>: There is no email address linked to username.", "reg-form-error", $this->td);
+                  $error_array['pepro_dev_login_email_exists'] = _x("<strong>Error</strong>: There is no email address linked to username.", "reg-form-error", "peprodev-ups");
                 }
               } else {
-                $error_array['pepro_dev_login_email_exists'] = _x("<strong>Error</strong>: The given email address is not registered.", "reg-form-error", $this->td);
+                $error_array['pepro_dev_login_email_exists'] = _x("<strong>Error</strong>: The given email address is not registered.", "reg-form-error", "peprodev-ups");
               }
             }
 
@@ -1714,14 +1714,14 @@ if (!class_exists("PeproDevUPS_Login")){
               switch ($field["type"]) {
                 case 'recaptcha':
                   if(!isset($param['g-recaptcha-response']) || empty($param['g-recaptcha-response'])){
-                    $error_array["pepro_dev_login_{$field["meta_name"]}"] = _x("<strong>Error:</strong> Please check the reCAPTCHA challenge.", "reg-form-error", $this->td);
+                    $error_array["pepro_dev_login_{$field["meta_name"]}"] = _x("<strong>Error:</strong> Please check the reCAPTCHA challenge.", "reg-form-error", "peprodev-ups");
                   }
                 break;
                 case 'button':
                 break;
                 default:
                   if ("yes" == $field["is-required"] && empty(trim($param[$field["meta_name"]])) ){
-                    $error_array["pepro_dev_login_{$field["meta_name"]}"] = sprintf(_x("<strong>Error:</strong> Please enter %s.", "reg-form-error", $this->td), $field["title"]);
+                    $error_array["pepro_dev_login_{$field["meta_name"]}"] = sprintf(_x("<strong>Error:</strong> Please enter %s.", "reg-form-error", "peprodev-ups"), $field["title"]);
                   }
                 break;
               }
@@ -1739,11 +1739,11 @@ if (!class_exists("PeproDevUPS_Login")){
               $rp = retrieve_password($user_login);
               if ($rp){
                 wp_send_json_success(array(
-                  "msg" => sprintf(__("A password-reset mail sent to you, Check your inbox.", $this->td)),
+                  "msg" => sprintf(__("A password-reset mail sent to you, Check your inbox.", "peprodev-ups")),
                 ));
               }
             }
-            wp_send_json_error(array("msg"=> __("<strong>Error:</strong> There was an error processing your request!", $this->td),));
+            wp_send_json_error(array("msg"=> __("<strong>Error:</strong> There was an error processing your request!", "peprodev-ups"),));
           break;
 
           case 'change_user_meta':
@@ -1751,14 +1751,14 @@ if (!class_exists("PeproDevUPS_Login")){
             $sparam = sanitize_text_field($_POST["sparam"] ?? "");
             $dparam = sanitize_text_field($_POST["dparam"] ?? "no");
             if (!$user_id){
-              wp_send_json_error(array("msg" => __("An unknown error occured.", $this->td)));
+              wp_send_json_error(array("msg" => __("An unknown error occured.", "peprodev-ups")));
             }
             update_user_meta($user_id, $sparam, $dparam);
-            wp_send_json_success(array("msg" => __("User details successfully changed.",$this->td)));
+            wp_send_json_success(array("msg" => __("User details successfully changed.","peprodev-ups")));
           break;
 
           default:
-            wp_send_json_error(array("msg" => __("An unknown error occured.", $this->td)));
+            wp_send_json_error(array("msg" => __("An unknown error occured.", "peprodev-ups")));
           break;
 
         }
@@ -1806,7 +1806,7 @@ if (!class_exists("PeproDevUPS_Login")){
           $userdata['display_name'] = $mobile;
         }
         if (!empty($userdata['user_email'])){
-          $userdata['display_name'] = __("Dear user",$this->td);
+          $userdata['display_name'] = __("Dear user","peprodev-ups");
         }
       }
 
@@ -1988,7 +1988,7 @@ if (!class_exists("PeproDevUPS_Login")){
       }
       $email_content = apply_filters("pepro_reglogin_send_verification_email_content", $email_content);
       $this->is_localhost() AND error_log("MAIL OTP: $otp_code");
-      $mail = $this->send_mail($email, "$this->from_name [".__("VERIFY",$this->td)."]", $email_content);
+      $mail = $this->send_mail($email, "$this->from_name [".__("VERIFY","peprodev-ups")."]", $email_content);
       return $this->is_localhost() ? true : $mail;
     }
     public function check_verification_email($user_id=0, $verification="")
@@ -2062,7 +2062,7 @@ if (!class_exists("PeproDevUPS_Login")){
         array(
           "meta_name"   => "username",
           "type"        => "text",
-          "title"       => __("Username/Email",$this->td),
+          "title"       => __("Username/Email","peprodev-ups"),
           "default"     => isset($_GET["username"]) && !empty($_GET["username"]) ? sanitize_text_field( esc_html( trim($_GET["username"]) ) ) : "",
           "is-required" => ($this->login_mobile_otp && $this->show_email_field ? "no" : "yes"),
           "is-public"   => "yes",
@@ -2070,15 +2070,15 @@ if (!class_exists("PeproDevUPS_Login")){
           "in-column"   => "no",
           "placeholder" => "",
           "classes"     => "",
-          "attributes"  => "tabindex=1 autocapitalize=none size=20 data-error-text=\"".esc_attr__("Enter username or email address correctly", $this->td)."\" ",
+          "attributes"  => "tabindex=1 autocapitalize=none size=20 data-error-text=\"".esc_attr__("Enter username or email address correctly", "peprodev-ups")."\" ",
         ),
         array(
           "meta_name"   => "password",
           "type"        => "password",
-          "title"       => __("Password",$this->td),
+          "title"       => __("Password","peprodev-ups"),
           "placeholder" => "",
           "classes"     => "password-input",
-          "attributes"  => "tabindex=2 autocomplete=off size=20 data-error-text=\"".esc_attr__("You have to enter a password", $this->td)."\"",
+          "attributes"  => "tabindex=2 autocomplete=off size=20 data-error-text=\"".esc_attr__("You have to enter a password", "peprodev-ups")."\"",
           "default"     => "",
           "is-required" => $this->login_mobile_otp ? "no" : "yes",
           "is-public"   => "yes",
@@ -2089,7 +2089,7 @@ if (!class_exists("PeproDevUPS_Login")){
         array(
           "meta_name"   => "mobile",
           "type"        => "mobile",
-          "title"       => __("Mobile",$this->td),
+          "title"       => __("Mobile","peprodev-ups"),
           "default"     => isset($_GET["username"]) && !empty($_GET["username"]) ? sanitize_text_field( esc_html( trim($_GET["username"]) ) ) : "",
           "is-required" => ($this->login_mobile_otp && $this->show_email_field ? "no" : "yes"),
           "is-public"   => "yes",
@@ -2097,12 +2097,12 @@ if (!class_exists("PeproDevUPS_Login")){
           "in-column"   => "no",
           "placeholder" => "",
           "classes"     => "mobile-verification force-ltr",
-          "attributes"  => "tabindex=1 data-error-text=\"".esc_attr__("Enter mobile number with English numbers,<br>e.g. 09123456789", $this->td)."\" pattern=".esc_attr("^(\+98|0098|98|0)?9\d{9}$")." maxlength=14",
+          "attributes"  => "tabindex=1 data-error-text=\"".esc_attr__("Enter mobile number with English numbers,<br>e.g. 09123456789", "peprodev-ups")."\" pattern=".esc_attr("^(\+98|0098|98|0)?9\d{9}$")." maxlength=14",
         ),
         array(
           "meta_name"   => "optverify",
           "type"        => "text",
-          "title"       => __("OTP Code",$this->td),
+          "title"       => __("OTP Code","peprodev-ups"),
           "row-class"   => "hide",
           "is-public"   => "yes",
           "is-required" => "no",
@@ -2111,7 +2111,7 @@ if (!class_exists("PeproDevUPS_Login")){
           "no-label"    => "no",
           "placeholder" => "",
           "classes"     => "otp-verification force-ltr",
-          "attributes"  => "autocomplete=off tabindex=2 data-error-text=\"".esc_attr__("You have to enter an OTP code or leave it empty and press Enter to receive a new one", $this->td)."\" pattern=".esc_attr("^\d{{$this->verification_digits}}$")." maxlength=$this->verification_digits minlength=$this->verification_digits",
+          "attributes"  => "autocomplete=off tabindex=2 data-error-text=\"".esc_attr__("You have to enter an OTP code or leave it empty and press Enter to receive a new one", "peprodev-ups")."\" pattern=".esc_attr("^\d{{$this->verification_digits}}$")." maxlength=$this->verification_digits minlength=$this->verification_digits",
           "default"     => "",
         ),
         array(
@@ -2144,17 +2144,17 @@ if (!class_exists("PeproDevUPS_Login")){
         }
       }
 
-      $textSend   = __("Receive OTP Code",$this->td);
-      $textVerify = __("Verify OTP Code",$this->td);
+      $textSend   = __("Receive OTP Code","peprodev-ups");
+      $textVerify = __("Verify OTP Code","peprodev-ups");
       if ($this->login_mobile_otp && $this->show_email_field){
-        $textSend = __("Login via OTP/Password",$this->td);
+        $textSend = __("Login via OTP/Password","peprodev-ups");
       }
       $num++;
       array_push($login_fields, array(
           "meta_name"   => "submit",
           "type"        => "button",
           "btn-type"    => "submit",
-          "title"       => $this->login_mobile_otp ? $textSend : __("Login",$this->td),
+          "title"       => $this->login_mobile_otp ? $textSend : __("Login","peprodev-ups"),
           "classes"     => "button button-primary",
           "attributes"  => "tabindex=$num " . ($this->login_mobile_otp ? "data-send=\"".esc_attr($textSend)."\" data-verify=\"".esc_attr($textVerify)."\"" : ""),
           "is-required" => "yes",
@@ -2174,11 +2174,11 @@ if (!class_exists("PeproDevUPS_Login")){
         $num++;
         array_push($login_fields,
           array(
-            "title"       => __("Username",$this->td),
+            "title"       => __("Username","peprodev-ups"),
             "type"        => "text",
             "meta_name"   => "username",
             "classes"     => "",
-            "attributes"  => "tabindex=$num data-error-text=\"".esc_attr__("Enter username correctly", $this->td)."\"",
+            "attributes"  => "tabindex=$num data-error-text=\"".esc_attr__("Enter username correctly", "peprodev-ups")."\"",
             "is-required" => $this->is_username_field_req ? "yes" : "no",
             "is-public"   => "yes",
             "no-label"    => "no",
@@ -2189,11 +2189,11 @@ if (!class_exists("PeproDevUPS_Login")){
         $num++;
         array_push($login_fields,
           array(
-            "title"       => __("Email",$this->td),
+            "title"       => __("Email","peprodev-ups"),
             "type"        => "email",
             "meta_name"   => "email",
             "classes"     => "",
-            "attributes"  => "tabindex=$num data-error-text=\"".esc_attr__("Enter email address correctly", $this->td)."\"",
+            "attributes"  => "tabindex=$num data-error-text=\"".esc_attr__("Enter email address correctly", "peprodev-ups")."\"",
             "is-required" => $this->is_email_field_req ? "yes" : "no",
             "is-public"   => "yes",
             "no-label"    => "no",
@@ -2207,7 +2207,7 @@ if (!class_exists("PeproDevUPS_Login")){
           array(
             "meta_name"   => "user_mobile",
             "type"        => "mobile",
-            "title"       => __("Mobile",$this->td),
+            "title"       => __("Mobile","peprodev-ups"),
             "default"     => "",
             "is-required" => "yes",
             "is-public"   => "yes",
@@ -2215,12 +2215,12 @@ if (!class_exists("PeproDevUPS_Login")){
             "in-column"   => "no",
             "placeholder" => "",
             "classes"     => "mobile-verification force-ltr",
-            "attributes"  => "tabindex=$num pattern=".esc_attr("^(\+98|0098|98|0)?9\d{9}$")." data-error-text=\"".esc_attr__("Enter mobile number with English numbers,<br>e.g. 09123456789", $this->td)."\" maxlength=14",
+            "attributes"  => "tabindex=$num pattern=".esc_attr("^(\+98|0098|98|0)?9\d{9}$")." data-error-text=\"".esc_attr__("Enter mobile number with English numbers,<br>e.g. 09123456789", "peprodev-ups")."\" maxlength=14",
           ),
           array(
             "meta_name"   => "optverify",
             "type"        => "text",
-            "title"       => __("OTP Code",$this->td),
+            "title"       => __("OTP Code","peprodev-ups"),
             "row-class"   => "hide",
             "is-public"   => "yes",
             "is-required" => "no",
@@ -2229,7 +2229,7 @@ if (!class_exists("PeproDevUPS_Login")){
             "no-label"    => "no",
             "placeholder" => "",
             "classes"     => "otp-verification force-ltr",
-            "attributes"  => "autocomplete=off tabindex=".($num+1)." data-error-text=\"".esc_attr__("You have to enter an OTP code or leave it empty and press Enter to receive a new one", $this->td)."\" pattern=".esc_attr("^\d{{$this->verification_digits}}$")." maxlength=$this->verification_digits minlength=$this->verification_digits",
+            "attributes"  => "autocomplete=off tabindex=".($num+1)." data-error-text=\"".esc_attr__("You have to enter an OTP code or leave it empty and press Enter to receive a new one", "peprodev-ups")."\" pattern=".esc_attr("^\d{{$this->verification_digits}}$")." maxlength=$this->verification_digits minlength=$this->verification_digits",
             "default"     => "",
           ),
           array(
@@ -2255,7 +2255,7 @@ if (!class_exists("PeproDevUPS_Login")){
           array_push($login_fields, array(
               "meta_name"   => "user_mobile",
               "type"        => "mobile",
-              "title"       => __("Mobile",$this->td),
+              "title"       => __("Mobile","peprodev-ups"),
               "default"     => "",
               "is-required" => $this->is_add_mobile_req ? "yes" : "no",
               "is-public"   => "yes",
@@ -2263,7 +2263,7 @@ if (!class_exists("PeproDevUPS_Login")){
               "in-column"   => "no",
               "placeholder" => "",
               "classes"     => "mobile-verification force-ltr",
-              "attributes"  => "tabindex=$num pattern=".esc_attr("^(\+98|0098|98|0)?9\d{9}$")." data-error-text=\"".esc_attr__("Enter mobile number with English numbers,<br>e.g. 09123456789", $this->td)."\" maxlength=14",
+              "attributes"  => "tabindex=$num pattern=".esc_attr("^(\+98|0098|98|0)?9\d{9}$")." data-error-text=\"".esc_attr__("Enter mobile number with English numbers,<br>e.g. 09123456789", "peprodev-ups")."\" maxlength=14",
             )
           );
         }
@@ -2272,9 +2272,9 @@ if (!class_exists("PeproDevUPS_Login")){
       foreach ( (array) $this->register_fileds as $field) {
         if ("tel" == $field["type"] || "mobile" == $field["type"]){
           $field["classes"]    = $field["classes"] . " mobile-verification force-ltr";
-          $field["attributes"] = " data-error-text=\"".esc_attr__("Enter mobile number with English numbers,<br>e.g. 09123456789", $this->td)."\" tabindex=$num pattern=".esc_attr("^(\+98|0098|98|0)?9\d{9}$")." maxlength=14";
+          $field["attributes"] = " data-error-text=\"".esc_attr__("Enter mobile number with English numbers,<br>e.g. 09123456789", "peprodev-ups")."\" tabindex=$num pattern=".esc_attr("^(\+98|0098|98|0)?9\d{9}$")." maxlength=14";
         }
-        if ($this->login_mobile_otp && "user_mobile" == $field["meta_name"]) continue;
+        if (($this->login_mobile_otp || $this->reg_add_mobile) && "user_mobile" == $field["meta_name"]) continue;
         if ("recaptcha" == $field["type"] && "yes" == $field["is-public"]) continue;
 
         $num++;
@@ -2286,7 +2286,7 @@ if (!class_exists("PeproDevUPS_Login")){
         $num++;
         array_push($login_fields,
         array(
-          "title"       => __("Password",$this->td),
+          "title"       => __("Password","peprodev-ups"),
           "type"        => "password",
           "meta_name"   => "password1",
           "classes"     => "",
@@ -2296,7 +2296,7 @@ if (!class_exists("PeproDevUPS_Login")){
           "no-label"    => "no",
         ),
         array(
-          "title"       => __("Confirm Password",$this->td),
+          "title"       => __("Confirm Password","peprodev-ups"),
           "type"        => "password",
           "meta_name"   => "password2",
           "classes"     => "",
@@ -2315,14 +2315,14 @@ if (!class_exists("PeproDevUPS_Login")){
         }
       }
 
-      $textSend   = __("Receive OTP & Register",$this->td);
-      $textVerify = __("Verify OTP & Register",$this->td);
+      $textSend   = __("Receive OTP & Register","peprodev-ups");
+      $textVerify = __("Verify OTP & Register","peprodev-ups");
       $num++;
       array_push($login_fields, array(
           "meta_name"   => "submit",
           "type"        => "button",
           "btn-type"    => "submit",
-          "title"       => $this->login_mobile_otp ? $textSend : __("Register",$this->td),
+          "title"       => $this->login_mobile_otp ? $textSend : __("Register","peprodev-ups"),
           "classes"     => "button button-primary",
           "attributes"  => "tabindex=$num " . ($this->login_mobile_otp ? "data-send=\"".esc_attr($textSend)."\" data-verify=\"".esc_attr($textVerify)."\"" : ""),
           "is-required" => "yes",
@@ -2502,7 +2502,7 @@ if (!class_exists("PeproDevUPS_Login")){
         array(
           "meta_name"   => "username",
           "type"        => "email",
-          "title"       => __("Email",$this->td),
+          "title"       => __("Email","peprodev-ups"),
           "default"     => (string) $current_user->user_email,
           "is-required" => "yes",
           "is-public"   => "yes",
@@ -2510,12 +2510,12 @@ if (!class_exists("PeproDevUPS_Login")){
           "in-column"   => "no",
           "placeholder" => "",
           "classes"     => "email-verification force-ltr",
-          "attributes"  => "tabindex=1 data-error-text=\"".esc_attr__("Enter username or email address correctly", $this->td)."\" ",
+          "attributes"  => "tabindex=1 data-error-text=\"".esc_attr__("Enter username or email address correctly", "peprodev-ups")."\" ",
         ),
         array(
           "meta_name"   => "verification",
           "type"        => "text",
-          "title"       => __("Verification Code",$this->td),
+          "title"       => __("Verification Code","peprodev-ups"),
           "row-class"   => "hide",
           "is-public"   => "yes",
           "is-required" => "no",
@@ -2524,7 +2524,7 @@ if (!class_exists("PeproDevUPS_Login")){
           "no-label"    => "no",
           "placeholder" => "",
           "classes"     => "code-verification force-ltr",
-          "attributes"  => "autocomplete=off tabindex=2 data-error-text=\"".esc_attr__("You have to enter a Verification code or leave it empty and press Enter to receive a new one", $this->td)."\" pattern=".esc_attr("^\d{{$this->verification_email_digits}}$")." maxlength=$this->verification_email_digits minlength=$this->verification_email_digits",
+          "attributes"  => "autocomplete=off tabindex=2 data-error-text=\"".esc_attr__("You have to enter a Verification code or leave it empty and press Enter to receive a new one", "peprodev-ups")."\" pattern=".esc_attr("^\d{{$this->verification_email_digits}}$")." maxlength=$this->verification_email_digits minlength=$this->verification_email_digits",
           "default"     => "",
         ),
       );
@@ -2536,8 +2536,8 @@ if (!class_exists("PeproDevUPS_Login")){
         }
       }
 
-      $textSend   = __("Receive Code",$this->td);
-      $textVerify = __("Verify Code",$this->td);
+      $textSend   = __("Receive Code","peprodev-ups");
+      $textVerify = __("Verify Code","peprodev-ups");
 
       array_push($login_fields, array(
           "meta_name"   => "submit",
@@ -2560,7 +2560,7 @@ if (!class_exists("PeproDevUPS_Login")){
         array(
           "meta_name"   => "username",
           "type"        => "text",
-          "title"       => __("Username/Email",$this->td),
+          "title"       => __("Username/Email","peprodev-ups"),
           "default"     => "",
           "is-required" => "yes",
           "is-public"   => "yes",
@@ -2568,7 +2568,7 @@ if (!class_exists("PeproDevUPS_Login")){
           "in-column"   => "no",
           "placeholder" => "",
           "classes"     => "email-verification force-ltr",
-          "attributes"  => "tabindex=1 data-error-text=\"".esc_attr__("Enter username or email address correctly", $this->td)."\"",
+          "attributes"  => "tabindex=1 data-error-text=\"".esc_attr__("Enter username or email address correctly", "peprodev-ups")."\"",
         ),
       );
       // add reCaptcha
@@ -2577,7 +2577,7 @@ if (!class_exists("PeproDevUPS_Login")){
           array_push($login_fields, $value);
         }
       }
-      $textSend   = __("Send reset password Email",$this->td);
+      $textSend   = __("Send reset password Email","peprodev-ups");
       array_push($login_fields, array(
           "meta_name"   => "submit",
           "type"        => "button",
@@ -2599,7 +2599,7 @@ if (!class_exists("PeproDevUPS_Login")){
         array(
           "meta_name"   => "username",
           "type"        => "mobile",
-          "title"       => __("Mobile",$this->td),
+          "title"       => __("Mobile","peprodev-ups"),
           "default"     => get_the_author_meta("user_mobile", $current_user->ID),
           "is-required" => "yes",
           "is-public"   => "yes",
@@ -2607,12 +2607,12 @@ if (!class_exists("PeproDevUPS_Login")){
           "in-column"   => "no",
           "placeholder" => "",
           "classes"     => "mobile-verification force-ltr",
-          "attributes"  => "tabindex=1 autocomplete=off data-error-text=\"".esc_attr__("Enter mobile number with English numbers,<br>e.g. 09123456789", $this->td)."\" pattern=".esc_attr("^(\+98|0098|98|0)?9\d{9}$")." maxlength=14",
+          "attributes"  => "tabindex=1 autocomplete=off data-error-text=\"".esc_attr__("Enter mobile number with English numbers,<br>e.g. 09123456789", "peprodev-ups")."\" pattern=".esc_attr("^(\+98|0098|98|0)?9\d{9}$")." maxlength=14",
         ),
         array(
           "meta_name"   => "verification",
           "type"        => "text",
-          "title"       => __("OTP Code",$this->td),
+          "title"       => __("OTP Code","peprodev-ups"),
           "row-class"   => "hide",
           "is-public"   => "yes",
           "is-required" => "no",
@@ -2621,7 +2621,7 @@ if (!class_exists("PeproDevUPS_Login")){
           "no-label"    => "no",
           "placeholder" => "",
           "classes"     => "code-verification force-ltr",
-          "attributes"  => "autocomplete=off data-error-text=\"".esc_attr__("You have to enter an OTP code or leave it empty and press Enter to receive a new one", $this->td)."\" tabindex=2 pattern=".esc_attr("^\d{{$this->verification_digits}}$")." maxlength=$this->verification_digits minlength=$this->verification_digits",
+          "attributes"  => "autocomplete=off data-error-text=\"".esc_attr__("You have to enter an OTP code or leave it empty and press Enter to receive a new one", "peprodev-ups")."\" tabindex=2 pattern=".esc_attr("^\d{{$this->verification_digits}}$")." maxlength=$this->verification_digits minlength=$this->verification_digits",
           "default"     => "",
         ),
         array(
@@ -2647,14 +2647,14 @@ if (!class_exists("PeproDevUPS_Login")){
         }
       }
 
-      $textSend   = __("Receive OTP Code",$this->td);
-      $textVerify = __("Verify OTP Code",$this->td);
+      $textSend   = __("Receive OTP Code","peprodev-ups");
+      $textVerify = __("Verify OTP Code","peprodev-ups");
 
       array_push($login_fields, array(
           "meta_name"   => "submit",
           "type"        => "button",
           "btn-type"    => "submit",
-          "title"       => $this->login_mobile_otp||$force ? $textSend : __("Login",$this->td),
+          "title"       => $this->login_mobile_otp||$force ? $textSend : __("Login","peprodev-ups"),
           "classes"     => $class,
           "attributes"  => "tabindex=3 " . ($this->login_mobile_otp||$force ? "data-send=\"".esc_attr($textSend)."\" data-verify=\"".esc_attr($textVerify)."\"" : ""),
           "is-required" => "yes",
@@ -2815,8 +2815,8 @@ if (!class_exists("PeproDevUPS_Login")){
     }
     public function manage_users_columns( $user_columns )
     {
-      $user_columns['_email_verification'] = _x("Email Verified", "metabox", $this->td);
-      $user_columns['_sms_verification']   = _x("SMS Verified", "metabox", $this->td);
+      $user_columns['_email_verification'] = _x("Email Verified", "metabox", "peprodev-ups");
+      $user_columns['_sms_verification']   = _x("SMS Verified", "metabox", "peprodev-ups");
       foreach ($this->get_register_fields() as $field) {
         if ("yes" == $field["in-column"]){
           $user_columns[$field["meta_name"]] = $field["title"];
@@ -2832,7 +2832,7 @@ if (!class_exists("PeproDevUPS_Login")){
           $verfied = "yes" == get_the_author_meta( "pepro_user_is_email_verified", $user_id);
           ?>
             <div class="pepro-reg-login-checkbox-wrapper">
-              <input class="pepro-reg-login-checkbox edit-user" style="transform: scale(0.75);" data-id="<?php echo $user_id;?>" data-param="pepro_user_is_email_verified" data-nonce="<?php echo esc_attr(wp_create_nonce($this->td));?>" type="checkbox" autocomplete="off" value="yes" <?php echo checked(true, $verfied, false);?> >
+              <input class="pepro-reg-login-checkbox edit-user" style="transform: scale(0.75);" data-id="<?php echo $user_id;?>" data-param="pepro_user_is_email_verified" data-nonce="<?php echo esc_attr(wp_create_nonce("peprodev-ups"));?>" type="checkbox" autocomplete="off" value="yes" <?php echo checked(true, $verfied, false);?> >
             </div>
           <?php
           $return = ob_get_contents();
@@ -2845,7 +2845,7 @@ if (!class_exists("PeproDevUPS_Login")){
           ?>
             <div class="pepro-reg-login-checkbox-wrapper">
               <?php echo $mobile;?>
-              <input class="pepro-reg-login-checkbox edit-user" style="transform: scale(0.75);" data-id="<?php echo $user_id;?>" data-param="pepro_user_is_sms_verified" data-nonce="<?php echo esc_attr(wp_create_nonce($this->td));?>" type="checkbox" autocomplete="off" value="yes" <?php echo checked(true, $verfied, false);?> >
+              <input class="pepro-reg-login-checkbox edit-user" style="transform: scale(0.75);" data-id="<?php echo $user_id;?>" data-param="pepro_user_is_sms_verified" data-nonce="<?php echo esc_attr(wp_create_nonce("peprodev-ups"));?>" type="checkbox" autocomplete="off" value="yes" <?php echo checked(true, $verfied, false);?> >
             </div>
           <?php
           $return = ob_get_contents();
@@ -2859,7 +2859,7 @@ if (!class_exists("PeproDevUPS_Login")){
             $value = $field["options"][$value] ?? $value;
           }
           if ("textarea" == $field["type"] || "editor" == $field["type"]){
-            $value = empty($value) ? "" : "<div id='{$field["meta_name"]}__{$user_id}' style='display:none;'>$value</div><a class='thickbox' title='{$field["title"]}' href='#TB_inline?width=900&height=600&inlineId={$field["meta_name"]}__{$user_id}'>".__("Read value",$this->td)."</a>";
+            $value = empty($value) ? "" : "<div id='{$field["meta_name"]}__{$user_id}' style='display:none;'>$value</div><a class='thickbox' title='{$field["title"]}' href='#TB_inline?width=900&height=600&inlineId={$field["meta_name"]}__{$user_id}'>".__("Read value","peprodev-ups")."</a>";
           }
           return $value;
         }
@@ -2876,10 +2876,10 @@ if (!class_exists("PeproDevUPS_Login")){
         wp_localize_script( "pepro_users_reg_login", "pepr_reg_login", array(
           "_td"     => $this->td,
           "_ajax"   => admin_url("admin-ajax.php"),
-          "loading" => _x("Please wait ...", "js-translate", $this->td),
-          "success" => _x("Operation done successfully", "wc-setting-js", $this->td),
-          "error"   => _x("An unknown error occured", "js-translate", $this->td),
-          "fixerr" => _x("Plese fix errors in form", "js-translate", $this->td),
+          "loading" => _x("Please wait ...", "js-translate", "peprodev-ups"),
+          "success" => _x("Operation done successfully", "wc-setting-js", "peprodev-ups"),
+          "error"   => _x("An unknown error occured", "js-translate", "peprodev-ups"),
+          "fixerr" => _x("Plese fix errors in form", "js-translate", "peprodev-ups"),
         ));
         wp_enqueue_script("pepro_users_reg_login");
       }
@@ -2892,7 +2892,7 @@ if (!class_exists("PeproDevUPS_Login")){
         "user_id"      => $user->ID,
       ));
       if (!empty($fields)){
-        echo "<h3>".__("Personal Information",$this->td)."</h3><table class='form-table'>$fields</table>";
+        echo "<h3>".__("Personal Information","peprodev-ups")."</h3><table class='form-table'>$fields</table>";
       }
     }
     public function update_profile_custom_fields( $user_id )
@@ -3011,9 +3011,9 @@ if (!class_exists("PeproDevUPS_Login")){
           case 'recaptcha':
             if(!isset($_POST['g-recaptcha-response']) || empty($_POST['g-recaptcha-response'])){
               if ($return_array){
-                $error_array["pepro_dev_login_{$field["meta_name"]}"] = _x("<strong>Error:</strong> Please check the reCAPTCHA challenge.", "reg-form-error", $this->td);
+                $error_array["pepro_dev_login_{$field["meta_name"]}"] = _x("<strong>Error:</strong> Please check the reCAPTCHA challenge.", "reg-form-error", "peprodev-ups");
               }else{
-                $errors->add("pepro_dev_login_{$field["meta_name"]}", _x("<strong>Error:</strong> Please check the reCAPTCHA challenge.", "reg-form-error", $this->td));
+                $errors->add("pepro_dev_login_{$field["meta_name"]}", _x("<strong>Error:</strong> Please check the reCAPTCHA challenge.", "reg-form-error", "peprodev-ups"));
               }
             }
           break;
@@ -3021,27 +3021,27 @@ if (!class_exists("PeproDevUPS_Login")){
           case 'mobile':
             if ("yes" == $field["is-required"] && empty(trim($_POST[$field["meta_name"]])) ){
               if ($return_array){
-                $error_array["pepro_dev_login_{$field["meta_name"]}"] = sprintf(_x("<strong>Error:</strong> Please enter %s.", "reg-form-error", $this->td), $field["title"]) ;
+                $error_array["pepro_dev_login_{$field["meta_name"]}"] = sprintf(_x("<strong>Error:</strong> Please enter %s.", "reg-form-error", "peprodev-ups"), $field["title"]) ;
               }else{
-                $errors->add("pepro_dev_login_{$field["meta_name"]}", sprintf(_x("<strong>Error:</strong> Please enter %s.", "reg-form-error", $this->td), $field["title"]) );
+                $errors->add("pepro_dev_login_{$field["meta_name"]}", sprintf(_x("<strong>Error:</strong> Please enter %s.", "reg-form-error", "peprodev-ups"), $field["title"]) );
               }
             }
 
             $valid_mobile = $this->clean_mobile_number($_POST[$field["meta_name"]], $field["meta_name"]);
             if(!$valid_mobile){
               if ($return_array){
-                $error_array["pepro_dev_login_{$field["meta_name"]}"] = _x("<strong>Error:</strong> Please enter a valid mobile number.", "reg-form-error", $this->td);
+                $error_array["pepro_dev_login_{$field["meta_name"]}"] = _x("<strong>Error:</strong> Please enter a valid mobile number.", "reg-form-error", "peprodev-ups");
               }else{
-                $errors->add("pepro_dev_login_{$field["meta_name"]}", _x("<strong>Error:</strong> Please enter a valid mobile number.", "reg-form-error", $this->td));
+                $errors->add("pepro_dev_login_{$field["meta_name"]}", _x("<strong>Error:</strong> Please enter a valid mobile number.", "reg-form-error", "peprodev-ups"));
               }
             }
             else{
               $found_prev_user = $this->get_user_by_mobile($valid_mobile);
               if ($found_prev_user && $found_prev_user > 0){
                 if ($return_array){
-                  $error_array["pepro_dev_login_{$field["meta_name"]}-duplicate"] = _x("<strong>Error:</strong> This mobile number is currently in use.", "reg-form-error", $this->td);
+                  $error_array["pepro_dev_login_{$field["meta_name"]}-duplicate"] = _x("<strong>Error:</strong> This mobile number is currently in use.", "reg-form-error", "peprodev-ups");
                 }else{
-                  $errors->add("pepro_dev_login_{$field["meta_name"]}-duplicate", _x("<strong>Error:</strong> This mobile number is currently in use.", "reg-form-error", $this->td));
+                  $errors->add("pepro_dev_login_{$field["meta_name"]}-duplicate", _x("<strong>Error:</strong> This mobile number is currently in use.", "reg-form-error", "peprodev-ups"));
                 }
               }
             }
@@ -3049,9 +3049,9 @@ if (!class_exists("PeproDevUPS_Login")){
           default:
             if ("yes" == $field["is-required"] && empty(trim($_POST[$field["meta_name"]])) ){
               if ($return_array){
-                $error_array["pepro_dev_login_{$field["meta_name"]}"] = sprintf(_x("<strong>Error:</strong> Please enter %s.", "reg-form-error", $this->td), $field["title"]);
+                $error_array["pepro_dev_login_{$field["meta_name"]}"] = sprintf(_x("<strong>Error:</strong> Please enter %s.", "reg-form-error", "peprodev-ups"), $field["title"]);
               }else{
-                $errors->add("pepro_dev_login_{$field["meta_name"]}", sprintf(_x("<strong>Error:</strong> Please enter %s.", "reg-form-error", $this->td), $field["title"]) );
+                $errors->add("pepro_dev_login_{$field["meta_name"]}", sprintf(_x("<strong>Error:</strong> Please enter %s.", "reg-form-error", "peprodev-ups"), $field["title"]) );
               }
             }
           break;
@@ -3079,25 +3079,25 @@ if (!class_exists("PeproDevUPS_Login")){
       if ($this->show_password_field && $this->is_password_field_req){
         if (empty(trim($_POST['password1']))){
           if ($return_array){
-            $error_array['pepro_dev_login_password1_error'] = _x("<strong>ERROR</strong>: Password field is required.","reg-form-error", $this->td);
+            $error_array['pepro_dev_login_password1_error'] = _x("<strong>ERROR</strong>: Password field is required.","reg-form-error", "peprodev-ups");
           }else{
-            $errors->add('pepro_dev_login_password1_error',  _x("<strong>ERROR</strong>: Password field is required.","reg-form-error", $this->td) );
+            $errors->add('pepro_dev_login_password1_error',  _x("<strong>ERROR</strong>: Password field is required.","reg-form-error", "peprodev-ups") );
           }
         }
         if (empty(trim($_POST['password2']))){
           if ($return_array){
-            $error_array['pepro_dev_login_password2_error'] = _x("<strong>ERROR</strong>: Confirm Password field is required.","reg-form-error", $this->td);
+            $error_array['pepro_dev_login_password2_error'] = _x("<strong>ERROR</strong>: Confirm Password field is required.","reg-form-error", "peprodev-ups");
           }else{
-            $errors->add('pepro_dev_login_password2_error',  _x("<strong>ERROR</strong>: Confirm Password field is required.","reg-form-error", $this->td) );
+            $errors->add('pepro_dev_login_password2_error',  _x("<strong>ERROR</strong>: Confirm Password field is required.","reg-form-error", "peprodev-ups") );
           }
         }
       }
       if ($this->show_password_field) {
         if ( $_POST['password1'] != $_POST['password2'] ) {
           if ($return_array){
-            $error_array['pepro_dev_login_password12_error'] = _x("<strong>ERROR</strong>: Password field and Confirm Password field do not match.","reg-form-error", $this->td);
+            $error_array['pepro_dev_login_password12_error'] = _x("<strong>ERROR</strong>: Password field and Confirm Password field do not match.","reg-form-error", "peprodev-ups");
           }else{
-            $errors->add('pepro_dev_login_password12_error', _x("<strong>ERROR</strong>: Password field and Confirm Password field do not match.","reg-form-error", $this->td) );
+            $errors->add('pepro_dev_login_password12_error', _x("<strong>ERROR</strong>: Password field and Confirm Password field do not match.","reg-form-error", "peprodev-ups") );
           }
         }
       }
@@ -3113,7 +3113,7 @@ if (!class_exists("PeproDevUPS_Login")){
           case 'tel':
           case 'mobile':
             if ("yes" == $field["is-required"] && empty(trim($_POST[$field["meta_name"]])) ){
-              $errors->add("pepro_dev_login_{$field["meta_name"]}", sprintf(_x("<strong>Error:</strong> Please enter %s.", "reg-form-error", $this->td), $field["title"]) );
+              $errors->add("pepro_dev_login_{$field["meta_name"]}", sprintf(_x("<strong>Error:</strong> Please enter %s.", "reg-form-error", "peprodev-ups"), $field["title"]) );
             }
 
             $valid_mobile = $this->clean_mobile_number($_POST[$field["meta_name"]], $field["meta_name"]);
@@ -3124,7 +3124,7 @@ if (!class_exists("PeproDevUPS_Login")){
 
               // $this->error_log_dump($valid_mobile, "validate_before_save ~> not valid");
 
-              $errors->add("pepro_dev_login_{$field["meta_name"]}--invalid", _x("<strong>Error:</strong> Please enter a valid mobile number.", "reg-form-error", $this->td));
+              $errors->add("pepro_dev_login_{$field["meta_name"]}--invalid", _x("<strong>Error:</strong> Please enter a valid mobile number.", "reg-form-error", "peprodev-ups"));
             }
 
             if(!empty(trim($_POST[$field["meta_name"]])) && false != $valid_mobile){
@@ -3148,7 +3148,7 @@ if (!class_exists("PeproDevUPS_Login")){
 
                   // $this->error_log_dump(false, "validate_before_save ~> cur_user is not in list or is not alone!");
 
-                  $err = sprintf(_x("<strong>Error:</strong> This mobile number is currently in use by %s.", "reg-form-error", $this->td), implode(" / ", $foundusers));
+                  $err = sprintf(_x("<strong>Error:</strong> This mobile number is currently in use by %s.", "reg-form-error", "peprodev-ups"), implode(" / ", $foundusers));
                   $errors->add("pepro_dev_login_{$field["meta_name"]}-duplicate", $err);
 
 
@@ -3159,7 +3159,7 @@ if (!class_exists("PeproDevUPS_Login")){
           break;
           default:
             if ("yes" == $field["is-required"] && empty(trim($_POST[$field["meta_name"]])) ){
-                $errors->add("pepro_dev_login_{$field["meta_name"]}", sprintf(_x("<strong>Error:</strong> Please enter %s.", "reg-form-error", $this->td), $field["title"]) );
+                $errors->add("pepro_dev_login_{$field["meta_name"]}", sprintf(_x("<strong>Error:</strong> Please enter %s.", "reg-form-error", "peprodev-ups"), $field["title"]) );
             }
           break;
         }
@@ -3192,11 +3192,11 @@ if (!class_exists("PeproDevUPS_Login")){
         $password2 = ( ! empty( $_POST['password2'] ) ) ? trim( $_POST['password2'] ) : '';
         ?>
         <p>
-          <label for="password1"><?php echo __('Password',$this->td);?></label>
+          <label for="password1"><?php esc_html_e('Password',"peprodev-ups");?></label>
           <input type="password" name="password1" id="password1" class="input" value="<?php echo esc_attr( wp_unslash( $password1 ) ); ?>" size="25" />
         </p>
         <p>
-          <label for="password2"><?php echo __('Confirm Password',$this->td);?></label>
+          <label for="password2"><?php esc_html_e('Confirm Password',"peprodev-ups");?></label>
           <input type="password" name="password2" id="password2" class="input" value="<?php echo esc_attr( wp_unslash( $password2 ) ); ?>" size="25" />
         </p>
         <?php
@@ -3215,19 +3215,19 @@ if (!class_exists("PeproDevUPS_Login")){
     {
       $fields_array = array(
         "home"         => array(
-          "name"       => __("Home page",$this->td),
+          "name"       => __("Home page","peprodev-ups"),
           "url"        => $this->special_pages_to_url("home")
         ),
         "profile"      => array(
-          "name"       => __("Pepro Profile page",$this->td),
+          "name"       => __("Pepro Profile page","peprodev-ups"),
           "url"        => $this->special_pages_to_url("profile")
         ),
         "profile_edit" => array(
-          "name"       => __("Pepro Profile Edit page",$this->td),
+          "name"       => __("Pepro Profile Edit page","peprodev-ups"),
           "url"        => $this->special_pages_to_url("profile_edit")
         ),
         "admin"        => array(
-          "name"       => __("WordPress Admin",$this->td),
+          "name"       => __("WordPress Admin","peprodev-ups"),
           "url"        => $this->special_pages_to_url("admin")
         ),
       );
@@ -3282,7 +3282,7 @@ if (!class_exists("PeproDevUPS_Login")){
       $roles = array(
         array(
           "role" => esc_attr("everyone"),
-          "name" => __("Everyone",$this->td),
+          "name" => __("Everyone","peprodev-ups"),
         )
       );
       foreach ($editable_roles as $role => $details) {
@@ -3302,16 +3302,16 @@ if (!class_exists("PeproDevUPS_Login")){
     public function get_fileds_types()
     {
       $fields_array = array(
-        "text"      => __("Text field",     $this->td),
-        "textarea"  => __("Textarea field", $this->td),
-        "number"    => __("Number field",   $this->td),
-        "email"     => __("Email field",    $this->td),
-        "mobile"    => __("Mobile field",   $this->td),
-        "editor"    => __("TinyMCE Editor", $this->td),
-        "select"    => __("Dropdown list",  $this->td),
-        // "date"      => __("Date picker",    $this->td),
-        // "color"     => __("Color selector", $this->td),
-        "recaptcha" => __("reCaptcha",      $this->td),
+        "text"      => __("Text field",     "peprodev-ups"),
+        "textarea"  => __("Textarea field", "peprodev-ups"),
+        "number"    => __("Number field",   "peprodev-ups"),
+        "email"     => __("Email field",    "peprodev-ups"),
+        "mobile"    => __("Mobile field",   "peprodev-ups"),
+        "editor"    => __("TinyMCE Editor", "peprodev-ups"),
+        "select"    => __("Dropdown list",  "peprodev-ups"),
+        // "date"      => __("Date picker",    "peprodev-ups"),
+        // "color"     => __("Color selector", "peprodev-ups"),
+        "recaptcha" => __("reCaptcha",      "peprodev-ups"),
       );
       return apply_filters( "pepro_reglogin_get_fileds_types", $fields_array);
     }
@@ -3345,7 +3345,7 @@ if (!class_exists("PeproDevUPS_Login")){
         "skip_recaptcha"  => true,
       ));
       if (!empty($fields)){
-        echo "<h3>".__("Personal Information",$this->td)."</h3><table class='form-table'>$fields</table>";
+        echo "<h3>".__("Personal Information","peprodev-ups")."</h3><table class='form-table'>$fields</table>";
       }
     }
     public function admin_init()
@@ -3361,7 +3361,7 @@ if (!class_exists("PeproDevUPS_Login")){
             "{$this->activation_status}-use_email_as_username"          => "no",
             "{$this->activation_status}-hide_email_field"               => "no",
             "{$this->activation_status}-hide_username_field"            => "no",
-            "{$this->activation_status}-sms_ultrafastsend_id"           => sprintf(__("Your verification Code [OTP] — %s",$this->td), get_bloginfo("name")),
+            "{$this->activation_status}-sms_ultrafastsend_id"           => sprintf(__("Your verification Code [OTP] — %s","peprodev-ups"), get_bloginfo("name")),
             "{$this->activation_status}-sms_expiration"                 => "90",
             "{$this->activation_status}-email_expiration"               => "120",
             "{$this->activation_status}-verification_digits"            => "5",
@@ -3370,7 +3370,7 @@ if (!class_exists("PeproDevUPS_Login")){
             "{$this->activation_status}-verification_email_sender_name" => get_bloginfo('name','display'),
             "{$this->activation_status}-verification_email_template"    => esc_html( $this->def_mail_body ),
 
-            "pepro-profile-redirection-fileds" => '[{"role": "everyone", "url": "{profile}", "text": "'.__("Profile",$this->td).'", "login": "yes", "register": "yes", "logout": "no" }]',
+            "pepro-profile-redirection-fileds" => '[{"role": "everyone", "url": "{profile}", "text": "'.__("Profile","peprodev-ups").'", "login": "yes", "register": "yes", "logout": "no" }]',
 
             "{$this->activation_status}-reglogin_type"                  => "email",
             "{$this->activation_status}-auto_login_after_reg"           => "yes",
@@ -3468,7 +3468,7 @@ if (!class_exists("PeproDevUPS_Login")){
     }
     public function plugins_row_links($links)
     {
-      array_push($links, "<a href='".admin_url("?page=pepro&section={$this->setting_slug}")."' target='_blank'><b>"._x("Manage Login/Register","loginregister","$this->td")."</b></a>");
+      array_push($links, "<a href='".admin_url("?page=pepro&section={$this->setting_slug}")."' target='_blank'><b>"._x("Manage Login/Register","loginregister","peprodev-ups")."</b></a>");
       return $links;
     }
     public function alert($yy)
@@ -3587,7 +3587,7 @@ if (!class_exists("PeproDevUPS_Login")){
         "lostpass"  => wp_lostpassword_url(),
         "hidelogin" => $this->hide_username_field ? "yes" : "no",
         "hideemail" => $this->hide_email_field ? "yes" : "no",
-        "catpcha"   => _x("<strong>Error:</strong> Please check the reCAPTCHA challenge.", "reg-form-error", $this->td),
+        "catpcha"   => _x("<strong>Error:</strong> Please check the reCAPTCHA challenge.", "reg-form-error", "peprodev-ups"),
       ));
       wp_enqueue_script( "pepro_reglogin_recaptcha", "https://www.google.com/recaptcha/api.js", array(), $this->current_version, true);
 
@@ -3811,11 +3811,11 @@ if (!class_exists("PeproDevUPS_Login")){
 
               wp_send_json_success(
                 array(
-                  "msg"      => __("Settings Successfully Saved.",$this->td),
+                  "msg"      => __("Settings Successfully Saved.","peprodev-ups"),
                   "dparam"   => $_POST["dparam"],
                   "login"    => untrailingslashit(wp_login_url()),
-                  "loginStr" => sprintf(_x('%1$s Your login page is now here: %2$s. Bookmark this page!',"login-section",$this->td),
-                  "<strong>"._x("Warning!","login-section",$this->td)."</strong>",
+                  "loginStr" => sprintf(_x('%1$s Your login page is now here: %2$s. Bookmark this page!',"login-section","peprodev-ups"),
+                  "<strong>"._x("Warning!","login-section","peprodev-ups")."</strong>",
                   "<strong><u><a href='".untrailingslashit(wp_login_url())."' target='_blank'>".untrailingslashit(wp_login_url())."</a></u></strong>"
                 ),
                   "register" => wp_registration_url(),
@@ -3824,7 +3824,7 @@ if (!class_exists("PeproDevUPS_Login")){
               );
             break;
           default:
-            wp_send_json_error(__("{$this->title} :: Incorrect Data Supplied.",$this->td));
+            wp_send_json_error(__("{$this->title} :: Incorrect Data Supplied.","peprodev-ups"));
             break;
         }
       }

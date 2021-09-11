@@ -36,15 +36,15 @@ $otif404     = sprintf( _x("No notification found! please consider %s.", "notif-
     <div class="card">
       <div class="card-header card-header-primary">
         <div class="lds-ring2"><div></div><div></div><div></div><div></div></div>
-        <h4 class="card-title"><?php echo _x("Notifications", "notif-panel", "pepro");?></h4>
-        <p class="card-category"><?php echo _x("You can manage notifications from here. Add, Delete, Schedule, Duplicate and Edit notifications on the fly using panle below.", "notif-panel", "pepro");?></p>
+        <h4 class="card-title"><?php echo esc_html_x("Notifications", "notif-panel", "pepro");?></h4>
+        <p class="card-category"><?php echo esc_html_x("You can manage notifications from here. Add, Delete, Schedule, Duplicate and Edit notifications on the fly using panle below.", "notif-panel", "pepro");?></p>
       </div>
       <div class="card-body">
         <div id="toggle_search_container" class="hide">
           <div class="input-group search mb-3">
-            <input class="search-here form-control" type="text" id="search-here" placeholder="<?php echo _x("Search here and hit Enter ...", "notif-panel", "pepro");?>" style="padding-inline: 0.7rem;" integrity="<?php echo esc_attr( $integrity );?>" wparam="<?php echo esc_attr( $PeproDevUPS_Profile->setting_slug );?>" lparam="search" value="<?php echo $srch;?>" />
+            <input class="search-here form-control" type="text" id="search-here" placeholder="<?php echo esc_html_x("Search here and hit Enter ...", "notif-panel", "pepro");?>" style="padding-inline: 0.7rem;" integrity="<?php echo esc_attr( $integrity );?>" wparam="<?php echo esc_attr( $PeproDevUPS_Profile->setting_slug );?>" lparam="search" value="<?php echo $srch;?>" />
             <div class="input-group-append">
-              <button class="btn btn-primary clear_search btn-sm" title="<?php echo _x("Clear search", "notif-panel", "pepro");?>"><i class="material-icons">close</i></button>
+              <button class="btn btn-primary clear_search btn-sm" title="<?php echo esc_html_x("Clear search", "notif-panel", "pepro");?>"><i class="material-icons">close</i></button>
             </div>
         </div>
         </div>
@@ -56,8 +56,8 @@ $otif404     = sprintf( _x("No notification found! please consider %s.", "notif-
             <div id="modal_add_notif">
               <div>
                 <div class="modal-header">
-                  <h5 class="modal-title addmode"><?php echo _x("Add New Notifications", "notif-panel", "pepro");?></h5>
-                  <h5 class="modal-title editmode"><?php echo _x("Edit Notification: ", "notif-panel", "pepro");?><span style="font-weight: bold;"></span></h5>
+                  <h5 class="modal-title addmode"><?php echo esc_html_x("Add New Notifications", "notif-panel", "pepro");?></h5>
+                  <h5 class="modal-title editmode"><?php echo esc_html_x("Edit Notification: ", "notif-panel", "pepro");?><span style="font-weight: bold;"></span></h5>
                   <input type="hidden" id="current_edit_notif_id" value="" />
                 </div>
                 <div class="modal-body">
@@ -240,8 +240,8 @@ $otif404     = sprintf( _x("No notification found! please consider %s.", "notif-
                     integrity="<?php echo esc_attr( $integrity );?>"
                     wparam="<?php echo esc_attr( $PeproDevUPS_Profile->setting_slug );?>"
                     lparam="add_new"><?php echo esc_html( $loadingRing ) . _x("Save Edits", "notif-panel", "pepro");?></button>
-                  <button type="button" id="clear_notif_form" class="btn btn-action"><?php echo _x("Clear form", "notif-panel", "pepro");?></button>
-                  <button type="button" id='close_add_new_notifications' class="btn btn-action" data-dismiss="modal"><?php echo _x("Close", "notif-panel", "pepro");?></button>
+                  <button type="button" id="clear_notif_form" class="btn btn-action"><?php echo esc_html_x("Clear form", "notif-panel", "pepro");?></button>
+                  <button type="button" id='close_add_new_notifications' class="btn btn-action" data-dismiss="modal"><?php echo esc_html_x("Close", "notif-panel", "pepro");?></button>
                 </div>
               </div>
             </div>
@@ -250,12 +250,12 @@ $otif404     = sprintf( _x("No notification found! please consider %s.", "notif-
           <table class="table table-hover" id="notifications_list_table">
           <thead class="text-primary">
             <tr>
-              <th><?php echo _x("Date", "notif-panel", "pepro");?></th>
-              <th><?php echo _x("Title", "notif-panel", "pepro");?></th>
-              <th><?php echo _x("Publish status", "notif-panel", "pepro");?></th>
-              <th><?php echo _x("User range", "notif-panel", "pepro");?></th>
-              <th><?php echo _x("Priority", "notif-panel", "pepro");?></th>
-              <th><?php echo _x("Action", "notif-panel", "pepro");?></th>
+              <th><?php echo esc_html_x("Date", "notif-panel", "pepro");?></th>
+              <th><?php echo esc_html_x("Title", "notif-panel", "pepro");?></th>
+              <th><?php echo esc_html_x("Publish status", "notif-panel", "pepro");?></th>
+              <th><?php echo esc_html_x("User range", "notif-panel", "pepro");?></th>
+              <th><?php echo esc_html_x("Priority", "notif-panel", "pepro");?></th>
+              <th><?php echo esc_html_x("Action", "notif-panel", "pepro");?></th>
             </tr>
           </thead>
           <tbody>
@@ -275,18 +275,18 @@ $otif404     = sprintf( _x("No notification found! please consider %s.", "notif-
   <div class="modal-dialog" id="modal_add_notif" role="document" style="max-width: 60%;">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="del_notifications"><?php echo _x("Permanently Remove Notifications", "notif-panel", "pepro");?></h5>
+        <h5 class="modal-title" id="del_notifications"><?php echo esc_html_x("Permanently Remove Notifications", "notif-panel", "pepro");?></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
       </div>
       <div class="modal-body">
         <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
         <p>
-          <?php echo _x("Are you sure you want to permanently remove this notification?<br>There is no Undo action available.", "notif-panel", "pepro");?>
+          <?php echo esc_html_x("Are you sure you want to permanently remove this notification?<br>There is no Undo action available.", "notif-panel", "pepro");?>
         </p>
       </div>
       <div class="modal-footer">
         <button type="button" id="remove_notif" class="btn btn-primary loadingRings"><?php echo $loadingRing . _x("Yes, Remove", "notif-panel", "pepro");?></button>
-        <button type="button" class="btn btn-action" data-dismiss="modal"><?php echo _x("Cancel", "notif-panel", "pepro");?></button>
+        <button type="button" class="btn btn-action" data-dismiss="modal"><?php echo esc_html_x("Cancel", "notif-panel", "pepro");?></button>
       </div>
     </div>
   </div>

@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/04 14:48:02
+# @Last modified time: 2021/09/11 11:30:36
 if (!class_exists("PeproDevUPS_Profile")) {
     class PeproDevUPS_Profile
     {
@@ -50,7 +50,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
         {
             global $wpdb, $wp;
             $this->id                = "peprocoreprofile";
-            $this->td                = "pepro";
+            $this->td                = "peprodev-ups";
             $this->priority          = 4;
             $this->assets_url_as     = plugins_url("/assets/", __FILE__);
             $this->assets_url        = plugins_url("/", __FILE__);
@@ -64,13 +64,13 @@ if (!class_exists("PeproDevUPS_Profile")) {
             $this->db_table          = "{$wpdb->prefix}pepro_core_profile";
             $this->tbl_notif         = "{$this->db_table}_notif";
             $this->tbl_sections      = "{$this->db_table}_sections";
-            $this->title             = __("PeproDev Ultimate Profile Solutions — Profile", $this->td);
-            $this->menu_label        = __("Profile", $this->td);
-            $this->page_label        = __("Profile Setting", $this->td);
-            $this->description       = __("Modern profile for users", $this->td);
-            $this->developer         = __("Pepro Dev. Group", $this->td);
-            $this->author            = __("Pepro Dev. Group", $this->td);
-            $this->license           = __("Pepro Dev License", $this->td);
+            $this->title             = __("PeproDev Ultimate Profile Solutions — Profile", "peprodev-ups");
+            $this->menu_label        = __("Profile", "peprodev-ups");
+            $this->page_label        = __("Profile Setting", "peprodev-ups");
+            $this->description       = __("Modern profile for users", "peprodev-ups");
+            $this->developer         = __("Pepro Dev. Group", "peprodev-ups");
+            $this->author            = __("Pepro Dev. Group", "peprodev-ups");
+            $this->license           = __("Pepro Dev License", "peprodev-ups");
             $this->icon_html         = "<i class=\"material-icons\">account_circle</i>";
             $this->current_version   = "4.3.0";
             $this->date_last_edit    = "1400/06/03";
@@ -91,7 +91,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
             $this->pluginURI         = "https://pepro.dev/ups";
             $this->useLD             = function_exists("sfwd_lms_has_access");
             $this->lang              = dirname(plugin_basename(__FILE__))."/languages/";
-            $this->copyright         = sprintf(__("Copyright (c) %s Pepro Dev, All rights reserved", $this->td), date("Y"));
+            $this->copyright         = sprintf(__("Copyright (c) %s Pepro Dev, All rights reserved", "peprodev-ups"), date("Y"));
             $this->setting_options   = array(
                 array(
                   "name" => "{$this->db_slug}_general",
@@ -164,7 +164,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
           $profile_page = get_option("{$this->activation_status}-profile-dash-page");
           $wp_admin_bar->add_node(array(
             'id'    => $this->id,
-            'title' => '<span class="ab-icon" aria-hidden="true"></span>' . __("User Dashboard",$this->td),
+            'title' => '<span class="ab-icon" aria-hidden="true"></span>' . __("User Dashboard","peprodev-ups"),
             'href'  => get_permalink( $profile_page),
             'meta'  => array( 'class' => 'custom-node-class' ),
           ));
@@ -242,8 +242,8 @@ if (!class_exists("PeproDevUPS_Profile")) {
                         "activation_status"=> $this->activation_status,
                       ),
                       array(
-                        "title" => __("Sections", $this->td),
-                        "titleW" => __("Manage Sections", $this->td),
+                        "title" => __("Sections", "peprodev-ups"),
+                        "titleW" => __("Manage Sections", "peprodev-ups"),
                         "icon" => "<i class=\"material-icons\">manage_accounts</i>",
                         "link" => "@sections",
                         "fn" => array($this,"htmlwrapper_sections"),
@@ -252,8 +252,8 @@ if (!class_exists("PeproDevUPS_Profile")) {
                         "activation_status"=> $this->activation_status,
                       ),
                       array(
-                        "title" => __("Notifications", $this->td),
-                        "titleW" => __("Manage Notifications", $this->td),
+                        "title" => __("Notifications", "peprodev-ups"),
+                        "titleW" => __("Manage Notifications", "peprodev-ups"),
                         "icon" => "<i class=\"material-icons\">notifications</i>",
                         "link" => "@notifications",
                         "fn" => array($this,"htmlwrapper_notifs"),
@@ -262,8 +262,8 @@ if (!class_exists("PeproDevUPS_Profile")) {
                         "activation_status"=> $this->activation_status,
                       ),
                       array(
-                        "title" => __("Shortcodes", $this->td),
-                        "titleW" => __("Manage Shortcodes", $this->td),
+                        "title" => __("Shortcodes", "peprodev-ups"),
+                        "titleW" => __("Manage Shortcodes", "peprodev-ups"),
                         "icon" => "<i class=\"material-icons\">auto_fix_high</i>",
                         "link" => "@shortcodes",
                         "fn" => array($this,"htmlwrapper_shortcodes"),
@@ -336,79 +336,79 @@ if (!class_exists("PeproDevUPS_Profile")) {
           $array = array(
             "user" => array (
               "sample" => "[user meta='' default='']".PHP_EOL."DEFAULT CONTENT".PHP_EOL."[/user]",
-              "title"  => __("Get User info",$this->td),
+              "title"  => __("Get User info","peprodev-ups"),
               "syntax" => array(
-                "meta"    => __("The meta key to retrieve",$this->td),
-                "default" => __("Default data if meta does not exist or is empty",$this->td),
+                "meta"    => __("The meta key to retrieve","peprodev-ups"),
+                "default" => __("Default data if meta does not exist or is empty","peprodev-ups"),
               )
             ),
             "pepro-profile" => array (
               "sample" => "[pepro-profile]",
-              "title"  => __("Display Pepro Profile on front-end, requires it's special page template",$this->td),
+              "title"  => __("Display Pepro Profile on front-end, requires it's special page template","peprodev-ups"),
             ),
             "pepro-profile-url" => array(
               "sample" => "[pepro-profile-url]",
-              "title"  => __("Returns Profile's Dashboard URL/Link",$this->td),
+              "title"  => __("Returns Profile's Dashboard URL/Link","peprodev-ups"),
               "syntax" => array(
-                "button"  => __("Dashboard URL call-to-action anchor text, leave empty to return url",$this->td),
-                "class"   => __("Dashboard URL call-to-action anchor class",$this->td),
-                "section" => __("Dashboard Section, leave empty to use dashboard home",$this->td),
-                "extras"  => __("Content instead of Dashboard URL call-to-action anchor, use {url} to replace with anchor link",$this->td),
-                __("content between shortcode tags",$this->td) => __("Content instead of Dashboard URL call-to-action, use {url} to replace with anchor link",$this->td),
+                "button"  => __("Dashboard URL call-to-action anchor text, leave empty to return url","peprodev-ups"),
+                "class"   => __("Dashboard URL call-to-action anchor class","peprodev-ups"),
+                "section" => __("Dashboard Section, leave empty to use dashboard home","peprodev-ups"),
+                "extras"  => __("Content instead of Dashboard URL call-to-action anchor, use {url} to replace with anchor link","peprodev-ups"),
+                __("content between shortcode tags","peprodev-ups") => __("Content instead of Dashboard URL call-to-action, use {url} to replace with anchor link","peprodev-ups"),
               )
             ),
             "profile-card-1" => array (
               "sample" => "[profile-card-1]".PHP_EOL."EXTRA CONTENT".PHP_EOL."[/profile-card-1]",
-              "title"  => __("Profile Card 1",$this->td),
+              "title"  => __("Profile Card 1","peprodev-ups"),
             ),
             "profile-card-2" => array (
               "sample" => "[profile-card-2 title='']".PHP_EOL."EXTRA CONTENT".PHP_EOL."[/profile-card-2]",
-              "title"  => __("Profile Card 2",$this->td),
+              "title"  => __("Profile Card 2","peprodev-ups"),
               "syntax" => array(
-                "title" => __("Title",$this->td),
+                "title" => __("Title","peprodev-ups"),
               )
             ),
             "profile-card-3" => array (
               "sample" => "[profile-card-3 title='' icon='' bg_color='' padding='']".PHP_EOL."EXTRA CONTENT".PHP_EOL."[/profile-card-3]",
-              "title"  => __("Profile Card 3",$this->td),
+              "title"  => __("Profile Card 3","peprodev-ups"),
               "syntax" => array(
-                "title"    => __("Title",$this->td),
-                "icon"     => __("Icon class",$this->td),
-                "bg_color" => __("Background Color (CSS)",$this->td),
-                "padding"  => __("Padding (CSS)",$this->td),
+                "title"    => __("Title","peprodev-ups"),
+                "icon"     => __("Icon class","peprodev-ups"),
+                "bg_color" => __("Background Color (CSS)","peprodev-ups"),
+                "padding"  => __("Padding (CSS)","peprodev-ups"),
               )
             ),
             "profile-card-4" => array (
               "sample" => "[profile-card-4 title='' icon='']".PHP_EOL."EXTRA CONTENT".PHP_EOL."[/profile-card-4]",
-              "title"  => __("Profile Card 4",$this->td),
+              "title"  => __("Profile Card 4","peprodev-ups"),
               "syntax" => array(
-                "title" => __("Title",$this->td),
-                "icon"  => __("Icon class",$this->td),
+                "title" => __("Title","peprodev-ups"),
+                "icon"  => __("Icon class","peprodev-ups"),
               )
             ),
             "profile-wc-stats" => array(
               "sample" => "[profile-wc-stats]",
-              "title"  => __("WooCommerce Stats",$this->td),
+              "title"  => __("WooCommerce Stats","peprodev-ups"),
             ),
             "profile-wc-orders" => array(
               "sample" => "[profile-wc-orders]",
-              "title"  => __("WooCommerce Orders",$this->td),
+              "title"  => __("WooCommerce Orders","peprodev-ups"),
               "syntax" => array(
-                "limit" => __("Limit items to show",$this->td),
+                "limit" => __("Limit items to show","peprodev-ups"),
               )
             ),
             "profile-wc-downloads" => array (
               "sample" => "[profile-wc-downloads category='nID']",
-              "title"  => __("WooCommerce Downloads",$this->td),
+              "title"  => __("WooCommerce Downloads","peprodev-ups"),
               "syntax" => array(
-                "category" => __("WooCommerce Category ID",$this->td),
+                "category" => __("WooCommerce Category ID","peprodev-ups"),
               )
             ),
             "profile-ld-enrolled" => array (
               "sample" => "[profile-ld-enrolled category='nID']",
-              "title"  => __("LearnDash Enrolled Courses",$this->td),
+              "title"  => __("LearnDash Enrolled Courses","peprodev-ups"),
               "syntax" => array(
-                "category" => __("LearnDash Category ID",$this->td),
+                "category" => __("LearnDash Category ID","peprodev-ups"),
               )
             ),
           );
@@ -510,53 +510,53 @@ if (!class_exists("PeproDevUPS_Profile")) {
           $current_screen = get_current_screen();
           if ( $current_screen && 'toplevel_page_pepro' === $current_screen->base ){
             ?>
-            <button href="#" class="button <?php echo $this->td;?>_shortcodehandler peprofile-open-box">
+            <button href="#" class="button <?php echo "peprodev-ups";?>_shortcodehandler peprofile-open-box">
               <i class='fa fa-external-link'></i>
               <?php echo $this->title;?>
             </button>
             <div class="popup-shortcode-select hide">
-              <button href="#" class="button <?php echo $this->td;?>_shortcodehandler _shortcodehandleruser">
+              <button href="#" class="button <?php echo "peprodev-ups";?>_shortcodehandler _shortcodehandleruser">
                 <i class='fa fa-'></i>
-                <?php echo __("User info",$this->td);?>
+                <?php esc_html_e("User info","peprodev-ups");?>
               </button>
-              <button href="#" class="button <?php echo $this->td;?>_shortcodehandler _shortcodehandlerwhitecard">
+              <button href="#" class="button <?php echo "peprodev-ups";?>_shortcodehandler _shortcodehandlerwhitecard">
                 <i class='fa fa-'></i>
-                <?php echo __("White Card",$this->td);?>
+                <?php esc_html_e("White Card","peprodev-ups");?>
               </button>
-              <button href="#" class="button <?php echo $this->td;?>_shortcodehandler _shortcodehandlercard">
+              <button href="#" class="button <?php echo "peprodev-ups";?>_shortcodehandler _shortcodehandlercard">
                 <i class='fa fa-'></i>
-                <?php echo __("Grey Card",$this->td);?>
+                <?php esc_html_e("Grey Card","peprodev-ups");?>
               </button>
-              <button href="#" class="button <?php echo $this->td;?>_shortcodehandler _shortcodehandlerbigcard">
+              <button href="#" class="button <?php echo "peprodev-ups";?>_shortcodehandler _shortcodehandlerbigcard">
                 <i class='fa fa-'></i>
-                <?php echo __("Colored Card",$this->td);?>
+                <?php esc_html_e("Colored Card","peprodev-ups");?>
               </button>
-              <button href="#" class="button <?php echo $this->td;?>_shortcodehandler _shortcodehandlerblackcard">
+              <button href="#" class="button <?php echo "peprodev-ups";?>_shortcodehandler _shortcodehandlerblackcard">
                 <i class='fa fa-'></i>
-                <?php echo __("Black Card",$this->td);?>
+                <?php esc_html_e("Black Card","peprodev-ups");?>
               </button>
               <?php
               if ($this->_wc_activated()) {
                 ?>
-                  <button href="#" class="button <?php echo $this->td;?>_shortcodehandler _shortcodehandlerstats">
+                  <button href="#" class="button <?php echo "peprodev-ups";?>_shortcodehandler _shortcodehandlerstats">
                     <i class='fa fa-'></i>
-                    <?php echo __("WC Stats",$this->td);?>
+                    <?php esc_html_e("WC Stats","peprodev-ups");?>
                   </button>
-                  <button href="#" class="button <?php echo $this->td;?>_shortcodehandler _shortcodehandlerorders">
+                  <button href="#" class="button <?php echo "peprodev-ups";?>_shortcodehandler _shortcodehandlerorders">
                     <i class='fa fa-'></i>
-                    <?php echo __("WC Orders",$this->td);?>
+                    <?php esc_html_e("WC Orders","peprodev-ups");?>
                   </button>
-                  <button href="#" class="button <?php echo $this->td;?>_shortcodehandler _shortcodehandlerdownloads">
+                  <button href="#" class="button <?php echo "peprodev-ups";?>_shortcodehandler _shortcodehandlerdownloads">
                     <i class='fa fa-'></i>
-                    <?php echo __("WC Downloads",$this->td);?>
+                    <?php esc_html_e("WC Downloads","peprodev-ups");?>
                   </button>
                 <?php
               }
               if ($this->_ld_activated()) {
                 ?>
-                <button href="#" class="button <?php echo $this->td;?>_shortcodehandler _shortcodehandlerldenrolled">
+                <button href="#" class="button <?php echo "peprodev-ups";?>_shortcodehandler _shortcodehandlerldenrolled">
                     <i class='fa fa-'></i>
-                    <?php echo __("Learndash Enrolled Courses",$this->td);?>
+                    <?php esc_html_e("Learndash Enrolled Courses","peprodev-ups");?>
                 </button>
                 <?php
               }
@@ -734,8 +734,8 @@ if (!class_exists("PeproDevUPS_Profile")) {
           if ($courses && !empty($courses)){
             ob_start();
             $columns_array = apply_filters( "peprofile_ld_courses_column", array(
-              "name" => __("Name",$this->td),
-              "view" => __("View",$this->td),
+              "name" => __("Name","peprodev-ups"),
+              "view" => __("View","peprodev-ups"),
             ));
             foreach ( $courses as $course ){
               $terms = wp_get_post_terms( $course, 'ld_course_category' );
@@ -904,7 +904,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                               </div>
                               <div class="text">
                                 <h2><?php echo $this->get_customer_total_orders_by_status("wc-on-hold");?></h2>
-                                <span><?php echo __("on-hold orders",$this->td);?></span>
+                                <span><?php esc_html_e("on-hold orders","peprodev-ups");?></span>
                               </div>
                           </div>
                           <div class="overview-chart">
@@ -921,7 +921,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                               </div>
                               <div class="text">
                                 <h2><?php echo $this->get_customer_total_orders_by_status("wc-processing");?></h2>
-                                <span><?php echo __("processing orders",$this->td);?></span>
+                                <span><?php esc_html_e("processing orders","peprodev-ups");?></span>
                               </div>
                           </div>
                           <div class="overview-chart">
@@ -938,7 +938,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                               </div>
                               <div class="text">
                                 <h2><?php echo $this->get_customer_total_orders_by_status("wc-complete");?></h2>
-                                <span><?php echo __("completed orders",$this->td);?></span>
+                                <span><?php esc_html_e("completed orders","peprodev-ups");?></span>
                               </div>
                           </div>
                           <div class="overview-chart">
@@ -958,7 +958,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                         </div>
                         <div class="text">
                           <h2><?php echo $this->get_customer_get_credit_balance();?></h2>
-                          <span><?php echo __("your wallet balance",$this->td);?></span>
+                          <span><?php esc_html_e("your wallet balance","peprodev-ups");?></span>
                         </div>
                       </div>
                       <div class="overview-chart">
@@ -1117,7 +1117,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
             $title = apply_filters(
                 "peprofile_default_title", sprintf(
                     ("%s — %s"),
-                    (!empty(trim($title)) ? trim($title) : _x("Dashboard", "user-dashboard", $this->td)),
+                    (!empty(trim($title)) ? trim($title) : _x("Dashboard", "user-dashboard", "peprodev-ups")),
                     get_bloginfo("name")
                 )
             );
@@ -1192,9 +1192,9 @@ if (!class_exists("PeproDevUPS_Profile")) {
           wp_localize_script(__CLASS__."notifs_panel",     "peprofile", array(
             "ajax" => admin_url('admin-ajax.php'),
             "wparam"=>$this->setting_slug,
-            "error_validate_form"=> __("Error validating form, please check marked fields.",$this->td),
-            "error_parsing_data"=> __("Error parsing item data.",$this->td),
-            "error_unknown_error"=> __("An unknown error occurred.",$this->td),
+            "error_validate_form"=> __("Error validating form, please check marked fields.","peprodev-ups"),
+            "error_parsing_data"=> __("Error parsing item data.","peprodev-ups"),
+            "error_unknown_error"=> __("An unknown error occurred.","peprodev-ups"),
           ));
         }
         public function htmlwrapper_notifs()
@@ -1212,9 +1212,9 @@ if (!class_exists("PeproDevUPS_Profile")) {
           wp_localize_script(__CLASS__."notifs_panel",     "peprofile", array(
             "ajax" => admin_url('admin-ajax.php'),
             "wparam"=>$this->setting_slug,
-            "error_validate_form"=> __("Error validating form, please check marked fields.",$this->td),
-            "error_parsing_data"=> __("Error parsing item data.",$this->td),
-            "error_unknown_error"=> __("An unknown error occurred.",$this->td),
+            "error_validate_form"=> __("Error validating form, please check marked fields.","peprodev-ups"),
+            "error_parsing_data"=> __("Error parsing item data.","peprodev-ups"),
+            "error_unknown_error"=> __("An unknown error occurred.","peprodev-ups"),
           ));
 
         }
@@ -1284,7 +1284,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                             )
                           );
                         }else{
-                          wp_send_json_error(array( "msg"=>__("There was a problem with your request. Error 0x10041", $this->td)));
+                          wp_send_json_error(array( "msg"=>__("There was a problem with your request. Error 0x10041", "peprodev-ups")));
                           break;
                         }
                       }
@@ -1292,20 +1292,20 @@ if (!class_exists("PeproDevUPS_Profile")) {
                       global $current_profile_url;
                       $current_profile_url = ( isset($_POST["cprl"]) && !empty(trim($_POST["cprl"])) ) ? trim($_POST["cprl"]) : "/";
 
-                      $shorts = ""; $notif = __("You have no new notification.", $this->td);
+                      $shorts = ""; $notif = __("You have no new notification.", "peprodev-ups");
                       $number = $this->get_user_notification_count(get_current_user_id());
-                      if ($number > 0){ $notif = sprintf(__("You have %s unread notifications.", $this->td), "<span class='nunread'>$number</span>"); }
+                      if ($number > 0){ $notif = sprintf(__("You have %s unread notifications.", "peprodev-ups"), "<span class='nunread'>$number</span>"); }
                       if ($number > 0){ $shorts = $this->get_user_notifications_short(get_current_user_id(),4); }
                       $htmldata = $this->get_user_notifications(get_current_user_id());
 
-                      $Ashorts = ""; $Anotif = __("You have no new announcement.", $this->td);
+                      $Ashorts = ""; $Anotif = __("You have no new announcement.", "peprodev-ups");
                       $Anumber = $this->get_user_announcements_count(get_current_user_id());
-                      if ($Anumber > 0){ $Anotif = sprintf(__("You have %s unread announcements.", $this->td), "<span class='nunread'>$Anumber</span>"); }
+                      if ($Anumber > 0){ $Anotif = sprintf(__("You have %s unread announcements.", "peprodev-ups"), "<span class='nunread'>$Anumber</span>"); }
                       if ($Anumber > 0){ $Ashorts = $this->get_user_announcements_short(get_current_user_id(),4); }
                       $Ahtmldata = $this->get_user_announcements(get_current_user_id());
 
                       wp_send_json_success( array(
-                          "msg"     => __("Done",$this->td),
+                          "msg"     => __("Done","peprodev-ups"),
                           "count"   => $notif,
                           "number"  => $number,
                           "tiny"    => $shorts,
@@ -1319,10 +1319,10 @@ if (!class_exists("PeproDevUPS_Profile")) {
                     break;
                   case 'edit-profile':
                     if (empty($_POST["dparam"]))
-                      wp_send_json_error(array( "msg"=>__("There was a problem with your request. Error 0x10027", $this->td)));
+                      wp_send_json_error(array( "msg"=>__("There was a problem with your request. Error 0x10027", "peprodev-ups")));
 
                     $user_id = get_current_user_id();
-                    if ( $user_id <= 0 ) { wp_send_json_error(array( "msg"=>__("There was a problem with your request. Error 0x00010", $this->td))); return; }
+                    if ( $user_id <= 0 ) { wp_send_json_error(array( "msg"=>__("There was a problem with your request. Error 0x00010", "peprodev-ups"))); return; }
 
                 		$current_user       = get_user_by( 'id', $user_id );
                 		$current_first_name = $current_user->first_name;
@@ -1356,22 +1356,22 @@ if (!class_exists("PeproDevUPS_Profile")) {
                             do_action( "poprofile_user_avatar_upload_success");
                           }else{
                             do_action( "poprofile_user_avatar_upload_failed");
-                            wp_send_json_error(array( "msg" =>  __("There was an error uploading your file. Operation Aborted, Error 0x100953.",$this->td)));
+                            wp_send_json_error(array( "msg" =>  __("There was an error uploading your file. Operation Aborted, Error 0x100953.","peprodev-ups")));
                             return;
                           }
 
                         }
                         else{
-                          wp_send_json_error(array( "msg" =>  __("There was an error uploading your file. Please check file type and size. Operation Aborted, Error 0x100954.",$this->td)));
+                          wp_send_json_error(array( "msg" =>  __("There was an error uploading your file. Please check file type and size. Operation Aborted, Error 0x100954.","peprodev-ups")));
                           return;
                         }
                     }
                 		$required_fields = apply_filters( 'peprofile_save_account_details_required_fields_label',
                 			array(
-                				'firstname'     => __( 'First name', $this->td ),
-                				'lastname'      => __( 'Last name', $this->td ),
-                				'display_name'  => __( 'Display name', $this->td ),
-                				'email'         => __( 'Email address', $this->td ),
+                				'firstname'     => __( 'First name', "peprodev-ups" ),
+                				'lastname'      => __( 'Last name', "peprodev-ups" ),
+                				'display_name'  => __( 'Display name', "peprodev-ups" ),
+                				'email'         => __( 'Email address', "peprodev-ups" ),
                 			)
                 		);
                     $show_email_field   = "yes" == get_option("PeproDevUPS_Core___loginregister-_regdef_email");
@@ -1388,7 +1388,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
 
                       foreach ($required_fields as $key => $value) {
                         if ( $index["name"] == $key && empty($index['value']) ){
-                          wp_send_json_error(array("msg" => sprintf( __( '%s is a required field.', $this->td ), '<strong>' . esc_html( $value ) . '</strong>' )));
+                          wp_send_json_error(array("msg" => sprintf( __( '%s is a required field.', "peprodev-ups" ), '<strong>' . esc_html( $value ) . '</strong>' )));
                           return;
                         }
                       }
@@ -1411,15 +1411,15 @@ if (!class_exists("PeproDevUPS_Profile")) {
                           case 'email':
                               $account_email = sanitize_email($index['value']);
                               if (!$is_email_field_req && (!empty($index['value']) && !filter_var($account_email, FILTER_VALIDATE_EMAIL)) ) {
-                                wp_send_json_error(array( "msg" => __('Please provide a valid email address.', $this->td)));
+                                wp_send_json_error(array( "msg" => __('Please provide a valid email address.', "peprodev-ups")));
                                 return;
                               }
                               if ($is_email_field_req && (empty($account_email) || !filter_var($account_email, FILTER_VALIDATE_EMAIL)) ) {
-                                wp_send_json_error(array( "msg" => __('Please provide a valid email address.', $this->td)));
+                                wp_send_json_error(array( "msg" => __('Please provide a valid email address.', "peprodev-ups")));
                                 return;
                               }
                               if ((!empty($account_email) && email_exists( $account_email ) && $account_email !== $current_user->user_email )) {
-                                wp_send_json_error(array( "msg" => __('This email address is already registered.', $this->td)));
+                                wp_send_json_error(array( "msg" => __('This email address is already registered.', "peprodev-ups")));
                                 return;
                               }
 
@@ -1433,7 +1433,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                           case 'display_name':
                             $user->display_name = wp_unslash( $index['value'] );
                             if ( is_email( $user->display_name ) ) {
-                              wp_send_json_error(array( "msg"=>__("Display name cannot be changed to email address due to privacy concern.", $this->td)));
+                              wp_send_json_error(array( "msg"=>__("Display name cannot be changed to email address due to privacy concern.", "peprodev-ups")));
                               return;
                             }
                             $retuen["display_name"] = $user->display_name;
@@ -1463,17 +1463,17 @@ if (!class_exists("PeproDevUPS_Profile")) {
 
                     }
                 		if ( ! empty( $pass_cur ) && empty( $pass1 )) {
-                      wp_send_json_error(array( "msg"=>__("Please fill out all password fields.", $this->td)));
+                      wp_send_json_error(array( "msg"=>__("Please fill out all password fields.", "peprodev-ups")));
                 			$save_pass = false;
                       return;
                 		}
                     elseif ( ! empty( $pass1 ) && empty( $pass_cur ) ){
-                      wp_send_json_error(array( "msg"=>__("Please enter your current password.", $this->td)));
+                      wp_send_json_error(array( "msg"=>__("Please enter your current password.", "peprodev-ups")));
                 			$save_pass = false;
                       return;
                 		}
                     elseif ( ! empty( $pass1 ) && ! wp_check_password( $pass_cur, $current_user->user_pass, $current_user->ID ) ) {
-                      wp_send_json_error(array( "msg"=>__("Your current password is incorrect.", $this->td)));
+                      wp_send_json_error(array( "msg"=>__("Your current password is incorrect.", "peprodev-ups")));
                 			$save_pass = false;
                       return;
                 		}
@@ -1490,20 +1490,20 @@ if (!class_exists("PeproDevUPS_Profile")) {
 
                     wp_send_json_success( array(
                       "fileds" => json_decode(stripslashes($_POST["dparam"])),
-                      'msg' => __("Profile Updated successfully.", $this->td),
+                      'msg' => __("Profile Updated successfully.", "peprodev-ups"),
                       "e"   => $retuen
                       ));
 
                     break;
                   default:
-                    wp_send_json_error(array( "msg"=>__("There was a problem with your request. Error 0x10030", $this->td)));
+                    wp_send_json_error(array( "msg"=>__("There was a problem with your request. Error 0x10030", "peprodev-ups")));
                     break;
 
                 }
-                wp_send_json_error(array( "msg"=>__("There was a problem with your request. Error 0x10028", $this->td)));
+                wp_send_json_error(array( "msg"=>__("There was a problem with your request. Error 0x10028", "peprodev-ups")));
               }
               else{
-                wp_send_json_error(array( "msg"=>__("There was a problem with your request. Error 0x10034", $this->td)));
+                wp_send_json_error(array( "msg"=>__("There was a problem with your request. Error 0x10034", "peprodev-ups")));
               }
               die();
             }
@@ -1521,7 +1521,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                         update_option($this->activation_status, "1");
                         wp_send_json_success(
                             array(
-                            "msg"     =>  sprintf(__("%s Successfully Activated.", $this->td), $this->menu_label),
+                            "msg"     =>  sprintf(__("%s Successfully Activated.", "peprodev-ups"), $this->menu_label),
                             "id"      =>  $ids,
                             "lparam"  =>  $r["lparam"],
                             "wparam"  =>  $r["wparam"],
@@ -1532,7 +1532,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                         update_option($this->activation_status, "0");
                         wp_send_json_success(
                             array(
-                            "msg"     =>  sprintf(__("%s Successfully Deactivated.", $this->td), $this->menu_label),
+                            "msg"     =>  sprintf(__("%s Successfully Deactivated.", "peprodev-ups"), $this->menu_label),
                             "id"      =>  $ids,
                             "lparam"  =>  $r["lparam"],
                             "wparam"  =>  $r["wparam"],
@@ -1598,10 +1598,10 @@ if (!class_exists("PeproDevUPS_Profile")) {
                       $dashpage = get_option("{$this->activation_status}-profile-dash-page");
                       $slug = get_page_template_slug($dashpage);
                       $notify_user_of_page_template = sprintf(
-                        __("Current selected dashboard page's template should be 'PeproDev Ultimate Profile Solutions — Profile'. %s",$this->td),
+                        __("Current selected dashboard page's template should be 'PeproDev Ultimate Profile Solutions — Profile'. %s","peprodev-ups"),
                         "<a class='btm btn btn-sm btn-danger' href='".
                         admin_url("post.php?post=$dashpage&action=edit#page_template")."' target='_blank'>".
-                        __("Edit",$this->td)."</a>"
+                        __("Edit","peprodev-ups")."</a>"
                       );
                       $len = strlen("peprofile-");
                       $notify_user = false;
@@ -1612,7 +1612,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                       wp_send_json_success( array(
                           "notice" => $notify_user,
                           "notice_html" => $notify_user_of_page_template,
-                          "msg"=>__("Settings Successfully Saved.",$this->td),
+                          "msg"=>__("Settings Successfully Saved.","peprodev-ups"),
                         ) );
                     break;
                   case 'add_new_section':
@@ -1621,13 +1621,13 @@ if (!class_exists("PeproDevUPS_Profile")) {
 
                     $query = $wpdb->get_row($wpdb->prepare("SELECT id FROM {$this->tbl_sections} WHERE `id`=%d", $id));
                     $title = isset($_POST["dparam"]["title"]) ? sanitize_text_field(trim($_POST["dparam"]["title"])) : null;
-                    if (empty(trim($title))) {wp_send_json_error(array( "msg"=>__("There was a problem with your request. Title field is required.", $this->td)));return false; }
+                    if (empty(trim($title))) {wp_send_json_error(array( "msg"=>__("There was a problem with your request. Title field is required.", "peprodev-ups")));return false; }
                     $slug = isset($_POST["dparam"]["slug"]) ? sanitize_title(trim($_POST["dparam"]["slug"])) : null;
-                    if (empty(trim($slug))) {wp_send_json_error(array( "msg"=>__("There was a problem with your request. Unique Slug field is required.", $this->td)));return false; }
+                    if (empty(trim($slug))) {wp_send_json_error(array( "msg"=>__("There was a problem with your request. Unique Slug field is required.", "peprodev-ups")));return false; }
                     $subject = isset($_POST["dparam"]["subject"]) ? sanitize_text_field(trim($_POST["dparam"]["subject"])) : null;
-                    if (empty(trim($subject))) {wp_send_json_error(array( "msg"=>__("There was a problem with your request. Unique Slug field is required.", $this->td)));return false; }
+                    if (empty(trim($subject))) {wp_send_json_error(array( "msg"=>__("There was a problem with your request. Unique Slug field is required.", "peprodev-ups")));return false; }
                     $content = isset($_POST["dparam"]["content"]) ? sanitize_text_field(trim($_POST["dparam"]["content"])) : null;
-                    if (empty(trim($content))) {wp_send_json_error(array( "msg"=>__("There was a problem with your request. Content field is required.", $this->td)));return false; }
+                    if (empty(trim($content))) {wp_send_json_error(array( "msg"=>__("There was a problem with your request. Content field is required.", "peprodev-ups")));return false; }
                     $icon = isset($_POST["dparam"]["icon"]) ? sanitize_text_field(trim($_POST["dparam"]["icon"])) : null;
                     if (empty(trim($icon))) {$icon = "zmdi zmdi-email"; }
                     $priority = isset($_POST["dparam"]["priority"]) ? sanitize_text_field(trim($_POST["dparam"]["priority"])) : null;
@@ -1689,12 +1689,12 @@ if (!class_exists("PeproDevUPS_Profile")) {
                     $htmltabledata = $this->show_sections_edit_panel($pageNum, $pageSrch, $reqURL);
 
                     if (false !== $update)
-                      wp_send_json_success(array( "msg"=>__("Notification edited successfully.", $this->td), "type"=> "update", "htmlupdate" => $htmltabledata, "status"=> $update));
+                      wp_send_json_success(array( "msg"=>__("Notification edited successfully.", "peprodev-ups"), "type"=> "update", "htmlupdate" => $htmltabledata, "status"=> $update));
 
                     if ($add)
-                      wp_send_json_success(array( "msg"=>__("New notification created successfully.", $this->td), "type"=> "add", "htmlupdate" => $htmltabledata, "status"=> $add));
+                      wp_send_json_success(array( "msg"=>__("New notification created successfully.", "peprodev-ups"), "type"=> "add", "htmlupdate" => $htmltabledata, "status"=> $add));
 
-                    wp_send_json_error(array( "msg"=>__("There was a problem with your request. Error 0x1001", $this->td)));
+                    wp_send_json_error(array( "msg"=>__("There was a problem with your request. Error 0x1001", "peprodev-ups")));
 
                     break;
                   case 'edit_section_builtin':
@@ -1703,27 +1703,27 @@ if (!class_exists("PeproDevUPS_Profile")) {
                     $priority = (int) ( isset($_POST["pparam"]) && !empty(trim($_POST["pparam"])) ) ? sanitize_text_field(trim($_POST["pparam"])) : "";
 
                     if (empty($id))
-                      wp_send_json_error(array( "msg"=>__("There was a problem with your request.", $this->td)));
+                      wp_send_json_error(array( "msg"=>__("There was a problem with your request.", "peprodev-ups")));
 
                     add_option( "peprofile_builtin_{$id}_priority",      ($priority?$priority:""));
                     add_option( "peprofile_builtin_{$id}_is_enabled",    ($active=="yes"?true:false));
                     update_option( "peprofile_builtin_{$id}_priority",   ($priority?$priority:"") );
                     update_option( "peprofile_builtin_{$id}_is_enabled", ($active=="yes"?true:false) );
 
-                    wp_send_json_success(array( "msg"=>__("Section edited successfully.", $this->td)));
+                    wp_send_json_success(array( "msg"=>__("Section edited successfully.", "peprodev-ups")));
 
                     break;
                   case 'search_section':
                     $data = $this->show_sections_edit_panel(1, sanitize_text_field(esc_html(trim($_POST["dparam"]))), $_POST["urlz"]);
-                    wp_send_json_success(array( "msg"=>__("Notification searched successfully.", $this->td), "html" => $data , "s" => sanitize_text_field(esc_html(trim($_POST["dparam"])))));
+                    wp_send_json_success(array( "msg"=>__("Notification searched successfully.", "peprodev-ups"), "html" => $data , "s" => sanitize_text_field(esc_html(trim($_POST["dparam"])))));
                     break;
                   case 'remove_section':
                     (int) $id = ( isset($_POST["dparam"]) && !empty(trim($_POST["dparam"])) && is_numeric(trim($_POST["dparam"])) ) ? trim($_POST["dparam"]) : "-1";
                     $st = $wpdb->delete("{$this->tbl_sections}", array( 'id' => $id ));
                     if ($st != false) {
-                        wp_send_json_success(array( "msg"=>__("Section removed successfully.", $this->td), "dparam" => $st));
+                        wp_send_json_success(array( "msg"=>__("Section removed successfully.", "peprodev-ups"), "dparam" => $st));
                     }else{
-                        wp_send_json_error(array( "msg"=>__("There was a problem with your request.", $this->td), "dparam" => $st));
+                        wp_send_json_error(array( "msg"=>__("There was a problem with your request.", "peprodev-ups"), "dparam" => $st));
                     }
                     break;
                   case 'add_new':
@@ -1733,13 +1733,13 @@ if (!class_exists("PeproDevUPS_Profile")) {
 
                     $title = isset($_POST["dparam"]["title"]) ? sanitize_text_field(trim($_POST["dparam"]["title"])) : null;
                     if (empty(trim($title))) {
-                      wp_send_json_error( array( "msg"=>__("There was a problem with your request. Title field is required.", $this->td)) );
+                      wp_send_json_error( array( "msg"=>__("There was a problem with your request. Title field is required.", "peprodev-ups")) );
                       return false;
                     }
                     $content = isset($_POST["dparam"]["content"]) ? sanitize_text_field(trim($_POST["dparam"]["content"])) : null;
                     if (empty(trim($content))) {
                       wp_send_json_error(
-                        array( "msg"=>__("There was a problem with your request. Content field is required.", $this->td))
+                        array( "msg"=>__("There was a problem with your request. Content field is required.", "peprodev-ups"))
                       );
                       return false;
                     }
@@ -1750,7 +1750,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                     $priority = isset($_POST["dparam"]["priority"]) ? sanitize_text_field(trim($_POST["dparam"]["priority"])) : null;
                     if (empty(trim($priority))) {
                       wp_send_json_error(
-                        array( "msg" => __("There was a problem with your request. Priority field is required.", $this->td))
+                        array( "msg" => __("There was a problem with your request. Priority field is required.", "peprodev-ups"))
                       );
                       return false; }
                     $act1       = isset($_POST["dparam"]["act1"]) ? sanitize_text_field(trim($_POST["dparam"]["act1"])) : null;
@@ -1761,7 +1761,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                     $usersList  = isset($_POST["dparam"]["usersList"]) ? $_POST["dparam"]["usersList"] : null;
                     if ($usersCheck == "0") {
                         if (empty($usersList)) {
-                          wp_send_json_error( array( "msg"=>__("There was a problem with your request. Users List is required.", $this->td), ) );
+                          wp_send_json_error( array( "msg"=>__("There was a problem with your request. Users List is required.", "peprodev-ups"), ) );
                           return false;
                         }
                         $usersListArray = $usersList;
@@ -1778,7 +1778,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
 
                     if ($scheduleCheck == "1") {
                         if (empty(trim($schedule))) {
-                            wp_send_json_error(array( "msg"=>__("There was a problem with your request. Schedule date is required.", $this->td)));
+                            wp_send_json_error(array( "msg"=>__("There was a problem with your request. Schedule date is required.", "peprodev-ups")));
                             return false;
                         }
                     }else{
@@ -1833,14 +1833,14 @@ if (!class_exists("PeproDevUPS_Profile")) {
                     $htmltabledata = $this->show_notifications_edit_panel($pageNum, $pageSrch, sanitize_text_field($_POST["dparam"]["url"]));
 
                     if (false !== $update) {
-                        wp_send_json_success(array( "msg"=>__("Notification edited successfully.", $this->td), "type"=> "update", "htmlupdate" => $htmltabledata, "status"=> $update));
+                        wp_send_json_success(array( "msg"=>__("Notification edited successfully.", "peprodev-ups"), "type"=> "update", "htmlupdate" => $htmltabledata, "status"=> $update));
                     }
 
                     if ($add) {
-                        wp_send_json_success(array( "msg"=>__("New notification created successfully.", $this->td), "type"=> "add", "htmlupdate" => $htmltabledata, "status"=> $add));
+                        wp_send_json_success(array( "msg"=>__("New notification created successfully.", "peprodev-ups"), "type"=> "add", "htmlupdate" => $htmltabledata, "status"=> $add));
                     }
 
-                    wp_send_json_error(array( "msg"=>__("There was a problem with your request. Error 0x1001", $this->td)));
+                    wp_send_json_error(array( "msg"=>__("There was a problem with your request. Error 0x1001", "peprodev-ups")));
 
                     break;
                   case 'remove_notif':
@@ -1848,17 +1848,17 @@ if (!class_exists("PeproDevUPS_Profile")) {
                     $wpdb->delete("{$this->tbl_notif}_list", array( 'notif_id' => $id ));
                     $st = $wpdb->delete($this->tbl_notif, array( 'id' => $id ));
                     if ($st != false) {
-                        wp_send_json_success(array( "msg"=>__("Notification removed successfully.", $this->td), "dparam" => $st));
+                        wp_send_json_success(array( "msg"=>__("Notification removed successfully.", "peprodev-ups"), "dparam" => $st));
                     }else{
-                        wp_send_json_error(array( "msg"=>__("There was a problem with your request.", $this->td), "dparam" => $st));
+                        wp_send_json_error(array( "msg"=>__("There was a problem with your request.", "peprodev-ups"), "dparam" => $st));
                     }
                     break;
                   case 'search':
                     $data = $this->show_notifications_edit_panel(1, sanitize_text_field(esc_html(trim($_POST["dparam"]))), $_POST["urlz"]);
-                    wp_send_json_success(array( "msg"=>__("Notification searched successfully.", $this->td), "html" => $data , "s" => sanitize_text_field(esc_html(trim($_POST["dparam"])))));
+                    wp_send_json_success(array( "msg"=>__("Notification searched successfully.", "peprodev-ups"), "html" => $data , "s" => sanitize_text_field(esc_html(trim($_POST["dparam"])))));
                     break;
                   default:
-                      wp_send_json_error(__("{$this->title} :: Incorrect Data Supplied.", $this->td));
+                      wp_send_json_error(__("{$this->title} :: Incorrect Data Supplied.", "peprodev-ups"));
                       break;
                   }
             }
@@ -1967,7 +1967,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                     </div>
                     <div class=\"content\">
                     <p>$notif->title</p>
-                    <span class=\"date\">". __("Priority: ", $this->td) . $this->translate_priority($notif->priority) ." / ".sprintf(esc_html__("%s ago", $this->td), human_time_diff(strtotime("$notif->date_scheduled"), current_time('timestamp')))."</span>
+                    <span class=\"date\">". __("Priority: ", "peprodev-ups") . $this->translate_priority($notif->priority) ." / ".sprintf(esc_html__("%s ago", "peprodev-ups"), human_time_diff(strtotime("$notif->date_scheduled"), current_time('timestamp')))."</span>
                     </div>
                     </a>";
                 }
@@ -2009,11 +2009,11 @@ if (!class_exists("PeproDevUPS_Profile")) {
                 </div>
                 <div class=\"text\">
                 <h5 class=\"name\">$notif->title</h5>
-                <p>". __("Priority: ", $this->td) . $this->translate_priority($notif->priority)."</p>
+                <p>". __("Priority: ", "peprodev-ups") . $this->translate_priority($notif->priority)."</p>
                 </div>
                 </div>
                 <div class=\"au-message__item-time\">
-                <span>".sprintf(esc_html__("%s ago", $this->td), human_time_diff(strtotime("$notif->date_scheduled"), current_time('timestamp')))."</span>
+                <span>".sprintf(esc_html__("%s ago", "peprodev-ups"), human_time_diff(strtotime("$notif->date_scheduled"), current_time('timestamp')))."</span>
                 </div>
                 </div>
                 </a>
@@ -2032,7 +2032,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                 </div>
                 <div class=\"au-chat__content\">
                 <div class=\"recei-mess-wrap\">
-                <span class=\"mess-time\">". date_i18n("Y/m/d H:m", strtotime($notif->date_scheduled)) ." (".sprintf(esc_html__("%s ago", $this->td), human_time_diff(strtotime("$notif->date_scheduled"), current_time('timestamp'))).")</span>
+                <span class=\"mess-time\">". date_i18n("Y/m/d H:m", strtotime($notif->date_scheduled)) ." (".sprintf(esc_html__("%s ago", "peprodev-ups"), human_time_diff(strtotime("$notif->date_scheduled"), current_time('timestamp'))).")</span>
                 <div class=\"recei-mess__inner\">
                 <div class=\"recei-mess-list\">
                 <div class=\"recei-mess\">" . $this->filter_content($notif->content, $notif) . $extas . "</div>
@@ -2088,7 +2088,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                 </div>
                 <div class=\"content\">
                 <p>$notif->title</p>
-                <span class=\"date\">". __("Priority: ", $this->td) . $this->translate_priority($notif->priority) ." / ".sprintf(esc_html__("%s ago", $this->td), human_time_diff(strtotime("$notif->date_scheduled"), current_time('timestamp')))."</span>
+                <span class=\"date\">". __("Priority: ", "peprodev-ups") . $this->translate_priority($notif->priority) ." / ".sprintf(esc_html__("%s ago", "peprodev-ups"), human_time_diff(strtotime("$notif->date_scheduled"), current_time('timestamp')))."</span>
                 </div>
                 </a>";
               }
@@ -2134,11 +2134,11 @@ if (!class_exists("PeproDevUPS_Profile")) {
                     </div>
                     <div class=\"text\">
                     <h5 class=\"name\">$notif->title</h5>
-                    <p>". __("Priority: ", $this->td) . $this->translate_priority($notif->priority)."</p>
+                    <p>". __("Priority: ", "peprodev-ups") . $this->translate_priority($notif->priority)."</p>
                     </div>
                     </div>
                     <div class=\"au-message__item-time\">
-                    <span>".sprintf(esc_html__("%s ago", $this->td), human_time_diff(strtotime("$notif->date_scheduled"), current_time('timestamp')))."</span>
+                    <span>".sprintf(esc_html__("%s ago", "peprodev-ups"), human_time_diff(strtotime("$notif->date_scheduled"), current_time('timestamp')))."</span>
                     </div>
                     </div>
                     </a>
@@ -2157,7 +2157,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                     </div>
                     <div class=\"au-chat__content\">
                     <div class=\"recei-mess-wrap\">
-                    <span class=\"mess-time\">". date_i18n("Y/m/d H:m", strtotime($notif->date_scheduled)) ." (".sprintf(esc_html__("%s ago", $this->td), human_time_diff(strtotime("$notif->date_scheduled"), current_time('timestamp'))).")</span>
+                    <span class=\"mess-time\">". date_i18n("Y/m/d H:m", strtotime($notif->date_scheduled)) ." (".sprintf(esc_html__("%s ago", "peprodev-ups"), human_time_diff(strtotime("$notif->date_scheduled"), current_time('timestamp'))).")</span>
                     <div class=\"recei-mess__inner\">
                     <div class=\"recei-mess-list\">
                     <div class=\"recei-mess\">" . $this->filter_content($notif->content, $notif) . $extas . "</div>
@@ -2192,11 +2192,11 @@ if (!class_exists("PeproDevUPS_Profile")) {
                     </div>
                     <div class=\"text\">
                     <h5 class=\"name\">$notif->title</h5>
-                    <p>". __("Priority: ", $this->td) . $this->translate_priority($notif->priority)."</p>
+                    <p>". __("Priority: ", "peprodev-ups") . $this->translate_priority($notif->priority)."</p>
                     </div>
                     </div>
                     <div class=\"au-message__item-time\">
-                    <span>".sprintf(esc_html__("%s ago", $this->td), human_time_diff(strtotime("$notif->date_scheduled"), current_time('timestamp')))."</span>
+                    <span>".sprintf(esc_html__("%s ago", "peprodev-ups"), human_time_diff(strtotime("$notif->date_scheduled"), current_time('timestamp')))."</span>
                     </div>
                     </div>
                     </a>
@@ -2215,7 +2215,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                     </div>
                     <div class=\"au-chat__content\">
                     <div class=\"recei-mess-wrap\">
-                    <span class=\"mess-time\">". date_i18n("Y/m/d H:m", strtotime($notif->date_scheduled)) ." (".sprintf(esc_html__("%s ago", $this->td), human_time_diff(strtotime("$notif->date_scheduled"), current_time('timestamp'))).")</span>
+                    <span class=\"mess-time\">". date_i18n("Y/m/d H:m", strtotime($notif->date_scheduled)) ." (".sprintf(esc_html__("%s ago", "peprodev-ups"), human_time_diff(strtotime("$notif->date_scheduled"), current_time('timestamp'))).")</span>
                     <div class=\"recei-mess__inner\">
                     <div class=\"recei-mess-list\">
                     <div class=\"recei-mess\">" . $this->filter_content($notif->content, $notif) . $extas . "</div>
@@ -2265,10 +2265,10 @@ if (!class_exists("PeproDevUPS_Profile")) {
             $slug = get_page_template_slug($post);
             $len = strlen("peprofile-");
             if((substr("$slug", 0, $len) === "peprofile-")) {
-                // $post_states[] = __("Pepro Profile Template", $this->td);
+                // $post_states[] = __("Pepro Profile Template", "peprodev-ups");
             }
             if (get_option("{$this->activation_status}-profile-dash-page","") == $post->ID){
-              $post_states[] = __("User Dashboard Page", $this->td);
+              $post_states[] = __("User Dashboard Page", "peprodev-ups");
             }
 
             return $post_states;
@@ -2282,7 +2282,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
             $url = get_permalink($profile_page);
             $arr = array_merge( $arr, array(
               "home"          => array(
-                "title"       => "<i class='fas fa-tachometer-alt'></i> ".__("Dashboard", $this->td),
+                "title"       => "<i class='fas fa-tachometer-alt'></i> ".__("Dashboard", "peprodev-ups"),
                 "url"         => $url,
                 "priority"    => 10,
                 "built_in"    => true,
@@ -2291,19 +2291,19 @@ if (!class_exists("PeproDevUPS_Profile")) {
               $arr = array_merge( $arr,
                 array(
                   "orders"        =>  array(
-                    "title"      => '<i class="fa fa-shopping-bag"></i> ' .__("Orders", $this->td),
+                    "title"      => '<i class="fa fa-shopping-bag"></i> ' .__("Orders", "peprodev-ups"),
                     "url"        => "$url?section=orders",
                     "built_in"   => true,
                     "priority"   => 701,
                   ),
                   "downloads"     =>  array(
-                    "title"      => '<i class="fa fa-download"></i> ' .__("Downloads", $this->td),
+                    "title"      => '<i class="fa fa-download"></i> ' .__("Downloads", "peprodev-ups"),
                     "url"        => "$url?section=downloads",
                     "built_in"   => true,
                     "priority"   => 703,
                   ),
                   "track"         =>  array(
-                    "title"      => '<i class="fa fa-truck"></i> ' .__("Order Tracking", $this->td),
+                    "title"      => '<i class="fa fa-truck"></i> ' .__("Order Tracking", "peprodev-ups"),
                     "url"        => "$url?section=track",
                     "built_in"   => true,
                     "priority"   => 704,
@@ -2313,7 +2313,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                 $arr = array_merge( $arr, array(
                   "wallet" =>
                   array(
-                    "title"      => '<i class="fa fa-wallet"></i> ' .__("Wallet", $this->td),
+                    "title"      => '<i class="fa fa-wallet"></i> ' .__("Wallet", "peprodev-ups"),
                     "url"        => "$url?section=wallet",
                     "built_in"   => true,
                     "priority"   => 700.5
@@ -2323,13 +2323,13 @@ if (!class_exists("PeproDevUPS_Profile")) {
             }
             $arr = array_merge($arr, array(
                   "notifications" =>  array(
-                    "title"       => '<i class="fa fa-bell"></i> ' .__("Notifications", $this->td),
+                    "title"       => '<i class="fa fa-bell"></i> ' .__("Notifications", "peprodev-ups"),
                     "url"         => "$url?section=notifications",
                     "built_in"    => true,
                     "priority"    => 900,
                   ),
                   "announcements" =>  array(
-                    "title"       => '<i class="fa fa-bullhorn"></i> ' .__("Announcements", $this->td),
+                    "title"       => '<i class="fa fa-bullhorn"></i> ' .__("Announcements", "peprodev-ups"),
                     "url"         => "$url?section=announcements",
                     "built_in"    => true,
                     "priority"    => 901,
@@ -2340,7 +2340,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                 $arr = array_merge( $arr,
                   array(
                     "courses" => array(
-                                    "title"       => '<i class="fas fa-user-graduate"></i> ' .__("My Courses", $this->td),
+                                    "title"       => '<i class="fas fa-user-graduate"></i> ' .__("My Courses", "peprodev-ups"),
                                     "url"         => "$url?section=courses",
                                     "built_in"    => true,
                                     "priority"    => 222,
@@ -2561,11 +2561,11 @@ if (!class_exists("PeproDevUPS_Profile")) {
         }
         public function translate_priority($p)
         {
-            $trUrgent = _x("Urgent", "notifications-priority", $this->td);
-            $trHigh = _x("High", "notifications-priority", $this->td);
-            $trMedium = _x("Medium", "notifications-priority", $this->td);
-            $trLow = _x("Low", "notifications-priority", $this->td);
-            $trNormal = _x("Normal", "notifications-priority", $this->td);
+            $trUrgent = _x("Urgent", "notifications-priority", "peprodev-ups");
+            $trHigh = _x("High", "notifications-priority", "peprodev-ups");
+            $trMedium = _x("Medium", "notifications-priority", "peprodev-ups");
+            $trLow = _x("Low", "notifications-priority", "peprodev-ups");
+            $trNormal = _x("Normal", "notifications-priority", "peprodev-ups");
             switch ($p) {
             case '1':
                 return $trUrgent;
@@ -2658,9 +2658,9 @@ if (!class_exists("PeproDevUPS_Profile")) {
                             <td>{$userRange}</td>
                             <td>{$priority}</td>
                             <td class=\"td-actions\">
-                              <!-- button type=\"button\" title=\"".esc_attr_x("View", "action-title", $this->td) ."\" class=\"btn btn-primary btn-sm view_notif_modal\" data-id=\"{$notif->id}\" integrity=\"".esc_attr($integrity)."\" wparam=\"".esc_attr($this->setting_slug)."\" lparam=\"view_notif\"><i class=\"fa fa-eye\"></i></button -->
-                              <button type=\"button\" title=\"".esc_attr_x("Edit", "action-title", $this->td) ."\" class=\"btn btn-primary btn-sm edit_notif_modal\" data-id=\"{$notif->id}\" integrity=\"".esc_attr($integrity)."\" wparam=\"".esc_attr($this->setting_slug)."\" lparam=\"edit_notif\"><i class=\"fa fa-pencil\"></i></button>
-                              <button type=\"button\" title=\"".esc_attr_x("Remove", "action-title", $this->td) ."\" class=\"btn btn-primary btn-sm remove_notif_modal\" data-id=\"{$notif->id}\" integrity=\"".esc_attr($integrity)."\" wparam=\"".esc_attr($PeproDevUPS_Profile->setting_slug)."\" lparam=\"remove_notif\"><i class=\"fa fa-trash-alt\"></i></button>
+                              <!-- button type=\"button\" title=\"".esc_attr_x("View", "action-title", "peprodev-ups") ."\" class=\"btn btn-primary btn-sm view_notif_modal\" data-id=\"{$notif->id}\" integrity=\"".esc_attr($integrity)."\" wparam=\"".esc_attr($this->setting_slug)."\" lparam=\"view_notif\"><i class=\"fa fa-eye\"></i></button -->
+                              <button type=\"button\" title=\"".esc_attr_x("Edit", "action-title", "peprodev-ups") ."\" class=\"btn btn-primary btn-sm edit_notif_modal\" data-id=\"{$notif->id}\" integrity=\"".esc_attr($integrity)."\" wparam=\"".esc_attr($this->setting_slug)."\" lparam=\"edit_notif\"><i class=\"fa fa-pencil\"></i></button>
+                              <button type=\"button\" title=\"".esc_attr_x("Remove", "action-title", "peprodev-ups") ."\" class=\"btn btn-primary btn-sm remove_notif_modal\" data-id=\"{$notif->id}\" integrity=\"".esc_attr($integrity)."\" wparam=\"".esc_attr($PeproDevUPS_Profile->setting_slug)."\" lparam=\"remove_notif\"><i class=\"fa fa-trash-alt\"></i></button>
                             </td>
                           </tr>";
                 }
@@ -2748,7 +2748,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                       $notif_access_str[] = translate_user_role($value);
                   }
                   if (!is_null($notif->ld_lms) && !empty($notif->ld_lms)){
-                    $notif_access_str[] = sprintf(__("Enrolled users of Ld-course: %s",$this->td),"<strong>".get_the_title( $notif->ld_lms )." (#<a target='_blank' href='".admin_url("post.php?post=$notif->ld_lms&action=edit")."'>$notif->ld_lms</a>)</strong>");
+                    $notif_access_str[] = sprintf(__("Enrolled users of Ld-course: %s","peprodev-ups"),"<strong>".get_the_title( $notif->ld_lms )." (#<a target='_blank' href='".admin_url("post.php?post=$notif->ld_lms&action=edit")."'>$notif->ld_lms</a>)</strong>");
                   }
 
                   $dataNotifExtraDetails = esc_attr(json_encode($dataNotifExtraDetails, JSON_NUMERIC_CHECK|JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE));
@@ -2757,12 +2757,12 @@ if (!class_exists("PeproDevUPS_Profile")) {
                             <td>{$notif_title_icon_set}{$notif->title}</td>
                             <td>{$notif->subject}</td>
                             <td>{$notif->slug}</td>
-                            <td>". (empty($notif_access_str) ? __("— Public —",$this->td) : implode(" / ", $notif_access_str)) ."</td>
+                            <td>". (empty($notif_access_str) ? __("— Public —","peprodev-ups") : implode(" / ", $notif_access_str)) ."</td>
                             <td>{$notif->priority}</td>
                             <td class=\"td-actions\">
-                              <!-- button type=\"button\" title=\"".esc_attr_x("View","action-title",$this->td)."\" class=\"btn btn-primary btn-sm view_notif_modal\" data-id=\"{$notif->id}\" integrity=\"".esc_attr($integrity)."\" wparam=\"".esc_attr($this->setting_slug)."\" lparam=\"view_section\"><i class=\"fa fa-eye\"></i></button -->
-                              <button type=\"button\" title=\"".esc_attr_x("Edit","action-title",$this->td)."\" class=\"btn btn-primary btn-sm edit_notif_modal\" data-id=\"{$notif->id}\" integrity=\"".esc_attr($integrity)."\" wparam=\"".esc_attr($this->setting_slug)."\" lparam=\"edit_section\"><i class=\"fa fa-pencil\"></i></button>
-                              <button type=\"button\" title=\"".esc_attr_x("Remove","action-title",$this->td)."\" class=\"btn btn-primary btn-sm remove_notif_modal\" data-id=\"{$notif->id}\" integrity=\"".esc_attr($integrity)."\" wparam=\"".esc_attr($PeproDevUPS_Profile->setting_slug)."\" lparam=\"remove_section\"><i class=\"fa fa-trash-alt\"></i></button>
+                              <!-- button type=\"button\" title=\"".esc_attr_x("View","action-title","peprodev-ups")."\" class=\"btn btn-primary btn-sm view_notif_modal\" data-id=\"{$notif->id}\" integrity=\"".esc_attr($integrity)."\" wparam=\"".esc_attr($this->setting_slug)."\" lparam=\"view_section\"><i class=\"fa fa-eye\"></i></button -->
+                              <button type=\"button\" title=\"".esc_attr_x("Edit","action-title","peprodev-ups")."\" class=\"btn btn-primary btn-sm edit_notif_modal\" data-id=\"{$notif->id}\" integrity=\"".esc_attr($integrity)."\" wparam=\"".esc_attr($this->setting_slug)."\" lparam=\"edit_section\"><i class=\"fa fa-pencil\"></i></button>
+                              <button type=\"button\" title=\"".esc_attr_x("Remove","action-title","peprodev-ups")."\" class=\"btn btn-primary btn-sm remove_notif_modal\" data-id=\"{$notif->id}\" integrity=\"".esc_attr($integrity)."\" wparam=\"".esc_attr($PeproDevUPS_Profile->setting_slug)."\" lparam=\"remove_section\"><i class=\"fa fa-trash-alt\"></i></button>
                             </td>
                           </tr>";
                 }
@@ -2818,15 +2818,15 @@ if (!class_exists("PeproDevUPS_Profile")) {
             $notif_title_icon_set = "<div class='$color_icon img-cir img-40'><i class='{$notif["icon"]}'></i></div>";
 
             echo "<tr class='builtin' data-nofit-tr=\"{$notif_id}\" data-active=\"{$is_active}\" data-priority=\"{$notif["priority"]}\" data-title=\"{$notif["title"]}\" >
-                      <td style=\"direction: ltr;\">".__("— Built-in Section —",$this->td)."</td>
+                      <td style=\"direction: ltr;\">".__("— Built-in Section —","peprodev-ups")."</td>
                       <td class='title'>{$notif_title_icon_set}{$notif["title"]}</td>
-                      <td>".__("— Built-in Section —",$this->td)."</td>
+                      <td>".__("— Built-in Section —","peprodev-ups")."</td>
                       <td>$notif_id</td>
-                      <td>".__("— Public —",$this->td)."</td>
+                      <td>".__("— Public —","peprodev-ups")."</td>
                       <td class='priority'>{$notif["priority"]}</td>
                       <td class=\"td-actions\">
-                        <button type=\"button\" title=\"".esc_attr_x("Edit","action-title",$this->td)."\" class=\"btn btn-primary btn-sm edit_notif_builtin\" data-id=\"{$notif_id}\" integrity=\"".esc_attr($integrity)."\" wparam=\"".esc_attr($this->setting_slug)."\" lparam=\"edit_section_builtin\"><i class=\"fa fa-pencil\"></i></button>
-                        <button type=\"button\" disabled title=\"".esc_attr_x("Remove","action-title",$this->td)."\" class=\"btn btn-gray btn-sm disabled\"><i class=\"fa fa-trash-alt\"></i></button>
+                        <button type=\"button\" title=\"".esc_attr_x("Edit","action-title","peprodev-ups")."\" class=\"btn btn-primary btn-sm edit_notif_builtin\" data-id=\"{$notif_id}\" integrity=\"".esc_attr($integrity)."\" wparam=\"".esc_attr($this->setting_slug)."\" lparam=\"edit_section_builtin\"><i class=\"fa fa-pencil\"></i></button>
+                        <button type=\"button\" disabled title=\"".esc_attr_x("Remove","action-title","peprodev-ups")."\" class=\"btn btn-gray btn-sm disabled\"><i class=\"fa fa-trash-alt\"></i></button>
                       </td>
                     </tr>";
 
@@ -2852,7 +2852,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                   <a class="btn btn-primary btn-sm no-ripple" title="Font Awesome Pro Brands" href="#navBrands" data-toggle="tab">Brands</a></li>
                 </div>
                 <div class="nav nav-search" data-tabs="tabs" style="width: auto;">
-                  <input id="searchfontawesome" class="form-control search-fa" placeholder="'.__("Search here ...",$this->td).'" />
+                  <input id="searchfontawesome" class="form-control search-fa" placeholder="'.__("Search here ...","peprodev-ups").'" />
                 </div>
               </div>
               <div class="tab-content">';
@@ -2998,13 +2998,13 @@ if (!class_exists("PeproDevUPS_Profile")) {
                 array(
                 'base' => "pepro-profile",
                 'name' => $this->title,
-                'description' => __('Adds Pepro Profile Dashoard to page', $this->td),
+                'description' => __('Adds Pepro Profile Dashoard to page', "peprodev-ups"),
                 'class' => "{$this->td}__class",
                 'icon' => "{$this->assets_url}/assets/img/peprodev.svg",
                 'show_settings_on_create' => false,
                 'admin_enqueue_css' => array("{$this->assets_url}/assets/css/vc.init.css","{$this->assets_url}/assets/css/select2.min.css"),
                 'admin_enqueue_js' => array("{$this->assets_url}/assets/js/select2.min.js"),
-                'category' => __('Pepro Elements', $this->td),
+                'category' => __('Pepro Elements', "peprodev-ups"),
                 'params' => false
                 )
             );
@@ -3024,7 +3024,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
         {
           $profile_template = array(
            'post_type'     => 'page',
-           'post_title'    => __("User Dashboard",$this->td),
+           'post_title'    => __("User Dashboard","peprodev-ups"),
            'post_content'  => '[pepro-profile]',
            'post_name'     => 'profile',
            'post_status'   => 'publish',
@@ -3048,12 +3048,12 @@ if (!class_exists("PeproDevUPS_Profile")) {
         {
             add_filter(
                 'admin_footer_text', function () {
-                    return sprintf(_x("Thanks for using %s products", "footer-copyright", $this->td), "<b><a href='https://pepro.dev/' target='_blank' >".__("Pepro Dev. Group", $this->td)."</a></b>");
+                    return sprintf(_x("Thanks for using %s products", "footer-copyright", "peprodev-ups"), "<b><a href='https://pepro.dev/' target='_blank' >".__("Pepro Dev. Group", "peprodev-ups")."</a></b>");
                 }, 11
             );
             add_filter(
                 'update_footer', function () {
-                    return sprintf(_x("Version %s", "footer-copyright", $this->td), $this->version);
+                    return sprintf(_x("Version %s", "footer-copyright", "peprodev-ups"), $this->version);
                 }, 11
             );
         }
@@ -3135,7 +3135,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
         }
         public function print_setting_input($SLUG="", $CAPTION="", $extraHtml="", $type="text",$extraClass="")
         {
-            $ON = sprintf(_x("Enter %s", "setting-page", $this->td), $CAPTION);
+            $ON = sprintf(_x("Enter %s", "setting-page", "peprodev-ups"), $CAPTION);
             echo "<tr>
     			<th scope='row'>
     				<label for='$SLUG'>$CAPTION</label>
@@ -3145,7 +3145,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
         }
         public function print_setting_select($SLUG, $CAPTION, $dataArray=array())
         {
-            $ON = sprintf(_x("Choose %s", "setting-page", $this->td), $CAPTION);
+            $ON = sprintf(_x("Choose %s", "setting-page", "peprodev-ups"), $CAPTION);
             $OPTS = "";
             foreach ($dataArray as $key => $value) {
                 if ($key == "EMPTY") {

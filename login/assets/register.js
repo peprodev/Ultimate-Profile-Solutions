@@ -3,7 +3,7 @@
  * @Date:   2021/08/02 22:04:09
  * @Email:  its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/09/01 22:19:12
+ * @Last modified time: 2021/09/11 11:33:52
  * @License: GPLv2
  * @Copyright: Copyright © Amirhosseinhpv (https://hpv.im), all rights reserved.
  */
@@ -564,7 +564,7 @@ jQuery.noConflict();
         url: pepc.ajax,
         type: 'POST',
         data: {
-          action: 'pepro',
+          action: 'peprodev-ups',
           integrity: nonce,
           wparam: wparam,
           lparam: lparam,

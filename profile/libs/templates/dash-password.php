@@ -8,14 +8,14 @@ $PeproDevUPS_Profile->change_dashboard_title(_x("Password & 2FA","user-dashboard
   <div class="row">
     <div class="col-md-12">
         <div class="overview-wrap">
-            <h2 class="title-1"><?php echo _x("Password & Two-factor authentication","user-dashboard",$PeproDevUPS_Profile->td);?></h2>
+            <h2 class="title-1"><?php echo esc_html_x("Password & Two-factor authentication","user-dashboard",$PeproDevUPS_Profile->td);?></h2>
         </div>
     </div>
   </div>
   <div class="row m-t-25">
     <div class="col-lg-6">
         <div class="card">
-            <div class="card-header"><?php echo _x("Change Password","user-dashboard",$PeproDevUPS_Profile->td);?></div>
+            <div class="card-header"><?php echo esc_html_x("Change Password","user-dashboard",$PeproDevUPS_Profile->td);?></div>
             <div class="card-body">
                 <form action="" method="post" novalidate="novalidate">
 
@@ -37,7 +37,7 @@ $PeproDevUPS_Profile->change_dashboard_title(_x("Password & 2FA","user-dashboard
                     </div>
                     <div>
                         <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
-                            <span id="payment-button-amount"><?php echo _x("Change password","user-dashboard",$PeproDevUPS_Profile->td);?></span>
+                            <span id="payment-button-amount"><?php echo esc_html_x("Change password","user-dashboard",$PeproDevUPS_Profile->td);?></span>
                         </button>
                     </div>
                 </form>
@@ -46,17 +46,17 @@ $PeproDevUPS_Profile->change_dashboard_title(_x("Password & 2FA","user-dashboard
     </div>
     <div class="col-lg-6">
         <div class="card">
-            <div class="card-header"><?php echo _x("Two-factor authentication","user-dashboard",$PeproDevUPS_Profile->td);?></div>
+            <div class="card-header"><?php echo esc_html_x("Two-factor authentication","user-dashboard",$PeproDevUPS_Profile->td);?></div>
             <div class="card-body">
                 <form action="" method="post" novalidate="novalidate">
                     <div class="row">
                       <div class="col-6">
                           <div class="form-group">
-                            <label for="2facset" class="control-label mb-1"><?php echo _x("Activation Setting","user-dashboard",$PeproDevUPS_Profile->td);?></label>
+                            <label for="2facset" class="control-label mb-1"><?php echo esc_html_x("Activation Setting","user-dashboard",$PeproDevUPS_Profile->td);?></label>
                             <div class="form-check">
                               <div class="checkbox">
                                 <label for="radio1" class="form-check-label">
-                                  <input type="checkbox" id="2facset" name="radios" checked value="option1" class="form-check-input"><?php echo _x("Enable 2FA","user-dashboard",$PeproDevUPS_Profile->td);?>
+                                  <input type="checkbox" id="2facset" name="radios" checked value="option1" class="form-check-input"><?php echo esc_html_x("Enable 2FA","user-dashboard",$PeproDevUPS_Profile->td);?>
                                 </label>
                               </div>
                             </div>
@@ -71,7 +71,7 @@ $PeproDevUPS_Profile->change_dashboard_title(_x("Password & 2FA","user-dashboard
 
                     <div>
                         <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
-                            <span id="payment-button-amount"><?php echo _x("Save 2FA Setting","user-dashboard",$PeproDevUPS_Profile->td);?></span>
+                            <span id="payment-button-amount"><?php echo esc_html_x("Save 2FA Setting","user-dashboard",$PeproDevUPS_Profile->td);?></span>
                         </button>
                     </div>
                 </form>

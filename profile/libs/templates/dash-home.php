@@ -46,7 +46,7 @@ $PeproDevUPS_Profile->change_dashboard_title();
 
     if ($PeproDevUPS_Profile->_wc_activated() && "true" == get_option("{$PeproDevUPS_Profile->activation_status}-woocommercestats")){
       ?>
-      <div class="row"><div class="col-md-12"><div class="overview-wrap"><h2 class="title-1" ><?php echo _x("Overview","user-dashboard",$PeproDevUPS_Profile->td);?></h2></div></div></div>
+      <div class="row"><div class="col-md-12"><div class="overview-wrap"><h2 class="title-1" ><?php echo esc_html_x("Overview","user-dashboard",$PeproDevUPS_Profile->td);?></h2></div></div></div>
       <?php
       echo $PeproDevUPS_Profile->peprofile_shortcode_wc_stats();
       do_action( "peprofile_homedashboard__after_woocommercestats" );
@@ -60,7 +60,7 @@ $PeproDevUPS_Profile->change_dashboard_title();
 
     if ($PeproDevUPS_Profile->_wc_activated() && "true" == get_option("{$PeproDevUPS_Profile->activation_status}-woocommerceorders")){
       ?>
-      <div class="row"><div class="col-lg-12"><h2 class="title-1 m-b-25"><?php echo _x("Latest 10 purchases","user-dashboard",$PeproDevUPS_Profile->td);?></h2>
+      <div class="row"><div class="col-lg-12"><h2 class="title-1 m-b-25"><?php echo esc_html_x("Latest 10 purchases","user-dashboard",$PeproDevUPS_Profile->td);?></h2>
         <?php echo $PeproDevUPS_Profile->peprofile_shortcode_wc_orders(); ?>
       </div></div>
       <?php

@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/04 14:45:29
+# @Last modified time: 2021/09/11 11:29:49
 global $PeproDevUPS_Profile;
 $td          = $PeproDevUPS_Profile->td;
 $rtl         = is_rtl() ? "right" : "left";
@@ -26,15 +26,15 @@ $loadingRing = '<div class="lds-ring2"><div></div><div></div><div></div><div></d
     <div class="card">
       <div class="card-header card-header-primary">
         <div class="lds-ring2"><div></div><div></div><div></div><div></div></div>
-        <h4 class="card-title"><?php echo _x("Profile Sections", "section-panel", "pepro");?></h4>
-        <p class="card-category"><?php echo _x("You can manage sections from here. Add, Delete, and Edit sections on the fly using panle below.", "section-panel", "pepro");?></p>
+        <h4 class="card-title"><?php echo esc_html_x("Profile Sections", "section-panel", "pepro");?></h4>
+        <p class="card-category"><?php echo esc_html_x("You can manage sections from here. Add, Delete, and Edit sections on the fly using panle below.", "section-panel", "pepro");?></p>
       </div>
       <div class="card-body">
         <div id="toggle_search_container" class="hide">
           <div class="input-group search mb-3">
-            <input class="search-here form-control" type="text" id="search-here" placeholder="<?php echo _x("Search here and hit Enter ...", "section-panel", "pepro");?>" style="padding-inline: 0.7rem;" integrity="<?php echo $integrity;?>" wparam="<?php echo $PeproDevUPS_Profile->setting_slug;?>" lparam="search_section" value="<?php echo $srch;?>" />
+            <input class="search-here form-control" type="text" id="search-here" placeholder="<?php echo esc_html_x("Search here and hit Enter ...", "section-panel", "pepro");?>" style="padding-inline: 0.7rem;" integrity="<?php echo $integrity;?>" wparam="<?php echo $PeproDevUPS_Profile->setting_slug;?>" lparam="search_section" value="<?php echo $srch;?>" />
             <div class="input-group-append">
-              <button class="btn btn-primary clear_search btn-sm" title="<?php echo _x("Clear search", "section-panel", "pepro");?>"><i class="material-icons">close</i></button>
+              <button class="btn btn-primary clear_search btn-sm" title="<?php echo esc_html_x("Clear search", "section-panel", "pepro");?>"><i class="material-icons">close</i></button>
             </div>
         </div>
         </div>
@@ -47,8 +47,8 @@ $loadingRing = '<div class="lds-ring2"><div></div><div></div><div></div><div></d
             <div id="modal_add_notif">
               <div>
                 <div class="modal-header">
-                  <h5 class="modal-title addmode"><?php echo _x("Add New Section", "section-panel", "pepro");?></h5>
-                  <h5 class="modal-title editmode"><?php echo _x("Edit Section: ", "section-panel", "pepro");?><span style="font-weight: bold;"></span></h5>
+                  <h5 class="modal-title addmode"><?php echo esc_html_x("Add New Section", "section-panel", "pepro");?></h5>
+                  <h5 class="modal-title editmode"><?php echo esc_html_x("Edit Section: ", "section-panel", "pepro");?><span style="font-weight: bold;"></span></h5>
                   <input type="hidden" id="current_edit_notif_id" value="" />
                 </div>
                 <div class="modal-body">
@@ -121,22 +121,22 @@ $loadingRing = '<div class="lds-ring2"><div></div><div></div><div></div><div></d
                       $title = _x("Restrict Access to User Roles", "notif-panel", "pepro");
                       $users = '<select id="notifaddedit-access" name="notifaddedit-access[]" multiple="true" class="form-control primary select2 mt-3">';
                       echo "<tr showadvanced><td ><label class=\"text-primary\" for=\"notifaddedit-access\">$title</label></td>
-                      <td>$users"; wp_dropdown_roles(); echo "</select><br><small>".__("Select none to show section for everyone (make public)",$this->td)."</small></td></tr>";
+                      <td>$users"; wp_dropdown_roles(); echo "</select><br><small>".__("Select none to show section for everyone (make public)","peprodev-ups")."</small></td></tr>";
 
-                      $sfws_posts = '<option value="0" selected>'.__("— None",$this->td).'</option>';
+                      $sfws_posts = '<option value="0" selected>'.__("— None","peprodev-ups").'</option>';
                       $posts = get_posts(array('post_type'=> 'sfwd-courses', 'post_status'=> 'publish', 'suppress_filters' => false, 'posts_per_page' => -1 ) );
                       foreach ($posts as $post) { $sfws_posts .= "<option value='$post->ID'>$post->post_title (#$post->ID)</option>"; }
                       $title = _x("Restrict Access to Ld-Course", "notif-panel", "pepro");
                       echo "<tr showadvanced>
                               <td ><label class=\"text-primary\" for=\"notifaddedit-ld_lms\">$title</label></td><td>".'
                                 <select id="notifaddedit-ld_lms" name="notifaddedit-ld_lms" class="form-control primary select2 mt-3">'.$sfws_posts.'</select>';
-                      echo "<br><small>".__("Restrict Access to Ld-Course enrolled users in addition to User Roles",$this->td)."</small></td></tr>";
+                      echo "<br><small>".__("Restrict Access to Ld-Course enrolled users in addition to User Roles","peprodev-ups")."</small></td></tr>";
 
-                      echo "<tr showadvanced><td><label class=\"text-primary\" >"._x("Custom CSS","profile-section",$this->td)."</label></td><td>
+                      echo "<tr showadvanced><td><label class=\"text-primary\" >"._x("Custom CSS","profile-section","peprodev-ups")."</label></td><td>
                             <textarea class=\"codeditor\" id=\"csseditor\" spellcheck=\"false\" dir=\"ltr\" rows=\"8\" cols=\"80\">".stripslashes(get_option("{$this->activation_status}-css",""))."</textarea>
                             <textarea style=\"display:none !important;\" class=\"codeditor\" id=\"css\" spellcheck=\"false\" dir=\"ltr\" rows=\"8\" cols=\"80\">".stripslashes(get_option("{$this->activation_status}-css",""))."</textarea>
                           </td></tr>";
-                      echo "<tr showadvanced><td><label class=\"text-primary\" >"._x("Custom JS","profile-section",$this->td)."</label></td><td>
+                      echo "<tr showadvanced><td><label class=\"text-primary\" >"._x("Custom JS","profile-section","peprodev-ups")."</label></td><td>
                             <textarea class=\"codeditor\" id=\"jseditor\" spellcheck=\"false\" dir=\"ltr\" rows=\"8\" cols=\"80\">".stripslashes(get_option("{$this->activation_status}-js","(function ($){\"use strict\";})(jQuery);"))."</textarea>
                             <textarea style=\"display:none !important;\" class=\"codeditor\" id=\"js\" spellcheck=\"false\" dir=\"ltr\" rows=\"8\" cols=\"80\">".stripslashes(get_option("{$this->activation_status}-js",""))."</textarea>
                           </td></tr>";
@@ -159,8 +159,8 @@ $loadingRing = '<div class="lds-ring2"><div></div><div></div><div></div><div></d
                     integrity="<?php echo esc_attr( $integrity );?>"
                     wparam="<?php echo esc_attr( $PeproDevUPS_Profile->setting_slug );?>"
                     lparam="add_new_section"><?php echo $loadingRing . _x("Save Edits", "section-panel", "pepro");?></button>
-                  <button type="button" id="clear_notif_form" class="btn btn-action"><?php echo _x("Clear form", "section-panel", "pepro");?></button>
-                  <button type="button" id='close_add_new_notifications' class="btn btn-action" data-dismiss="modal"><?php echo _x("Close", "section-panel", "pepro");?></button>
+                  <button type="button" id="clear_notif_form" class="btn btn-action"><?php echo esc_html_x("Clear form", "section-panel", "pepro");?></button>
+                  <button type="button" id='close_add_new_notifications' class="btn btn-action" data-dismiss="modal"><?php echo esc_html_x("Close", "section-panel", "pepro");?></button>
                 </div>
               </div>
             </div>
@@ -169,13 +169,13 @@ $loadingRing = '<div class="lds-ring2"><div></div><div></div><div></div><div></d
           <table class="table table-hover" id="notifications_list_table">
           <thead class="text-primary">
             <tr>
-              <th><?php echo _x("Date", "section-panel", "pepro");?></th>
-              <th><?php echo _x("Title", "section-panel", "pepro");?></th>
-              <th><?php echo _x("Subject", "section-panel", "pepro");?></th>
-              <th><?php echo _x("Slug", "section-panel", "pepro");?></th>
-              <th><?php echo _x("Access Roles", "section-panel", "pepro");?></th>
-              <th><?php echo _x("Priority", "section-panel", "pepro");?></th>
-              <th><?php echo _x("Action", "section-panel", "pepro");?></th>
+              <th><?php echo esc_html_x("Date", "section-panel", "pepro");?></th>
+              <th><?php echo esc_html_x("Title", "section-panel", "pepro");?></th>
+              <th><?php echo esc_html_x("Subject", "section-panel", "pepro");?></th>
+              <th><?php echo esc_html_x("Slug", "section-panel", "pepro");?></th>
+              <th><?php echo esc_html_x("Access Roles", "section-panel", "pepro");?></th>
+              <th><?php echo esc_html_x("Priority", "section-panel", "pepro");?></th>
+              <th><?php echo esc_html_x("Action", "section-panel", "pepro");?></th>
             </tr>
           </thead>
           <tbody>
@@ -196,17 +196,17 @@ $loadingRing = '<div class="lds-ring2"><div></div><div></div><div></div><div></d
   <div class="modal-dialog" id="modal_add_notif" role="document" style="max-width: 60%;">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="del_notifications"><?php echo _x("Permanently Remove Sections", "section-panel", "pepro");?></h5>
+        <h5 class="modal-title" id="del_notifications"><?php echo esc_html_x("Permanently Remove Sections", "section-panel", "pepro");?></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
       </div>
       <div class="modal-body">
         <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
         <p>
-          <?php echo _x("Are you sure you want to permanently remove this section?<br>There is no Undo action available.", "section-panel", "pepro");?>
+          <?php echo esc_html_x("Are you sure you want to permanently remove this section?<br>There is no Undo action available.", "section-panel", "pepro");?>
         </p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-action" data-dismiss="modal"><?php echo _x("Cancel", "section-panel", "pepro");?></button>
+        <button type="button" class="btn btn-action" data-dismiss="modal"><?php echo esc_html_x("Cancel", "section-panel", "pepro");?></button>
         <button type="button" id="remove_section" class="btn btn-primary loadingRings"><?php echo $loadingRing . _x("Yes, Remove", "section-panel", "pepro");?></button>
       </div>
     </div>
@@ -217,7 +217,7 @@ $loadingRing = '<div class="lds-ring2"><div></div><div></div><div></div><div></d
   <div class="modal-dialog" id="edit_section_built" role="document" style="max-width: 60%;">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="edit_section_builtin_title"><?php echo _x("Edit Built-in Section: ", "section-panel", "pepro");?><span></span></h5>
+        <h5 class="modal-title" id="edit_section_builtin_title"><?php echo esc_html_x("Edit Built-in Section: ", "section-panel", "pepro");?><span></span></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
       </div>
       <div class="modal-body">
@@ -253,7 +253,7 @@ $loadingRing = '<div class="lds-ring2"><div></div><div></div><div></div><div></d
         </p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-action" data-dismiss="modal"><?php echo _x("Cancel", "section-panel", "pepro");?></button>
+        <button type="button" class="btn btn-action" data-dismiss="modal"><?php echo esc_html_x("Cancel", "section-panel", "pepro");?></button>
         <button type="button" id="save_built_in_edit" class="btn btn-primary loadingRings"><?php echo $loadingRing . _x("Save Changes", "section-panel", "pepro");?></button>
       </div>
     </div>

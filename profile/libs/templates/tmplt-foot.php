@@ -1,7 +1,7 @@
 <?php
 
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/04 14:40:16
+# @Last modified time: 2021/09/08 16:56:18
 
 global $PeproDevUPS_Profile, $current_profile_url, $PeproDevUPS_Login, $PeproDevUPS_ProfileStripslashesNotifsJs;
 wp_enqueue_script( "jquery" );
@@ -29,5 +29,3 @@ wp_add_inline_script("peprodev--custom", '(function ($) {"use strict";
   '.$js1.'
   '.$js2.'
 })(jQuery);', "after");
-
-echo "<pre>".print_r("{$PeproDevUPS_Login->assets_url}bootstrap.min.js",1)."</pre>";

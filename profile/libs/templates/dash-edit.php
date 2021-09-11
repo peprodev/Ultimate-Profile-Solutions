@@ -12,14 +12,14 @@ $PeproDevUPS_Profile->change_dashboard_title(_x("Edit", "user-dashboard", $Pepro
   <div class="row">
     <div class="col-md-12">
         <div class="overview-wrap">
-            <h2 class="title-1"><?php echo _x("Edit", "edit-user", $PeproDevUPS_Profile->td);?></h2>
+            <h2 class="title-1"><?php echo esc_html_x("Edit", "edit-user", $PeproDevUPS_Profile->td);?></h2>
         </div>
     </div>
   </div>
   <div class="row m-t-25">
     <div class="col-lg-12">
         <div class="card">
-            <div class="card-header"><?php echo _x("Edit Personal Info", "edit-user", $PeproDevUPS_Profile->td);?></div>
+            <div class="card-header"><?php echo esc_html_x("Edit Personal Info", "edit-user", $PeproDevUPS_Profile->td);?></div>
             <div class="card-body">
                 <form class="edit-profile-form" method="post">
                     <div class="row mt-3">
@@ -91,7 +91,7 @@ $PeproDevUPS_Profile->change_dashboard_title(_x("Edit", "user-dashboard", $Pepro
                     <?php do_action("peprofile_user_details_edit_form_end"); ?>
                     <div class=" mt-3">
                       <button id="submit-profile-changes" href="#" class="btn btn-lg btn-info btn-block loadingRings" type="submit">
-                          <?php echo _x("Save Edit", "edit-user", $PeproDevUPS_Profile->td);?>
+                          <?php echo esc_html_x("Save Edit", "edit-user", $PeproDevUPS_Profile->td);?>
                       </button>
                     </div>
                 </form>

@@ -11,7 +11,7 @@ $PeproDevUPS_Profile->change_dashboard_title(_x("Orders","user-dashboard",$Pepro
   <div class="row">
     <div class="col-md-12">
         <div class="overview-wrap">
-            <h2 class="title-1"><?php echo _x("Orders","user-dashboard",$PeproDevUPS_Profile->td);?></h2>
+            <h2 class="title-1"><?php echo esc_html_x("Orders","user-dashboard",$PeproDevUPS_Profile->td);?></h2>
         </div>
     </div>
   </div>

@@ -13,14 +13,14 @@ Requires at least: 5.0
 Tested up to: 5.8
 Requires PHP: 7.2
 WC tested up to: 5.5
-Text Domain: pepro
+Text Domain: peprodev-ups
 Domain Path: /languages
 Copyright: (c) 2021 Pepro Dev. Group, All rights reserved.
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/04 14:59:02
+# @Last modified time: 2021/09/11 11:23:21
 
 defined("ABSPATH") or die("PeproDev Ultimate Profile Solutions :: Unauthorized Access! (https://pepro.dev/)");
 
@@ -32,7 +32,7 @@ if (!class_exists("PeproDevUPS")) {
             define('PeproDevUPS', '1.5.7');
 
             load_plugin_textdomain("wpserveur-hide-login", false, dirname(plugin_basename(__FILE__))."/languages/");
-            load_plugin_textdomain("pepro", false, dirname(plugin_basename(__FILE__))."/languages/");
+            load_plugin_textdomain("peprodev-ups", false, dirname(plugin_basename(__FILE__))."/languages/");
             global $PeproDevUPS_Core, $PeproDevUPS_Profile, $PeproDevUPS_Login;
 
             require_once plugin_dir_path(__FILE__) . "/core/main.php";

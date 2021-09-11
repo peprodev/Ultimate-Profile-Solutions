@@ -71,14 +71,14 @@ is_rtl() AND $PeproDevUPS_Profile->dashboard_add_css_inline('
   <div class="row">
     <div class="col-md-12">
         <div class="overview-wrap">
-            <h2 class="title-1"><?php echo _x("Order Tracking","user-dashboard",$PeproDevUPS_Profile->td);?></h2>
+            <h2 class="title-1"><?php echo esc_html_x("Order Tracking","user-dashboard",$PeproDevUPS_Profile->td);?></h2>
         </div>
     </div>
   </div>
   <div class="row m-t-25">
     <div class="col-12">
         <div class="card">
-            <div class="card-header"><?php echo _x("Order Tracking","user-dashboard",$PeproDevUPS_Profile->td);?>
+            <div class="card-header"><?php echo esc_html_x("Order Tracking","user-dashboard",$PeproDevUPS_Profile->td);?>
              <a class="back-to-top btn btn-warning btn-sm mr-2 ml-2" style="padding: 0 0.3rem; font-size: 0.8rem; display:none;" href="<?php echo $current_page;?>">
              <i class="zmdi zmdi-long-arrow-return"></i>
            </a>

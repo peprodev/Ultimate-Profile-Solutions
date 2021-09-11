@@ -3,7 +3,7 @@
  * @Date:   2020/05/03 13:33:07
  * @Email:  its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/08/27 17:02:02
+ * @Last modified time: 2021/09/11 11:33:12
  * @License: GPLv2
  * @Copyright: Copyright © 2020 Amirhosseinhpv, All rights reserved.
  */
@@ -39,7 +39,7 @@
         url: pepc.ajax,
         type: 'POST',
         data: {
-          action: 'pepro',
+          action: 'peprodev-ups',
           integrity: nonce,
           wparam: wparam,
           lparam: lparam,
@@ -132,7 +132,7 @@
         url: pepc.ajax,
         type: 'POST',
         data: {
-          action: 'pepro',
+          action: 'peprodev-ups',
           integrity: nonce,
           wparam: wparam,
           lparam: lparam,
@@ -252,7 +252,7 @@
         url: pepc.ajax,
         type: 'POST',
         data: {
-          action: 'pepro',
+          action: 'peprodev-ups',
           integrity: nonce,
           wparam: wparam,
           lparam: lparam,
@@ -397,7 +397,7 @@
         url: pepc.ajax,
         type: 'POST',
         data: {
-          action: 'pepro',
+          action: 'peprodev-ups',
           integrity: nonce,
           wparam: wparam,
           lparam: lparam,
