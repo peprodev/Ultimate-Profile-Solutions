@@ -1,7 +1,7 @@
 <?php
 
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/08 16:56:18
+# @Last modified time: 2021/09/15 14:50:53
 
 global $PeproDevUPS_Profile, $current_profile_url, $PeproDevUPS_Login, $PeproDevUPS_ProfileStripslashesNotifsJs;
 wp_enqueue_script( "jquery" );
@@ -12,10 +12,10 @@ wp_register_script( "peprodev--custom",  plugins_url("/js/custom-js.js", __FILE_
 wp_localize_script( "peprodev--custom",  "_i18n", array(
   "td"                  => "peprocoreprofile",
   "ajax"                => admin_url( "admin-ajax.php"),
-  "prductnames"         => __("Product name","pepro"),
-  "wishlistempty"       => __("No products added to the wishlist","pepro"),
-  "fillreq"             => __("Please fill out all required fields.","pepro"),
-  "max_size_err"        => sprintf(__("Error, File is too large. Maximum file size is %s MB",$PeproDevUPS_Profile->td), "2"),
+  "prductnames"         => __("Product name", "peprodev-ups"),
+  "wishlistempty"       => __("No products added to the wishlist", "peprodev-ups"),
+  "fillreq"             => __("Please fill out all required fields.", "peprodev-ups"),
+  "max_size_err"        => sprintf(__("Error, File is too large. Maximum file size is %s MB","peprodev-ups"), "2"),
   "nonce"               => wp_create_nonce( "pepro_profile" ),
   "current_profile_url" => $current_profile_url,
 ) );

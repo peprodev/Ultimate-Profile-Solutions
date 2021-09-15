@@ -1,25 +1,25 @@
 <?php
 
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/03 15:39:31
+# @Last modified time: 2021/09/15 14:48:50
 
 global $PeproDevUPS_Profile, $PeproDevUPS_Login;
 $current_user = wp_get_current_user();
-$PeproDevUPS_Profile->change_dashboard_title(_x("Edit", "user-dashboard", $PeproDevUPS_Profile->td));
+$PeproDevUPS_Profile->change_dashboard_title(_x("Edit", "user-dashboard", "peprodev-ups"));
 ?>
 
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
         <div class="overview-wrap">
-            <h2 class="title-1"><?php echo esc_html_x("Edit", "edit-user", $PeproDevUPS_Profile->td);?></h2>
+            <h2 class="title-1"><?php echo esc_html_x("Edit", "edit-user", "peprodev-ups");?></h2>
         </div>
     </div>
   </div>
   <div class="row m-t-25">
     <div class="col-lg-12">
         <div class="card">
-            <div class="card-header"><?php echo esc_html_x("Edit Personal Info", "edit-user", $PeproDevUPS_Profile->td);?></div>
+            <div class="card-header"><?php echo esc_html_x("Edit Personal Info", "edit-user", "peprodev-ups");?></div>
             <div class="card-body">
                 <form class="edit-profile-form" method="post">
                     <div class="row mt-3">
@@ -31,7 +31,7 @@ $PeproDevUPS_Profile->change_dashboard_title(_x("Edit", "user-dashboard", $Pepro
                           $id        = "avatar";
                           $extrahtml = "accept='image/jpeg, image/png' ";
                           $class     = "form-control primary bg-light";
-                          $title     = _x("Avatar", "edit-user", $PeproDevUPS_Profile->td);
+                          $title     = _x("Avatar", "edit-user", "peprodev-ups");
                           echo "<div class='form-group'><label for='$id' class='control-label mb-1'>$title</label>
                           <img src='$saved' width='64' style='margin: 1rem;border-radius: 4px;' id='avatar_b'/><input style='max-width: 400px;' id='$id' name='$id' type='$type' class='form-control $class' $extrahtml value='".esc_attr($val)."' /></div>";
                         ?>
@@ -40,17 +40,17 @@ $PeproDevUPS_Profile->change_dashboard_title(_x("Edit", "user-dashboard", $Pepro
                     <div class="row mt-3">
                         <div class="col-lg-4 col-md-12">
                           <?php
-                            $PeproDevUPS_Profile->add_input(_x("First Name", "edit-user", $PeproDevUPS_Profile->td), "firstname", "$current_user->user_firstname", "required ", "");
+                            $PeproDevUPS_Profile->add_input(_x("First Name", "edit-user", "peprodev-ups"), "firstname", "$current_user->user_firstname", "required ", "");
                           ?>
                         </div>
                         <div class="col-lg-4 col-md-12">
                           <?php
-                            $PeproDevUPS_Profile->add_input(_x("Last Name", "edit-user", $PeproDevUPS_Profile->td), "lastname", "$current_user->user_lastname", "required ", "");
+                            $PeproDevUPS_Profile->add_input(_x("Last Name", "edit-user", "peprodev-ups"), "lastname", "$current_user->user_lastname", "required ", "");
                           ?>
                         </div>
                         <div class="col-lg-4 col-md-12">
                           <?php
-                            $PeproDevUPS_Profile->add_input(_x("Display Publicly as", "edit-user", $PeproDevUPS_Profile->td), "display_name", "$current_user->display_name", "required ", "");
+                            $PeproDevUPS_Profile->add_input(_x("Display Publicly as", "edit-user", "peprodev-ups"), "display_name", "$current_user->display_name", "required ", "");
                           ?>
                         </div>
                     </div>
@@ -63,7 +63,7 @@ $PeproDevUPS_Profile->change_dashboard_title(_x("Edit", "user-dashboard", $Pepro
                             ?>
                             <div class="col-lg-4 col-md-12">
                               <?php
-                                $PeproDevUPS_Profile->add_input(_x("Email", "edit-user", $PeproDevUPS_Profile->td), "email", "$current_user->user_email", ($PeproDevUPS_Login->is_email_field_req ? "required" : "") . ' autocomplete="off" ', "", "email");
+                                $PeproDevUPS_Profile->add_input(_x("Email", "edit-user", "peprodev-ups"), "email", "$current_user->user_email", ($PeproDevUPS_Login->is_email_field_req ? "required" : "") . ' autocomplete="off" ', "", "email");
                               ?>
                             </div>
                             <?php
@@ -71,12 +71,12 @@ $PeproDevUPS_Profile->change_dashboard_title(_x("Edit", "user-dashboard", $Pepro
                           ?>
                         <div class="col-lg-4 col-md-12">
                           <?php
-                            $PeproDevUPS_Profile->add_input(_x("Current Password", "edit-user", $PeproDevUPS_Profile->td), "password_current", "", 'autocomplete="off" ', "", "password");
+                            $PeproDevUPS_Profile->add_input(_x("Current Password", "edit-user", "peprodev-ups"), "password_current", "", 'autocomplete="off" ', "", "password");
                             ?>
                         </div>
                         <div class="col-lg-4 col-md-12">
                           <?php
-                            $PeproDevUPS_Profile->add_input(_x("New Password", "edit-user", $PeproDevUPS_Profile->td), "password_new", "", 'autocomplete="off" ', "", "password");
+                            $PeproDevUPS_Profile->add_input(_x("New Password", "edit-user", "peprodev-ups"), "password_new", "", 'autocomplete="off" ', "", "password");
                             ?>
                         </div>
                     </div>
@@ -91,7 +91,7 @@ $PeproDevUPS_Profile->change_dashboard_title(_x("Edit", "user-dashboard", $Pepro
                     <?php do_action("peprofile_user_details_edit_form_end"); ?>
                     <div class=" mt-3">
                       <button id="submit-profile-changes" href="#" class="btn btn-lg btn-info btn-block loadingRings" type="submit">
-                          <?php echo esc_html_x("Save Edit", "edit-user", $PeproDevUPS_Profile->td);?>
+                          <?php echo esc_html_x("Save Edit", "edit-user", "peprodev-ups");?>
                       </button>
                     </div>
                 </form>

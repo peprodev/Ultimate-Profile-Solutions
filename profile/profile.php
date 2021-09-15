@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/15 13:52:25
+# @Last modified time: 2021/09/15 14:33:28
 if (!class_exists("PeproDevUPS_Profile")) {
     class PeproDevUPS_Profile
     {
@@ -508,7 +508,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
         public function media_buttons_add_new()
         {
           $current_screen = get_current_screen();
-          if ( $current_screen && 'toplevel_page_pepro' === $current_screen->base ){
+          if ( $current_screen && 'toplevel_page_peprodev-ups' === $current_screen->base ){
             ?>
             <button href="#" class="button <?php echo "peprodev-ups";?>_shortcodehandler peprofile-open-box">
               <i class='fa fa-external-link'></i>

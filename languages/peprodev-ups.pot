@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: PeproDev Ultimate Profile Solutions\n"
-"POT-Creation-Date: 2021-09-11 11:37+0430\n"
+"POT-Creation-Date: 2021-09-15 14:38+0430\n"
 "PO-Revision-Date: 2021-09-11 11:36+0430\n"
 "Last-Translator: Amirhosseinhpv <its@hpv.im>\n"
 "Language-Team: Amirhosseinhpv <its@hpv.im>\n"
@@ -30,28 +30,16 @@ msgstr ""
 msgid "WordPress Admin"
 msgstr ""
 
-#: core/apps/home.php:52
-msgid "<i class='material-icons'>wordpress</i>"
-msgstr ""
-
 #: core/apps/home.php:53
 msgid "Homepage"
-msgstr ""
-
-#: core/apps/home.php:53
-msgid "<i class='material-icons'>home</i>"
 msgstr ""
 
 #: core/apps/home.php:54
 msgid "User Profile"
 msgstr ""
 
-#: core/apps/home.php:54
-msgid "<i class='material-icons'>supervised_user_circle</i>"
-msgstr ""
-
-#: core/apps/home.php:80 core/apps/home.php:87 core/main.php:265
-#: core/main.php:281
+#: core/apps/home.php:80 core/apps/home.php:87 core/main.php:264
+#: core/main.php:280
 msgid "Pepro Dev"
 msgstr ""
 
@@ -66,7 +54,7 @@ msgid "Copyright %1$s, made with %2$s by %3$s for a better web."
 msgstr ""
 
 #. Plugin Name of the plugin/theme
-#: core/main.php:37 core/main.php:491
+#: core/main.php:37 core/main.php:490
 msgid "PeproDev Ultimate Profile Solutions"
 msgstr ""
 
@@ -83,7 +71,7 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
-#: core/main.php:150 core/main.php:607 core/main.php:608
+#: core/main.php:150 core/main.php:606 core/main.php:607
 msgctxt "peprocore-appearance-setting"
 msgid "PeproDev UPS"
 msgstr ""
@@ -100,220 +88,220 @@ msgstr ""
 msgid "PeproDev UPS Settings"
 msgstr ""
 
-#: core/main.php:253
+#: core/main.php:252
 msgid "Please wait ..."
 msgstr ""
 
-#: core/main.php:265 core/main.php:281 profile/profile.php:3051
+#: core/main.php:264 core/main.php:280 profile/profile.php:3051
 #, php-format
 msgctxt "footer-copyright"
 msgid "Thanks for using %s products"
 msgstr ""
 
-#: core/main.php:268 profile/profile.php:3056
+#: core/main.php:267 profile/profile.php:3056
 #, php-format
 msgctxt "footer-copyright"
 msgid "Version %s"
 msgstr ""
 
-#: core/main.php:287
+#: core/main.php:286
 msgid "Shortcode and Hooks for Developers"
 msgstr ""
 
-#: core/main.php:290
+#: core/main.php:289
 msgid ""
 "Set maximum number of suggestion for each item. Use 0 to trun off item "
 "display."
 msgstr ""
 
-#: core/main.php:291
+#: core/main.php:290
 msgid "Trend items age (day)"
 msgstr ""
 
-#: core/main.php:294
+#: core/main.php:293
 msgid "Save setting"
 msgstr ""
 
-#: core/main.php:295
+#: core/main.php:294
 msgid ""
 "Are you sure you want to clear all searches history (trend items) from "
 "database?"
 msgstr ""
 
-#: core/main.php:295
+#: core/main.php:294
 msgid "Empty Database"
 msgstr ""
 
-#: core/main.php:338 login/login.php:3814 profile/profile.php:1615
+#: core/main.php:337 login/login.php:3814 profile/profile.php:1615
 msgid "Settings Successfully Saved."
 msgstr ""
 
-#: core/main.php:354
+#: core/main.php:353
 msgid "PeproDev UPS"
 msgstr ""
 
-#: core/main.php:395 profile/profile.php:3138
+#: core/main.php:394 profile/profile.php:3138
 #, php-format
 msgctxt "setting-page"
 msgid "Enter %s"
 msgstr ""
 
-#: core/main.php:404 profile/profile.php:3148
+#: core/main.php:403 profile/profile.php:3148
 #, php-format
 msgctxt "setting-page"
 msgid "Choose %s"
 msgstr ""
 
-#: core/main.php:474
+#: core/main.php:473
 msgid "Contact support@pepro.dev for more information"
 msgstr ""
 
-#: core/main.php:494
+#: core/main.php:493
 #, php-format
 msgid "Welcome to v.%s"
 msgstr ""
 
-#: core/main.php:496
+#: core/main.php:495
 msgid "WordPress Admin Dashboard"
 msgstr ""
 
-#: core/main.php:497
+#: core/main.php:496
 msgid "WordPress Plugins"
 msgstr ""
 
-#: core/main.php:498
+#: core/main.php:497
 msgid "Website Home Page"
 msgstr ""
 
-#: core/main.php:501
+#: core/main.php:500
 msgid "Profile Page"
 msgstr ""
 
-#: core/main.php:526
+#: core/main.php:525
 msgctxt "peprocore-appearance-setting"
 msgid "Appearance"
 msgstr ""
 
-#: core/main.php:538
+#: core/main.php:537
 msgctxt "peprocore-appearance-setting"
 msgid "Theme Scheme"
 msgstr ""
 
-#: core/main.php:541
+#: core/main.php:540
 msgctxt "peprocore-appearance-setting"
 msgid "Dark Mode"
 msgstr ""
 
-#: core/main.php:542
+#: core/main.php:541
 msgctxt "peprocore-appearance-setting"
 msgid "Light Mode"
 msgstr ""
 
-#: core/main.php:549
+#: core/main.php:548
 msgctxt "peprocore-appearance-setting"
 msgid "Theme Color"
 msgstr ""
 
-#: core/main.php:552
+#: core/main.php:551
 msgctxt "peprocore-appearance-setting"
 msgid "Purple"
 msgstr ""
 
-#: core/main.php:553
+#: core/main.php:552
 msgctxt "peprocore-appearance-setting"
 msgid "Azure"
 msgstr ""
 
-#: core/main.php:554
+#: core/main.php:553
 msgctxt "peprocore-appearance-setting"
 msgid "Green"
 msgstr ""
 
-#: core/main.php:555
+#: core/main.php:554
 msgctxt "peprocore-appearance-setting"
 msgid "Orange"
 msgstr ""
 
-#: core/main.php:556
+#: core/main.php:555
 msgctxt "peprocore-appearance-setting"
 msgid "Red"
 msgstr ""
 
-#: core/main.php:561
+#: core/main.php:560
 msgctxt "peprocore-appearance-setting"
 msgid "Sidebar Image"
 msgstr ""
 
-#: core/main.php:573
+#: core/main.php:572
 msgid "Sidebar 1"
 msgstr ""
 
-#: core/main.php:574
+#: core/main.php:573
 msgid "Sidebar 2"
 msgstr ""
 
-#: core/main.php:575
+#: core/main.php:574
 msgid "Sidebar 3"
 msgstr ""
 
-#: core/main.php:576
+#: core/main.php:575
 msgid "Sidebar 4"
 msgstr ""
 
-#: core/main.php:577
+#: core/main.php:576
 msgid "Sidebar 5"
 msgstr ""
 
-#: core/main.php:578
+#: core/main.php:577
 msgid "Sidebar 6"
 msgstr ""
 
-#: core/main.php:579
+#: core/main.php:578
 msgid "Sidebar 7"
 msgstr ""
 
-#: core/main.php:580
+#: core/main.php:579
 msgid "Sidebar 8"
 msgstr ""
 
-#: core/main.php:581
+#: core/main.php:580
 msgid "Sidebar 9"
 msgstr ""
 
-#: core/main.php:582
+#: core/main.php:581
 msgid "Sidebar 10"
 msgstr ""
 
-#: core/main.php:583
+#: core/main.php:582
 msgid "Sidebar 11"
 msgstr ""
 
-#: core/main.php:584
+#: core/main.php:583
 msgid "Sidebar 12"
 msgstr ""
 
-#: core/main.php:585
+#: core/main.php:584
 msgid "Sidebar 13"
 msgstr ""
 
-#: core/main.php:586
+#: core/main.php:585
 msgid "Sidebar Custom"
 msgstr ""
 
-#: core/main.php:595
+#: core/main.php:594
 msgid "Select Custom Image"
 msgstr ""
 
-#: core/main.php:596
+#: core/main.php:595
 msgid "Select or Upload Custom Image"
 msgstr ""
 
-#: core/main.php:602
+#: core/main.php:601
 msgctxt "peprocore-appearance-setting"
 msgid "Dashboard Title"
 msgstr ""
 
-#: core/main.php:630
+#: core/main.php:629
 msgctxt "peprocore-appearance-setting"
 msgid "Save Settings"
 msgstr ""

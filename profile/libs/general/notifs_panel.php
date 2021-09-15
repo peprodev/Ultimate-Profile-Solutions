@@ -1,26 +1,25 @@
 <?php
 
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/02 12:36:49
+# @Last modified time: 2021/09/15 14:47:56
 
 global $PeproDevUPS_Profile;
-$td          = $PeproDevUPS_Profile->td;
 $rtl         = is_rtl() ? "right" : "left";
 $page        = isset($_GET['cpage']) ? abs((int) sanitize_text_field($_GET['cpage'])) : 1;
 $srch        = isset($_GET['s']) ? sanitize_text_field(esc_html(trim($_GET['s']))) : "";
 $integrity   = wp_create_nonce('peprocorenounce');
-$trUrgent    = _x("Urgent", "notifications-priority", "pepro");
-$trHigh      = _x("High", "notifications-priority", "pepro");
-$trMedium    = _x("Medium", "notifications-priority", "pepro");
-$trLow       = _x("Low", "notifications-priority", "pepro");
-$trNormal    = _x("Normal", "notifications-priority", "pepro");
-$trRed       = _x("Red", "notif-panel", "pepro");
-$trOrange    = _x("Orange", "notif-panel", "pepro");
-$trBlue      = _x("Blue", "notif-panel", "pepro");
-$trGreen     = _x("Green", "notif-panel", "pepro");
-$trDark      = _x("Dark", "notif-panel", "pepro");
+$trUrgent    = _x("Urgent", "notifications-priority", "peprodev-ups");
+$trHigh      = _x("High", "notifications-priority", "peprodev-ups");
+$trMedium    = _x("Medium", "notifications-priority", "peprodev-ups");
+$trLow       = _x("Low", "notifications-priority", "peprodev-ups");
+$trNormal    = _x("Normal", "notifications-priority", "peprodev-ups");
+$trRed       = _x("Red", "notif-panel", "peprodev-ups");
+$trOrange    = _x("Orange", "notif-panel", "peprodev-ups");
+$trBlue      = _x("Blue", "notif-panel", "peprodev-ups");
+$trGreen     = _x("Green", "notif-panel", "peprodev-ups");
+$trDark      = _x("Dark", "notif-panel", "peprodev-ups");
 $loadingRing = '<div class="lds-ring2"><div></div><div></div><div></div><div></div></div>';
-$otif404     = sprintf( _x("No notification found! please consider %s.", "notif-panel", "pepro"), '<a data-toggle="modal" id="add_notifpopup" data-target="#add_new_notifications" href="#">'._x("adding new one", "notif-panel", "pepro").'</a>' );
+$otif404     = sprintf( _x("No notification found! please consider %s.", "notif-panel", "peprodev-ups"), '<a data-toggle="modal" id="add_notifpopup" data-target="#add_new_notifications" href="#">'._x("adding new one", "notif-panel", "peprodev-ups").'</a>' );
 
 ?>
 
@@ -36,28 +35,28 @@ $otif404     = sprintf( _x("No notification found! please consider %s.", "notif-
     <div class="card">
       <div class="card-header card-header-primary">
         <div class="lds-ring2"><div></div><div></div><div></div><div></div></div>
-        <h4 class="card-title"><?php echo esc_html_x("Notifications", "notif-panel", "pepro");?></h4>
-        <p class="card-category"><?php echo esc_html_x("You can manage notifications from here. Add, Delete, Schedule, Duplicate and Edit notifications on the fly using panle below.", "notif-panel", "pepro");?></p>
+        <h4 class="card-title"><?php echo esc_html_x("Notifications", "notif-panel", "peprodev-ups");?></h4>
+        <p class="card-category"><?php echo esc_html_x("You can manage notifications from here. Add, Delete, Schedule, Duplicate and Edit notifications on the fly using panle below.", "notif-panel", "peprodev-ups");?></p>
       </div>
       <div class="card-body">
         <div id="toggle_search_container" class="hide">
           <div class="input-group search mb-3">
-            <input class="search-here form-control" type="text" id="search-here" placeholder="<?php echo esc_html_x("Search here and hit Enter ...", "notif-panel", "pepro");?>" style="padding-inline: 0.7rem;" integrity="<?php echo esc_attr( $integrity );?>" wparam="<?php echo esc_attr( $PeproDevUPS_Profile->setting_slug );?>" lparam="search" value="<?php echo $srch;?>" />
+            <input class="search-here form-control" type="text" id="search-here" placeholder="<?php echo esc_html_x("Search here and hit Enter ...", "notif-panel", "peprodev-ups");?>" style="padding-inline: 0.7rem;" integrity="<?php echo esc_attr( $integrity );?>" wparam="<?php echo esc_attr( $PeproDevUPS_Profile->setting_slug );?>" lparam="search" value="<?php echo $srch;?>" />
             <div class="input-group-append">
-              <button class="btn btn-primary clear_search btn-sm" title="<?php echo esc_html_x("Clear search", "notif-panel", "pepro");?>"><i class="material-icons">close</i></button>
+              <button class="btn btn-primary clear_search btn-sm" title="<?php echo esc_html_x("Clear search", "notif-panel", "peprodev-ups");?>"><i class="material-icons">close</i></button>
             </div>
         </div>
         </div>
           <p>
-            <button class="btn btn-primary add_notifc loadingRings" id="add_notifpopup" href="#"><?php echo $loadingRing . _x("Add New", "notif-panel", "pepro");?></button>
-            <button class="btn btn-primary toggle_search loadingRings" id="toggle_search" href="#"><?php echo $loadingRing . _x("Search", "notif-panel", "pepro");?></button>
+            <button class="btn btn-primary add_notifc loadingRings" id="add_notifpopup" href="#"><?php echo $loadingRing . _x("Add New", "notif-panel", "peprodev-ups");?></button>
+            <button class="btn btn-primary toggle_search loadingRings" id="toggle_search" href="#"><?php echo $loadingRing . _x("Search", "notif-panel", "peprodev-ups");?></button>
           </p>
           <div class="hide mb-4" id="add_new_notifications">
             <div id="modal_add_notif">
               <div>
                 <div class="modal-header">
-                  <h5 class="modal-title addmode"><?php echo esc_html_x("Add New Notifications", "notif-panel", "pepro");?></h5>
-                  <h5 class="modal-title editmode"><?php echo esc_html_x("Edit Notification: ", "notif-panel", "pepro");?><span style="font-weight: bold;"></span></h5>
+                  <h5 class="modal-title addmode"><?php echo esc_html_x("Add New Notifications", "notif-panel", "peprodev-ups");?></h5>
+                  <h5 class="modal-title editmode"><?php echo esc_html_x("Edit Notification: ", "notif-panel", "peprodev-ups");?><span style="font-weight: bold;"></span></h5>
                   <input type="hidden" id="current_edit_notif_id" value="" />
                 </div>
                 <div class="modal-body">
@@ -65,16 +64,16 @@ $otif404     = sprintf( _x("No notification found! please consider %s.", "notif-
                     <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
                     <tbody>
                     <?php
-                      $t  = _x("Title", "notif-panel", "pepro");
-                      $tt = sprintf(_x("Enter %s", "notif-panel", "pepro"), $t);
+                      $t  = _x("Title", "notif-panel", "peprodev-ups");
+                      $tt = sprintf(_x("Enter %s", "notif-panel", "peprodev-ups"), $t);
                       $PeproDevUPS_Profile->add_notif_input( "is-required", "notifaddedit-title", $t, $tt );
-                      $t  = _x("Content", "notif-panel", "pepro");
-                      $tt = sprintf(_x("Enter %s", "notif-panel", "pepro"), $t);
+                      $t  = _x("Content", "notif-panel", "peprodev-ups");
+                      $tt = sprintf(_x("Enter %s", "notif-panel", "peprodev-ups"), $t);
                       $PeproDevUPS_Profile->add_notif_editor( "is-required", "notifaddedit-content", $t, $tt );
 
 
-                      $title = _x("Icon", "notif-panel", "pepro");
-                      $titles = _x("Pick icon (provided by FontAwesome)", "notif-panel", "pepro");
+                      $title = _x("Icon", "notif-panel", "peprodev-ups");
+                      $titles = _x("Pick icon (provided by FontAwesome)", "notif-panel", "peprodev-ups");
                       echo "<tr>
                               <td>
                                 <label class=\"text-primary\" for=\"notifaddedit-icon\">$title</label>
@@ -86,8 +85,8 @@ $otif404     = sprintf( _x("No notification found! please consider %s.", "notif-
                             </tr>";
 
 
-                      $title = _x("Icon Color", "notif-panel", "pepro");
-                      $toltip = sprintf(_x("Enter %s", "notif-panel", "pepro"), $title);
+                      $title = _x("Icon Color", "notif-panel", "peprodev-ups");
+                      $toltip = sprintf(_x("Enter %s", "notif-panel", "peprodev-ups"), $title);
                       echo "<tr><td ><label class=\"text-primary\" for=\"notifaddedit-color-bg-c4\">$title</label></td>
           	            <td>
           	              <div class=\"form-check form-check-radio form-check-inline\">
@@ -123,8 +122,8 @@ $otif404     = sprintf( _x("No notification found! please consider %s.", "notif-
           	          </td></tr>";
 
 
-                      $title = _x("Priority", "notif-panel", "pepro");
-                      $toltip = sprintf(_x("Enter %s", "notif-panel", "pepro"), $title);
+                      $title = _x("Priority", "notif-panel", "peprodev-ups");
+                      $toltip = sprintf(_x("Enter %s", "notif-panel", "peprodev-ups"), $title);
                       echo "<tr><td ><label class=\"text-primary\" for=\"notifaddedit-priority-5\">$title</label></td>
                         <td>
                           <div class=\"form-check form-check-radio form-check-inline\">
@@ -160,24 +159,24 @@ $otif404     = sprintf( _x("No notification found! please consider %s.", "notif-
                         </td>
                       </tr>";
 
-                      $t  = _x("Action 1 Title", "notif-panel", "pepro");
-                      $tt = sprintf(_x("Enter %s", "notif-panel", "pepro"), $t);
+                      $t  = _x("Action 1 Title", "notif-panel", "peprodev-ups");
+                      $tt = sprintf(_x("Enter %s", "notif-panel", "peprodev-ups"), $t);
                       $PeproDevUPS_Profile->add_notif_input("", "notifaddedit-act1", $t, $tt);
-                      $t  = _x("Action 1 URL", "notif-panel", "pepro");
-                      $tt = sprintf(_x("Enter %s", "notif-panel", "pepro"), $t);
+                      $t  = _x("Action 1 URL", "notif-panel", "peprodev-ups");
+                      $tt = sprintf(_x("Enter %s", "notif-panel", "peprodev-ups"), $t);
                       $PeproDevUPS_Profile->add_notif_input("", "notifaddedit-act1url", $t, $tt);
-                      $t  = _x("Action 2 Title", "notif-panel", "pepro");
-                      $tt = sprintf(_x("Enter %s", "notif-panel", "pepro"), $t);
+                      $t  = _x("Action 2 Title", "notif-panel", "peprodev-ups");
+                      $tt = sprintf(_x("Enter %s", "notif-panel", "peprodev-ups"), $t);
                       $PeproDevUPS_Profile->add_notif_input("", "notifaddedit-act2", $t, $tt);
-                      $t  = _x("Action 2 URL", "notif-panel", "pepro");
-                      $tt = sprintf(_x("Enter %s", "notif-panel", "pepro"), $t);
+                      $t  = _x("Action 2 URL", "notif-panel", "peprodev-ups");
+                      $tt = sprintf(_x("Enter %s", "notif-panel", "peprodev-ups"), $t);
                       $PeproDevUPS_Profile->add_notif_input("", "notifaddedit-act2url", $t, $tt);
                       $usersarray = "";
                       $users      = get_users(array( 'fields' => array( "id","display_name" ) ));
                       foreach ($users as $user) {
                           $usersarray.= "<option value='$user->id'>$user->display_name (#$user->id)</option>";
                       }
-                      $titke = _x("Global notification (for current and future users) / Uncheck to specify users", "notif-panel", "pepro");
+                      $titke = _x("Global notification (for current and future users) / Uncheck to specify users", "notif-panel", "peprodev-ups");
                       $users = '
                       <div class="form-check">
                       <label class="form-check-label">
@@ -192,11 +191,11 @@ $otif404     = sprintf( _x("No notification found! please consider %s.", "notif-
                           '.$usersarray.'
                         </select>
                         </div>';
-                      $title = _x("Global notification?", "notif-panel", "pepro");
+                      $title = _x("Global notification?", "notif-panel", "peprodev-ups");
                       echo "<tr><td ><label class=\"text-primary\" for=\"notifaddedit-users-check\">$title</label></td>
                       <td>$users</td></tr>";
 
-                      $titke = _x("Check to schedule for later / Keep unchecked to Publish Now", "notif-panel", "pepro");
+                      $titke = _x("Check to schedule for later / Keep unchecked to Publish Now", "notif-panel", "peprodev-ups");
                       $datepicker = sprintf('
                       <div class="form-check">
                       <label class="form-check-label">
@@ -218,7 +217,7 @@ $otif404     = sprintf( _x("No notification found! please consider %s.", "notif-
                           "", /*$persianDate*/
                           $titke
                       );
-                      $title = _x("Publish Later?", "notif-panel", "pepro");
+                      $title = _x("Publish Later?", "notif-panel", "peprodev-ups");
                       echo "<tr><td ><label class=\"text-primary\" for=\"notifaddedit-schedule-check\">$title</label></td>
                       <td>$datepicker</td></tr>";
                       ?>
@@ -232,16 +231,16 @@ $otif404     = sprintf( _x("No notification found! please consider %s.", "notif-
                     class="add_edit_save_notification btn btn-primary loadingRings"
                     integrity="<?php echo esc_attr( $integrity );?>"
                     wparam="<?php echo esc_attr( $PeproDevUPS_Profile->setting_slug );?>"
-                    lparam="add_new"><?php echo esc_html( $loadingRing ) . _x("Add New", "notif-panel", "pepro");?></button>
+                    lparam="add_new"><?php echo esc_html( $loadingRing ) . _x("Add New", "notif-panel", "peprodev-ups");?></button>
                   <button
                     type="button"
                     id="edit_notif"
                     class="add_edit_save_notification btn btn-primary loadingRings"
                     integrity="<?php echo esc_attr( $integrity );?>"
                     wparam="<?php echo esc_attr( $PeproDevUPS_Profile->setting_slug );?>"
-                    lparam="add_new"><?php echo esc_html( $loadingRing ) . _x("Save Edits", "notif-panel", "pepro");?></button>
-                  <button type="button" id="clear_notif_form" class="btn btn-action"><?php echo esc_html_x("Clear form", "notif-panel", "pepro");?></button>
-                  <button type="button" id='close_add_new_notifications' class="btn btn-action" data-dismiss="modal"><?php echo esc_html_x("Close", "notif-panel", "pepro");?></button>
+                    lparam="add_new"><?php echo esc_html( $loadingRing ) . _x("Save Edits", "notif-panel", "peprodev-ups");?></button>
+                  <button type="button" id="clear_notif_form" class="btn btn-action"><?php echo esc_html_x("Clear form", "notif-panel", "peprodev-ups");?></button>
+                  <button type="button" id='close_add_new_notifications' class="btn btn-action" data-dismiss="modal"><?php echo esc_html_x("Close", "notif-panel", "peprodev-ups");?></button>
                 </div>
               </div>
             </div>
@@ -250,12 +249,12 @@ $otif404     = sprintf( _x("No notification found! please consider %s.", "notif-
           <table class="table table-hover" id="notifications_list_table">
           <thead class="text-primary">
             <tr>
-              <th><?php echo esc_html_x("Date", "notif-panel", "pepro");?></th>
-              <th><?php echo esc_html_x("Title", "notif-panel", "pepro");?></th>
-              <th><?php echo esc_html_x("Publish status", "notif-panel", "pepro");?></th>
-              <th><?php echo esc_html_x("User range", "notif-panel", "pepro");?></th>
-              <th><?php echo esc_html_x("Priority", "notif-panel", "pepro");?></th>
-              <th><?php echo esc_html_x("Action", "notif-panel", "pepro");?></th>
+              <th><?php echo esc_html_x("Date", "notif-panel", "peprodev-ups");?></th>
+              <th><?php echo esc_html_x("Title", "notif-panel", "peprodev-ups");?></th>
+              <th><?php echo esc_html_x("Publish status", "notif-panel", "peprodev-ups");?></th>
+              <th><?php echo esc_html_x("User range", "notif-panel", "peprodev-ups");?></th>
+              <th><?php echo esc_html_x("Priority", "notif-panel", "peprodev-ups");?></th>
+              <th><?php echo esc_html_x("Action", "notif-panel", "peprodev-ups");?></th>
             </tr>
           </thead>
           <tbody>
@@ -275,18 +274,18 @@ $otif404     = sprintf( _x("No notification found! please consider %s.", "notif-
   <div class="modal-dialog" id="modal_add_notif" role="document" style="max-width: 60%;">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="del_notifications"><?php echo esc_html_x("Permanently Remove Notifications", "notif-panel", "pepro");?></h5>
+        <h5 class="modal-title" id="del_notifications"><?php echo esc_html_x("Permanently Remove Notifications", "notif-panel", "peprodev-ups");?></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
       </div>
       <div class="modal-body">
         <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
         <p>
-          <?php echo esc_html_x("Are you sure you want to permanently remove this notification?<br>There is no Undo action available.", "notif-panel", "pepro");?>
+          <?php echo esc_html_x("Are you sure you want to permanently remove this notification?<br>There is no Undo action available.", "notif-panel", "peprodev-ups");?>
         </p>
       </div>
       <div class="modal-footer">
-        <button type="button" id="remove_notif" class="btn btn-primary loadingRings"><?php echo $loadingRing . _x("Yes, Remove", "notif-panel", "pepro");?></button>
-        <button type="button" class="btn btn-action" data-dismiss="modal"><?php echo esc_html_x("Cancel", "notif-panel", "pepro");?></button>
+        <button type="button" id="remove_notif" class="btn btn-primary loadingRings"><?php echo $loadingRing . _x("Yes, Remove", "notif-panel", "peprodev-ups");?></button>
+        <button type="button" class="btn btn-action" data-dismiss="modal"><?php echo esc_html_x("Cancel", "notif-panel", "peprodev-ups");?></button>
       </div>
     </div>
   </div>

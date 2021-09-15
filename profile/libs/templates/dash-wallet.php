@@ -1,17 +1,17 @@
 <?php
 
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/08/29 00:00:30
+# @Last modified time: 2021/09/15 14:50:35
 
 
 global $PeproDevUPS_Profile;
-$PeproDevUPS_Profile->change_dashboard_title(_x("Wallet", "user-dashboard", $PeproDevUPS_Profile->td));
+$PeproDevUPS_Profile->change_dashboard_title(_x("Wallet", "user-dashboard", "peprodev-ups"));
 ?>
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
       <div class="overview-wrap">
-        <h2 class="title-1"><?php echo esc_html_x("Wallet", "user-dashboard", $PeproDevUPS_Profile->td);?></h2>
+        <h2 class="title-1"><?php echo esc_html_x("Wallet", "user-dashboard", "peprodev-ups");?></h2>
       </div>
     </div>
   </div>

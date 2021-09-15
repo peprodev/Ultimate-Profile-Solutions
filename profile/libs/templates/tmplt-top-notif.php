@@ -1,7 +1,7 @@
 <?php
 
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/04 14:34:37
+# @Last modified time: 2021/09/15 14:51:30
 
 
 global $PeproDevUPS_Profile , $wp , $current_profile_url;
@@ -9,12 +9,12 @@ $current_page = home_url($wp->request);
 $current_profile_url = $current_page;
 
 $number = $PeproDevUPS_Profile->get_user_notification_count(get_current_user_id());
-$notif = __("You have no new notification.", $PeproDevUPS_Profile->td);
-if ($number > 0) {  $notif = sprintf(__("You have %s unread notifications.", $PeproDevUPS_Profile->td), "<span class='nunread'>$number</span>");}
+$notif = __("You have no new notification.", "peprodev-ups");
+if ($number > 0) {  $notif = sprintf(__("You have %s unread notifications.", "peprodev-ups"), "<span class='nunread'>$number</span>");}
 
 $Anumber = $PeproDevUPS_Profile->get_user_announcements_count(get_current_user_id());
-$Anotif = __("You have no new announcement.", $PeproDevUPS_Profile->td);
-if ($Anumber > 0) {  $Anotif = sprintf(__("You have %s unread announcements.", $PeproDevUPS_Profile->td), "<span class='nunread'>$Anumber</span>");}
+$Anotif = __("You have no new announcement.", "peprodev-ups");
+if ($Anumber > 0) {  $Anotif = sprintf(__("You have %s unread announcements.", "peprodev-ups"), "<span class='nunread'>$Anumber</span>");}
 
 ?>
 <div class="noti__item notifications js-item-menu">
@@ -33,7 +33,7 @@ if ($Anumber > 0) {  $Anotif = sprintf(__("You have %s unread announcements.", $
         } ?>
 
         <div class="notifi__footer">
-            <a href="<?php echo "{$current_page}/?section=notifications";?>"><?php esc_html_e("All notifications",$PeproDevUPS_Profile->td);?></a>
+            <a href="<?php echo "{$current_page}/?section=notifications";?>"><?php esc_html_e("All notifications","peprodev-ups");?></a>
         </div>
     </div>
 </div>
@@ -53,7 +53,7 @@ if ($Anumber > 0) {  $Anotif = sprintf(__("You have %s unread announcements.", $
         } ?>
 
         <div class="notifi__footer">
-            <a href="<?php echo "{$current_page}/?section=announcements";?>"><?php esc_html_e("All announcements",$PeproDevUPS_Profile->td);?></a>
+            <a href="<?php echo "{$current_page}/?section=announcements";?>"><?php esc_html_e("All announcements","peprodev-ups");?></a>
         </div>
     </div>
 </div>

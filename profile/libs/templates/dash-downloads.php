@@ -1,12 +1,21 @@
 <?php
+# @Author: Amirhosseinhpv
+# @Date:   2021/08/28 00:07:32
+# @Email:  its@hpv.im
+# @Last modified by:   Amirhosseinhpv
+# @Last modified time: 2021/09/15 14:47:50
+# @License: GPLv2
+# @Copyright: Copyright © Amirhosseinhpv (https://hpv.im), all rights reserved.
+
+
 global $PeproDevUPS_Profile;
-$PeproDevUPS_Profile->change_dashboard_title(_x("Downloads","user-dashboard",$PeproDevUPS_Profile->td));
+$PeproDevUPS_Profile->change_dashboard_title(_x("Downloads","user-dashboard","peprodev-ups"));
 ?>
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
         <div class="overview-wrap">
-            <h2 class="title-1"><?php echo esc_html_x("Downloads","user-dashboard",$PeproDevUPS_Profile->td);?></h2>
+            <h2 class="title-1"><?php echo esc_html_x("Downloads","user-dashboard","peprodev-ups");?></h2>
         </div>
     </div>
   </div>

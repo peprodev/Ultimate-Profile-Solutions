@@ -1,7 +1,10 @@
 <?php
+# @Last modified by:   Amirhosseinhpv
+# @Last modified time: 2021/09/15 14:50:29
+
 global $PeproDevUPS_Profile, $wp;
 $current_page = $_SERVER['REQUEST_URI'];
-$PeproDevUPS_Profile->change_dashboard_title(_x("Order Tracking","user-dashboard",$PeproDevUPS_Profile->td));
+$PeproDevUPS_Profile->change_dashboard_title(_x("Order Tracking","user-dashboard","peprodev-ups"));
 $PeproDevUPS_Profile->dashboard_add_css($PeproDevUPS_Profile->get_wc_asset_url( 'assets/css/woocommerce-layout.css' ));
 $PeproDevUPS_Profile->dashboard_add_css($PeproDevUPS_Profile->get_wc_asset_url( 'assets/css/woocommerce-smallscreen.css' ));
 $PeproDevUPS_Profile->dashboard_add_css($PeproDevUPS_Profile->get_wc_asset_url( 'assets/css/woocommerce.css' ));
@@ -71,14 +74,14 @@ is_rtl() AND $PeproDevUPS_Profile->dashboard_add_css_inline('
   <div class="row">
     <div class="col-md-12">
         <div class="overview-wrap">
-            <h2 class="title-1"><?php echo esc_html_x("Order Tracking","user-dashboard",$PeproDevUPS_Profile->td);?></h2>
+            <h2 class="title-1"><?php echo esc_html_x("Order Tracking","user-dashboard","peprodev-ups");?></h2>
         </div>
     </div>
   </div>
   <div class="row m-t-25">
     <div class="col-12">
         <div class="card">
-            <div class="card-header"><?php echo esc_html_x("Order Tracking","user-dashboard",$PeproDevUPS_Profile->td);?>
+            <div class="card-header"><?php echo esc_html_x("Order Tracking","user-dashboard","peprodev-ups");?>
              <a class="back-to-top btn btn-warning btn-sm mr-2 ml-2" style="padding: 0 0.3rem; font-size: 0.8rem; display:none;" href="<?php echo $current_page;?>">
              <i class="zmdi zmdi-long-arrow-return"></i>
            </a>
