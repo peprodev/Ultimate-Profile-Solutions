@@ -1,7 +1,7 @@
 <?php
 
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/08/29 00:00:11
+# @Last modified time: 2021/09/15 13:51:15
 
 global $PeproDevUPS_Profile, $rtl, $wp;
 $PeproDevUPS_Profile->change_dashboard_title();
@@ -12,7 +12,7 @@ $PeproDevUPS_Profile->change_dashboard_title();
     do_action( "peprofile_homedashboard__before_start" );
 
     if ("p1" == get_option("{$PeproDevUPS_Profile->activation_status}-customposition") && "true" == get_option("{$PeproDevUPS_Profile->activation_status}-showcustomtext")){
-      echo $PeproDevUPS_Profile->get_promotion_data();
+      echo wp_kses_post( $PeproDevUPS_Profile->get_promotion_data() );
       do_action( "peprofile_homedashboard__after_customtext" );
     }
 

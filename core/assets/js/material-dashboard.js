@@ -1,3 +1,14 @@
+/**
+ * @Author: Amirhosseinhpv
+ * @Date:   2021/08/28 00:08:00
+ * @Email:  its@hpv.im
+ * @Last modified by:   Amirhosseinhpv
+ * @Last modified time: 2021/09/15 13:41:00
+ * @License: GPLv2
+ * @Copyright: Copyright © Amirhosseinhpv (https://hpv.im), all rights reserved.
+ */
+
+
 /*!
 
  =========================================================
@@ -22,10 +33,9 @@
      if (isWindows) {
        // if we are on windows OS we activate the perfectScrollbar function
        // $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar();
-
-       $('html').addClass('perfect-scrollbar-on');
+       // $('html').addClass('perfect-scrollbar-on');
      } else {
-       $('html').addClass('perfect-scrollbar-off');
+       // $('html').addClass('perfect-scrollbar-off');
      }
    })();
 

@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/11 11:29:15
+# @Last modified time: 2021/09/15 13:40:45
 if (!class_exists("PeproDevUPS_Core")){
   class PeproDevUPS_Core
   {
@@ -228,7 +228,6 @@ if (!class_exists("PeproDevUPS_Core")){
       wp_enqueue_script("popper",                     "{$PeproDevUPS_Login->assets_url}assets/popper.min.js", array( 'jquery' ), "1.5.5", true); //'1.16.0'
       wp_enqueue_script("bootstrap-material-design",  "{$this->assets_url}js/core/bootstrap-material-design.min.js", array( 'jquery' ), "1.5.5", true); //'3.0.2'
       wp_enqueue_script("default-passive-events",     "{$this->assets_url}js/default-passive-events.js", array( 'jquery' ), "1.5.5", true); //'1.0.10'
-      // wp_enqueue_script("perfect-scrollbar", "{$this->assets_url}js/plugins/perfect-scrollbar.jquery.min.js", array( 'jquery' ), '1.0.2', true);
       // Google Maps Plugin
       // wp_enqueue_script("google-map", "https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE", array( 'jquery' ), '1.0.0', true);
       // Chartist JS

@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/11 11:30:36
+# @Last modified time: 2021/09/15 13:52:25
 if (!class_exists("PeproDevUPS_Profile")) {
     class PeproDevUPS_Profile
     {
@@ -1121,7 +1121,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                     get_bloginfo("name")
                 )
             );
-            echo "<script>document.title = '$title';</script>";
+            echo "<script>document.title = '".esc_html( $title )."';</script>";
         }
         /* Woocommerce tempalate overwrite hooks
         */
@@ -1753,12 +1753,12 @@ if (!class_exists("PeproDevUPS_Profile")) {
                         array( "msg" => __("There was a problem with your request. Priority field is required.", "peprodev-ups"))
                       );
                       return false; }
-                    $act1       = isset($_POST["dparam"]["act1"]) ? sanitize_text_field(trim($_POST["dparam"]["act1"])) : null;
-                    $act1url    = isset($_POST["dparam"]["act1url"]) ? sanitize_text_field(trim($_POST["dparam"]["act1url"])) : null;
-                    $act2       = isset($_POST["dparam"]["act2"]) ? sanitize_text_field(trim($_POST["dparam"]["act2"])) : null;
-                    $act2url    = isset($_POST["dparam"]["act2url"]) ? sanitize_text_field(trim($_POST["dparam"]["act2url"])) : null;
-                    $usersCheck = isset($_POST["dparam"]["users-check"]) ? sanitize_text_field(trim($_POST["dparam"]["users-check"])) : null;
-                    $usersList  = isset($_POST["dparam"]["usersList"]) ? $_POST["dparam"]["usersList"] : null;
+                    $act1       = isset($_POST["dparam"]["act1"])         ? sanitize_text_field(trim($_POST["dparam"]["act1"])) : null;
+                    $act1url    = isset($_POST["dparam"]["act1url"])      ? sanitize_text_field(trim($_POST["dparam"]["act1url"])) : null;
+                    $act2       = isset($_POST["dparam"]["act2"])         ? sanitize_text_field(trim($_POST["dparam"]["act2"])) : null;
+                    $act2url    = isset($_POST["dparam"]["act2url"])      ? sanitize_text_field(trim($_POST["dparam"]["act2url"])) : null;
+                    $usersCheck = isset($_POST["dparam"]["users-check"])  ? sanitize_text_field(trim($_POST["dparam"]["users-check"])) : null;
+                    $usersList  = isset($_POST["dparam"]["usersList"])    ? $_POST["dparam"]["usersList"] : null;
                     if ($usersCheck == "0") {
                         if (empty($usersList)) {
                           wp_send_json_error( array( "msg"=>__("There was a problem with your request. Users List is required.", "peprodev-ups"), ) );

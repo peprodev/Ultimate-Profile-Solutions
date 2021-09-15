@@ -1,7 +1,7 @@
 <?php
 
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/08/29 00:00:22
+# @Last modified time: 2021/09/15 13:52:00
 
 global $PeproDevUPS_Profile,$current_profile_url;
 $PeproDevUPS_Profile->change_dashboard_title(_x("Notifications","user-dashboard",$PeproDevUPS_Profile->td));
@@ -35,14 +35,14 @@ if ($number > 0) {
             <div class="au-inbox-wrap js-inbox-wrap">
               <div class="au-message js-list-load">
                   <div class="au-message__noti notifications">
-                      <p><?php echo $notif_unread_count;?></p>
+                      <p><?php echo wp_kses_post( $notif_unread_count );?></p>
                   </div>
                   <div class="au-message-list notifications">
-                      <?php echo $titles;?>
+                      <?php echo wp_kses_post( $titles );?>
                   </div>
               </div>
 
-              <?php echo $notifs;?>
+              <?php echo wp_kses_post( $notifs );?>
             </div>
         </div>
     </div>

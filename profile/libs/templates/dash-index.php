@@ -2,7 +2,7 @@
 <?php
 
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/03 15:33:00
+# @Last modified time: 2021/09/15 13:51:40
 
 global $PeproDevUPS_Profile, $rtl, $wp, $PeproDevUPS_ProfileStripslashesNotifsJs;
 $current_section                = isset($_GET["section"]) ? sanitize_text_field(trim($_GET["section"])) : "";
@@ -17,7 +17,7 @@ if ("true" === get_option("{$PeproDevUPS_Profile->activation_status}-footerhook"
 ?>
 <html lang="en" dir="<?php echo is_rtl() ? "rtl" : "ltr";?>">
 <head>
-  <title><?php echo $title;?></title>
+  <title><?php echo esc_html( $title );?></title>
   <base href="<?php echo home_url($wp->request);?>">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
