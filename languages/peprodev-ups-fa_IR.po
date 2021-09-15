@@ -1,13 +1,15 @@
 msgid ""
 msgstr ""
-"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
 "Project-Id-Version: PeproDev Ultimate Profile Solutions\n"
-"POT-Creation-Date: 2021-09-11 11:37+0430\n"
-"PO-Revision-Date: 2021-09-11 11:38+0430\n"
+"POT-Creation-Date: 2021-09-15 14:38+0430\n"
+"PO-Revision-Date: 2021-09-15 15:11+0430\n"
+"Last-Translator: Amirhosseinhpv <its@hpv.im>\n"
 "Language-Team: Amirhosseinhpv <its@hpv.im>\n"
+"Language: fa_IR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
 "X-Generator: Poedit 2.2\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
@@ -16,8 +18,6 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
 "esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
 "_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
-"Last-Translator: Amirhosseinhpv <its@hpv.im>\n"
-"Language: fa_IR\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
@@ -30,28 +30,16 @@ msgstr "سولوشن کامل پروفایل پپرو"
 msgid "WordPress Admin"
 msgstr "مدیریت وردپرس"
 
-#: core/apps/home.php:52
-msgid "<i class='material-icons'>wordpress</i>"
-msgstr "<i class='material-icons'>wordpress</i>"
-
 #: core/apps/home.php:53
 msgid "Homepage"
 msgstr "صفحه اصلی"
-
-#: core/apps/home.php:53
-msgid "<i class='material-icons'>home</i>"
-msgstr "<i class='material-icons'>home</i>"
 
 #: core/apps/home.php:54
 msgid "User Profile"
 msgstr "پروفایل کاربر"
 
-#: core/apps/home.php:54
-msgid "<i class='material-icons'>supervised_user_circle</i>"
-msgstr "<i class='material-icons'>supervised_user_circle</i>"
-
-#: core/apps/home.php:80 core/apps/home.php:87 core/main.php:265
-#: core/main.php:281
+#: core/apps/home.php:80 core/apps/home.php:87 core/main.php:264
+#: core/main.php:280
 msgid "Pepro Dev"
 msgstr "گروه توسعه پپرو"
 
@@ -68,7 +56,7 @@ msgstr ""
 "بهتر."
 
 #. Plugin Name of the plugin/theme
-#: core/main.php:37 core/main.php:491
+#: core/main.php:37 core/main.php:490
 msgid "PeproDev Ultimate Profile Solutions"
 msgstr "سولوشن کامل پروفایل پپرو"
 
@@ -85,7 +73,7 @@ msgstr "مستندات"
 msgid "Dashboard"
 msgstr "پیشخوان"
 
-#: core/main.php:150 core/main.php:607 core/main.php:608
+#: core/main.php:150 core/main.php:606 core/main.php:607
 msgctxt "peprocore-appearance-setting"
 msgid "PeproDev UPS"
 msgstr "سولوشن پروفایل"
@@ -102,27 +90,27 @@ msgstr "تنظیمات"
 msgid "PeproDev UPS Settings"
 msgstr "تنظیمات سولوشن کامل پروفایل پپرو"
 
-#: core/main.php:253
+#: core/main.php:252
 msgid "Please wait ..."
 msgstr "لطفا صبر کنید ..."
 
-#: core/main.php:265 core/main.php:281 profile/profile.php:3051
+#: core/main.php:264 core/main.php:280 profile/profile.php:3051
 #, php-format
 msgctxt "footer-copyright"
 msgid "Thanks for using %s products"
 msgstr "بابت استفاده از محصولات %s سپاسگزاریم"
 
-#: core/main.php:268 profile/profile.php:3056
+#: core/main.php:267 profile/profile.php:3056
 #, php-format
 msgctxt "footer-copyright"
 msgid "Version %s"
 msgstr "نسخه %s"
 
-#: core/main.php:287
+#: core/main.php:286
 msgid "Shortcode and Hooks for Developers"
 msgstr "شورت‌کد و هوک ها برای توسعه دهندگان"
 
-#: core/main.php:290
+#: core/main.php:289
 msgid ""
 "Set maximum number of suggestion for each item. Use 0 to trun off item "
 "display."
@@ -130,15 +118,15 @@ msgstr ""
 "حداکثر موارد نمایشی در نتایج جستجو را مشخص کنید. برای مخفی سازی 0 را وارد "
 "کنید."
 
-#: core/main.php:291
+#: core/main.php:290
 msgid "Trend items age (day)"
 msgstr "عمر جستجوهای ترند (روز)"
 
-#: core/main.php:294
+#: core/main.php:293
 msgid "Save setting"
 msgstr "ذخیره تنظیمات"
 
-#: core/main.php:295
+#: core/main.php:294
 msgid ""
 "Are you sure you want to clear all searches history (trend items) from "
 "database?"
@@ -146,180 +134,180 @@ msgstr ""
 "آیا مطمئن هستید میخواهید جداول پایگاه داده ( داده جستجوهای ترند ) را حذف "
 "کنید؟؟"
 
-#: core/main.php:295
+#: core/main.php:294
 msgid "Empty Database"
 msgstr "خالی کردن دیتابیس"
 
-#: core/main.php:338 login/login.php:3814 profile/profile.php:1615
+#: core/main.php:337 login/login.php:3814 profile/profile.php:1615
 msgid "Settings Successfully Saved."
 msgstr "تنظیمات با موفقیت ذخیره شد."
 
-#: core/main.php:354
+#: core/main.php:353
 msgid "PeproDev UPS"
 msgstr "سولوشن پروفایل"
 
-#: core/main.php:395 profile/profile.php:3138
+#: core/main.php:394 profile/profile.php:3138
 #, php-format
 msgctxt "setting-page"
 msgid "Enter %s"
 msgstr "%s را وارد کنید"
 
-#: core/main.php:404 profile/profile.php:3148
+#: core/main.php:403 profile/profile.php:3148
 #, php-format
 msgctxt "setting-page"
 msgid "Choose %s"
 msgstr "%s را انتخاب کنید"
 
-#: core/main.php:474
+#: core/main.php:473
 msgid "Contact support@pepro.dev for more information"
 msgstr "برای اطلاعات بیشتر با ایمیل support@pepro.co در تماس باشید"
 
-#: core/main.php:494
+#: core/main.php:493
 #, php-format
 msgid "Welcome to v.%s"
 msgstr "به نسخه %s خوش آمدید"
 
-#: core/main.php:496
+#: core/main.php:495
 msgid "WordPress Admin Dashboard"
 msgstr "داشبورد مدیریت وردپرس"
 
-#: core/main.php:497
+#: core/main.php:496
 msgid "WordPress Plugins"
 msgstr "افزونه های وردپرس"
 
-#: core/main.php:498
+#: core/main.php:497
 msgid "Website Home Page"
 msgstr "صفحه اصلی وبسایت"
 
-#: core/main.php:501
+#: core/main.php:500
 msgid "Profile Page"
 msgstr "صفحه پروفایل کاربر"
 
-#: core/main.php:526
+#: core/main.php:525
 msgctxt "peprocore-appearance-setting"
 msgid "Appearance"
 msgstr "نمایش"
 
-#: core/main.php:538
+#: core/main.php:537
 msgctxt "peprocore-appearance-setting"
 msgid "Theme Scheme"
 msgstr "طرح تم"
 
-#: core/main.php:541
+#: core/main.php:540
 msgctxt "peprocore-appearance-setting"
 msgid "Dark Mode"
 msgstr "حالت تاریک"
 
-#: core/main.php:542
+#: core/main.php:541
 msgctxt "peprocore-appearance-setting"
 msgid "Light Mode"
 msgstr "حالت روشن"
 
-#: core/main.php:549
+#: core/main.php:548
 msgctxt "peprocore-appearance-setting"
 msgid "Theme Color"
 msgstr "رنگ قالب"
 
-#: core/main.php:552
+#: core/main.php:551
 msgctxt "peprocore-appearance-setting"
 msgid "Purple"
 msgstr "بنفش"
 
-#: core/main.php:553
+#: core/main.php:552
 msgctxt "peprocore-appearance-setting"
 msgid "Azure"
 msgstr "آبی"
 
-#: core/main.php:554
+#: core/main.php:553
 msgctxt "peprocore-appearance-setting"
 msgid "Green"
 msgstr "سبز"
 
-#: core/main.php:555
+#: core/main.php:554
 msgctxt "peprocore-appearance-setting"
 msgid "Orange"
 msgstr "نارنجی"
 
-#: core/main.php:556
+#: core/main.php:555
 msgctxt "peprocore-appearance-setting"
 msgid "Red"
 msgstr "قرمز"
 
-#: core/main.php:561
+#: core/main.php:560
 msgctxt "peprocore-appearance-setting"
 msgid "Sidebar Image"
 msgstr "عکس سایدبار"
 
-#: core/main.php:573
+#: core/main.php:572
 msgid "Sidebar 1"
 msgstr "سایدبار 1"
 
-#: core/main.php:574
+#: core/main.php:573
 msgid "Sidebar 2"
 msgstr "سایدبار 2"
 
-#: core/main.php:575
+#: core/main.php:574
 msgid "Sidebar 3"
 msgstr "سایدبار 3"
 
-#: core/main.php:576
+#: core/main.php:575
 msgid "Sidebar 4"
 msgstr "سایدبار 4"
 
-#: core/main.php:577
+#: core/main.php:576
 msgid "Sidebar 5"
 msgstr "سایدبار 5"
 
-#: core/main.php:578
+#: core/main.php:577
 msgid "Sidebar 6"
 msgstr "سایدبار 6"
 
-#: core/main.php:579
+#: core/main.php:578
 msgid "Sidebar 7"
 msgstr "سایدبار 7"
 
-#: core/main.php:580
+#: core/main.php:579
 msgid "Sidebar 8"
 msgstr "سایدبار 8"
 
-#: core/main.php:581
+#: core/main.php:580
 msgid "Sidebar 9"
 msgstr "سایدبار 9"
 
-#: core/main.php:582
+#: core/main.php:581
 msgid "Sidebar 10"
 msgstr "سایدبار 10"
 
-#: core/main.php:583
+#: core/main.php:582
 msgid "Sidebar 11"
 msgstr "سایدبار 11"
 
-#: core/main.php:584
+#: core/main.php:583
 msgid "Sidebar 12"
 msgstr "سایدبار 12"
 
-#: core/main.php:585
+#: core/main.php:584
 msgid "Sidebar 13"
 msgstr "سایدبار 13"
 
-#: core/main.php:586
+#: core/main.php:585
 msgid "Sidebar Custom"
 msgstr "عکس شخصی سازی شده"
 
-#: core/main.php:595
+#: core/main.php:594
 msgid "Select Custom Image"
 msgstr "انتخاب عکس دیگر"
 
-#: core/main.php:596
+#: core/main.php:595
 msgid "Select or Upload Custom Image"
 msgstr "انتخاب یا آپلود عکس دیگر"
 
-#: core/main.php:602
+#: core/main.php:601
 msgctxt "peprocore-appearance-setting"
 msgid "Dashboard Title"
 msgstr "عنوان داشبورد"
 
-#: core/main.php:630
+#: core/main.php:629
 msgctxt "peprocore-appearance-setting"
 msgid "Save Settings"
 msgstr "ذخیره تنظیمات"
@@ -3744,3 +3732,12 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "https://pepro.dev/"
 msgstr "https://pepro.dev/"
+
+#~ msgid "<i class='material-icons'>wordpress</i>"
+#~ msgstr "<i class='material-icons'>wordpress</i>"
+
+#~ msgid "<i class='material-icons'>home</i>"
+#~ msgstr "<i class='material-icons'>home</i>"
+
+#~ msgid "<i class='material-icons'>supervised_user_circle</i>"
+#~ msgstr "<i class='material-icons'>supervised_user_circle</i>"
