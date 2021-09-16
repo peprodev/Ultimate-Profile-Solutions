@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/11 11:24:25
+# @Last modified time: 2021/09/16 11:46:40
 add_thickbox();
 wp_enqueue_style("wp-color-picker");
 wp_enqueue_script("wp-color-picker");
@@ -456,12 +456,18 @@ foreach ($styleFiles as $style) {
                 <div class="col-lg-4 col-md-12">
                   <div class="mt-3 mb-3 fields--tools">
                     <h4 class="mb-3"><?php esc_html_e("Login/Registeration Type", "peprodev-ups");?></h4>
-                    <label class="row w-100 align-items-center m-0">
+                    <label class="row w-100 align-items-center m-0 mb-2">
                       <input autocomplete="off" type="radio" class='form-checkbox iostoggle single-required mr-2 reglogin_type' <?php checked($this->reglogin_type === "mobile", true);?> name="reglogin_type" value="mobile" /><?php esc_html_e("Using Mobile OTP", "peprodev-ups");?>
                     </label>
-                    <label class="row w-100 align-items-center m-0">
+                    <label class="row w-100 align-items-center m-0 mb-2">
                       <input autocomplete="off" type="radio" class='form-checkbox iostoggle single-required mr-2 reglogin_type' <?php checked($this->reglogin_type === "email", true);?> name="reglogin_type" value="email" /><?php esc_html_e("Using Email/Username & Password", "peprodev-ups");?>
                     </label>
+                    <div class="save_checkboxes">
+                      <label class="row w-100 align-items-center m-0 mb-2">
+                        <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required mr-2 auto_login_after_reg' <?php checked( $this->auto_login_after_reg, true);?> name="auto_login_after_reg" /> <?php esc_html_e("Auto-login After Registeration","peprodev-ups");?>
+                      </label>
+                    </div>
+
                   </div>
                   <div class="workspace">
                     <h4 class="mb-3 mt-4"><?php esc_html_e("Registeration Default Fields", "peprodev-ups");?></h4>
@@ -499,49 +505,127 @@ foreach ($styleFiles as $style) {
             <p class="card-category"><?php echo esc_html_x("You can control how verification and some extra feature works from here","login-section", "peprodev-ups");?></p>
           </div>
           <div class="card-body">
-            <br>
-            <div class="row save_checkboxes justify-content-between">
-              <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-reg-auto-login '>
-                <div class="col-lg-12">
-                  <label class="row w-100 align-items-center pl-3 pr-1">
-                    <input autocomplete="off" type="checkbox" class='form-checkbox single-required mr-2' <?php checked( $this->auto_login_after_reg, true);?>
-                    id="auto_login_after_reg" name="auto_login_after_reg" /> <?php esc_html_e("Registeration: Auto-login after signup","peprodev-ups");?>
-                  </label>
+            <div class="row">
+              <div class="col-6">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row justify-content-between save_sms_settings ">
+                      <p class="font-weight-bold p-3"><?php esc_html_e("Config SMS.ir WebAPI to send SMS Verification Codes", "peprodev-ups");?></p>
+                      <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-sms_api_url '>
+                        <div class="col-lg-6">
+                          <?php esc_html_e("Sending Number","peprodev-ups");?> <a href="https://ip.sms.ir/#/UserSetting" class="btn btn-sm btn-round btn-group btn-info float-left m-0" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                        <div class="col-lg-6">
+                          <input autocomplete="off" type="text" id="sms_api_url" placeholder="<?php esc_html_e("Sending Number","peprodev-ups");?>" dir="ltr" class='form-input single-required mr-2' name="sms_api_url" value="<?php echo esc_attr( $this->sms_api_url );?>" />
+                        </div>
+                      </div>
+                      <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-sms_secret_key '>
+                        <div class="col-lg-6">
+                          <?php esc_html_e("Security code","peprodev-ups");?> <a href="https://ip.sms.ir/#/UserApiKey" class="btn btn-sm btn-round btn-group btn-info float-left m-0" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                        <div class="col-lg-6">
+                          <input autocomplete="off" type="text" id="sms_secret_key" placeholder="<?php esc_html_e("Security code","peprodev-ups");?>" dir="ltr" class='form-input single-required mr-2' name="sms_secret_key" value="<?php echo esc_attr( $this->sms_secret_key );?>" />
+                        </div>
+                      </div>
+                      <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-sms_api_key '>
+                        <div class="col-lg-6">
+                          <?php esc_html_e("API Key","peprodev-ups");?>
+                        </div>
+                        <div class="col-lg-6">
+                          <input autocomplete="off" type="text" id="sms_api_key" placeholder="<?php esc_html_e("API Key","peprodev-ups");?>" dir="ltr" class='form-input single-required mr-2' name="sms_api_key" value="<?php echo esc_attr( $this->sms_api_key );?>" />
+                        </div>
+                      </div>
+                      <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-sms_ultrafastsend_id '>
+                        <div class="col-lg-6">
+                          <?php esc_html_e("UltraFastSend ID or SMS text containing [OTP]","peprodev-ups");?> <a href="https://ip.sms.ir/#/User/UltraFastSendSetting" class="btn btn-sm btn-round btn-group btn-info float-left m-0" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                        <div class="col-lg-6">
+                          <input autocomplete="off" type="text" id="sms_ultrafastsend_id" placeholder="<?php esc_html_e("UltraFastSend ID or SMS text containing [OTP]","peprodev-ups");?>" dir="ltr" class='form-input single-required mr-2' name="sms_ultrafastsend_id" value="<?php echo esc_attr( $this->sms_ultrafastsend );?>" />
+                        </div>
+                      </div>
+                      <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-sms_expiration '>
+                        <div class="col-lg-6">
+                          <?php esc_html_e("Verification expire duration (in seconds)","peprodev-ups");?>
+                        </div>
+                        <div class="col-lg-6">
+                          <input autocomplete="off" type="text" id="sms_expiration" placeholder="<?php esc_html_e("Verification expire duration","peprodev-ups");?>" dir="ltr" class='form-input single-required mr-2' name="sms_expiration" value="<?php echo esc_attr( $this->sms_expiration );?>" />
+                        </div>
+                      </div>
+                      <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-verification_digits '>
+                        <div class="col-lg-6">
+                          <?php esc_html_e("Verification Code length","peprodev-ups");?>
+                        </div>
+                        <div class="col-lg-6">
+                          <input autocomplete="off" type="text" id="verification_digits" placeholder="<?php esc_html_e("Verification Code length","peprodev-ups");?>" dir="ltr" class='form-input single-required mr-2' name="verification_digits" value="<?php echo esc_attr( $this->verification_digits );?>" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-reg-verify-email '>
-                <div class="col-lg-12">
-                  <label class="row w-100 align-items-center pl-3 pr-1">
-                    <input autocomplete="off" type="checkbox" class='form-checkbox single-required mr-2' <?php checked( $this->verify_email, true);?>
-                    id="verify_email" name="verify_email" /> <?php esc_html_e("Registeration: Verify E-mail","peprodev-ups");?>
-                  </label>
+              <div class="col-6">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row justify-content-between save_email_settings ">
+                      <p class="font-weight-bold p-3"><?php esc_html_e("Config Email Settings to send Verification Codes", "peprodev-ups");?></p>
+                      <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-email_expiration '>
+                        <div class="col-lg-6">
+                          <?php esc_html_e("Verification expire duration (in seconds)","peprodev-ups");?>
+                        </div>
+                        <div class="col-lg-6">
+                          <input autocomplete="off" type="text" id="email_expiration" placeholder="<?php esc_html_e("Verification expire duration","peprodev-ups");?>" dir="ltr" class='form-input single-required mr-2' name="email_expiration" value="<?php echo esc_attr( $this->email_expiration );?>" />
+                        </div>
+                      </div>
+                      <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-verification_email_digits '>
+                        <div class="col-lg-6">
+                          <?php esc_html_e("Verification Code length","peprodev-ups");?>
+                        </div>
+                        <div class="col-lg-6">
+                          <input autocomplete="off" type="text" id="verification_email_digits" placeholder="<?php esc_html_e("Verification Code length","peprodev-ups");?>" dir="ltr" class='form-input single-required mr-2' name="verification_email_digits" value="<?php echo esc_attr( $this->verification_email_digits );?>" />
+                        </div>
+                      </div>
+                      <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-verification_email_sender_name '>
+                        <div class="col-lg-6">
+                          <?php esc_html_e("Verification Email Sender name","peprodev-ups");?>
+                        </div>
+                        <div class="col-lg-6">
+                          <input autocomplete="off" type="text" id="verification_email_sender_name" placeholder="<?php esc_html_e("Verification Email Sender name","peprodev-ups");?>" dir="ltr" class='form-input single-required mr-2' name="verification_email_sender_name" value="<?php echo esc_attr( $this->verification_email_sender_name );?>" />
+                        </div>
+                      </div>
+                      <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-verification_email_sender '>
+                        <div class="col-lg-6">
+                          <?php esc_html_e("Verification Email Sender address","peprodev-ups");?>
+                        </div>
+                        <div class="col-lg-6">
+                          <input autocomplete="off" type="text" id="verification_email_sender" title="<?php echo "e.g. Enter noreply to send mail from noreply@".parse_url(get_bloginfo('url'), PHP_URL_HOST);?>" placeholder="<?php echo "e.g. Enter noreply to send mail from noreply@".parse_url(get_bloginfo('url'), PHP_URL_HOST);?>" dir="ltr"
+                          class='form-input single-required mr-2' name="verification_email_sender" value="<?php echo esc_attr( $this->verification_email_sender );?>" />
+                        </div>
+                      </div>
+                      <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-verification_email_template '>
+                        <div class="col-lg-12">
+                          <?php esc_html_e("Verification Email Template","peprodev-ups");?>
+                          <textarea class="codeditor" id="verification_email_template_editor" autocomplete="off" spellcheck="false" dir="ltr" rows="8" cols="80"><?php echo $this->verification_email_template;?></textarea>
+                          <textarea class="codeditor" id="verification_email_template" autocomplete="off" name="verification_email_template" spellcheck="false" dir="ltr" rows="8" cols="80" style="display:none !important;"><?php echo $this->verification_email_template;?></textarea>
+                          <?php esc_html_e("Available tags: ","peprodev-ups");?>
+                          <?php
+                          $tags = (array) apply_filters( "pepro_reglogin_verification_email_replacements", array(
+                            "[OTP]"           => "",
+                            "[request_email]" => "",
+                            "[username]"      => "",
+                            "[first_name]"    => "",
+                            "[last_name]"     => "",
+                            "[display_name]"  => "",
+                            "[user_email]"    => "",));
+                            foreach ($tags as $key => $value) {
+                              echo "<copy>$key</copy> ";
+                            }
+                            ?>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
                 </div>
               </div>
-              <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-reg-verify-mobile '>
-                <div class="col-lg-12">
-                  <label class="row w-100 align-items-center pl-3 pr-1">
-                    <input autocomplete="off" type="checkbox" class='form-checkbox single-required mr-2' <?php checked( $this->verify_mobile, true);?>
-                    id="verify_mobile" name="verify_mobile" /> <?php esc_html_e("Registeration: Verify Mobile by SMS?","peprodev-ups");?>
-                  </label>
-                </div>
-              </div>
-              <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-reg-email-as-username '>
-                <div class="col-lg-12">
-                  <label class="row w-100 align-items-center pl-3 pr-1">
-                    <input autocomplete="off" type="checkbox" class='form-checkbox single-required mr-2' <?php checked( $this->use_email_as_username, true);?>
-                    id="use_email_as_username" name="use_email_as_username" /> <?php esc_html_e("Registeration: Use E-mail as Username","peprodev-ups");?>
-                  </label>
-                </div>
-              </div>
-              <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-rag-mobile-as-username '>
-                <div class="col-lg-12">
-                  <label class="row w-100 align-items-center pl-3 pr-1">
-                    <input autocomplete="off" type="checkbox" class='form-checkbox single-required mr-2' <?php checked( $this->use_mobile_as_username, true);?>
-                    id="use_mobile_as_username" name="use_mobile_as_username" /> <?php esc_html_e("Registeration: Use Mobile as Username","peprodev-ups");?>
-                  </label>
-                </div>
-              </div>
-              <?php do_action( "pepro_reglogin_verify_fields_inner_options"); ?>
             </div>
             <br>
             <button
@@ -553,128 +637,7 @@ foreach ($styleFiles as $style) {
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-6">
-            <div class="card">
-              <div class="card-body">
-                <div class="row justify-content-between save_sms_settings ">
-                  <p class="font-weight-bold p-3"><?php esc_html_e("Config SMS.ir WebAPI to send SMS Verification Codes", "peprodev-ups");?></p>
-                  <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-sms_api_url '>
-                    <div class="col-lg-6">
-                      <?php esc_html_e("Sending Number","peprodev-ups");?> <a href="https://ip.sms.ir/#/UserSetting" class="btn btn-sm btn-round btn-group btn-info float-left m-0" target="_blank"><i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                    <div class="col-lg-6">
-                      <input autocomplete="off" type="text" id="sms_api_url" placeholder="<?php esc_html_e("Sending Number","peprodev-ups");?>" dir="ltr" class='form-input single-required mr-2' name="sms_api_url" value="<?php echo esc_attr( $this->sms_api_url );?>" />
-                    </div>
-                  </div>
-                  <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-sms_secret_key '>
-                    <div class="col-lg-6">
-                      <?php esc_html_e("Security code","peprodev-ups");?> <a href="https://ip.sms.ir/#/UserApiKey" class="btn btn-sm btn-round btn-group btn-info float-left m-0" target="_blank"><i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                    <div class="col-lg-6">
-                      <input autocomplete="off" type="text" id="sms_secret_key" placeholder="<?php esc_html_e("Security code","peprodev-ups");?>" dir="ltr" class='form-input single-required mr-2' name="sms_secret_key" value="<?php echo esc_attr( $this->sms_secret_key );?>" />
-                    </div>
-                  </div>
-                  <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-sms_api_key '>
-                    <div class="col-lg-6">
-                      <?php esc_html_e("API Key","peprodev-ups");?>
-                    </div>
-                    <div class="col-lg-6">
-                      <input autocomplete="off" type="text" id="sms_api_key" placeholder="<?php esc_html_e("API Key","peprodev-ups");?>" dir="ltr" class='form-input single-required mr-2' name="sms_api_key" value="<?php echo esc_attr( $this->sms_api_key );?>" />
-                    </div>
-                  </div>
-                  <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-sms_ultrafastsend_id '>
-                    <div class="col-lg-6">
-                      <?php esc_html_e("UltraFastSend ID or SMS text containing [OTP]","peprodev-ups");?> <a href="https://ip.sms.ir/#/User/UltraFastSendSetting" class="btn btn-sm btn-round btn-group btn-info float-left m-0" target="_blank"><i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                    <div class="col-lg-6">
-                      <input autocomplete="off" type="text" id="sms_ultrafastsend_id" placeholder="<?php esc_html_e("UltraFastSend ID or SMS text containing [OTP]","peprodev-ups");?>" dir="ltr" class='form-input single-required mr-2' name="sms_ultrafastsend_id" value="<?php echo esc_attr( $this->sms_ultrafastsend );?>" />
-                    </div>
-                  </div>
-                  <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-sms_expiration '>
-                    <div class="col-lg-6">
-                      <?php esc_html_e("Verification expire duration (in seconds)","peprodev-ups");?>
-                    </div>
-                    <div class="col-lg-6">
-                      <input autocomplete="off" type="text" id="sms_expiration" placeholder="<?php esc_html_e("Verification expire duration","peprodev-ups");?>" dir="ltr" class='form-input single-required mr-2' name="sms_expiration" value="<?php echo esc_attr( $this->sms_expiration );?>" />
-                    </div>
-                  </div>
-                  <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-verification_digits '>
-                    <div class="col-lg-6">
-                      <?php esc_html_e("Verification Code length","peprodev-ups");?>
-                    </div>
-                    <div class="col-lg-6">
-                      <input autocomplete="off" type="text" id="verification_digits" placeholder="<?php esc_html_e("Verification Code length","peprodev-ups");?>" dir="ltr" class='form-input single-required mr-2' name="verification_digits" value="<?php echo esc_attr( $this->verification_digits );?>" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-6">
-            <div class="card">
-              <div class="card-body">
-                <div class="row justify-content-between save_email_settings ">
-                  <p class="font-weight-bold p-3"><?php esc_html_e("Config Email Settings to send Verification Codes", "peprodev-ups");?></p>
-                  <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-email_expiration '>
-                    <div class="col-lg-6">
-                      <?php esc_html_e("Verification expire duration (in seconds)","peprodev-ups");?>
-                    </div>
-                    <div class="col-lg-6">
-                      <input autocomplete="off" type="text" id="email_expiration" placeholder="<?php esc_html_e("Verification expire duration","peprodev-ups");?>" dir="ltr" class='form-input single-required mr-2' name="email_expiration" value="<?php echo esc_attr( $this->email_expiration );?>" />
-                    </div>
-                  </div>
-                  <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-verification_email_digits '>
-                    <div class="col-lg-6">
-                      <?php esc_html_e("Verification Code length","peprodev-ups");?>
-                    </div>
-                    <div class="col-lg-6">
-                      <input autocomplete="off" type="text" id="verification_email_digits" placeholder="<?php esc_html_e("Verification Code length","peprodev-ups");?>" dir="ltr" class='form-input single-required mr-2' name="verification_email_digits" value="<?php echo esc_attr( $this->verification_email_digits );?>" />
-                    </div>
-                  </div>
-                  <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-verification_email_sender_name '>
-                    <div class="col-lg-6">
-                      <?php esc_html_e("Verification Email Sender name","peprodev-ups");?>
-                    </div>
-                    <div class="col-lg-6">
-                      <input autocomplete="off" type="text" id="verification_email_sender_name" placeholder="<?php esc_html_e("Verification Email Sender name","peprodev-ups");?>" dir="ltr" class='form-input single-required mr-2' name="verification_email_sender_name" value="<?php echo esc_attr( $this->verification_email_sender_name );?>" />
-                    </div>
-                  </div>
-                  <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-verification_email_sender '>
-                    <div class="col-lg-6">
-                      <?php esc_html_e("Verification Email Sender address","peprodev-ups");?>
-                    </div>
-                    <div class="col-lg-6">
-                      <input autocomplete="off" type="text" id="verification_email_sender" title="<?php echo "e.g. Enter noreply to send mail from noreply@".parse_url(get_bloginfo('url'), PHP_URL_HOST);?>" placeholder="<?php echo "e.g. Enter noreply to send mail from noreply@".parse_url(get_bloginfo('url'), PHP_URL_HOST);?>" dir="ltr"
-                      class='form-input single-required mr-2' name="verification_email_sender" value="<?php echo esc_attr( $this->verification_email_sender );?>" />
-                    </div>
-                  </div>
-                  <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-verification_email_template '>
-                    <div class="col-lg-12">
-                      <?php esc_html_e("Verification Email Template","peprodev-ups");?>
-                      <textarea class="codeditor" id="verification_email_template_editor" autocomplete="off" spellcheck="false" dir="ltr" rows="8" cols="80"><?php echo wp_unslash($this->verification_email_template);?></textarea>
-                      <textarea class="codeditor" id="verification_email_template" autocomplete="off" name="verification_email_template" spellcheck="false" dir="ltr" rows="8" cols="80" style="display:none !important;"><?php echo wp_unslash($this->verification_email_template);?></textarea>
-                      <?php esc_html_e("Available tags: ","peprodev-ups");?>
-                      <?php
-                      $tags = (array) apply_filters( "pepro_reglogin_verification_email_replacements", array(
-                        "[OTP]"           => "",
-                        "[request_email]" => "",
-                        "[username]"      => "",
-                        "[first_name]"    => "",
-                        "[last_name]"     => "",
-                        "[display_name]"  => "",
-                        "[user_email]"    => "",));
-                        foreach ($tags as $key => $value) {
-                          echo "<copy>$key</copy> ";
-                        }
-                        ?>
-                      </div>
-                    </div>
-                  </div>
-              </div>
-            </div>
-          </div>
-        </div>
+
 
 
       </div>
@@ -719,9 +682,9 @@ foreach ($styleFiles as $style) {
                       foreach ($special_pages as $key => $value) { $newarray[] = "{{$key}}: {$value["name"]}"; $newarray2[] = "<div class='mt-2 ".esc_attr(is_rtl()?"text-right":"text-left")." small'><strong><copy>{{$key}}</copy></strong> : {$value["name"]}</div>"; }
                       ?>
                       <div id="speciallinks" class="hide">
-                        <div class="mt-2 <?php echo esc_attr(is_rtl()?"text-right":"text-left");?> small"><?php esc_html_e("You can use page ID as <b>#page_id</b>, e.g. for ID 275 use <b>#275</b>", "peprodev-ups");?></div>
-                        <div class="mt-2 <?php echo esc_attr(is_rtl()?"text-right":"text-left");?> small"><?php esc_html_e("You can use page slug as <b>@page_slug</b>, e.g. for slug about-us use <b>@about-us</b>", "peprodev-ups");?></div>
-                        <div class="mt-2 <?php echo esc_attr(is_rtl()?"text-right":"text-left");?> small"><?php esc_html_e("You can also enter full URL for external addresses, e.g. https://google.com/", "peprodev-ups");?></div>
+                        <div class="mt-2 <?php echo esc_attr(is_rtl()?"text-right":"text-left");?> small"><?php _e("You can use page ID as <b>#page_id</b>, e.g. for ID 275 use <b>#275</b>", "peprodev-ups");?></div>
+                        <div class="mt-2 <?php echo esc_attr(is_rtl()?"text-right":"text-left");?> small"><?php _e("You can use page slug as <b>@page_slug</b>, e.g. for slug about-us use <b>@about-us</b>", "peprodev-ups");?></div>
+                        <div class="mt-2 <?php echo esc_attr(is_rtl()?"text-right":"text-left");?> small"><?php esc_html_e("You can also enter full URL for external addresses, e.g. https://google.com", "peprodev-ups");?></div>
                         <div class="mt-2 mb-2 <?php echo esc_attr(is_rtl()?"text-right":"text-left");?> small"><?php esc_html_e("And use following macros too:", "peprodev-ups");?></div>
                         <?php echo implode("", $newarray2);?>
                       </div>
@@ -767,9 +730,9 @@ foreach ($styleFiles as $style) {
                 </div>
               </template>
               <div class="mt-3 mb-3">
-                <a href="javascript:;" class='btn btn-primary redirection--add-field'><?php esc_html_e("Add Rule","peprodev-ups");?></a>
-                <a href="javascript:;" class='btn btn-primary redirection--toggle-fields'><?php esc_html_e("Collapse / Expand","peprodev-ups");?></a>
-                <a href="javascript:;" class='btn btn-danger ml-4 mr-4 redirection--clear-fields'><?php esc_html_e("Clear Rules","peprodev-ups");?></a>
+                <a href="javascript:;" class='btn btn-sm btn-primary redirection--add-field'><span class="material-icons">add_circle</span> <?php esc_html_e("Add Rule","peprodev-ups");?></a>
+                <a href="javascript:;" class='btn btn-sm btn-primary redirection--toggle-fields'><span class="material-icons">expand</span> <?php esc_html_e("Collapse / Expand","peprodev-ups");?></a>
+                <a href="javascript:;" class='btn btn-sm btn-danger ml-4 mr-4 redirection--clear-fields'><span class="material-icons">delete_sweep</span> <?php esc_html_e("Clear Rules","peprodev-ups");?></a>
               </div>
               <div class="redirection-workspace workspace" data-empty="<?php esc_html_e("No redirections rule found.","peprodev-ups");?>"></div>
             </div>

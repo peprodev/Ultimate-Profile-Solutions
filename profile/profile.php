@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/15 14:33:28
+# @Last modified time: 2021/09/16 20:08:53
 if (!class_exists("PeproDevUPS_Profile")) {
     class PeproDevUPS_Profile
     {
@@ -134,7 +134,6 @@ if (!class_exists("PeproDevUPS_Profile")) {
             add_action("admin_bar_menu",  array( $this, "admin_bar_menu_items"), 31);
             add_filter("get_avatar_url",  array( $this, "change_avatar_url"), 10, 3);
         }
-
         public function template_redirect()
         {
           if (get_the_id() == $this->get_profile_page()){
@@ -1370,7 +1369,6 @@ if (!class_exists("PeproDevUPS_Profile")) {
                 			array(
                 				'firstname'     => __( 'First name', "peprodev-ups" ),
                 				'lastname'      => __( 'Last name', "peprodev-ups" ),
-                				'display_name'  => __( 'Display name', "peprodev-ups" ),
                 				'email'         => __( 'Email address', "peprodev-ups" ),
                 			)
                 		);
@@ -1430,32 +1428,12 @@ if (!class_exists("PeproDevUPS_Profile")) {
                               $retuen["user_email"] = $user->user_email;
 
                             break;
-                          case 'display_name':
-                            $user->display_name = wp_unslash( $index['value'] );
-                            if ( is_email( $user->display_name ) ) {
-                              wp_send_json_error(array( "msg"=>__("Display name cannot be changed to email address due to privacy concern.", "peprodev-ups")));
-                              return;
-                            }
-                            $retuen["display_name"] = $user->display_name;
-                            break;
                           case 'password_current':
                               $pass_cur = $index['value'];
                               break;
                           case 'password_new':
                               $pass1 = $index['value'];
                             break;
-                          case 'birthday':
-                              update_user_meta( $user_id, "birthday", $index['value']);
-                              break;
-                          case 'gender':
-                              update_user_meta( $user_id, "gender", 2 == $index['value'] ? 0 : 1);
-                              break;
-                          case 'weight':
-                              update_user_meta( $user_id, "weight", $index['value']);
-                              break;
-                          case 'height':
-                              update_user_meta( $user_id, "height", $index['value']);
-                              break;
                           default:
                             do_action( "peprofile_user_details_edit_loop_details", $_POST, $index);
                             break;
@@ -1478,6 +1456,8 @@ if (!class_exists("PeproDevUPS_Profile")) {
                       return;
                 		}
                 		if ( $pass1 && $save_pass ) { $user->user_pass = $pass1; }
+
+                    $retuen["display_name"] = "{$user->first_name} {$user->last_name}";
 
                     do_action( "peprofile_user_details_edit_save_details", $_POST, $user_id);
 
@@ -1544,7 +1524,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
 
                       $setting_slug = "css";
                       if(isset($_POST["dparam"][$setting_slug])){
-                        update_option("{$this->activation_status}-{$setting_slug}", wp_slash($_POST["dparam"][$setting_slug]));
+                        update_option("{$this->activation_status}-{$setting_slug}", sanitize_textarea_field($_POST["dparam"][$setting_slug]));
                       }
                       $setting_slug = "js";
                       if(isset($_POST["dparam"][$setting_slug])){

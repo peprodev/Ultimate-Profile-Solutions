@@ -3,7 +3,7 @@
  * @Date:   2021/08/02 22:04:09
  * @Email:  its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/09/11 11:33:52
+ * @Last modified time: 2021/09/16 11:48:15
  * @License: GPLv2
  * @Copyright: Copyright © Amirhosseinhpv (https://hpv.im), all rights reserved.
  */
@@ -615,7 +615,9 @@ jQuery.noConflict();
       copy_clipboard(me.text());
       show_toast(_register_fields._copy);
     });
-
+    function scroll_element(element, offset = 0) {
+    	$("html, body").animate({ scrollTop: element.offset().top - offset }, 500);
+    }
     function animate_save_btn(save=true) {
       if (save){
         var savebtn = $("button.btn.btn-primary.icn-btn[integrity][wparam][lparam]");
@@ -663,7 +665,7 @@ jQuery.noConflict();
      });
     }
 
-    $.fn.glow = function(){this.each(function(){$(this).stop().addClass("glow").delay(1500).queue(function() {$(this).removeClass("glow").dequeue();});});};
+    $.fn.glow = function(){this.each(function(){$("html, body").animate({ scrollTop: $(this).offset().top-50}, 500); $(this).stop().addClass("glow").delay(1500).queue(function() {$(this).removeClass("glow").dequeue();});});};
 
 
 

@@ -3,7 +3,7 @@
  * @Date:   2021/08/17 09:27:55
  * @Email:  its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/09/03 15:00:23
+ * @Last modified time: 2021/09/16 21:50:47
  * @License: GPLv2
  * @Copyright: Copyright © Amirhosseinhpv (https://hpv.im), all rights reserved.
  */
@@ -78,10 +78,12 @@ toast.active {
 	transform: scale(1) !important;
 }
 
+[data-pepro-reglogin]>form .login_error:empty,
 [data-pepro-reglogin]>form #login_error:empty {
 	display: none;
 }
 
+[data-pepro-reglogin]>form .login_error,
 [data-pepro-reglogin]>form #login_error {
 	display: block;
 	border-right: 4px solid #72aee6;
@@ -93,14 +95,17 @@ toast.active {
 	border-right-color: #d63638;
 }
 
+[data-pepro-reglogin]>form .login_error.info,
 [data-pepro-reglogin]>form #login_error.info {
 	border-right-color: #72aee6;
 }
 
+[data-pepro-reglogin]>form .login_error.success,
 [data-pepro-reglogin]>form #login_error.success {
 	border-right-color: #00a32a;
 }
 
+[data-pepro-reglogin]>form .login_error.error,
 [data-pepro-reglogin]>form #login_error.error {
 	border-right-color: #d63638;
 }
@@ -143,6 +148,22 @@ toast.active {
 	scrollbar-width: thin;
 	z-index: 99999 !important;
 }
+
+@media only screen and (max-width: 450px) {
+	.popup-active .pepro-verify-container,
+	.popup-active [data-pepro-reglogin] {
+		width: 98%;
+		transform: translate(1%, 10vh);
+	}
+	[data-pepro-reglogin] > form .pepro-form-links {
+		flex-direction: column;
+		align-items: center;
+	}
+	[data-pepro-reglogin] > form .pepro-form-links>a:not(:last-of-type){
+		margin-bottom: 1rem;
+	}
+}
+
 
 [data-pepro-reglogin]>form .form-text.button.button-primary {
 	min-width: 100%;
@@ -187,10 +208,15 @@ toast.active {
 	color: #c7254e;
 }
 
-[data-pepro-reglogin]>form .pepro-form-links {
+[data-pepro-reglogin] > form .pepro-form-links {
 	display: flex;
 	justify-content: space-between;
 	margin-top: 1.5rem;
+	flex-direction: column;
+	align-items: center;
+}
+.pepro-form-links a:not(:last-of-type) {
+	margin-bottom: 1rem;
 }
 
 [data-pepro-reglogin]>form {
@@ -207,5 +233,9 @@ toast.active {
 
 .pepro-login-reg-field.submit-wrap.form-required button {
 	display: block;
+	width: 100%;
+}
+
+.pepro-login-reg-field .ahrefbtn{
 	width: 100%;
 }

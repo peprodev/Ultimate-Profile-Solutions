@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/04 14:56:24
+# @Last modified time: 2021/09/16 19:59:02
 
 /**
  * My Addresses
@@ -57,7 +57,7 @@ $col    = 1;
 	?>
 
 
-	<div class="col-lg-4">
+	<div class="col-lg-6">
 			<div class="card">
 					<div class="card-header"><?php echo esc_html( $address_title ); ?></div>
 					<div class="card-body">

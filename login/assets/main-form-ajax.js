@@ -1,8 +1,7 @@
 /**
- * @Date:   2021/08/17 09:28:22
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/09/03 14:52:45
- * @License: GPLv2
+ * @Last modified time: 2021/09/16 23:16:57
+ * resendtime
  */
 jQuery.noConflict();
 (function($) {
@@ -142,6 +141,7 @@ jQuery.noConflict();
           });
           tippy('[data-tippy-content]',{allowHTML: true, theme: 'error',});
           scroll_element();
+          $(login_form).find(":input").prop("disabled", false);
           error_occured = true;
           return false;
         }
@@ -183,6 +183,10 @@ jQuery.noConflict();
                 if (e.data.focus){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).focus(); }, 100); }
                 if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).select(); }, 100); }
                 if (e.data.show){ $(login_form).find(e.data.show).show(); }
+                if (".otp-resend" == e.data.show && e.data.timerdown){
+                  if (0 == e.data.timerdown){ $(login_form).find(e.data.show).html(); }
+                  else{ $(login_form).find(e.data.show).countdown(e.data.timerdown, function(event){$(this).html(event.strftime('%M:%S'));}); }
+                }
               }
               else{
                 $(".popup-active").removeClass("popup-active");
@@ -253,6 +257,10 @@ jQuery.noConflict();
                 if (e.data.focus){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).focus(); }, 100); }
                 if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).select(); }, 100); }
                 if (e.data.show){ $(login_form).find(e.data.show).show(); }
+                if (".otp-resend" == e.data.show && e.data.timerdown){
+                  if (0 == e.data.timerdown){ $(login_form).find(e.data.show).html(); }
+                  else{ $(login_form).find(e.data.show).countdown(e.data.timerdown, function(event){$(this).html(event.strftime('%M:%S'));}); }
+                }
               }
               $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(e.data.msg);
             }
@@ -301,6 +309,7 @@ jQuery.noConflict();
           });
           tippy('[data-tippy-content]',{allowHTML: true, theme: 'error',});
           scroll_element();
+          $(login_form).find(":input").prop("disabled", false);
           error_occured = true;
           return false;
         }
@@ -344,6 +353,10 @@ jQuery.noConflict();
                 if (e.data.focus){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).focus(); }, 100); }
                 if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).select(); }, 100); }
                 if (e.data.show){ $(login_form).find(e.data.show).show(); }
+                if (".otp-resend" == e.data.show && e.data.timerdown){
+                  if (0 == e.data.timerdown){ $(login_form).find(e.data.show).html(); }
+                  else{ $(login_form).find(e.data.show).countdown(e.data.timerdown, function(event){$(this).html(event.strftime('%M:%S'));}); }
+                }
               }
               else{
                 $(".popup-active").removeClass("popup-active");
@@ -390,6 +403,10 @@ jQuery.noConflict();
                 if (e.data.focus){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).focus(); }, 100); }
                 if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).select(); }, 100); }
                 if (e.data.show){ $(login_form).find(e.data.show).show(); }
+                if (".otp-resend" == e.data.show && e.data.timerdown){
+                  if (0 == e.data.timerdown){ $(login_form).find(e.data.show).html(); }
+                  else{ $(login_form).find(e.data.show).countdown(e.data.timerdown, function(event){$(this).html(event.strftime('%M:%S'));}); }
+                }
               }
               $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(e.data.msg);
             }
@@ -437,6 +454,7 @@ jQuery.noConflict();
           });
           tippy('[data-tippy-content]',{allowHTML: true, theme: 'error',});
           scroll_element();
+          $(login_form).find(":input").prop("disabled", false);
           error_occured = true;
           return false;
         }
@@ -479,6 +497,10 @@ jQuery.noConflict();
                 if (e.data.focus){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).focus(); }, 100); }
                 if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).select(); }, 100); }
                 if (e.data.show){ $(login_form).find(e.data.show).show(); }
+                if (".otp-resend" == e.data.show && e.data.timerdown){
+                  if (0 == e.data.timerdown){ $(login_form).find(e.data.show).html(); }
+                  else{ $(login_form).find(e.data.show).countdown(e.data.timerdown, function(event){$(this).html(event.strftime('%M:%S'));}); }
+                }
               }
               else{
                 $(".popup-active").removeClass("popup-active");
@@ -525,6 +547,10 @@ jQuery.noConflict();
                 if (e.data.focus){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).focus(); }, 100); }
                 if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).select(); }, 100); }
                 if (e.data.show){ $(login_form).find(e.data.show).show(); }
+                if (".otp-resend" == e.data.show && e.data.timerdown){
+                  if (0 == e.data.timerdown){ $(login_form).find(e.data.show).html(); }
+                  else{ $(login_form).find(e.data.show).countdown(e.data.timerdown, function(event){$(this).html(event.strftime('%M:%S'));}); }
+                }
               }
               $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(e.data.msg);
             }
@@ -641,6 +667,7 @@ jQuery.noConflict();
           });
           tippy('[data-tippy-content]',{allowHTML: true, theme: 'error',});
           scroll_element();
+          $(login_form).find(":input").prop("disabled", false);
           error_occured = true;
           return false;
         }
@@ -673,6 +700,7 @@ jQuery.noConflict();
             param: form_params,
           },
           success: function(e) {
+            $(login_form).find(":input").prop("disabled", false)
             $(login_form).find(".otp-resend").hide();
             if (e.success === true) {
               $(login_form).find("#login_error").removeClass("info success error").addClass("success").html(e.data.msg);
@@ -683,6 +711,10 @@ jQuery.noConflict();
                 if (e.data.focus){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).focus(); }, 100); }
                 if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).select(); }, 100); }
                 if (e.data.show){ $(login_form).find(e.data.show).show(); }
+                if (".otp-resend" == e.data.show && e.data.timerdown){
+                  if (0 == e.data.timerdown){ $(login_form).find(e.data.show).html(_pepro_dev.resendnow); }
+                  else{ $(login_form).find(e.data.show).countdown(e.data.timerdown, function(qt){ $(this).html( _pepro_dev.resendtime.replace('%s', qt.strftime('%M:%S') ) ); }); }
+                }
               }
               else{
                 $(login_form).find(".pepro-login-reg-field").addClass("hide");
@@ -746,6 +778,10 @@ jQuery.noConflict();
                 if (e.data.focus){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).focus(); }, 100); }
                 if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).select(); }, 100); }
                 if (e.data.show){ $(login_form).find(e.data.show).show(); }
+                if (".otp-resend" == e.data.show && e.data.timerdown){
+                  if (0 == e.data.timerdown){ $(login_form).find(e.data.show).html(_pepro_dev.resendnow); }
+                  else{ $(login_form).find(e.data.show).countdown(e.data.timerdown, function(qt){ $(this).html( _pepro_dev.resendtime.replace('%s', qt.strftime('%M:%S') ) ); }); }
+                }
               }
               $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(e.data.msg);
               show_toast(e.data.msg);
@@ -757,9 +793,9 @@ jQuery.noConflict();
             show_toast(_pepro_dev.error);
           },
           complete: function(e) {
+            $(login_form).find(":input").prop("disabled", false)
             scroll_element();
             $(login_form).removeClass("loading");
-            $(login_form).find(":input").prop("disabled", false)
           },
         });
       });
@@ -787,6 +823,7 @@ jQuery.noConflict();
           });
           tippy('[data-tippy-content]',{allowHTML: true, theme: 'error',});
           scroll_element();
+          $(login_form).find(":input").prop("disabled", false);
           error_occured = true;
           return false;
         }
@@ -906,6 +943,7 @@ jQuery.noConflict();
       e.preventDefault();
       var me = $(this);
       me.parents("[data-pepro-reglogin]").find(".otp-verification, .code-verification").val("").trigger("change");
+      me.parents("[data-pepro-reglogin]").find(":input").prop("disabled", false);
       me.parents("[data-pepro-reglogin]").find("#submit").trigger("click");
     });
     $(document).on("click tap", ".switch-form-lost-pass", function(e){

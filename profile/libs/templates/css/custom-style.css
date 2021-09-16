@@ -3,7 +3,7 @@
  * @Date:2020/05/03 13:33:07
  * @Email:its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/09/04 14:33:15
+ * @Last modified time: 2021/09/16 21:17:27
  * @License:GPLv2
  * @Copyright:Copyright © 2020 Amirhosseinhpv,All rights reserved.
  */
@@ -48,6 +48,7 @@
 
 .au-message__item-text .text {
 	margin-left: 0;
+	margin-right: 0;
 }
 
 #wpadminbar:hover {
