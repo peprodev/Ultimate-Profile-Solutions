@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/17 22:18:37
+# @Last modified time: 2021/09/17 22:34:43
 include_once plugin_dir_path(__FILE__) . "/include/class-login-permalink.php";
 
 if (!class_exists("PeproDevUPS_Login")){
@@ -125,7 +125,7 @@ if (!class_exists("PeproDevUPS_Login")){
       $this->verification_email_digits      = get_option("{$this->activation_status}-verification_email_digits", "8");
       $this->verification_email_sender      = get_option("{$this->activation_status}-verification_email_sender");
       $this->verification_email_sender_name = get_option("{$this->activation_status}-verification_email_sender_name", get_bloginfo('name','display'));
-      $this->verification_email_template    = get_option("{$this->activation_status}-verification_email_template");
+      $this->verification_email_template    = html_entity_decode(stripslashes(get_option("{$this->activation_status}-verification_email_template")));
       $this->def_mail_body                  = ['<!DOCTYPE html>', '<html>', '  <head>', '    <meta charset="utf-8">', '  </head>', '  <body>',
         '    <div style="display:block; width:450px; border-radius:0.5rem; margin: 1rem auto; text-align: center; color: #2b2b2b; padding: 1rem; box-shadow: 0 2px 5px 1px #0003; border: 1px solid #ccc;">',
         '      <h2>Verify your account</h2>',
@@ -3645,7 +3645,7 @@ if (!class_exists("PeproDevUPS_Login")){
             "{$this->activation_status}-verification_email_digits"      => "8",
             "{$this->activation_status}-verification_email_sender"      => $this->default_sender,
             "{$this->activation_status}-verification_email_sender_name" => get_bloginfo('name','display'),
-            "{$this->activation_status}-verification_email_template"    => $this->def_mail_body,
+            "{$this->activation_status}-verification_email_template"    => htmlentities($this->def_mail_body),
             "pepro-profile-redirection-fileds"                          => '[{"role": "everyone", "url": "{profile}", "text": "'.__("Profile","peprodev-ups").'", "login": "yes", "register": "yes", "logout": "no" }]',
             "{$this->activation_status}-reglogin_type"                  => "email",
             "{$this->activation_status}-auto_login_after_reg"           => "yes",
@@ -4061,9 +4061,9 @@ if (!class_exists("PeproDevUPS_Login")){
 
               $data = "verification_email_template";
               if(isset($_POST["dparam"][$data])){
-                update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data]));
+                update_option("{$this->activation_status}-{$data}", htmlentities($_POST["dparam"][$data]));
                 if (empty($_POST["dparam"][$data])){
-                  update_option("{$this->activation_status}-{$data}", $this->def_mail_body);
+                  update_option("{$this->activation_status}-{$data}", htmlentities($this->def_mail_body));
                 }
               }
 

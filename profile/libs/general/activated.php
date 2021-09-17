@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/11 11:29:32
+# @Last modified time: 2021/09/17 22:37:04
 ?>
 <div class="row">
   <div class="col-lg-6 col-md-6">
@@ -203,15 +203,15 @@
               <tr>
                 <td colspan="2">
                   <?php echo esc_html_x("Global CSS","profile-section", "peprodev-ups");?>
-                  <textarea name="<?php echo "{$this->activation_status}-css";?>" class="codeditor" id="csseditor" spellcheck="false" dir="ltr" rows="8" cols="80"><?php echo wp_unslash(get_option("{$this->activation_status}-css",""));?></textarea>
-                  <textarea name="<?php echo "{$this->activation_status}-css";?>" style="display:none !important;" class="codeditor" id="css" spellcheck="false" dir="ltr" rows="8" cols="80"><?php echo wp_unslash(get_option("{$this->activation_status}-css",""));?></textarea>
+                  <textarea name="<?php echo "{$this->activation_status}-css";?>" class="codeditor" id="csseditor" spellcheck="false" dir="ltr" rows="8" cols="80"><?php echo html_entity_decode(stripslashes(get_option("{$this->activation_status}-css")));?></textarea>
+                  <textarea name="<?php echo "{$this->activation_status}-css";?>" style="display:none !important;" class="codeditor" id="css" spellcheck="false" dir="ltr" rows="8" cols="80"><?php echo html_entity_decode(stripslashes(get_option("{$this->activation_status}-css")));?></textarea>
                 </td>
               </tr>
               <tr>
                 <td colspan="2">
                   <?php echo esc_html_x("Global JS","profile-section", "peprodev-ups");?>
-                  <textarea name="<?php echo "{$this->activation_status}-css";?>" class="codeditor" id="jseditor" spellcheck="false" dir="ltr" rows="8" cols="80"><?php echo wp_unslash(get_option("{$this->activation_status}-js",""));?></textarea>
-                  <textarea name="<?php echo "{$this->activation_status}-js";?>" style="display:none !important;" class="codeditor" id="js" spellcheck="false" dir="ltr" rows="8" cols="80"><?php echo wp_unslash(get_option("{$this->activation_status}-js",""));?></textarea>
+                  <textarea name="<?php echo "{$this->activation_status}-css";?>" class="codeditor" id="jseditor" spellcheck="false" dir="ltr" rows="8" cols="80"><?php echo html_entity_decode(stripslashes(get_option("{$this->activation_status}-js")));?></textarea>
+                  <textarea name="<?php echo "{$this->activation_status}-js";?>" style="display:none !important;" class="codeditor" id="js" spellcheck="false" dir="ltr" rows="8" cols="80"><?php echo html_entity_decode(stripslashes(get_option("{$this->activation_status}-js")));?></textarea>
                 </td>
               </tr>
           </tbody>

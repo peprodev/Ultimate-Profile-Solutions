@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/15 14:48:20
+# @Last modified time: 2021/09/17 22:37:48
 global $PeproDevUPS_Profile;
 $rtl         = is_rtl() ? "right" : "left";
 $page        = (int) isset($_GET['cpage']) ? sanitize_text_field($_GET['cpage']) : 1;
@@ -132,12 +132,12 @@ $loadingRing = '<div class="lds-ring2"><div></div><div></div><div></div><div></d
                       echo "<br><small>".__("Restrict Access to Ld-Course enrolled users in addition to User Roles","peprodev-ups")."</small></td></tr>";
 
                       echo "<tr showadvanced><td><label class=\"text-primary\" >"._x("Custom CSS","profile-section","peprodev-ups")."</label></td><td>
-                            <textarea class=\"codeditor\" id=\"csseditor\" spellcheck=\"false\" dir=\"ltr\" rows=\"8\" cols=\"80\">".stripslashes(get_option("{$this->activation_status}-css",""))."</textarea>
-                            <textarea style=\"display:none !important;\" class=\"codeditor\" id=\"css\" spellcheck=\"false\" dir=\"ltr\" rows=\"8\" cols=\"80\">".stripslashes(get_option("{$this->activation_status}-css",""))."</textarea>
+                            <textarea class=\"codeditor\" id=\"csseditor\" spellcheck=\"false\" dir=\"ltr\" rows=\"8\" cols=\"80\">".html_entity_decode(stripslashes(get_option("{$this->activation_status}-css")))."</textarea>
+                            <textarea style=\"display:none !important;\" class=\"codeditor\" id=\"css\" spellcheck=\"false\" dir=\"ltr\" rows=\"8\" cols=\"80\">".html_entity_decode(stripslashes(get_option("{$this->activation_status}-css")))."</textarea>
                           </td></tr>";
                       echo "<tr showadvanced><td><label class=\"text-primary\" >"._x("Custom JS","profile-section","peprodev-ups")."</label></td><td>
-                            <textarea class=\"codeditor\" id=\"jseditor\" spellcheck=\"false\" dir=\"ltr\" rows=\"8\" cols=\"80\">".stripslashes(get_option("{$this->activation_status}-js","(function ($){\"use strict\";})(jQuery);"))."</textarea>
-                            <textarea style=\"display:none !important;\" class=\"codeditor\" id=\"js\" spellcheck=\"false\" dir=\"ltr\" rows=\"8\" cols=\"80\">".stripslashes(get_option("{$this->activation_status}-js",""))."</textarea>
+                            <textarea class=\"codeditor\" id=\"jseditor\" spellcheck=\"false\" dir=\"ltr\" rows=\"8\" cols=\"80\">".html_entity_decode(stripslashes(get_option("{$this->activation_status}-js","(function ($){\"use strict\";})(jQuery);")))."</textarea>
+                            <textarea style=\"display:none !important;\" class=\"codeditor\" id=\"js\" spellcheck=\"false\" dir=\"ltr\" rows=\"8\" cols=\"80\">".html_entity_decode(stripslashes(get_option("{$this->activation_status}-js")))."</textarea>
                           </td></tr>";
                       ?>
                   </tbody>

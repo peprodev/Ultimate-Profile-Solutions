@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/17 20:58:15
+# @Last modified time: 2021/09/17 22:35:48
 if (!class_exists("PeproDevUPS_Profile")) {
     class PeproDevUPS_Profile
     {
@@ -1525,11 +1525,11 @@ if (!class_exists("PeproDevUPS_Profile")) {
 
                       $setting_slug = "css";
                       if(isset($_POST["dparam"][$setting_slug])){
-                        update_option("{$this->activation_status}-{$setting_slug}", sanitize_textarea_field($_POST["dparam"][$setting_slug]));
+                        update_option("{$this->activation_status}-{$setting_slug}", htmlentities($_POST["dparam"][$setting_slug]));
                       }
                       $setting_slug = "js";
                       if(isset($_POST["dparam"][$setting_slug])){
-                        update_option("{$this->activation_status}-{$setting_slug}", sanitize_textarea_field($_POST["dparam"][$setting_slug]));
+                        update_option("{$this->activation_status}-{$setting_slug}", htmlentities($_POST["dparam"][$setting_slug]));
                       }
                       $setting_slug = "logo";
                       if(isset($_POST["dparam"][$setting_slug]) && !empty($_POST["dparam"][$setting_slug])){
