@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/16 20:08:53
+# @Last modified time: 2021/09/17 20:58:15
 if (!class_exists("PeproDevUPS_Profile")) {
     class PeproDevUPS_Profile
     {
@@ -1457,6 +1457,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                 		}
                 		if ( $pass1 && $save_pass ) { $user->user_pass = $pass1; }
 
+                    $user->display_name = "{$user->first_name} {$user->last_name}";
                     $retuen["display_name"] = "{$user->first_name} {$user->last_name}";
 
                     do_action( "peprofile_user_details_edit_save_details", $_POST, $user_id);

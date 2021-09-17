@@ -3,7 +3,7 @@
  * @Date:   2021/08/17 09:27:55
  * @Email:  its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/09/16 21:50:47
+ * @Last modified time: 2021/09/17 18:48:06
  * @License: GPLv2
  * @Copyright: Copyright © Amirhosseinhpv (https://hpv.im), all rights reserved.
  */
@@ -238,4 +238,8 @@ toast.active {
 
 .pepro-login-reg-field .ahrefbtn{
 	width: 100%;
+}
+
+.otp-resend.disabled {
+	color: gray;
 }

@@ -3,11 +3,10 @@
  * @Date:2020/05/03 13:33:07
  * @Email:its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/09/16 21:17:27
+ * @Last modified time: 2021/09/17 21:14:38
  * @License:GPLv2
  * @Copyright:Copyright © 2020 Amirhosseinhpv,All rights reserved.
  */
-
 
 .bg-c1 {
 	background: #00ad5f;
@@ -29,7 +28,8 @@
 	background: #1c1a19;
 }
 
-.backtonotifs,.au-chat {
+.au-chat,
+.backtonotifs {
 	display: none;
 }
 
@@ -53,7 +53,7 @@
 
 #wpadminbar:hover {
 	opacity: 1;
-	transition: all .3s ease-in-out;
+	transition: all 0.3s ease-in-out;
 }
 
 #wpadminbar {
@@ -126,11 +126,11 @@
 	border-top: 2px #333 dashed;
 }
 
-.view-wc-orders	.wc-item-meta li {
+.view-wc-orders .wc-item-meta li {
 	list-style: none;
 }
 
-.view-wc-orders	.wc-item-meta li * {
+.view-wc-orders .wc-item-meta li * {
 	display: inline;
 }
 
@@ -138,7 +138,11 @@
 	margin-top: 1rem;
 }
 
-.view-wc-orders>p,.view-wc-orders p.order-again,.view-wc-orders address,.view-wc-orders .pepro_wc_delivery_stages,.view-wc-orders .puiw_orders_invoice_btn_container {
+.view-wc-orders .pepro_wc_delivery_stages,
+.view-wc-orders .puiw_orders_invoice_btn_container,
+.view-wc-orders > p,
+.view-wc-orders address,
+.view-wc-orders p.order-again {
 	background: white;
 	border-radius: 5px;
 	padding: 1.5rem;
@@ -148,7 +152,8 @@ p.order-again {
 	margin-top: 2rem;
 }
 
-.view-wc-orders .pepro_wc_delivery_stages.estimated_delivery_date,.view-wc-orders .puiw_orders_invoice_btn_container {
+.view-wc-orders .pepro_wc_delivery_stages.estimated_delivery_date,
+.view-wc-orders .puiw_orders_invoice_btn_container {
 	margin: -0.5rem 0;
 }
 
@@ -164,7 +169,8 @@ p.order-again {
 	font-weight: 400;
 }
 
-.view-wc-orders .table-earning tfoot td,.view-wc-orders .table-earning tfoot th {
+.view-wc-orders .table-earning tfoot td,
+.view-wc-orders .table-earning tfoot th {
 	color: #808080;
 	padding: 12px 40px;
 	white-space: nowrap;
@@ -187,12 +193,14 @@ p.order-again {
 	font-weight: normal;
 }
 
-.view-wc-orders .table-earning tfoot tr:last-of-type th,.view-wc-orders .table-earning tfoot tr:last-of-type td {
+.view-wc-orders .table-earning tfoot tr:last-of-type td,
+.view-wc-orders .table-earning tfoot tr:last-of-type th {
 	background: #333;
 	color: #fff;
 }
 
-.view-wc-orders .table-earning tfoot th,.view-wc-orders .table-earning tfoot td {
+.view-wc-orders .table-earning tfoot td,
+.view-wc-orders .table-earning tfoot th {
 	font-size: 16px;
 	vertical-align: middle;
 	font-weight: 400;
@@ -216,11 +224,12 @@ p.order-again {
 	padding: 0;
 }
 
-.au-message__item>a {
+.au-message__item > a {
 	display: block !important;
 }
 
-.yith-wcwl-form .hidden-title-form,.wishlist-title.wishlist-title-with-form {
+.wishlist-title.wishlist-title-with-form,
+.yith-wcwl-form .hidden-title-form {
 	display: none;
 }
 
@@ -268,8 +277,8 @@ p.order-again {
 	list-style: none;
 	display: inline-block;
 	font-size: 1.5rem;
-	-webkit-padding-end: .5rem;
-	padding-inline-end: .5rem;
+	-webkit-padding-end: 0.5rem;
+	padding-inline-end: 0.5rem;
 }
 
 .img-cir.img-40 {
@@ -335,11 +344,15 @@ footer {
 	max-height: 100%;
 }
 
-ol,ul,li {
+li,
+ol,
+ul {
 	margin: 0 !important;
 }
 
-.fas::before, .fab::before, .active i::before {
+.active i::before,
+.fab::before,
+.fas::before {
 	color: currentColor !important;
 }
 
@@ -383,7 +396,6 @@ ol,ul,li {
 .btn-outline-primary::before {
 	display: none;
 }
-
 @media screen and (max-width: 600px) {
 	tr {
 		justify-content: center;
@@ -431,7 +443,8 @@ ol,ul,li {
 		border-bottom-right-radius: 10px;
 	}
 
-	tr td, tr th {
+	tr td,
+	tr th {
 		width: 100% !important;
 		align-items: center;
 		justify-content: center;
@@ -440,12 +453,12 @@ ol,ul,li {
 
 	.table-earning tbody td:last-of-type {
 		line-height: 3.1;
-		padding: 0 0 24px 0;
+		padding: 0 0 24px;
 	}
 }
 
 .woocommerce-OrderUpdates.commentlist.notes {
-	padding: 1rem 2rem 1rem 0rem;
+	padding: 1rem 2rem 1rem 0;
 	background: white;
 	margin-bottom: 2rem !important;
 	border-radius: 5px;
@@ -466,4 +479,24 @@ ol,ul,li {
 
 a {
 	text-decoration: none;
+}
+
+.section-edit .btn.btn-block.edit,
+.section-edit button[type="submit"] {
+	width: 100% !important;
+	max-width: 260px !important;
+}
+
+.forceltr {
+	direction: ltr;
+	unicode-bidi: bidi-override;
+}
+
+label[for="avatar"] {
+	border: 1px solid;
+	padding: 0.2rem;
+	border-radius: 4px;
+	-webkit-padding-end: 1rem;
+	        padding-inline-end: 1rem;
+	cursor: pointer;
 }
