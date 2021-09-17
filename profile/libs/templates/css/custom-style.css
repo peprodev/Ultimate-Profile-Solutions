@@ -3,7 +3,7 @@
  * @Date:2020/05/03 13:33:07
  * @Email:its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/09/17 21:14:38
+ * @Last modified time: 2021/09/17 23:05:55
  * @License:GPLv2
  * @Copyright:Copyright © 2020 Amirhosseinhpv,All rights reserved.
  */
@@ -499,4 +499,13 @@ label[for="avatar"] {
 	-webkit-padding-end: 1rem;
 	        padding-inline-end: 1rem;
 	cursor: pointer;
+}
+
+.row.nowarp > * {
+	width: auto;
+}
+.form-control {
+    -webkit-appearance: auto;
+    -moz-appearance: auto;
+    appearance: auto;
 }
