@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/17 22:34:43
+# @Last modified time: 2021/09/19 09:08:27
 include_once plugin_dir_path(__FILE__) . "/include/class-login-permalink.php";
 
 if (!class_exists("PeproDevUPS_Login")){
@@ -483,13 +483,13 @@ if (!class_exists("PeproDevUPS_Login")){
     public function enqueue_shortcode_styles($args=array())
     {
       global $PeproDevUPS_Login;
-      wp_enqueue_style("pepro-login-reg-formaction",    "{$this->assets_url}/assets/main-form.css", array(), "1.5.9");
-      wp_enqueue_style("pepro-login-reg-formconfirm",   "{$this->assets_url}/assets/jquery-confirm.css", array(), "1.5.9");
-      wp_enqueue_script("pepro-login-reg-formconfirm",  "{$this->assets_url}/assets/jquery-confirm.js", array("jquery"), "1.5.9", true);
-      wp_enqueue_script("pepro-login-reg-popper",       "{$PeproDevUPS_Login->assets_url}assets/popper.min.js", array("jquery"), "1.5.9", true);
-      wp_enqueue_script("pepro-login-reg-tippy-bundle", "{$this->assets_url}/assets/tippy-bundle.umd.min.js", array("jquery"), "1.5.9", true);
-      wp_enqueue_script("pepro-login-reg-countdown",    "{$this->assets_url}/assets/jquery.countdown.min.js", array("jquery"), "1.5.9", true);
-      wp_enqueue_script("pepro-login-reg-formaction",   "{$this->assets_url}/assets/main-form-ajax.js", array("jquery"), "1.5.9", true);
+      wp_enqueue_style("pepro-login-reg-formaction",    "{$this->assets_url}/assets/main-form.css", array(), "1.6.0");
+      wp_enqueue_style("pepro-login-reg-formconfirm",   "{$this->assets_url}/assets/jquery-confirm.css", array(), "1.6.0");
+      wp_enqueue_script("pepro-login-reg-formconfirm",  "{$this->assets_url}/assets/jquery-confirm.js", array("jquery"), "1.6.0", true);
+      wp_enqueue_script("pepro-login-reg-popper",       "{$PeproDevUPS_Login->assets_url}assets/popper.min.js", array("jquery"), "1.6.0", true);
+      wp_enqueue_script("pepro-login-reg-tippy-bundle", "{$this->assets_url}/assets/tippy-bundle.umd.min.js", array("jquery"), "1.6.0", true);
+      wp_enqueue_script("pepro-login-reg-countdown",    "{$this->assets_url}/assets/jquery.countdown.min.js", array("jquery"), "1.6.0", true);
+      wp_enqueue_script("pepro-login-reg-formaction",   "{$this->assets_url}/assets/main-form-ajax.js", array("jquery"), "1.6.0", true);
       wp_localize_script("pepro-login-reg-formaction",  $args["uniqd"], array(
         "instance"          => $args["uniqd"],
         "trigger"           => $args["trigger"]??"",
@@ -997,7 +997,7 @@ if (!class_exists("PeproDevUPS_Login")){
                     else{
                       // send verification
                       $_otp_date = get_the_author_meta("_sms_otp_date", $user_id);
-                      $_otp_now  = date_i18n("Y/m/d H:i:s", current_time("timestamp"));
+                      $_otp_now  = $this->wp_date("Y/m/d H:i:s", current_time("timestamp"));
                       $today     = strtotime($_otp_now);
                       $expire    = strtotime($today . " + $this->sms_expiration sec");
                       if ($_otp_date){
@@ -1010,7 +1010,7 @@ if (!class_exists("PeproDevUPS_Login")){
                             "is_otp"    => true,
                             "focus"     => ".otp-verification",
                             "show"      => ".otp-resend",
-                            "timerdown" => date_i18n("Y/m/d H:i:s", strtotime(get_the_author_meta("_sms_otp_date", $user_id)." + $this->sms_expiration sec")),
+                            "timerdown" => $this->wp_date("Y/m/d H:i:s", strtotime(get_the_author_meta("_sms_otp_date", $user_id)." + $this->sms_expiration sec")),
                             ));
                           }
                           else{
@@ -1029,7 +1029,8 @@ if (!class_exists("PeproDevUPS_Login")){
                           "is_otp"    => true,
                           "focus"     => ".mobile-verification",
                           "show"      => ".otp-resend",
-                          "timerdown" => date_i18n("Y/m/d H:i:s", strtotime(get_the_author_meta("_sms_otp_date", $user_id)." + $this->sms_expiration sec")),
+                          // "timernow"  => $_otp_now,
+                          "timerdown" => $this->wp_date("Y/m/d H:i:s", strtotime(get_the_author_meta("_sms_otp_date", $user_id)." + $this->sms_expiration sec")),
                           ));
                         }
                       }
@@ -1041,7 +1042,7 @@ if (!class_exists("PeproDevUPS_Login")){
                           "is_otp"    => true,
                           "focus"     => ".otp-verification",
                           "show"      => ".otp-resend",
-                          "timerdown" => date_i18n("Y/m/d H:i:s", strtotime(get_the_author_meta("_sms_otp_date", $user_id)." + $this->sms_expiration sec")),
+                          "timerdown" => $this->wp_date("Y/m/d H:i:s", strtotime(get_the_author_meta("_sms_otp_date", $user_id)." + $this->sms_expiration sec")),
                           ));
                         }
                         else{
@@ -1142,7 +1143,7 @@ if (!class_exists("PeproDevUPS_Login")){
                 else{
                   // send verification
                   $_otp_date = get_the_author_meta("_sms_otp_date", $user->ID);
-                  $_otp_now  = date_i18n("Y/m/d H:i:s", current_time("timestamp"));
+                  $_otp_now  = $this->wp_date("Y/m/d H:i:s", current_time("timestamp"));
                   $today     = strtotime($_otp_now);
                   $expire    = strtotime($today . " + $this->sms_expiration sec");
                   if ($_otp_date){
@@ -1155,7 +1156,7 @@ if (!class_exists("PeproDevUPS_Login")){
                           "is_otp"    => true,
                           "focus"     => ".code-verification",
                           "show"      => ".otp-resend",
-                          "timerdown" => date_i18n("Y/m/d H:i:s", strtotime(get_the_author_meta("_sms_otp_date", $user->ID)." + $this->sms_expiration sec")),
+                          "timerdown" => $this->wp_date("Y/m/d H:i:s", strtotime(get_the_author_meta("_sms_otp_date", $user->ID)." + $this->sms_expiration sec")),
                         ));
                       }
                       else{
@@ -1174,7 +1175,7 @@ if (!class_exists("PeproDevUPS_Login")){
                         "is_otp"    => true,
                         "focus"     => ".mobile-verification",
                         "show"      => ".otp-resend",
-                        "timerdown" => date_i18n("Y/m/d H:i:s", strtotime(get_the_author_meta("_sms_otp_date", $user->ID)." + $this->sms_expiration sec")),
+                        "timerdown" => $this->wp_date("Y/m/d H:i:s", strtotime(get_the_author_meta("_sms_otp_date", $user->ID)." + $this->sms_expiration sec")),
                       ));
                     }
                   }
@@ -1186,7 +1187,7 @@ if (!class_exists("PeproDevUPS_Login")){
                         "is_otp"    => true,
                         "focus"     => ".code-verification",
                         "show"      => ".otp-resend",
-                        "timerdown" => date_i18n("Y/m/d H:i:s", strtotime(get_the_author_meta("_sms_otp_date", $user->ID)." + $this->sms_expiration sec")),
+                        "timerdown" => $this->wp_date("Y/m/d H:i:s", strtotime(get_the_author_meta("_sms_otp_date", $user->ID)." + $this->sms_expiration sec")),
                       ));
                     }
                     else{
@@ -1252,7 +1253,7 @@ if (!class_exists("PeproDevUPS_Login")){
                 else{
 
                   $_otp_date = get_the_author_meta("_email_otp_date", $user_id);
-                  $_otp_now  = date_i18n("Y/m/d H:i:s", current_time("timestamp"));
+                  $_otp_now  = $this->wp_date("Y/m/d H:i:s", current_time("timestamp"));
                   $today     = strtotime($_otp_now);
                   $expire    = strtotime($today . " + $this->email_expiration sec");
                   if ($_otp_date){
@@ -1265,7 +1266,7 @@ if (!class_exists("PeproDevUPS_Login")){
                           "is_otp"    => true,
                           "focus"     => ".code-verification",
                           "show"      => ".otp-resend",
-                          "timerdown" => date_i18n("Y/m/d H:i:s", strtotime(get_the_author_meta("_email_otp_date", $user_id)." + $this->email_expiration sec")),
+                          "timerdown" => $this->wp_date("Y/m/d H:i:s", strtotime(get_the_author_meta("_email_otp_date", $user_id)." + $this->email_expiration sec")),
                         ));
                       }else{
                         wp_send_json_error(array(
@@ -1284,7 +1285,7 @@ if (!class_exists("PeproDevUPS_Login")){
                         "is_otp"    => true,
                         "focus"     => ".email-verification",
                         "show"      => ".otp-resend",
-                        "timerdown" => date_i18n("Y/m/d H:i:s", strtotime(get_the_author_meta("_email_otp_date", $user_id)." + $this->email_expiration sec")),
+                        "timerdown" => $this->wp_date("Y/m/d H:i:s", strtotime(get_the_author_meta("_email_otp_date", $user_id)." + $this->email_expiration sec")),
                       ));
                     }
                   }else{
@@ -1294,7 +1295,7 @@ if (!class_exists("PeproDevUPS_Login")){
                         "msg"       => sprintf(__("Verification code sent to %s.", "peprodev-ups"), $param["username"]),
                         "focus"     => ".code-verification",
                         "show"      => ".otp-resend",
-                        "timerdown" => date_i18n("Y/m/d H:i:s", strtotime(get_the_author_meta("_email_otp_date", $user_id)." + $this->email_expiration sec")),
+                        "timerdown" => $this->wp_date("Y/m/d H:i:s", strtotime(get_the_author_meta("_email_otp_date", $user_id)." + $this->email_expiration sec")),
                         "is_otp"    => true,
                       ));
                     }else{
@@ -1371,7 +1372,7 @@ if (!class_exists("PeproDevUPS_Login")){
                 else{
                   // send verification
                   $_otp_date = get_the_author_meta("_sms_otp_date", $user->ID);
-                  $_otp_now  = date_i18n("Y/m/d H:i:s", current_time("timestamp"));
+                  $_otp_now  = $this->wp_date("Y/m/d H:i:s", current_time("timestamp"));
                   $today     = strtotime($_otp_now);
                   $expire    = strtotime($today . " + $this->sms_expiration sec");
                   if ($_otp_date){
@@ -1384,7 +1385,7 @@ if (!class_exists("PeproDevUPS_Login")){
                           "is_otp"    => true,
                           "show"      => ".otp-resend",
                           "focus"     => ".code-verification",
-                          "timerdown" => date_i18n("Y/m/d H:i:s", strtotime(get_the_author_meta("_sms_otp_date", $user->ID)." + $this->sms_expiration sec")),
+                          "timerdown" => $this->wp_date("Y/m/d H:i:s", strtotime(get_the_author_meta("_sms_otp_date", $user->ID)." + $this->sms_expiration sec")),
                         ));
                       }
                       else{
@@ -1403,7 +1404,7 @@ if (!class_exists("PeproDevUPS_Login")){
                         "is_otp"    => true,
                         "focus"     => ".mobile-verification",
                         "show"      => ".otp-resend",
-                        "timerdown" => date_i18n("Y/m/d H:i:s", strtotime(get_the_author_meta("_sms_otp_date", $user->ID)." + $this->sms_expiration sec")),
+                        "timerdown" => $this->wp_date("Y/m/d H:i:s", strtotime(get_the_author_meta("_sms_otp_date", $user->ID)." + $this->sms_expiration sec")),
                       ));
                     }
                   }
@@ -1415,7 +1416,7 @@ if (!class_exists("PeproDevUPS_Login")){
                         "is_otp"    => true,
                         "show"      => ".otp-resend",
                         "focus"     => ".code-verification",
-                        "timerdown" => date_i18n("Y/m/d H:i:s", strtotime(get_the_author_meta("_sms_otp_date", $user->ID)." + $this->sms_expiration sec")),
+                        "timerdown" => $this->wp_date("Y/m/d H:i:s", strtotime(get_the_author_meta("_sms_otp_date", $user->ID)." + $this->sms_expiration sec")),
                       ));
                     }
                     else{
@@ -1600,20 +1601,24 @@ if (!class_exists("PeproDevUPS_Login")){
                   else{
                     // send verification
                     $_otp_date = get_option(__CLASS__."_sms_otp_{$valid_mobile}_date");
-                    $_otp_now = date_i18n("Y/m/d H:i:s", current_time("timestamp"));
-                    $today = strtotime($_otp_now);
+                    $_otp_now  = $this->wp_date("Y/m/d H:i:s", current_time("timestamp"));
+                    $today     = strtotime($_otp_now);
                     $expire    = strtotime($today . " + $this->sms_expiration sec");
                     if ($_otp_date){
                       $expire = strtotime($_otp_date . " + $this->sms_expiration sec");
                       if($today >= $expire){
                         $sms = $this->send_dummyuser_verification_sms($valid_mobile);
+                        $_otp_date = get_option(__CLASS__."_sms_otp_{$valid_mobile}_date");
                         if ($sms){
                           wp_send_json_success(array(
                             "msg"       => __("Verification code sent, Enter in field below.", "peprodev-ups"),
                             "is_otp"    => true,
                             "focus"     => ".otp-verification",
                             "show"      => ".otp-resend",
-                            "timerdown" => date_i18n("Y/m/d H:i:s", strtotime(get_option(__CLASS__."_sms_otp_{$valid_mobile}_date")." + $this->sms_expiration sec")),
+                            // "_otp_date" => $_otp_date,
+                            // "timernow"  => $_otp_now,
+                            // "timernow2"  => "$_otp_date + $this->sms_expiration sec",
+                            "timerdown" => $this->wp_date("Y/m/d H:i:s", strtotime("$_otp_date + $this->sms_expiration sec")),
                           ));
                         }
                         else{
@@ -1632,7 +1637,10 @@ if (!class_exists("PeproDevUPS_Login")){
                           "is_otp"    => true,
                           "focus"     => ".mobile-verification",
                           "show"      => ".otp-resend",
-                          "timerdown" => date_i18n("Y/m/d H:i:s", strtotime(get_option(__CLASS__."_sms_otp_{$valid_mobile}_date")." + $this->sms_expiration sec")),
+                          // "_otp_date" => $_otp_date,
+                          // "timernow"  => $_otp_now,
+                          // "timernow2"  => "$_otp_date + $this->sms_expiration sec",
+                          "timerdown" => $this->wp_date("Y/m/d H:i:s", strtotime(get_option(__CLASS__."_sms_otp_{$valid_mobile}_date")." + $this->sms_expiration sec")),
                         ));
                       }
                     }
@@ -1644,7 +1652,7 @@ if (!class_exists("PeproDevUPS_Login")){
                           "is_otp"    => true,
                           "focus"     => ".otp-verification",
                           "show"      => ".otp-resend",
-                          "timerdown" => date_i18n("Y/m/d H:i:s", strtotime(get_option(__CLASS__."_sms_otp_{$valid_mobile}_date")." + $this->sms_expiration sec")),
+                          "timerdown" => $this->wp_date("Y/m/d H:i:s", strtotime(get_option(__CLASS__."_sms_otp_{$valid_mobile}_date")." + $this->sms_expiration sec")),
                         ));
                       }
                       else{
@@ -1721,7 +1729,7 @@ if (!class_exists("PeproDevUPS_Login")){
                   else{
                     // send verification
                     $_otp_date = get_option(__CLASS__."_email_otp_{$valid_email}_date");
-                    $_otp_now  = date_i18n("Y/m/d H:i:s", current_time("timestamp"));
+                    $_otp_now  = $this->wp_date("Y/m/d H:i:s", current_time("timestamp"));
                     $today     = strtotime($_otp_now);
                     $expire    = strtotime($today . " + $this->email_expiration sec");
                     if ($_otp_date){
@@ -1734,7 +1742,7 @@ if (!class_exists("PeproDevUPS_Login")){
                             "is_otp"    => true,
                             "focus"     => ".otp-verification",
                             "show"      => ".otp-resend",
-                            "timerdown" => date_i18n("Y/m/d H:i:s", strtotime(get_option(__CLASS__."_email_otp_{$valid_email}_date")." + $this->sms_expiration sec")),
+                            "timerdown" => $this->wp_date("Y/m/d H:i:s", strtotime(get_option(__CLASS__."_email_otp_{$valid_email}_date")." + $this->sms_expiration sec")),
                           ));
                         }
                         else{
@@ -1753,7 +1761,7 @@ if (!class_exists("PeproDevUPS_Login")){
                           "is_otp"    => true,
                           "focus"     => ".email-verification",
                           "show"      => ".otp-resend",
-                          "timerdown" => date_i18n("Y/m/d H:i:s", strtotime(get_option(__CLASS__."_email_otp_{$valid_email}_date")." + $this->email_expiration sec")),
+                          "timerdown" => $this->wp_date("Y/m/d H:i:s", strtotime(get_option(__CLASS__."_email_otp_{$valid_email}_date")." + $this->email_expiration sec")),
                         ));
                       }
                     }
@@ -1765,7 +1773,7 @@ if (!class_exists("PeproDevUPS_Login")){
                           "is_otp"    => true,
                           "focus"     => ".otp-verification",
                           "show"      => ".otp-resend",
-                          "timerdown" => date_i18n("Y/m/d H:i:s", strtotime(get_option(__CLASS__."_email_otp_{$valid_email}_date")." + $this->email_expiration sec")),
+                          "timerdown" => $this->wp_date("Y/m/d H:i:s", strtotime(get_option(__CLASS__."_email_otp_{$valid_email}_date")." + $this->email_expiration sec")),
                         ));
                       }
                       else{
@@ -1895,7 +1903,7 @@ if (!class_exists("PeproDevUPS_Login")){
               // send verification
               else{
                 $_otp_date = get_option(__CLASS__."_email_otp_{$valid_email}_date");
-                $_otp_now  = date_i18n("Y/m/d H:i:s", current_time("timestamp"));
+                $_otp_now  = $this->wp_date("Y/m/d H:i:s", current_time("timestamp"));
                 $today     = strtotime($_otp_now);
                 $expire    = strtotime($today . " + $this->email_expiration sec");
                 if ($_otp_date){
@@ -1908,7 +1916,7 @@ if (!class_exists("PeproDevUPS_Login")){
                         "is_otp"    => true,
                         "focus"     => ".otp-verification",
                         "show"      => ".otp-resend",
-                        "timerdown" => date_i18n("Y/m/d H:i:s", strtotime(get_option(__CLASS__."_email_otp_{$valid_email}_date")." + $this->sms_expiration sec")),
+                        "timerdown" => $this->wp_date("Y/m/d H:i:s", strtotime(get_option(__CLASS__."_email_otp_{$valid_email}_date")." + $this->sms_expiration sec")),
                       ));
                     }
                     else{
@@ -1927,7 +1935,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       "is_otp"    => true,
                       "focus"     => ".email-verification",
                       "show"      => ".otp-resend",
-                      "timerdown" => date_i18n("Y/m/d H:i:s", strtotime(get_option(__CLASS__."_email_otp_{$valid_email}_date")." + $this->email_expiration sec")),
+                      "timerdown" => $this->wp_date("Y/m/d H:i:s", strtotime(get_option(__CLASS__."_email_otp_{$valid_email}_date")." + $this->email_expiration sec")),
                     ));
                   }
                 }
@@ -1939,7 +1947,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       "is_otp"    => true,
                       "focus"     => ".otp-verification",
                       "show"      => ".otp-resend",
-                      "timerdown" => date_i18n("Y/m/d H:i:s", strtotime(get_option(__CLASS__."_email_otp_{$valid_email}_date")." + $this->email_expiration sec")),
+                      "timerdown" => $this->wp_date("Y/m/d H:i:s", strtotime(get_option(__CLASS__."_email_otp_{$valid_email}_date")." + $this->email_expiration sec")),
                     ));
                   }
                   else{
@@ -2075,7 +2083,7 @@ if (!class_exists("PeproDevUPS_Login")){
         $otp_code .= substr($generator, (rand()%(strlen($generator))), 1);
       }
       update_user_meta($user_id, "_{$type}_otp_code", $otp_code);
-      update_user_meta($user_id, "_{$type}_otp_date", date_i18n("Y/m/d H:i:s", current_time("timestamp")) );
+      update_user_meta($user_id, "_{$type}_otp_date", $this->wp_date("Y/m/d H:i:s", current_time("timestamp")) );
       do_action( "pepro_reglogin_make_otp", $otp_code, $user_id, $otp_digits, $type );
       return apply_filters("pepro_reglogin_make_otp", $otp_code, $user_id, $otp_digits, $type );
     }
@@ -2084,7 +2092,7 @@ if (!class_exists("PeproDevUPS_Login")){
       $generator = "1357902468"; $otp_code = "";
       for ($i = 1; $i <= $otp_digits; $i++) { $otp_code .= substr($generator, (rand()%(strlen($generator))), 1); }
       update_option(__CLASS__."_{$type}_otp_{$user}_code", $otp_code);
-      update_option(__CLASS__."_{$type}_otp_{$user}_date", date_i18n("Y/m/d H:i:s", current_time("timestamp")) );
+      update_option(__CLASS__."_{$type}_otp_{$user}_date", $this->wp_date("Y/m/d H:i:s", current_time("timestamp")) );
       do_action( "pepro_reglogin_make_dummyuser_otp", $otp_code, $user, $otp_digits, $type );
       return apply_filters("pepro_reglogin_make_dummyuser_otp", $otp_code, $user, $otp_digits, $type );
     }
@@ -2109,7 +2117,7 @@ if (!class_exists("PeproDevUPS_Login")){
     {
       $_otp_code = get_the_author_meta("_sms_otp_code", $user_id);
       $_otp_date = get_the_author_meta("_sms_otp_date", $user_id);
-      $_otp_now  = date_i18n("Y/m/d H:i:s", current_time("timestamp"));
+      $_otp_now  = $this->wp_date("Y/m/d H:i:s", current_time("timestamp"));
       if (!$user_id || !$verification || !$_otp_date || !$_otp_code) return false;
       $today  = strtotime($_otp_now);
       $expire = strtotime("$_otp_date + $this->sms_expiration sec");
@@ -2149,7 +2157,7 @@ if (!class_exists("PeproDevUPS_Login")){
     {
       $_otp_code = get_the_author_meta("_email_otp_code", $user_id);
       $_otp_date = get_the_author_meta("_email_otp_date", $user_id);
-      $_otp_now  = date_i18n("Y/m/d H:i:s", current_time("timestamp"));
+      $_otp_now  = $this->wp_date("Y/m/d H:i:s", current_time("timestamp"));
       if (!$user_id || !$verification || !$_otp_date || !$_otp_code) return false;
       $today  = strtotime($_otp_now);
       $expire = strtotime("$_otp_date + $this->email_expiration sec");
@@ -2196,7 +2204,7 @@ if (!class_exists("PeproDevUPS_Login")){
       $_otp_code = get_option(__CLASS__."_{$type}_otp_{$user}_code","");
       $_otp_date = get_option(__CLASS__."_{$type}_otp_{$user}_date","");
       if (!$user || !$verification || !$_otp_date || !$_otp_code) return false;
-      $_otp_now  = date_i18n("Y/m/d H:i:s", current_time("timestamp"));
+      $_otp_now  = $this->wp_date("Y/m/d H:i:s", current_time("timestamp"));
       $today  = strtotime($_otp_now);
       $expiretime = "sms" === $type ? $this->sms_expiration : $this->email_expiration;
       $expiretime = apply_filters("pepro_reglogin_check_dummyuser_otp_expiration_time", $expiretime, $_otp_date);
@@ -4059,6 +4067,22 @@ if (!class_exists("PeproDevUPS_Login")){
               $data = "verification_email_digits";
               if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_text_field(trim($_POST["dparam"][$data]))); }
 
+              $data = "verification_email_sender_name";
+              if(isset($_POST["dparam"][$data])){
+                update_option("{$this->activation_status}-{$data}", sanitize_text_field($_POST["dparam"][$data]));
+                if (empty($_POST["dparam"][$data])){
+                  update_option("{$this->activation_status}-{$data}", get_bloginfo('name','display'));
+                }
+              }
+
+              $data = "verification_email_sender";
+              if(isset($_POST["dparam"][$data])){
+                update_option("{$this->activation_status}-{$data}", sanitize_text_field($_POST["dparam"][$data]));
+                if (empty($_POST["dparam"][$data])){
+                  update_option("{$this->activation_status}-{$data}", $this->default_sender);
+                }
+              }
+
               $data = "verification_email_template";
               if(isset($_POST["dparam"][$data])){
                 update_option("{$this->activation_status}-{$data}", htmlentities($_POST["dparam"][$data]));
@@ -4108,7 +4132,8 @@ if (!class_exists("PeproDevUPS_Login")){
     {
         return get_option($mc) <> "" ? get_option($mc) : $def;
     }
-    private function parseTemplate($contents){
+    private function parseTemplate($contents)
+    {
       preg_match('!/\*[^*]*\*+([^/][^*]*\*+)*/!', $contents, $themeinfo);
       $ss = str_ireplace(array("\n"), "|", $themeinfo[0]);
       $ss = substr($ss,4,-3);
@@ -4119,6 +4144,11 @@ if (!class_exists("PeproDevUPS_Login")){
         $styleExifDAta[strtolower($uu[0])] = substr($uu[1],1);
       }
       return $styleExifDAta;
+    }
+    public function wp_date($format="Y/m/d H:i:s", $timestap=null, $timezone=null)
+    {
+      remove_all_filters("wp_date");
+      return wp_date($format, $timestap, $timezone);
     }
   }
 }

@@ -225,9 +225,9 @@ if (!class_exists("PeproDevUPS_Core")){
       global $PeproDevUPS_Login;
       // Core JS Files
       wp_enqueue_script('jquery');
-      wp_enqueue_script("popper",                     "{$PeproDevUPS_Login->assets_url}assets/popper.min.js", array( 'jquery' ), "1.5.9", true); //'1.16.0'
-      wp_enqueue_script("bootstrap-material-design",  "{$this->assets_url}js/core/bootstrap-material-design.min.js", array( 'jquery' ), "1.5.9", true); //'3.0.2'
-      wp_enqueue_script("default-passive-events",     "{$this->assets_url}js/default-passive-events.js", array( 'jquery' ), "1.5.9", true); //'1.0.10'
+      wp_enqueue_script("popper",                     "{$PeproDevUPS_Login->assets_url}assets/popper.min.js", array( 'jquery' ), "1.6.0", true); //'1.16.0'
+      wp_enqueue_script("bootstrap-material-design",  "{$this->assets_url}js/core/bootstrap-material-design.min.js", array( 'jquery' ), "1.6.0", true); //'3.0.2'
+      wp_enqueue_script("default-passive-events",     "{$this->assets_url}js/default-passive-events.js", array( 'jquery' ), "1.6.0", true); //'1.0.10'
       // Google Maps Plugin
       // wp_enqueue_script("google-map", "https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE", array( 'jquery' ), '1.0.0', true);
       // Chartist JS
@@ -238,7 +238,7 @@ if (!class_exists("PeproDevUPS_Core")){
       // Control Center for Material Dashboard: parallax effects, scripts for the example pages etc
       // Material Dashboard DEMO methods, don't include it in your project!
 
-      wp_enqueue_script("material-dashboard", "{$this->assets_url}js/material-dashboard.js", array( 'jquery' ), "1.5.9", true); //'2.1.0'
+      wp_enqueue_script("material-dashboard", "{$this->assets_url}js/material-dashboard.js", array( 'jquery' ), "1.6.0", true); //'2.1.0'
 
       wp_enqueue_script("dashboard-back", "{$this->assets_url}js/dashboard-back.js", array('jquery'), '1.0.2', true);
       wp_localize_script( "dashboard-back", "pepc",

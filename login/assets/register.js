@@ -3,14 +3,13 @@
  * @Date:   2021/08/02 22:04:09
  * @Email:  its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/09/16 11:48:15
+ * @Last modified time: 2021/09/19 08:25:24
  * @License: GPLv2
  * @Copyright: Copyright © Amirhosseinhpv (https://hpv.im), all rights reserved.
  */
 jQuery.noConflict();
 (function($) {
   $(function() {
-
     jconfirm.defaults = {
       title: '',
       titleClass: '',
@@ -63,16 +62,12 @@ jQuery.noConflict();
       onAction: function() {},
       escapeKey: true,
     };
-
-
     setTimeout(function () { $(document).trigger("pepro_register_fields_load_json"); }, 100);
     setTimeout(function () { $(document).trigger("pepro_redirection_fields_load_json"); }, 100);
     setTimeout(function () { $("[name='reglogin_type']").trigger("refesh", [true]); }, 100);
-
     $('input[colorpicker]').each(function(){
       $(this).wpColorPicker({ palettes: _register_fields._palett});
     });
-
     var editor_header;
     var editor_footer;
     var editor_css;

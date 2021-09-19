@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/17 22:37:04
+# @Last modified time: 2021/09/19 08:49:03
 ?>
 <div class="row">
   <div class="col-lg-6 col-md-6">
@@ -67,7 +67,7 @@
                 <?php echo "<div class='alert dashpagetemplatenotice alert-inverse'>$notify_user_of_page_template</div>";?>
                 <script type="text/javascript">
                   (function($) {
-                    $(".dashpagetemplatenotice").<?php echo $show_alert?"show":"hide";?>();
+                    $(".dashpagetemplatenotice").<?php echo esc_html( $show_alert ? "show" : "hide" );?>();
                   })(jQuery);
                 </script>
               <!-- Show Welcome message -->

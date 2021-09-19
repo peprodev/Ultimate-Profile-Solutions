@@ -4,14 +4,14 @@
 add_thickbox();
 wp_enqueue_style("wp-color-picker");
 wp_enqueue_script("wp-color-picker");
-wp_enqueue_style("pepro-register-fields-ide",      "$this->assets_url/assets/ide/ace.css" , array(), "1.5.9");
-wp_enqueue_style("pepro-register-fields",          "$this->assets_url/assets/register.css", array(), "1.5.9");
-wp_enqueue_style("pepro-register-jqconfirm",       "$this->assets_url/assets/jquery-confirm.css", array(), "1.5.9");
-wp_enqueue_script("pepro-register-jqconfirm",      "$this->assets_url/assets/jquery-confirm.js", array('jquery'), "1.5.9");
-wp_enqueue_script("color-picker-alpha",            "$this->assets_url/assets/wp-color-picker-alpha.min.js", array("jquery"), "1.5.9");
-wp_enqueue_script("pepro-register-fields-hotkeys", "$this->assets_url/assets/hotkeys.min.js", array('jquery'), "1.5.9");
-wp_enqueue_script("pepro-register-fields-ide",     "$this->assets_url/assets/ide/ace.js", array('jquery'), "1.5.9");
-wp_enqueue_script("pepro-register-fields",         "$this->assets_url/assets/register.js", array("jquery"), "1.5.9");
+wp_enqueue_style("pepro-register-fields-ide",      "$this->assets_url/assets/ide/ace.css" , array(), "1.6.0");
+wp_enqueue_style("pepro-register-fields",          "$this->assets_url/assets/register.css", array(), "1.6.0");
+wp_enqueue_style("pepro-register-jqconfirm",       "$this->assets_url/assets/jquery-confirm.css", array(), "1.6.0");
+wp_enqueue_script("pepro-register-jqconfirm",      "$this->assets_url/assets/jquery-confirm.js", array('jquery'), "1.6.0");
+wp_enqueue_script("color-picker-alpha",            "$this->assets_url/assets/wp-color-picker-alpha.min.js", array("jquery"), "1.6.0");
+wp_enqueue_script("pepro-register-fields-hotkeys", "$this->assets_url/assets/hotkeys.min.js", array('jquery'), "1.6.0");
+wp_enqueue_script("pepro-register-fields-ide",     "$this->assets_url/assets/ide/ace.js", array('jquery'), "1.6.0");
+wp_enqueue_script("pepro-register-fields",         "$this->assets_url/assets/register.js", array("jquery"), "1.6.0");
 wp_localize_script("pepro-register-fields",        "_register_fields", array(
   "_added"     => __("New Field Successfully Added", "peprodev-ups"),
   "_removed"   => __("Field Successfully Removed",   "peprodev-ups"),

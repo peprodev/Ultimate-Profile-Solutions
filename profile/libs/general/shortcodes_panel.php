@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/11 11:29:57
+# @Last modified time: 2021/09/19 08:50:21
 ?>
 <style media="screen">
 .table.pepcappearance tr td:first-child { min-width: unset !important; }
@@ -27,16 +27,18 @@
                 $samole = esc_html( $value['sample'] );
                 echo "<tr>";
                   echo "<td><strong>[{$key}]</strong></td>";
-                  echo "<td>" . (isset($value['title']) ? $value['title'] : $key) . "</td>";
+                  echo "<td>" . wp_kses_post(isset($value['title']) ? $value['title'] : $key) . "</td>";
                   if (isset($value['syntax'])){
                     echo "<td><ul style=\"margin: 0;padding: 0;list-style: none;\">";
-                    foreach ($value['syntax'] as $key4444 => $value) { echo "<li><strong>$key4444</strong>: $value</li>"; }
+                    foreach ($value['syntax'] as $key4444 => $value) { echo wp_kses_post("<li><strong>$key4444</strong>: $value</li>"); }
                     echo "</ul></td>";
                   }
                   else{
                     echo "<td><i>".__("No attribute required","peprodev-ups")."</i></td>";
                   }
-                  echo "<td class='copy-shortcode' style='text-align: left;'><code title='".__("Click to copy","peprodev-ups")."' style=\"cursor: pointer; direction: ltr; unicode-bidi: bidi-override;\" data-copy='".esc_attr($samole)."'><strong>".nl2br($samole)."</strong></code></td>";
+                  echo "<td class='copy-shortcode' style='text-align: left;'>
+                  <code title='".__("Click to copy","peprodev-ups")."' style=\"cursor: pointer; direction: ltr; unicode-bidi: bidi-override;\"
+                  data-copy='".esc_attr($samole)."'><strong>".wp_kses_post(nl2br($samole))."</strong></code></td>";
                 echo "</tr>";
               }
             ?>

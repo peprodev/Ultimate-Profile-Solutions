@@ -1,6 +1,6 @@
 /**
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/09/17 22:07:44
+ * @Last modified time: 2021/09/19 08:46:55
  * resendtime
  */
 jQuery.noConflict();
@@ -14,7 +14,6 @@ jQuery.noConflict();
         }
     });
     $.fn.isValid = function(){ return this[0].checkValidity(); }
-
     $("[data-pepro-reglogin]").each(function(index, val) {
       instance = $(val).data("pepro-reglogin");
       var _pepro_dev = window[instance];

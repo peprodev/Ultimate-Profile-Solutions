@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/17 22:35:48
+# @Last modified time: 2021/09/19 09:06:08
 if (!class_exists("PeproDevUPS_Profile")) {
     class PeproDevUPS_Profile
     {
@@ -2462,9 +2462,9 @@ if (!class_exists("PeproDevUPS_Profile")) {
             global $wp;
             $ssection = isset($_GET['section']) ? sanitize_text_field(trim($_GET['section'])) : "home";
             foreach ($this->peprofile_get_nav_items_array() as $key => $value) {
-                echo "<li data-ref='$key' class='item-priority-{$value["priority"]}'><a href='{$value["url"]}'>{$value["title"]}</a></li>";
+                echo "<li data-ref='".esc_attr($key)."' class='item-priority-".esc_attr($value["priority"])."'><a href='".esc_attr($value["url"])."'>".wp_kses_post($value["title"])."</a></li>";
             }
-            echo "<script>function makeactiveli(e){var divs = document.querySelectorAll(`[data-ref='$ssection']`), i;for (i = 0; i < divs.length; ++i) {divs[i].className = divs[i].className + ' active';}} window.onload = makeactiveli; makeactiveli(); setTimeout(function () { makeactiveli() }, 500);</script>";
+            echo "<script>function makeactiveli(e){var divs = document.querySelectorAll(`[data-ref='".esc_html($ssection)."']`), i;for (i = 0; i < divs.length; ++i) {divs[i].className = divs[i].className + ' active';}} window.onload = makeactiveli; makeactiveli(); setTimeout(function () { makeactiveli() }, 500);</script>";
         }
         public function peprofile_dashboard_slugs($oldArray=array())
         {
