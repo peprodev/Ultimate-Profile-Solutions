@@ -1,6 +1,6 @@
 /**
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/09/19 08:46:55
+ * @Last modified time: 2021/10/09 03:35:55
  * resendtime
  */
 jQuery.noConflict();
@@ -102,7 +102,17 @@ jQuery.noConflict();
         $submitBtn = $(this).parents("form").find(".submit-wrap #submit[type=submit]")
         if ($(this).val() !== ""){
           $submitBtn.text($submitBtn.data("verify"));
-        }else{
+        }
+        else{
+          $submitBtn.text($submitBtn.data("send"));
+        }
+      });
+      $(document).on("change keyup", `#${_pepro_dev.instance} form#pepro-login-inline input[name=verification]`, function(e) {
+        $submitBtn = $(this).parents("form").find(".submit-wrap #submit[type=submit]")
+        if ($(this).val() !== ""){
+          $submitBtn.text($submitBtn.data("verify"));
+        }
+        else{
           $submitBtn.text($submitBtn.data("send"));
         }
       });
@@ -167,13 +177,12 @@ jQuery.noConflict();
             if (e.success === true) {
               $(login_form).find("#login_error").removeClass("info success error").addClass("success").html(e.data.msg);
               if (e.data.is_otp){
+                $(login_form).find(".optverify-wrap, .verification-wrap").removeClass("hide");
                 $(login_form).find("#login_error").removeClass("info success error").addClass("info").html(e.data.msg);
-                $(login_form).find(".optverify-wrap").removeClass("hide");
-                if (e.data.focus){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).focus(); }, 100); }
-                if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).select(); }, 100); }
+                if (e.data.focus){ setTimeout(function () { $(login_form).find(e.data.focus).first().focus(); }, 100); }
+                if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).first().select(); }, 100); }
                 if (e.data.show){ $(login_form).find(e.data.show).show(); }
                 resend_counndown(e, login_form, _pepro_dev);
-
               }
               else{
                 $(".popup-active").removeClass("popup-active");
@@ -237,12 +246,12 @@ jQuery.noConflict();
                   buttons: obj_buttons,
                 });
               }
-
             }
             else {
               if (e.data.is_otp){
-                if (e.data.focus){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).focus(); }, 100); }
-                if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).select(); }, 100); }
+                $(login_form).find(".optverify-wrap, .verification-wrap").removeClass("hide");
+                if (e.data.focus){ setTimeout(function () { $(login_form).find(e.data.focus).first().focus(); }, 100); }
+                if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).first().select(); }, 100); }
                 if (e.data.show){ $(login_form).find(e.data.show).show(); }
                 resend_counndown(e, login_form, _pepro_dev);
 
@@ -336,8 +345,8 @@ jQuery.noConflict();
               if (e.data.is_otp){
                 $(login_form).find("#login_error").removeClass("info success error").addClass("info").html(e.data.msg);
                 $(login_form).find(".verification-wrap").removeClass("hide");
-                if (e.data.focus){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).focus(); }, 100); }
-                if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).select(); }, 100); }
+                if (e.data.focus){ setTimeout(function () { $(login_form).find(e.data.focus).first().focus(); }, 100); }
+                if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).first().select(); }, 100); }
                 if (e.data.show){ $(login_form).find(e.data.show).show(); }
                 resend_counndown(e, login_form, _pepro_dev);
 
@@ -384,8 +393,8 @@ jQuery.noConflict();
             }
             else {
               if (e.data.is_otp){
-                if (e.data.focus){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).focus(); }, 100); }
-                if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).select(); }, 100); }
+                if (e.data.focus){ setTimeout(function () { $(login_form).find(e.data.focus).first().focus(); }, 100); }
+                if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).first().select(); }, 100); }
                 if (e.data.show){ $(login_form).find(e.data.show).show(); }
                 resend_counndown(e, login_form, _pepro_dev);
 
@@ -477,8 +486,8 @@ jQuery.noConflict();
               if (e.data.is_otp){
                 $(login_form).find("#login_error").removeClass("info success error").addClass("info").html(e.data.msg);
                 $(login_form).find(".verification-wrap").removeClass("hide");
-                if (e.data.focus){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).focus(); }, 100); }
-                if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).select(); }, 100); }
+                if (e.data.focus){ setTimeout(function () { $(login_form).find(e.data.focus).first().focus(); }, 100); }
+                if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).first().select(); }, 100); }
                 if (e.data.show){ $(login_form).find(e.data.show).show(); }
                 resend_counndown(e, login_form, _pepro_dev);
 
@@ -525,8 +534,8 @@ jQuery.noConflict();
             }
             else {
               if (e.data.is_otp){
-                if (e.data.focus){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).focus(); }, 100); }
-                if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).select(); }, 100); }
+                if (e.data.focus){ setTimeout(function () { $(login_form).find(e.data.focus).first().focus(); }, 100); }
+                if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).first().select(); }, 100); }
                 if (e.data.show){ $(login_form).find(e.data.show).show(); }
                 resend_counndown(e, login_form, _pepro_dev);
 
@@ -691,8 +700,8 @@ jQuery.noConflict();
                 $(login_form).find("#login_error").removeClass("info success error").addClass("info").html(e.data.msg);
                 $(login_form).find(".pepro-login-reg-field").addClass("hide");
                 $(login_form).find(".user_mobile-wrap, .submit-wrap, .optverify-wrap, [data-recaptcha]").removeClass("hide");
-                if (e.data.focus){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).focus(); }, 100); }
-                if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).select(); }, 100); }
+                if (e.data.focus){ setTimeout(function () { $(login_form).find(e.data.focus).first().focus(); }, 100); }
+                if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).first().select(); }, 100); }
                 if (e.data.show){ $(login_form).find(e.data.show).show(); }
                 resend_counndown(e, login_form, _pepro_dev);
               }
@@ -755,8 +764,8 @@ jQuery.noConflict();
             }
             else {
               if (e.data.is_otp){
-                if (e.data.focus){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).focus(); }, 100); }
-                if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).select(); }, 100); }
+                if (e.data.focus){ setTimeout(function () { $(login_form).find(e.data.focus).first().focus(); }, 100); }
+                if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).first().select(); }, 100); }
                 if (e.data.show){ $(login_form).find(e.data.show).show(); }
                 resend_counndown(e, login_form, _pepro_dev);
               }
@@ -840,8 +849,8 @@ jQuery.noConflict();
               if (e.data.is_otp){
                 $(login_form).find("#login_error").removeClass("info success error").addClass("info").html(e.data.msg);
                 $(login_form).find(".user_mobile-wrap, .submit-wrap, .optverify-wrap, [data-recaptcha]").removeClass("hide");
-                if (e.data.focus){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).focus(); }, 100); }
-                if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).select(); }, 100); }
+                if (e.data.focus){ setTimeout(function () { $(login_form).find(e.data.focus).first().focus(); }, 100); }
+                if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).first().select(); }, 100); }
                 if (e.data.show){ $(login_form).find(e.data.show).show(); }
                 resend_counndown(e, login_form, _pepro_dev);
               }
@@ -904,8 +913,8 @@ jQuery.noConflict();
             }
             else {
               if (e.data.is_otp){
-                if (e.data.focus){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).focus(); }, 100); }
-                if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).get(0).select(); }, 100); }
+                if (e.data.focus){ setTimeout(function () { $(login_form).find(e.data.focus).first().focus(); }, 100); }
+                if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).first().select(); }, 100); }
                 if (e.data.show){ $(login_form).find(e.data.show).show(); }
                 resend_counndown(e, login_form, _pepro_dev);
               }
@@ -940,14 +949,20 @@ jQuery.noConflict();
         else{
           $(login_form).find(e.data.show).prop("disabled", true).addClass("disabled").countdown(e.data.timerdown)
           .on('update.countdown', function(qd) {
-            $(this).html( _pepro_dev.resendtime.replace('%s', qd.strftime('%M:%S') ) );
+            $(this).html(_pepro_dev.resendtime.replace('%s',qd.strftime('%M:%S')));
           })
           .on('finish.countdown', function(qd) {
+            $(this).html(_pepro_dev.resendnow).prop("disabled", false).removeClass("disabled");
+          })
+          .on('stop.countdown', function(qd) {
             $(this).html(_pepro_dev.resendnow).prop("disabled", false).removeClass("disabled");
           });
         }
       }
     }
+    $(document).on("input", "[data-pepro-reglogin]>form.inline input[type=number]", function(e){
+      $(this).val(toEnglishDigits($(this).val()));
+    });
     $(document).on("click tap", "[data-pepro-reglogin]>form.inline error", function(e){
       $(this).parent().find(":input").focus().select();
     });
@@ -972,8 +987,8 @@ jQuery.noConflict();
       $popup = $(`[data-trigger-ref='${$(this).data("trigger")}'`).addClass("popup-active");
       $username = $(".popup-active input[name='username']");
       if ($username.length){
-        $username.get(0).focus();
-        setTimeout(function () { $username.get(0).focus(); }, 200);
+        $username.first().focus();
+        setTimeout(function () { $username.first().focus(); }, 200);
       }
     });
     $(document).on("click tap", ".switch-form-login", function(e){
@@ -1023,6 +1038,19 @@ jQuery.noConflict();
         buttons: { close: { btnClass: "btn-"+type, text: _pepro_dev.closeTxt, keys: ["enter", "esc"], action: $fn } },
       });
     }
-
+    function toEnglishDigits(str){
+        // https://stackoverflow.com/a/51113170
+        // convert persian digits [۰۱۲۳۴۵۶۷۸۹]
+        var e = '۰'.charCodeAt(0);
+        str = str.replace(/[۰-۹]/g, function(t) {
+            return t.charCodeAt(0) - e;
+        });
+        // convert arabic indic digits [٠١٢٣٤٥٦٧٨٩]
+        e = '٠'.charCodeAt(0);
+        str = str.replace(/[٠-٩]/g, function(t) {
+            return t.charCodeAt(0) - e;
+        });
+        return str;
+    }
   });
 })(jQuery);

@@ -3,7 +3,7 @@
  * @Date:   2021/08/02 22:04:09
  * @Email:  its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/09/19 08:25:24
+ * @Last modified time: 2021/10/09 01:50:37
  * @License: GPLv2
  * @Copyright: Copyright © Amirhosseinhpv (https://hpv.im), all rights reserved.
  */
@@ -276,6 +276,16 @@ jQuery.noConflict();
           $('._regdef_email .is_required').prop("checked", true).trigger("change").prop("disabled", true);
           $('._regdef_passwords [name="_regdef_passwords"]').prop("checked", true).trigger("change").prop("disabled", true);
           $('._regdef_passwords .is_required').prop("checked", true).trigger("change").prop("disabled", true);
+          break;
+        case "mailotp":
+          if (!mute){
+            $('._regdef_mobile [name="_regdef_mobile"]').prop("checked", false).trigger("change").prop("disabled", false);
+            $('._regdef_mobile .is_required').prop("checked", false).trigger("change").prop("disabled", false);
+          }
+          $('._regdef_email [name="_regdef_email"]').prop("checked", true).trigger("change").prop("disabled", true);
+          $('._regdef_email .is_required').prop("checked", true).trigger("change").prop("disabled", true);
+          $('._regdef_passwords [name="_regdef_passwords"]').prop("checked", false).trigger("change").prop("disabled", false);
+          $('._regdef_passwords .is_required').prop("checked", false).trigger("change").prop("disabled", false);
           break;
         default:
       }

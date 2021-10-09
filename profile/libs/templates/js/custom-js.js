@@ -15,7 +15,7 @@
  * @Date:2020/05/03 13:33:07
  * @Email:its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/09/02 12:09:49
+ * @Last modified time: 2021/10/09 03:17:31
  * @License:GPLv2
  * @Copyright:Copyright © 2020 Amirhosseinhpv,All rights reserved.
  */
@@ -37,7 +37,7 @@ $ = jQuery;!function(e,t){"object"==typeof exports&&"object"==typeof module?modu
  * @Date:   2020/09/28 17:58:05
  * @Email:  its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/09/02 12:09:49
+ * @Last modified time: 2021/10/09 03:17:31
  * @License: GPLv2
  * @Copyright: Copyright © 2020 Amirhosseinhpv, All rights reserved.
  */
@@ -264,15 +264,10 @@ $ = jQuery;!function(e,t){"object"==typeof exports&&"object"==typeof module?modu
     });
 
     $(document).on("click tap","#submit-profile-changes",function(e){
-      if (e.isDefaultPrevented()){
-        e.preventDefault();
-        return;
-      }
+      if (e.isDefaultPrevented()){ e.preventDefault(); return; }
       e.preventDefault();
       var stop = false;
-      $.each($(".edit-profile-form :required"), function(index, val) {
-        if ($.trim($(val).val()) === ""){ stop = true; }
-      });
+      $.each($(".edit-profile-form :required"), function(index, val) { if ($.trim($(val).val()) === ""){ stop = true; } });
       if (stop){
         $(".edit-profile-form :required:invalid").first().focus();
         $(".save-user-details").slideUp().html(_i18n.fillreq).removeClass("error info success").addClass("error").slideDown();
@@ -324,6 +319,9 @@ $ = jQuery;!function(e,t){"object"==typeof exports&&"object"==typeof module?modu
               if (e.data.e.avatar){
                 $("#avatar").val("").trigger("change");
                 $(".account-item .image img, .account-dropdown .image img, #avatar_b").attr("src", e.data.e.avatar).trigger("load");
+              }
+              if (e.data.refresh == true){
+                setTimeout(function () { window.location.href = window.location.href; }, 500);
               }
             }
           } else {

@@ -3,7 +3,7 @@
  * @Date:2020/05/03 13:33:07
  * @Email:its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/09/17 23:05:55
+ * @Last modified time: 2021/09/28 21:41:35
  * @License:GPLv2
  * @Copyright:Copyright © 2020 Amirhosseinhpv,All rights reserved.
  */
@@ -297,8 +297,13 @@ footer {
 }
 
 .header-mobile .header-mobile-inner {
-	height: 65px;
+    height: 25px;
 }
+
+.header-mobile .navbar-mobile {
+    top: 48px;
+}
+
 
 .alert-box {
 	display: block;

@@ -1,7 +1,7 @@
 <?php
 
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/17 21:15:16
+# @Last modified time: 2021/10/09 03:04:46
 
 global $PeproDevUPS_Profile, $PeproDevUPS_Login;
 $current_user = wp_get_current_user();
@@ -17,7 +17,7 @@ $PeproDevUPS_Profile->change_dashboard_title(_x("Edit", "user-dashboard", "pepro
     </div>
   </div>
   <div class="row m-t-25">
-    <div class="col-lg-6 col-md-12">
+    <div class="col-lg-12 col-md-12">
         <div class="card">
             <div class="card-header"><?php echo esc_html_x("Edit Personal Info", "edit-user", "peprodev-ups");?></div>
             <div class="card-body">
@@ -52,7 +52,7 @@ $PeproDevUPS_Profile->change_dashboard_title(_x("Edit", "user-dashboard", "pepro
                           $PeproDevUPS_Profile->add_input(_x("Last Name", "edit-user", "peprodev-ups"), "lastname", "$current_user->user_lastname", "required ", "");
                         ?>
                       </div>
-                      <div class="col-lg-6 col-md-12 mt-3">
+                      <div class="col-lg-12 col-md-12 mt-3">
                         <?php
                           $PeproDevUPS_Profile->add_input(_x("Current Password", "edit-user", "peprodev-ups"), "password_current", "", 'autocomplete="off" ', "", "password");
                           ?>
@@ -60,6 +60,11 @@ $PeproDevUPS_Profile->change_dashboard_title(_x("Edit", "user-dashboard", "pepro
                       <div class="col-lg-6 col-md-12 mt-3">
                         <?php
                           $PeproDevUPS_Profile->add_input(_x("New Password", "edit-user", "peprodev-ups"), "password_new", "", 'autocomplete="off" ', "", "password");
+                          ?>
+                      </div>
+                      <div class="col-lg-6 col-md-12 mt-3">
+                        <?php
+                          $PeproDevUPS_Profile->add_input(_x("Confirm Password", "edit-user", "peprodev-ups"), "password_confirm", "", 'autocomplete="off" ', "", "password");
                           ?>
                       </div>
                       <?php
@@ -81,7 +86,7 @@ $PeproDevUPS_Profile->change_dashboard_title(_x("Edit", "user-dashboard", "pepro
             </div>
         </div>
     </div>
-    <div class="col-lg-6 col-md-12">
+    <div class="col-lg-12 col-md-12">
       <div class="row">
         <?php
           if (class_exists("PeproDevUPS_Login")){
@@ -94,7 +99,7 @@ $PeproDevUPS_Profile->change_dashboard_title(_x("Edit", "user-dashboard", "pepro
       </div>
     </div>
   </div>
-  <div class="row m-t-25">
+  <div class="m-t-25">
     <?php
     if ($PeproDevUPS_Profile->_wc_activated()) {
       echo "<div class='overview-wrap'><h2 class='title-1'>".__("E-commerce settings", "peprodev-ups")."</h2></div><div class='row m-t-25'>";

@@ -1,24 +1,24 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/15 14:45:29
+# @Last modified time: 2021/09/22 21:10:05
 if (!class_exists("PeproDevUPS_Core")){
   class PeproDevUPS_Core
   {
     private static $_instance = null;
-      public $td;
-      public $ns;
-      public $plugin_dir;
-      public $plugin_url;
-      public $assets_url;
-      public $plugin_basename;
-      public $plugin_file;
-      public $version;
-      public $db_slug;
-      public $title;
-      public $title_w;
-      public $db_table = null;
-      public $manage_links = array();
-      public $meta_links = array();
+    public $td;
+    public $ns;
+    public $plugin_dir;
+    public $plugin_url;
+    public $assets_url;
+    public $plugin_basename;
+    public $plugin_file;
+    public $version;
+    public $db_slug;
+    public $title;
+    public $title_w;
+    public $db_table = null;
+    public $manage_links = array();
+    public $meta_links = array();
     public function __construct()
     {
         global $wpdb;
@@ -31,7 +31,7 @@ if (!class_exists("PeproDevUPS_Core")){
         $this->assets_url      = plugins_url("/assets/", __FILE__);
         $this->plugin_basename = plugin_basename(__FILE__);
         $this->plugin_file     = __FILE__;
-        $this->version         = defined('PeproDevUPS') ? PeproDevUPS : "1.0.0";
+        $this->version         = defined('PEPRODEVUPS') ? PEPRODEVUPS : "1.0.0";
         $this->db_slug         = $this->td;
         $this->db_table        = $wpdb->prefix . $this->db_slug;
         $this->title           = __("PeproDev Ultimate Profile Solutions", "peprodev-ups");

@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/16 11:46:40
+# @Last modified time: 2021/10/09 01:46:32
 add_thickbox();
 wp_enqueue_style("wp-color-picker");
 wp_enqueue_script("wp-color-picker");
@@ -460,8 +460,12 @@ foreach ($styleFiles as $style) {
                       <input autocomplete="off" type="radio" class='form-checkbox iostoggle single-required mr-2 reglogin_type' <?php checked($this->reglogin_type === "mobile", true);?> name="reglogin_type" value="mobile" /><?php esc_html_e("Using Mobile OTP", "peprodev-ups");?>
                     </label>
                     <label class="row w-100 align-items-center m-0 mb-2">
+                      <input autocomplete="off" type="radio" class='form-checkbox iostoggle single-required mr-2 reglogin_type' <?php checked($this->reglogin_type === "mailotp", true);?> name="reglogin_type" value="mailotp" /><?php esc_html_e("Using Email OTP", "peprodev-ups");?>
+                    </label>
+                    <label class="row w-100 align-items-center m-0 mb-2">
                       <input autocomplete="off" type="radio" class='form-checkbox iostoggle single-required mr-2 reglogin_type' <?php checked($this->reglogin_type === "email", true);?> name="reglogin_type" value="email" /><?php esc_html_e("Using Email/Username & Password", "peprodev-ups");?>
                     </label>
+                    <br>
                     <div class="save_checkboxes">
                       <label class="row w-100 align-items-center m-0 mb-2">
                         <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required mr-2 auto_login_after_reg' <?php checked( $this->auto_login_after_reg, true);?> name="auto_login_after_reg" /> <?php esc_html_e("Auto-login After Registeration","peprodev-ups");?>

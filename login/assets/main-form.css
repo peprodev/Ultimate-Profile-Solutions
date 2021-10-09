@@ -3,7 +3,7 @@
  * @Date:   2021/08/17 09:27:55
  * @Email:  its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/09/17 18:48:06
+ * @Last modified time: 2021/10/09 03:21:39
  * @License: GPLv2
  * @Copyright: Copyright © Amirhosseinhpv (https://hpv.im), all rights reserved.
  */
@@ -86,28 +86,33 @@ toast.active {
 [data-pepro-reglogin]>form .login_error,
 [data-pepro-reglogin]>form #login_error {
 	display: block;
-	border-right: 4px solid #72aee6;
+	border-left: 4px solid #72aee6;
 	padding: 12px;
 	margin-right: 0;
 	margin-bottom: 20px;
 	background-color: #fff;
 	box-shadow: 0 1px 1px 0 #0000001a;
-	border-right-color: #d63638;
+	border-color: #d63638;
+}
+[dir="rtl"] [data-pepro-reglogin]>form .login_error,
+[dir="rtl"] [data-pepro-reglogin]>form #login_error {
+	border-left: none;
+	border-right: 4px solid #72aee6;
 }
 
 [data-pepro-reglogin]>form .login_error.info,
 [data-pepro-reglogin]>form #login_error.info {
-	border-right-color: #72aee6;
+	border-color: #72aee6;
 }
 
 [data-pepro-reglogin]>form .login_error.success,
 [data-pepro-reglogin]>form #login_error.success {
-	border-right-color: #00a32a;
+	border-color: #00a32a;
 }
 
 [data-pepro-reglogin]>form .login_error.error,
 [data-pepro-reglogin]>form #login_error.error {
-	border-right-color: #d63638;
+	border-color: #d63638;
 }
 
 .pepro-verify-container,

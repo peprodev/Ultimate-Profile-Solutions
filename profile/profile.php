@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/19 09:06:08
+# @Last modified time: 2021/10/09 03:18:04
 if (!class_exists("PeproDevUPS_Profile")) {
     class PeproDevUPS_Profile
     {
@@ -1246,7 +1246,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
         }
         public function front_side_ajax_handler()
         {
-            check_ajax_referer( 'pepro_profile', 'integrity' );
+            check_ajax_referer('pepro_profile', 'integrity');
             // handle front-end profile ajax requests
             if (wp_doing_ajax() && $_POST['action'] == $this->id ) {
               if ("profile" == $_POST['wparam']){
@@ -1434,19 +1434,27 @@ if (!class_exists("PeproDevUPS_Profile")) {
                           case 'password_new':
                               $pass1 = $index['value'];
                             break;
+                          case 'password_confirm':
+                              $pass2 = $index['value'];
+                            break;
                           default:
                             do_action( "peprofile_user_details_edit_loop_details", $_POST, $index);
                             break;
                       }
 
                     }
-                		if ( ! empty( $pass_cur ) && empty( $pass1 )) {
+                		if ( !empty( $pass_cur ) && (empty( $pass1 ) || empty( $pass2 )) ) {
                       wp_send_json_error(array( "msg"=>__("Please fill out all password fields.", "peprodev-ups")));
                 			$save_pass = false;
                       return;
                 		}
-                    elseif ( ! empty( $pass1 ) && empty( $pass_cur ) ){
+                    elseif (empty( $pass_cur ) && (!empty( $pass1 ) || !empty( $pass2 )) ){
                       wp_send_json_error(array( "msg"=>__("Please enter your current password.", "peprodev-ups")));
+                			$save_pass = false;
+                      return;
+                		}
+                    elseif (!empty( $pass_cur ) && ($pass1 != $pass2)){
+                      wp_send_json_error(array( "msg"=>__("New password and Confirm password does not match.", "peprodev-ups")));
                 			$save_pass = false;
                       return;
                 		}
@@ -1469,10 +1477,17 @@ if (!class_exists("PeproDevUPS_Profile")) {
 
                     do_action( "peprofile_user_details_edited", $user_id);
 
+                    if ($save_pass) {
+                      wp_clear_auth_cookie();
+                      $user = new \WP_User($user_id);
+                      wp_set_current_user($user->ID);
+                      wp_set_auth_cookie($user->ID);
+                    }
                     wp_send_json_success( array(
-                      "fileds" => json_decode(stripslashes($_POST["dparam"])),
-                      'msg' => __("Profile Updated successfully.", "peprodev-ups"),
-                      "e"   => $retuen
+                      "fileds"  => json_decode(stripslashes($_POST["dparam"])),
+                      'msg'     => __("Profile Updated successfully.", "peprodev-ups"),
+                      // "e"   => $retuen,
+                      "refresh" => $save_pass?true:false,
                       ));
 
                     break;
