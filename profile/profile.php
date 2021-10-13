@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/10/09 03:18:04
+# @Last modified time: 2021/10/13 11:31:07
 if (!class_exists("PeproDevUPS_Profile")) {
     class PeproDevUPS_Profile
     {
@@ -136,21 +136,14 @@ if (!class_exists("PeproDevUPS_Profile")) {
         }
         public function template_redirect()
         {
-          if (get_the_id() == $this->get_profile_page()){
-            if (!get_current_user_id()) {
-              // if (!$this->_wc_activated()) {
-                // $profile_url = $this->get_profile_page(["i"=>current_time("timestamp")]);
-                // $profile_url = wp_login_url($profile_url);
-                // wp_redirect($profile_url);
-              // }
-            }
-          }
         }
         public function get_profile_page($queryVar=null)
         {
           $profile_page = get_option("{$this->activation_status}-profile-dash-page");
-          if ($queryVar){
+          if ($queryVar && null !== $queryVar && is_array($queryVar)){
             $url          = get_permalink($profile_page);
+            $lang         = defined('ICL_LANGUAGE_CODE') ? ICL_LANGUAGE_CODE : "en";
+            $url          = apply_filters( 'wpml_permalink', $url , $lang);
             $profile_page = add_query_arg( $queryVar, $url);
           }
           return apply_filters( "peprofile_get_profile_page", $profile_page, $queryVar);
@@ -160,11 +153,11 @@ if (!class_exists("PeproDevUPS_Profile")) {
           wp_register_style("{$this->id}-adminbar_styles", false);
           wp_add_inline_style( "{$this->id}-adminbar_styles", '#wpadminbar #wp-admin-bar-peprocoreprofile .ab-icon::before {content: "\f110";top: 2px;}');
           wp_enqueue_style("{$this->id}-adminbar_styles");
-          $profile_page = get_option("{$this->activation_status}-profile-dash-page");
+          $profile_page = $this->get_profile_page(["i"=>current_time("timestamp")]);
           $wp_admin_bar->add_node(array(
             'id'    => $this->id,
             'title' => '<span class="ab-icon" aria-hidden="true"></span>' . __("User Dashboard","peprodev-ups"),
-            'href'  => get_permalink( $profile_page),
+            'href'  => $profile_page,
             'meta'  => array( 'class' => 'custom-node-class' ),
           ));
           foreach ($this->peprofile_get_nav_items_array() as $key => $value) {
@@ -1008,7 +1001,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
             'extras'  => '',
           ),$atts));
           $link = $this->get_profile_page(["i"=>current_time("timestamp")]);
-          if (!empty($section)){ $link = $this->get_profile_page([ "section" => $section ]); }
+          if (!empty($section)){ $link = $this->get_profile_page(["section"=>$section]); }
           if (!empty($button)){
             return "<a href='$link' class='".esc_attr( $class )."' >$button</a>";
           }
@@ -2273,13 +2266,10 @@ if (!class_exists("PeproDevUPS_Profile")) {
         public function peprofile_get_nav_items($arr)
         {
             global $wp;
-            $profile_page = get_option("{$this->activation_status}-profile-dash-page","");
-            $slug = get_page_template_slug($profile_page);
-            $url = get_permalink($profile_page);
             $arr = array_merge( $arr, array(
               "home"          => array(
                 "title"       => "<i class='fas fa-tachometer-alt'></i> ".__("Dashboard", "peprodev-ups"),
-                "url"         => $url,
+                "url"         => $this->get_profile_page(["i"=>current_time("timestamp")]),
                 "priority"    => 10,
                 "built_in"    => true,
               )));
@@ -2288,19 +2278,19 @@ if (!class_exists("PeproDevUPS_Profile")) {
                 array(
                   "orders"        =>  array(
                     "title"      => '<i class="fa fa-shopping-bag"></i> ' .__("Orders", "peprodev-ups"),
-                    "url"        => "$url?section=orders",
+                    "url"        => $this->get_profile_page(["section"=> "orders"]),
                     "built_in"   => true,
                     "priority"   => 701,
                   ),
                   "downloads"     =>  array(
                     "title"      => '<i class="fa fa-download"></i> ' .__("Downloads", "peprodev-ups"),
-                    "url"        => "$url?section=downloads",
+                    "url"        => $this->get_profile_page(["section"=> "downloads"]),
                     "built_in"   => true,
                     "priority"   => 703,
                   ),
                   "track"         =>  array(
                     "title"      => '<i class="fa fa-truck"></i> ' .__("Order Tracking", "peprodev-ups"),
-                    "url"        => "$url?section=track",
+                    "url"        => $this->get_profile_page(["section"=> "track"]),
                     "built_in"   => true,
                     "priority"   => 704,
                   ),
@@ -2310,7 +2300,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                   "wallet" =>
                   array(
                     "title"      => '<i class="fa fa-wallet"></i> ' .__("Wallet", "peprodev-ups"),
-                    "url"        => "$url?section=wallet",
+                    "url"        => $this->get_profile_page(["section"=> "wallet"]),
                     "built_in"   => true,
                     "priority"   => 700.5
                   )
@@ -2320,13 +2310,13 @@ if (!class_exists("PeproDevUPS_Profile")) {
             $arr = array_merge($arr, array(
                   "notifications" =>  array(
                     "title"       => '<i class="fa fa-bell"></i> ' .__("Notifications", "peprodev-ups"),
-                    "url"         => "$url?section=notifications",
+                    "url"         => $this->get_profile_page(["section"=> "notifications"]),
                     "built_in"    => true,
                     "priority"    => 900,
                   ),
                   "announcements" =>  array(
                     "title"       => '<i class="fa fa-bullhorn"></i> ' .__("Announcements", "peprodev-ups"),
-                    "url"         => "$url?section=announcements",
+                    "url"         => $this->get_profile_page(["section"=> "announcements"]),
                     "built_in"    => true,
                     "priority"    => 901,
                   )
@@ -2337,7 +2327,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                   array(
                     "courses" => array(
                                     "title"       => '<i class="fas fa-user-graduate"></i> ' .__("My Courses", "peprodev-ups"),
-                                    "url"         => "$url?section=courses",
+                                    "url"         => $this->get_profile_page(["section"=> "courses"]),
                                     "built_in"    => true,
                                     "priority"    => 222,
                                 )
@@ -2349,6 +2339,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
         public function peprofile_get_custom_user_nav_items($arr)
         {
             global $wp, $wpdb;
+            $profile_url = $this->get_profile_page(["i"=>current_time("timestamp")]);
             $sections = $wpdb->get_results("SELECT * FROM `$this->tbl_sections` ORDER BY `date_created` DESC");
             if ($sections && !empty($sections)){
               foreach ($sections as $section) {
@@ -2393,7 +2384,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                   $arr = array_merge($arr,
                             array( "$section->slug" => array(
                                                   "title"       => "<i class=\"$section->icon\"></i> $section->title",
-                                                  "url"         => home_url($wp->request) . "?section={$section->slug}",
+                                                  "url"         => $this->get_profile_page(["section"=> $section->slug]),
                                                   "priority"    => $section->priority,
                                                   "built_in"    => "db",
                                                 )
@@ -3028,7 +3019,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
            'comment_status'=> 'closed',
           );
 
-          if ("yes" !== get_option("{$this->activation_status}-profile-dash-page-created")){
+          if ("yes" != get_option("{$this->activation_status}-profile-dash-page-created","")){
             $post_id = wp_insert_post( $profile_template );
             if(!is_wp_error($post_id)){
               update_post_meta( $post_id, '_wp_page_template', 'peprofile-template.php' );
@@ -3036,7 +3027,6 @@ if (!class_exists("PeproDevUPS_Profile")) {
               update_option("{$this->activation_status}-profile-dash-page-created", "yes");
             }
           }
-
         }
         /* common functions
         */

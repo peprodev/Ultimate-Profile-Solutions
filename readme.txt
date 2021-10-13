@@ -2,8 +2,8 @@
 Contributors: amirhosseinhpv, peprodev, blackswanlab
 Donate link: https://pepro.dev/donate/
 Tags: functionality, pepro, management, administration, profile, login, register
-Version: 1.6.0
-Stable tag: 1.6.0
+Version: 1.8.0
+Stable tag: 1.8.0
 Requires at least: 5.0
 Tested up to: 5.8
 Requires PHP: 7.2
@@ -46,12 +46,19 @@ You can help us improve our works by committing your changes to Pepro Dev's Gith
 1. Overview
 
 == Changelog ==
+
+= Ver. 1.8.0 | 2021-08-29/1400-06-07 =
+* WPML compatibility
+
 = Ver. 1.0.0 | 2021-08-29/1400-06-07 =
 * initial release
 * unified all-in-one plugin
 * added translation
 
 == Upgrade Notice ==
+
+= Ver. 1.8.0 | 2021-08-29/1400-06-07 =
+* WPML compatibility
 
 = Ver. 1.0.0 | 2021-08-29/1400-06-07 =
 * initial release
