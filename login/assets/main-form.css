@@ -1,11 +1,6 @@
 /**
- * @Author: Amirhosseinhpv
- * @Date:   2021/08/17 09:27:55
- * @Email:  its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/10/09 03:21:39
- * @License: GPLv2
- * @Copyright: Copyright © Amirhosseinhpv (https://hpv.im), all rights reserved.
+ * @Last modified time: 2021/10/17 19:45:12
  */
 :root{
 	--tippy-color: #bf1e2e;
@@ -44,7 +39,8 @@ toast.active {
 
 [data-pepro-reglogin] > form.inline error {
 	position: absolute;
-	left: 0;
+	right: 0;
+	left: auto;
 	top: 3px;
 	display: block;
 	width: 18px;
@@ -56,6 +52,10 @@ toast.active {
 	font-weight: 800;
 	font-size: small;
 	cursor: help;
+}
+[dir="rtl"] [data-pepro-reglogin] > form.inline error {
+	left: 0;
+	right: auto;
 }
 
 .tippy-box[data-theme~='error'] {

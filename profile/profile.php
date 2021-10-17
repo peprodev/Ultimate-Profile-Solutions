@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/10/13 11:31:07
+# @Last modified time: 2021/10/18 02:26:21
 if (!class_exists("PeproDevUPS_Profile")) {
     class PeproDevUPS_Profile
     {
@@ -1341,12 +1341,16 @@ if (!class_exists("PeproDevUPS_Profile")) {
                           if ( $movefile && ! isset( $movefile['error'] ) ) {
                             $saved = get_user_meta( get_current_user_id(), 'profile_ifile', true );
                             if (!empty($saved) && file_exists(wp_upload_dir()["basedir"] . "/profile/$saved")){
+                              // remove prev-image
                               unlink(wp_upload_dir()["basedir"] . "/profile/$saved");
                             }
+                            $newimg = wp_upload_dir()["basedir"] . "/profile/" . basename($movefile["file"]);
+                            $this->make_thumb($newimg, $newimg, 250);
                             update_user_meta( get_current_user_id(), 'profile_ifile', basename($movefile["file"]));
                             update_user_meta( get_current_user_id(), 'profile_image', $movefile["url"]);
                             do_action( "poprofile_user_avatar_upload_success");
-                          }else{
+                          }
+                          else{
                             do_action( "poprofile_user_avatar_upload_failed");
                             wp_send_json_error(array( "msg" =>  __("There was an error uploading your file. Operation Aborted, Error 0x100953.","peprodev-ups")));
                             return;
@@ -1358,8 +1362,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                           return;
                         }
                     }
-                		$required_fields = apply_filters( 'peprofile_save_account_details_required_fields_label',
-                			array(
+                    $required_fields = apply_filters( 'peprofile_save_account_details_required_fields_label', array(
                 				'firstname'     => __( 'First name', "peprodev-ups" ),
                 				'lastname'      => __( 'Last name', "peprodev-ups" ),
                 				'email'         => __( 'Email address', "peprodev-ups" ),
@@ -1476,10 +1479,12 @@ if (!class_exists("PeproDevUPS_Profile")) {
                       wp_set_current_user($user->ID);
                       wp_set_auth_cookie($user->ID);
                     }
+                    $saved = get_user_meta( get_current_user_id(), 'profile_ifile', true );
                     wp_send_json_success( array(
+                      "e"       => $retuen,
                       "fileds"  => json_decode(stripslashes($_POST["dparam"])),
                       'msg'     => __("Profile Updated successfully.", "peprodev-ups"),
-                      // "e"   => $retuen,
+                      'img'     => wp_upload_dir()["basedir"] . "/profile/$saved",
                       "refresh" => $save_pass?true:false,
                       ));
 
@@ -1496,6 +1501,30 @@ if (!class_exists("PeproDevUPS_Profile")) {
               }
               die();
             }
+        }
+        public function make_thumb($src, $dest, $desired_width, $degrees=false)
+        {
+
+          /* read the source image */
+          $source_image = imagecreatefromjpeg($src);
+          $width = imagesx($source_image);
+          $height = imagesy($source_image);
+
+          /* find the "desired height" of this thumbnail, relative to the desired width  */
+          $desired_height = floor($height * ($desired_width / $width));
+
+          /* create a new, "virtual" image */
+          $virtual_image = imagecreatetruecolor($desired_width, $desired_height);
+
+          /* copy source image at a resized size */
+          imagecopyresampled($virtual_image, $source_image, 0, 0, 0, 0, $desired_width, $desired_height, $width, $height);
+
+          if ($degrees){
+            $virtual_image = imagerotate($virtual_image, $degrees, 0);
+          }
+
+          /* create the physical thumbnail image to its destination */
+          imagejpeg($virtual_image, $dest);
         }
         public function admin_side_ajax_handler($r)
         {
@@ -2919,9 +2948,9 @@ if (!class_exists("PeproDevUPS_Profile")) {
             if ($wpdb->get_var("SHOW TABLES LIKE '". $tbl ."'") != $tbl || $force) {
               $sql = "CREATE TABLE `$tbl` (
               `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-              `date_created` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
-              `date_modified` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
-              `date_scheduled` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+              `date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
+              `date_modified` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+              `date_scheduled` DATETIME DEFAULT CURRENT_TIMESTAMP,
               `date_scheduledFA` TINYTEXT,
               `title` TINYTEXT,
               `content` LONGTEXT,

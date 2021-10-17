@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/22 21:10:05
+# @Last modified time: 2021/10/17 15:36:13
 if (!class_exists("PeproDevUPS_Core")){
   class PeproDevUPS_Core
   {
@@ -159,7 +159,7 @@ if (!class_exists("PeproDevUPS_Core")){
       $tbl = $this->db_table;
       $sql = "CREATE TABLE `$tbl` (
         `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-        `date` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
+        `date` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
         `term` VARCHAR(500) DEFAULT '' NOT NULL,
         `count` BIGINT(20) UNSIGNED DEFAULT '1' NOT NULL,
         PRIMARY KEY id (id)
