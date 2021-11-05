@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/10/18 02:26:21
+# @Last modified time: 2021/11/04 10:58:54
 if (!class_exists("PeproDevUPS_Profile")) {
     class PeproDevUPS_Profile
     {
@@ -313,11 +313,11 @@ if (!class_exists("PeproDevUPS_Profile")) {
                   vc_add_shortcode_param("{$this->id}_about", array($this,'vc_add_pepro_about'), plugins_url("/assets/js/vc.init.js", __FILE__));
               }
           }
-          add_action('admin_init',                    function(){ if (!current_user_can('manage_options') && ( !wp_doing_ajax() ) ) {
+          add_action('admin_init',                    function(){ if (!current_user_can('edit_posts') && ( !wp_doing_ajax() ) ) {
             $url = apply_filters("peprofile_admin_redirect_url_if_no_access",home_url());
             wp_safe_redirect( $url );
             exit; } }, 1 );
-          add_action('after_setup_theme',             function(){ if (!current_user_can('administrator')  && !is_admin()) {
+          add_action('after_setup_theme',             function(){ if (!current_user_can('edit_posts')  && !is_admin()) {
             show_admin_bar(false);
             add_filter('show_admin_bar', '__return_false');
           }});
@@ -419,6 +419,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
         }
         public function change_avatar_url($url, $id_or_email, $args)
         {
+          $user = false;
           $local = esc_url("{$this->assets_url}assets/img/account.png");
           if (is_numeric($id_or_email)) {
             $user = get_user_by('id', absint( $id_or_email ));
@@ -2948,9 +2949,9 @@ if (!class_exists("PeproDevUPS_Profile")) {
             if ($wpdb->get_var("SHOW TABLES LIKE '". $tbl ."'") != $tbl || $force) {
               $sql = "CREATE TABLE `$tbl` (
               `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-              `date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
-              `date_modified` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-              `date_scheduled` DATETIME DEFAULT CURRENT_TIMESTAMP,
+              `date_created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+              `date_modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+              `date_scheduled` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
               `date_scheduledFA` TINYTEXT,
               `title` TINYTEXT,
               `content` LONGTEXT,
@@ -2973,8 +2974,8 @@ if (!class_exists("PeproDevUPS_Profile")) {
               `user_id` INT(10) UNSIGNED NOT NULL DEFAULT '0',
               `notif_id` INT(10) UNSIGNED NOT NULL DEFAULT '0',
               `has_seen` ENUM( '0', '1' ) DEFAULT '0',
-              `seen_first_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
-              `seen_last_date` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+              `seen_first_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+              `seen_last_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
               PRIMARY KEY id (id) ) $charset_collate;";
               dbDelta($sql);
             }
@@ -2983,8 +2984,8 @@ if (!class_exists("PeproDevUPS_Profile")) {
             if ($wpdb->get_var("SHOW TABLES LIKE '". $tbl ."'") != $tbl || $force) {
               $sql = "CREATE TABLE `$tbl` (
               `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-              `date_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
-              `date_modified` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+              `date_created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+              `date_modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
               `title` TINYTEXT,
               `slug` TINYTEXT,
               `subject` TINYTEXT,

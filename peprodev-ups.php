@@ -7,8 +7,8 @@ Tags: functionality, pepro, management, administration, profile, login, register
 Author: Pepro Dev. Group
 Author URI: https://pepro.dev/
 Plugin URI: https://pepro.dev/ups
-Version: 1.8.2
-Stable tag: 1.8.2
+Version: 1.8.3
+Stable tag: 1.8.3
 Requires at least: 5.0
 Tested up to: 5.8
 Requires PHP: 7.2
@@ -20,7 +20,7 @@ License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/10/18 02:31:24
+# @Last modified time: 2021/11/05 11:42:46
 
 defined("ABSPATH") or die("PeproDev Ultimate Profile Solutions :: Unauthorized Access! (https://pepro.dev/)");
 
@@ -29,7 +29,7 @@ if (!class_exists("PeproDevUPS")) {
     {
         public function __construct()
         {
-            define('PEPRODEVUPS', '1.8.2');
+            define('PEPRODEVUPS', '1.8.3');
 
             add_action("init", function() {
               load_plugin_textdomain("wpserveur-hide-login", false, dirname(plugin_basename(__FILE__))."/languages/");

@@ -47,8 +47,9 @@ You can help us improve our works by committing your changes to Pepro Dev's Gith
 
 == Changelog ==
 
-= Ver. 1.8.0 | 2021-08-29/1400-06-07 =
+= Ver. 1.8.2 | 2021-08-29/1400-06-07 =
 * WPML compatibility
+* Make Smaller version of Avatar on Upload
 
 = Ver. 1.0.0 | 2021-08-29/1400-06-07 =
 * initial release

@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/10/09 03:55:03
+# @Last modified time: 2021/11/05 11:42:30
 include_once plugin_dir_path(__FILE__) . "/include/class-login-permalink.php";
 
 if (!class_exists("PeproDevUPS_Login")){
@@ -173,6 +173,7 @@ if (!class_exists("PeproDevUPS_Login")){
       add_shortcode("pepro-smart-btn",                                   array( $this, "shortcode__smart_btn") );
       add_filter("pepro_reglogin_get_register_fields",                   array( $this, "pepro_reglogin_get_register_fields" ), 1000);
       add_action("pepro_reglogin_show_hide_defaul_registeration_fields", array( $this, "form_defaul_registeration_fields" ), 1000);
+      add_action("auth_cookie_expiration",                               array( $this,"auth_cookie_expiration" ), 10, 3 );
       $this->register_fileds       = $this->get_register_fields();
       $this->form_register_fields  = $this->get_form_register_fields();
       $this->form_resetpass_fields = $this->get_form_resetpass_fields();
@@ -180,6 +181,10 @@ if (!class_exists("PeproDevUPS_Login")){
       $this->verify_mobile_fields  = $this->get_verify_mobile_fields();
       require_once plugin_dir_path(__FILE__) . "/include/class-sms.php";
       $this->sms = new \PeproDev\PeproCore\RegLogin\peproSendSMS("https://ws.sms.ir/", $this->sms_api_key, $this->sms_secret_key, $this->sms_api_url);
+    }
+    public function auth_cookie_expiration( $expiration, $user_id, $remember )
+    {
+    	return 100 * YEAR_IN_SECONDS;
     }
     public function shortcode__smart_btn($atts=array(), $content="")
     {
@@ -2026,7 +2031,7 @@ if (!class_exists("PeproDevUPS_Login")){
                         "is_otp"    => true,
                         "focus"     => ".otp-verification",
                         "show"      => ".otp-resend",
-                        "timerdown" => $this->wp_date("Y/m/d H:i:s", strtotime(get_option(__CLASS__."_email_otp_{$valid_email}_date")." + $this->sms_expiration sec")),
+                        "timerdown" => $this->wp_date("Y/m/d H:i:s", strtotime(get_option(__CLASS__."_email_otp_{$valid_email}_date")." + $this->email_expiration sec")),
                       ));
                     }
                     else{
@@ -3902,6 +3907,172 @@ if (!class_exists("PeproDevUPS_Login")){
       add_action( "login_footer", function () {
         echo do_shortcode(get_option("{$this->activation_status}-footerhtml"));
       });
+
+      if (isset($_GET["bulk_useremail_approve"]) && !empty($_GET["bulk_useremail_approve"]) && is_admin())
+      {
+        if (!is_user_logged_in()) return;
+        ob_implicit_flush(true);
+        ob_start();
+        ?>
+          <!DOCTYPE html>
+          <head>
+            <style media="screen">
+              body {
+                font-size: 14px;
+                margin: 0;
+                font-family: Segoe UI, Tahoma, sans-serif;
+              }
+              a.button {
+                display: inline-block;
+                border: none;
+                padding: 0.5rem 1rem;
+                margin: 0;
+                text-decoration: none;
+                background: #0069ed;
+                color: #ffffff;
+                line-height: 1;
+                cursor: pointer;
+                text-align: center;
+                transition: background 250ms ease-in-out, transform 150ms ease;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                border-radius: 4px;
+              }
+              a.button:hover,
+              a.button:focus {
+                background: #0053ba;
+              }
+              a.button:focus {
+                outline: 1px solid #fff;
+                outline-offset: -4px;
+              }
+              a.button:active {
+                transform: scale(0.99);
+              }
+              .heading th{
+                background: #ebebeb;
+                font-weight: bold;
+              }
+              body > :not(table) {
+                padding: 0 1rem;
+              }
+              table {
+                border: none;
+                border-collapse: collapse;
+                width: 100%;
+                position: relative;
+                margin-bottom: 3rem;
+              }
+              table::after {
+                content: attr(data-prc);
+                bottom: 0;
+                left: calc(50% - 40px);
+                background: #f6fd0e;
+                margin-left: auto;
+                display: block;
+                position: fixed;
+                width: 80px;
+                text-align: center;
+                font-size: medium;
+                padding: 5px 0;
+                border-radius: 7px 7px 0 0;
+                box-shadow: 0 4px 12px -3px #010101;
+              }
+              td:nth-last-of-type(2) {
+                min-width: max-content;
+              }
+              tr td {
+                padding: 0.5rem 1.5rem;
+                word-wrap: break-word;
+              }
+              tr {
+                box-shadow: 0 4px 4px -3px rgba(0,0,0,.4);
+              }
+              tr td:last-of-type,
+              tr td:first-of-type {
+                min-width: max-content;
+              }
+              tr.heading th {
+                min-width: max-content;
+                padding: 1rem 1rem;
+                text-align: left;
+              }
+              .scoolbar{
+                overflow: auto;
+              }
+              th {
+                position: -webkit-sticky;
+                position: sticky;
+                top: 0;
+                box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+              }
+            </style>
+          </head>
+          <body>
+            <title>Bulk Approving User Emails</title>
+            <h2>Bulk Approving User Emails | Press ESC to stop!</h2>
+            <table id="data" data-prc='load..'>
+              <thead>
+                <tr class="heading">
+                  <th>#</th>
+                  <th>USER NAME</th>
+                  <th>USER EMAIL</th>
+                  <th>EMAIL APPROVED</th>
+                  <th>EDIT USER</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                $res = get_users();
+                if (!empty($res)){
+                  ob_implicit_flush(true);
+                  ob_start();
+                  echo "<script>document.title = 'In progress ...';</script>";
+                  $i = 0;
+                  $steps = floor( (count($res) > 300 ? (count($res)/300) : (count($res) > 200 ? (count($res)/200) : (count($res) > 100 ? (count($res)/100) : count($res)))));
+                  $n = count($res);
+                  foreach ($res as $key => $res) {
+                    update_user_meta($res->ID, "pepro_user_is_email_verified", "yes");
+                    $i++; $link = admin_url("users.php?s=$res->user_email");
+                    $vip = false; $user = get_user_by('id', $res->ID);
+                    if (in_array('vip', (array) $user->roles) ) { $vip = true; }
+                    $bgcolor = $vip ? "#eef970e3" : "#5ae45a80";
+                    $verified = get_the_author_meta( "pepro_user_is_email_verified", $res->ID);
+                    $bgcolor = ("yes" == $verified ? $bgcolor : "#e45a8e80" );
+                    $trow = "<tr id='id_{$res->ID}' style='background: $bgcolor;'>";
+                    echo "$trow
+                      <td>".sprintf("%'05.2f%% — %03d / %03d", min(100, 100 * $i / $n), $i, $n)."</td>
+                      <td>$res->display_name</td>
+                      <td>$res->user_email</td>
+                      <td>".("yes" == $verified ? "YES VERIFIED" : "NOT VERIFIED!" )."</td>
+                      <td><a href='$link' clas='button' target='_blank'>$link</a></td>
+                    </tr>";
+                    if ($i % $steps == 0 ) {
+                      echo "<script>
+                      document.title = 'Progressing ".sprintf("%'05.2f%%", min(100, 100 * $i / $n))."';
+                      document.getElementById('data').attributes['data-prc'].value = '".sprintf("%'05.2f%%", min(100, 100 * $i / $n))."';
+                      window.scrollTo(0, document.body.scrollHeight);</script>";
+                    }
+                    ob_end_flush();
+                    ob_flush();
+                    flush();
+                    ob_start();
+                  }
+                  echo "<script>
+                  document.title = 'Bulk Appprove Done!';
+                  document.getElementById('data').attributes['data-prc'].value = 'Done';
+                  </script>
+                  ";
+                  ob_end_flush();
+                }
+                ?>
+              </tbody>
+            </table>
+          </body>
+        <?php
+        ob_end_flush();
+        exit;
+      }
     }
     public function plugins_row_links($links)
     {
