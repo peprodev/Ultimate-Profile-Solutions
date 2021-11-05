@@ -1,10 +1,11 @@
 /**
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/10/17 19:45:12
+ * @Last modified time: 2021/11/05 16:21:05
  */
-:root{
+:root {
 	--tippy-color: #bf1e2e;
 }
+
 toast {
 	display: block;
 	position: fixed;
@@ -26,13 +27,13 @@ toast.active {
 	transform: translateX(-50%) translateY(-20%);
 }
 
-[data-pepro-reglogin]>form .force-ltr {
+[data-pepro-reglogin] > form .force-ltr {
 	direction: ltr;
 	text-align: left;
 }
 
-[data-pepro-reglogin]>form .pepro-login-reg-field {
-	margin: .8rem 0;
+[data-pepro-reglogin] > form .pepro-login-reg-field {
+	margin: 0.8rem 0;
 	text-align: start;
 	position: relative;
 }
@@ -53,38 +54,43 @@ toast.active {
 	font-size: small;
 	cursor: help;
 }
+
 [dir="rtl"] [data-pepro-reglogin] > form.inline error {
 	left: 0;
 	right: auto;
 }
 
 .tippy-box[data-theme~='error'] {
-  background-color: var(--tippy-color);
+	background-color: var(--tippy-color);
 }
+
 .tippy-box[data-theme~='error'][data-placement^='top'] > .tippy-arrow::before {
-  border-top-color: var(--tippy-color);
+	border-top-color: var(--tippy-color);
 }
+
 .tippy-box[data-theme~='error'][data-placement^='bottom'] > .tippy-arrow::before {
-  border-bottom-color: var(--tippy-color);
+	border-bottom-color: var(--tippy-color);
 }
+
 .tippy-box[data-theme~='error'][data-placement^='left'] > .tippy-arrow::before {
-  border-left-color: var(--tippy-color);
+	border-left-color: var(--tippy-color);
 }
+
 .tippy-box[data-theme~='error'][data-placement^='right'] > .tippy-arrow::before {
-  border-right-color: var(--tippy-color);
+	border-right-color: var(--tippy-color);
 }
 
 .jconfirm.jconfirm-modern .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
 	transform: scale(1) !important;
 }
 
-[data-pepro-reglogin]>form .login_error:empty,
-[data-pepro-reglogin]>form #login_error:empty {
+[data-pepro-reglogin] > form #login_error:empty,
+[data-pepro-reglogin] > form .login_error:empty {
 	display: none;
 }
 
-[data-pepro-reglogin]>form .login_error,
-[data-pepro-reglogin]>form #login_error {
+[data-pepro-reglogin] > form #login_error,
+[data-pepro-reglogin] > form .login_error {
 	display: block;
 	border-left: 4px solid #72aee6;
 	padding: 12px;
@@ -94,24 +100,25 @@ toast.active {
 	box-shadow: 0 1px 1px 0 #0000001a;
 	border-color: #d63638;
 }
-[dir="rtl"] [data-pepro-reglogin]>form .login_error,
-[dir="rtl"] [data-pepro-reglogin]>form #login_error {
+
+[dir="rtl"] [data-pepro-reglogin] > form .login_error,
+[dir="rtl"] [data-pepro-reglogin] > form #login_error {
 	border-left: none;
 	border-right: 4px solid #72aee6;
 }
 
-[data-pepro-reglogin]>form .login_error.info,
-[data-pepro-reglogin]>form #login_error.info {
+[data-pepro-reglogin] > form #login_error.info,
+[data-pepro-reglogin] > form .login_error.info {
 	border-color: #72aee6;
 }
 
-[data-pepro-reglogin]>form .login_error.success,
-[data-pepro-reglogin]>form #login_error.success {
+[data-pepro-reglogin] > form #login_error.success,
+[data-pepro-reglogin] > form .login_error.success {
 	border-color: #00a32a;
 }
 
-[data-pepro-reglogin]>form .login_error.error,
-[data-pepro-reglogin]>form #login_error.error {
+[data-pepro-reglogin] > form #login_error.error,
+[data-pepro-reglogin] > form .login_error.error {
 	border-color: #d63638;
 }
 
@@ -153,62 +160,62 @@ toast.active {
 	scrollbar-width: thin;
 	z-index: 99999 !important;
 }
-
 @media only screen and (max-width: 450px) {
 	.popup-active .pepro-verify-container,
 	.popup-active [data-pepro-reglogin] {
 		width: 98%;
 		transform: translate(1%, 10vh);
 	}
+
 	[data-pepro-reglogin] > form .pepro-form-links {
 		flex-direction: column;
 		align-items: center;
 	}
-	[data-pepro-reglogin] > form .pepro-form-links>a:not(:last-of-type){
+
+	[data-pepro-reglogin] > form .pepro-form-links > a:not(:last-of-type) {
 		margin-bottom: 1rem;
 	}
 }
 
-
-[data-pepro-reglogin]>form .form-text.button.button-primary {
+[data-pepro-reglogin] > form .form-text.button.button-primary {
 	min-width: 100%;
 }
 
-[data-pepro-reglogin]>form .pepro-login-reg-field.hide {
+[data-pepro-reglogin] > form .pepro-login-reg-field.hide {
 	display: none;
 }
 
-[data-pepro-reglogin]>form textarea:hover,
-[data-pepro-reglogin]>form textarea:active,
-[data-pepro-reglogin]>form textarea:focus,
-[data-pepro-reglogin]>form textarea,
-[data-pepro-reglogin]>form select:hover,
-[data-pepro-reglogin]>form select:active,
-[data-pepro-reglogin]>form select:focus,
-[data-pepro-reglogin]>form select,
-[data-pepro-reglogin]>form input:hover,
-[data-pepro-reglogin]>form input:active,
-[data-pepro-reglogin]>form input:focus,
-[data-pepro-reglogin]>form input {
+[data-pepro-reglogin] > form input,
+[data-pepro-reglogin] > form input:active,
+[data-pepro-reglogin] > form input:focus,
+[data-pepro-reglogin] > form input:hover,
+[data-pepro-reglogin] > form select,
+[data-pepro-reglogin] > form select:active,
+[data-pepro-reglogin] > form select:focus,
+[data-pepro-reglogin] > form select:hover,
+[data-pepro-reglogin] > form textarea,
+[data-pepro-reglogin] > form textarea:active,
+[data-pepro-reglogin] > form textarea:focus,
+[data-pepro-reglogin] > form textarea:hover {
 	border-color: #e8e8e8 !important;
-	box-shadow: 0px 0px 0px 1px #e8e8e8 inset;
+	box-shadow: 0 0 0 1px #e8e8e8 inset;
 }
 
-[data-pepro-reglogin]>form textarea:valid,
-[data-pepro-reglogin]>form select:valid,
-[data-pepro-reglogin]>form input:valid {
+[data-pepro-reglogin] > form input:valid,
+[data-pepro-reglogin] > form select:valid,
+[data-pepro-reglogin] > form textarea:valid {
 	border-color: #61f599 !important;
-	box-shadow: 0px 0px 0px 1px #61f599 inset;
+	box-shadow: 0 0 0 1px #61f599 inset;
 }
 
-[data-pepro-reglogin]>form textarea:invalid,
-[data-pepro-reglogin]>form select:invalid,
-[data-pepro-reglogin]>form input:invalid {
+[data-pepro-reglogin] > form input:invalid,
+[data-pepro-reglogin] > form select:invalid,
+[data-pepro-reglogin] > form textarea:invalid {
 	border-color: #f56171 !important;
-	box-shadow: 0px 0px 0px 1px #f56171 inset;
+	box-shadow: 0 0 0 1px #f56171 inset;
 }
 
-[data-pepro-reglogin]>form .form-required label::after {
+[data-pepro-reglogin] > form .form-required label::after {
 	content: " *";
 	color: #c7254e;
 }
@@ -220,15 +227,16 @@ toast.active {
 	flex-direction: column;
 	align-items: center;
 }
+
 .pepro-form-links a:not(:last-of-type) {
 	margin-bottom: 1rem;
 }
 
-[data-pepro-reglogin]>form {
+[data-pepro-reglogin] > form {
 	display: none;
 }
 
-[data-pepro-reglogin]>form.inline {
+[data-pepro-reglogin] > form.inline {
 	display: block;
 }
 
@@ -241,10 +249,18 @@ toast.active {
 	width: 100%;
 }
 
-.pepro-login-reg-field .ahrefbtn{
+.pepro-login-reg-field .ahrefbtn {
 	width: 100%;
 }
 
 .otp-resend.disabled {
 	color: gray;
+}
+
+.pepro-form-links a {
+	border: 1px solid #ccc;
+	padding: 0.5rem;
+	width: 100%;
+	text-align: center;
+	border-radius: 5px;
 }

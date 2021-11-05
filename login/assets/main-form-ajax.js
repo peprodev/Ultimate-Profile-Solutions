@@ -1,6 +1,6 @@
 /**
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/10/09 03:35:55
+ * @Last modified time: 2021/11/05 12:12:21
  * resendtime
  */
 jQuery.noConflict();
@@ -947,14 +947,11 @@ jQuery.noConflict();
           $(login_form).find(e.data.show).html(_pepro_dev.resendnow);
         }
         else{
-          $(login_form).find(e.data.show).prop("disabled", true).addClass("disabled").countdown(e.data.timerdown)
-          .on('update.countdown', function(qd) {
+          $(login_form).find(e.data.show).prop("disabled", true).addClass("disabled").countdown(e.data.timerdown).on('update.countdown', function(qd) {
             $(this).html(_pepro_dev.resendtime.replace('%s',qd.strftime('%M:%S')));
-          })
-          .on('finish.countdown', function(qd) {
+          }).on('finish.countdown', function(qd) {
             $(this).html(_pepro_dev.resendnow).prop("disabled", false).removeClass("disabled");
-          })
-          .on('stop.countdown', function(qd) {
+          }).on('stop.countdown', function(qd) {
             $(this).html(_pepro_dev.resendnow).prop("disabled", false).removeClass("disabled");
           });
         }
