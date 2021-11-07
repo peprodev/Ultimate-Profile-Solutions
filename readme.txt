@@ -2,8 +2,8 @@
 Contributors: amirhosseinhpv, peprodev, blackswanlab
 Donate link: https://pepro.dev/donate/
 Tags: functionality, pepro, management, administration, profile, login, register
-Version: 1.8.0
-Stable tag: 1.8.0
+Version: 1.8.6
+Stable tag: 1.8.6
 Requires at least: 5.0
 Tested up to: 5.8
 Requires PHP: 7.2
@@ -47,6 +47,16 @@ You can help us improve our works by committing your changes to Pepro Dev's Gith
 
 == Changelog ==
 
+= Ver. 1.8.6 | 2021-11-08/1400-08-17 =
+* Fixes for Profile Notification not accepting HTML
+* Fixes for Profile Dashboard Logo size
+* Added Option to let use WordPress login/register URL structure
+
+= Ver. 1.8.5 | 2021-11-05/1400-08-14 =
+* Fixes applied for verification
+* Bulk approve user emails (/wp-admin/?bulk_useremail_approve=1)
+
+
 = Ver. 1.8.2 | 2021-08-29/1400-06-07 =
 * WPML compatibility
 * Make Smaller version of Avatar on Upload
@@ -56,7 +66,20 @@ You can help us improve our works by committing your changes to Pepro Dev's Gith
 * unified all-in-one plugin
 * added translation
 
+
+
+
+
 == Upgrade Notice ==
+
+= Ver. 1.8.6 | 2021-11-08/1400-08-17 =
+* Fixes for Profile Notification not accepting HTML
+* Fixes for Profile Dashboard Logo size
+* Added Option to let use WordPress login/register URL structure
+
+= Ver. 1.8.5 | 2021-11-05/1400-08-14 =
+* Fixes applied for verification
+* Bulk approve user emails (/wp-admin/?bulk_useremail_approve=1)
 
 = Ver. 1.8.0 | 2021-08-29/1400-06-07 =
 * WPML compatibility

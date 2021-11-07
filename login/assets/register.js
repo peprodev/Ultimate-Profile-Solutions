@@ -3,7 +3,7 @@
  * @Date:   2021/08/02 22:04:09
  * @Email:  its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/10/09 01:50:37
+ * @Last modified time: 2021/11/08 00:49:30
  * @License: GPLv2
  * @Copyright: Copyright © Amirhosseinhpv (https://hpv.im), all rights reserved.
  */
@@ -488,6 +488,15 @@ jQuery.noConflict();
       return false;
     });
 
+
+
+      if ($("[name=login-section-active]").prop("checked")){
+        $("table.activesecurity-table, #alert-primary").show();
+      }else{
+        $("table.activesecurity-table, #alert-primary").hide();
+      }
+
+
     $(document).on("click tap", ".register--import-export", function(e){
       e.preventDefault();
       $(".register-fields-import-export").toggleClass("slide-up");
@@ -496,11 +505,20 @@ jQuery.noConflict();
       e.preventDefault();
       $(".redirection-fields-import-export").toggleClass("slide-up");
     });
-
+    $(document).on("change", "[name=login-section-active]", function(e){
+      e.preventDefault();
+      var me = $(this);
+      if (me.prop("checked")){
+        $("table.activesecurity-table, #alert-primary").show();
+      }else{
+        $("table.activesecurity-table, #alert-primary").hide();
+      }
+    });
     $(document).on("click tap", ".login-section-save", function(e) {
       e.preventDefault();
       datatosave           = {
         "style":              $("#login-section-style").val(),
+        "activesecurity":     $("#login-section-active").prop("checked") ? "yes" : "no",
         "loginslug":          $("#login-section-loginslug").val(),
         "redirectslug":       $("#login-section-redirectslug").val(),
         "force-style":        $("#login-section-style-force").attr("data-checked"),

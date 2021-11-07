@@ -1,7 +1,7 @@
 <?php
 
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/15 14:47:56
+# @Last modified time: 2021/11/08 00:15:18
 
 global $PeproDevUPS_Profile;
 $rtl         = is_rtl() ? "right" : "left";
@@ -18,7 +18,7 @@ $trOrange    = _x("Orange", "notif-panel", "peprodev-ups");
 $trBlue      = _x("Blue", "notif-panel", "peprodev-ups");
 $trGreen     = _x("Green", "notif-panel", "peprodev-ups");
 $trDark      = _x("Dark", "notif-panel", "peprodev-ups");
-$loadingRing = '<div class="lds-ring2"><div></div><div></div><div></div><div></div></div>';
+$loadingRing = "<div class='lds-ring2'><div></div><div></div><div></div><div></div></div>";
 $otif404     = sprintf( _x("No notification found! please consider %s.", "notif-panel", "peprodev-ups"), '<a data-toggle="modal" id="add_notifpopup" data-target="#add_new_notifications" href="#">'._x("adding new one", "notif-panel", "peprodev-ups").'</a>' );
 
 ?>
@@ -231,14 +231,14 @@ $otif404     = sprintf( _x("No notification found! please consider %s.", "notif-
                     class="add_edit_save_notification btn btn-primary loadingRings"
                     integrity="<?php echo esc_attr( $integrity );?>"
                     wparam="<?php echo esc_attr( $PeproDevUPS_Profile->setting_slug );?>"
-                    lparam="add_new"><?php echo esc_html( $loadingRing ) . _x("Add New", "notif-panel", "peprodev-ups");?></button>
+                    lparam="add_new"><?php echo $loadingRing . _x("Add New", "notif-panel", "peprodev-ups");?></button>
                   <button
                     type="button"
                     id="edit_notif"
                     class="add_edit_save_notification btn btn-primary loadingRings"
                     integrity="<?php echo esc_attr( $integrity );?>"
                     wparam="<?php echo esc_attr( $PeproDevUPS_Profile->setting_slug );?>"
-                    lparam="add_new"><?php echo esc_html( $loadingRing ) . _x("Save Edits", "notif-panel", "peprodev-ups");?></button>
+                    lparam="add_new"><?php echo $loadingRing . _x("Save Edits", "notif-panel", "peprodev-ups");?></button>
                   <button type="button" id="clear_notif_form" class="btn btn-action"><?php echo esc_html_x("Clear form", "notif-panel", "peprodev-ups");?></button>
                   <button type="button" id='close_add_new_notifications' class="btn btn-action" data-dismiss="modal"><?php echo esc_html_x("Close", "notif-panel", "peprodev-ups");?></button>
                 </div>

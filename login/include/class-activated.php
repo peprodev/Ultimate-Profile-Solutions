@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/10/09 01:46:32
+# @Last modified time: 2021/11/08 00:49:22
 add_thickbox();
 wp_enqueue_style("wp-color-picker");
 wp_enqueue_script("wp-color-picker");
@@ -799,8 +799,15 @@ foreach ($styleFiles as $style) {
             <p class="card-category"><?php echo esc_html_x("You can control wordpress login, register and lost password permalinks from here","login-section", "peprodev-ups");?></p>
           </div>
           <div class="card-body table-responsive">
+            <label class="row w-100 align-items-center m-0 mb-2" for="login-section-active">
+              <input autocomplete="off" type="checkbox" <?php checked(get_option("{$this->activation_status}-activesecurity", ""), "yes", true); ?> class="form-checkbox iostoggle single-required mr-2 login-section-active" id="login-section-active" name="login-section-active" value="yes">
+              <?=esc_html_x("Activate this section?","login-section", "peprodev-ups");?>
+            </label>
+
             <div id="alert-primary"><div class="alert alert-success alert-dismissible fade show" role="alert"> <?php printf( _x('%1$s Your login page is: %2$s. Bookmark this page!',"login-section","peprodev-ups"), "<strong>"._x("Attention!","login-section","peprodev-ups")."</strong>", "<strong><u><a href='".wp_login_url()."' target='_blank'>".untrailingslashit(wp_login_url())."</a></u></strong>" ); ?></div></div>
-            <table class="table pepcappearance">
+
+
+            <table class="table pepcappearance activesecurity-table">
               <tbody>
                 <tr>
                   <td><?php echo esc_html_x("Login Base Slug","login-section", "peprodev-ups");?></td>

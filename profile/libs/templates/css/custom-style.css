@@ -3,7 +3,7 @@
  * @Date:2020/05/03 13:33:07
  * @Email:its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/10/18 02:30:14
+ * @Last modified time: 2021/11/08 00:33:34
  * @License:GPLv2
  * @Copyright:Copyright © 2020 Amirhosseinhpv,All rights reserved.
  */
@@ -345,9 +345,6 @@ footer {
 	max-height: 100%;
 }
 
-.menu-sidebar .logo a img {
-	max-height: 100%;
-}
 
 li,
 ol,
@@ -478,7 +475,7 @@ ul {
 }
 
 .header-mobile .header-mobile__bar {
-	padding: 15px 0;
+	padding: 12px 0;
 	background: white;
 }
 
@@ -519,4 +516,7 @@ label[for="avatar"] {
 .account-wrap .image {
 	display: flex;
 	align-items: stretch;
+}
+.menu-sidebar .logo a img, .menu-sidebar .logo a {
+	max-height: 60px !important;
 }

@@ -1,7 +1,10 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/11/05 16:33:49
-include_once plugin_dir_path(__FILE__) . "/include/class-login-permalink.php";
+# @Last modified time: 2021/11/08 00:50:38
+
+if ("yes" == get_option("PeproDevUPS_Core___loginregister-activesecurity", "")){
+  include_once plugin_dir_path(__FILE__) . "/include/class-login-permalink.php";
+}
 
 if (!class_exists("PeproDevUPS_Login")){
   class PeproDevUPS_Login
@@ -4274,6 +4277,9 @@ if (!class_exists("PeproDevUPS_Login")){
           case 'savelogin':
               if(isset($_POST["dparam"]["loginslug"]) && !empty($_POST["dparam"]["loginslug"])) { update_option("whl_page", $_POST["dparam"]["loginslug"]);}
               if(isset($_POST["dparam"]["redirectslug"]) && !empty($_POST["dparam"]["redirectslug"])) { update_option("whl_redirect_admin", $_POST["dparam"]["redirectslug"]);}
+
+              $data    = "activesecurity";
+              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_text_field($_POST["dparam"][$data])); }
 
               $data    = "style";
               if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }

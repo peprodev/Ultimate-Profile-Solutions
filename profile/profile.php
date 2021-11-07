@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/11/04 10:58:54
+# @Last modified time: 2021/11/08 00:26:08
 if (!class_exists("PeproDevUPS_Profile")) {
     class PeproDevUPS_Profile
     {
@@ -1638,25 +1638,25 @@ if (!class_exists("PeproDevUPS_Profile")) {
 
                     (int) $id = ( isset($_POST["dparam"]["id"]) && !empty(trim($_POST["dparam"]["id"])) && is_numeric(trim($_POST["dparam"]["id"])) ) ? trim($_POST["dparam"]["id"]) : "-1";
 
-                    $query = $wpdb->get_row($wpdb->prepare("SELECT id FROM {$this->tbl_sections} WHERE `id`=%d", $id));
-                    $title = isset($_POST["dparam"]["title"]) ? sanitize_text_field(trim($_POST["dparam"]["title"])) : null;
+                    $query                                  = $wpdb->get_row($wpdb->prepare("SELECT id FROM {$this->tbl_sections} WHERE `id`=%d", $id));
+                    $title                                  = isset($_POST["dparam"]["title"]) ? sanitize_text_field(trim($_POST["dparam"]["title"])) : null;
                     if (empty(trim($title))) {wp_send_json_error(array( "msg"=>__("There was a problem with your request. Title field is required.", "peprodev-ups")));return false; }
-                    $slug = isset($_POST["dparam"]["slug"]) ? sanitize_title(trim($_POST["dparam"]["slug"])) : null;
+                    $slug                                   = isset($_POST["dparam"]["slug"]) ? sanitize_title(trim($_POST["dparam"]["slug"])) : null;
                     if (empty(trim($slug))) {wp_send_json_error(array( "msg"=>__("There was a problem with your request. Unique Slug field is required.", "peprodev-ups")));return false; }
-                    $subject = isset($_POST["dparam"]["subject"]) ? sanitize_text_field(trim($_POST["dparam"]["subject"])) : null;
+                    $subject                                = isset($_POST["dparam"]["subject"]) ? sanitize_text_field(trim($_POST["dparam"]["subject"])) : null;
                     if (empty(trim($subject))) {wp_send_json_error(array( "msg"=>__("There was a problem with your request. Unique Slug field is required.", "peprodev-ups")));return false; }
-                    $content = isset($_POST["dparam"]["content"]) ? sanitize_text_field(trim($_POST["dparam"]["content"])) : null;
+                    $content                                = isset($_POST["dparam"]["content"]) ? (trim($_POST["dparam"]["content"])) : null;
                     if (empty(trim($content))) {wp_send_json_error(array( "msg"=>__("There was a problem with your request. Content field is required.", "peprodev-ups")));return false; }
-                    $icon = isset($_POST["dparam"]["icon"]) ? sanitize_text_field(trim($_POST["dparam"]["icon"])) : null;
-                    if (empty(trim($icon))) {$icon = "zmdi zmdi-email"; }
-                    $priority = isset($_POST["dparam"]["priority"]) ? sanitize_text_field(trim($_POST["dparam"]["priority"])) : null;
+                    $icon                                   = isset($_POST["dparam"]["icon"]) ? sanitize_text_field(trim($_POST["dparam"]["icon"])) : null;
+                    if (empty(trim($icon))) {$icon          = "zmdi zmdi-email"; }
+                    $priority                               = isset($_POST["dparam"]["priority"]) ? sanitize_text_field(trim($_POST["dparam"]["priority"])) : null;
                     if (empty(trim($priority))) { $priority = 1000; }
-                    $active = isset($_POST["dparam"]["active"]) ? sanitize_text_field(trim($_POST["dparam"]["active"])) : null;
-                    if (empty(trim($active))) { $active = "no"; }
-                    $access = isset($_POST["dparam"]["access"]) ? sanitize_text_field(trim($_POST["dparam"]["access"])) : null;
-                    $ld_lms = isset($_POST["dparam"]["ld_lms"]) ? sanitize_text_field(trim($_POST["dparam"]["ld_lms"])) : "";
-                    $css    = isset($_POST["dparam"]["css"]) ? sanitize_text_field(trim($_POST["dparam"]["css"])) : null;
-                    $js     = isset($_POST["dparam"]["js"]) ? sanitize_text_field(trim($_POST["dparam"]["js"])) : null;
+                    $active                                 = isset($_POST["dparam"]["active"]) ? sanitize_text_field(trim($_POST["dparam"]["active"])) : null;
+                    if (empty(trim($active))) { $active     = "no"; }
+                    $access                                 = isset($_POST["dparam"]["access"]) ? sanitize_text_field(trim($_POST["dparam"]["access"])) : null;
+                    $ld_lms                                 = isset($_POST["dparam"]["ld_lms"]) ? sanitize_text_field(trim($_POST["dparam"]["ld_lms"])) : "";
+                    $css                                    = isset($_POST["dparam"]["css"]) ? (trim($_POST["dparam"]["css"])) : null;
+                    $js                                     = isset($_POST["dparam"]["js"]) ? (trim($_POST["dparam"]["js"])) : null;
 
                     $dataArray = array(
                       'content'     => $content,
@@ -2769,11 +2769,12 @@ if (!class_exists("PeproDevUPS_Profile")) {
                   }
 
                   $dataNotifExtraDetails = esc_attr(json_encode($dataNotifExtraDetails, JSON_NUMERIC_CHECK|JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE));
+                  $url = $this->get_profile_page(["section"=>$notif->slug]);
                   echo "<tr data-nofit-tr=\"{$notif->id}\" data-json=\"$dataNotifExtraDetails\" >
                             <td style=\"direction: ltr;\">{$PeproDevUPS_Profile->parse_date($notif->date_created)}</td>
                             <td>{$notif_title_icon_set}{$notif->title}</td>
                             <td>{$notif->subject}</td>
-                            <td>{$notif->slug}</td>
+                            <td><a href='$url' target='_blank'>{$notif->slug}</a></td>
                             <td>". (empty($notif_access_str) ? __("— Public —","peprodev-ups") : implode(" / ", $notif_access_str)) ."</td>
                             <td>{$notif->priority}</td>
                             <td class=\"td-actions\">
@@ -2833,12 +2834,12 @@ if (!class_exists("PeproDevUPS_Profile")) {
             $color_icon = (true == $notif["is_active"]) ? "bg-c1" : "bg-c3" ;
             $is_active = $notif["is_active"] ? "true" : "false" ;
             $notif_title_icon_set = "<div class='$color_icon img-cir img-40'><i class='{$notif["icon"]}'></i></div>";
-
+            $url = $this->get_profile_page(["section"=>$notif_id]);
             echo "<tr class='builtin' data-nofit-tr=\"{$notif_id}\" data-active=\"{$is_active}\" data-priority=\"{$notif["priority"]}\" data-title=\"{$notif["title"]}\" >
                       <td style=\"direction: ltr;\">".__("— Built-in Section —","peprodev-ups")."</td>
                       <td class='title'>{$notif_title_icon_set}{$notif["title"]}</td>
                       <td>".__("— Built-in Section —","peprodev-ups")."</td>
-                      <td>$notif_id</td>
+                      <td class='href'><a href='$url' target='_blank'>$notif_id</a></td>
                       <td>".__("— Public —","peprodev-ups")."</td>
                       <td class='priority'>{$notif["priority"]}</td>
                       <td class=\"td-actions\">
