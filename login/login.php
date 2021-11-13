@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/11/08 00:50:38
+# @Last modified time: 2021/11/13 14:49:43
 
 if ("yes" == get_option("PeproDevUPS_Core___loginregister-activesecurity", "")){
   include_once plugin_dir_path(__FILE__) . "/include/class-login-permalink.php";
@@ -1051,7 +1051,7 @@ if (!class_exists("PeproDevUPS_Login")){
                             "show"        => ".otp-resend",
                             "last_attemp" => $last_attemp,
                             "cur_time"    => $this->wp_date(),
-                            "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp)),
+                            "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp) + $this->sms_expiration),
                           ));
                         }
                       }
@@ -2609,49 +2609,51 @@ if (!class_exists("PeproDevUPS_Login")){
           )
         );
       }
-      if (!$this->hide_email_field){
+      if ($this->show_email_field){
         $num++;
-        array_push($login_fields,
-          array(
-            "title"       => __("Email","peprodev-ups"),
-            "type"        => "email",
-            "meta_name"   => "email",
-            "classes"     => "email-verification force-ltr",
-            "attributes"  => "tabindex=$num data-error-text=\"".esc_attr__("Enter email address correctly", "peprodev-ups")."\"",
-            "is-required" => $this->is_email_field_req ? "yes" : "no",
-            "is-public"   => "yes",
-            "no-label"    => "no",
-          ),
-          array(
-            "meta_name"   => "optverify",
-            "type"        => "number",
-            "title"       => __("OTP Code","peprodev-ups"),
-            "row-class"   => "hide",
-            "is-public"   => "yes",
-            "is-required" => "no",
-            "is-editable" => "no",
-            "in-column"   => "no",
-            "no-label"    => "no",
-            "placeholder" => "",
-            "classes"     => "otp-verification force-ltr",
-            "attributes"  => "autocomplete=off min=0 tabindex=".($num+1)." data-error-text=\"".esc_attr__("You have to enter an OTP code or leave it empty and press Enter to receive a new one", "peprodev-ups")."\" pattern=".esc_attr("^\d{{$this->verification_email_digits}}$")." maxlength=$this->verification_email_digits minlength=$this->verification_email_digits",
-            "default"     => "",
-          ),
-          array(
-            "meta_name"   => "checkemail",
-            "type"        => "hidden",
-            "title"       => "",
-            "row-class"   => "hide",
-            "default"     => "1",
-            "is-public"   => "yes",
-            "is-required" => "no",
-            "is-editable" => "no",
-            "in-column"   => "no",
-            "placeholder" => "",
-            "classes"     => "",
-            "attributes"  => "",
-          )
-        );
+        array_push($login_fields, array(
+          "title"       => __("Email","peprodev-ups"),
+          "type"        => "email",
+          "meta_name"   => "email",
+          "classes"     => "email-verification force-ltr",
+          "attributes"  => "tabindex=$num data-error-text=\"".esc_attr__("Enter email address correctly", "peprodev-ups")."\"",
+          "is-required" => $this->is_email_field_req ? "yes" : "no",
+          "is-public"   => "yes",
+          "no-label"    => "no",
+        ));
+        if ($this->_email_field_req){
+          array_push($login_fields,
+            array(
+              "meta_name"   => "optverify",
+              "type"        => "number",
+              "title"       => __("OTP Code","peprodev-ups"),
+              "row-class"   => "hide",
+              "is-public"   => "yes",
+              "is-required" => "no",
+              "is-editable" => "no",
+              "in-column"   => "no",
+              "no-label"    => "no",
+              "placeholder" => "",
+              "classes"     => "otp-verification force-ltr",
+              "attributes"  => "autocomplete=off min=0 tabindex=".($num+1)." data-error-text=\"".esc_attr__("You have to enter an OTP code or leave it empty and press Enter to receive a new one", "peprodev-ups")."\" pattern=".esc_attr("^\d{{$this->verification_email_digits}}$")." maxlength=$this->verification_email_digits minlength=$this->verification_email_digits",
+              "default"     => "",
+            ),
+            array(
+              "meta_name"   => "checkemail",
+              "type"        => "hidden",
+              "title"       => "",
+              "row-class"   => "hide",
+              "default"     => "1",
+              "is-public"   => "yes",
+              "is-required" => "no",
+              "is-editable" => "no",
+              "in-column"   => "no",
+              "placeholder" => "",
+              "classes"     => "",
+              "attributes"  => "",
+            )
+          );
+        }
       }
       // default otp-login
       if ($this->login_mobile_otp){
@@ -2728,7 +2730,6 @@ if (!class_exists("PeproDevUPS_Login")){
         }
         if (($this->login_mobile_otp || $this->reg_add_mobile) && "user_mobile" == $field["meta_name"]) continue;
         if ("recaptcha" == $field["type"] && "yes" == $field["is-public"]) continue;
-
         $num++;
         $field["attributes"] = "tabindex=$num " . (isset($field["attributes"]) ? $field["attributes"] : "");
         array_push($login_fields, $field);

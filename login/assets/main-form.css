@@ -1,6 +1,6 @@
 /**
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/11/05 16:21:05
+ * @Last modified time: 2021/11/10 09:27:12
  */
 :root {
 	--tippy-color: #bf1e2e;
@@ -263,4 +263,8 @@ toast.active {
 	width: 100%;
 	text-align: center;
 	border-radius: 5px;
+}
+
+[data-tippy-root] {
+	z-index: 99999999 !important;
 }
