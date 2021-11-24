@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/11/13 14:49:43
+# @Last modified time: 2021/11/15 11:24:36
 
 if ("yes" == get_option("PeproDevUPS_Core___loginregister-activesecurity", "")){
   include_once plugin_dir_path(__FILE__) . "/include/class-login-permalink.php";
@@ -4534,6 +4534,7 @@ if (!class_exists("PeproDevUPS_Login")){
     public function wp_date($format="Y/m/d H:i:s", $timestap=false, $timezone=null)
     {
       remove_all_filters("wp_date");
+      remove_all_filters("date_i18n");
       return date_i18n(empty($format) || !$format ? "Y/m/d H:i:s" : $format, $timestap);
     }
   }
