@@ -1736,7 +1736,7 @@ if (!class_exists("PeproDevUPS_Login")){
                           "logout_url"    => wp_logout_url(),
                         ));
                       }else{
-                        wp_send_json_error(array("msg"=> __("<strong>Error:</strong> There was an error processing your request!", "peprodev-ups"),));
+                        wp_send_json_error(array("msg"=> __("<strong>Error:</strong> There was an error creating new user!", "peprodev-ups"), "er"=>1));
                       }
 
 
@@ -1864,7 +1864,7 @@ if (!class_exists("PeproDevUPS_Login")){
                           "logout_url"    => wp_logout_url(),
                         ));
                       }else{
-                        wp_send_json_error(array("msg"=> __("<strong>Error:</strong> There was an error processing your request!", "peprodev-ups"),));
+                        wp_send_json_error(array("msg"=> __("<strong>Error:</strong> There was an error creating new user!", "peprodev-ups"), "er"=>2));
                       }
 
 
@@ -1959,7 +1959,7 @@ if (!class_exists("PeproDevUPS_Login")){
                 }
               }
             }
-            wp_send_json_error(array("msg"=> __("<strong>Error:</strong> There was an error processing your request!", "peprodev-ups"),));
+            wp_send_json_error(array("msg"=> __("<strong>Error:</strong> There was an error processing your request!", "peprodev-ups"), "er"=>3));
           break;
 
           case 'resetpass':
@@ -2621,7 +2621,7 @@ if (!class_exists("PeproDevUPS_Login")){
           "is-public"   => "yes",
           "no-label"    => "no",
         ));
-        if ($this->_email_field_req){
+        if ($this->is_email_field_req){
           array_push($login_fields,
             array(
               "meta_name"   => "optverify",
