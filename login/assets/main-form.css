@@ -1,6 +1,6 @@
 /**
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/11/15 11:29:12
+ * @Last modified time: 2021/12/03 13:59:03
  */
 :root {
 	--tippy-color: #bf1e2e;
@@ -30,7 +30,7 @@ toast.active {
 [data-pepro-reglogin] > form .force-ltr {
 	direction: ltr;
 	text-align: left;
-	padding: 1rem;
+	padding: 0 1rem;
 }
 
 [data-pepro-reglogin] > form .pepro-login-reg-field {
@@ -272,4 +272,15 @@ toast.active {
 
 [data-tippy-root] {
 	z-index: 99999999 !important;
+}
+
+.g-recaptcha {
+	margin-bottom: 1.5rem;
+}
+.popup-active .pepro-verify-container, .popup-active [data-pepro-reglogin] {
+    overflow-y: auto !important;
+	overflow-x: hidden !important;
+}
+.pepro-form-links a:not(:last-of-type) {
+	margin-bottom: 0.5rem !important;
 }

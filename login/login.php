@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/11/15 11:24:36
+# @Last modified time: 2021/12/03 14:14:44
 
 if ("yes" == get_option("PeproDevUPS_Core___loginregister-activesecurity", "")){
   include_once plugin_dir_path(__FILE__) . "/include/class-login-permalink.php";
@@ -157,9 +157,9 @@ if (!class_exists("PeproDevUPS_Login")){
       add_action("user_profile_update_errors",                           array( $this, "registration_errors_admin" ), 10, 3);
       add_action("manage_users_columns",                                 array( $this, "manage_users_columns" ));
       add_action("manage_users_custom_column",                           array( $this, "manage_users_custom_column" ), 100, 3);
-      add_action("login_form_logout",                                    array( $this, "login_form_logout"));
       add_action("admin_enqueue_scripts",                                array( $this, "admin_enqueue_scripts" ));
       add_action("login_form_register",                                  array( $this, "login_form_register"));
+      add_action("login_form_logout",                                    array( $this, "login_form_logout"));
       add_filter("login_redirect",                                       array( $this, "redirect_after_login_register" ), 10, 3);
       add_filter("registration_redirect",                                array( $this, "redirect_after_login_register" ), 10, 3);
       add_filter("woocommerce_login_redirect",                           array( $this, "redirect_after_login_register" ), 10, 3);
@@ -3288,6 +3288,7 @@ if (!class_exists("PeproDevUPS_Login")){
     }
     public function parse_redirection_url($url="")
     {
+      if (empty($url)) return home_url();
       #page_id / @page_slug / {special_pages} / Full URL
       $url = trim($url);
       if ($this->startsWith($url, "#")){

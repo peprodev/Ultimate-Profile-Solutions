@@ -1,6 +1,6 @@
 /**
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/11/13 14:52:25
+ * @Last modified time: 2021/12/03 14:02:28
  * resendtime
  */
 jQuery.noConflict();
@@ -69,7 +69,7 @@ jQuery.noConflict();
         closeIconClass: false,
         watchInterval: 100,
         columnClass: 'm',
-        boxWidth: '400px',
+        boxWidth: '500px',
         scrollToPreviousElement: true,
         scrollToPreviousElementAnimate: true,
         useBootstrap: false,
@@ -179,14 +179,14 @@ jQuery.noConflict();
             if (e.success === true) {
               $(login_form).find("#login_error").removeClass("info success error").addClass("success").html(e.data.msg);
               if (e.data.is_otp){
-                $(login_form).find(".optverify-wrap, .verification-wrap").removeClass("hide");
+                $(login_form).find(".optverify-wrap, .verification-wrap").removeClass("hide").show();
                 $(login_form).find("#login_error").removeClass("info success error").addClass("info").html(e.data.msg);
                 if (e.data.focus){ setTimeout(function () { $(login_form).find(e.data.focus).first().focus(); }, 100); }
                 if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).first().select(); }, 100); }
                 $(login_form).find(".pepro-login-reg-field").hide();
                 $(login_form).find(".switch-form-register").hide();
                 if (e.data.show){ $(login_form).find(e.data.show).show(); }
-                $(login_form).find(".pepro-login-reg-field.mobile-wrap").show();
+                $(login_form).find(".pepro-login-reg-field.mobile-wrap, .pepro-login-reg-field.verification-wrap").show();
                 $(login_form).find("#mobile").prop("disabled", true).prop("readonly", true).addClass("disabled");
                 $(login_form).find(".pepro-login-reg-field.optverify-wrap").show();
                 $(login_form).find(".pepro-login-reg-field.submit-wrap").show();
@@ -250,7 +250,7 @@ jQuery.noConflict();
                   content: e.data.msg,
                   icon: 'fas fa-check-circle',
                   type: 'green',
-                  boxWidth: "400px",
+                  boxWidth: "500px",
                   buttons: obj_buttons,
                 });
               }
@@ -393,7 +393,7 @@ jQuery.noConflict();
                   content: e.data.msg,
                   icon: 'fas fa-check-circle',
                   type: 'green',
-                  boxWidth: "400px",
+                  boxWidth: "500px",
                   buttons: obj_buttons,
                 });
               }
@@ -534,7 +534,7 @@ jQuery.noConflict();
                   content: e.data.msg,
                   icon: 'fas fa-check-circle',
                   type: 'green',
-                  boxWidth: "400px",
+                  boxWidth: "500px",
                   buttons: obj_buttons,
                 });
               }
@@ -766,7 +766,7 @@ jQuery.noConflict();
                     },
                   };
                 }
-                jc = $.confirm({ title: "", content: e.data.msg, icon: 'fas fa-check-circle', type: 'green', boxWidth: "400px", buttons: obj_buttons, });
+                jc = $.confirm({ title: "", content: e.data.msg, icon: 'fas fa-check-circle', type: 'green', boxWidth: "500px", buttons: obj_buttons, });
               }
             }
             else {
@@ -915,7 +915,7 @@ jQuery.noConflict();
                     },
                   };
                 }
-                jc = $.confirm({ title: "", content: e.data.msg, icon: 'fas fa-check-circle', type: 'green', boxWidth: "400px", buttons: obj_buttons, });
+                jc = $.confirm({ title: "", content: e.data.msg, icon: 'fas fa-check-circle', type: 'green', boxWidth: "500px", buttons: obj_buttons, });
               }
             }
             else {
@@ -1031,13 +1031,27 @@ jQuery.noConflict();
         $("html, body, .pepro-login-reg-container").animate({scrollTop: $(".pepro-login-reg-container").offset().top-100});
       }
     }
+
+    function resizeReCaptcha() {
+      var width = $('.g-recaptcha').parent().width();
+      if (width < 400 && width > 100 ){
+        var scale = width / 302;
+        $('.g-recaptcha').css('transform', 'scale(' + scale + ')');
+        $('.g-recaptcha').css('-webkit-transform', 'scale(' + scale + ')');
+        $('.g-recaptcha').css('transform-origin', '0 0');
+        $('.g-recaptcha').css('-webkit-transform-origin', '0 0');
+      }
+    };
+    $(window).on('resize', function(){ resizeReCaptcha(); });
+    $(document).on("click tap", "[data-trigger]", function(e){setTimeout(function () { resizeReCaptcha(); }, 200);});
+
     function show_toast(data = "Sample Toast!", delay = 1500) {
       if (!$("toast").length){$(document.body).append($("<toast>"));}
       $("toast").html(data).stop().addClass("active").delay(delay).queue(function() {
         $(this).removeClass("active").dequeue().off("click tap");
       }).on("click tap", function(e) { e.preventDefault(); $(this).stop().removeClass("active"); });
     }
-    function show_modal_alert(title = "", content = "", icon = "fas fa-info-circle", type = "blue", boxWidth = "400px", $fn = null, theme="modern") {
+    function show_modal_alert(title = "", content = "", icon = "fas fa-info-circle", type = "blue", boxWidth = "500px", $fn = null, theme="modern") {
       $.confirm({
         title: title?"<br>"+title:"",
         content: content,
