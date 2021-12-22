@@ -2,8 +2,8 @@
 Contributors: amirhosseinhpv, peprodev, blackswanlab
 Donate link: https://pepro.dev/donate/
 Tags: functionality, pepro, management, administration, profile, login, register
-Version: 1.8.9
-Stable tag: 1.8.9
+Version: 1.9.2
+Stable tag: 1.9.2
 Requires at least: 5.0
 Tested up to: 5.8
 Requires PHP: 7.2
@@ -47,6 +47,14 @@ You can help us improve our works by committing your changes to Pepro Dev's Gith
 
 == Changelog ==
 
+= Ver. 1.9.2 | 2021-12-22/1400-10-01 =
+* Verification Enhancement
+
+= Ver. 1.9.1 | 2021-12-11/1400-09-20 =
+* CSS Fixes
+* Enhancement
+* Responsive reCaptcha
+
 = Ver. 1.8.9 | 2021-11-24/1400-09-03 =
 * Fixes for Wrong Date/Time on OTP timeout timer
 * Fixes for No Creating user using Email OTP method
@@ -79,6 +87,14 @@ You can help us improve our works by committing your changes to Pepro Dev's Gith
 
 
 == Upgrade Notice ==
+
+= Ver. 1.9.2 | 2021-12-22/1400-10-01 =
+* Verification Enhancement
+
+= Ver. 1.9.1 | 2021-12-11/1400-09-20 =
+* CSS Fixes
+* Enhancement
+* Responsive reCaptcha
 
 = Ver. 1.8.9 | 2021-11-24/1400-09-03 =
 * Fixes for Wrong Date/Time on OTP timeout timer

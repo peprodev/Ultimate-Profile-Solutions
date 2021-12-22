@@ -1,6 +1,6 @@
 /**
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/12/03 13:59:03
+ * @Last modified time: 2021/12/12 14:47:29
  */
 :root {
 	--tippy-color: #bf1e2e;
@@ -283,4 +283,8 @@ toast.active {
 }
 .pepro-form-links a:not(:last-of-type) {
 	margin-bottom: 0.5rem !important;
+}
+
+.pepro-login-reg-field.recaptcha-wrap {
+	direction: ltr;
 }

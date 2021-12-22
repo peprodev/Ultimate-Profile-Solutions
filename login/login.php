@@ -2482,7 +2482,7 @@ if (!class_exists("PeproDevUPS_Login")){
         ),
         array(
           "meta_name"   => "verification",
-          "type"        => "number",
+          "type"        => "text",
           "title"       => __("Verification Code","peprodev-ups"),
           "row-class"   => "hide",
           "is-public"   => "yes",
@@ -2525,7 +2525,7 @@ if (!class_exists("PeproDevUPS_Login")){
         ),
         array(
           "meta_name"   => "optverify",
-          "type"        => "number",
+          "type"        => "text",
           "title"       => __("OTP Code","peprodev-ups"),
           "row-class"   => "hide",
           "is-public"   => "yes",
@@ -2625,7 +2625,7 @@ if (!class_exists("PeproDevUPS_Login")){
           array_push($login_fields,
             array(
               "meta_name"   => "optverify",
-              "type"        => "number",
+              "type"        => "text",
               "title"       => __("OTP Code","peprodev-ups"),
               "row-class"   => "hide",
               "is-public"   => "yes",
@@ -2674,7 +2674,7 @@ if (!class_exists("PeproDevUPS_Login")){
           ),
           array(
             "meta_name"   => "optverify",
-            "type"        => "number",
+            "type"        => "text",
             "title"       => __("OTP Code","peprodev-ups"),
             "row-class"   => "hide",
             "is-public"   => "yes",
@@ -2965,7 +2965,7 @@ if (!class_exists("PeproDevUPS_Login")){
         ),
         array(
           "meta_name"   => "verification",
-          "type"        => "number",
+          "type"        => "text",
           "title"       => __("Verification Code","peprodev-ups"),
           "row-class"   => "hide",
           "is-public"   => "yes",
@@ -3043,7 +3043,7 @@ if (!class_exists("PeproDevUPS_Login")){
         ),
         array(
           "meta_name"   => "optverify",
-          "type"        => "number",
+          "type"        => "text",
           "title"       => __("Email OTP Verification","peprodev-ups"),
           "row-class"   => "hide",
           "is-public"   => "yes",
@@ -3113,7 +3113,7 @@ if (!class_exists("PeproDevUPS_Login")){
         ),
         array(
           "meta_name"   => "verification",
-          "type"        => "number",
+          "type"        => "text",
           "title"       => __("OTP Code","peprodev-ups"),
           "row-class"   => "hide",
           "is-public"   => "yes",

@@ -1,6 +1,6 @@
 /**
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/12/03 14:02:28
+ * @Last modified time: 2021/12/12 14:50:07
  * resendtime
  */
 jQuery.noConflict();
@@ -205,7 +205,7 @@ jQuery.noConflict();
                       text: _pepro_dev.closeTxt,
                       keys: ["esc"],
                       action: function(res) {
-                        window.location.href = window.location.href;
+                        window.location.reload();
                         jc.close();
                       }
                     },
@@ -215,7 +215,7 @@ jQuery.noConflict();
                       keys: ["enter"],
                       action: function(res) {
                         if (true === e.data.redirect){
-                          window.location.href = window.location.href;
+                          window.location.reload();
                         }else{
                           window.location.href = e.data.redirect;
                         }
@@ -235,7 +235,7 @@ jQuery.noConflict();
                       keys: ["enter", "esc"],
                       action: function(res) {
                         if (true === e.data.redirect){
-                          window.location.href = window.location.href;
+                          window.location.reload();
                         }else{
                           window.location.href = e.data.redirect;
                         }
@@ -368,7 +368,7 @@ jQuery.noConflict();
                     text: _pepro_dev.closeTxt,
                     keys: ["esc"],
                     action: function(res) {
-                      window.location.href = window.location.href;
+                      window.location.reload();
                       jc.close();
                     }
                   },
@@ -378,7 +378,7 @@ jQuery.noConflict();
                     keys: ["enter"],
                     action: function(res) {
                       if (true === e.data.redirect){
-                        window.location.href = window.location.href;
+                        window.location.reload();
                       }else{
                         window.location.href = e.data.redirect;
                       }
@@ -455,7 +455,7 @@ jQuery.noConflict();
           error_occured = true;
           return false;
         }
-        if (error_occured){ return false; $(login_form).find(":input").prop("disabled", false); }
+        if (error_occured){ $(login_form).find(":input").prop("disabled", false); return false; }
 
         $recaps = $(login_form).find("div[data-recaptcha]");
         if ($recaps.length){
@@ -509,7 +509,7 @@ jQuery.noConflict();
                     text: _pepro_dev.closeTxt,
                     keys: ["esc"],
                     action: function(res) {
-                      window.location.href = window.location.href;
+                      window.location.reload();
                       jc.close();
                     }
                   },
@@ -519,7 +519,7 @@ jQuery.noConflict();
                     keys: ["enter"],
                     action: function(res) {
                       if (true === e.data.redirect){
-                        window.location.href = window.location.href;
+                        window.location.reload();
                       }else{
                         window.location.href = e.data.redirect;
                       }
@@ -726,7 +726,7 @@ jQuery.noConflict();
                       keys: ["esc"],
                       action: function(res) {
                         $(".popup-active").removeClass("popup-active");
-                        window.location.href = window.location.href;
+                        window.location.reload();
                         jc.close();
                       }
                     },
@@ -875,7 +875,7 @@ jQuery.noConflict();
                       keys: ["esc"],
                       action: function(res) {
                         $(".popup-active").removeClass("popup-active");
-                        window.location.href = window.location.href;
+                        window.location.reload();
                         jc.close();
                       }
                     },
@@ -997,6 +997,7 @@ jQuery.noConflict();
         $username.first().focus();
         setTimeout(function () { $username.first().focus(); }, 200);
       }
+      setTimeout(function () { resizeReCaptcha(); }, 200);
     });
     $(document).on("click tap", ".switch-form-login", function(e){
       e.preventDefault();
@@ -1043,7 +1044,8 @@ jQuery.noConflict();
       }
     };
     $(window).on('resize', function(){ resizeReCaptcha(); });
-    $(document).on("click tap", "[data-trigger]", function(e){setTimeout(function () { resizeReCaptcha(); }, 200);});
+    $(document).on("click tap", ".pepro-form-links a", function(e){setTimeout(function () { resizeReCaptcha(); }, 200);});
+    setTimeout(function () { resizeReCaptcha(); }, 200);
 
     function show_toast(data = "Sample Toast!", delay = 1500) {
       if (!$("toast").length){$(document.body).append($("<toast>"));}
