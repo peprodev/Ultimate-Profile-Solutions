@@ -116,7 +116,6 @@ if (!class_exists("PeproDevUPS_Profile")) {
               ),
             );
 
-
             add_action("init", array( $this, "init_plugin" ));
             if (!current_user_can('edit_posts') && !is_admin()) {
               show_admin_bar(false);
@@ -268,43 +267,43 @@ if (!class_exists("PeproDevUPS_Profile")) {
           add_filter( "peprocore_dashboard_nav_menuitems", function ($s) {
             $d = apply_filters( "peprocore_{$this->id}_dashboard_nav_menuitems", array() ); return array_merge( $s, $d ); }, 11
           );
-          add_action( "peprocore_handle_ajaxrequests", $this->ajax_hndlr, 11);
-          add_action( "delete_user", array( $this, "after_delete_user"));
-          add_action("admin_init",                    array($this, "admin_init"));
-          add_action("wp_ajax_nopriv_{$this->id}",    array($this, "front_side_ajax_handler"));
-          add_action("wp_ajax_{$this->id}",           array($this, "front_side_ajax_handler"));
+          add_action( "peprocore_handle_ajaxrequests",       $this->ajax_hndlr, 11);
+          add_action( "delete_user",                         array( $this, "after_delete_user"));
+          add_action( "admin_init",                          array($this, "admin_init"));
+          add_action( "wp_ajax_nopriv_{$this->id}",          array($this, "front_side_ajax_handler"));
+          add_action( "wp_ajax_{$this->id}",                 array($this, "front_side_ajax_handler"));
           if (!is_admin()){
-            add_shortcode("pepro-profile",              array($this, "peprofile_shortcode_main"));
-            add_shortcode("user",                       array($this, "peprofile_shortcode_user"));
-            add_shortcode("pepro-profile-url",          array($this, "peprofile_shortcode_profile_url"));
-            add_shortcode("profile-card-1",             array($this, "peprofile_shortcode_card_1"));
-            add_shortcode("profile-card-2",             array($this, "peprofile_shortcode_card_2"));
-            add_shortcode("profile-card-3",             array($this, "peprofile_shortcode_card_3"));
-            add_shortcode("profile-card-4",             array($this, "peprofile_shortcode_card_4"));
-            add_shortcode("profile-wc-stats",           array($this, "peprofile_shortcode_wc_stats"));
-            add_shortcode("profile-wc-orders",          array($this, "peprofile_shortcode_wc_orders"));
-            add_shortcode("profile-wc-downloads",       array($this, "peprofile_shortcode_wc_downloads"));
+            add_shortcode("pepro-profile",                   array($this, "peprofile_shortcode_main"));
+            add_shortcode("user",                            array($this, "peprofile_shortcode_user"));
+            add_shortcode("pepro-profile-url",               array($this, "peprofile_shortcode_profile_url"));
+            add_shortcode("profile-card-1",                  array($this, "peprofile_shortcode_card_1"));
+            add_shortcode("profile-card-2",                  array($this, "peprofile_shortcode_card_2"));
+            add_shortcode("profile-card-3",                  array($this, "peprofile_shortcode_card_3"));
+            add_shortcode("profile-card-4",                  array($this, "peprofile_shortcode_card_4"));
+            add_shortcode("profile-wc-stats",                array($this, "peprofile_shortcode_wc_stats"));
+            add_shortcode("profile-wc-orders",               array($this, "peprofile_shortcode_wc_orders"));
+            add_shortcode("profile-wc-downloads",            array($this, "peprofile_shortcode_wc_downloads"));
           }
-          add_filter("peprofile_shortcodes",          array($this, "peprofile_shortcodes_list"), 10, 1);
-          add_filter("media_buttons",                 array($this, "media_buttons_add_new"), PHP_INT_MAX );
+          add_filter( "peprofile_shortcodes",                array($this, "peprofile_shortcodes_list"), 10, 1);
+          add_filter( "media_buttons",                       array($this, "media_buttons_add_new"), PHP_INT_MAX );
           if ($this->_ld_activated()) {
-            add_shortcode("profile-ld-enrolled",      array($this, "peprofile_shortcode_ld_enrolled"));
+            add_shortcode("profile-ld-enrolled",             array($this, "peprofile_shortcode_ld_enrolled"));
           }
           if (get_current_user_id()){
-            add_filter("template_include",            array($this, "template_include"));
-            add_filter("theme_page_templates",        array($this, "theme_page_templates"), 10, 4);
+            add_filter( "template_include",                  array($this, "template_include"));
+            add_filter( "theme_page_templates",              array($this, "theme_page_templates"), 10, 4);
           }
-          add_filter("peprofile_dashboard_slugs",     array($this, "peprofile_dashboard_slugs"), 10, 1);
-          add_filter("display_post_states",           array($this, "display_post_states"), 10, 2);
-          add_filter("peprofile_get_nav_items",       array($this, "peprofile_get_nav_items"),10,1);
-          add_filter("peprofile_get_nav_items",       array($this, "peprofile_get_custom_user_nav_items"),11,1);
-          add_action("peprofile_get_template_part_nav-bar", array($this, "peprofile_get_template_part_nav"));
+          add_filter( "peprofile_dashboard_slugs",           array($this, "peprofile_dashboard_slugs"), 10, 1);
+          add_filter( "display_post_states",                 array($this, "display_post_states"), 10, 2);
+          add_filter( "peprofile_get_nav_items",             array($this, "peprofile_get_nav_items"),10,1);
+          add_filter( "peprofile_get_nav_items",             array($this, "peprofile_get_custom_user_nav_items"),11,1);
+          add_action( "peprofile_get_template_part_nav-bar", array($this, "peprofile_get_template_part_nav"));
           $this->peprofile_custom_user_nav_items_hndlr();
           $this->CreateDatabase();
           $this->add_special_post();
 
           if ($this->_wc_activated()) {
-              add_action('woocommerce_available_downloads', array($this, 'woocommerce_order_downloads_table'), 20);
+              add_action( 'woocommerce_available_downloads', array($this, 'woocommerce_order_downloads_table'), 20);
           }
           if ($this->_vc_activated()) {
               add_action("vc_before_init", array($this,"integrate_With_VC"));
@@ -313,13 +312,13 @@ if (!class_exists("PeproDevUPS_Profile")) {
                   vc_add_shortcode_param("{$this->id}_about", array($this,'vc_add_pepro_about'), plugins_url("/assets/js/vc.init.js", __FILE__));
               }
           }
-          add_action('admin_init',                    function(){ if (!current_user_can('edit_posts') && ( !wp_doing_ajax() ) ) {
+          add_action( 'admin_init',                    function(){ if (!current_user_can('edit_posts') && ( !wp_doing_ajax() ) ) {
             $url = apply_filters("peprofile_admin_redirect_url_if_no_access",home_url());
             wp_safe_redirect( $url );
             exit; } }, 1 );
-          add_action('after_setup_theme',             function(){ if (!current_user_can('edit_posts')  && !is_admin()) {
+          add_action( 'after_setup_theme',             function(){ if (!current_user_can('edit_posts')  && !is_admin()) {
             show_admin_bar(false);
-            add_filter('show_admin_bar', '__return_false');
+            add_filter( 'show_admin_bar', '__return_false');
           }});
 
         }

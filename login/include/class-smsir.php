@@ -6,16 +6,68 @@
 namespace PeproDev\PeproCore\RegLogin;
 class peproSendSMS
 {
-    private $api_url;
-    private $api_key;
-    private $secret_key;
-    private $line_number;
-    public function __construct($api_url, $api_key, $secret_key, $line_number)
+    public function __construct()
     {
-      $this->api_url = untrailingslashit($api_url);
-      $this->api_key = $api_key;
-      $this->secret_key = $secret_key;
-      $this->line_number = $line_number;
+      $this->td                = "peprodev-ups";
+      $this->setting_slug      = "loginregister";
+      $this->activation_status = "PeproDevUPS_Core___{$this->setting_slug}";
+      $this->save_prefix       = $this->activation_status;
+      $this->api_url           = untrailingslashit("https://ws.sms.ir/");
+      $this->api_key           = get_option("{$this->save_prefix}-sms_api_key");
+      $this->secret_key        = get_option("{$this->save_prefix}-sms_secret_key");
+      $this->line_number       = get_option("{$this->save_prefix}-sms_api_url");
+      $this->sms_text          = get_option("{$this->save_prefix}-smsir_message");
+      add_filter( "pepro_reglogin_sms_verification_gateways", array( $this, "sms_verification_gateways"), 10, 1);
+    }
+    public function sms_verification_gateways($gateways=array())
+    {
+      $gateways["smsir"] = array(
+        "name"       => _x("SMS.ir", "gateway", $this->td),
+        "fn_send"    => array( $this, "CLASS_SMSIR"),
+        "fn_setting" => array( $this, "setting_smsir"),
+      );
+      return $gateways;
+    }
+    public function setting_smsir()
+    {
+      ob_start();
+      ?>
+        <p class="font-weight-bold p-3"><?php esc_html_e("SMS.ir Setting", "peprodev-ups");?></p>
+        <div class='col-lg-12 row justify-content-between mb-3 field-opt-sms_api_key'>
+          <div class="col-lg-6 label"><span><?php esc_html_e("API Key","peprodev-ups");?></span></div>
+          <div class="col-lg-6"><input name="sms_api_key" value="<?php echo esc_attr( $this->api_key );?>" autocomplete="off" type="text" dir="ltr" class='form-input single-required mr-2' /></div>
+        </div>
+        <div class='col-lg-12 row justify-content-between mb-3 field-opt-sms_secret_key'>
+          <div class="col-lg-6 label"><span><?php esc_html_e("Security code","peprodev-ups");?></span><?=$this->external_link("https://ip.sms.ir/#/UserApiKey");?></div>
+          <div class="col-lg-6"><input name="sms_secret_key" value="<?php echo esc_attr( $this->secret_key );?>" autocomplete="off" type="text" dir="ltr" class='form-input single-required mr-2' /></div>
+        </div>
+        <div class='col-lg-12 row justify-content-between mb-3 field-opt-sms_api_url'>
+          <div class="col-lg-6 label"><span><?php esc_html_e("Sender Number","peprodev-ups");?></span><?=$this->external_link("https://ip.sms.ir/#/UserSetting");?></div>
+          <div class="col-lg-6"><input name="sms_api_url" value="<?php echo esc_attr( $this->line_number );?>" autocomplete="off" type="text" dir="ltr" class='form-input single-required mr-2' /></div>
+        </div>
+        <div class='col-lg-12 row justify-content-between mb-3 field-opt-smsir_message'>
+            <div class="col-lg-6 label"><span><?php esc_html_e("Template ID / Message containing [OTP]","peprodev-ups");?></span><?=$this->external_link("https://ip.sms.ir/#/User/UltraFastSendSetting");?></div>
+            <div class="col-lg-6"><textarea name="smsir_message" autocomplete="off" class='form-input single-required mr-2' placeholder="UltraFastSend Template ID / Message containing [OTP]" /><?php echo strip_tags($this->sms_text);?></textarea></div>
+        </div>
+      <?php
+      $htmloutput = ob_get_contents();
+      ob_end_clean();
+      return $htmloutput;
+    }
+    public function CLASS_SMSIR($numbers=array(), $message="", $otp_code=0)
+    {
+      $message = str_replace("[OTP]", $otp_code, $this->sms_text);
+      if (is_numeric(trim($message))){
+        $ParameterArray = array(array( "Parameter" => "OTP", "ParameterValue" => $otp_code));
+        return $this->ultraFastSend(array("ParameterArray" => $ParameterArray, "Mobile" => $numbers, "TemplateId" => trim($message)));
+      }
+      else{
+        return $this->send_normal_sms($numbers, $message);
+      }
+    }
+    public function external_link($url='#')
+    {
+      return ' <a href="'.esc_url($url).'" class="btn btn-sm btn-round btn-group btn-info float-left m-0" target="_blank"><i class="fas fa-external-link-alt"></i></a>';
     }
     public function send_normal_sms($MobileNumbers=array(), $Messages="")
     {

@@ -63,73 +63,71 @@ if (!class_exists("PeproDevUPS_Login")){
     public function __construct()
     {
       if (class_exists("PeproCoreLoginSlugChangerClass")){new PeproCoreLoginSlugChangerClass;}
-      $this->priority                       = 3;
-      $this->assets_url                     = plugins_url("/", __FILE__);
-      $this->assets_dir                     = plugin_dir_path(__FILE__);
-      $this->instance                       = $this;
-      $this->file                           = plugin_basename(__FILE__);
-      $this->hwnd                           = __CLASS__;
-      $this->setting_slug                   = "loginregister";
-      $this->id                             = "loginregister";
-      $this->td                             = "peprodev-ups";
-      $this->title                          = __("PeproDev Ultimate Profile Solutions — Login","peprodev-ups");
-      $this->menu_label                     = __("Login/Register","peprodev-ups");
-      $this->page_label                     = __("Login Setting","peprodev-ups");
-      $this->developer                      = __("Pepro Dev. Group","peprodev-ups");
-      $this->author                         = __("Pepro Dev. Group","peprodev-ups");
-      $this->license                        = __("Pepro Dev License","peprodev-ups");
-      $this->icon_html                      = "<i class=\"material-icons\">fingerprint</i>";
-      $this->current_version                = "3.5.0";
-      $this->date_last_edit                 = "1400/06/03";
-      $this->wp_tested                      = "5.8";
-      $this->wp_minimum                     = "5.0";
-      $this->wc_tested                      = "5.5.2";
-      $this->wc_minimum                     = "5.0";
-      $this->php_minimum                    = "5.6";
-      $this->php_recomonded                 = "7.3";
-      $this->pepc_tested                    = "1.7.0";
-      $this->pepc_minimum                   = "1.7.0";
-      $this->activation_status              = "PeproDevUPS_Core___{$this->setting_slug}";
-      $this->html_wrapper                   = array($this,"htmlwrapper");
-      $this->ajax_hndlr                     = array($this,"ajaxhandler");
-      $this->developerURI                   = "https://pepro.dev";
-      $this->authorURI                      = "https://pepro.dev";
-      $this->licenseURI                     = "https://pepro.dev/license";
-      $this->pluginURI                      = "https://pepro.dev/ups";
-      $this->lang                           = dirname(plugin_basename(__FILE__))."/languages/";
-      $this->copyright                      = sprintf(__("Copyright (c) %s Pepro Dev. Group, All rights reserved","peprodev-ups"), date("Y"));
-      $this->reglogin_type                  = get_option("{$this->activation_status}-reglogin_type");
-      $this->auto_login_after_reg           = "yes"    == get_option("{$this->activation_status}-auto_login_after_reg");
-      $this->login_mobile_otp               = "mobile" == $this->reglogin_type;
-      $this->login_email_otp                = "mailotp" == $this->reglogin_type;
-      $this->use_mobile_as_username         = "mobile" == $this->reglogin_type;
-      $this->use_email_as_username          = "email"  == $this->reglogin_type;
-      $this->show_password_field            = "yes" == get_option("{$this->activation_status}-_regdef_passwords");
-      $this->is_password_field_req          = "yes" == get_option("{$this->activation_status}-_regdef_passwords-req");
-      $this->reg_add_firstname              = "yes" == get_option("{$this->activation_status}-_regdef_firstname");
-      $this->is_add_firstname_req           = "yes" == get_option("{$this->activation_status}-_regdef_firstname-req");
-      $this->reg_add_lastname               = "yes" == get_option("{$this->activation_status}-_regdef_lastname");
-      $this->is_add_lastname_req            = "yes" == get_option("{$this->activation_status}-_regdef_lastname-req");
-      $this->reg_add_displayname            = "yes" == get_option("{$this->activation_status}-_regdef_displayname");
-      $this->is_add_displayname_req         = "yes" == get_option("{$this->activation_status}-_regdef_displayname-req");
-      $this->reg_add_mobile                 = "yes" == get_option("{$this->activation_status}-_regdef_mobile");
-      $this->is_add_mobile_req              = "yes" == get_option("{$this->activation_status}-_regdef_mobile-req");
-      $this->hide_email_field               = "yes" !== get_option("{$this->activation_status}-_regdef_email");
-      $this->show_email_field               = "yes" == get_option("{$this->activation_status}-_regdef_email");
-      $this->is_email_field_req             = "yes" == get_option("{$this->activation_status}-_regdef_email-req");
-      $this->hide_username_field            = "yes" !== get_option("{$this->activation_status}-_regdef_username");
-      $this->is_username_field_req          = "yes" == get_option("{$this->activation_status}-_regdef_username-req");
-      $this->sms_api_url                    = get_option("{$this->activation_status}-sms_api_url");
-      $this->sms_secret_key                 = get_option("{$this->activation_status}-sms_secret_key");
-      $this->sms_api_key                    = get_option("{$this->activation_status}-sms_api_key");
-      $this->sms_ultrafastsend              = get_option("{$this->activation_status}-sms_ultrafastsend_id");
-      $this->sms_expiration                 = get_option("{$this->activation_status}-sms_expiration", "90");
-      $this->email_expiration               = get_option("{$this->activation_status}-email_expiration", "120");
-      $this->verification_digits            = get_option("{$this->activation_status}-verification_digits", "5");
-      $this->verification_email_digits      = get_option("{$this->activation_status}-verification_email_digits", "8");
-      $this->verification_email_sender      = get_option("{$this->activation_status}-verification_email_sender");
-      $this->verification_email_sender_name = get_option("{$this->activation_status}-verification_email_sender_name", get_bloginfo('name','display'));
-      $this->verification_email_template    = html_entity_decode(stripslashes(get_option("{$this->activation_status}-verification_email_template")));
+      $this->priority               = 3;
+      $this->assets_url             = plugins_url("/", __FILE__);
+      $this->assets_dir             = plugin_dir_path(__FILE__);
+      $this->instance               = $this;
+      $this->file                   = plugin_basename(__FILE__);
+      $this->hwnd                   = __CLASS__;
+      $this->setting_slug           = "loginregister";
+      $this->id                     = "loginregister";
+      $this->td                     = "peprodev-ups";
+      $this->title                  = __("PeproDev Ultimate Profile Solutions — Login","peprodev-ups");
+      $this->menu_label             = __("Login/Register","peprodev-ups");
+      $this->page_label             = __("Login Setting","peprodev-ups");
+      $this->developer              = __("Pepro Dev. Group","peprodev-ups");
+      $this->author                 = __("Pepro Dev. Group","peprodev-ups");
+      $this->license                = __("Pepro Dev License","peprodev-ups");
+      $this->icon_html              = "<i class=\"material-icons\">fingerprint</i>";
+      $this->current_version        = "3.5.0";
+      $this->date_last_edit         = "1400/06/03";
+      $this->wp_tested              = "5.8";
+      $this->wp_minimum             = "5.0";
+      $this->wc_tested              = "5.5.2";
+      $this->wc_minimum             = "5.0";
+      $this->php_minimum            = "5.6";
+      $this->php_recomonded         = "7.3";
+      $this->pepc_tested            = "1.7.0";
+      $this->pepc_minimum           = "1.7.0";
+      $this->activation_status      = "PeproDevUPS_Core___{$this->setting_slug}";
+      $this->save_prefix            = $this->activation_status;
+      $this->html_wrapper           = array($this,"htmlwrapper");
+      $this->ajax_hndlr             = array($this,"ajaxhandler");
+      $this->developerURI           = "https://pepro.dev";
+      $this->authorURI              = "https://pepro.dev";
+      $this->licenseURI             = "https://pepro.dev/license";
+      $this->pluginURI              = "https://pepro.dev/ups";
+      $this->lang                   = dirname(plugin_basename(__FILE__))."/languages/";
+      $this->copyright              = sprintf(__("Copyright (c) %s Pepro Dev. Group, All rights reserved","peprodev-ups"), date("Y"));
+      $this->reglogin_type          = get_option("{$this->save_prefix}-reglogin_type");
+      $this->auto_login_after_reg   = "yes"    == get_option("{$this->save_prefix}-auto_login_after_reg");
+      $this->login_mobile_otp       = "mobile" == $this->reglogin_type;
+      $this->login_email_otp        = "mailotp" == $this->reglogin_type;
+      $this->use_mobile_as_username = "mobile" == $this->reglogin_type;
+      $this->use_email_as_username  = "email"  == $this->reglogin_type;
+      $this->show_password_field    = "yes" == get_option("{$this->save_prefix}-_regdef_passwords");
+      $this->is_password_field_req  = "yes" == get_option("{$this->save_prefix}-_regdef_passwords-req");
+      $this->reg_add_firstname      = "yes" == get_option("{$this->save_prefix}-_regdef_firstname");
+      $this->is_add_firstname_req   = "yes" == get_option("{$this->save_prefix}-_regdef_firstname-req");
+      $this->reg_add_lastname       = "yes" == get_option("{$this->save_prefix}-_regdef_lastname");
+      $this->is_add_lastname_req    = "yes" == get_option("{$this->save_prefix}-_regdef_lastname-req");
+      $this->reg_add_displayname    = "yes" == get_option("{$this->save_prefix}-_regdef_displayname");
+      $this->is_add_displayname_req = "yes" == get_option("{$this->save_prefix}-_regdef_displayname-req");
+      $this->reg_add_mobile         = "yes" == get_option("{$this->save_prefix}-_regdef_mobile");
+      $this->is_add_mobile_req      = "yes" == get_option("{$this->save_prefix}-_regdef_mobile-req");
+      $this->hide_email_field       = "yes" !== get_option("{$this->save_prefix}-_regdef_email");
+      $this->show_email_field       = "yes" == get_option("{$this->save_prefix}-_regdef_email");
+      $this->is_email_field_req     = "yes" == get_option("{$this->save_prefix}-_regdef_email-req");
+      $this->hide_username_field    = "yes" !== get_option("{$this->save_prefix}-_regdef_username");
+      $this->is_username_field_req  = "yes" == get_option("{$this->save_prefix}-_regdef_username-req");
+
+      $this->sms_expiration                 = get_option("{$this->save_prefix}-sms_expiration", "90");
+      $this->email_expiration               = get_option("{$this->save_prefix}-email_expiration", "120");
+      $this->verification_digits            = get_option("{$this->save_prefix}-verification_digits", "5");
+      $this->verification_email_digits      = get_option("{$this->save_prefix}-verification_email_digits", "8");
+      $this->verification_email_sender      = get_option("{$this->save_prefix}-verification_email_sender");
+      $this->verification_email_sender_name = get_option("{$this->save_prefix}-verification_email_sender_name", get_bloginfo('name','display'));
+      $this->verification_email_template    = html_entity_decode(stripslashes(get_option("{$this->save_prefix}-verification_email_template")));
       $this->def_mail_body                  = ['<!DOCTYPE html>', '<html>', '  <head>', '    <meta charset="utf-8">', '  </head>', '  <body>',
         '    <div style="display:block; width:450px; border-radius:0.5rem; margin: 1rem auto; text-align: center; color: #2b2b2b; padding: 1rem; box-shadow: 0 2px 5px 1px #0003; border: 1px solid #ccc;">',
         '      <h2>Verify your account</h2>',
@@ -142,48 +140,65 @@ if (!class_exists("PeproDevUPS_Login")){
       $this->default_sender                 = "wordpress@" . parse_url(get_bloginfo('url'), PHP_URL_HOST);
       $this->from_name                      = !empty($this->verification_email_sender_name) ? trim($this->verification_email_sender_name) : get_bloginfo('name','display');
       $this->from_address                   = !empty($this->verification_email_sender) ? trim($this->verification_email_sender) : $this->default_sender;
-      add_action("init",                                                 array( $this, "admin_init" ));
-      add_action("wp_ajax_pepro_reglogin",                               array( $this, "handel_ajax_req"));
-      add_action("wp_ajax_nopriv_pepro_reglogin",                        array( $this, "handel_ajax_req"));
-      add_action("register_form",                                        array( $this, "register_form" ));
-      add_action("user_new_form",                                        array( $this, "register_form_admin" ));
-      add_action("user_register",                                        array( $this, "user_register" ));
-      add_action("edit_user_created_user",                               array( $this, "user_register" ));
-      add_action("show_user_profile",                                    array( $this, "show_profile_custom_fields" ), 10, 3);
-      add_action("edit_user_profile",                                    array( $this, "show_profile_custom_fields" ), 10, 3);
-      add_action("personal_options_update",                              array( $this, "update_profile_custom_fields" ));
-      add_action("edit_user_profile_update",                             array( $this, "update_profile_custom_fields" ));
-      add_action("registration_errors",                                  array( $this, "registration_errors" ), 10, 3);
-      add_action("user_profile_update_errors",                           array( $this, "registration_errors_admin" ), 10, 3);
-      add_action("manage_users_columns",                                 array( $this, "manage_users_columns" ));
-      add_action("manage_users_custom_column",                           array( $this, "manage_users_custom_column" ), 100, 3);
-      add_action("admin_enqueue_scripts",                                array( $this, "admin_enqueue_scripts" ));
-      add_action("login_form_register",                                  array( $this, "login_form_register"));
-      add_action("login_form_logout",                                    array( $this, "login_form_logout"));
-      add_filter("login_redirect",                                       array( $this, "redirect_after_login_register" ), 10, 3);
-      add_filter("registration_redirect",                                array( $this, "redirect_after_login_register" ), 10, 3);
-      add_filter("woocommerce_login_redirect",                           array( $this, "redirect_after_login_register" ), 10, 3);
-      add_filter("woocommerce_registration_redirect",                    array( $this, "redirect_after_login_register" ), 10, 3);
-      add_filter("peprofile_shortcodes",                                 array( $this, "add_peprofile_shortcodes" ), 11000);
-      add_filter("teeny_mce_plugins",                                    array( $this, "teeny_mce_plugins" ), 10, 2 );
-      add_shortcode("pepro-login-form",                                  array( $this, "shortcode__pepro_login_form"));
-      add_shortcode("pepro-login-popup",                                 array( $this, "shortcode__pepro_login_popup"));
-      add_shortcode("logout-url",                                        array( $this, "shortcode__logout_url"));
-      add_shortcode("verified-mobile",                                   array( $this, "shortcode__user_verified_mobile"));
-      add_shortcode("verified-email",                                    array( $this, "shortcode__user_verified_email"));
-      add_shortcode("loggedin",                                          array( $this, "shortcode__check_loggedin") );
-      add_shortcode("loggedout",                                         array( $this, "shortcode__check_loggedout") );
-      add_shortcode("pepro-smart-btn",                                   array( $this, "shortcode__smart_btn") );
-      add_filter("pepro_reglogin_get_register_fields",                   array( $this, "pepro_reglogin_get_register_fields" ), 1000);
-      add_action("pepro_reglogin_show_hide_defaul_registeration_fields", array( $this, "form_defaul_registeration_fields" ), 1000);
-      add_action("auth_cookie_expiration",                               array( $this,"auth_cookie_expiration" ), 10, 3 );
+      add_action("init",                              array( $this, "admin_init" ));
+      add_action("wp_ajax_pepro_reglogin",            array( $this, "handel_ajax_req"));
+      add_action("wp_ajax_nopriv_pepro_reglogin",     array( $this, "handel_ajax_req"));
+      add_action("register_form",                     array( $this, "register_form" ));
+      add_action("user_new_form",                     array( $this, "register_form_admin" ));
+      add_action("user_register",                     array( $this, "user_register" ));
+      add_action("edit_user_created_user",            array( $this, "user_register" ));
+      add_action("show_user_profile",                 array( $this, "show_profile_custom_fields" ), 10, 3);
+      add_action("edit_user_profile",                 array( $this, "show_profile_custom_fields" ), 10, 3);
+      add_action("personal_options_update",           array( $this, "update_profile_custom_fields" ));
+      add_action("edit_user_profile_update",          array( $this, "update_profile_custom_fields" ));
+      add_action("registration_errors",               array( $this, "registration_errors" ), 10, 3);
+      add_action("user_profile_update_errors",        array( $this, "registration_errors_admin" ), 10, 3);
+      add_action("manage_users_columns",              array( $this, "manage_users_columns" ));
+      add_action("manage_users_custom_column",        array( $this, "manage_users_custom_column" ), 100, 3);
+      add_action("admin_enqueue_scripts",             array( $this, "admin_enqueue_scripts" ));
+      add_action("login_form_register",               array( $this, "login_form_register"));
+      add_action("login_form_logout",                 array( $this, "login_form_logout"));
+      add_filter("login_redirect",                    array( $this, "redirect_after_login_register" ), 10, 3);
+      add_filter("registration_redirect",             array( $this, "redirect_after_login_register" ), 10, 3);
+      add_filter("woocommerce_login_redirect",        array( $this, "redirect_after_login_register" ), 10, 3);
+      add_filter("woocommerce_registration_redirect", array( $this, "redirect_after_login_register" ), 10, 3);
+      add_filter("peprofile_shortcodes",              array( $this, "add_peprofile_shortcodes" ), 11000);
+      add_filter("teeny_mce_plugins",                 array( $this, "teeny_mce_plugins" ), 10, 2 );
+      add_shortcode("pepro-login-form",               array( $this, "shortcode__pepro_login_form"));
+      add_shortcode("pepro-login-popup",              array( $this, "shortcode__pepro_login_popup"));
+      add_shortcode("logout-url",                     array( $this, "shortcode__logout_url"));
+      add_shortcode("verified-mobile",                array( $this, "shortcode__user_verified_mobile"));
+      add_shortcode("verified-email",                 array( $this, "shortcode__user_verified_email"));
+      add_shortcode("loggedin",                       array( $this, "shortcode__check_loggedin") );
+      add_shortcode("loggedout",                      array( $this, "shortcode__check_loggedout") );
+      add_shortcode("pepro-smart-btn",                array( $this, "shortcode__smart_btn") );
+
+      add_filter( "pepro_reglogin_get_register_fields",                   array( $this, "pepro_reglogin_get_register_fields" ), 1000);
+      add_action( "pepro_reglogin_show_hide_defaul_registeration_fields", array( $this, "form_defaul_registeration_fields" ), 1000);
+      add_action( "auth_cookie_expiration",                               array( $this, "auth_cookie_expiration" ), 10, 3 );
+
       $this->register_fileds       = $this->get_register_fields();
       $this->form_register_fields  = $this->get_form_register_fields();
       $this->form_resetpass_fields = $this->get_form_resetpass_fields();
       $this->login_fields          = $this->get_login_fields();
       $this->verify_mobile_fields  = $this->get_verify_mobile_fields();
-      require_once plugin_dir_path(__FILE__) . "/include/class-sms.php";
-      $this->sms = new \PeproDev\PeproCore\RegLogin\peproSendSMS("https://ws.sms.ir/", $this->sms_api_key, $this->sms_secret_key, $this->sms_api_url);
+
+      require_once plugin_dir_path(__FILE__) . "/include/class-smsir.php";
+      require_once plugin_dir_path(__FILE__) . "/include/class-kavenegar.php";
+
+      $this->smsir = new \PeproDev\PeproCore\RegLogin\peproSendSMS;
+      $this->smsir = new \PeproDev\PeproCore\RegLogin\peproKavenegarSMS;
+
+    }
+    public function sendmsg_sms($numbers=array(), $message="", $otp_code=0)
+    {
+      $method   = get_option("{$this->save_prefix}-sms_method", "smsir");
+      $gateways = (array) apply_filters( "pepro_reglogin_sms_verification_gateways", array());
+      if (isset($gateways[$method]["fn_send"]) && is_callable($gateways[$method]["fn_send"])){
+        return call_user_func_array($gateways[$method]["fn_send"], func_get_args());
+      }else{
+        return false;
+      }
     }
     public function auth_cookie_expiration( $expiration, $user_id, $remember )
     {
@@ -331,13 +346,13 @@ if (!class_exists("PeproDevUPS_Login")){
               <div class="row justify-content-between align-items-center">
               <div class="col-8">
                 <label class="row w-100 align-items-center m-0">
-                  <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required mr-2 main_checkbox <?php echo esc_attr($key);?>' <?php echo checked(get_option("{$this->activation_status}-{$key}") === "yes", true);?> name="<?php echo esc_attr($key);?>" /> <?php echo esc_html($value);?>
+                  <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required mr-2 main_checkbox <?php echo esc_attr($key);?>' <?php echo checked(get_option("{$this->save_prefix}-{$key}") === "yes", true);?> name="<?php echo esc_attr($key);?>" /> <?php echo esc_html($value);?>
                   <input name="type" value="<?php echo esc_attr($key);?>" autocomplete="off" type="hidden" class="form-input meta-name" />
                 </label>
               </div>
               <div class="col-4">
                 <label class="row w-100 align-items-center m-0">
-                  <input autocomplete="off" type="checkbox" class='form-checkbox single-required mr-2 is_required' <?php echo checked(get_option("{$this->activation_status}-{$key}-req") === "yes", true);?> name="<?php echo esc_attr($key);?>-req" /> <?php esc_html_e("Required?", "peprodev-ups");?>
+                  <input autocomplete="off" type="checkbox" class='form-checkbox single-required mr-2 is_required' <?php echo checked(get_option("{$this->save_prefix}-{$key}-req") === "yes", true);?> name="<?php echo esc_attr($key);?>-req" /> <?php esc_html_e("Required?", "peprodev-ups");?>
                 </label>
               </div>
             </div>
@@ -412,36 +427,36 @@ if (!class_exists("PeproDevUPS_Login")){
       }
 
       if ($this->_wc_activated()){
-        if ("yes" == get_option("{$this->activation_status}-_wc_billing_city")){
+        if ("yes" == get_option("{$this->save_prefix}-_wc_billing_city")){
           $reg_add_city = array(
             "meta_name"   => "billing_city",
             "type"        => "text",
             "title"       => __("City","peprodev-ups"),
-            "is-required" => "yes" == get_option("{$this->activation_status}-_wc_billing_city-req") ? "yes" : "no",
+            "is-required" => "yes" == get_option("{$this->save_prefix}-_wc_billing_city-req") ? "yes" : "no",
             "is-public"   => "yes",
             "is-editable" => "no",
             "in-column"   => "no",
           );
           array_unshift($fields, $reg_add_city);
         }
-        if ("yes" == get_option("{$this->activation_status}-_wc_billing_state")){
+        if ("yes" == get_option("{$this->save_prefix}-_wc_billing_state")){
           $reg_add_state = array(
             "meta_name"   => "billing_state",
             "type"        => "wc_state",
             "title"       => __("State / County","peprodev-ups"),
-            "is-required" => "yes" == get_option("{$this->activation_status}-_wc_billing_state-req") ? "yes" : "no",
+            "is-required" => "yes" == get_option("{$this->save_prefix}-_wc_billing_state-req") ? "yes" : "no",
             "is-public"   => "yes",
             "is-editable" => "no",
             "in-column"   => "no",
           );
           array_unshift($fields, $reg_add_state);
         }
-        if ("yes" == get_option("{$this->activation_status}-_wc_billing_country")){
+        if ("yes" == get_option("{$this->save_prefix}-_wc_billing_country")){
           $reg_add_country = array(
             "meta_name"   => "billing_country",
             "type"        => "wc_country",
             "title"       => __("Country / Region","peprodev-ups"),
-            "is-required" => "yes" == get_option("{$this->activation_status}-_wc_billing_country-req") ? "yes" : "no",
+            "is-required" => "yes" == get_option("{$this->save_prefix}-_wc_billing_country-req") ? "yes" : "no",
             "is-public"   => "yes",
             "is-editable" => "no",
             "in-column"   => "no",
@@ -534,7 +549,7 @@ if (!class_exists("PeproDevUPS_Login")){
 
         "catpcha"    => _x("<strong>Error:</strong> Please check the reCAPTCHA challenge.", "reg-form-error", "peprodev-ups"),
         ));
-      wp_add_inline_style("pepro-login-reg-formaction", get_option("{$this->activation_status}-customcss"));
+      wp_add_inline_style("pepro-login-reg-formaction", get_option("{$this->save_prefix}-customcss"));
       wp_enqueue_script( "pepro_reglogin_recaptcha",    "https://www.google.com/recaptcha/api.js", array(), time(), true);
     }
     public function verify_user_mobile_email_inline()
@@ -788,7 +803,7 @@ if (!class_exists("PeproDevUPS_Login")){
       $uniqd = uniqid("pepro_reg_login_");
       $this->enqueue_shortcode_styles(array("uniqd" => $uniqd, "trigger" => $trigger, ));
       echo '<div class="pepro-login-reg-container" id="'.esc_attr($uniqd).'" data-pepro-reglogin="'.esc_attr($uniqd).'">';
-      echo wp_unslash(get_option("{$this->activation_status}-headerhtml"));
+      echo wp_unslash(get_option("{$this->save_prefix}-headerhtml"));
       if (!is_user_logged_in()){
         echo "$before";
         ?>
@@ -888,7 +903,7 @@ if (!class_exists("PeproDevUPS_Login")){
           }
         }
       }
-      echo wp_unslash(get_option("{$this->activation_status}-footerhtml"));
+      echo wp_unslash(get_option("{$this->save_prefix}-footerhtml"));
       echo '</div>';
       $htmloutput = ob_get_contents();
       ob_end_clean();
@@ -2276,14 +2291,7 @@ if (!class_exists("PeproDevUPS_Login")){
       if (!$mobile || empty($mobile) || !$valid_mobile){
         return false;
       }
-      $msg = str_replace("[OTP]", $otp_code, $this->sms_ultrafastsend);
-      if (is_numeric(trim($msg))){
-        $ParameterArray = array(array( "Parameter" => "OTP", "ParameterValue" => $otp_code));
-        return $this->sms->ultraFastSend(array("ParameterArray" => $ParameterArray, "Mobile" => $valid_mobile, "TemplateId" => trim($msg)));
-      }
-      else{
-        return $this->sms->send_normal_sms([$valid_mobile], $msg);
-      }
+      return $this->sendmsg_sms($valid_mobile, $otp_code, $otp_code);
     }
     public function check_verification_sms($user_id=0, $verification="")
     {
@@ -2351,14 +2359,7 @@ if (!class_exists("PeproDevUPS_Login")){
       if (!$mobile || empty($mobile) || !$valid_mobile){
         return false;
       }
-      $msg = str_replace("[OTP]", $otp_code, $this->sms_ultrafastsend);
-      if (is_numeric(trim($msg))){
-        $ParameterArray = array(array( "Parameter" => "OTP", "ParameterValue" => $otp_code));
-        return $this->sms->ultraFastSend(array("ParameterArray" => $ParameterArray, "Mobile" => $valid_mobile, "TemplateId" => trim($msg)));
-      }
-      else{
-        return $this->sms->send_normal_sms([$valid_mobile], $msg);
-      }
+      return $this->sendmsg_sms($valid_mobile, $otp_code, $otp_code);
     }
     public function send_dummyuser_verification_email($email="")
     {
@@ -3858,37 +3859,37 @@ if (!class_exists("PeproDevUPS_Login")){
         array(
           "name" => "{$this->td}_general",
           "data" => array(
-            "{$this->activation_status}-verify_email"                   => "no",
-            "{$this->activation_status}-verify_mobile"                  => "no",
-            "{$this->activation_status}-use_mobile_as_username"         => "no",
-            "{$this->activation_status}-use_email_as_username"          => "no",
-            "{$this->activation_status}-hide_email_field"               => "no",
-            "{$this->activation_status}-hide_username_field"            => "no",
-            "{$this->activation_status}-sms_ultrafastsend_id"           => sprintf(__("Verification Code: [OTP] — %s","peprodev-ups"), get_bloginfo("name")),
-            "{$this->activation_status}-sms_expiration"                 => "90",
-            "{$this->activation_status}-email_expiration"               => "120",
-            "{$this->activation_status}-verification_digits"            => "5",
-            "{$this->activation_status}-verification_email_digits"      => "8",
-            "{$this->activation_status}-verification_email_sender"      => $this->default_sender,
-            "{$this->activation_status}-verification_email_sender_name" => get_bloginfo('name','display'),
-            "{$this->activation_status}-verification_email_template"    => htmlentities($this->def_mail_body),
+            "{$this->save_prefix}-verify_email"                   => "no",
+            "{$this->save_prefix}-verify_mobile"                  => "no",
+            "{$this->save_prefix}-use_mobile_as_username"         => "no",
+            "{$this->save_prefix}-use_email_as_username"          => "no",
+            "{$this->save_prefix}-hide_email_field"               => "no",
+            "{$this->save_prefix}-hide_username_field"            => "no",
+            "{$this->save_prefix}-sms_ultrafastsend_id"           => sprintf(__("Verification Code: [OTP] — %s","peprodev-ups"), get_bloginfo("name")),
+            "{$this->save_prefix}-sms_expiration"                 => "90",
+            "{$this->save_prefix}-email_expiration"               => "120",
+            "{$this->save_prefix}-verification_digits"            => "5",
+            "{$this->save_prefix}-verification_email_digits"      => "8",
+            "{$this->save_prefix}-verification_email_sender"      => $this->default_sender,
+            "{$this->save_prefix}-verification_email_sender_name" => get_bloginfo('name','display'),
+            "{$this->save_prefix}-verification_email_template"    => htmlentities($this->def_mail_body),
             "pepro-profile-redirection-fileds"                          => '[{"role": "everyone", "url": "{profile}", "text": "'.__("Profile","peprodev-ups").'", "login": "yes", "register": "yes", "logout": "no" }]',
-            "{$this->activation_status}-reglogin_type"                  => "email",
-            "{$this->activation_status}-auto_login_after_reg"           => "yes",
-            "{$this->activation_status}-_regdef_passwords"              => "yes",
-            "{$this->activation_status}-_regdef_passwords-req"          => "yes",
-            "{$this->activation_status}-_regdef_firstname"              => "yes",
-            "{$this->activation_status}-_regdef_firstname-req"          => "yes",
-            "{$this->activation_status}-_regdef_lastname"               => "yes",
-            "{$this->activation_status}-_regdef_lastname-req"           => "yes",
-            "{$this->activation_status}-_regdef_displayname"            => "",
-            "{$this->activation_status}-_regdef_displayname-req"        => "",
-            "{$this->activation_status}-_regdef_mobile"                 => "",
-            "{$this->activation_status}-_regdef_mobile-req"             => "",
-            "{$this->activation_status}-_regdef_email"                  => "yes",
-            "{$this->activation_status}-_regdef_email-req"              => "yes",
-            "{$this->activation_status}-_regdef_username"               => "yes",
-            "{$this->activation_status}-_regdef_username-req"           => "",
+            "{$this->save_prefix}-reglogin_type"                  => "email",
+            "{$this->save_prefix}-auto_login_after_reg"           => "yes",
+            "{$this->save_prefix}-_regdef_passwords"              => "yes",
+            "{$this->save_prefix}-_regdef_passwords-req"          => "yes",
+            "{$this->save_prefix}-_regdef_firstname"              => "yes",
+            "{$this->save_prefix}-_regdef_firstname-req"          => "yes",
+            "{$this->save_prefix}-_regdef_lastname"               => "yes",
+            "{$this->save_prefix}-_regdef_lastname-req"           => "yes",
+            "{$this->save_prefix}-_regdef_displayname"            => "",
+            "{$this->save_prefix}-_regdef_displayname-req"        => "",
+            "{$this->save_prefix}-_regdef_mobile"                 => "",
+            "{$this->save_prefix}-_regdef_mobile-req"             => "",
+            "{$this->save_prefix}-_regdef_email"                  => "yes",
+            "{$this->save_prefix}-_regdef_email-req"              => "yes",
+            "{$this->save_prefix}-_regdef_username"               => "yes",
+            "{$this->save_prefix}-_regdef_username-req"           => "",
 
           )
         ),
@@ -3954,17 +3955,17 @@ if (!class_exists("PeproDevUPS_Login")){
       },11);
       add_action( "peprocore_handle_ajaxrequests", $this->ajax_hndlr, 11);
       add_action( 'login_enqueue_scripts', array($this, 'addLoginStyles'));
-      add_filter( 'login_headertext', function(){return get_option("{$this->activation_status}-logo-title",get_bloginfo('name'));} );
-      add_filter( 'login_headerurl', function(){return get_option("{$this->activation_status}-logo-href",home_url());} );
-      if("false" === get_option("{$this->activation_status}-shake","true")){
+      add_filter( 'login_headertext', function(){return get_option("{$this->save_prefix}-logo-title",get_bloginfo('name'));} );
+      add_filter( 'login_headerurl', function(){return get_option("{$this->save_prefix}-logo-href",home_url());} );
+      if("false" === get_option("{$this->save_prefix}-shake","true")){
         remove_action('login_head', 'wp_shake_js', 12);
       }
-      add_filter( "login_link_separator",function () {return get_option("{$this->activation_status}-link-separator"," | ");});
+      add_filter( "login_link_separator",function () {return get_option("{$this->save_prefix}-link-separator"," | ");});
       add_action( "login_head", function () {
-        echo do_shortcode(get_option("{$this->activation_status}-headerhtml"));
+        echo do_shortcode(get_option("{$this->save_prefix}-headerhtml"));
       });
       add_action( "login_footer", function () {
-        echo do_shortcode(get_option("{$this->activation_status}-footerhtml"));
+        echo do_shortcode(get_option("{$this->save_prefix}-footerhtml"));
       });
 
       if (isset($_GET["bulk_useremail_approve"]) && !empty($_GET["bulk_useremail_approve"]) && is_admin())
@@ -4157,19 +4158,19 @@ if (!class_exists("PeproDevUPS_Login")){
     }
     public function addLoginStyles()
     {
-      $st = get_option("{$this->activation_status}-style","def.css");
-      $wpdef = get_option("{$this->activation_status}-wp","0");
+      $st = get_option("{$this->save_prefix}-style","def.css");
+      $wpdef = get_option("{$this->save_prefix}-wp","0");
       $st = basename($st,".css");
       if (file_exists("{$this->assets_dir}/styles/{$st}/{$st}.css")){
         ($wpdef === "true") ? wp_dequeue_style('login') : null;
         wp_enqueue_style(__CLASS__."-$st", "{$this->assets_url}styles/{$st}/{$st}.css");
-        if(get_option("{$this->activation_status}-forcebg","false") === "true"){
+        if(get_option("{$this->save_prefix}-forcebg","false") === "true"){
           $bgCode = "";
-          switch (get_option("{$this->activation_status}-bgtype","color")) {
+          switch (get_option("{$this->save_prefix}-bgtype","color")) {
             case 'gradient':
-                $var_gradient1 = get_option("{$this->activation_status}-bg-gradient1","#6a11cb");
-                $var_gradient2 = get_option("{$this->activation_status}-bg-gradient2","#2575fc");
-                $var_gradient3 = get_option("{$this->activation_status}-bg-gradient3","to left");
+                $var_gradient1 = get_option("{$this->save_prefix}-bg-gradient1","#6a11cb");
+                $var_gradient2 = get_option("{$this->save_prefix}-bg-gradient2","#2575fc");
+                $var_gradient3 = get_option("{$this->save_prefix}-bg-gradient3","to left");
                 $bgCode = "body.login{ background: $var_gradient1;
                 background: -webkit-linear-gradient($var_gradient3, $var_gradient1, $var_gradient2);
                 background: -o-linear-gradient($var_gradient3, $var_gradient1, $var_gradient2);
@@ -4177,16 +4178,16 @@ if (!class_exists("PeproDevUPS_Login")){
                 background: linear-gradient($var_gradient3, $var_gradient1, $var_gradient2);}";
               break;
             case 'image':
-                $var_img = get_option("{$this->activation_status}-bg-img","");
+                $var_img = get_option("{$this->save_prefix}-bg-img","");
                 $bgCode = "body.login{ background: url('$var_img') no-repeat center;background-size: cover;}";
               break;
             case 'video':
                 $bgCode = "video#$this->id {position: fixed;right: 0;bottom: 0;min-width: 100vw;min-height: 100vh;z-index:-1;}";
                 add_action('login_footer', function () {
-                  $var_video = get_option("{$this->activation_status}-bg-video","");
-                  $var_videoAutoplay = get_option("{$this->activation_status}-bg-video-autoplay","true") === "true" ? "autoplay='true'" : "";
-                  $var_videoMuted = get_option("{$this->activation_status}-bg-video-muted","true") === "true" ? "muted='true'" : "";
-                  $var_videoLoop = get_option("{$this->activation_status}-bg-video-loop","true") === "true" ? "loop='true'" : "";
+                  $var_video = get_option("{$this->save_prefix}-bg-video","");
+                  $var_videoAutoplay = get_option("{$this->save_prefix}-bg-video-autoplay","true") === "true" ? "autoplay='true'" : "";
+                  $var_videoMuted = get_option("{$this->save_prefix}-bg-video-muted","true") === "true" ? "muted='true'" : "";
+                  $var_videoLoop = get_option("{$this->save_prefix}-bg-video-loop","true") === "true" ? "loop='true'" : "";
                   echo "<video $var_videoAutoplay $var_videoMuted $var_videoLoop id=\"$this->id\">
                     <source src='".esc_html( $var_video )."' type=\"video/mp4\">
                   </video>";
@@ -4194,37 +4195,37 @@ if (!class_exists("PeproDevUPS_Login")){
 
               break;
             default:
-                $var_solid_color = get_option("{$this->activation_status}-bg-solid","white");
+                $var_solid_color = get_option("{$this->save_prefix}-bg-solid","white");
                 $bgCode = "body.login{background: $var_solid_color;}";
               break;
           }
           wp_add_inline_style(__CLASS__."-$st", "$bgCode");
         }
-        if(get_option("{$this->activation_status}-spb","true") === "false"){
+        if(get_option("{$this->save_prefix}-spb","true") === "false"){
           wp_add_inline_style(__CLASS__."-$st", "button.wp-hide-pw{display: none !important;}");
         }
-        if(get_option("{$this->activation_status}-nav","true") === "false"){
+        if(get_option("{$this->save_prefix}-nav","true") === "false"){
           wp_add_inline_style(__CLASS__."-$st", "#nav{display: none !important;}");
         }
-        if(get_option("{$this->activation_status}-privacy","true") === "false"){
+        if(get_option("{$this->save_prefix}-privacy","true") === "false"){
           wp_add_inline_style(__CLASS__."-$st", ".privacy-policy-page-link{display: none !important;}");
         }
-        if(get_option("{$this->activation_status}-b2b","true") === "false"){
+        if(get_option("{$this->save_prefix}-b2b","true") === "false"){
           wp_add_inline_style(__CLASS__."-$st", "p#backtoblog{display: none !important;}");
         }
-        if(get_option("{$this->activation_status}-rmc","true") === "false"){
+        if(get_option("{$this->save_prefix}-rmc","true") === "false"){
           wp_add_inline_style(__CLASS__."-$st", "p.forgetmenot{display: none !important;}");
         }
-        if(get_option("{$this->activation_status}-error","true") === "false"){
+        if(get_option("{$this->save_prefix}-error","true") === "false"){
           wp_add_inline_style(__CLASS__."-$st", "#login_error{display: none !important;}");
         }
-        if(get_option("{$this->activation_status}-msg","true") === "false"){
+        if(get_option("{$this->save_prefix}-msg","true") === "false"){
           wp_add_inline_style(__CLASS__."-$st", "p.message{display: none !important;}");
         }
-        if(get_option("{$this->activation_status}-showlogo","false") === "true"){
-          $lurl = get_option("{$this->activation_status}-logo","");
-          $lh = get_option("{$this->activation_status}-logo-w","84px");
-          $lw = get_option("{$this->activation_status}-logo-h","84px");
+        if(get_option("{$this->save_prefix}-showlogo","false") === "true"){
+          $lurl = get_option("{$this->save_prefix}-logo","");
+          $lh = get_option("{$this->save_prefix}-logo-w","84px");
+          $lw = get_option("{$this->save_prefix}-logo-h","84px");
           wp_add_inline_style(__CLASS__."-$st", "#login h1 a, .login h1 a {
             background-image: url('$lurl');
             height:$lh;width:$lw;
@@ -4237,7 +4238,7 @@ if (!class_exists("PeproDevUPS_Login")){
       }
 
       wp_enqueue_style("pepro-login-reg-admin-custom", "{$this->assets_url}/assets/main-form.css");
-      wp_add_inline_style("pepro-login-reg-admin-custom", get_option("{$this->activation_status}-customcss"));
+      wp_add_inline_style("pepro-login-reg-admin-custom", get_option("{$this->save_prefix}-customcss"));
 
       if ($this->hide_username_field){
         wp_add_inline_style("pepro-login-reg-admin-custom", 'form#registerform input#user_login, form#registerform label[for="user_login"]{display: none;}');
@@ -4277,220 +4278,135 @@ if (!class_exists("PeproDevUPS_Login")){
       if ($r["wparam"] === $this->setting_slug){
         switch ($r["lparam"]) {
           case 'savelogin':
+
               if(isset($_POST["dparam"]["loginslug"]) && !empty($_POST["dparam"]["loginslug"])) { update_option("whl_page", $_POST["dparam"]["loginslug"]);}
               if(isset($_POST["dparam"]["redirectslug"]) && !empty($_POST["dparam"]["redirectslug"])) { update_option("whl_redirect_admin", $_POST["dparam"]["redirectslug"]);}
+              $data = "force-style";        if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->save_prefix}-wp", sanitize_textarea_field($_POST["dparam"][$data])); }
+              $data = "html-header";        if(isset($_POST["dparam"][$data])) { update_option("{$this->save_prefix}-headerhtml", sanitize_textarea_field($_POST["dparam"][$data]));}
+              $data = "html-footer";        if(isset($_POST["dparam"][$data])) { update_option("{$this->save_prefix}-footerhtml", sanitize_textarea_field($_POST["dparam"][$data]));}
+              $data = "redirection_fileds"; if(isset($_POST["dparam"][$data])) { update_option("pepro-profile-redirection-fileds", (wp_filter_nohtml_kses($_POST["dparam"][$data])));}
+              $data = "register_fileds";    if(isset($_POST["dparam"][$data])) { update_option("pepro-profile-register-fileds", (wp_filter_nohtml_kses($_POST["dparam"][$data])));}
 
-              $data    = "activesecurity";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_text_field($_POST["dparam"][$data])); }
+              $text_fields_save = apply_filters("pepro_reglogin_save_text_fields", array());
+              $text_fields_save = array_merge( array(
+                "sms_method",
+                "sms_api_url",
+                "sms_secret_key",
+                "sms_api_key",
+                "sms_expiration",
+                "email_expiration",
+                "sms_ultrafastsend_id",
+                "verification_digits",
+                "verification_email_digits"
+              ), $text_fields_save);
 
-              $data    = "style";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
+              $raw_fields_save = apply_filters("pepro_reglogin_save_raw_fields", array());
+              $raw_fields_save = array_merge( array(
+                "customcss",
+                "show_password_field",
+                "auto_login_after_reg",
+                "smsir_message",
+                "verify_email",
+                "verify_mobile",
+                "use_mobile_as_username",
+                "use_email_as_username",
+                "hide_email_field",
+                "hide_username_field",
+                "reg_add_mobile",
+                "reg_add_firstname",
+                "reg_add_lastname",
+                "reg_add_displayname",
+                "login_mobile_otp"
+              ), $raw_fields_save);
 
-              $data    = "force-style";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-wp",     sanitize_textarea_field($_POST["dparam"][$data])); }
+              $raw_noempty_fields_save = apply_filters("pepro_reglogin_save_raw_noempty_fields", array());
+              $raw_noempty_fields_save = array_merge( array(
+                "activesecurity",
+                "style",
+                "showlogo",
+                "logo",
+                "logo-id",
+                "logo-w",
+                "logo-h",
+                "logo-title",
+                "logo-href",
+                "shake",
+                "spb",
+                "b2b",
+                "privacy",
+                "nav",
+                "rmc",
+                "msg",
+                "error",
+                "forcebg",
+                "bgtype",
+                "bg-solid",
+                "bg-gradient1",
+                "bg-gradient2",
+                "bg-gradient3",
+                "bg-img",
+                "bg-img-id",
+                "bg-video",
+                "bg-video-id",
+                "bg-video-autoplay",
+                "bg-video-muted",
+                "bg-video-loop",
+                "link-separator"
+              ), $raw_noempty_fields_save);
 
-              $data    = "showlogo";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data    = "logo";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data    = "logo-id";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data    = "logo-w";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data    = "logo-h";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data    = "logo-title";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data    = "logo-href";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data    = "shake";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data    = "spb";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data    = "b2b";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data    = "privacy";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data    = "nav";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data    = "rmc";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data    = "msg";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data    = "error";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data    = "forcebg";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data    = "bgtype";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data    = "bg-solid";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data    = "bg-gradient1";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data    = "bg-gradient2";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data    = "bg-gradient3";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data    = "bg-img";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data    = "bg-img-id";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data    = "bg-video";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data    = "bg-video-id";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data    = "bg-video-autoplay";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data    = "bg-video-muted";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data    = "bg-video-loop";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data    = "link-separator";
-              if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data    = "html-header"; $slutter = "headerhtml";
-              if(isset($_POST["dparam"][$data])) { update_option("{$this->activation_status}-{$slutter}", sanitize_textarea_field($_POST["dparam"][$data]));}
-
-              $data    = "html-footer"; $slutter = "footerhtml";
-              if(isset($_POST["dparam"][$data])) { update_option("{$this->activation_status}-{$slutter}", sanitize_textarea_field($_POST["dparam"][$data]));}
-
-              $data = "customcss";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data = "show_password_field";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data = "auto_login_after_reg";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data = "verify_email";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data = "verify_mobile";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data = "use_mobile_as_username";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data = "use_email_as_username";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data = "hide_email_field";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data = "hide_username_field";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data = "reg_add_mobile";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data = "reg_add_firstname";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data = "reg_add_lastname";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data = "reg_add_displayname";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data = "login_mobile_otp";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_textarea_field($_POST["dparam"][$data])); }
-
-              $data = "redirection_fileds";
-              if(isset($_POST["dparam"][$data])){ update_option("pepro-profile-redirection-fileds", (wp_filter_nohtml_kses($_POST["dparam"][$data]))); }
-
-              $data = "register_fileds";
-              if(isset($_POST["dparam"][$data])){ update_option("pepro-profile-register-fileds", (wp_filter_nohtml_kses($_POST["dparam"][$data]))); }
-
-              $data = "sms_api_url";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_text_field(trim($_POST["dparam"][$data]))); }
-
-              $data = "sms_secret_key";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_text_field(trim($_POST["dparam"][$data]))); }
-
-              $data = "sms_api_key";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_text_field(trim($_POST["dparam"][$data]))); }
-
-              $data = "sms_ultrafastsend_id";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_text_field(trim($_POST["dparam"][$data]))); }
-
-              $data = "sms_expiration";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_text_field(trim($_POST["dparam"][$data]))); }
-
-              $data = "email_expiration";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_text_field(trim($_POST["dparam"][$data]))); }
-
-              $data = "verification_digits";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_text_field(trim($_POST["dparam"][$data]))); }
-
-              $data = "verification_email_digits";
-              if(isset($_POST["dparam"][$data])){ update_option("{$this->activation_status}-{$data}", sanitize_text_field(trim($_POST["dparam"][$data]))); }
+              foreach ($text_fields_save as $data) {
+                if(isset($_POST["dparam"][$data])){
+                  update_option("{$this->save_prefix}-{$data}", sanitize_text_field(trim($_POST["dparam"][$data])));
+                }
+              }
+              foreach ($raw_fields_save as $data) {
+                if(isset($_POST["dparam"][$data])){
+                  update_option("{$this->save_prefix}-{$data}", sanitize_textarea_field($_POST["dparam"][$data]));
+                }
+              }
+              foreach ($raw_noempty_fields_save as $data) {
+                if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){
+                  update_option("{$this->save_prefix}-{$data}", sanitize_textarea_field($_POST["dparam"][$data]));
+                }
+              }
 
               $data = "verification_email_sender_name";
               if(isset($_POST["dparam"][$data])){
-                update_option("{$this->activation_status}-{$data}", sanitize_text_field($_POST["dparam"][$data]));
+                update_option("{$this->save_prefix}-{$data}", sanitize_text_field($_POST["dparam"][$data]));
                 if (empty($_POST["dparam"][$data])){
-                  update_option("{$this->activation_status}-{$data}", get_bloginfo('name','display'));
+                  update_option("{$this->save_prefix}-{$data}", get_bloginfo('name','display'));
                 }
               }
 
               $data = "verification_email_sender";
               if(isset($_POST["dparam"][$data])){
-                update_option("{$this->activation_status}-{$data}", sanitize_text_field($_POST["dparam"][$data]));
+                update_option("{$this->save_prefix}-{$data}", sanitize_text_field($_POST["dparam"][$data]));
                 if (empty($_POST["dparam"][$data])){
-                  update_option("{$this->activation_status}-{$data}", $this->default_sender);
+                  update_option("{$this->save_prefix}-{$data}", $this->default_sender);
                 }
               }
 
               $data = "verification_email_template";
               if(isset($_POST["dparam"][$data])){
-                update_option("{$this->activation_status}-{$data}", htmlentities($_POST["dparam"][$data]));
+                update_option("{$this->save_prefix}-{$data}", htmlentities($_POST["dparam"][$data]));
                 if (empty($_POST["dparam"][$data])){
-                  update_option("{$this->activation_status}-{$data}", htmlentities($this->def_mail_body));
+                  update_option("{$this->save_prefix}-{$data}", htmlentities($this->def_mail_body));
                 }
               }
 
               $data = "reglogin_type";
               if(isset($_POST["dparam"][$data])){
-                update_option("{$this->activation_status}-{$data}", sanitize_text_field($_POST["dparam"][$data]));
+                update_option("{$this->save_prefix}-{$data}", sanitize_text_field($_POST["dparam"][$data]));
                 if (empty($_POST["dparam"][$data])){
-                  update_option("{$this->activation_status}-{$data}", "email");
+                  update_option("{$this->save_prefix}-{$data}", "email");
                 }
               }
 
               foreach ($this->get_registeration_form_defaul_fields() as $key => $value) {
                 if(isset($_POST["dparam"][$key])){
-                  update_option("{$this->activation_status}-{$key}", sanitize_text_field($_POST["dparam"][$key]));
+                  update_option("{$this->save_prefix}-{$key}", sanitize_text_field($_POST["dparam"][$key]));
                   if(isset($_POST["dparam"]["{$key}-req"])){
-                    update_option("{$this->activation_status}-{$key}-req", sanitize_text_field($_POST["dparam"]["{$key}-req"]));
+                    update_option("{$this->save_prefix}-{$key}-req", sanitize_text_field($_POST["dparam"]["{$key}-req"]));
                   }
                 }
               }
@@ -4508,10 +4424,21 @@ if (!class_exists("PeproDevUPS_Login")){
                   "lostpass" => wp_lostpassword_url(),
                 )
               );
-            break;
+          break;
+          case "testotp":
+            $mobile = $this->clean_mobile_number($_POST["dparam"]);
+            if ($mobile){
+              $sms = $this->send_dummyuser_verification_sms($mobile);
+              wp_send_json_success(array(
+                "msg" => sprintf(__("OTP SMS sent to %s.<br>Response: %s",$this->td), $mobile, $sms),
+                "sms" => $sms,
+              ));
+            }
+            wp_send_json_error(__("{$this->title} :: Incorrect Data Supplied.","peprodev-ups"));
+          break;
           default:
             wp_send_json_error(__("{$this->title} :: Incorrect Data Supplied.","peprodev-ups"));
-            break;
+          break;
         }
       }
     }

@@ -488,15 +488,15 @@ jQuery.noConflict();
       return false;
     });
 
+    if ($("[name=login-section-active]").prop("checked")){
+      $("table.activesecurity-table, #alert-primary").show();
+    }
+    else{
+      $("table.activesecurity-table, #alert-primary").hide();
+    }
 
-
-      if ($("[name=login-section-active]").prop("checked")){
-        $("table.activesecurity-table, #alert-primary").show();
-      }else{
-        $("table.activesecurity-table, #alert-primary").hide();
-      }
-
-
+    $(".gatewayssettings .card-body").addClass("hide");
+    $(".gatewayssettings .card-body."+$("[name=sms_method]").val()).removeClass("hide");
     $(document).on("click tap", ".register--import-export", function(e){
       e.preventDefault();
       $(".register-fields-import-export").toggleClass("slide-up");
@@ -514,6 +514,8 @@ jQuery.noConflict();
         $("table.activesecurity-table, #alert-primary").hide();
       }
     });
+
+    /* SAVE SETTING BTN */
     $(document).on("click tap", ".login-section-save", function(e) {
       e.preventDefault();
       datatosave           = {
@@ -565,14 +567,14 @@ jQuery.noConflict();
         });
       }
       if($(".save_sms_settings").length){
-        $(".save_sms_settings input").each(function(index, val) {
+        $(".save_sms_settings :input").each(function(index, val) {
           name = $(val).attr("name");
           value = $(val).val();
           datatosave[name] = value;
         });
       }
       if($(".save_email_settings").length){
-        $(".save_email_settings input").each(function(index, val) {
+        $(".save_email_settings :input").each(function(index, val) {
           name = $(val).attr("name");
           value = $(val).val();
           datatosave[name] = value;
@@ -609,6 +611,49 @@ jQuery.noConflict();
         },
       });
     });
+
+    $(document).on("click tap", '[class*="field-opt"] > div.label span', function(e){
+      e.preventDefault();
+      $(this).parent().next("div").find(":input").focus().select();
+    });
+    /* SMS OTP Check */
+    $(document).on("click tap", ".btn.testotp", function(e){
+      e.preventDefault();
+      var me = $(this);
+      let nonce = me.attr('integrity'), wparam = me.attr('wparam'), lparam = me.attr('lparam');
+      notify = $.notify({icon: "hourglass_empty", message: pepc.loading}, {type: 'info',timer: 3000, placement: {from: "top",align: "right", allow_dismiss: false, showProgressbar: true}});
+      animate_save_btn(true, ".btn.testotp","send");
+      $.ajax({
+        url: pepc.ajax,
+        type: 'POST',
+        data: {
+          action: 'peprodev-ups',
+          integrity: nonce,
+          wparam: "loginregister",
+          lparam: "testotp",
+          dparam: $("#sms_test").val(),
+        },
+        success: function(e) {
+          if (e.success === true) {
+            notify.update({icon: "thumb_up",message: e.data.msg, type: 'success'});
+          } else {
+            notify.update({icon: "error",message: e.data.msg, type: 'danger'});
+          }
+        },
+        error: function(e) {
+          console.error(e);
+        },
+        complete: function(e) {
+          animate_save_btn(false, ".btn.testotp","send");
+        },
+      });
+    });
+    $(document).on("change", "[name=sms_method]", function(e){
+      e.preventDefault();
+      var me = $(this);
+      $(".gatewayssettings .card-body").addClass("hide");
+      $(".gatewayssettings .card-body."+me.val()).removeClass("hide");
+    });
     $(document).on("click tap", ".nav-tabs-wrapper .nav-link", function(e){
       e.preventDefault();
       $(".nav-link.active.show").removeClass("active show");
@@ -617,13 +662,13 @@ jQuery.noConflict();
       $($(this).attr("href")).addClass("active show")
       history.replaceState(undefined, undefined, $(this).attr("href"))
     });
-
     $(document).on("click tap", "#copyshortcode", function(e){
       e.preventDefault();
       var me = $(this);
       copy_clipboard($(".smart_btn_workspace pre").text().replace(/\n/gi,""));
       show_toast(_register_fields._copy);
     });
+
     if ("" !== window.location.hash){
       $tab = $(`.tab-content>.tab-pane${window.location.hash}`);
       if ($tab.length){
@@ -641,17 +686,17 @@ jQuery.noConflict();
     function scroll_element(element, offset = 0) {
     	$("html, body").animate({ scrollTop: element.offset().top - offset }, 500);
     }
-    function animate_save_btn(save=true) {
+    function animate_save_btn(save=true, $btn="button.btn.btn-primary.icn-btn[integrity][wparam][lparam]", $normal="save", $loading="settings") {
       if (save){
-        var savebtn = $("button.btn.btn-primary.icn-btn[integrity][wparam][lparam]");
+        var savebtn = $($btn);
         if (savebtn.length > 0) {
-          savebtn.find("i.material-icons").html("settings").addClass("heartbeatcss");
+          savebtn.find("i.material-icons").html($loading).addClass("heartbeatcss");
         }
       }
       else{
-        var savebtn = $("button.btn.btn-primary.icn-btn[integrity][wparam][lparam]");
+        var savebtn = $($btn);
         if (savebtn.length > 0) {
-          savebtn.find("i.material-icons").html("save").removeClass("heartbeatcss");
+          savebtn.find("i.material-icons").html($normal).removeClass("heartbeatcss");
         }
       }
     }
