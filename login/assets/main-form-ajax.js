@@ -1,6 +1,6 @@
 /**
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/12/30 21:00:36
+ * @Last modified time: 2021/12/30 21:23:52
  * resendtime
  */
 jQuery.noConflict();
@@ -315,7 +315,7 @@ jQuery.noConflict();
           error_occured = true;
           return false;
         }
-        if (error_occured){ return false; $(login_form).find(":input").prop("disabled", false); }
+        if (error_occured){ $(login_form).find(":input").prop("disabled", false); return false; }
 
         $recaps = $(login_form).find("div[data-recaptcha]");
         if ($recaps.length){
@@ -671,7 +671,7 @@ jQuery.noConflict();
           error_occured = true;
           return false;
         }
-        if (error_occured){ return false; $(login_form).find(":input").prop("disabled", false); }
+        if (error_occured){ $(login_form).find(":input").prop("disabled", false); return false; }
         $recaps = $(login_form).find("div[data-recaptcha]");
         if ($recaps.length){
           $.each($recaps, function(index, val) {
@@ -825,7 +825,7 @@ jQuery.noConflict();
           error_occured = true;
           return false;
         }
-        if (error_occured){ return false; $(login_form).find(":input").prop("disabled", false); }
+        if (error_occured){ $(login_form).find(":input").prop("disabled", false); return false; }
         $recaps = $(login_form).find("div[data-recaptcha]");
         if ($recaps.length){
           $.each($recaps, function(index, val) {

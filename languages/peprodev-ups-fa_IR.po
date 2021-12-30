@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PeproDev Ultimate Profile Solutions\n"
 "POT-Creation-Date: 2021-12-30 21:11+0330\n"
-"PO-Revision-Date: 2021-12-30 21:15+0330\n"
+"PO-Revision-Date: 2021-12-30 21:22+0330\n"
 "Last-Translator: Amirhosseinhpv <its@hpv.im>\n"
 "Language-Team: Amirhosseinhpv <its@hpv.im>\n"
 "Language: fa_IR\n"
@@ -1661,7 +1661,7 @@ msgstr "خطا در ارسال کد تایید به %s، مجددا تلاش ک�
 #: login/login.php:1482 login/login.php:1608
 #, php-format
 msgid "Error Sending Verification, you can request one code every %s seconds."
-msgstr "خطا در ارسال کد، شما مجاز به ارسال یک درخواست در هر %s ثانیه هستید."
+msgstr "شما مجاز به ارسال یک درخواست در هر %s ثانیه هستید."
 
 #: login/login.php:1119 login/login.php:1203 login/login.php:1240
 #: login/login.php:1382 login/login.php:1460 login/login.php:1496
@@ -1669,7 +1669,7 @@ msgstr "خطا در ارسال کد، شما مجاز به ارسال یک در�
 #: login/login.php:2167
 #, php-format
 msgid "Verification code sent to %s."
-msgstr "کد تایید به %s ارسال شد."
+msgstr "لطفا رمز یکبارمصرف ارسال شده به شماره %s را در کادر زیر وارد کنید"
 
 #: login/login.php:1130 login/login.php:1214 login/login.php:1251
 #: login/login.php:1393 login/login.php:1471 login/login.php:1506
