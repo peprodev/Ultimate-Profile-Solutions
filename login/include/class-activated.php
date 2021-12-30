@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/11/08 00:49:22
+# @Last modified time: 2021/12/30 20:26:47
 add_thickbox();
 wp_enqueue_style("wp-color-picker");
 wp_enqueue_script("wp-color-picker");
@@ -912,17 +912,18 @@ foreach ($styleFiles as $style) {
           <div class="card-body table-responsive">
             <div class="row justify-content-between smart_btn_workspace">
               <div class="col-lg-6 justify-content-between mt-3 mb-3">
-                <pre style="direction: ltr;text-align: left;" class="border p-3">[pepro-smart-btn
+                <pre style="direction: ltr;text-align: left;" class="border p-3">
+[pepro-smart-btn
  loggedin_text="Hi {display_name}"
  loggedin_href="/profile"
  loggedin_avatar="yes"
  loggedin_avatar_size="32"
- loggedin_class="button button-primary"
+ loggedin_class="w-btn us-btn-style_1 ush_btn_1"
  loggedout_text="Login/Register"
  loggedout_form="login"
- loggedout_class="button button-primary"
+ loggedout_class="w-btn us-btn-style_1 ush_btn_1"
  login_popup_title="Login"
- register_popup_title="Register" ]</pre>
+ register_popup_title="Register"]</pre>
 <button type="button" id="copyshortcode" class="btn btn-primary" style="position: relative;transform: translate(-0.5rem, -4.5rem);"><span class="material-icons">content_copy</span></button>
               </div>
             </div>

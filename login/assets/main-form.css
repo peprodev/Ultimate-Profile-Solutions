@@ -1,6 +1,6 @@
 /**
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/12/12 14:47:29
+ * @Last modified time: 2021/12/30 21:10:12
  */
 :root {
 	--tippy-color: #bf1e2e;
@@ -161,6 +161,7 @@ toast.active {
 	scrollbar-width: thin;
 	z-index: 99999 !important;
 }
+
 @media only screen and (max-width: 450px) {
 	.popup-active .pepro-verify-container,
 	.popup-active [data-pepro-reglogin] {
@@ -221,14 +222,6 @@ toast.active {
 	color: #c7254e;
 }
 
-[data-pepro-reglogin] > form .pepro-form-links {
-	display: flex;
-	justify-content: space-between;
-	margin-top: 0;
-	flex-direction: column;
-	align-items: center;
-}
-
 .pepro-form-links a:not(:last-of-type) {
 	margin-bottom: 0.5rem;
 }
@@ -258,12 +251,25 @@ toast.active {
 	color: gray;
 }
 
-.pepro-form-links a {
+.pepro-form-links a[class*="switch"] {
 	border: 1px solid #ccc;
 	padding: 0.5rem;
 	width: 100%;
 	text-align: center;
 	border-radius: 5px;
+	clear: both;
+	margin-top: .5rem;
+	float: right;
+}
+
+.pepro-form-links .otp-resend {
+	float: left;
+	margin-top: 0.5rem;
+}
+
+.pepro-form-links .otp-changenum {
+	float: right;
+	margin-top: 0.5rem;
 }
 
 .pepro-login-reg-field.submit-wrap.form-required #submit {
@@ -277,10 +283,12 @@ toast.active {
 .g-recaptcha {
 	margin-bottom: 1.5rem;
 }
+
 .popup-active .pepro-verify-container, .popup-active [data-pepro-reglogin] {
-    overflow-y: auto !important;
+	overflow-y: auto !important;
 	overflow-x: hidden !important;
 }
+
 .pepro-form-links a:not(:last-of-type) {
 	margin-bottom: 0.5rem !important;
 }

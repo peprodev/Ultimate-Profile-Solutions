@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/02 14:30:52
+# @Last modified time: 2021/12/30 20:19:12
 
 namespace PeproDev\PeproCore\RegLogin;
 class peproKavenegarSMS
@@ -62,7 +62,7 @@ class peproKavenegarSMS
       </div>
       <div class='col-lg-12 row justify-content-between mb-3 field-opt-kavenegar_message'>
         <div class="col-lg-6 label"><span><?php esc_html_e("Message containing [OTP]","peprodev-ups");?></span></div>
-        <div class="col-lg-6"><textarea name="kavenegar_message" autocomplete="off" class='form-input single-required mr-2' placeholder="e.g: token={OTP}template=SendActivationSMS" /><?php echo strip_tags($this->kavenegar_message);?></textarea></div>
+        <div class="col-lg-6"><textarea name="kavenegar_message" autocomplete="off" class='form-input single-required mr-2' placeholder="e.g: Your Code: [OTP]" /><?php echo strip_tags($this->kavenegar_message);?></textarea></div>
       </div>
     <?php
     $htmloutput = ob_get_contents();

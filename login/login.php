@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/12/03 14:14:44
+# @Last modified time: 2021/12/30 21:19:23
 
 if ("yes" == get_option("PeproDevUPS_Core___loginregister-activesecurity", "")){
   include_once plugin_dir_path(__FILE__) . "/include/class-login-permalink.php";
@@ -170,8 +170,10 @@ if (!class_exists("PeproDevUPS_Login")){
       add_shortcode("verified-mobile",                array( $this, "shortcode__user_verified_mobile"));
       add_shortcode("verified-email",                 array( $this, "shortcode__user_verified_email"));
       add_shortcode("loggedin",                       array( $this, "shortcode__check_loggedin") );
+      add_shortcode("guest",                          array( $this, "shortcode__check_loggedout") );
       add_shortcode("loggedout",                      array( $this, "shortcode__check_loggedout") );
       add_shortcode("pepro-smart-btn",                array( $this, "shortcode__smart_btn") );
+      add_shortcode("pepro-sms-subscription",         array( $this, "shortcode__sms_subscription") );
 
       add_filter( "pepro_reglogin_get_register_fields",                   array( $this, "pepro_reglogin_get_register_fields" ), 1000);
       add_action( "pepro_reglogin_show_hide_defaul_registeration_fields", array( $this, "form_defaul_registeration_fields" ), 1000);
@@ -189,6 +191,40 @@ if (!class_exists("PeproDevUPS_Login")){
       $this->smsir = new \PeproDev\PeproCore\RegLogin\peproSendSMS;
       $this->smsir = new \PeproDev\PeproCore\RegLogin\peproKavenegarSMS;
 
+    }
+    public function shortcode__sms_subscription($atts=array(), $content="")
+    {
+      $atts = extract(shortcode_atts(array(
+        'btnclass'  => "subscribe_btn",
+        'subscribe' => __("Subscribe",$this->td),
+        'mobile'    => __("Mobile",$this->td),
+        'verify'    => __("Verify Code",$this->td),
+      ), $atts));
+      ob_start();
+      wp_enqueue_style("pepro-sms_subscription",   "{$this->assets_url}/assets/subscribe.css", array(), current_time("timestamp"));
+      wp_enqueue_script("pepro-sms_subscription",  "{$this->assets_url}/assets/subscribe.js", array("jquery"), current_time("timestamp"), true);
+      ?>
+      <div class="pepro-sms-subscription pss-container">
+        <div class="pss-subcontainer">
+          <div class="pss-input-container pssmobile">
+            <label for="pssmobile"><?=$mobile;?></label>
+            <input type="text" id="pssmobile" placeholder="<?=__("Enter mobile number",$this->td);?>" name="pssmobile" value="<?php echo (get_current_user_id() ? esc_attr( get_the_author_meta("user_mobile", get_current_user_id())) : "");?>" />
+          </div>
+          <div class="pss-input-container pssverify hide">
+            <label for="pssverify"><?=$verify;?></label>
+            <input type="text" id="pssverify" placeholder="<?=__("Enter verify number",$this->td);?>" name="pssverify" value="" />
+          </div>
+          <div class="pss-submit-container">
+            <span class="pss-countdown"></span>
+            <span class="pss-resend"></span>
+            <button type="button" class="<?=$btnclass;?>" id="pssverifysms"><?=$subscribe;?></button>
+          </div>
+        </div>
+      </div>
+      <?php
+      $htmloutput = ob_get_contents();
+      ob_end_clean();
+      return $htmloutput;
     }
     public function sendmsg_sms($numbers=array(), $message="", $otp_code=0)
     {
@@ -214,10 +250,11 @@ if (!class_exists("PeproDevUPS_Login")){
         "loggedin_href"         => "/profile",
         "loggedin_avatar"       => "yes",
         "loggedin_avatar_size"  => "32",
-        "loggedin_class"        => "button button-primary",
+        "loggedin_class"        => "",
         "loggedout_text"        => "Login/Register",
         "loggedout_form"        => "login",
-        "loggedout_class"       => "button button-primary",
+        "loggedout_class"       => "",
+        "trigger"               => "",
         "login_popup_title"     => $login,
         "register_popup_title"  => $register,
         "resetpass_popup_title" => $recover,
@@ -242,7 +279,8 @@ if (!class_exists("PeproDevUPS_Login")){
         echo "<a id='$uniqid' href='$loggedin_href' class='peprodev-ultimate-profile-solution peprodev-smart-btn logged-in $loggedin_class'>{$avatar}$loggedin_text</a>";
       }
       else{
-        echo "[pepro-login-popup trigger='#$uniqid' title='$login_popup_title' reg_title='$register_popup_title' reset_title='$resetpass_popup_title' active='$loggedout_form'] <a id='$uniqid' href='#' class='peprodev-ultimate-profile-solution peprodev-smart-btn logged-out $loggedout_class'>$loggedout_text</a>";
+        $trigger = !empty($trigger) ? ",$trigger" : "";
+        echo "[pepro-login-popup trigger='#$uniqid{$trigger}' title='$login_popup_title' reg_title='$register_popup_title' reset_title='$resetpass_popup_title' active='$loggedout_form'] <a id='$uniqid' href='#' class='peprodev-ultimate-profile-solution peprodev-smart-btn logged-out $loggedout_class'>$loggedout_text</a>";
       }
 
       $htmloutput = ob_get_contents();
@@ -823,6 +861,7 @@ if (!class_exists("PeproDevUPS_Login")){
               ));
             ?>
             <div class="pepro-form-links">
+              <a href="javascript:;" style="display: none;" class="otp-changenum"><?php printf(__("Change Number", "peprodev-ups"), 60);?></a>
               <a href="javascript:;" style="display: none;" class="otp-resend"><?php printf(__("Resend Code in (%s)", "peprodev-ups"), 60);?></a>
               <?php
               if (!$this->login_mobile_otp){
@@ -859,6 +898,7 @@ if (!class_exists("PeproDevUPS_Login")){
                     ));
                   ?>
                   <div class="pepro-form-links">
+                    <a href="javascript:;" style="display: none;" class="otp-changenum"><?php printf(__("Change Number", "peprodev-ups"), 60);?></a>
                     <a href="javascript:;" style="display: none;" class="otp-resend"><?php printf(__("Resend Code in (%s)", "peprodev-ups"), 60);?></a>
                     <a class="switch-form-login" href="javascript:;"><?php esc_html_e("Back to Login", "peprodev-ups");?></a>
                   </div>
@@ -883,6 +923,7 @@ if (!class_exists("PeproDevUPS_Login")){
                     ));
                   ?>
                   <div class="pepro-form-links">
+                    <a href="javascript:;" style="display: none;" class="otp-changenum"><?php printf(__("Change Number", "peprodev-ups"), 60);?></a>
                     <a href="javascript:;" style="display: none;" class="otp-resend"><?php printf(__("Resend Code in (%s)", "peprodev-ups"), 60);?></a>
                     <a class="switch-form-login" href="javascript:;"><?php esc_html_e("Back to Login", "peprodev-ups");?></a>
                   </div>
@@ -1020,7 +1061,7 @@ if (!class_exists("PeproDevUPS_Login")){
                           "is_otp"    => true,
                           "focus"     => ".otp-verification",
                           "select"    => ".otp-verification",
-                          "show"      => ".otp-resend",
+                          "show"      => ".otp-resend,.otp-changenum",
                           "timerdown" => 0,
                         ));
                       }
@@ -1042,7 +1083,7 @@ if (!class_exists("PeproDevUPS_Login")){
                               "msg"         => __("Verification code sent, Enter in field below.", "peprodev-ups"),
                               "is_otp"      => true,
                               "focus"       => ".otp-verification",
-                              "show"        => ".otp-resend",
+                              "show"        => ".otp-resend,.otp-changenum",
                               "last_attemp" => $last_attemp,
                               "cur_time"    => $this->wp_date(),
                               "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp) + $this->sms_expiration),
@@ -1053,7 +1094,7 @@ if (!class_exists("PeproDevUPS_Login")){
                               "msg"       => sprintf(__("Error Sending Verification to %s. Try again.", "peprodev-ups"), $valid_mobile),
                               "is_otp"    => true,
                               "focus"     => ".mobile-verification",
-                              "show"      => ".otp-resend",
+                              "show"      => ".otp-resend,.otp-changenum",
                               "timerdown" => 0,
                             ));
                           }
@@ -1063,7 +1104,7 @@ if (!class_exists("PeproDevUPS_Login")){
                             "msg"         => sprintf(__("Error Sending Verification, you can request one code every %s seconds.", "peprodev-ups"), $this->sms_expiration),
                             "is_otp"      => true,
                             "focus"       => ".mobile-verification",
-                            "show"        => ".otp-resend",
+                            "show"        => ".otp-resend,.otp-changenum",
                             "last_attemp" => $last_attemp,
                             "cur_time"    => $this->wp_date(),
                             "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp) + $this->sms_expiration),
@@ -1078,7 +1119,7 @@ if (!class_exists("PeproDevUPS_Login")){
                             "msg"         => sprintf(__("Verification code sent to %s.", "peprodev-ups"), $valid_mobile),
                             "is_otp"      => true,
                             "focus"       => ".otp-verification",
-                            "show"        => ".otp-resend",
+                            "show"        => ".otp-resend,.otp-changenum",
                             "last_attemp" => $last_attemp,
                             "cur_time"    => $this->wp_date(),
                             "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp) + $this->sms_expiration),
@@ -1089,7 +1130,7 @@ if (!class_exists("PeproDevUPS_Login")){
                             "msg"       => __("Error Sending Verification code. Try again.", "peprodev-ups"),
                             "is_otp"    => true,
                             "focus"     => ".mobile-verification",
-                            "show"      => ".otp-resend",
+                            "show"      => ".otp-resend,.otp-changenum",
                             "timerdown" => 0,
                           ));
                         }
@@ -1142,7 +1183,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       "is_otp"    => true,
                       "focus"     => ".code-verification",
                       "select"    => ".code-verification",
-                      "show"      => ".otp-resend",
+                      "show"      => ".otp-resend,.otp-changenum",
                       "timerdown" => 0,
                     ));
                   }
@@ -1162,7 +1203,7 @@ if (!class_exists("PeproDevUPS_Login")){
                           "msg"         => sprintf(__("Verification code sent to %s.", "peprodev-ups"), $param["username"]),
                           "is_otp"      => true,
                           "focus"       => ".code-verification",
-                          "show"        => ".otp-resend",
+                          "show"        => ".otp-resend,.otp-changenum",
                           "last_attemp" => $last_attemp,
                           "cur_time"    => $this->wp_date(),
                           "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp) + $this->email_expiration),
@@ -1174,7 +1215,7 @@ if (!class_exists("PeproDevUPS_Login")){
                           "is_otp"    => true,
                           "focus"     => ".email-verification",
                           "select"    => ".email-verification",
-                          "show"      => ".otp-resend",
+                          "show"      => ".otp-resend,.otp-changenum",
                           "timerdown" => 0,
                         ));
                       }
@@ -1184,7 +1225,7 @@ if (!class_exists("PeproDevUPS_Login")){
                         "msg"         => sprintf(__("Error Sending Verification, you can request one code every %s seconds.", "peprodev-ups"), $this->email_expiration),
                         "is_otp"      => true,
                         "focus"       => ".email-verification",
-                        "show"        => ".otp-resend",
+                        "show"        => ".otp-resend,.otp-changenum",
                         "last_attemp" => $last_attemp,
                         "cur_time"    => $this->wp_date(),
                         "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp) + $this->email_expiration),
@@ -1198,7 +1239,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       wp_send_json_success(array(
                         "msg"         => sprintf(__("Verification code sent to %s.", "peprodev-ups"), $param["username"]),
                         "focus"       => ".code-verification",
-                        "show"        => ".otp-resend",
+                        "show"        => ".otp-resend,.otp-changenum",
                         "cur_time"    => $this->wp_date(),
                         "last_attemp" => $last_attemp,
                         "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp) + $this->email_expiration),
@@ -1211,7 +1252,7 @@ if (!class_exists("PeproDevUPS_Login")){
                         "is_otp"    => true,
                         "focus"     => ".email-verification",
                         "select"    => ".email-verification",
-                        "show"      => ".otp-resend",
+                        "show"      => ".otp-resend,.otp-changenum",
                         "timerdown" => 0,
                       ));
                     }
@@ -1285,7 +1326,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       "is_otp"    => true,
                       "focus"     => ".code-verification",
                       "select"    => ".code-verification",
-                      "show"      => ".otp-resend",
+                      "show"      => ".otp-resend,.otp-changenum",
                       "timerdown" => 0,
                       ));
                   }
@@ -1305,7 +1346,7 @@ if (!class_exists("PeproDevUPS_Login")){
                           "msg"         => __("Verification code sent, Enter in field below.", "peprodev-ups"),
                           "is_otp"      => true,
                           "focus"       => ".code-verification",
-                          "show"        => ".otp-resend",
+                          "show"        => ".otp-resend,.otp-changenum",
                           "last_attemp" => $last_attemp,
                           "cur_time"    => $this->wp_date(),
                           "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp) + $this->sms_expiration),
@@ -1316,7 +1357,7 @@ if (!class_exists("PeproDevUPS_Login")){
                           "msg"       => sprintf(__("Error Sending Verification to %s. Try again.", "peprodev-ups"), $valid_mobile),
                           "is_otp"    => true,
                           "focus"     => ".mobile-verification",
-                          "show"      => ".otp-resend",
+                          "show"      => ".otp-resend,.otp-changenum",
                           "timerdown" => 0,
                         ));
                       }
@@ -1326,7 +1367,7 @@ if (!class_exists("PeproDevUPS_Login")){
                         "msg"         => sprintf(__("Error Sending Verification, you can request one code every %s seconds.", "peprodev-ups"), $this->sms_expiration),
                         "is_otp"      => true,
                         "focus"       => ".mobile-verification",
-                        "show"        => ".otp-resend",
+                        "show"        => ".otp-resend,.otp-changenum",
                         "last_attemp" => $last_attemp,
                         "cur_time"    => $this->wp_date(),
                         "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp) + $this->sms_expiration),
@@ -1341,7 +1382,7 @@ if (!class_exists("PeproDevUPS_Login")){
                         "msg"         => sprintf(__("Verification code sent to %s.", "peprodev-ups"), $valid_mobile),
                         "is_otp"      => true,
                         "focus"       => ".code-verification",
-                        "show"        => ".otp-resend",
+                        "show"        => ".otp-resend,.otp-changenum",
                         "last_attemp" => $last_attemp,
                         "cur_time"    => $this->wp_date(),
                         "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp) + $this->sms_expiration),
@@ -1352,7 +1393,7 @@ if (!class_exists("PeproDevUPS_Login")){
                         "msg"       => __("Error Sending Verification code. Try again.", "peprodev-ups"),
                         "is_otp"    => true,
                         "focus"     => ".mobile-verification",
-                        "show"      => ".otp-resend",
+                        "show"      => ".otp-resend,.otp-changenum",
                         "timerdown" => 0,
                       ));
                     }
@@ -1399,7 +1440,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       "is_otp"    => true,
                       "focus"     => ".code-verification",
                       "select"    => ".code-verification",
-                      "show"      => ".otp-resend",
+                      "show"      => ".otp-resend,.otp-changenum",
                       "timerdown" => 0,
                     ));
                   }
@@ -1419,7 +1460,7 @@ if (!class_exists("PeproDevUPS_Login")){
                           "msg"         => sprintf(__("Verification code sent to %s.", "peprodev-ups"), $param["username"]),
                           "is_otp"      => true,
                           "focus"       => ".code-verification",
-                          "show"        => ".otp-resend",
+                          "show"        => ".otp-resend,.otp-changenum",
                           "last_attemp" => $last_attemp,
                           "cur_time"    => $this->wp_date(),
                           "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp) + $this->email_expiration),
@@ -1431,7 +1472,7 @@ if (!class_exists("PeproDevUPS_Login")){
                           "is_otp"    => true,
                           "focus"     => ".email-verification",
                           "select"    => ".email-verification",
-                          "show"      => ".otp-resend",
+                          "show"      => ".otp-resend,.otp-changenum",
                           "timerdown" => 0,
                         ));
                       }
@@ -1441,7 +1482,7 @@ if (!class_exists("PeproDevUPS_Login")){
                         "msg"         => sprintf(__("Error Sending Verification, you can request one code every %s seconds.", "peprodev-ups"), $this->email_expiration),
                         "is_otp"      => true,
                         "focus"       => ".email-verification",
-                        "show"        => ".otp-resend",
+                        "show"        => ".otp-resend,.otp-changenum",
                         "last_attemp" => $last_attemp,
                         "cur_time"    => $this->wp_date(),
                         "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp) + $this->email_expiration),
@@ -1454,7 +1495,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       wp_send_json_success(array(
                         "msg"         => sprintf(__("Verification code sent to %s.", "peprodev-ups"), $param["username"]),
                         "focus"       => ".code-verification",
-                        "show"        => ".otp-resend",
+                        "show"        => ".otp-resend,.otp-changenum",
                         "is_otp"      => true,
                         "last_attemp" => $last_attemp,
                         "cur_time"    => $this->wp_date(),
@@ -1466,7 +1507,7 @@ if (!class_exists("PeproDevUPS_Login")){
                         "is_otp"    => true,
                         "focus"     => ".email-verification",
                         "select"    => ".email-verification",
-                        "show"      => ".otp-resend",
+                        "show"      => ".otp-resend,.otp-changenum",
                         "timerdown" => 0,
                         ));
                     }
@@ -1526,7 +1567,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       "is_otp"    => true,
                       "focus"     => ".code-verification",
                       "select"    => ".code-verification",
-                      "show"      => ".otp-resend",
+                      "show"      => ".otp-resend,.otp-changenum",
                       "timerdown" => 0,
                       ));
                   }
@@ -1545,7 +1586,7 @@ if (!class_exists("PeproDevUPS_Login")){
                         wp_send_json_success(array(
                           "msg"         => __("Verification code sent, Enter in field below.", "peprodev-ups"),
                           "is_otp"      => true,
-                          "show"        => ".otp-resend",
+                          "show"        => ".otp-resend,.otp-changenum",
                           "focus"       => ".code-verification",
                           "last_attemp" => $last_attemp,
                           "cur_time"    => $this->wp_date(),
@@ -1557,7 +1598,7 @@ if (!class_exists("PeproDevUPS_Login")){
                           "msg"       => sprintf(__("Error Sending Verification to %s. Try again.", "peprodev-ups"), $valid_mobile),
                           "is_otp"    => true,
                           "focus"     => ".mobile-verification",
-                          "show"      => ".otp-resend",
+                          "show"      => ".otp-resend,.otp-changenum",
                           "timerdown" => 0,
                         ));
                       }
@@ -1567,7 +1608,7 @@ if (!class_exists("PeproDevUPS_Login")){
                         "msg"         => sprintf(__("Error Sending Verification, you can request one code every %s seconds.", "peprodev-ups"), $this->sms_expiration),
                         "is_otp"      => true,
                         "focus"       => ".mobile-verification",
-                        "show"        => ".otp-resend",
+                        "show"        => ".otp-resend,.otp-changenum",
                         "last_attemp" => $last_attemp,
                         "cur_time"    => $this->wp_date(),
                         "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp) + $this->sms_expiration),
@@ -1581,7 +1622,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       wp_send_json_success(array(
                         "msg"         => sprintf(__("Verification code sent to %s.", "peprodev-ups"), $valid_mobile),
                         "is_otp"      => true,
-                        "show"        => ".otp-resend",
+                        "show"        => ".otp-resend,.otp-changenum",
                         "focus"       => ".code-verification",
                         "last_attemp" => $last_attemp,
                         "cur_time"    => $this->wp_date(),
@@ -1593,7 +1634,7 @@ if (!class_exists("PeproDevUPS_Login")){
                         "msg"       => __("Error Sending Verification code. Try again.", "peprodev-ups"),
                         "is_otp"    => true,
                         "focus"     => ".mobile-verification",
-                        "show"      => ".otp-resend",
+                        "show"      => ".otp-resend,.otp-changenum",
                         "timerdown" => 0,
                       ));
                     }
@@ -1762,7 +1803,7 @@ if (!class_exists("PeproDevUPS_Login")){
                         "is_otp"    => true,
                         "focus"     => ".otp-verification",
                         "select"    => ".otp-verification",
-                        "show"      => ".otp-resend",
+                        "show"      => ".otp-resend,.otp-changenum",
                         "timerdown" => 0,
                       ));
                     }
@@ -1782,7 +1823,7 @@ if (!class_exists("PeproDevUPS_Login")){
                             "msg"         => __("Verification code sent, Enter in field below.", "peprodev-ups"),
                             "is_otp"      => true,
                             "focus"       => ".otp-verification",
-                            "show"        => ".otp-resend",
+                            "show"        => ".otp-resend,.otp-changenum",
                             "last_attemp" => $last_attemp,
                             "cur_time"    => $this->wp_date(),
                             "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp) + $this->sms_expiration),
@@ -1793,7 +1834,7 @@ if (!class_exists("PeproDevUPS_Login")){
                             "msg"       => sprintf(__("<strong>Error:</strong> Sending Verification to %s failed. Try again.", "peprodev-ups"), $valid_mobile),
                             "is_otp"    => true,
                             "focus"     => ".mobile-verification",
-                            "show"      => ".otp-resend",
+                            "show"      => ".otp-resend,.otp-changenum",
                             "timerdown" => 0,
                           ));
                         }
@@ -1803,7 +1844,7 @@ if (!class_exists("PeproDevUPS_Login")){
                           "msg"       => sprintf(__("<strong>Error:</strong> Sending Verification failed, you can request one code every %s seconds.", "peprodev-ups"), $this->sms_expiration),
                           "is_otp"    => true,
                           "focus"     => ".mobile-verification",
-                          "show"      => ".otp-resend",
+                          "show"      => ".otp-resend,.otp-changenum",
                           "last_attemp" => $last_attemp,
                           "cur_time"    => $this->wp_date(),
                           "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp) + $this->sms_expiration),
@@ -1818,7 +1859,7 @@ if (!class_exists("PeproDevUPS_Login")){
                           "msg"         => sprintf(__("Verification code sent to %s.", "peprodev-ups"), $valid_mobile),
                           "is_otp"      => true,
                           "focus"       => ".otp-verification",
-                          "show"        => ".otp-resend",
+                          "show"        => ".otp-resend,.otp-changenum",
                           "last_attemp" => $last_attemp,
                           "cur_time"    => $this->wp_date(),
                           "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp) + $this->sms_expiration),
@@ -1829,7 +1870,7 @@ if (!class_exists("PeproDevUPS_Login")){
                           "msg"       => __("<strong>Error:</strong> Sending Verification code failed. Try again.", "peprodev-ups"),
                           "is_otp"    => true,
                           "focus"     => ".mobile-verification",
-                          "show"      => ".otp-resend",
+                          "show"      => ".otp-resend,.otp-changenum",
                           "timerdown" => 0,
                         ));
                       }
@@ -1890,7 +1931,7 @@ if (!class_exists("PeproDevUPS_Login")){
                         "is_otp"    => true,
                         "focus"     => ".otp-verification",
                         "select"    => ".otp-verification",
-                        "show"      => ".otp-resend",
+                        "show"      => ".otp-resend,.otp-changenum",
                         "timerdown" => 0,
                       ));
                     }
@@ -1910,7 +1951,7 @@ if (!class_exists("PeproDevUPS_Login")){
                             "msg"         => __("Verification code sent, Enter in field below.", "peprodev-ups"),
                             "is_otp"      => true,
                             "focus"       => ".otp-verification",
-                            "show"        => ".otp-resend",
+                            "show"        => ".otp-resend,.otp-changenum",
                             "last_attemp" => $last_attemp,
                             "cur_time"    => $this->wp_date(),
                             "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp) + $this->email_expiration),
@@ -1921,7 +1962,7 @@ if (!class_exists("PeproDevUPS_Login")){
                             "msg"       => sprintf(__("<strong>Error:</strong> Sending Verification to %s failed. Try again.", "peprodev-ups"), $valid_email),
                             "is_otp"    => true,
                             "focus"     => ".email-verification",
-                            "show"      => ".otp-resend",
+                            "show"      => ".otp-resend,.otp-changenum",
                             "timerdown" => 0,
                           ));
                         }
@@ -1931,7 +1972,7 @@ if (!class_exists("PeproDevUPS_Login")){
                           "msg"       => sprintf(__("<strong>Error:</strong> Sending Verification failed, you can request one code every %s seconds.", "peprodev-ups"), $this->email_expiration),
                           "is_otp"    => true,
                           "focus"     => ".email-verification",
-                          "show"      => ".otp-resend",
+                          "show"      => ".otp-resend,.otp-changenum",
                           "last_attemp" => $last_attemp,
                           "cur_time"    => $this->wp_date(),
                           "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp) + $this->email_expiration),
@@ -1946,7 +1987,7 @@ if (!class_exists("PeproDevUPS_Login")){
                           "msg"         => sprintf(__("Verification code sent to %s.", "peprodev-ups"), $valid_email),
                           "is_otp"      => true,
                           "focus"       => ".otp-verification",
-                          "show"        => ".otp-resend",
+                          "show"        => ".otp-resend,.otp-changenum",
                           "last_attemp" => $last_attemp,
                           "cur_time"    => $this->wp_date(),
                           "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp) + $this->email_expiration),
@@ -1957,7 +1998,7 @@ if (!class_exists("PeproDevUPS_Login")){
                           "msg"       => __("<strong>Error:</strong> Sending Verification code failed. Try again.", "peprodev-ups"),
                           "is_otp"    => true,
                           "focus"     => ".email-verification",
-                          "show"      => ".otp-resend",
+                          "show"      => ".otp-resend,.otp-changenum",
                           "timerdown" => 0,
                         ));
                       }
@@ -2068,7 +2109,7 @@ if (!class_exists("PeproDevUPS_Login")){
                     "is_otp"    => true,
                     "focus"     => ".otp-verification",
                     "select"    => ".otp-verification",
-                    "show"      => ".otp-resend",
+                    "show"      => ".otp-resend,.otp-changenum",
                     "timerdown" => 0,
                   ));
                 }
@@ -2089,7 +2130,7 @@ if (!class_exists("PeproDevUPS_Login")){
                         "msg"         => __("Verification code sent, Enter in field below.", "peprodev-ups"),
                         "is_otp"      => true,
                         "focus"       => ".otp-verification",
-                        "show"        => ".otp-resend",
+                        "show"        => ".otp-resend,.otp-changenum",
                         "last_attemp" => $last_attemp,
                         "cur_time"    => $this->wp_date(),
                         "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp) + $this->email_expiration),
@@ -2100,7 +2141,7 @@ if (!class_exists("PeproDevUPS_Login")){
                         "msg"       => sprintf(__("<strong>Error:</strong> Sending Verification to %s failed. Try again.", "peprodev-ups"), $valid_email),
                         "is_otp"    => true,
                         "focus"     => ".email-verification",
-                        "show"      => ".otp-resend",
+                        "show"      => ".otp-resend,.otp-changenum",
                         "timerdown" => 0,
                       ));
                     }
@@ -2110,7 +2151,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       "msg"         => sprintf(__("<strong>Error:</strong> Sending Verification failed, you can request one code every %s seconds.", "peprodev-ups"), $this->email_expiration),
                       "is_otp"      => true,
                       "focus"       => ".email-verification",
-                      "show"        => ".otp-resend",
+                      "show"        => ".otp-resend,.otp-changenum",
                       "last_attemp" => $last_attemp,
                       "cur_time"    => $this->wp_date(),
                       "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp) + $this->email_expiration),
@@ -2126,7 +2167,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       "msg"         => sprintf(__("Verification code sent to %s.", "peprodev-ups"), $valid_email),
                       "is_otp"      => true,
                       "focus"       => ".otp-verification",
-                      "show"        => ".otp-resend",
+                      "show"        => ".otp-resend,.otp-changenum",
                       "last_attemp" => $last_attemp,
                       "cur_time"    => $this->wp_date(),
                       "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp) + $this->email_expiration),
@@ -2137,7 +2178,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       "msg"       => __("<strong>Error:</strong> Sending Verification code failed. Try again.", "peprodev-ups"),
                       "is_otp"    => true,
                       "focus"     => ".email-verification",
-                      "show"      => ".otp-resend",
+                      "show"      => ".otp-resend,.otp-changenum",
                       "timerdown" => 0,
                     ));
                   }
@@ -2303,10 +2344,13 @@ if (!class_exists("PeproDevUPS_Login")){
       $expire = strtotime($_otp_date) + $this->sms_expiration;
       if($today >= $expire){
         // expired
+        update_user_meta($user_id, "_sms_otp_date", "");
       } else {
         if ($this->convert_to_english(trim($verification)) == $_otp_code){
+          update_user_meta($user_id, "_sms_otp_date", "");
           return true;
         }
+        update_user_meta($user_id, "_sms_otp_date", "");
         // else ~> expired
       }
       return false;
@@ -2343,11 +2387,14 @@ if (!class_exists("PeproDevUPS_Login")){
       $expire = strtotime($_otp_date) + $this->email_expiration;
       if($today >= $expire){
         // expired
+        update_user_meta($user_id, "_email_otp_date", "");
       }
       else {
         if (trim($this->convert_to_english($verification)) == $_otp_code){
+          update_user_meta($user_id, "_email_otp_date", "");
           return true;
         }
+        update_user_meta($user_id, "_email_otp_date", "");
         // else ~> expired
       }
       return false;
@@ -2384,10 +2431,13 @@ if (!class_exists("PeproDevUPS_Login")){
       $expire = strtotime($_otp_date) + $expiretime;
       if($today >= $expire){
         // expired
+        delete_option(__CLASS__."_{$type}_otp_{$user}_date");
       } else {
         if ($this->convert_to_english(trim($verification)) == $_otp_code){
+          delete_option(__CLASS__."_{$type}_otp_{$user}_date");
           return true;
         }
+        delete_option(__CLASS__."_{$type}_otp_{$user}_date");
         // else ~> expired
       }
       return false;

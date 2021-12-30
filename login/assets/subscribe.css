@@ -1,0 +1,69 @@
+/**
+ * @Author: Amirhosseinhpv
+ * @Date:   2021/12/27 12:04:00
+ * @Email:  its@hpv.im
+ * @Last modified by:   Amirhosseinhpv
+ * @Last modified time: 2021/12/30 20:14:39
+ * @License: GPLv2
+ * @Copyright: Copyright © Amirhosseinhpv (https://hpv.im), all rights reserved.
+ */
+
+
+.pss-subcontainer {
+  max-width: 400px;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  direction: ltr;
+  text-align: left;
+}
+
+.pss-input-container{
+  width: 100%;
+}
+
+.pss-input-container input {
+  width: 100%;
+}
+
+#pssverify, #pssmobile{
+  direction: ltr;
+  text-align: left;
+}
+
+.pss-input-container input {
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  border-width: 1px;
+  padding: 0.7rem;
+  border-radius: 0.2em;
+  background: transparent;
+  border-color: #e8e8e8;
+  color: inherit;
+}
+
+.pss-submit-container {
+  width: auto;
+}
+
+.pepro-sms-subscription label {
+  display: none;
+}
+
+.pepro-sms-subscription .hide {
+  display: none;
+}
+
+#pssverifysms {
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  border-width: 1px;
+  border-radius: 0.2em;
+  background: transparent;
+  border-color: #c61414;
+  color: inherit;
+  padding: 0.7rem;
+  border: 1px solid;
+}

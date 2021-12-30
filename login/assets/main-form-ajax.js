@@ -1,6 +1,6 @@
 /**
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/12/12 14:50:07
+ * @Last modified time: 2021/12/30 21:00:36
  * resendtime
  */
 jQuery.noConflict();
@@ -141,7 +141,7 @@ jQuery.noConflict();
           error_occured = true;
           return false;
         }
-        if (error_occured){ return false; $(login_form).find(":input").prop("disabled", false); }
+        if (error_occured){ $(login_form).find(":input").prop("disabled", false); return false; }
 
 
         $recaps = $(login_form).find("div[data-recaptcha]");
@@ -163,6 +163,7 @@ jQuery.noConflict();
         show_toast(_pepro_dev.loading);
         $(login_form).find("#login_error").removeClass("info success error").addClass("info").html(_pepro_dev.loading);
         $(login_form).find("#mobile").prop("disabled", false).prop("readonly", false).removeClass("disabled");
+        $(login_form).find("#user_mobile").prop("disabled", false).prop("readonly", false).removeClass("disabled");
 
         _pepro_dev._ajax_req = $.ajax({
           type: "POST",
@@ -175,7 +176,7 @@ jQuery.noConflict();
             param: form_params,
           },
           success: function(e) {
-            $(login_form).find(".otp-resend").hide();
+            $(login_form).find(".otp-resend,.otp-changenum").hide();
             if (e.success === true) {
               $(login_form).find("#login_error").removeClass("info success error").addClass("success").html(e.data.msg);
               if (e.data.is_otp){
@@ -186,8 +187,9 @@ jQuery.noConflict();
                 $(login_form).find(".pepro-login-reg-field").hide();
                 $(login_form).find(".switch-form-register").hide();
                 if (e.data.show){ $(login_form).find(e.data.show).show(); }
-                $(login_form).find(".pepro-login-reg-field.mobile-wrap, .pepro-login-reg-field.verification-wrap").show();
+                $(login_form).find(".pepro-login-reg-field.mobile-wrap, .pepro-login-reg-field.user_mobile-wrap, .pepro-login-reg-field.verification-wrap").show();
                 $(login_form).find("#mobile").prop("disabled", true).prop("readonly", true).addClass("disabled");
+                $(login_form).find("#user_mobile").prop("disabled", true).prop("readonly", true).addClass("disabled");
                 $(login_form).find(".pepro-login-reg-field.optverify-wrap").show();
                 $(login_form).find(".pepro-login-reg-field.submit-wrap").show();
                 resend_counndown(e, login_form, _pepro_dev);
@@ -345,7 +347,7 @@ jQuery.noConflict();
             param: form_params,
           },
           success: function(e) {
-            $(login_form).find(".otp-resend").hide();
+            $(login_form).find(".otp-resend,.otp-changenum").hide();
             if (e.success === true) {
               $(".popup-active").removeClass("popup-active");
               $(login_form).find("#login_error").removeClass("info success error").addClass("success").html(e.data.msg);
@@ -488,7 +490,7 @@ jQuery.noConflict();
           },
           success: function(e) {
             if (e.success === true) {
-              $(login_form).find(".otp-resend").hide();
+              $(login_form).find(".otp-resend,.otp-changenum").hide();
               $(login_form).find("#login_error").removeClass("info success error").addClass("success").html(e.data.msg);
               if (e.data.is_otp){
                 $(login_form).find("#login_error").removeClass("info success error").addClass("info").html(e.data.msg);
@@ -700,7 +702,7 @@ jQuery.noConflict();
           },
           success: function(e) {
             $(login_form).find(":input").prop("disabled", false)
-            $(login_form).find(".otp-resend").hide();
+            $(login_form).find(".otp-resend,.otp-changenum").hide();
             if (e.success === true) {
               $(login_form).find("#login_error").removeClass("info success error").addClass("success").html(e.data.msg);
               if (e.data.is_otp){
@@ -710,6 +712,10 @@ jQuery.noConflict();
                 if (e.data.focus){ setTimeout(function () { $(login_form).find(e.data.focus).first().focus(); }, 100); }
                 if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).first().select(); }, 100); }
                 if (e.data.show){ $(login_form).find(e.data.show).show(); }
+                $(login_form).find("#mobile").prop("disabled", true).prop("readonly", true).addClass("disabled");
+                $(login_form).find("#user_mobile").prop("disabled", true).prop("readonly", true).addClass("disabled");
+                $(login_form).find(".pepro-login-reg-field.optverify-wrap").show();
+                $(login_form).find(".pepro-login-reg-field.submit-wrap").show();
                 resend_counndown(e, login_form, _pepro_dev);
               }
               else{
@@ -850,7 +856,7 @@ jQuery.noConflict();
           },
           success: function(e) {
             $(login_form).find(":input").prop("disabled", false)
-            $(login_form).find(".otp-resend").hide();
+            $(login_form).find(".otp-resend,.otp-changenum").hide();
             if (e.success === true) {
               $(login_form).find("#login_error").removeClass("info success error").addClass("success").html(e.data.msg);
               if (e.data.is_otp){
@@ -945,24 +951,27 @@ jQuery.noConflict();
 
     });
     function resend_counndown(e, login_form, _pepro_dev) {
-      if (".otp-resend" == e.data.show){
+      if (".otp-resend,.otp-changenum" == e.data.show){
         $submitBtn = $(login_form).find(".submit-wrap #submit[type=submit]")
         $submitBtn.text($submitBtn.data("verify"));
       }
-      if (".otp-resend" == e.data.show && e.data.timerdown){
+      if (".otp-resend,.otp-changenum" == e.data.show && e.data.timerdown){
         if (0 == e.data.timerdown){
-          $(login_form).find(e.data.show).html(_pepro_dev.resendnow);
+          $(login_form).find(".otp-resend").html(_pepro_dev.resendnow);
           $(login_form).find("#mobile").prop("disabled", false).prop("readonly", false).removeClass("disabled");
+          $(login_form).find("#user_mobile").prop("disabled", false).prop("readonly", false).removeClass("disabled");
         }
         else{
-          $(login_form).find(e.data.show).prop("disabled", true).addClass("disabled").countdown(e.data.timerdown).on('update.countdown', function(qd) {
+          $(login_form).find(".otp-resend").prop("disabled", true).addClass("disabled").countdown(e.data.timerdown).on('update.countdown', function(qd) {
             $(this).html(_pepro_dev.resendtime.replace('%s',qd.strftime('%M:%S')));
           }).on('finish.countdown', function(qd) {
             $(this).html(_pepro_dev.resendnow).prop("disabled", false).removeClass("disabled");
             $(login_form).find("#mobile").prop("disabled", false).prop("readonly", false).removeClass("disabled");
+            $(login_form).find("#user_mobile").prop("disabled", false).prop("readonly", false).removeClass("disabled");
           }).on('stop.countdown', function(qd) {
             $(this).html(_pepro_dev.resendnow).prop("disabled", false).removeClass("disabled");
             $(login_form).find("#mobile").prop("disabled", false).prop("readonly", false).removeClass("disabled");
+            $(login_form).find("#user_mobile").prop("disabled", false).prop("readonly", false).removeClass("disabled");
           });
         }
       }
@@ -993,6 +1002,14 @@ jQuery.noConflict();
       e.preventDefault();
       $popup = $(`[data-trigger-ref='${$(this).data("trigger")}'`).addClass("popup-active");
       $username = $(".popup-active input[name='username']");
+      if ($(this).is(".active-login")){
+        $(".popup-active").find("form.inline").removeClass("inline");
+        $(".popup-active").find("form#pepro-login-inline").addClass("inline");
+      }
+      if ($(this).is(".active-register")){
+        $(".popup-active").find("form.inline").removeClass("inline");
+        $(".popup-active").find("form#pepro-reg-inline").addClass("inline");
+      }
       if ($username.length){
         $username.first().focus();
         setTimeout(function () { $username.first().focus(); }, 200);
@@ -1007,10 +1024,12 @@ jQuery.noConflict();
     $(document).on("click tap", ".switch-form-register", function(e){
       e.preventDefault();
       mobile = $(this).parents(".pepro-login-reg-container").find("#mobile").val();
+      user_mobile = $(this).parents(".pepro-login-reg-container").find("#user_mobile").val();
       $(this).parents(".pepro-login-reg-container").find("form").removeClass("inline");
       $(this).parents(".pepro-login-reg-container").find("#pepro-reg-inline").addClass("inline");
       $(this).parents(".pepro-login-reg-container").find("#pepro-reg-inline input").trigger("change");
       $(this).parents(".pepro-login-reg-container").find("#pepro-reg-inline input#user_mobile").val(mobile).trigger("change");
+      $(this).parents(".pepro-login-reg-container").find("#pepro-reg-inline input#user_mobile").val(user_mobile).trigger("change");
 
     });
     $(".pepro-login-reg-container").find("#pepro-reg-inline").find("#billing_country,#billing_state,#billing_city").attr("required","required").trigger("change");
@@ -1021,6 +1040,15 @@ jQuery.noConflict();
       me.parents("form").find(".otp-verification, .code-verification").val("").trigger("change");
       me.parents("form").find(":input").prop("disabled", false);
       me.parents("form").find("#submit").trigger("click");
+    });
+    $(document).on("click tap", ".otp-changenum", function(e){
+      e.preventDefault();
+      var me = $(this);
+      me.parents("form").find("#login_error").empty();
+      me.parents("form").find("#mobile, #user_mobile, #submit").show().prop("disabled", false).prop("readonly", false).removeClass("disabled");
+      me.parents("form").find(".otp-resend").hide();
+      me.hide();
+      setTimeout(function () { $(login_form).find("#mobile, #user_mobile").first().focus(); }, 100);
     });
     $(document).on("click tap", ".switch-form-lost-pass", function(e){
       e.preventDefault();
