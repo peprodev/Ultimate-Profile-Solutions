@@ -1,6 +1,6 @@
 /**
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/12/31 01:56:49
+ * @Last modified time: 2021/12/31 20:12:23
  * resendtime
  */
 jQuery.noConflict();
@@ -568,7 +568,26 @@ jQuery.noConflict();
       // 	e.setCustomValidity(e.attributes["data-error-text"].value);
       // });
 
-      // register
+      $(document).on("change keyup focus", `#${_pepro_dev.instance} form :input`, function(e) {
+        val = $(this).val();
+        if ($.trim(val) !== "") {
+          $(this).addClass("filled");
+          $(this).parent().addClass("filled");
+        }else{
+          $(this).removeClass("filled");
+          $(this).parent().removeClass("filled");
+        }
+      });
+
+      $(document).on("focusout", `#${_pepro_dev.instance} form :input`, function(e) {
+        $(this).removeClass("focused");
+        $(this).parent().removeClass("focused");
+      });
+      $(document).on("focusin", `#${_pepro_dev.instance} form :input`, function(e) {
+        $(this).addClass("focused");
+        $(this).parent().addClass("focused");
+      });
+
       $(document).on("change keyup", `#${_pepro_dev.instance} form#pepro-reg-inline input[name=optverify]`, function(e) {
         $submitBtn = $(this).parents("form").find(".submit-wrap #submit[type=submit]")
         if ($(this).val() !== ""){

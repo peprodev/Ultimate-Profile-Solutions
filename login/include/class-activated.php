@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/12/30 20:26:47
+# @Last modified time: 2021/12/31 20:05:45
 add_thickbox();
 wp_enqueue_style("wp-color-picker");
 wp_enqueue_script("wp-color-picker");
@@ -218,7 +218,6 @@ foreach ($styleFiles as $style) {
                       data-checked='<?php echo esc_attr( get_option("{$this->activation_status}-forcebg", "false") === "true" ? "true" : "false" );?>' id="login-section-forcebg"></a>
                   </td>
                 </tr>
-
                 <tr onlyforcedbg="true">
                   <td><?php echo esc_html_x("Background Type", "login-section", "peprodev-ups");?></td>
                   <td>
@@ -470,6 +469,9 @@ foreach ($styleFiles as $style) {
                       <label class="row w-100 align-items-center m-0 mb-2">
                         <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required mr-2 auto_login_after_reg' <?php checked( $this->auto_login_after_reg, true);?> name="auto_login_after_reg" /> <?php esc_html_e("Auto-login After Registeration","peprodev-ups");?>
                       </label>
+                      <label class="row w-100 align-items-center m-0 mb-2">
+                        <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required mr-2 floating_input_label' <?php checked( $this->floating_input_label, true);?> name="floating_input_label" /> <?php esc_html_e("Use floating form labels","peprodev-ups");?>
+                      </label>
                     </div>
 
                   </div>
@@ -650,10 +652,6 @@ foreach ($styleFiles as $style) {
             </button>
           </div>
         </div>
-
-
-
-
       </div>
       <div class="tab-pane" id="tab_redirection">
         <div class="card">

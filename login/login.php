@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/12/31 02:29:15
+# @Last modified time: 2021/12/31 20:08:51
 
 if ("yes" == get_option("PeproDevUPS_Core___loginregister-activesecurity", "")){
   include_once plugin_dir_path(__FILE__) . "/include/class-login-permalink.php";
@@ -45,6 +45,7 @@ if (!class_exists("PeproDevUPS_Login")){
     public $title;
     public $show_password_field;
     public $auto_login_after_reg;
+    public $floating_input_label;
     public $verify_email;
     public $verify_mobile;
     public $use_mobile_as_username;
@@ -103,6 +104,7 @@ if (!class_exists("PeproDevUPS_Login")){
       $this->copyright              = sprintf(__("Copyright (c) %s Pepro Dev. Group, All rights reserved","peprodev-ups"), date("Y"));
       $this->reglogin_type          = get_option("{$this->save_prefix}-reglogin_type");
       $this->auto_login_after_reg   = "yes"    == get_option("{$this->save_prefix}-auto_login_after_reg");
+      $this->floating_input_label   = "yes"    == get_option("{$this->save_prefix}-floating_input_label");
       $this->login_mobile_otp       = "mobile" == $this->reglogin_type;
       $this->login_email_otp        = "mailotp" == $this->reglogin_type;
       $this->use_mobile_as_username = "mobile" == $this->reglogin_type;
@@ -239,7 +241,7 @@ if (!class_exists("PeproDevUPS_Login")){
         "gohome_url"  => home_url(),
       ));
       ?>
-      <form class="pepro-sms-subscription pss-container" novalidate action="/" method="POST">
+      <form class="pepro-sms-subscription pss-container <?=($this->floating_input_label?"floating_from_label":"");?>" novalidate action="/" method="POST">
         <div class="pss-subcontainer">
           <div class="pss-input-container pssname">
             <input type="text" id="pssname" onchange="this.setAttribute('value', this.value.trim());" required autocomplete="off" name="pssname" value="<?php echo (get_current_user_id() ? esc_attr( get_the_author_meta("display_name", get_current_user_id())) : "");?>" />
@@ -599,6 +601,7 @@ if (!class_exists("PeproDevUPS_Login")){
         "trigger"           => $args["trigger"]??"",
         "ajaxurl"           => admin_url('admin-ajax.php'),
         "nonce"             => wp_create_nonce("peprodev-ups"),
+        "floating_label"    => $this->floating_input_label ? "yes" : "no",
         "loading"           => _x("Please wait ...", "js-translate", "peprodev-ups"),
         "error"             => _x("An unknown error occured.", "js-translate", "peprodev-ups"),
         "errorTxt"          => _x("Error", "js-translate", "peprodev-ups"),
@@ -641,7 +644,7 @@ if (!class_exists("PeproDevUPS_Login")){
             <div class="card-header"><?php esc_html_e("Verify/Change your email address", "peprodev-ups");?></div>
             <div class="card-body">
               <?php echo '<div class="pepro-verify-container" id="'.esc_attr($uniqd).'" data-pepro-reglogin="'.esc_attr($uniqd).'">'; ?>
-                <form class="pepro-verify inline" id="pepro-verify-inline" method="post">
+                <form class="pepro-verify inline <?=($this->floating_input_label?"floating_from_label":"");?>" id="pepro-verify-inline" method="post">
                   <?php
                     if ("yes" == get_the_author_meta( "pepro_user_is_email_verified", get_current_user_id())){
                       ?>
@@ -688,7 +691,7 @@ if (!class_exists("PeproDevUPS_Login")){
             <div class="card-header"><?php esc_html_e("Verify/Change your mobile number", "peprodev-ups");?></div>
             <div class="card-body">
               <?php echo '<div class="pepro-verify-container" id="'.esc_attr($uniqd).'" data-pepro-reglogin="'.esc_attr($uniqd).'">'; ?>
-                <form class="pepro-verify inline" id="pepro-verify-inline-force" method="post">
+                <form class="pepro-verify inline <?=($this->floating_input_label?"floating_from_label":"");?>" id="pepro-verify-inline-force" method="post">
                   <?php
                     if ("yes" == get_the_author_meta( "pepro_user_is_sms_verified", get_current_user_id())){
                       ?>
@@ -885,7 +888,7 @@ if (!class_exists("PeproDevUPS_Login")){
         echo "$before";
         ?>
           <!-- PeproDev Ultimate Profile Solutions Login Form -->
-          <form novalidate class="pepro-login-reg <?php echo ("login" === $active?"inline":"");?>" id="pepro-login-inline" method="post">
+          <form novalidate class="pepro-login-reg <?=($this->floating_input_label?"floating_from_label":"") . ("login" === $active?" inline ":"");?>" id="pepro-login-inline" method="post">
             <h6 style="margin-bottom: 1rem; border-bottom: 1px solid #ccc;padding: 0 0 1rem 0;"><?php echo (!empty($title) ? $title : __("Login", "peprodev-ups"));?></h6>
             <div id="login_error"></div>
             <?php
@@ -928,7 +931,7 @@ if (!class_exists("PeproDevUPS_Login")){
             // form register
             if (get_option('users_can_register')){
               ?>
-                <form novalidate class="pepro-login-reg <?php echo ("register" === $active?"inline":"");?>" id="pepro-reg-inline" method="post">
+                <form novalidate class="pepro-login-reg <?=($this->floating_input_label?"floating_from_label":"") . ("register" === $active?" inline ":"");?>" id="pepro-reg-inline" method="post">
                   <h6 style="margin-bottom: 1rem; border-bottom: 1px solid #ccc;padding: 0 0 1rem 0;"><?php echo (!empty($reg_title) ? $reg_title : __("Register", "peprodev-ups"));?></h6>
                   <div id="login_error"></div>
                   <?php
@@ -959,7 +962,7 @@ if (!class_exists("PeproDevUPS_Login")){
             // form reset password
             if (!$this->login_mobile_otp){
               ?>
-                <form novalidate class="pepro-login-reg <?php echo ("resetpass" === $active?"inline":"");?>" id="pepro-pass-inline" method="post">
+                <form novalidate class="pepro-login-reg <?=($this->floating_input_label?"floating_from_label":"") . ("resetpass" === $active?" inline ":"");?>" id="pepro-pass-inline" method="post">
                   <h6 style="margin-bottom: 1rem; border-bottom: 1px solid #ccc;padding: 0 0 1rem 0;"><?php echo (!empty($reset_title) ? $reset_title : __("Recover Password", $this->td));?></h6>
                   <div id="login_error"></div>
                   <?php
@@ -4139,6 +4142,7 @@ if (!class_exists("PeproDevUPS_Login")){
             "pepro-profile-redirection-fileds"                          => '[{"role": "everyone", "url": "{profile}", "text": "'.__("Profile","peprodev-ups").'", "login": "yes", "register": "yes", "logout": "no" }]',
             "{$this->save_prefix}-reglogin_type"                  => "email",
             "{$this->save_prefix}-auto_login_after_reg"           => "yes",
+            "{$this->save_prefix}-floating_input_label"           => "yes",
             "{$this->save_prefix}-_regdef_passwords"              => "yes",
             "{$this->save_prefix}-_regdef_passwords-req"          => "yes",
             "{$this->save_prefix}-_regdef_firstname"              => "yes",
@@ -4568,6 +4572,7 @@ if (!class_exists("PeproDevUPS_Login")){
                 "customcss",
                 "show_password_field",
                 "auto_login_after_reg",
+                "floating_input_label",
                 "smsir_message",
                 "verify_email",
                 "verify_mobile",

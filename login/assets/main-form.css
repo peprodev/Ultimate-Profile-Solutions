@@ -1,6 +1,6 @@
 /**
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/12/30 21:10:12
+ * @Last modified time: 2021/12/31 20:22:25
  */
 :root {
 	--tippy-color: #bf1e2e;
@@ -199,10 +199,10 @@ toast.active {
 [data-pepro-reglogin] > form textarea:active,
 [data-pepro-reglogin] > form textarea:focus,
 [data-pepro-reglogin] > form textarea:hover {
-	border-color: #e8e8e8 !important;
+	/* border-color: #e8e8e8 !important; */
 	box-shadow: 0 0 0 1px #e8e8e8 inset;
 }
-
+/*
 [data-pepro-reglogin] > form input:valid,
 [data-pepro-reglogin] > form select:valid,
 [data-pepro-reglogin] > form textarea:valid {
@@ -215,11 +215,11 @@ toast.active {
 [data-pepro-reglogin] > form textarea:invalid {
 	border-color: #f56171 !important;
 	box-shadow: 0 0 0 1px #f56171 inset;
-}
+}*/
 
 [data-pepro-reglogin] > form .form-required label::after {
 	content: " *";
-	color: #c7254e;
+	color: currentColor;
 }
 
 .pepro-form-links a:not(:last-of-type) {
@@ -295,4 +295,42 @@ toast.active {
 
 .pepro-login-reg-field.recaptcha-wrap {
 	direction: ltr;
+}
+
+
+.pepro-login-reg-container form h6 {
+	border: none !important;
+	text-align: center;
+	padding: 2rem 0 1rem 0 !important;
+	color: var(--color-content-primary, #019162);
+	font-weight: bold;
+}
+.popup-active [data-pepro-reglogin] {
+	border-radius: 1rem !important;
+	padding: 1.5rem !important;
+}
+
+
+form.floating_from_label .pepro-login-reg-field label {
+  position: absolute;
+  top: 0.7rem;
+  padding: 0 1rem;
+  margin: 0 0.5rem;
+  transition: all 0.3s linear;
+  right: 0;
+}
+
+form.floating_from_label .pepro-login-reg-field.focused label,
+form.floating_from_label .pepro-login-reg-field.filled label{
+  padding: 0 0.5rem;
+  top: -0.6rem;
+  font-size: smaller;
+	background: var(--color-content-primary, #019162);
+	border-radius: 1rem;
+}
+form.floating_from_label .pepro-login-reg-field.filled label,
+form.floating_from_label .pepro-login-reg-field.focused label,
+form.floating_from_label .pepro-login-reg-field.filled label::after,
+form.floating_from_label .pepro-login-reg-field.focused label::after{
+	color: var(--color-content-bg, #f0f0f0);
 }
