@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PeproDev Ultimate Profile Solutions\n"
-"POT-Creation-Date: 2021-12-30 21:11+0330\n"
-"PO-Revision-Date: 2021-12-30 21:22+0330\n"
+"POT-Creation-Date: 2021-12-31 03:59+0330\n"
+"PO-Revision-Date: 2021-12-31 04:05+0330\n"
 "Last-Translator: Amirhosseinhpv <its@hpv.im>\n"
 "Language-Team: Amirhosseinhpv <its@hpv.im>\n"
 "Language: fa_IR\n"
@@ -26,7 +26,7 @@ msgctxt "peprocore-appearance-setting"
 msgid "PeproDev Ultimate Profile Solutions"
 msgstr "سولوشن کامل پروفایل پپرو"
 
-#: core/apps/home.php:52 login/login.php:3775
+#: core/apps/home.php:52 login/login.php:3997
 msgid "WordPress Admin"
 msgstr "مدیریت وردپرس"
 
@@ -38,8 +38,8 @@ msgstr "صفحه اصلی"
 msgid "User Profile"
 msgstr "پروفایل کاربر"
 
-#: core/apps/home.php:80 core/apps/home.php:87 core/main.php:264
-#: core/main.php:280
+#: core/apps/home.php:80 core/apps/home.php:87 core/main.php:269
+#: core/main.php:285
 msgid "Pepro Dev"
 msgstr "گروه توسعه پپرو"
 
@@ -56,7 +56,7 @@ msgstr ""
 "بهتر."
 
 #. Plugin Name of the plugin/theme
-#: core/main.php:37 core/main.php:490
+#: core/main.php:37 core/main.php:495
 msgid "PeproDev Ultimate Profile Solutions"
 msgstr "سولوشن کامل پروفایل پپرو"
 
@@ -69,48 +69,48 @@ msgstr "%2$s نسخه %1$s"
 msgid "Documentation"
 msgstr "مستندات"
 
-#: core/main.php:131 core/main.php:204 profile/profile.php:2300
+#: core/main.php:131 core/main.php:209 profile/profile.php:2402
 msgid "Dashboard"
 msgstr "پیشخوان"
 
-#: core/main.php:150 core/main.php:606 core/main.php:607
+#: core/main.php:150 core/main.php:611 core/main.php:612
 msgctxt "peprocore-appearance-setting"
 msgid "PeproDev UPS"
 msgstr "سولوشن پروفایل"
 
-#: core/main.php:205
+#: core/main.php:210
 msgid "PeproDev UPS Dashboard"
 msgstr "داشبورد پروفایل"
 
-#: core/main.php:213
+#: core/main.php:218
 msgid "Setting"
 msgstr "تنظیمات"
 
-#: core/main.php:214
+#: core/main.php:219
 msgid "PeproDev UPS Settings"
 msgstr "تنظیمات سولوشن کامل پروفایل پپرو"
 
-#: core/main.php:252
+#: core/main.php:257
 msgid "Please wait ..."
 msgstr "لطفا صبر کنید ..."
 
-#: core/main.php:264 core/main.php:280 profile/profile.php:3067
+#: core/main.php:269 core/main.php:285 profile/profile.php:3238
 #, php-format
 msgctxt "footer-copyright"
 msgid "Thanks for using %s products"
 msgstr "بابت استفاده از محصولات %s سپاسگزاریم"
 
-#: core/main.php:267 profile/profile.php:3072
+#: core/main.php:272 profile/profile.php:3243
 #, php-format
 msgctxt "footer-copyright"
 msgid "Version %s"
 msgstr "نسخه %s"
 
-#: core/main.php:286
+#: core/main.php:291
 msgid "Shortcode and Hooks for Developers"
 msgstr "شورت‌کد و هوک ها برای توسعه دهندگان"
 
-#: core/main.php:289
+#: core/main.php:294
 msgid ""
 "Set maximum number of suggestion for each item. Use 0 to trun off item "
 "display."
@@ -118,15 +118,15 @@ msgstr ""
 "حداکثر موارد نمایشی در نتایج جستجو را مشخص کنید. برای مخفی سازی 0 را وارد "
 "کنید."
 
-#: core/main.php:290
+#: core/main.php:295
 msgid "Trend items age (day)"
 msgstr "عمر جستجوهای ترند (روز)"
 
-#: core/main.php:293
+#: core/main.php:298
 msgid "Save setting"
 msgstr "ذخیره تنظیمات"
 
-#: core/main.php:294
+#: core/main.php:299
 msgid ""
 "Are you sure you want to clear all searches history (trend items) from "
 "database?"
@@ -134,180 +134,180 @@ msgstr ""
 "آیا مطمئن هستید میخواهید جداول پایگاه داده ( داده جستجوهای ترند ) را حذف "
 "کنید؟؟"
 
-#: core/main.php:294
+#: core/main.php:299
 msgid "Empty Database"
 msgstr "خالی کردن دیتابیس"
 
-#: core/main.php:337 login/login.php:4457 profile/profile.php:1633
+#: core/main.php:342 login/login.php:4679 profile/profile.php:1713
 msgid "Settings Successfully Saved."
 msgstr "تنظیمات با موفقیت ذخیره شد."
 
-#: core/main.php:353
+#: core/main.php:358
 msgid "PeproDev UPS"
 msgstr "سولوشن پروفایل"
 
-#: core/main.php:394 profile/profile.php:3154
+#: core/main.php:399 profile/profile.php:3325
 #, php-format
 msgctxt "setting-page"
 msgid "Enter %s"
 msgstr "%s را وارد کنید"
 
-#: core/main.php:403 profile/profile.php:3164
+#: core/main.php:408 profile/profile.php:3335
 #, php-format
 msgctxt "setting-page"
 msgid "Choose %s"
 msgstr "%s را انتخاب کنید"
 
-#: core/main.php:473
+#: core/main.php:478
 msgid "Contact support@pepro.dev for more information"
 msgstr "برای اطلاعات بیشتر با ایمیل support@pepro.co در تماس باشید"
 
-#: core/main.php:493
+#: core/main.php:498
 #, php-format
 msgid "Welcome to v.%s"
 msgstr "به نسخه %s خوش آمدید"
 
-#: core/main.php:495
+#: core/main.php:500
 msgid "WordPress Admin Dashboard"
 msgstr "داشبورد مدیریت وردپرس"
 
-#: core/main.php:496
+#: core/main.php:501
 msgid "WordPress Plugins"
 msgstr "افزونه های وردپرس"
 
-#: core/main.php:497
+#: core/main.php:502
 msgid "Website Home Page"
 msgstr "صفحه اصلی وبسایت"
 
-#: core/main.php:500
+#: core/main.php:505
 msgid "Profile Page"
 msgstr "صفحه پروفایل کاربر"
 
-#: core/main.php:525
+#: core/main.php:530
 msgctxt "peprocore-appearance-setting"
 msgid "Appearance"
 msgstr "نمایش"
 
-#: core/main.php:537
+#: core/main.php:542
 msgctxt "peprocore-appearance-setting"
 msgid "Theme Scheme"
 msgstr "طرح تم"
 
-#: core/main.php:540
+#: core/main.php:545
 msgctxt "peprocore-appearance-setting"
 msgid "Dark Mode"
 msgstr "حالت تاریک"
 
-#: core/main.php:541
+#: core/main.php:546
 msgctxt "peprocore-appearance-setting"
 msgid "Light Mode"
 msgstr "حالت روشن"
 
-#: core/main.php:548
+#: core/main.php:553
 msgctxt "peprocore-appearance-setting"
 msgid "Theme Color"
 msgstr "رنگ قالب"
 
-#: core/main.php:551
+#: core/main.php:556
 msgctxt "peprocore-appearance-setting"
 msgid "Purple"
 msgstr "بنفش"
 
-#: core/main.php:552
+#: core/main.php:557
 msgctxt "peprocore-appearance-setting"
 msgid "Azure"
 msgstr "آبی"
 
-#: core/main.php:553
+#: core/main.php:558
 msgctxt "peprocore-appearance-setting"
 msgid "Green"
 msgstr "سبز"
 
-#: core/main.php:554
+#: core/main.php:559
 msgctxt "peprocore-appearance-setting"
 msgid "Orange"
 msgstr "نارنجی"
 
-#: core/main.php:555
+#: core/main.php:560
 msgctxt "peprocore-appearance-setting"
 msgid "Red"
 msgstr "قرمز"
 
-#: core/main.php:560
+#: core/main.php:565
 msgctxt "peprocore-appearance-setting"
 msgid "Sidebar Image"
 msgstr "عکس سایدبار"
 
-#: core/main.php:572
+#: core/main.php:577
 msgid "Sidebar 1"
 msgstr "سایدبار 1"
 
-#: core/main.php:573
+#: core/main.php:578
 msgid "Sidebar 2"
 msgstr "سایدبار 2"
 
-#: core/main.php:574
+#: core/main.php:579
 msgid "Sidebar 3"
 msgstr "سایدبار 3"
 
-#: core/main.php:575
+#: core/main.php:580
 msgid "Sidebar 4"
 msgstr "سایدبار 4"
 
-#: core/main.php:576
+#: core/main.php:581
 msgid "Sidebar 5"
 msgstr "سایدبار 5"
 
-#: core/main.php:577
+#: core/main.php:582
 msgid "Sidebar 6"
 msgstr "سایدبار 6"
 
-#: core/main.php:578
+#: core/main.php:583
 msgid "Sidebar 7"
 msgstr "سایدبار 7"
 
-#: core/main.php:579
+#: core/main.php:584
 msgid "Sidebar 8"
 msgstr "سایدبار 8"
 
-#: core/main.php:580
+#: core/main.php:585
 msgid "Sidebar 9"
 msgstr "سایدبار 9"
 
-#: core/main.php:581
+#: core/main.php:586
 msgid "Sidebar 10"
 msgstr "سایدبار 10"
 
-#: core/main.php:582
+#: core/main.php:587
 msgid "Sidebar 11"
 msgstr "سایدبار 11"
 
-#: core/main.php:583
+#: core/main.php:588
 msgid "Sidebar 12"
 msgstr "سایدبار 12"
 
-#: core/main.php:584
+#: core/main.php:589
 msgid "Sidebar 13"
 msgstr "سایدبار 13"
 
-#: core/main.php:585
+#: core/main.php:590
 msgid "Sidebar Custom"
 msgstr "عکس شخصی سازی شده"
 
-#: core/main.php:594
+#: core/main.php:599
 msgid "Select Custom Image"
 msgstr "انتخاب عکس دیگر"
 
-#: core/main.php:595
+#: core/main.php:600
 msgid "Select or Upload Custom Image"
 msgstr "انتخاب یا آپلود عکس دیگر"
 
-#: core/main.php:601
+#: core/main.php:606
 msgctxt "peprocore-appearance-setting"
 msgid "Dashboard Title"
 msgstr "عنوان داشبورد"
 
-#: core/main.php:629
+#: core/main.php:634
 msgctxt "peprocore-appearance-setting"
 msgid "Save Settings"
 msgstr "ذخیره تنظیمات"
@@ -328,28 +328,28 @@ msgstr "کپی شد!"
 msgid "Saving ..."
 msgstr "ذخیره سازی ..."
 
-#: login/include/class-activated.php:21 login/login.php:563
-#: login/login.php:3424
+#: login/include/class-activated.php:21 login/login.php:232 login/login.php:602
+#: login/login.php:3646
 msgctxt "js-translate"
 msgid "Please wait ..."
 msgstr "لطفا صبر کنید ..."
 
-#: login/include/class-activated.php:22 login/login.php:564
+#: login/include/class-activated.php:22 login/login.php:236 login/login.php:603
 msgctxt "js-translate"
 msgid "An unknown error occured."
 msgstr "خطای ناشناخته رخ داد."
 
-#: login/include/class-activated.php:23 login/login.php:565
+#: login/include/class-activated.php:23 login/login.php:604
 msgctxt "js-translate"
 msgid "Error"
 msgstr "خطایی رخ داد"
 
-#: login/include/class-activated.php:24 login/login.php:566
+#: login/include/class-activated.php:24 login/login.php:605
 msgctxt "js-translate"
 msgid "Go Home"
 msgstr "رفتن به خانه"
 
-#: login/include/class-activated.php:25 login/login.php:575
+#: login/include/class-activated.php:25 login/login.php:614
 msgctxt "js-translate"
 msgid "Confirm"
 msgstr "تایید کنید"
@@ -361,12 +361,12 @@ msgstr ""
 "آیا مطمئن هستید میخواهید همه موارد را پاک کنید؟ <red>این عملیات قابل بازگشت "
 "نیست."
 
-#: login/include/class-activated.php:27 login/login.php:576
+#: login/include/class-activated.php:27 login/login.php:615
 msgctxt "js-translate"
 msgid "Success"
 msgstr "عملیات موفق"
 
-#: login/include/class-activated.php:28 login/login.php:584
+#: login/include/class-activated.php:28 login/login.php:623
 msgctxt "js-translate"
 msgid "Close"
 msgstr "بستن"
@@ -381,27 +381,27 @@ msgctxt "js-translate"
 msgid "All items deleted successfully"
 msgstr "تمامی موارد با موفقیت حذف شدند"
 
-#: login/include/class-activated.php:31 login/login.php:577
+#: login/include/class-activated.php:31 login/login.php:616
 msgctxt "js-translate"
 msgid "Submit"
 msgstr "ثبت"
 
-#: login/include/class-activated.php:32 login/login.php:579
+#: login/include/class-activated.php:32 login/login.php:618
 msgctxt "js-translate"
 msgid "Okay"
 msgstr "باشه"
 
-#: login/include/class-activated.php:33 login/login.php:580
+#: login/include/class-activated.php:33 login/login.php:619
 msgctxt "js-translate"
 msgid "Yes"
 msgstr "بلی"
 
-#: login/include/class-activated.php:34 login/login.php:581
+#: login/include/class-activated.php:34 login/login.php:620
 msgctxt "js-translate"
 msgid "No"
 msgstr "خیر"
 
-#: login/include/class-activated.php:35 login/login.php:582
+#: login/include/class-activated.php:35 login/login.php:621
 msgctxt "js-translate"
 msgid "Cancel"
 msgstr "لغو"
@@ -1287,296 +1287,312 @@ msgstr "سر شماره ارسال"
 msgid "Template ID / Message containing [OTP]"
 msgstr "شناسه قالب ارسال سریع یا متن پیامک حاوی کد [OTP]"
 
-#: login/login.php:75
+#: login/login.php:77
 msgid "PeproDev Ultimate Profile Solutions — Login"
 msgstr "سولوشن کامل پروفایل پپرو — لاگین"
 
-#: login/login.php:76
+#: login/login.php:78
 msgid "Login/Register"
 msgstr "لاگین / ریجستر"
 
-#: login/login.php:77
+#: login/login.php:79
 msgid "Login Setting"
 msgstr "تنظیمات لاگین / ریجستر"
 
 #. Author of the plugin/theme
-#: login/login.php:78 login/login.php:79 profile/profile.php:71
-#: profile/profile.php:72 profile/profile.php:3067
+#: login/login.php:80 login/login.php:81 profile/profile.php:72
+#: profile/profile.php:73 profile/profile.php:3238
 msgid "Pepro Dev. Group"
 msgstr "تیم برنامه ‏نویسی پپرو"
 
-#: login/login.php:80 profile/profile.php:73
+#: login/login.php:82 profile/profile.php:74
 msgid "Pepro Dev License"
 msgstr "لایسنس پپرو"
 
-#: login/login.php:101
+#: login/login.php:103
 #, php-format
 msgid "Copyright (c) %s Pepro Dev. Group, All rights reserved"
 msgstr "تمامی حقوق مادی و معنوی تا سال (%s) برای مرکز توسعه پپرو محفوظ است"
 
-#: login/login.php:199
+#: login/login.php:220
 msgid "Subscribe"
 msgstr "عضویت"
 
-#: login/login.php:200 login/login.php:455 login/login.php:2558
-#: login/login.php:2707 login/login.php:2755 login/login.php:3146
+#: login/login.php:221 login/login.php:494 login/login.php:2777
+#: login/login.php:2926 login/login.php:2974 login/login.php:3365
 msgid "Mobile"
 msgstr "موبایل"
 
-#: login/login.php:201 login/login.php:3033
+#: login/login.php:222 profile/profile.php:794
+msgid "Name"
+msgstr "نام"
+
+#: login/login.php:223 login/login.php:3252
 msgid "Verify Code"
 msgstr "تایید کد یکبار مصرف"
 
-#: login/login.php:211
-msgid "Enter mobile number"
-msgstr "شماره موبایل را وارد کنید"
+#: login/login.php:233 login/login.php:1069
+msgctxt "js-translate"
+msgid "You should fill in your name"
+msgstr "شما باید نام خود را وارد کنید"
 
-#: login/login.php:215
-msgid "Enter verify number"
-msgstr "کد تایید را وارد کنید"
+#: login/login.php:234 login/login.php:1070
+msgctxt "js-translate"
+msgid "You should fill in your mobile"
+msgstr "شما باید موبایل را وارد کنید"
 
-#: login/login.php:245 login/login.php:850 login/login.php:2614
-#: login/login.php:3201
-msgid "Login"
-msgstr "ورود"
+#: login/login.php:235
+msgctxt "js-translate"
+msgid "You should fill in OTP code"
+msgstr "شما باید کد یکبارمصرف را وارد کنید"
 
-#: login/login.php:246 login/login.php:876 login/login.php:887
-#: login/login.php:2818
-msgid "Register"
-msgstr "ثبت نام"
-
-#: login/login.php:247 login/login.php:912
-msgid "Recover Password"
-msgstr "فراموشی رمز عبور"
-
-#: login/login.php:326
-msgid "Mobile Field"
-msgstr "فیلد موبایل"
-
-#: login/login.php:327
-msgid "Email Field"
-msgstr "فیلد ایمیل"
-
-#: login/login.php:328
-msgid "Password Fields"
-msgstr "فیلد کلمه عبور"
-
-#: login/login.php:329
-msgid "Username Field"
-msgstr "فیلد نام کاربری"
-
-#: login/login.php:330
-msgid "User First name"
-msgstr "فیلد نام کوچک"
-
-#: login/login.php:331
-msgid "User Last name"
-msgstr "فیلد نام خانوادگی"
-
-#: login/login.php:332
-msgid "User Display name"
-msgstr "فیلد نام نمایشی"
-
-#: login/login.php:336
-msgid "WooCommerce Billing Country"
-msgstr "ووکامرس: فیلد کشور/منطقه"
-
-#: login/login.php:337
-msgid "WooCommerce Billing State"
-msgstr "ووکامرس: فیلد استان/ایالت"
-
-#: login/login.php:338
-msgid "WooCommerce Billing City"
-msgstr "ووکامرس: فیلد شهر"
-
-#: login/login.php:393
-msgid "Required?"
-msgstr "ضروری است؟"
-
-#: login/login.php:408
-msgid "First Name"
-msgstr "نام کوچک"
-
-#: login/login.php:423
-msgid "Last Name"
-msgstr "نام خانوادگی"
-
-#: login/login.php:438
-msgid "Display Name"
-msgstr "نام نمایشی"
-
-#: login/login.php:463 login/login.php:2566 login/login.php:2715
-#: login/login.php:2763 login/login.php:2771 login/login.php:3154
-msgid "Enter mobile number with English numbers,<br>e.g. 09123456789"
-msgstr "شماره موبایل را با اعداد انگلیسی وارد کنید،<br> مثال: 09123456789"
-
-#: login/login.php:472
-msgid "City"
-msgstr "شهر"
-
-#: login/login.php:484
-msgid "State / County"
-msgstr "استان / ایالت"
-
-#: login/login.php:496
-msgid "Country / Region"
-msgstr "کشور / منطقه"
-
-#: login/login.php:568 login/login.php:865 login/login.php:902
-#: login/login.php:927
+#: login/login.php:237 login/login.php:258 login/login.php:607
+#: login/login.php:910 login/login.php:953 login/login.php:984
 #, php-format
 msgid "Resend Code in (%s)"
 msgstr "ارسال مجدد کد ( %s ثانیه)"
 
-#: login/login.php:569
+#: login/login.php:238 login/login.php:608
 msgid "Resend OTP Code"
 msgstr "ارسال مجدد کد"
 
-#: login/login.php:572
+#: login/login.php:257 login/login.php:906 login/login.php:949
+#: login/login.php:980
+msgid "Change Number"
+msgstr "تغییر موبایل"
+
+#: login/login.php:284 login/login.php:889 login/login.php:2833
+#: login/login.php:3420
+msgid "Login"
+msgstr "ورود"
+
+#: login/login.php:285 login/login.php:921 login/login.php:932
+#: login/login.php:3037
+msgid "Register"
+msgstr "ثبت نام"
+
+#: login/login.php:286 login/login.php:963
+msgid "Recover Password"
+msgstr "فراموشی رمز عبور"
+
+#: login/login.php:365
+msgid "Mobile Field"
+msgstr "فیلد موبایل"
+
+#: login/login.php:366
+msgid "Email Field"
+msgstr "فیلد ایمیل"
+
+#: login/login.php:367
+msgid "Password Fields"
+msgstr "فیلد کلمه عبور"
+
+#: login/login.php:368
+msgid "Username Field"
+msgstr "فیلد نام کاربری"
+
+#: login/login.php:369
+msgid "User First name"
+msgstr "فیلد نام کوچک"
+
+#: login/login.php:370
+msgid "User Last name"
+msgstr "فیلد نام خانوادگی"
+
+#: login/login.php:371
+msgid "User Display name"
+msgstr "فیلد نام نمایشی"
+
+#: login/login.php:375
+msgid "WooCommerce Billing Country"
+msgstr "ووکامرس: فیلد کشور/منطقه"
+
+#: login/login.php:376
+msgid "WooCommerce Billing State"
+msgstr "ووکامرس: فیلد استان/ایالت"
+
+#: login/login.php:377
+msgid "WooCommerce Billing City"
+msgstr "ووکامرس: فیلد شهر"
+
+#: login/login.php:432
+msgid "Required?"
+msgstr "ضروری است؟"
+
+#: login/login.php:447
+msgid "First Name"
+msgstr "نام کوچک"
+
+#: login/login.php:462
+msgid "Last Name"
+msgstr "نام خانوادگی"
+
+#: login/login.php:477
+msgid "Display Name"
+msgstr "نام نمایشی"
+
+#: login/login.php:502 login/login.php:2785 login/login.php:2934
+#: login/login.php:2982 login/login.php:2990 login/login.php:3373
+msgid "Enter mobile number with English numbers,<br>e.g. 09123456789"
+msgstr "شماره موبایل را با اعداد انگلیسی وارد کنید،<br> مثال: 09123456789"
+
+#: login/login.php:511
+msgid "City"
+msgstr "شهر"
+
+#: login/login.php:523
+msgid "State / County"
+msgstr "استان / ایالت"
+
+#: login/login.php:535
+msgid "Country / Region"
+msgstr "کشور / منطقه"
+
+#: login/login.php:611
 msgid "Select an option&hellip;"
 msgstr "یک گزینه انتخاب نمائید&hellip;"
 
-#: login/login.php:573
+#: login/login.php:612
 msgid "Enter State / County &hellip;"
 msgstr "نام استان / ایالت را وارد کنید &hellip;"
 
-#: login/login.php:574
+#: login/login.php:613
 msgid "Enter City &hellip;"
 msgstr "نام شهر را وارد کنید &hellip;"
 
-#: login/login.php:578
+#: login/login.php:617
 msgctxt "js-translate"
 msgid "Login"
 msgstr "ورود"
 
-#: login/login.php:583
+#: login/login.php:622
 msgctxt "js-translate"
 msgid "One or more fields have an error. Please check and try again."
 msgstr "یک یا چند فیلد خطا دارند، لطفاً بررسی کنید و مجدد تلاش کنید."
 
-#: login/login.php:585
+#: login/login.php:624
 msgctxt "js-translate"
 msgid "Please check this field validity"
 msgstr "لطفاً چک کنید داده فیلد معتبر باشد"
 
-#: login/login.php:586
+#: login/login.php:625
 msgctxt "js-translate"
 msgid "This field is required, Please check its validity"
 msgstr "این فیلد ضروری است، لطفاً چک کنید داده فیلد معتبر باشد"
 
-#: login/login.php:588 login/login.php:1704 login/login.php:2049
-#: login/login.php:3559 login/login.php:3561 login/login.php:4299
+#: login/login.php:627 login/login.php:1871 login/login.php:2216
+#: login/login.php:3781 login/login.php:3783 login/login.php:4521
 msgctxt "reg-form-error"
 msgid "<strong>Error:</strong> Please check the reCAPTCHA challenge."
 msgstr "<strong>خطا:</strong> لطفا تایید کنید ربات نیستید."
 
-#: login/login.php:602
+#: login/login.php:641
 msgid "Verify/Change your email address"
 msgstr "تایید/تغییر آدرس ایمیل"
 
-#: login/login.php:611
+#: login/login.php:650
 msgid "You Email address is already verified!"
 msgstr "آدرس ایمیل حساب شما قبلا تایید شده است!"
 
-#: login/login.php:620
+#: login/login.php:659
 msgid "You Email address is not verified!"
 msgstr "آدرس ایمیل حساب شما تایید نشده است!"
 
-#: login/login.php:649
+#: login/login.php:688
 msgid "Verify/Change your mobile number"
 msgstr "تایید/تغییر شماره موبایل"
 
-#: login/login.php:658 login/login.php:1540
+#: login/login.php:697 login/login.php:1707
 msgid "You mobile is already verified!"
 msgstr "شماره موبایل شما قبلا تایید شده است!"
 
-#: login/login.php:667
+#: login/login.php:706
 msgid "You mobile is not verified!"
 msgstr "شماره موبایل شما تایید نشده است!"
 
-#: login/login.php:768
+#: login/login.php:807
 msgid "Login/Register Inline form"
 msgstr "فرم لاگین / ریجستر خطی"
 
-#: login/login.php:770 login/login.php:786
+#: login/login.php:809 login/login.php:825
 msgid "Content before form"
 msgstr "محتوای قبل فرم"
 
-#: login/login.php:771 login/login.php:787
+#: login/login.php:810 login/login.php:826
 msgid "Content after form"
 msgstr "محتوای بعد فرم"
 
-#: login/login.php:772 login/login.php:790
+#: login/login.php:811 login/login.php:829
 msgid "Login Form title"
 msgstr "عنوان فرم لاگین"
 
-#: login/login.php:773 login/login.php:791
+#: login/login.php:812 login/login.php:830
 msgid "Default active form: login/register/resetpass"
 msgstr "فرم فعال پیشفرض: login/register/resetpass"
 
-#: login/login.php:774 login/login.php:792
+#: login/login.php:813 login/login.php:831
 msgid "Register Form title"
 msgstr "عنوان فرم ثبت نام"
 
-#: login/login.php:775 login/login.php:793
+#: login/login.php:814 login/login.php:832
 msgid "Reset Password Form title"
 msgstr "عنوان فرم فراموشی رمز"
 
-#: login/login.php:776 login/login.php:795 login/login.php:806
-#: login/login.php:814 login/login.php:822 profile/profile.php:348
+#: login/login.php:815 login/login.php:834 login/login.php:845
+#: login/login.php:853 login/login.php:861 profile/profile.php:402
 msgid "content between shortcode tags"
 msgstr "محتوای بین دو تگ شورتکد"
 
-#: login/login.php:776
+#: login/login.php:815
 msgid "Content to show to logged in users"
 msgstr "محتوای برای نمایش به کاربران لاگین شده"
 
-#: login/login.php:781
+#: login/login.php:820
 msgid "Login/Register Popup form"
 msgstr "فرم لاگین / ریجستر پاپ آپ"
 
-#: login/login.php:783
+#: login/login.php:822
 msgid "A jQuery selector to trigger popup"
 msgstr "انتخابگر جیکوئری برای تریگر کردن پاپ آپ"
 
-#: login/login.php:784
+#: login/login.php:823
 msgid "Trigger call-to-action anchor text, leave empty to use jQuery trigger"
 msgstr ""
 "متن انکر لینک تریگر پاپ آپ، برای استفاده از تریگر جیکوئری خالی رها کنید"
 
-#: login/login.php:785
+#: login/login.php:824
 msgid "Trigger call-to-action anchor class"
 msgstr "کلاس انکر لینک تریگر پاپ آپ"
 
-#: login/login.php:788
+#: login/login.php:827
 msgid "Content before popup form"
 msgstr "محتوای قبل فرم پاپ آپ"
 
-#: login/login.php:789
+#: login/login.php:828
 msgid "Content after popup form"
 msgstr "محتوای بعد فرم پاپ آپ"
 
-#: login/login.php:794 login/login.php:795
+#: login/login.php:833 login/login.php:834
 msgid "Content instead of trigger call-to-action"
 msgstr "محتوای جایگزین دکمه تریگر"
 
-#: login/login.php:800
+#: login/login.php:839
 msgid "Returns Logout URL/Link"
 msgstr "آدرس صفحه / لینک خروج از حساب کاربری"
 
-#: login/login.php:802
+#: login/login.php:841
 msgid "URL to redirect on logout"
 msgstr "آدرس انتقال پس از خروج"
 
-#: login/login.php:803
+#: login/login.php:842
 msgid "Logout call-to-action anchor text, leave empty to return url"
 msgstr "متن انکر لینک خروج، برای دریافت لینک خروج خالی رها کنید"
 
-#: login/login.php:804
+#: login/login.php:843
 msgid "Logout call-to-action anchor class"
 msgstr "کلاس انکر لینک خروج"
 
-#: login/login.php:805 login/login.php:806
+#: login/login.php:844 login/login.php:845
 msgid ""
 "Content instead of Logout call-to-action, use {url} to replace with logout "
 "link"
@@ -1584,170 +1600,216 @@ msgstr ""
 "محتوای جایگزین دکمه خروج از حساب، برای استفاده از لینک خروج {url} را وارد "
 "کنید"
 
-#: login/login.php:811
+#: login/login.php:850
 msgid "Show content if user has verified Email"
 msgstr "نمایش محتوا اگر ایمیل کاربر تایید شده است"
 
-#: login/login.php:813 login/login.php:821
+#: login/login.php:852 login/login.php:860
 msgid "Show Content between tags if opposite of the condition is true"
 msgstr "نمایش محتوای بین دو تگ شورتکد اگر شرط متضاد درست بود"
 
-#: login/login.php:814 login/login.php:822
+#: login/login.php:853 login/login.php:861
 msgid "Content to show if condition were true, can use other shortcodes too"
 msgstr "نمایش محتوای بین دو تگ شورتکد اگر شرط متضاد درست بود"
 
-#: login/login.php:819
+#: login/login.php:858
 msgid "Show content if user has verified Mobile"
 msgstr "نمایش محتوا اگر موبایل کاربر تایید شده است"
 
-#: login/login.php:864 login/login.php:901 login/login.php:926
-msgid "Change Number"
-msgstr "تغییر موبایل"
-
-#: login/login.php:869
+#: login/login.php:914
 msgid "Lost Password?"
 msgstr "فراموشی رمز؟"
 
-#: login/login.php:903 login/login.php:928
+#: login/login.php:954 login/login.php:985
 msgid "Back to Login"
 msgstr "بازگشت به ورود"
 
-#: login/login.php:943 login/login.php:1055 login/login.php:1176
-#: login/login.php:1273 login/login.php:1791 login/login.php:1919
-#: login/login.php:2098 profile/libs/templates/tmplt-topbar.php:47
+#: login/login.php:1000 login/login.php:1222 login/login.php:1343
+#: login/login.php:1440 login/login.php:1958 login/login.php:2086
+#: login/login.php:2265 profile/libs/templates/tmplt-topbar.php:47
 msgid "Logout"
 msgstr "خروج"
 
-#: login/login.php:1002
+#: login/login.php:1059
 msgid "Unauthorized Access!"
 msgstr "دسترسی غیرمجاز!"
 
-#: login/login.php:1007
+#: login/login.php:1071
+msgctxt "js-translate"
+msgid "You should enter a valid mobile number"
+msgstr "لطفاً شماره موبایل معتبر وارد کنید"
+
+#: login/login.php:1072
+msgctxt "js-translate"
+msgid "You should enter OTP code sent to your mobile"
+msgstr "شما باید کد یکبارمصرف معتبری را وارد کنید"
+
+#: login/login.php:1077
+msgid "This mobile number is currently subscribed"
+msgstr "شماره موبایل وارد شده عضو خبرنامه میباشد"
+
+#: login/login.php:1089 login/login.php:1250 login/login.php:1513
+#: login/login.php:1754 login/login.php:1990 login/login.php:2118
+#: login/login.php:2297
+msgid "Verification code sent, Enter in field below."
+msgstr "کد یکبار مصرف ارسال شد. در زیر وارد کنید."
+
+#: login/login.php:1100
+#, php-format
+msgid "Sending Verification to %s failed, Please try again."
+msgstr "خطا در ارسال کد تایید به %s، لطفاً مجددا تلاش کنید."
+
+#: login/login.php:1110
+#, php-format
+msgid "Sending Verification failed, you can request one code every %s seconds."
+msgstr "شما مجاز به ارسال یک درخواست در هر %s ثانیه هستید."
+
+#: login/login.php:1125
+#, php-format
+msgid "Verification code sent to %s, Enter the code in field below"
+msgstr "کد یکبارمصرف ارسال شده به شماره %s را در زیر وارد کنید"
+
+#: login/login.php:1136
+msgid "Sending Verification code failed, Please try again."
+msgstr "خطا در ارسال کد تایید، مجددا تلاش کنید."
+
+#: login/login.php:1152
+msgid "You've successfully registered to newsletter"
+msgstr "تبریک میگوییم! شما با موفقیت عضو خبرنامه شدید"
+
+#: login/login.php:1155
+msgid "There was an error registering you!"
+msgstr "خطایی در پروسه ثبت شما در لیست خبرنامه رخ داد!"
+
+#: login/login.php:1160
+msgid "Verification code is incorrect/expired!"
+msgstr "کد تایید نادرست است یا منقضی شده!"
+
+#: login/login.php:1170 login/login.php:2363 login/login.php:2396
+msgid "An unknown error occured."
+msgstr "خطای ناشناخته رخ داد."
+
+#: login/login.php:1174
 msgid "You are already logged-in."
 msgstr "شما قبلا وارد حساب شده اید."
 
-#: login/login.php:1010 login/login.php:1285 login/login.php:1523
+#: login/login.php:1177 login/login.php:1452 login/login.php:1690
 msgid "Source data is not valid."
 msgstr "داده وارد شده نا معتبر است."
 
-#: login/login.php:1015 login/login.php:1292 login/login.php:1530
+#: login/login.php:1182 login/login.php:1459 login/login.php:1697
 msgid "Please check the reCAPTCHA challenge."
-msgstr "<strong>خطا:</strong> لطفا تایید کنید ربات نیستید."
+msgstr "خطا: لطفا تایید کنید ربات نیستید."
 
-#: login/login.php:1036
+#: login/login.php:1203
 msgid "The mobile number is not currently in use by any account."
 msgstr "شماره موبایل به هیچ حسابی متصل نیست."
 
-#: login/login.php:1052 login/login.php:1173 login/login.php:1270
+#: login/login.php:1219 login/login.php:1340 login/login.php:1437
 #, php-format
 msgid "Hi %s, You have successfully logged in!"
 msgstr "سلام %s، شما با موفقیت وارد شدید!"
 
-#: login/login.php:1060
+#: login/login.php:1227
 msgid "Login verification code is incorrect/expired!"
 msgstr "کد تایید نادرست است یا منقضی شده!"
 
-#: login/login.php:1083 login/login.php:1346 login/login.php:1587
-#: login/login.php:1823 login/login.php:1951 login/login.php:2130
-msgid "Verification code sent, Enter in field below."
-msgstr "کد یکبار مصرف ارسال شد. در زیر وارد کنید."
-
-#: login/login.php:1094 login/login.php:1357 login/login.php:1598
+#: login/login.php:1261 login/login.php:1524 login/login.php:1765
 #, php-format
 msgid "Error Sending Verification to %s. Try again."
 msgstr "خطا در ارسال کد تایید به %s، مجددا تلاش کنید."
 
-#: login/login.php:1104 login/login.php:1225 login/login.php:1367
-#: login/login.php:1482 login/login.php:1608
+#: login/login.php:1271 login/login.php:1392 login/login.php:1534
+#: login/login.php:1649 login/login.php:1775
 #, php-format
 msgid "Error Sending Verification, you can request one code every %s seconds."
 msgstr "شما مجاز به ارسال یک درخواست در هر %s ثانیه هستید."
 
-#: login/login.php:1119 login/login.php:1203 login/login.php:1240
-#: login/login.php:1382 login/login.php:1460 login/login.php:1496
-#: login/login.php:1623 login/login.php:1859 login/login.php:1987
-#: login/login.php:2167
+#: login/login.php:1286 login/login.php:1370 login/login.php:1407
+#: login/login.php:1549 login/login.php:1627 login/login.php:1663
+#: login/login.php:1790 login/login.php:2026 login/login.php:2154
+#: login/login.php:2334
 #, php-format
 msgid "Verification code sent to %s."
-msgstr "لطفا رمز یکبارمصرف ارسال شده به شماره %s را در کادر زیر وارد کنید"
+msgstr "لطفا رمز یکبارمصرف ارسال شده به شماره %s را در کادر زیر وارد کنید."
 
-#: login/login.php:1130 login/login.php:1214 login/login.php:1251
-#: login/login.php:1393 login/login.php:1471 login/login.php:1506
-#: login/login.php:1634
+#: login/login.php:1297 login/login.php:1381 login/login.php:1418
+#: login/login.php:1560 login/login.php:1638 login/login.php:1673
+#: login/login.php:1801
 msgid "Error Sending Verification code. Try again."
 msgstr "خطا در ارسال کد تایید، مجددا تلاش کنید."
 
-#: login/login.php:1143
+#: login/login.php:1310
 msgid "Please enter a valid email/username/mobile."
 msgstr "لطفا نام کاربری/ایمیل/شماره موبایل معتبر وارد کنید."
 
-#: login/login.php:1145 login/login.php:1404 login/login.php:1645
+#: login/login.php:1312 login/login.php:1571 login/login.php:1812
 msgid "Please enter a valid mobile number."
 msgstr "لطفا شماره موبایل معتبر وارد کنید."
 
-#: login/login.php:1148 login/login.php:1155
+#: login/login.php:1315 login/login.php:1322
 msgid "Please enter a valid Username/Email."
 msgstr "لطفا نام کاربری/ایمیل معتبر وارد کنید."
 
-#: login/login.php:1161
+#: login/login.php:1328
 msgid "User E-mail address could not be verified!"
 msgstr "آدرس ایمیل تایید شده را نمیتوان پیدا کرد!"
 
-#: login/login.php:1182 login/login.php:1439
+#: login/login.php:1349 login/login.php:1606
 msgid "Email verification code is incorrect/expired!"
 msgstr "کد یکبار مصرف ایمیلی نادرست است یا منقضی شده!"
 
-#: login/login.php:1278
+#: login/login.php:1445
 msgid "Password does not match!"
 msgstr "متاسفانه رمز عبور صحیح نمیباشد!"
 
-#: login/login.php:1305 login/login.php:1546
+#: login/login.php:1472 login/login.php:1713
 msgid "The mobile number is currently in use by another account."
 msgstr "شماره موبایل وارد شده درحال استفاده توسط حساب دیگری است."
 
-#: login/login.php:1319 login/login.php:1560
+#: login/login.php:1486 login/login.php:1727
 #, php-format
 msgid "Hi %s, You have successfully verified your mobile number!"
 msgstr "سلام %s، حساب شما با موفقیت اعتبار سنجی شد!"
 
-#: login/login.php:1321 login/login.php:1433 login/login.php:1562
+#: login/login.php:1488 login/login.php:1600 login/login.php:1729
 msgid "Go Home"
 msgstr "رفتن به خانه"
 
-#: login/login.php:1325 login/login.php:1566
+#: login/login.php:1492 login/login.php:1733
 msgid "Mobile verification code is incorrect/expired!"
 msgstr "کد یکبار مصرف پیامکی نادرست است یا منقضی شده!"
 
-#: login/login.php:1410
+#: login/login.php:1577
 msgid "E-mail address could not be validated!"
 msgstr "آدرس ایمیل انتخابی را نمیتوان تایید کرد!"
 
-#: login/login.php:1431
+#: login/login.php:1598
 #, php-format
 msgid "Hi %s, You have successfully verified your email address!"
 msgstr "سلام %s، حساب شما با موفقیت اعتبار سنجی شد!"
 
-#: login/login.php:1653 login/login.php:2024
+#: login/login.php:1820 login/login.php:2191
 msgid "<strong>Error:</strong> Source data is not valid."
 msgstr "<strong>خطا:</strong> داده نادرست وارد شده است."
 
-#: login/login.php:1655
+#: login/login.php:1822
 msgid "<strong>Error:</strong> User registration is not allowed!"
 msgstr "<strong>خطا:</strong> ثبت نام در وبسایت مجاز نیست!"
 
-#: login/login.php:1663
+#: login/login.php:1830
 msgctxt "reg-form-error"
 msgid "<strong>Error:</strong> Please enter a username."
 msgstr "<strong>خطا:</strong> لطفا یک نام کاربری وارد کنید."
 
-#: login/login.php:1668
+#: login/login.php:1835
 msgctxt "reg-form-error"
 msgid ""
 "<strong>Error</strong>: This username is already registered. Please choose "
 "another one."
 msgstr "<strong>خطا:</strong> نام کاربری قبلا ثبت شده است."
 
-#: login/login.php:1671
+#: login/login.php:1838
 msgctxt "reg-form-error"
 msgid ""
 "<strong>Error</strong>: This username is invalid because it uses illegal "
@@ -1756,43 +1818,43 @@ msgstr ""
 "<strong>خطا:</strong> نام کاربری با کاراکتر های نادرست وارد شده است. لطفا "
 "نام کاربری صحیح وارد کنید."
 
-#: login/login.php:1675
+#: login/login.php:1842
 msgctxt "reg-form-error"
 msgid "<strong>Error</strong>: Sorry, that username is not allowed."
 msgstr "<strong>خطا:</strong> نام کاربری انتخاب شده غیرمجاز است."
 
-#: login/login.php:1682
+#: login/login.php:1849
 msgctxt "reg-form-error"
 msgid "<strong>Error</strong>: Please enter an email address."
 msgstr "<strong>خطا:</strong> لطفا آدرس ایمیل معتبر وارد کنید."
 
-#: login/login.php:1687 login/login.php:1690
+#: login/login.php:1854 login/login.php:1857
 msgctxt "reg-form-error"
 msgid "<strong>Error</strong>: The given email address is not valid."
 msgstr "<strong>خطا:</strong> آدرس ایمیل معتبر نیست."
 
-#: login/login.php:1693
+#: login/login.php:1860
 msgctxt "reg-form-error"
 msgid ""
 "<strong>Error</strong>: This email is already registered. Please choose "
 "another one."
 msgstr "<strong>خطا:</strong> آدرس ایمیل قبلا ثبت شده است."
 
-#: login/login.php:1713 login/login.php:1730 login/login.php:2057
-#: login/login.php:3569 login/login.php:3571 login/login.php:3597
-#: login/login.php:3599 login/login.php:3661 login/login.php:3707
+#: login/login.php:1880 login/login.php:1897 login/login.php:2224
+#: login/login.php:3791 login/login.php:3793 login/login.php:3819
+#: login/login.php:3821 login/login.php:3883 login/login.php:3929
 #, php-format
 msgctxt "reg-form-error"
 msgid "<strong>Error:</strong> Please enter %s."
 msgstr "<strong>خطا:</strong> لطفا %s را وارد کنید."
 
-#: login/login.php:1718 login/login.php:3578 login/login.php:3580
-#: login/login.php:3672
+#: login/login.php:1885 login/login.php:3800 login/login.php:3802
+#: login/login.php:3894
 msgctxt "reg-form-error"
 msgid "<strong>Error:</strong> Please enter a valid mobile number."
 msgstr "<strong>خطا:</strong> لطفا شماره موبایل معتبر وارد کنید."
 
-#: login/login.php:1723
+#: login/login.php:1890
 msgctxt "reg-form-error"
 msgid ""
 "<strong>Error:</strong> This mobile number is already registered. Please "
@@ -1800,57 +1862,57 @@ msgid ""
 msgstr ""
 "<strong>خطا:</strong> شماره موبایل قبلا ثبت شده است. یک شماره جدید وارد کنید."
 
-#: login/login.php:1737 login/login.php:2063 login/login.php:3627
-#: login/login.php:3629
+#: login/login.php:1904 login/login.php:2230 login/login.php:3849
+#: login/login.php:3851
 msgctxt "reg-form-error"
 msgid "<strong>ERROR</strong>: Password field is required."
 msgstr "<strong>خطا:</strong> لطفا رمز عبور را وارد کنید."
 
-#: login/login.php:1740 login/login.php:2066 login/login.php:3634
-#: login/login.php:3636
+#: login/login.php:1907 login/login.php:2233 login/login.php:3856
+#: login/login.php:3858
 msgctxt "reg-form-error"
 msgid "<strong>ERROR</strong>: Confirm Password field is required."
 msgstr "<strong>خطا:</strong> لطفا تایید رمز عبور را وارد کنید."
 
-#: login/login.php:1745 login/login.php:2069
+#: login/login.php:1912 login/login.php:2236
 msgctxt "reg-form-error"
 msgid "<strong>Error</strong>: Passwords may not contain the character \"\\\"."
 msgstr "<strong>خطا:</strong> شما نباید در رمز عبور از \"\\\" استفاده کنید."
 
-#: login/login.php:1748 login/login.php:2072 login/login.php:3643
-#: login/login.php:3645
+#: login/login.php:1915 login/login.php:2239 login/login.php:3865
+#: login/login.php:3867
 msgctxt "reg-form-error"
 msgid ""
 "<strong>ERROR</strong>: Password field and Confirm Password field do not "
 "match."
 msgstr "<strong>خطا:</strong> رمز عبور و تایید رمز عبور یکسان نیستند."
 
-#: login/login.php:1768
+#: login/login.php:1935
 msgid ""
 "<strong>Error:</strong> The mobile number is currently in use by another "
 "account."
 msgstr "<strong>خطا:</strong> شماره موبایل توسط حساب دیگری در حال استفاده است."
 
-#: login/login.php:1788 login/login.php:1916
+#: login/login.php:1955 login/login.php:2083
 #, php-format
 msgid "Hi %s, You have successfully registered!"
 msgstr "سلام %s، شما با موفقیت ثبت نام شدید!"
 
-#: login/login.php:1795 login/login.php:1923
+#: login/login.php:1962 login/login.php:2090
 msgid "<strong>Error:</strong> There was an error creating new user!"
 msgstr "<strong>خطا:</strong> خطایی در ساخت کاربر جدید رخ داد!"
 
-#: login/login.php:1802 login/login.php:1930 login/login.php:2108
+#: login/login.php:1969 login/login.php:2097 login/login.php:2275
 msgid "<strong>Error:</strong> Verification code is incorrect/expired!"
 msgstr "<strong>خطا:</strong> کد تایید نادرست است یا منقضی شده!"
 
-#: login/login.php:1834 login/login.php:1962 login/login.php:2141
+#: login/login.php:2001 login/login.php:2129 login/login.php:2308
 #, php-format
 msgid "<strong>Error:</strong> Sending Verification to %s failed. Try again."
 msgstr ""
 "<strong>خطا:</strong> در ارسال کد تایید به %s خطایی رخ داد، مجددا تلاش کنید."
 
-#: login/login.php:1844 login/login.php:1972 login/login.php:2151
+#: login/login.php:2011 login/login.php:2139 login/login.php:2318
 #, php-format
 msgid ""
 "<strong>Error:</strong> Sending Verification failed, you can request one "
@@ -1859,88 +1921,102 @@ msgstr ""
 "<strong>خطا:</strong> خطا در ارسال کد، شما مجاز به ارسال یک درخواست در هر %s "
 "ثانیه هستید."
 
-#: login/login.php:1870 login/login.php:1998 login/login.php:2178
+#: login/login.php:2037 login/login.php:2165 login/login.php:2345
 msgid "<strong>Error:</strong> Sending Verification code failed. Try again."
 msgstr "<strong>خطا:</strong> خطا در ارسال کد تایید، مجددا تلاش کنید."
 
-#: login/login.php:1883
+#: login/login.php:2050
 msgid "<strong>Error:</strong> Please enter a valid mobile number."
 msgstr "<strong>خطا:</strong> لطفا شماره موبایل معتبر وارد کنید."
 
-#: login/login.php:1897
+#: login/login.php:2064
 msgid ""
 "<strong>Error:</strong> The email address is currently in use by another "
 "account."
 msgstr "<strong>خطا:</strong> آدرس ایمیل توسط حساب دیگری در حال استفاده است."
 
-#: login/login.php:2010
+#: login/login.php:2177
 msgid "<strong>Error:</strong> Please enter a valid email address."
 msgstr "<strong>خطا:</strong> لطفا آدرس ایمیل معتبر وارد کنید."
 
-#: login/login.php:2018 login/login.php:2103 login/login.php:2188
+#: login/login.php:2185 login/login.php:2270 login/login.php:2355
 msgid "<strong>Error:</strong> There was an error processing your request!"
 msgstr "<strong>خطا:</strong> خطایی در پردازش درخواست شما رخ داد!"
 
-#: login/login.php:2030
+#: login/login.php:2197
 msgid "<strong>Error:</strong> Username/Email field is required!"
 msgstr "<strong>خطا:</strong> لطفا آدرس نام کاربری/ایمیل معتبر وارد کنید!"
 
-#: login/login.php:2037
+#: login/login.php:2204
 msgid "<strong>Error:</strong> Please enter a valid Username/Email!"
 msgstr "<strong>خطا:</strong> لطفا آدرس نام کاربری/ایمیل معتبر وارد کنید!"
 
-#: login/login.php:2042
+#: login/login.php:2209
 msgid ""
 "<strong>Error:</strong> No Verified Email Address is connected to your "
 "account!"
 msgstr "<strong>خطا:</strong> آدرس ایمیل تایید شده ای به حساب شما متصل نیست!"
 
-#: login/login.php:2095
+#: login/login.php:2262
 #, php-format
 msgid "Hi %s, You have successfully reset your password!"
 msgstr "سلام %s، رمز عبور حساب شما با موفقیت تغییر کرد!"
 
-#: login/login.php:2196 login/login.php:2208
-msgid "An unknown error occured."
-msgstr "خطای ناشناخته رخ داد."
-
-#: login/login.php:2204
+#: login/login.php:2371
 msgid "User details successfully changed."
 msgstr "تنظیمات کاربر با موفقیت ذخیره شد."
 
-#: login/login.php:2250
+#: login/login.php:2379
+#, php-format
+msgid "Submition ID %s Successfully Deleted."
+msgstr "مورد آی دی %s با موفقیت حذف شد."
+
+#: login/login.php:2381
+#, php-format
+msgid "Error Deleting Submition ID %s."
+msgstr "خطا در حذف مورد با ای دی %s."
+
+#: login/login.php:2389 profile/profile.php:1840
+msgid "Database Successfully Cleared."
+msgstr "دیتابیس با موفقیت پاک شد."
+
+#: login/login.php:2391 profile/profile.php:1842
+msgid "Error Clearing Database."
+msgstr "خطا در پاک کردن دیتابیس رخ داد."
+
+#: login/login.php:2460
 msgid "New user"
 msgstr "کاربر جدید"
 
-#: login/login.php:2252
+#: login/login.php:2462
 msgid "Dear user"
 msgstr "کاربر عزیز"
 
-#: login/login.php:2374 login/login.php:2413
+#: login/login.php:2587 login/login.php:2629
 msgid "Verify Email"
 msgstr "تایید ایمیل"
 
-#: login/login.php:2488 login/login.php:2515 login/login.php:3057
+#: login/login.php:2707 login/login.php:2734 login/login.php:3276
 msgid "Username/Email"
 msgstr "نام کاربری/ایمیل"
 
-#: login/login.php:2496 login/login.php:2523 login/login.php:3006
+#: login/login.php:2715 login/login.php:2742 login/login.php:3225
 msgid "Enter username or email address correctly"
 msgstr "نام کاربری یا ایمیل را به درستی وارد کنید"
 
-#: login/login.php:2501 login/login.php:2783 login/login.php:3740
+#: login/login.php:2720 login/login.php:3002 login/login.php:3962
 msgid "Password"
 msgstr "کلمه عبور"
 
-#: login/login.php:2504
+#: login/login.php:2723
 msgid "You have to enter a password"
 msgstr "شما باید یک کلمه عبور وارد کنید"
 
-#: login/login.php:2528 login/login.php:3011
+#: login/login.php:2747 login/login.php:3230
 msgid "Verification Code"
 msgstr "کد یکبار مصرف"
 
-#: login/login.php:2537 login/login.php:3020
+#: login/login.php:2756 login/login.php:3239
 msgid ""
 "You have to enter a Verification code or leave it empty and press Enter to "
 "receive a new one"
@@ -1948,200 +2024,200 @@ msgstr ""
 "شما باید کد اعتبار سنجی را وارد کنید، یا فیلد را خالی کرده و اینتر را بزنید "
 "تا کد مجددا ارسال شود"
 
-#: login/login.php:2571 login/login.php:2671 login/login.php:2720
-#: login/login.php:3159
+#: login/login.php:2790 login/login.php:2890 login/login.php:2939
+#: login/login.php:3378
 msgid "OTP Code"
 msgstr "کد یکبار مصرف"
 
-#: login/login.php:2580 login/login.php:2680 login/login.php:2729
-#: login/login.php:3098 login/login.php:3168
+#: login/login.php:2799 login/login.php:2899 login/login.php:2948
+#: login/login.php:3317 login/login.php:3387
 msgid ""
 "You have to enter an OTP code or leave it empty and press Enter to receive a "
 "new one"
 msgstr "شما باید کد یکبار مصرف را بصورت اعداد انگلیسی وارد کنید"
 
-#: login/login.php:2615 login/login.php:3195
+#: login/login.php:2834 login/login.php:3414
 msgid "Verify OTP Code"
 msgstr "تایید کد یکبار مصرف"
 
-#: login/login.php:2616 login/login.php:2617 login/login.php:3194
+#: login/login.php:2835 login/login.php:2836 login/login.php:3413
 msgid "Receive OTP Code"
 msgstr "دریافت کد یکبار مصرف"
 
-#: login/login.php:2618
+#: login/login.php:2837
 msgid "Login via OTP/Password"
 msgstr "ورود با کد یکبار مصرف / رمز عبور"
 
-#: login/login.php:2643
+#: login/login.php:2862
 msgid "Username"
 msgstr "نام کاربری"
 
-#: login/login.php:2647
+#: login/login.php:2866
 msgid "Enter username correctly"
 msgstr "نام کاربری را به درستی وارد کنید"
 
-#: login/login.php:2657 login/login.php:2998
+#: login/login.php:2876 login/login.php:3217
 msgid "Email"
 msgstr "ایمیل"
 
-#: login/login.php:2661 login/login.php:3061
+#: login/login.php:2880 login/login.php:3280
 msgid "Enter email address correctly"
 msgstr "ایمیل را به درستی وارد کنید"
 
-#: login/login.php:2793 login/login.php:3744
+#: login/login.php:3012 login/login.php:3966
 msgid "Confirm Password"
 msgstr "تایید رمز عبور"
 
-#: login/login.php:2811
+#: login/login.php:3030
 msgid "Receive OTP & Register"
 msgstr "دریافت کد یکبار مصرف ثبت نام"
 
-#: login/login.php:2812
+#: login/login.php:3031
 msgid "Verify OTP & Register"
 msgstr "تایید کد یکبار مصرف و ثبت نام"
 
-#: login/login.php:3032
+#: login/login.php:3251
 msgid "Receive Code"
 msgstr "دریافت کد یکبار مصرف"
 
-#: login/login.php:3067
+#: login/login.php:3286
 msgid "New Password"
 msgstr "کلمه عبور جدید"
 
-#: login/login.php:3077
+#: login/login.php:3296
 msgid "Confirm New Password"
 msgstr "تایید کلمه عبور جدید"
 
-#: login/login.php:3089
+#: login/login.php:3308
 msgid "Email OTP Verification"
 msgstr "اعتبار سنجی ایمیل"
 
-#: login/login.php:3123
+#: login/login.php:3342
 msgid "Receive OTP & Reset Password"
 msgstr "دریافت کد یکبار مصرف تغییر رمز"
 
-#: login/login.php:3124
+#: login/login.php:3343
 msgid "Verify OTP & Reset Password"
 msgstr "تایید کد یکبار مصرف و تغییر رمز"
 
-#: login/login.php:3363
+#: login/login.php:3585
 msgctxt "metabox"
 msgid "Email Verified"
 msgstr "ایمیل تایید شده"
 
-#: login/login.php:3364
+#: login/login.php:3586
 msgctxt "metabox"
 msgid "SMS Verified"
 msgstr "موبایل تایید شده"
 
-#: login/login.php:3407
+#: login/login.php:3629
 msgid "Read value"
 msgstr "مشاهده"
 
-#: login/login.php:3425
+#: login/login.php:3647
 msgctxt "wc-setting-js"
 msgid "Operation done successfully"
 msgstr "عملیات با موفقیت انجام شد"
 
-#: login/login.php:3426
+#: login/login.php:3648
 msgctxt "js-translate"
 msgid "An unknown error occured"
 msgstr "خطای ناشناخته رخ داد"
 
-#: login/login.php:3427
+#: login/login.php:3649
 msgctxt "js-translate"
 msgid "Plese fix errors in form"
 msgstr "خطاهای فرم را برطرف کنید"
 
-#: login/login.php:3440 login/login.php:3893
+#: login/login.php:3662 login/login.php:4115
 msgid "Personal Information"
 msgstr "اطلاعات شخصی"
 
-#: login/login.php:3587 login/login.php:3589
+#: login/login.php:3809 login/login.php:3811
 msgctxt "reg-form-error"
 msgid "<strong>Error:</strong> This mobile number is currently in use."
 msgstr "<strong>خطا:</strong> شماره موبایل قبلا ثبت شده است."
 
-#: login/login.php:3696
+#: login/login.php:3918
 #, php-format
 msgctxt "reg-form-error"
 msgid "<strong>Error:</strong> This mobile number is currently in use by %s."
 msgstr "<strong>خطا:</strong> شماره موبایل توسط %s در حال استفاده است."
 
-#: login/login.php:3763
+#: login/login.php:3985
 msgid "Home page"
 msgstr "صفحه اصلی"
 
-#: login/login.php:3767
+#: login/login.php:3989
 msgid "Pepro Profile page"
 msgstr "صفحه پروفایل کاربر در پروفایل پپرو"
 
-#: login/login.php:3771
+#: login/login.php:3993
 msgid "Pepro Profile Edit page"
 msgstr "صفحه ویرایش حساب کاربر در پروفایل پپرو"
 
-#: login/login.php:3830
+#: login/login.php:4052
 msgid "Everyone"
 msgstr "هر کاربری با هر نقشی"
 
-#: login/login.php:3850
+#: login/login.php:4072
 msgid "Text field"
 msgstr "فیلد متنی"
 
-#: login/login.php:3851
+#: login/login.php:4073
 msgid "Textarea field"
 msgstr "فیلد چندخطی"
 
-#: login/login.php:3852
+#: login/login.php:4074
 msgid "Number field"
 msgstr "فیلد عددی"
 
-#: login/login.php:3853
+#: login/login.php:4075
 msgid "Email field"
 msgstr "فیلد ایمیل"
 
-#: login/login.php:3854
+#: login/login.php:4076
 msgid "Mobile field"
 msgstr "فیلد موبایل"
 
-#: login/login.php:3855
+#: login/login.php:4077
 msgid "TinyMCE Editor"
 msgstr "فیلد ویرایشگر پیشرفته"
 
-#: login/login.php:3856
+#: login/login.php:4078
 msgid "Dropdown list"
 msgstr "لیست کرکره ای"
 
-#: login/login.php:3859
+#: login/login.php:4081
 msgid "reCaptcha"
 msgstr "ریکپچای گوگل"
 
-#: login/login.php:3909
+#: login/login.php:4131
 #, php-format
 msgid "Verification Code: [OTP] — %s"
 msgstr "کد تایید حساب شما: [OTP] — %s"
 
-#: login/login.php:3917 profile/profile.php:68
+#: login/login.php:4139 profile/profile.php:69
 msgid "Profile"
 msgstr "پروفایل"
 
-#: login/login.php:4180
+#: login/login.php:4402
 msgctxt "loginregister"
 msgid "Manage Login/Register"
 msgstr "مدیریت لاگین/ریجستر"
 
-#: login/login.php:4460
+#: login/login.php:4682
 #, php-format
 msgctxt "login-section"
 msgid "%1$s Your login page is now here: %2$s. Bookmark this page!"
 msgstr "%1$s صفحه لاگین فعلی شما: %2$s. این آدرس را ذخیره کنید!"
 
-#: login/login.php:4461
+#: login/login.php:4683
 msgctxt "login-section"
 msgid "Warning!"
 msgstr "اخطار!"
 
-#: login/login.php:4474
+#: login/login.php:4696
 #, php-format
 msgid "OTP SMS sent to %s.<br>Response: %s"
 msgstr "پیامک تست ارسال شد به %s. <br>نتیجه بازگشتی: %s"
@@ -2181,7 +2257,7 @@ msgctxt "profile-section"
 msgid "Dashboard page"
 msgstr "پیشخوان کاربر"
 
-#: profile/libs/general/activated.php:50 profile/profile.php:1619
+#: profile/libs/general/activated.php:50 profile/profile.php:1699
 #, php-format
 msgid ""
 "Current selected dashboard page's template should be 'PeproDev Ultimate "
@@ -2191,7 +2267,7 @@ msgstr ""
 "%s"
 
 #: profile/libs/general/activated.php:53
-#: profile/libs/templates/wc/my-address.php:71 profile/profile.php:1622
+#: profile/libs/templates/wc/my-address.php:71 profile/profile.php:1702
 msgid "Edit"
 msgstr "ویرایش"
 
@@ -2318,35 +2394,132 @@ msgctxt "profile-section"
 msgid "Global JS"
 msgstr "کد JS گلوبال"
 
+#: profile/libs/general/newsletter_panel.php:10
 #: profile/libs/general/notifs_panel.php:11
-#: profile/libs/general/sections_panel.php:10 profile/profile.php:2580
+#: profile/libs/general/sections_panel.php:10 profile/profile.php:2682
 msgctxt "notifications-priority"
 msgid "Urgent"
 msgstr "فوری"
 
+#: profile/libs/general/newsletter_panel.php:11
 #: profile/libs/general/notifs_panel.php:12
-#: profile/libs/general/sections_panel.php:11 profile/profile.php:2581
+#: profile/libs/general/sections_panel.php:11 profile/profile.php:2683
 msgctxt "notifications-priority"
 msgid "High"
 msgstr "مهم"
 
+#: profile/libs/general/newsletter_panel.php:12
 #: profile/libs/general/notifs_panel.php:13
-#: profile/libs/general/sections_panel.php:12 profile/profile.php:2582
+#: profile/libs/general/sections_panel.php:12 profile/profile.php:2684
 msgctxt "notifications-priority"
 msgid "Medium"
 msgstr "متوسط"
 
+#: profile/libs/general/newsletter_panel.php:13
 #: profile/libs/general/notifs_panel.php:14
-#: profile/libs/general/sections_panel.php:13 profile/profile.php:2583
+#: profile/libs/general/sections_panel.php:13 profile/profile.php:2685
 msgctxt "notifications-priority"
 msgid "Low"
 msgstr "کم"
 
+#: profile/libs/general/newsletter_panel.php:14
 #: profile/libs/general/notifs_panel.php:15
-#: profile/libs/general/sections_panel.php:14 profile/profile.php:2584
+#: profile/libs/general/sections_panel.php:14 profile/profile.php:2686
 msgctxt "notifications-priority"
 msgid "Normal"
 msgstr "معمولی"
+
+#: profile/libs/general/newsletter_panel.php:15
+#: profile/libs/general/sections_panel.php:15
+msgctxt "section-panel"
+msgid "Red"
+msgstr "قرمز"
+
+#: profile/libs/general/newsletter_panel.php:16
+#: profile/libs/general/sections_panel.php:16
+msgctxt "section-panel"
+msgid "Orange"
+msgstr "نارنجی"
+
+#: profile/libs/general/newsletter_panel.php:17
+#: profile/libs/general/sections_panel.php:17
+msgctxt "section-panel"
+msgid "Blue"
+msgstr "آبی"
+
+#: profile/libs/general/newsletter_panel.php:18
+#: profile/libs/general/sections_panel.php:18
+msgctxt "section-panel"
+msgid "Green"
+msgstr "سبز"
+
+#: profile/libs/general/newsletter_panel.php:19
+#: profile/libs/general/sections_panel.php:19
+msgctxt "section-panel"
+msgid "Dark"
+msgstr "تاریک"
+
+#: profile/libs/general/newsletter_panel.php:28
+msgctxt "section-panel"
+msgid "Manage Newsletter Subscriber"
+msgstr "مدیریت کاربران خبرنامه"
+
+#: profile/libs/general/newsletter_panel.php:29
+msgctxt "section-panel"
+msgid "You can manage Newsletter Subscribers from here"
+msgstr "شما میتوانید کاربران خبرنامه را از این صفحه مدیریت کنید"
+
+#: profile/libs/general/newsletter_panel.php:33
+msgctxt "notif-panel"
+msgid "Export All Users to Excel CSV"
+msgstr "خروجی همه اعضا به اکسل CSV"
+
+#: profile/libs/general/newsletter_panel.php:34
+msgctxt "notif-panel"
+msgid "Show ALL at Once"
+msgstr "نمایش تمامی اعضا یکجا"
+
+#: profile/libs/general/newsletter_panel.php:35
+msgctxt "notif-panel"
+msgid "Clear Database"
+msgstr "خالی کردن دیتابیس"
+
+#: profile/libs/general/newsletter_panel.php:38
+#, php-format
+msgid "Total Records: %s"
+msgstr "تعداد اعضا: %s"
+
+#: profile/libs/general/newsletter_panel.php:44
+#: profile/libs/general/sections_panel.php:171
+msgctxt "section-panel"
+msgid "Date"
+msgstr "تاريخ"
+
+#: profile/libs/general/newsletter_panel.php:45
+msgctxt "section-panel"
+msgid "Name"
+msgstr "نام"
+
+#: profile/libs/general/newsletter_panel.php:46
+msgctxt "section-panel"
+msgid "Mobile"
+msgstr "موبایل"
+
+#: profile/libs/general/newsletter_panel.php:47
+msgctxt "section-panel"
+msgid "Email"
+msgstr "ایمیل"
+
+#: profile/libs/general/newsletter_panel.php:48
+msgctxt "section-panel"
+msgid "UID"
+msgstr "آیدی"
+
+#: profile/libs/general/newsletter_panel.php:49
+#: profile/libs/general/sections_panel.php:177
+msgctxt "section-panel"
+msgid "Action"
+msgstr "عملیات"
 
 #: profile/libs/general/notifs_panel.php:16
 msgctxt "notif-panel"
@@ -2580,31 +2753,6 @@ msgctxt "notif-panel"
 msgid "Cancel"
 msgstr "لغو"
 
-#: profile/libs/general/sections_panel.php:15
-msgctxt "section-panel"
-msgid "Red"
-msgstr "قرمز"
-
-#: profile/libs/general/sections_panel.php:16
-msgctxt "section-panel"
-msgid "Orange"
-msgstr "نارنجی"
-
-#: profile/libs/general/sections_panel.php:17
-msgctxt "section-panel"
-msgid "Blue"
-msgstr "آبی"
-
-#: profile/libs/general/sections_panel.php:18
-msgctxt "section-panel"
-msgid "Green"
-msgstr "سبز"
-
-#: profile/libs/general/sections_panel.php:19
-msgctxt "section-panel"
-msgid "Dark"
-msgstr "تاریک"
-
 #: profile/libs/general/sections_panel.php:28
 msgctxt "section-panel"
 msgid "Profile Sections"
@@ -2774,11 +2922,6 @@ msgctxt "section-panel"
 msgid "Close"
 msgstr "نزدیک"
 
-#: profile/libs/general/sections_panel.php:171
-msgctxt "section-panel"
-msgid "Date"
-msgstr "تاريخ"
-
 #: profile/libs/general/sections_panel.php:172
 msgctxt "section-panel"
 msgid "Title"
@@ -2798,11 +2941,6 @@ msgstr "دسترسی کاربران"
 msgctxt "section-panel"
 msgid "Priority"
 msgstr "اهمیت"
-
-#: profile/libs/general/sections_panel.php:177
-msgctxt "section-panel"
-msgid "Action"
-msgstr "عملیات"
 
 #: profile/libs/general/sections_panel.php:198
 msgctxt "section-panel"
@@ -2883,12 +3021,12 @@ msgstr "پیام ها"
 
 #: profile/libs/templates/dash-announcements.php:13
 #: profile/libs/templates/dash-notifications.php:13
-#: profile/libs/templates/tmplt-top-notif.php:12 profile/profile.php:1287
+#: profile/libs/templates/tmplt-top-notif.php:12 profile/profile.php:1367
 msgid "You have no new notification."
 msgstr "شما هیچ پیام خوانده نشده ندارید."
 
 #: profile/libs/templates/dash-announcements.php:15
-#: profile/libs/templates/tmplt-top-notif.php:17 profile/profile.php:1295
+#: profile/libs/templates/tmplt-top-notif.php:17 profile/profile.php:1375
 #, php-format
 msgid "You have %s unread announcements."
 msgstr "شما %s پیام خوانده نشده دارید."
@@ -2910,12 +3048,12 @@ msgctxt "user-dashboard"
 msgid "Downloads"
 msgstr "دانلودها"
 
-#: profile/libs/templates/dash-downloads.php:45 profile/profile.php:701
+#: profile/libs/templates/dash-downloads.php:45 profile/profile.php:766
 msgid "No downloads available yet."
 msgstr "متاسفانه هیچ دانلودی در دسترس نیست."
 
 #: profile/libs/templates/dash-downloads.php:47
-#: profile/libs/templates/wc/orders.php:149 profile/profile.php:703
+#: profile/libs/templates/wc/orders.php:149 profile/profile.php:768
 msgid "Browse products"
 msgstr "مشاهده محصولات"
 
@@ -3195,12 +3333,12 @@ msgstr "لطفا تمامی فیلد های ضروری را پر کنید."
 msgid "Error, File is too large. Maximum file size is %s MB"
 msgstr "خطا، فایل خیلی بزرگ است. حداکثر حجم مجاز %s مگابایت است"
 
-#: profile/libs/templates/tmplt-top-notif.php:13 profile/profile.php:1289
+#: profile/libs/templates/tmplt-top-notif.php:13 profile/profile.php:1369
 #, php-format
 msgid "You have %s unread notifications."
 msgstr "شما %s اطلاعیه خوانده نشده دارید."
 
-#: profile/libs/templates/tmplt-top-notif.php:16 profile/profile.php:1293
+#: profile/libs/templates/tmplt-top-notif.php:16 profile/profile.php:1373
 msgid "You have no new announcement."
 msgstr "شما هیچ پیام خوانده نشده ندارید."
 
@@ -3249,11 +3387,11 @@ msgstr "آدرس حمل و نقل"
 msgid "You have not set up this type of address yet."
 msgstr "شما هنوز این نوع آدرس را ایجاد نکردید."
 
-#: profile/libs/templates/wc/order-downloads.php:55 profile/profile.php:668
+#: profile/libs/templates/wc/order-downloads.php:55 profile/profile.php:733
 msgid "&infin;"
 msgstr "&infin;"
 
-#: profile/libs/templates/wc/order-downloads.php:61 profile/profile.php:674
+#: profile/libs/templates/wc/order-downloads.php:61 profile/profile.php:739
 msgid "Never"
 msgstr "هرگز"
 
@@ -3297,263 +3435,295 @@ msgstr "بروزرسانی های سفارش"
 msgid "l jS \\o\\f F Y, h:ia"
 msgstr "l jS \\o\\f F Y, h:ia"
 
-#: profile/profile.php:67
+#: profile/profile.php:68
 msgid "PeproDev Ultimate Profile Solutions — Profile"
 msgstr "سولوشن کامل پروفایل پپرو — پروفایل"
 
-#: profile/profile.php:69
+#: profile/profile.php:70
 msgid "Profile Setting"
 msgstr "تنظیمات پروفایل"
 
-#: profile/profile.php:70
+#: profile/profile.php:71
 msgid "Modern profile for users"
 msgstr "پیشخوان مدرن پروفایل کاربران"
 
-#: profile/profile.php:94
+#: profile/profile.php:95
 #, php-format
 msgid "Copyright (c) %s Pepro Dev, All rights reserved"
 msgstr "تمامی حقوق مادی و معنوی تا سال (%s) برای مرکز توسعه پپرو محفوظ است"
 
-#: profile/profile.php:158 profile/profile.php:3044
+#: profile/profile.php:139 profile/profile.php:2928
+msgid "No subscriber found!"
+msgstr "هیچ عضوی یافت نشد!"
+
+#: profile/profile.php:202 profile/profile.php:3215
 msgid "User Dashboard"
 msgstr "پیشخوان کاربر"
 
-#: profile/profile.php:236
+#: profile/profile.php:280
 msgid "Sections"
 msgstr "بخش های پروفایل"
 
-#: profile/profile.php:237
+#: profile/profile.php:281
 msgid "Manage Sections"
 msgstr "مدیریت بخش ها"
 
-#: profile/profile.php:246 profile/profile.php:2341
+#: profile/profile.php:290 profile/profile.php:2443
 msgid "Notifications"
 msgstr "اطلاعیه"
 
-#: profile/profile.php:247
+#: profile/profile.php:291
 msgid "Manage Notifications"
 msgstr "مدیریت اطلاع رسانی ها"
 
-#: profile/profile.php:256
+#: profile/profile.php:300
 msgid "Shortcodes"
 msgstr "شورتکد ها"
 
-#: profile/profile.php:257
+#: profile/profile.php:301
 msgid "Manage Shortcodes"
 msgstr "مدیریت شورتکد ها"
 
-#: profile/profile.php:330
+#: profile/profile.php:310
+msgid "Newsletter"
+msgstr "خبرنامه"
+
+#: profile/profile.php:311
+msgid "Manage Newsletter Subscriber"
+msgstr "مدیریت اعضای خبرنامه"
+
+#: profile/profile.php:384
 msgid "Get User info"
 msgstr "دریافت اطلاعات کاربر"
 
-#: profile/profile.php:332
+#: profile/profile.php:386
 msgid "The meta key to retrieve"
 msgstr "کلید متا برای دریافت اطلاعات"
 
-#: profile/profile.php:333
+#: profile/profile.php:387
 msgid "Default data if meta does not exist or is empty"
 msgstr "مقدار پیشفرض اگر متا خالی بود یا وجود نداشت"
 
-#: profile/profile.php:338
+#: profile/profile.php:392
 msgid "Display Pepro Profile on front-end, requires it's special page template"
 msgstr "نمایش محتوای اصلی افزونه پروفایل، نیازمند تنظیمات تمپلت برگه است"
 
-#: profile/profile.php:342
+#: profile/profile.php:396
 msgid "Returns Profile's Dashboard URL/Link"
 msgstr "آدرس صفحه / لینک خروج از حساب کاربری"
 
-#: profile/profile.php:344
+#: profile/profile.php:398
 msgid "Dashboard URL call-to-action anchor text, leave empty to return url"
 msgstr "متن انکر لینک داشبورد، برای دریافت لینک خالی رها کنید"
 
-#: profile/profile.php:345
+#: profile/profile.php:399
 msgid "Dashboard URL call-to-action anchor class"
 msgstr "کلاس انکر لینک داشبورد"
 
-#: profile/profile.php:346
+#: profile/profile.php:400
 msgid "Dashboard Section, leave empty to use dashboard home"
 msgstr "سکشن داشبورد، برای پیشخوان خالی رها کنید"
 
-#: profile/profile.php:347
+#: profile/profile.php:401
 msgid ""
 "Content instead of Dashboard URL call-to-action anchor, use {url} to replace "
 "with anchor link"
 msgstr ""
 "محتوا به جای انکر لینک داشبورد، از {url} برای لینک داشبورد استفاده کنید"
 
-#: profile/profile.php:348
+#: profile/profile.php:402
 msgid ""
 "Content instead of Dashboard URL call-to-action, use {url} to replace with "
 "anchor link"
 msgstr "محتوا به جای لینک داشبورد، از {url} برای لینک داشبورد استفاده کنید"
 
-#: profile/profile.php:353
+#: profile/profile.php:407
 msgid "Profile Card 1"
 msgstr "شورتکد کارت 1"
 
-#: profile/profile.php:357
+#: profile/profile.php:411
 msgid "Profile Card 2"
 msgstr "شورتکد کارت 2"
 
-#: profile/profile.php:359 profile/profile.php:366 profile/profile.php:376
+#: profile/profile.php:413 profile/profile.php:420 profile/profile.php:430
 msgid "Title"
 msgstr "عنوان"
 
-#: profile/profile.php:364
+#: profile/profile.php:418
 msgid "Profile Card 3"
 msgstr "شورتکد کارت 3"
 
-#: profile/profile.php:367 profile/profile.php:377
+#: profile/profile.php:421 profile/profile.php:431
 msgid "Icon class"
 msgstr "کلاس آیکون"
 
-#: profile/profile.php:368
+#: profile/profile.php:422
 msgid "Background Color (CSS)"
 msgstr "رنگ بکگراند CSS"
 
-#: profile/profile.php:369
+#: profile/profile.php:423
 msgid "Padding (CSS)"
 msgstr "پدینگ CSS"
 
-#: profile/profile.php:374
+#: profile/profile.php:428
 msgid "Profile Card 4"
 msgstr "شورتکد کارت 4"
 
-#: profile/profile.php:382
+#: profile/profile.php:436
 msgid "WooCommerce Stats"
 msgstr "آمار ووکامرس"
 
-#: profile/profile.php:386
+#: profile/profile.php:440
 msgid "WooCommerce Orders"
 msgstr "سفارشات ووکامرس"
 
-#: profile/profile.php:388
+#: profile/profile.php:442
 msgid "Limit items to show"
 msgstr "تعداد قابل نمایش"
 
-#: profile/profile.php:393
+#: profile/profile.php:447
 msgid "WooCommerce Downloads"
 msgstr "دانلودهای ووکامرس"
 
-#: profile/profile.php:395
+#: profile/profile.php:449
 msgid "WooCommerce Category ID"
 msgstr "دسته بندی ووکامرس"
 
-#: profile/profile.php:400
+#: profile/profile.php:454
 msgid "LearnDash Enrolled Courses"
 msgstr "دوره‎‌های ثبت‌نامی لرن دش"
 
-#: profile/profile.php:402
+#: profile/profile.php:456
 msgid "LearnDash Category ID"
 msgstr "دسته بندی لرن دش"
 
-#: profile/profile.php:512
+#: profile/profile.php:461
+msgid "A form for Mobile Newsletter subscription (SMS Verified Memebers)"
+msgstr "یک فرم برای ثبت نام کاربران در خبرنامه پیامکی (با تایید شماره موبایل)"
+
+#: profile/profile.php:463
+msgid "Submit button classes"
+msgstr "کلاس های دکمه ثبت"
+
+#: profile/profile.php:464
+msgid "Translation for Subscribe"
+msgstr "ترجمه عضویت"
+
+#: profile/profile.php:465
+msgid "Translation for Mobile"
+msgstr "ترجمه موبایل"
+
+#: profile/profile.php:466
+msgid "Translation for Name"
+msgstr "ترجمه نام"
+
+#: profile/profile.php:467
+msgid "Translation for Verify"
+msgstr "ترجمه کد تایید"
+
+#: profile/profile.php:577
 msgid "User info"
 msgstr "اطلاعات کاربر"
 
-#: profile/profile.php:516
+#: profile/profile.php:581
 msgid "White Card"
 msgstr "کارت سفید"
 
-#: profile/profile.php:520
+#: profile/profile.php:585
 msgid "Grey Card"
 msgstr "کارت خاکستری"
 
-#: profile/profile.php:524
+#: profile/profile.php:589
 msgid "Colored Card"
 msgstr "کارت رنگی"
 
-#: profile/profile.php:528
+#: profile/profile.php:593
 msgid "Black Card"
 msgstr "کارت مشکی"
 
-#: profile/profile.php:535
+#: profile/profile.php:600
 msgid "WC Stats"
 msgstr "آمار ووکامرس"
 
-#: profile/profile.php:539
+#: profile/profile.php:604
 msgid "WC Orders"
 msgstr "سفارشات ووکامرس"
 
-#: profile/profile.php:543
+#: profile/profile.php:608
 msgid "WC Downloads"
 msgstr "دانلودهای ووکامرس"
 
-#: profile/profile.php:551
+#: profile/profile.php:616
 msgid "Learndash Enrolled Courses"
 msgstr "دوره‎‌های ثبت‌نامی لرن دش"
 
-#: profile/profile.php:729
-msgid "Name"
-msgstr "نام"
-
-#: profile/profile.php:730
+#: profile/profile.php:795
 msgid "View"
 msgstr "مشاهده"
 
-#: profile/profile.php:899
+#: profile/profile.php:964
 msgid "on-hold orders"
 msgstr "سفارشات در انتظار"
 
-#: profile/profile.php:916
+#: profile/profile.php:981
 msgid "processing orders"
 msgstr "سفارشات درحال پردازش"
 
-#: profile/profile.php:933
+#: profile/profile.php:998
 msgid "completed orders"
 msgstr "سفارشات تکمیل شده"
 
-#: profile/profile.php:953
+#: profile/profile.php:1018
 msgid "your wallet balance"
 msgstr "موجودی کیف پول شما"
 
-#: profile/profile.php:1112
+#: profile/profile.php:1177
 msgctxt "user-dashboard"
 msgid "Dashboard"
 msgstr "پیشخوان"
 
-#: profile/profile.php:1187 profile/profile.php:1207
+#: profile/profile.php:1252 profile/profile.php:1272 profile/profile.php:1287
 msgid "Error validating form, please check marked fields."
 msgstr "خطا در تایید داده های فرم، مجددا تلاش کنید."
 
-#: profile/profile.php:1188 profile/profile.php:1208
+#: profile/profile.php:1253 profile/profile.php:1273 profile/profile.php:1288
 msgid "Error parsing item data."
 msgstr "خطا در خواندن داده ی آیتم."
 
-#: profile/profile.php:1189 profile/profile.php:1209
+#: profile/profile.php:1254 profile/profile.php:1274 profile/profile.php:1289
 msgid "An unknown error occurred."
 msgstr "خطای پیش بینی نشده رخ داد."
 
-#: profile/profile.php:1279
+#: profile/profile.php:1359
 msgid "There was a problem with your request. Error 0x10041"
 msgstr ""
 "این یک خطای پیش بینی نشده است و متاسفانه سیستم قادر به انجام وظیفه نمیباشد. "
 "خطای 0x10041"
 
-#: profile/profile.php:1300
+#: profile/profile.php:1380
 msgid "Done"
 msgstr "انجام شد"
 
-#: profile/profile.php:1314
+#: profile/profile.php:1394
 msgid "There was a problem with your request. Error 0x10027"
 msgstr ""
 "این یک خطای پیش بینی نشده است و متاسفانه سیستم قادر به انجام وظیفه نمیباشد. "
 "خطای 0x10027"
 
-#: profile/profile.php:1317
+#: profile/profile.php:1397
 msgid "There was a problem with your request. Error 0x00010"
 msgstr ""
 "این یک خطای پیش بینی نشده است و متاسفانه سیستم قادر به انجام وظیفه نمیباشد. "
 "خطای 0x10010"
 
-#: profile/profile.php:1355
+#: profile/profile.php:1435
 msgid ""
 "There was an error uploading your file. Operation Aborted, Error 0x100953."
 msgstr ""
 "خطایی هنگام آپلود پیش آمد و متاسفانه سیستم قادر به انجام وظیفه نمیباشد. خطای "
 "0x100953."
 
-#: profile/profile.php:1361
+#: profile/profile.php:1441
 msgid ""
 "There was an error uploading your file. Please check file type and size. "
 "Operation Aborted, Error 0x100954."
@@ -3561,177 +3731,186 @@ msgstr ""
 "خطایی هنگام آپلود پیش آمد، لطفا اندازه و فرمت فایل را مجددا چک کنید. خطای "
 "0x100954."
 
-#: profile/profile.php:1366
+#: profile/profile.php:1446
 msgid "First name"
 msgstr "نام کوچک"
 
-#: profile/profile.php:1367
+#: profile/profile.php:1447
 msgid "Last name"
 msgstr "نام خانوادگی"
 
-#: profile/profile.php:1368
+#: profile/profile.php:1448
 msgid "Email address"
 msgstr "آدرس ایمیل"
 
-#: profile/profile.php:1385
+#: profile/profile.php:1465
 #, php-format
 msgid "%s is a required field."
 msgstr "%s یک فیلد ضروری است."
 
-#: profile/profile.php:1408 profile/profile.php:1412
+#: profile/profile.php:1488 profile/profile.php:1492
 msgid "Please provide a valid email address."
 msgstr "لطفا یک آدرس ایمیل معتبر وارد کنید."
 
-#: profile/profile.php:1416
+#: profile/profile.php:1496
 msgid "This email address is already registered."
 msgstr "این آدرس قبلا ثبت شده است."
 
-#: profile/profile.php:1443
+#: profile/profile.php:1523
 msgid "Please fill out all password fields."
 msgstr "لطفا همه فیلد های کلمه عبور را وارد کنید."
 
-#: profile/profile.php:1448
+#: profile/profile.php:1528
 msgid "Please enter your current password."
 msgstr "لطفا کلمه عبور فعلی را وارد کنید."
 
-#: profile/profile.php:1453
+#: profile/profile.php:1533
 msgid "New password and Confirm password does not match."
 msgstr "رمز عبور و تایید رمز عبور یکسان نیستند."
 
-#: profile/profile.php:1458
+#: profile/profile.php:1538
 msgid "Your current password is incorrect."
 msgstr "کلمه عبور فعلی اشتباه وارد شده است."
 
-#: profile/profile.php:1486
+#: profile/profile.php:1566
 msgid "Profile Updated successfully."
 msgstr "اطلاعات پروفایل با موفقیت ویرایش شد."
 
-#: profile/profile.php:1493
+#: profile/profile.php:1573
 msgid "There was a problem with your request. Error 0x10030"
 msgstr ""
 "این یک خطای پیش بینی نشده است و متاسفانه سیستم قادر به انجام وظیفه نمیباشد. "
 "خطای 0x10030"
 
-#: profile/profile.php:1497
+#: profile/profile.php:1577
 msgid "There was a problem with your request. Error 0x10028"
 msgstr ""
 "این یک خطای پیش بینی نشده است و متاسفانه سیستم قادر به انجام وظیفه نمیباشد. "
 "خطای 0x10028"
 
-#: profile/profile.php:1500
+#: profile/profile.php:1580
 msgid "There was a problem with your request. Error 0x10034"
 msgstr ""
 "این یک خطای پیش بینی نشده است و متاسفانه سیستم قادر به انجام وظیفه نمیباشد. "
 "خطای 0x10034"
 
-#: profile/profile.php:1542
+#: profile/profile.php:1622
 #, php-format
 msgid "%s Successfully Activated."
 msgstr "%s با موفقیت فعال شد."
 
-#: profile/profile.php:1553
+#: profile/profile.php:1633
 #, php-format
 msgid "%s Successfully Deactivated."
 msgstr "%s با موفقیت غیر فعال شد."
 
-#: profile/profile.php:1642 profile/profile.php:1754
+#: profile/profile.php:1722 profile/profile.php:1856
 msgid "There was a problem with your request. Title field is required."
 msgstr "مشکلی با درخواست شما وجود دارد. فیلد عنوان را بررسی کنید."
 
-#: profile/profile.php:1644 profile/profile.php:1646
+#: profile/profile.php:1724 profile/profile.php:1726
 msgid "There was a problem with your request. Unique Slug field is required."
 msgstr "مشکلی با درخواست شما وجود دارد. فیلد نامک یکتا را بررسی کنید."
 
-#: profile/profile.php:1648 profile/profile.php:1760
+#: profile/profile.php:1728 profile/profile.php:1862
 msgid "There was a problem with your request. Content field is required."
 msgstr "مشکلی با درخواست شما وجود دارد. فیلد محتوا را بررسی کنید."
 
-#: profile/profile.php:1710 profile/profile.php:1854
+#: profile/profile.php:1790 profile/profile.php:1956
 msgid "Notification edited successfully."
 msgstr "اطلاع رسانی با موفقیت ویرایش شد."
 
-#: profile/profile.php:1713 profile/profile.php:1858
+#: profile/profile.php:1793 profile/profile.php:1960
 msgid "New notification created successfully."
 msgstr "اطلاع رسانی جدید با موفقیت ایجاد شد."
 
-#: profile/profile.php:1715 profile/profile.php:1861
+#: profile/profile.php:1795 profile/profile.php:1963
 msgid "There was a problem with your request. Error 0x1001"
 msgstr ""
 "این یک خطای پیش بینی نشده است و متاسفانه سیستم قادر به انجام وظیفه نمیباشد"
 
-#: profile/profile.php:1724 profile/profile.php:1744 profile/profile.php:1871
+#: profile/profile.php:1804 profile/profile.php:1824 profile/profile.php:1833
+#: profile/profile.php:1973
 msgid "There was a problem with your request."
 msgstr "مشکلی با درخواست شما وجود دارد."
 
-#: profile/profile.php:1731
+#: profile/profile.php:1811
 msgid "Section edited successfully."
 msgstr "بخش پیشفرض با موفقیت ویرایش شد."
 
-#: profile/profile.php:1736 profile/profile.php:1876
+#: profile/profile.php:1816 profile/profile.php:1978
 msgid "Notification searched successfully."
 msgstr "جستجوی اطلاع رسانی انجام شد."
 
-#: profile/profile.php:1742
+#: profile/profile.php:1822
 msgid "Section removed successfully."
 msgstr "بخش با موفقیت حذف شد."
 
-#: profile/profile.php:1771
+#: profile/profile.php:1831
+msgid "Subscriber removed successfully."
+msgstr "کاربر با موفقیت از خبرنامه حذف شد."
+
+#: profile/profile.php:1847
+msgid "File is loaded to your pc!"
+msgstr "فایل در سیستم شما بارگیری شد!"
+
+#: profile/profile.php:1873
 msgid "There was a problem with your request. Priority field is required."
 msgstr "مشکلی با درخواست شما وجود دارد. فیلد اهمیت را بررسی کنید."
 
-#: profile/profile.php:1782
+#: profile/profile.php:1884
 msgid "There was a problem with your request. Users List is required."
 msgstr "مشکلی با درخواست شما وجود دارد. فیلد کاربران را بررسی کنید."
 
-#: profile/profile.php:1799
+#: profile/profile.php:1901
 msgid "There was a problem with your request. Schedule date is required."
 msgstr "مشکلی با درخواست شما وجود دارد. فیلد تاریخ انتشار را بررسی کنید."
 
-#: profile/profile.php:1869
+#: profile/profile.php:1971
 msgid "Notification removed successfully."
 msgstr "اطلاع رسانی با موفقیت حذف شد."
 
-#: profile/profile.php:1988 profile/profile.php:2030 profile/profile.php:2109
-#: profile/profile.php:2155 profile/profile.php:2213
+#: profile/profile.php:2090 profile/profile.php:2132 profile/profile.php:2211
+#: profile/profile.php:2257 profile/profile.php:2315
 msgid "Priority: "
 msgstr "اهمیت: "
 
-#: profile/profile.php:1988 profile/profile.php:2034 profile/profile.php:2053
-#: profile/profile.php:2109 profile/profile.php:2159 profile/profile.php:2178
-#: profile/profile.php:2217 profile/profile.php:2236
+#: profile/profile.php:2090 profile/profile.php:2136 profile/profile.php:2155
+#: profile/profile.php:2211 profile/profile.php:2261 profile/profile.php:2280
+#: profile/profile.php:2319 profile/profile.php:2338
 #, php-format
 msgid "%s ago"
 msgstr "%s پیش"
 
-#: profile/profile.php:2289
+#: profile/profile.php:2391
 msgid "User Dashboard Page"
 msgstr "صفحه پیشخوان کاربر"
 
-#: profile/profile.php:2309
+#: profile/profile.php:2411
 msgid "Orders"
 msgstr "سفارش‌ها"
 
-#: profile/profile.php:2315
+#: profile/profile.php:2417
 msgid "Downloads"
 msgstr "دانلودها"
 
-#: profile/profile.php:2321
+#: profile/profile.php:2423
 msgid "Order Tracking"
 msgstr "رهگیری مرسولات"
 
-#: profile/profile.php:2331
+#: profile/profile.php:2433
 msgid "Wallet"
 msgstr "کیف پول"
 
-#: profile/profile.php:2347
+#: profile/profile.php:2449
 msgid "Announcements"
 msgstr "پیام ها"
 
-#: profile/profile.php:2358
+#: profile/profile.php:2460
 msgid "My Courses"
 msgstr "دوره‌های من"
 
-#: profile/profile.php:2613
+#: profile/profile.php:2715
 #, php-format
 msgctxt "notifications-priority"
 msgid "No notification found! please consider %s."
@@ -3739,64 +3918,65 @@ msgstr ""
 "هیچ اطلاع رسانی یافت نشد! شما میتوانید با کلیک روی \"%s\"، یک اطلاع رسانی "
 "جدید اضافه کنید."
 
-#: profile/profile.php:2614
+#: profile/profile.php:2716
 msgctxt "notifications-section"
 msgid "adding new one"
 msgstr "افزودن اطلاع رسانی"
 
-#: profile/profile.php:2622 profile/profile.php:2724
+#: profile/profile.php:2724 profile/profile.php:2826
 #, php-format
 msgctxt "notifications-priority"
 msgid "Sorry, your search for \"%s\" didn't match any notification!"
 msgstr "متاسفیم! نتیجه ای برای جستجوی شما با عنوان \"%s\" یافت نشد!"
 
-#: profile/profile.php:2633
+#: profile/profile.php:2735
 #, php-format
 msgctxt "notification-list-publishdate"
 msgid "Published at %s"
 msgstr "منتشر شده در %s"
 
-#: profile/profile.php:2636
+#: profile/profile.php:2738
 #, php-format
 msgctxt "notification-list-publishdate"
 msgid "Scheduled for %s"
 msgstr "زمانبندی شده برای %s"
 
-#: profile/profile.php:2639
+#: profile/profile.php:2741
 msgctxt "notification-list-publishdate"
 msgid "Current and Future users"
 msgstr "تمامی کاربران فعلی و آینده وبسایت"
 
-#: profile/profile.php:2642
+#: profile/profile.php:2744
 #, php-format
 msgctxt "notification-list-publishdate"
 msgid "For %s users"
 msgstr "برای تعداد %s کاربر"
 
-#: profile/profile.php:2677 profile/profile.php:2780
+#: profile/profile.php:2779 profile/profile.php:2882
 msgctxt "action-title"
 msgid "View"
 msgstr "مشاهده"
 
-#: profile/profile.php:2678 profile/profile.php:2781 profile/profile.php:2845
+#: profile/profile.php:2780 profile/profile.php:2883 profile/profile.php:3016
 msgctxt "action-title"
 msgid "Edit"
 msgstr "ویرایش"
 
-#: profile/profile.php:2679 profile/profile.php:2782 profile/profile.php:2846
+#: profile/profile.php:2781 profile/profile.php:2884 profile/profile.php:2956
+#: profile/profile.php:3017
 msgctxt "action-title"
 msgid "Remove"
 msgstr "حذ"
 
-#: profile/profile.php:2690 profile/profile.php:2794
+#: profile/profile.php:2792 profile/profile.php:2896 profile/profile.php:2973
 msgid "&laquo;"
 msgstr "&laquo;"
 
-#: profile/profile.php:2691 profile/profile.php:2795
+#: profile/profile.php:2793 profile/profile.php:2897 profile/profile.php:2974
 msgid "&raquo;"
 msgstr "&raquo;"
 
-#: profile/profile.php:2718
+#: profile/profile.php:2820
 #, php-format
 msgctxt "notifications-priority"
 msgid "No section found! please consider %s."
@@ -3804,33 +3984,33 @@ msgstr ""
 "هیچ بخش یافت نشد! شما میتوانید با کلیک روی \"%s\"، یک بخش جدید به پروفایل "
 "اضافه کنید."
 
-#: profile/profile.php:2718
+#: profile/profile.php:2820
 msgctxt "notifications-section"
 msgid "adding new section"
 msgstr "افزودن بخش"
 
-#: profile/profile.php:2767
+#: profile/profile.php:2869
 #, php-format
 msgid "Enrolled users of Ld-course: %s"
 msgstr "کاربران عضو دوره لرن‌دش: %s"
 
-#: profile/profile.php:2777 profile/profile.php:2842
+#: profile/profile.php:2879 profile/profile.php:3013
 msgid "— Public —"
 msgstr "— عمومی —"
 
-#: profile/profile.php:2838 profile/profile.php:2840
+#: profile/profile.php:3009 profile/profile.php:3011
 msgid "— Built-in Section —"
 msgstr "— بخش پیشفرض —"
 
-#: profile/profile.php:2872
+#: profile/profile.php:3043
 msgid "Search here ..."
 msgstr "برای جستجو، کلمه مورد نظر را تایپ کرده و Enter را بفشارید ..."
 
-#: profile/profile.php:3018
+#: profile/profile.php:3189
 msgid "Adds Pepro Profile Dashoard to page"
 msgstr "شورتکد پروفایل پپرو را به صفحه اضافه میکند"
 
-#: profile/profile.php:3024
+#: profile/profile.php:3195
 msgid "Pepro Elements"
 msgstr "ویجت های پپرو"
 
@@ -3847,6 +4027,12 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "https://pepro.dev/"
 msgstr "https://pepro.dev/"
+
+#~ msgid "Enter mobile number"
+#~ msgstr "شماره موبایل را وارد کنید"
+
+#~ msgid "Enter verify number"
+#~ msgstr "کد تایید را وارد کنید"
 
 #~ msgid "Config SMS.ir WebAPI to send SMS Verification Codes"
 #~ msgstr "تنظیمات پنل پیامکی SMS.ir برای ارسال کد اعتبار سنجی"

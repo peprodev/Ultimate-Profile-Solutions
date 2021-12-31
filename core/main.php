@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/10/17 15:36:13
+# @Last modified time: 2021/12/30 23:33:29
 if (!class_exists("PeproDevUPS_Core")){
   class PeproDevUPS_Core
   {
@@ -184,10 +184,15 @@ if (!class_exists("PeproDevUPS_Core")){
       add_action("admin_print_footer_scripts", array($this, 'admin_print_footer_scripts'));
       add_action("wp_ajax_nopriv_{$this->td}", array($this, 'handel_ajax_req'));
       add_action("wp_ajax_{$this->td}", array($this, 'handel_ajax_req'));
-      add_action( "us_theme_icon", function(){ wp_dequeue_style( "us-font-awesome" ); });
+      // add_action("us_theme_icon", function(){ wp_dequeue_style( "us-font-awesome" ); });
     }
     public function load_dashboard_before_initiated()
     {
+      wp_dequeue_style( "us-font-awesome" );
+      wp_dequeue_style( "us-core" );
+      wp_dequeue_script( "us-core" );
+      wp_dequeue_style( "us-font-awesome-duotone" );
+      wp_dequeue_style( "font-awesome" );
       wp_enqueue_style("RobotoSlabMaterialIcons", "//fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons", array(), '1.0', 'all');
       wp_enqueue_style("font-awesome", "{$this->assets_url}/fa-pro/css/all.min.css", array(), '1.0', 'all');
       wp_enqueue_style("material-dashboard", "{$this->assets_url}css/material-dashboard.min.css", array(), '2.1.0', 'all');

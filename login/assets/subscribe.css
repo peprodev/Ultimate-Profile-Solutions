@@ -1,69 +1,81 @@
 /**
- * @Author: Amirhosseinhpv
- * @Date:   2021/12/27 12:04:00
- * @Email:  its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/12/30 20:14:39
- * @License: GPLv2
- * @Copyright: Copyright © Amirhosseinhpv (https://hpv.im), all rights reserved.
+ * @Last modified time: 2021/12/31 01:58:20
  */
 
-
-.pss-subcontainer {
-  max-width: 400px;
-  display: flex;
-  align-items: center;
-  align-content: center;
-  direction: ltr;
-  text-align: left;
+subtoast {
+  display: block;
+  padding: 0.5rem 2rem;
+  background: var(--toast-bg, rgba(0, 0, 0, .8));
+  color: #fff;
+  text-align: center;
+  top: 0;
+  width: 100vw;
+  padding: 1rem 0;
+  left: 0;
+  z-index: 99999;
+  box-shadow: 0 2px 11px 0 rgba(0, 0,0, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  -moz-backdrop-filter: blur(10px);
+  transform: translateY(-110%);
+  position: fixed;
+  z-index: 9999999999999999 !important;
 }
 
-.pss-input-container{
+subtoast.active {
+  transform: translateY(0);
+}
+
+.pss-input-container {
   width: 100%;
+  position: relative;
+  margin-bottom: 1.2rem;
 }
 
 .pss-input-container input {
   width: 100%;
-}
-
-#pssverify, #pssmobile{
-  direction: ltr;
-  text-align: left;
-}
-
-.pss-input-container input {
-  font-size: 1rem;
-  font-weight: 400;
-  letter-spacing: 0;
-  border-width: 1px;
-  padding: 0.7rem;
-  border-radius: 0.2em;
-  background: transparent;
-  border-color: #e8e8e8;
-  color: inherit;
-}
-
-.pss-submit-container {
-  width: auto;
-}
-
-.pepro-sms-subscription label {
-  display: none;
 }
 
 .pepro-sms-subscription .hide {
   display: none;
 }
 
+.pss-input-container label {
+  position: absolute;
+  top: 0.7rem;
+  padding: 0 1rem;
+  margin: 0 0.5rem;
+  transition: all 0.3s ease-in-out;
+  right: 0;
+}
+
+.pss-input-container input:not([value=""]) + label,
+.pss-input-container input:focus + label {
+  padding: 0 0.5rem;
+  top: -0.6rem;
+  font-size: smaller;
+  background: var(--color-content-primary, #07b37a);
+}
+
 #pssverifysms {
-  font-size: 1rem;
-  font-weight: 400;
-  letter-spacing: 0;
-  border-width: 1px;
-  border-radius: 0.2em;
-  background: transparent;
-  border-color: #c61414;
-  color: inherit;
+  width: 100%;
   padding: 0.7rem;
-  border: 1px solid;
+}
+
+.pepro-sms-subscription .otp-changenum {
+  float: right;
+  margin-bottom: 1rem;
+}
+
+.pepro-sms-subscription .otp-resend {
+  float: left;
+  margin-bottom: 1rem;
+}
+
+.pss-submit-container a {
+  font-weight: bold;
+  font-size: small;
 }

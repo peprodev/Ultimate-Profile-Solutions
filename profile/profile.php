@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/11/08 00:26:08
+# @Last modified time: 2021/12/31 03:57:07
 if (!class_exists("PeproDevUPS_Profile")) {
     class PeproDevUPS_Profile
     {
@@ -62,6 +62,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
             $this->setting_slug      = "profile";
             $this->db_slug           = "pc_profile";
             $this->db_table          = "{$wpdb->prefix}pepro_core_profile";
+            $this->tbl_subscribers   = "{$wpdb->prefix}peprofile_subscribers";
             $this->tbl_notif         = "{$this->db_table}_notif";
             $this->tbl_sections      = "{$this->db_table}_sections";
             $this->title             = __("PeproDev Ultimate Profile Solutions — Profile", "peprodev-ups");
@@ -116,6 +117,42 @@ if (!class_exists("PeproDevUPS_Profile")) {
               ),
             );
 
+
+
+            if (isset($_GET["peprodev_subscribers"]) && "export_csv" === trim($_GET["peprodev_subscribers"])){
+
+
+              $data = array();
+              $notifs = $wpdb->get_results($wpdb->prepare("SELECT * FROM `$this->tbl_subscribers` ORDER BY `date_created` DESC"));
+              if (false !== $notifs && 0 !== $notifs && !empty($notifs)) {
+                foreach ($notifs as $notif) {
+                  $data[] = array(
+                    "date"   => $notif->date_created,
+                    "name"   => $notif->name,
+                    "mobile" => $notif->mobile,
+                    "email"  => $notif->email,
+                    "uid"    => $notif->user,
+                  );
+                }
+              }
+              else{
+                wp_die(__("No subscriber found!", "notifications-priority", $this->td));
+              }
+
+
+              $filename = "PeproDevUPS Subscribers " . current_time("timestamp").".csv";
+              header('Content-Description: File Transfer');
+              header("Content-Type: application/vnd.ms-excel; charset=utf-8");
+              header('Content-Transfer-Encoding: binary');
+              header("Content-Disposition: attachment; filename=\"$filename\"");
+              header('Expires: 0');
+              header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+              header('Pragma: no-cache');
+              header('Pragma: public');
+              echo "\xEF\xBB\xBF"; // UTF-8 BOM
+              $this->ExportFileAsExcel($data);
+            }
+
             add_action("init", array( $this, "init_plugin" ));
             if (!current_user_can('edit_posts') && !is_admin()) {
               show_admin_bar(false);
@@ -123,15 +160,22 @@ if (!class_exists("PeproDevUPS_Profile")) {
             }
             add_action("template_redirect", array( $this, "remove_yoast_wpseo") );
             add_action("template_redirect", array( $this, "template_redirect"));
-            add_action("us_theme_icon", function(){
-              wp_dequeue_style( "us-font-awesome" );
-              wp_dequeue_style( "us-core" );
-              wp_dequeue_script( "us-core" );
-              wp_dequeue_style( "us-font-awesome-duotone" );
-              wp_dequeue_style( "font-awesome" );
-            });
             add_action("admin_bar_menu",  array( $this, "admin_bar_menu_items"), 31);
             add_filter("get_avatar_url",  array( $this, "change_avatar_url"), 10, 3);
+        }
+        public function ExportFileAsExcel($records = array(), $delimiter = "," )
+        {
+          if(!empty($records)){
+            $heading = false;
+            foreach($records as $row) {
+              if(!$heading) {
+                echo implode($delimiter, array_keys($row)) . "\n";
+                $heading = true;
+              }
+              echo implode($delimiter, array_values($row)) . "\n";
+            }
+            exit;
+          }
         }
         public function template_redirect()
         {
@@ -186,36 +230,36 @@ if (!class_exists("PeproDevUPS_Profile")) {
             return array_merge( $modules,
               array(
                 array(
-                  "priority" =>         $this->priority,
-                  "id" =>               $this->id,
-                  "hwnd" =>             $this->hwnd,
-                  "instance" =>         $this->instance,
-                  "menu_label" =>       $this->menu_label,
-                  "page_label" =>       $this->page_label,
-                  "icon_html" =>        $this->icon_html,
-                  "current_version" =>  $this->current_version,
-                  "date_last_edit" =>   $this->date_last_edit,
-                  "wp_tested" =>        $this->wp_tested,
-                  "wp_minimum" =>       $this->wp_minimum,
-                  "wc_tested" =>        $this->wc_tested,
-                  "wc_minimum" =>       $this->wc_minimum,
-                  "php_minimum" =>      $this->php_minimum,
-                  "php_recomonded" =>   $this->php_recomonded,
-                  "pepc_tested" =>      $this->pepc_tested,
-                  "pepc_minimum" =>     $this->pepc_minimum,
-                  "setting_slug" =>     $this->setting_slug,
-                  "activation_status"=> $this->activation_status,
-                  "html_wrapper" =>     $this->html_wrapper,
-                  "ajax_hndlr" =>       $this->ajax_hndlr,
-                  "developer" =>        $this->developer,
-                  "developerURI" =>     $this->developerURI,
-                  "author" =>           $this->author,
-                  "authorURI" =>        $this->authorURI,
-                  "copyright" =>        $this->copyright,
-                  "license" =>          $this->license,
-                  "licenseURI" =>       $this->licenseURI,
-                  "pluginURI" =>        $this->pluginURI,
-                  "description" =>      $this->description,
+                  "priority"          => $this->priority,
+                  "id"                => $this->id,
+                  "hwnd"              => $this->hwnd,
+                  "instance"          => $this->instance,
+                  "menu_label"        => $this->menu_label,
+                  "page_label"        => $this->page_label,
+                  "icon_html"         => $this->icon_html,
+                  "current_version"   => $this->current_version,
+                  "date_last_edit"    => $this->date_last_edit,
+                  "wp_tested"         => $this->wp_tested,
+                  "wp_minimum"        => $this->wp_minimum,
+                  "wc_tested"         => $this->wc_tested,
+                  "wc_minimum"        => $this->wc_minimum,
+                  "php_minimum"       => $this->php_minimum,
+                  "php_recomonded"    => $this->php_recomonded,
+                  "pepc_tested"       => $this->pepc_tested,
+                  "pepc_minimum"      => $this->pepc_minimum,
+                  "setting_slug"      => $this->setting_slug,
+                  "activation_status" => $this->activation_status,
+                  "html_wrapper"      => $this->html_wrapper,
+                  "ajax_hndlr"        => $this->ajax_hndlr,
+                  "developer"         => $this->developer,
+                  "developerURI"      => $this->developerURI,
+                  "author"            => $this->author,
+                  "authorURI"         => $this->authorURI,
+                  "copyright"         => $this->copyright,
+                  "license"           => $this->license,
+                  "licenseURI"        => $this->licenseURI,
+                  "pluginURI"         => $this->pluginURI,
+                  "description"       => $this->description,
                 )
               )
             );
@@ -223,45 +267,55 @@ if (!class_exists("PeproDevUPS_Profile")) {
           add_filter( "peprocore_{$this->id}_dashboard_nav_menuitems", function(){
             return array(
                       array(
-                        "title" => $this->menu_label,
-                        "titleW" => $this->page_label,
-                        "icon" => $this->icon_html,
-                        "link" => "@{$this->setting_slug}",
-                        "fn" => $this->html_wrapper,
-                        "id" => $this->id,
+                        "title"    => $this->menu_label,
+                        "titleW"   => $this->page_label,
+                        "icon"     => $this->icon_html,
+                        "link"     => "@{$this->setting_slug}",
+                        "fn"       => $this->html_wrapper,
+                        "id"       => $this->id,
                         "priority" => $this->priority,
                         "activation_status"=> $this->activation_status,
                       ),
                       array(
-                        "title" => __("Sections", "peprodev-ups"),
-                        "titleW" => __("Manage Sections", "peprodev-ups"),
-                        "icon" => "<i class=\"material-icons\">manage_accounts</i>",
-                        "link" => "@sections",
-                        "fn" => array($this,"htmlwrapper_sections"),
-                        "id" => "{$this->id}_sections",
+                        "title"    => __("Sections", "peprodev-ups"),
+                        "titleW"   => __("Manage Sections", "peprodev-ups"),
+                        "icon"     => "<i class=\"material-icons\">manage_accounts</i>",
+                        "link"     => "@sections",
+                        "fn"       => array($this,"htmlwrapper_sections"),
+                        "id"       => "{$this->id}_sections",
                         "priority" => $this->priority+0.1,
                         "activation_status"=> $this->activation_status,
                       ),
                       array(
-                        "title" => __("Notifications", "peprodev-ups"),
-                        "titleW" => __("Manage Notifications", "peprodev-ups"),
-                        "icon" => "<i class=\"material-icons\">notifications</i>",
-                        "link" => "@notifications",
-                        "fn" => array($this,"htmlwrapper_notifs"),
-                        "id" => "{$this->id}_notifs",
+                        "title"    => __("Notifications", "peprodev-ups"),
+                        "titleW"   => __("Manage Notifications", "peprodev-ups"),
+                        "icon"     => "<i class=\"material-icons\">notifications</i>",
+                        "link"     => "@notifications",
+                        "fn"       => array($this,"htmlwrapper_notifs"),
+                        "id"       => "{$this->id}_notifs",
                         "priority" => $this->priority+0.2,
                         "activation_status"=> $this->activation_status,
                       ),
                       array(
-                        "title" => __("Shortcodes", "peprodev-ups"),
-                        "titleW" => __("Manage Shortcodes", "peprodev-ups"),
-                        "icon" => "<i class=\"material-icons\">auto_fix_high</i>",
-                        "link" => "@shortcodes",
-                        "fn" => array($this,"htmlwrapper_shortcodes"),
-                        "id" => "{$this->id}_shortcodes",
+                        "title"    => __("Shortcodes", "peprodev-ups"),
+                        "titleW"   => __("Manage Shortcodes", "peprodev-ups"),
+                        "icon"     => "<i class=\"material-icons\">auto_fix_high</i>",
+                        "link"     => "@shortcodes",
+                        "fn"       => array($this,"htmlwrapper_shortcodes"),
+                        "id"       => "{$this->id}_shortcodes",
                         "priority" => $this->priority+0.1,
                         "activation_status"=> $this->activation_status,
-                      )
+                      ),
+                      array(
+                        "title"    => __("Newsletter", "peprodev-ups"),
+                        "titleW"   => __("Manage Newsletter Subscriber", "peprodev-ups"),
+                        "icon"     => "<i class=\"material-icons\">auto_fix_high</i>",
+                        "link"     => "@newsletter",
+                        "fn"       => array($this,"htmlwrapper_newsletter"),
+                        "id"       => "{$this->id}_newsletter",
+                        "priority" => $this->priority+0.2,
+                        "activation_status" => $this->activation_status,
+                      ),
                     );
           });
           add_filter( "peprocore_dashboard_nav_menuitems", function ($s) {
@@ -400,6 +454,17 @@ if (!class_exists("PeproDevUPS_Profile")) {
               "title"  => __("LearnDash Enrolled Courses","peprodev-ups"),
               "syntax" => array(
                 "category" => __("LearnDash Category ID","peprodev-ups"),
+              )
+            ),
+            "pepro-sms-subscription" => array (
+              "sample" => "[pepro-sms-subscription]",
+              "title"  => __("A form for Mobile Newsletter subscription (SMS Verified Memebers)","peprodev-ups"),
+              "syntax" => array(
+                "btnclass"  => __("Submit button classes","peprodev-ups"),
+                "subscribe" => __("Translation for Subscribe","peprodev-ups"),
+                "mobile"    => __("Translation for Mobile","peprodev-ups"),
+                "name"      => __("Translation for Name","peprodev-ups"),
+                "verify"    => __("Translation for Verify","peprodev-ups"),
               )
             ),
           );
@@ -1182,11 +1247,11 @@ if (!class_exists("PeproDevUPS_Profile")) {
           wp_enqueue_style(__CLASS__."simple-iconpicker",  plugins_url("/assets/css/simple-iconpicker.min.css", __FILE__));
           wp_enqueue_script(__CLASS__."notifs_panel",      plugins_url("/assets/js/peprocore-sections-panel.js", __FILE__), array("jquery"), $this->current_version);
           wp_localize_script(__CLASS__."notifs_panel",     "peprofile", array(
-            "ajax" => admin_url('admin-ajax.php'),
-            "wparam"=>$this->setting_slug,
-            "error_validate_form"=> __("Error validating form, please check marked fields.","peprodev-ups"),
-            "error_parsing_data"=> __("Error parsing item data.","peprodev-ups"),
-            "error_unknown_error"=> __("An unknown error occurred.","peprodev-ups"),
+            "ajax"                => admin_url('admin-ajax.php'),
+            "wparam"              => $this->setting_slug,
+            "error_validate_form" => __("Error validating form, please check marked fields.","peprodev-ups"),
+            "error_parsing_data"  => __("Error parsing item data.","peprodev-ups"),
+            "error_unknown_error" => __("An unknown error occurred.","peprodev-ups"),
           ));
         }
         public function htmlwrapper_notifs()
@@ -1207,6 +1272,21 @@ if (!class_exists("PeproDevUPS_Profile")) {
             "error_validate_form"=> __("Error validating form, please check marked fields.","peprodev-ups"),
             "error_parsing_data"=> __("Error parsing item data.","peprodev-ups"),
             "error_unknown_error"=> __("An unknown error occurred.","peprodev-ups"),
+          ));
+
+        }
+        public function htmlwrapper_newsletter()
+        {
+          $this->remove_us_css();
+          $this->enqueue_scripts_and_styles();
+          include plugin_dir_path(__FILE__) . "/libs/general/newsletter_panel.php";
+          wp_enqueue_script(__CLASS__."notifs_panel",  plugins_url("/assets/js/peprocore-newsletter-panel.js", __FILE__), array("jquery"), $this->current_version);
+          wp_localize_script(__CLASS__."notifs_panel", "peprofile", array(
+            "ajax"                => admin_url('admin-ajax.php'),
+            "wparam"              => $this->setting_slug,
+            "error_validate_form" => __("Error validating form, please check marked fields.","peprodev-ups"),
+            "error_parsing_data"  => __("Error parsing item data.","peprodev-ups"),
+            "error_unknown_error" => __("An unknown error occurred.","peprodev-ups"),
           ));
 
         }
@@ -1743,6 +1823,28 @@ if (!class_exists("PeproDevUPS_Profile")) {
                     }else{
                         wp_send_json_error(array( "msg"=>__("There was a problem with your request.", "peprodev-ups"), "dparam" => $st));
                     }
+                    break;
+                  case 'remove_subscriber':
+                    (int) $id = ( isset($_POST["dparam"]) && !empty(trim($_POST["dparam"])) && is_numeric(trim($_POST["dparam"])) ) ? trim($_POST["dparam"]) : "-1";
+                    $st = $wpdb->delete("{$this->tbl_subscribers}", array( 'id' => $id ));
+                    if ($st != false) {
+                        wp_send_json_success(array( "msg"=>__("Subscriber removed successfully.", "peprodev-ups"), "dparam" => $st));
+                    }else{
+                        wp_send_json_error(array( "msg"=>__("There was a problem with your request.", "peprodev-ups"), "dparam" => $st));
+                    }
+                    break;
+                  case 'clear_newsletterdb':
+                    global $wpdb;
+                    $del = $wpdb->query("TRUNCATE TABLE `$this->tbl_subscribers`");
+                    if (false !== $del){
+                      wp_send_json_success( array( "msg" => sprintf(__("Database Successfully Cleared.",$this->td),$id ) ) );
+                    }else{
+                      wp_send_json_error( array( "msg" => sprintf(__("Error Clearing Database.",$this->td),$id ) ) );
+                    }
+                    break;
+                  case 'excel_newsletter':
+                    global $wpdb;
+                    wp_send_json_success( array( "msg" => sprintf(__("File is loaded to your pc!",$this->td),$id ) ) );
                     break;
                   case 'add_new':
 
@@ -2768,12 +2870,12 @@ if (!class_exists("PeproDevUPS_Profile")) {
                   }
 
                   $dataNotifExtraDetails = esc_attr(json_encode($dataNotifExtraDetails, JSON_NUMERIC_CHECK|JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE));
-                  $url = $this->get_profile_page(["section"=>$notif->slug]);
+                  $urlprofile = $this->get_profile_page(["section"=>$notif->slug]);
                   echo "<tr data-nofit-tr=\"{$notif->id}\" data-json=\"$dataNotifExtraDetails\" >
                             <td style=\"direction: ltr;\">{$PeproDevUPS_Profile->parse_date($notif->date_created)}</td>
                             <td>{$notif_title_icon_set}{$notif->title}</td>
                             <td>{$notif->subject}</td>
-                            <td><a href='$url' target='_blank'>{$notif->slug}</a></td>
+                            <td><a href='$urlprofile' target='_blank'>{$notif->slug}</a></td>
                             <td>". (empty($notif_access_str) ? __("— Public —","peprodev-ups") : implode(" / ", $notif_access_str)) ."</td>
                             <td>{$notif->priority}</td>
                             <td class=\"td-actions\">
@@ -2814,6 +2916,75 @@ if (!class_exists("PeproDevUPS_Profile")) {
             $tcona = ob_get_contents();
             ob_end_clean();
             return $tcona;
+        }
+        public function show_newsletter_edit_panel($page=1, $search="", $url="", $retTotal=false)
+        {
+          global $wpdb;
+          ob_start();
+          $td            = $this->td;
+          $post_per_page = (int) isset($_GET["per_page"]) ? sanitize_text_field($_GET["per_page"]) : 30;
+          $notifs        = false;
+          $offset        = ( $page * $post_per_page ) - $post_per_page;
+          $otif404       = __("No subscriber found!", "notifications-priority", $td);
+          $integrity     = wp_create_nonce('peprocorenounce');
+          $total         = $wpdb->get_var("SELECT COUNT(1) FROM $this->tbl_subscribers AS combined_table");
+
+          if ($retTotal) return $total;
+
+          $notifs        = $wpdb->get_results($wpdb->prepare("SELECT * FROM `$this->tbl_subscribers` ORDER BY `date_created` DESC LIMIT %d, %d", $offset, $post_per_page));
+
+          if (false !== $notifs && 0 !== $notifs && !empty($notifs)) {
+
+              foreach ( $notifs as $notif ){
+                $dataNotifExtraDetails = [];
+                $dataNotifExtraDetails = array(
+                  "date_created" => $notif->date_created,
+                  "user"         => $notif->user,
+                  "name"         => $notif->name,
+                  "mobile"       => $notif->mobile,
+                  "email"        => $notif->email,
+                  "extra_info"   => $notif->extra_info
+                );
+                $dataNotifExtraDetails = esc_attr(json_encode($dataNotifExtraDetails, JSON_NUMERIC_CHECK|JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE));
+                echo "<tr data-nofit-tr=\"{$notif->id}\" data-json=\"$dataNotifExtraDetails\" >
+                  <td style=\"direction: ltr;\">{$this->parse_date($notif->date_created)}</td>
+                  <td>{$notif->name}</td>
+                  <td>{$notif->mobile}</td>
+                  <td>{$notif->email}</td>
+                  <td><a href='".admin_url("user-edit.php?user_id={$notif->user}")."' target='_blank'>UID#{$notif->user}</a></td>
+                  <td class=\"td-actions\"><button  type=\"button\"
+                                                    title=\"".esc_attr_x("Remove","action-title","peprodev-ups")."\"
+                                                    class=\"btn btn-primary btn-sm remove_notif_modal\"
+                                                    data-id=\"{$notif->id}\"
+                                                    data-integrity=\"".esc_attr($integrity)."\"
+                                                    data-wparam=\"".esc_attr($this->setting_slug)."\"
+                                                    data-lparam=\"remove_subscriber\"><i class=\"fa fa-trash-alt\"></i></button></td>
+                </tr>";
+              }
+
+              echo "<tr data-nofit-tr=\"empty\" style=\"display:none;\"><td colspan=\"8\" style=\"text-align: center;\">$otif404</td></tr>";
+              echo '<tr><td colspan="5" style="text-align: center;" class="pagination">';
+              $url = !$url ? $_SERVER['REQUEST_URI'] : $url;
+              echo paginate_links(array(
+                  'before_page_number' => "<span class='btn btn-action no-ripple btn-sm'>",
+                  'after_page_number'  => "</span>",
+                  'base'      => add_query_arg(array('cpage' => '%#%'), $url),
+                  'format'    => '',
+                  'prev_text' => __('&laquo;'),
+                  'next_text' => __('&raquo;'),
+                  'total'     => ceil($total / $post_per_page),
+                  'current'   => $page,
+                  'prev_next' => false,
+                  'type'      => 'list'
+                ));
+              echo '</td></tr>';
+          }
+          else{
+              echo "<tr data-nofit-tr=\"empty\"><td colspan=\"8\" style=\"text-align: center;\">$otif404</td></tr>";
+          }
+          $tcona = ob_get_contents();
+          ob_end_clean();
+          return $tcona;
         }
         public function get_built_in_sections_trs()
         {

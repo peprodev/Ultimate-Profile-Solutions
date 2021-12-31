@@ -1,6 +1,6 @@
 /**
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/12/30 21:23:52
+ * @Last modified time: 2021/12/31 01:56:49
  * resendtime
  */
 jQuery.noConflict();
@@ -957,9 +957,11 @@ jQuery.noConflict();
       }
       if (".otp-resend,.otp-changenum" == e.data.show && e.data.timerdown){
         if (0 == e.data.timerdown){
+          $(login_form).find(".otp-resend").countdown('stop');
           $(login_form).find(".otp-resend").html(_pepro_dev.resendnow);
           $(login_form).find("#mobile").prop("disabled", false).prop("readonly", false).removeClass("disabled");
           $(login_form).find("#user_mobile").prop("disabled", false).prop("readonly", false).removeClass("disabled");
+
         }
         else{
           $(login_form).find(".otp-resend").prop("disabled", true).addClass("disabled").countdown(e.data.timerdown).on('update.countdown', function(qd) {

@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/12/30 21:19:23
+# @Last modified time: 2021/12/31 02:29:15
 
 if ("yes" == get_option("PeproDevUPS_Core___loginregister-activesecurity", "")){
   include_once plugin_dir_path(__FILE__) . "/include/class-login-permalink.php";
@@ -62,6 +62,8 @@ if (!class_exists("PeproDevUPS_Login")){
     protected $file;
     public function __construct()
     {
+      global $wpdb;
+      $this->db_table = "{$wpdb->prefix}peprofile_subscribers";
       if (class_exists("PeproCoreLoginSlugChangerClass")){new PeproCoreLoginSlugChangerClass;}
       $this->priority               = 3;
       $this->assets_url             = plugins_url("/", __FILE__);
@@ -190,37 +192,74 @@ if (!class_exists("PeproDevUPS_Login")){
 
       $this->smsir = new \PeproDev\PeproCore\RegLogin\peproSendSMS;
       $this->smsir = new \PeproDev\PeproCore\RegLogin\peproKavenegarSMS;
+      $this->CreateDatabase();
 
+    }
+    public function CreateDatabase($force = false)
+    {
+      global $wpdb;
+      if(!function_exists('dbDelta')) { include_once ABSPATH . 'wp-admin/includes/upgrade.php'; }
+      $charset_collate = $wpdb->get_charset_collate();
+      if ($wpdb->get_var("SHOW TABLES LIKE '$this->db_table'") != $this->db_table || $force ) {
+        dbDelta("CREATE TABLE `$this->db_table` (
+          `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+          `date_created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+          `user` VARCHAR(512),
+          `name` VARCHAR(512),
+          `mobile` VARCHAR(20),
+          `email` VARCHAR(320),
+          `extra_info` TEXT,
+          PRIMARY KEY id (id)
+        ) $charset_collate;");
+      }
     }
     public function shortcode__sms_subscription($atts=array(), $content="")
     {
       $atts = extract(shortcode_atts(array(
-        'btnclass'  => "subscribe_btn",
+        'btnclass'  => "subscribe_btn w-btn us-btn-style_1",
         'subscribe' => __("Subscribe",$this->td),
         'mobile'    => __("Mobile",$this->td),
+        'name'      => __("Name",$this->td),
         'verify'    => __("Verify Code",$this->td),
       ), $atts));
       ob_start();
-      wp_enqueue_style("pepro-sms_subscription",   "{$this->assets_url}/assets/subscribe.css", array(), current_time("timestamp"));
-      wp_enqueue_script("pepro-sms_subscription",  "{$this->assets_url}/assets/subscribe.js", array("jquery"), current_time("timestamp"), true);
+      wp_enqueue_script("pepro-login-reg-countdown", "{$this->assets_url}/assets/jquery.countdown.min.js", array("jquery"), "1.6.0", true);
+      wp_enqueue_style("pepro-sms_subscription",     "{$this->assets_url}/assets/subscribe.css", array(), current_time("timestamp"));
+      wp_enqueue_script("pepro-sms_subscription",    "{$this->assets_url}/assets/subscribe.js", array("jquery"), current_time("timestamp"), true);
+      wp_localize_script( "pepro-sms_subscription",  "_pdss", array(
+        "ajaxurl"     => admin_url('admin-ajax.php'),
+        "nonce"       => wp_create_nonce("peprodev-ups"),
+        "loading"     => _x("Please wait ...", "js-translate", "peprodev-ups"),
+        "your_name"   => _x("You should fill in your name", "js-translate", "peprodev-ups"),
+        "your_mobile" => _x("You should fill in your mobile", "js-translate", "peprodev-ups"),
+        "your_otp"    => _x("You should fill in OTP code", "js-translate", "peprodev-ups"),
+        "error"       => _x("An unknown error occured.", "js-translate", "peprodev-ups"),
+        "resendtime"  => __("Resend Code in (%s)", "peprodev-ups"),
+        "resendnow"   => __("Resend OTP Code", "peprodev-ups"),
+        "gohome_url"  => home_url(),
+      ));
       ?>
-      <div class="pepro-sms-subscription pss-container">
+      <form class="pepro-sms-subscription pss-container" novalidate action="/" method="POST">
         <div class="pss-subcontainer">
+          <div class="pss-input-container pssname">
+            <input type="text" id="pssname" onchange="this.setAttribute('value', this.value.trim());" required autocomplete="off" name="pssname" value="<?php echo (get_current_user_id() ? esc_attr( get_the_author_meta("display_name", get_current_user_id())) : "");?>" />
+            <label for="pssname"><?=$name;?></label>
+          </div>
           <div class="pss-input-container pssmobile">
+            <input type="text" id="pssmobile" onchange="this.setAttribute('value', this.value.trim());" required autocomplete="off" name="pssmobile" value="<?php echo (get_current_user_id() ? esc_attr( get_the_author_meta("user_mobile", get_current_user_id())) : "");?>" />
             <label for="pssmobile"><?=$mobile;?></label>
-            <input type="text" id="pssmobile" placeholder="<?=__("Enter mobile number",$this->td);?>" name="pssmobile" value="<?php echo (get_current_user_id() ? esc_attr( get_the_author_meta("user_mobile", get_current_user_id())) : "");?>" />
           </div>
           <div class="pss-input-container pssverify hide">
+            <input type="text" id="pssverify" class="otp-verification" onchange="this.setAttribute('value', this.value.trim());" autocomplete="off" name="pssverify" value="" />
             <label for="pssverify"><?=$verify;?></label>
-            <input type="text" id="pssverify" placeholder="<?=__("Enter verify number",$this->td);?>" name="pssverify" value="" />
           </div>
           <div class="pss-submit-container">
-            <span class="pss-countdown"></span>
-            <span class="pss-resend"></span>
-            <button type="button" class="<?=$btnclass;?>" id="pssverifysms"><?=$subscribe;?></button>
+            <a href="javascript:;" style="display: none;" class="otp-changenum"><?php esc_html_e("Change Number", "peprodev-ups");?></a>
+            <a href="javascript:;" style="display: none;" class="otp-resend"><?php printf(__("Resend Code in (%s)", "peprodev-ups"), 60);?></a>
+            <button type="submit" class="<?=$btnclass;?>" id="pssverifysms"><?=$subscribe;?></button>
           </div>
         </div>
-      </div>
+      </form>
       <?php
       $htmloutput = ob_get_contents();
       ob_end_clean();
@@ -861,7 +900,13 @@ if (!class_exists("PeproDevUPS_Login")){
               ));
             ?>
             <div class="pepro-form-links">
-              <a href="javascript:;" style="display: none;" class="otp-changenum"><?php printf(__("Change Number", "peprodev-ups"), 60);?></a>
+              <?php
+              if ($this->login_mobile_otp){
+                ?>
+                  <a href="javascript:;" style="display: none;" class="otp-changenum"><?php esc_html_e("Change Number", "peprodev-ups");?></a>
+                <?php
+              }
+              ?>
               <a href="javascript:;" style="display: none;" class="otp-resend"><?php printf(__("Resend Code in (%s)", "peprodev-ups"), 60);?></a>
               <?php
               if (!$this->login_mobile_otp){
@@ -898,7 +943,13 @@ if (!class_exists("PeproDevUPS_Login")){
                     ));
                   ?>
                   <div class="pepro-form-links">
-                    <a href="javascript:;" style="display: none;" class="otp-changenum"><?php printf(__("Change Number", "peprodev-ups"), 60);?></a>
+                    <?php
+                    if ($this->login_mobile_otp){
+                      ?>
+                        <a href="javascript:;" style="display: none;" class="otp-changenum"><?php esc_html_e("Change Number", "peprodev-ups");?></a>
+                      <?php
+                    }
+                    ?>
                     <a href="javascript:;" style="display: none;" class="otp-resend"><?php printf(__("Resend Code in (%s)", "peprodev-ups"), 60);?></a>
                     <a class="switch-form-login" href="javascript:;"><?php esc_html_e("Back to Login", "peprodev-ups");?></a>
                   </div>
@@ -923,7 +974,13 @@ if (!class_exists("PeproDevUPS_Login")){
                     ));
                   ?>
                   <div class="pepro-form-links">
-                    <a href="javascript:;" style="display: none;" class="otp-changenum"><?php printf(__("Change Number", "peprodev-ups"), 60);?></a>
+                    <?php
+                    if ($this->login_mobile_otp){
+                      ?>
+                        <a href="javascript:;" style="display: none;" class="otp-changenum"><?php esc_html_e("Change Number", "peprodev-ups");?></a>
+                      <?php
+                    }
+                    ?>
                     <a href="javascript:;" style="display: none;" class="otp-resend"><?php printf(__("Resend Code in (%s)", "peprodev-ups"), 60);?></a>
                     <a class="switch-form-login" href="javascript:;"><?php esc_html_e("Back to Login", "peprodev-ups");?></a>
                   </div>
@@ -1002,6 +1059,116 @@ if (!class_exists("PeproDevUPS_Login")){
           wp_send_json_error(array("msg"=>__("Unauthorized Access!", "peprodev-ups")));
         }
         switch (sanitize_text_field($_POST["order"])) {
+
+          case 'smsnewsletter':
+            $pssname      = sanitize_text_field(trim($_POST["pssname"]));
+            $pssmobile    = sanitize_text_field(trim($_POST["pssmobile"]));
+            $pssverify    = $this->convert_to_english(sanitize_text_field(trim($_POST["pssverify"])));
+            $valid_mobile = $this->clean_mobile_number($pssmobile);
+
+            if (empty($pssname)){ wp_send_json_error(["msg"=> _x("You should fill in your name", "js-translate", "peprodev-ups"), "is_otp" => false ]); }
+            if (empty($pssmobile)){wp_send_json_error(["msg"=> _x("You should fill in your mobile", "js-translate", "peprodev-ups"), "is_otp" => false ]); }
+            if (!$valid_mobile){ wp_send_json_error(["msg"=> _x("You should enter a valid mobile number", "js-translate", "peprodev-ups"), "is_otp" => false ]); }
+            if (!empty($pssname) && !empty($pssmobile) && empty($pssverify)){ wp_send_json_error(["msg"=> _x("You should enter OTP code sent to your mobile", "js-translate", "peprodev-ups"), "is_otp" => false ]); }
+
+            // send OTP Code via SMS
+            if ( $valid_mobile && !empty($pssname) && !empty($pssmobile) && $pssverify == "false" ){
+              if ($this->get_subscriber_by_mobile($valid_mobile)){
+                wp_send_json_error(array("msg" => __("This mobile number is currently subscribed", "peprodev-ups"), "is_otp" => false));
+              }
+              $_otp_now = $this->wp_date();
+              $last_attemp = get_option(__CLASS__."_sms_otp_{$valid_mobile}_date");
+              if ($last_attemp){
+                $today  = strtotime($_otp_now);
+                $expire = strtotime($last_attemp) + $this->sms_expiration;
+                if($today >= $expire){
+                  $sms = $this->send_dummyuser_verification_sms($valid_mobile);
+                  $last_attemp = $this->wp_date();
+                  if ($sms){
+                    wp_send_json_success(array(
+                      "msg"         => __("Verification code sent, Enter in field below.", "peprodev-ups"),
+                      "is_otp"      => true,
+                      "focus"       => ".otp-verification",
+                      "show"        => ".otp-resend,.otp-changenum",
+                      "last_attemp" => $last_attemp,
+                      "cur_time"    => $this->wp_date(),
+                      "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp) + $this->sms_expiration),
+                    ));
+                  }
+                  else{
+                    wp_send_json_error(array(
+                      "msg"       => sprintf(__("Sending Verification to %s failed, Please try again.", "peprodev-ups"), $valid_mobile),
+                      "is_otp"    => true,
+                      "focus"     => ".mobile-verification",
+                      "show"      => ".otp-resend,.otp-changenum",
+                      "timerdown" => 0,
+                    ));
+                  }
+                }
+                else {
+                  wp_send_json_error(array(
+                    "msg"       => sprintf(__("Sending Verification failed, you can request one code every %s seconds.", "peprodev-ups"), $this->sms_expiration),
+                    "is_otp"    => true,
+                    "focus"     => ".mobile-verification",
+                    "show"      => ".otp-resend,.otp-changenum",
+                    "last_attemp" => $last_attemp,
+                    "cur_time"    => $this->wp_date(),
+                    "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp) + $this->sms_expiration),
+                  ));
+                }
+              }
+              else{
+                $sms = $this->send_dummyuser_verification_sms($valid_mobile);
+                $last_attemp = $this->wp_date();
+                if ($sms){
+                  wp_send_json_success(array(
+                    "msg"         => sprintf(__("Verification code sent to %s, Enter the code in field below", "peprodev-ups"), $valid_mobile),
+                    "is_otp"      => true,
+                    "focus"       => ".otp-verification",
+                    "show"        => ".otp-resend,.otp-changenum",
+                    "last_attemp" => $last_attemp,
+                    "cur_time"    => $this->wp_date(),
+                    "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp) + $this->sms_expiration),
+                    ));
+                  }
+                  else{
+                    wp_send_json_error(array(
+                    "msg"       => __("Sending Verification code failed, Please try again.", "peprodev-ups"),
+                    "is_otp"    => true,
+                    "focus"     => ".mobile-verification",
+                    "show"      => ".otp-resend,.otp-changenum",
+                    "timerdown" => 0,
+                    ));
+                  }
+              }
+            }
+
+            // verify OTP, if success ~> +[ADD SUBSCRIBER]
+            if ( !empty(trim($pssname)) && !empty(trim($pssmobile)) && $valid_mobile && !empty(trim($pssverify)) ){
+              $verified = $this->check_dummyuser_otp_verification($valid_mobile, $pssverify);
+              if ($verified){
+                $newUser = $this->register_newsletter_user($pssname, $pssmobile);
+                if ($newUser){
+                  wp_send_json_success(array("msg" => __("You've successfully registered to newsletter", "peprodev-ups"), "is_otp" => false));
+                }
+                else{
+                  wp_send_json_error(array("msg" => __("There was an error registering you!", "peprodev-ups"), "is_otp" => false));
+                }
+              }
+              else{
+                wp_send_json_error(array(
+                  "msg"       => __("Verification code is incorrect/expired!", "peprodev-ups"),
+                  "is_otp"    => true,
+                  "focus"     => ".otp-verification",
+                  "select"    => ".otp-verification",
+                  "show"      => ".otp-resend,.otp-changenum",
+                  "timerdown" => 0,
+                ));
+              }
+            }
+
+            wp_send_json_error(array("msg" => __("An unknown error occured.", "peprodev-ups")));
+          break;
 
           case 'login':
             if (is_user_logged_in()){ wp_send_json_error(array("msg" => __("You are already logged-in.", "peprodev-ups"))); }
@@ -2204,6 +2371,27 @@ if (!class_exists("PeproDevUPS_Login")){
             wp_send_json_success(array("msg" => __("User details successfully changed.","peprodev-ups")));
           break;
 
+          case 'delete_item':
+            global $wpdb;
+            $id = (int) trim($_POST["lparam"]);
+            $del = $wpdb->delete( $this->db_table, array('ID' => $id) );
+            if (false !== $del){
+              wp_send_json_success( array( "msg" => sprintf(__("Submition ID %s Successfully Deleted.",$this->td),$id ) ) );
+            }else{
+              wp_send_json_error( array( "msg" => sprintf(__("Error Deleting Submition ID %s.",$this->td),$id ) ) );
+            }
+          break;
+
+          case 'clear_db':
+            global $wpdb;
+            $del = $wpdb->query("TRUNCATE TABLE `$this->db_table`");
+            if (false !== $del){
+              wp_send_json_success( array( "msg" => sprintf(__("Database Successfully Cleared.",$this->td),$id ) ) );
+            }else{
+              wp_send_json_error( array( "msg" => sprintf(__("Error Clearing Database.",$this->td),$id ) ) );
+            }
+          break;
+
           default:
             wp_send_json_error(array("msg" => __("An unknown error occured.", "peprodev-ups")));
           break;
@@ -2211,6 +2399,28 @@ if (!class_exists("PeproDevUPS_Login")){
         }
         die();
       }
+    }
+    public function register_newsletter_user($pssname = "", $pssmobile = "", $pssemail = "", $extra_info = "")
+    {
+      global $wpdb;
+      $db_insert = $wpdb->insert($this->db_table,
+        array(
+          'user'       => get_current_user_id(),
+          'name'       => $pssname,
+          'mobile'     => $pssmobile,
+          'email'      => $pssemail,
+          'extra_info' => $extra_info,
+        ),"%s");
+      return $db_insert;
+    }
+    public function get_subscriber_by_mobile($mobile=0)
+    {
+      global $wpdb;
+      $found = $wpdb->get_row( $wpdb->prepare( "SELECT ID FROM $this->db_table WHERE `mobile` = '%s' ORDER BY `date_created` DESC LIMIT 1", $this->clean_mobile_number($mobile)));
+      if ($found && !is_null($found) && !empty($found)){
+        return $found->ID;
+      }
+      return false;
     }
     public function register_new_user($username=false, $email=false, $mobile=false, $params=array())
     {
@@ -2437,8 +2647,8 @@ if (!class_exists("PeproDevUPS_Login")){
           delete_option(__CLASS__."_{$type}_otp_{$user}_date");
           return true;
         }
-        delete_option(__CLASS__."_{$type}_otp_{$user}_date");
         // else ~> expired
+        delete_option(__CLASS__."_{$type}_otp_{$user}_date");
       }
       return false;
     }
@@ -3256,6 +3466,9 @@ if (!class_exists("PeproDevUPS_Login")){
             }
           }
         }
+      }
+      if (empty($this->get_redirection_fields()) && ("ajax_login" == $requested_redirect_to || "ajax_register" == $requested_redirect_to)){
+        return true;
       }
       return $redirect_to;
     }
