@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2022/01/01 17:55:16
+# @Last modified time: 2022/01/01 23:38:07
 
 if ("yes" == get_option("PeproDevUPS_Core___loginregister-activesecurity", "")){
   include_once plugin_dir_path(__FILE__) . "/include/class-login-permalink.php";
@@ -191,9 +191,13 @@ if (!class_exists("PeproDevUPS_Login")){
       $this->login_fields          = $this->get_login_fields();
       $this->verify_mobile_fields  = $this->get_verify_mobile_fields();
 
+      if($this->login_mobile_otp) $this->change_number_text = __("Change Number", "peprodev-ups");
+      if($this->login_email_otp) $this->change_number_text  = __("Change Email", "peprodev-ups");
+
       $this->form_class = array();
-      if ($this->floating_from_label) $this->form_class[] = "floating_from_label";
+      if ($this->floating_input_label) $this->form_class[] = "floating_from_label";
       if ($this->no_popup_alert) $this->form_class[] = "no_popup_alert";
+      if ($this->login_mobile_otp || $this->login_email_otp) $this->form_class[] = "center_extra_button";
       $this->form_class = implode(" ", apply_filters("pepro_reglogin_action_form_classes", $this->form_class));
 
       require_once plugin_dir_path(__FILE__) . "/include/class-smsir.php";
@@ -264,7 +268,7 @@ if (!class_exists("PeproDevUPS_Login")){
             <label for="pssverify"><?=$verify;?></label>
           </div>
           <div class="pss-submit-container">
-            <a href="javascript:;" style="display: none;" class="otp-changenum"><?php esc_html_e("Change Number", "peprodev-ups");?></a>
+            <a href="javascript:;" style="display: none;" class="otp-changenum"><?php echo $this->change_number_text;?></a>
             <a href="javascript:;" style="display: none;" class="otp-resend"><?php printf(__("Resend Code in (%s)", "peprodev-ups"), 60);?></a>
             <button type="submit" class="<?=$btnclass;?>" id="pssverifysms"><?=$subscribe;?></button>
           </div>
@@ -898,7 +902,7 @@ if (!class_exists("PeproDevUPS_Login")){
         echo "$before";
         ?>
           <!-- PeproDev Ultimate Profile Solutions Login Form -->
-          <form novalidate class="pepro-login-reg <?=$this->form_class . ("login" === $active?" inline ":"");?>" id="pepro-login-inline" method="post">
+          <form novalidate id="pepro-login-inline" class="pepro-login-reg <?=$this->form_class . ("login" === $active?" inline ":"");?>" method="post">
             <h6 style="margin-bottom: 1rem; border-bottom: 1px solid #ccc;padding: 0 0 1rem 0;"><?php echo (!empty($title) ? $title : __("Login", "peprodev-ups"));?></h6>
             <div id="login_error"></div>
             <?php
@@ -914,26 +918,10 @@ if (!class_exists("PeproDevUPS_Login")){
             ?>
             <div class="pepro-form-links">
               <?php
-              if ($this->login_mobile_otp){
-                ?>
-                  <a href="javascript:;" style="display: none;" class="otp-changenum"><?php esc_html_e("Change Number", "peprodev-ups");?></a>
-                <?php
-              }
-              ?>
-              <a href="javascript:;" style="display: none;" class="otp-resend"><?php printf(__("Resend Code in (%s)", "peprodev-ups"), 60);?></a>
-              <?php
-              if (!$this->login_mobile_otp){
-                ?>
-                <a class="switch-form-lost-pass" href="javascript:;"><?php esc_html_e("Lost Password?", "peprodev-ups");?></a>
-                <?php
-              }
-              ?>
-              <?php
-              if (get_option('users_can_register')){
-                ?>
-                  <a class="switch-form-register"  href="javascript:;"><?php esc_html_e("Register", "peprodev-ups");?></a>
-                <?php
-              }
+                if ($this->login_mobile_otp || $this->login_email_otp){?><a href="javascript:;" style="display: none;" class="otp-changenum"><?php echo $this->change_number_text;?></a><?php }?>
+                <a href="javascript:;" style="display: none;" class="otp-resend"><?php printf(__("Resend Code in (%s)", "peprodev-ups"), 60);?></a><?php
+                if (!$this->login_mobile_otp && !$this->login_email_otp){?><a class="switch-form-lost-pass" href="javascript:;"><?php esc_html_e("Lost Password?", "peprodev-ups");?></a><?php }
+                if (get_option('users_can_register')){?><a class="switch-form-register"  href="javascript:;"><?php esc_html_e("Register", "peprodev-ups");?></a><?php }
               ?>
             </div>
           </form>
@@ -942,7 +930,7 @@ if (!class_exists("PeproDevUPS_Login")){
             if (get_option('users_can_register')){
               ?>
                 <!-- PeproDev Ultimate Profile Solutions Register Form -->
-                <form novalidate class="pepro-login-reg <?=$this->form_class . ("register" === $active?" inline ":"");?>" id="pepro-reg-inline" method="post">
+                <form novalidate id="pepro-reg-inline" class="pepro-login-reg <?=$this->form_class . ("register" === $active?" inline ":"");?>" method="post">
                   <h6 style="margin-bottom: 1rem; border-bottom: 1px solid #ccc;padding: 0 0 1rem 0;"><?php echo (!empty($reg_title) ? $reg_title : __("Register", "peprodev-ups"));?></h6>
                   <div id="login_error"></div>
                   <?php
@@ -958,12 +946,7 @@ if (!class_exists("PeproDevUPS_Login")){
                   ?>
                   <div class="pepro-form-links">
                     <?php
-                    if ($this->login_mobile_otp){
-                      ?>
-                        <a href="javascript:;" style="display: none;" class="otp-changenum"><?php esc_html_e("Change Number", "peprodev-ups");?></a>
-                      <?php
-                    }
-                    ?>
+                    if ($this->login_mobile_otp || $this->login_email_otp){?><a href="javascript:;" style="display: none;" class="otp-changenum"><?php echo $this->change_number_text;?></a><?php } ?>
                     <a href="javascript:;" style="display: none;" class="otp-resend"><?php printf(__("Resend Code in (%s)", "peprodev-ups"), 60);?></a>
                     <a class="switch-form-login" href="javascript:;"><?php esc_html_e("Back to Login", "peprodev-ups");?></a>
                   </div>
@@ -974,7 +957,7 @@ if (!class_exists("PeproDevUPS_Login")){
             if (!$this->login_mobile_otp){
               ?>
                 <!-- PeproDev Ultimate Profile Solutions Reset Password Form -->
-                <form novalidate class="pepro-login-reg <?=$this->form_class . ("resetpass" === $active?" inline ":"");?>" id="pepro-pass-inline" method="post">
+                <form novalidate id="pepro-pass-inline" class="pepro-login-reg <?=$this->form_class . ("resetpass" === $active?" inline ":"");?>" method="post">
                   <h6 style="margin-bottom: 1rem; border-bottom: 1px solid #ccc;padding: 0 0 1rem 0;"><?php echo (!empty($reset_title) ? $reset_title : __("Recover Password", $this->td));?></h6>
                   <div id="login_error"></div>
                   <?php
@@ -992,7 +975,7 @@ if (!class_exists("PeproDevUPS_Login")){
                     <?php
                     if ($this->login_mobile_otp){
                       ?>
-                        <a href="javascript:;" style="display: none;" class="otp-changenum"><?php esc_html_e("Change Number", "peprodev-ups");?></a>
+                        <a href="javascript:;" style="display: none;" class="otp-changenum"><?php echo $this->change_number_text;?></a>
                       <?php
                     }
                     ?>
@@ -1395,8 +1378,8 @@ if (!class_exists("PeproDevUPS_Login")){
                         wp_send_json_error(array(
                           "msg"       => __("Error Sending Verification code. Try again.", "peprodev-ups"),
                           "is_otp"    => true,
-                          "focus"     => ".email-verification",
-                          "select"    => ".email-verification",
+                          "focus"     => ".code-verification",
+                          "select"    => ".code-verification",
                           "show"      => ".otp-resend,.otp-changenum",
                           "timerdown" => 0,
                         ));
@@ -1406,7 +1389,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       wp_send_json_error(array(
                         "msg"         => sprintf(__("Error Sending Verification, you can request one code every %s seconds.", "peprodev-ups"), $this->email_expiration),
                         "is_otp"      => true,
-                        "focus"       => ".email-verification",
+                        "focus"       => ".code-verification",
                         "show"        => ".otp-resend,.otp-changenum",
                         "last_attemp" => $last_attemp,
                         "cur_time"    => $this->wp_date(),
@@ -1432,8 +1415,8 @@ if (!class_exists("PeproDevUPS_Login")){
                       wp_send_json_error(array(
                         "msg"       => __("Error Sending Verification code. Try again.", "peprodev-ups"),
                         "is_otp"    => true,
-                        "focus"     => ".email-verification",
-                        "select"    => ".email-verification",
+                        "focus"     => ".code-verification",
+                        "select"    => ".code-verification",
                         "show"      => ".otp-resend,.otp-changenum",
                         "timerdown" => 0,
                       ));
@@ -3114,6 +3097,9 @@ if (!class_exists("PeproDevUPS_Login")){
           "verification" => "",
         ));
 
+        if (!empty(trim($field["placeholder"]))){$row_class .= " has-placeholder ";}
+        if ("select" == $field["type"]){$row_class .= " has-dropdown ";}
+        if ("button" != $field["type"]){$row_class .= " {$field["type"]}";}
 
         switch ($field["type"]) {
 

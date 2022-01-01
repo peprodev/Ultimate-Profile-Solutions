@@ -1,6 +1,6 @@
 /**
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2022/01/01 18:43:40
+ * @Last modified time: 2022/01/01 22:54:51
  * resendtime
  */
 jQuery.noConflict();
@@ -190,14 +190,10 @@ jQuery.noConflict();
                 $(login_form).find("#login_error").removeClass("info success error").addClass("info").html(e.data.msg);
                 if (e.data.focus){ setTimeout(function () { $(login_form).find(e.data.focus).first().focus(); }, 100); }
                 if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).first().select(); }, 100); }
-                $(login_form).find(".pepro-login-reg-field").hide();
-                $(login_form).find(".switch-form-register").hide();
+                $(login_form).find(".pepro-login-reg-field, .switch-form-register, .switch-form-login").hide();
                 if (e.data.show){ $(login_form).find(e.data.show).show(); }
-                $(login_form).find(".pepro-login-reg-field.mobile-wrap, .pepro-login-reg-field.user_mobile-wrap, .pepro-login-reg-field.verification-wrap").show();
-                $(login_form).find("#mobile").prop("disabled", true).prop("readonly", true).addClass("disabled");
-                $(login_form).find("#user_mobile").prop("disabled", true).prop("readonly", true).addClass("disabled");
-                $(login_form).find(".pepro-login-reg-field.optverify-wrap").show();
-                $(login_form).find(".pepro-login-reg-field.submit-wrap").show();
+                $(login_form).find(".pepro-login-reg-field.mobile-wrap, .pepro-login-reg-field.email-wrap, .pepro-login-reg-field.user_mobile-wrap, .pepro-login-reg-field.verification-wrap, .pepro-login-reg-field.optverify-wrap, .pepro-login-reg-field.submit-wrap").show();
+                $(login_form).find("#mobileو #user_mobile, #email").prop("disabled", true).prop("readonly", true).addClass("disabled");
                 resend_counndown(e, login_form, _pepro_dev);
               }
               else{
@@ -624,6 +620,7 @@ jQuery.noConflict();
         $(this).parent().addClass("focused");
       });
 
+      // register
       $(document).on("change keyup", `#${_pepro_dev.instance} form#pepro-reg-inline input[name=optverify]`, function(e) {
         $submitBtn = $(this).parents("form").find(".submit-wrap #submit[type=submit]")
         if ($(this).val() !== ""){
@@ -688,15 +685,15 @@ jQuery.noConflict();
             $newstate.append( $option );
           });
           $newstate.val("");
-          $(login_form).find("[name=billing_city]").replaceWith( $newstate );
+          $(login_form).find("[name=billing_city]").replaceWith( $newstate ).parent().addClass("filled");
           $newstate.show().trigger('change');
         }else{
           $newstate = $('<input type="text" />')
           .prop('id',"billing_city")
           .prop('name',"billing_city")
           .attr('required',"")
-          .prop('placeholder',_pepro_dev.placeholder_city )
           .addClass('form-text').val("");
+          // .prop('placeholder',_pepro_dev.placeholder_city )
           $(login_form).find("[name=billing_city]").replaceWith( $newstate );
         }
 
@@ -764,14 +761,14 @@ jQuery.noConflict();
               if (e.data.is_otp){
                 $(login_form).find("#login_error").removeClass("info success error").addClass("info").html(e.data.msg);
                 $(login_form).find(".pepro-login-reg-field").addClass("hide");
-                $(login_form).find(".user_mobile-wrap, .submit-wrap, .optverify-wrap, [data-recaptcha]").removeClass("hide");
+                $(login_form).find(".user_mobile-wrap, .submit-wrap, .optverify-wrap, .verification-wrap, [data-recaptcha]").removeClass("hide");
                 if (e.data.focus){ setTimeout(function () { $(login_form).find(e.data.focus).first().focus(); }, 100); }
                 if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).first().select(); }, 100); }
+                $(login_form).find(".pepro-login-reg-field, .switch-form-register, .switch-form-login").hide();
                 if (e.data.show){ $(login_form).find(e.data.show).show(); }
-                $(login_form).find("#mobile").prop("disabled", true).prop("readonly", true).addClass("disabled");
-                $(login_form).find("#user_mobile").prop("disabled", true).prop("readonly", true).addClass("disabled");
-                $(login_form).find(".pepro-login-reg-field.optverify-wrap").show();
-                $(login_form).find(".pepro-login-reg-field.submit-wrap").show();
+                $(login_form).find("#mobile, #user_mobile, #email").prop("disabled", true).prop("readonly", true).addClass("disabled");
+                $(login_form).find(".pepro-login-reg-field.mobile-wrap, .pepro-login-reg-field.email-wrap, .pepro-login-reg-field.user_mobile-wrap, .pepro-login-reg-field.verification-wrap, .pepro-login-reg-field.optverify-wrap, .pepro-login-reg-field.submit-wrap").show();
+                $(login_form).find("#mobileو #user_mobile, #email").prop("disabled", true).prop("readonly", true).addClass("disabled");
                 resend_counndown(e, login_form, _pepro_dev);
               }
               else{
@@ -1136,10 +1133,11 @@ jQuery.noConflict();
       e.preventDefault();
       var me = $(this);
       me.parents("form").find("#login_error").empty();
-      me.parents("form").find("#mobile, #user_mobile, #submit").show().prop("disabled", false).prop("readonly", false).removeClass("disabled");
-      me.parents("form").find(".otp-resend").hide();
+      me.parents("form").find(".pepro-login-reg-field, .switch-form-register, .switch-form-login").show();
+      me.parents("form").find("#mobile, #user_mobile, #submit, #username, #email, #optverify").show().prop("disabled", false).prop("readonly", false).removeClass("disabled");
+      me.parents("form").find(".optverify-wrap, .verification-wrap, .otp-resend").hide();
       me.hide();
-      setTimeout(function () { $(login_form).find("#mobile, #user_mobile").first().focus(); }, 100);
+      setTimeout(function () { $(login_form).find("#mobile, #user_mobile, #username, #email").first().focus(); }, 100);
     });
     $(document).on("click tap", ".switch-form-lost-pass", function(e){
       e.preventDefault();
