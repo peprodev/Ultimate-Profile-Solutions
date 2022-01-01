@@ -1,6 +1,6 @@
 /**
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/12/31 20:22:25
+ * @Last modified time: 2022/01/01 15:16:41
  */
 :root {
 	--tippy-color: #bf1e2e;
@@ -317,6 +317,12 @@ form.floating_from_label .pepro-login-reg-field label {
   padding: 0 1rem;
   margin: 0 0.5rem;
   transition: all 0.3s linear;
+  right: auto;
+	left: 0;
+	z-index: 2;
+}
+[dir="rtl"] form.floating_from_label .pepro-login-reg-field label {
+	left: auto;
   right: 0;
 }
 
