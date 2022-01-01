@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/12/31 20:05:45
+# @Last modified time: 2022/01/01 17:55:20
 add_thickbox();
 wp_enqueue_style("wp-color-picker");
 wp_enqueue_script("wp-color-picker");
@@ -471,6 +471,9 @@ foreach ($styleFiles as $style) {
                       </label>
                       <label class="row w-100 align-items-center m-0 mb-2">
                         <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required mr-2 floating_input_label' <?php checked( $this->floating_input_label, true);?> name="floating_input_label" /> <?php esc_html_e("Use floating form labels","peprodev-ups");?>
+                      </label>
+                      <label class="row w-100 align-items-center m-0 mb-2">
+                        <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required mr-2 no_popup_alert' <?php checked( $this->no_popup_alert, true);?> name="no_popup_alert" /> <?php esc_html_e("Don't use Popup after Login/Register","peprodev-ups");?>
                       </label>
                     </div>
 

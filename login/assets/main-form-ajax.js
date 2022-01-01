@@ -1,6 +1,6 @@
 /**
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/12/31 20:12:23
+ * @Last modified time: 2022/01/01 18:43:40
  * resendtime
  */
 jQuery.noConflict();
@@ -14,6 +14,10 @@ jQuery.noConflict();
         }
     });
     $.fn.isValid = function(){ return this[0].checkValidity(); }
+
+    $(document.body).append($(`<pdtoast>`));
+    $(document.body).append($(`<toastwide>`));
+
     $("[data-pepro-reglogin]").each(function(index, val) {
       instance = $(val).data("pepro-reglogin");
       var _pepro_dev = window[instance];
@@ -88,6 +92,9 @@ jQuery.noConflict();
         onAction: function() {},
         escapeKey: true,
       };
+      var $success_color = "rgba(21, 139, 2, 0.8)";
+      var $error_color   = "rgba(139, 2, 2, 0.8)";
+      var $info_color    = "rgba(2, 133, 139, 0.8)";
       if ("" !== _pepro_dev.trigger){
         if ($(_pepro_dev.trigger).length){
           $(_pepro_dev.trigger).attr("data-trigger", _pepro_dev.instance)
@@ -142,15 +149,13 @@ jQuery.noConflict();
           return false;
         }
         if (error_occured){ $(login_form).find(":input").prop("disabled", false); return false; }
-
-
         $recaps = $(login_form).find("div[data-recaptcha]");
         if ($recaps.length){
           $.each($recaps, function(index, val) {
             if ($(val).find(".g-recaptcha-response").val() === "") {
               $(login_form).find("#login_error").append(_pepro_dev.catpcha);
-              error_occured = true;
               show_toast(_pepro_dev.catpcha);
+              error_occured = true;
               return false;
             }
           });
@@ -162,9 +167,9 @@ jQuery.noConflict();
         $(login_form).find(":input").prop("disabled", true)
         show_toast(_pepro_dev.loading);
         $(login_form).find("#login_error").removeClass("info success error").addClass("info").html(_pepro_dev.loading);
+        show_toast(_pepro_dev.loading);
         $(login_form).find("#mobile").prop("disabled", false).prop("readonly", false).removeClass("disabled");
         $(login_form).find("#user_mobile").prop("disabled", false).prop("readonly", false).removeClass("disabled");
-
         _pepro_dev._ajax_req = $.ajax({
           type: "POST",
           dataType: "json",
@@ -179,6 +184,7 @@ jQuery.noConflict();
             $(login_form).find(".otp-resend,.otp-changenum").hide();
             if (e.success === true) {
               $(login_form).find("#login_error").removeClass("info success error").addClass("success").html(e.data.msg);
+              show_toast(e.data.msg);
               if (e.data.is_otp){
                 $(login_form).find(".optverify-wrap, .verification-wrap").removeClass("hide").show();
                 $(login_form).find("#login_error").removeClass("info success error").addClass("info").html(e.data.msg);
@@ -247,14 +253,23 @@ jQuery.noConflict();
                     },
                   };
                 }
-                jc = $.confirm({
-                  title: "",
-                  content: e.data.msg,
-                  icon: 'fas fa-check-circle',
-                  type: 'green',
-                  boxWidth: "500px",
-                  buttons: obj_buttons,
-                });
+                if ($(login_form).is(".no_popup_alert")){
+                  show_toast(e.data.msg, $success_color);
+                  setTimeout(function () {
+                    if (true === e.data.redirect){window.location.reload();}
+                    else{window.location.href = e.data.redirect;}
+                  }, 2000);
+                }
+                else{
+                  jc = $.confirm({
+                    title: "",
+                    content: e.data.msg,
+                    icon: 'fas fa-check-circle',
+                    type: 'green',
+                    boxWidth: "500px",
+                    buttons: obj_buttons,
+                  });
+                }
               }
             }
             else {
@@ -266,11 +281,13 @@ jQuery.noConflict();
                 resend_counndown(e, login_form, _pepro_dev);
               }
               $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(e.data.msg);
+              show_toast(e.data.msg);
             }
           },
           error: function(e) {
             console.error(e);
             $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(_pepro_dev.error);
+            show_toast(_pepro_dev.error);
           },
           complete: function(e) {
             scroll_element();
@@ -278,7 +295,6 @@ jQuery.noConflict();
             $(login_form).find(":input").prop("disabled", false)
           },
         });
-
       });
 
       // verify
@@ -322,9 +338,8 @@ jQuery.noConflict();
           $.each($recaps, function(index, val) {
             if ($(val).find(".g-recaptcha-response").val() === "") {
               $(login_form).find("#login_error").append(_pepro_dev.catpcha);
-
-              error_occured = true;
               show_toast(_pepro_dev.catpcha);
+              error_occured = true;
               return false;
             }
           });
@@ -334,8 +349,8 @@ jQuery.noConflict();
         form_params = $(login_form).find(":input").serialize();
         $(login_form).addClass("loading");
         $(login_form).find(":input").prop("disabled", true)
-        show_toast(_pepro_dev.loading);
         $(login_form).find("#login_error").removeClass("info success error").addClass("info").html(_pepro_dev.loading);
+        show_toast(_pepro_dev.loading);
         _pepro_dev._ajax_req = $.ajax({
           type: "POST",
           dataType: "json",
@@ -351,6 +366,7 @@ jQuery.noConflict();
             if (e.success === true) {
               $(".popup-active").removeClass("popup-active");
               $(login_form).find("#login_error").removeClass("info success error").addClass("success").html(e.data.msg);
+              show_toast(e.data.msg);
               if (e.data.is_otp){
                 $(login_form).find("#login_error").removeClass("info success error").addClass("info").html(e.data.msg);
                 $(login_form).find(".verification-wrap").removeClass("hide");
@@ -358,7 +374,6 @@ jQuery.noConflict();
                 if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).first().select(); }, 100); }
                 if (e.data.show){ $(login_form).find(e.data.show).show(); }
                 resend_counndown(e, login_form, _pepro_dev);
-
               }
               else{
                 $(".popup-active").removeClass("popup-active");
@@ -390,14 +405,23 @@ jQuery.noConflict();
                 };
                 $url = true === e.data.redirect ? window.location.href : e.data.redirect;
                 $(login_form).append(`<div class='pepro-login-reg-field'><button href='${$url}' class='ahrefbtn ${$submitBtn.attr("class")}' target='_self' type='submit'>${e.data.redirect_text}</button></div>`);
-                jc = $.confirm({
-                  title: "",
-                  content: e.data.msg,
-                  icon: 'fas fa-check-circle',
-                  type: 'green',
-                  boxWidth: "500px",
-                  buttons: obj_buttons,
-                });
+                if ($(login_form).is(".no_popup_alert")){
+                  show_toast(e.data.msg, $success_color);
+                  setTimeout(function () {
+                    if (true === e.data.redirect){window.location.reload();}
+                    else{window.location.href = e.data.redirect;}
+                  }, 2000);
+                }
+                else{
+                  jc = $.confirm({
+                    title: "",
+                    content: e.data.msg,
+                    icon: 'fas fa-check-circle',
+                    type: 'green',
+                    boxWidth: "500px",
+                    buttons: obj_buttons,
+                  });
+                }
               }
             }
             else {
@@ -409,11 +433,13 @@ jQuery.noConflict();
 
               }
               $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(e.data.msg);
+              show_toast(e.data.msg);
             }
           },
           error: function(e) {
             console.error(e);
             $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(_pepro_dev.error);
+            show_toast(_pepro_dev.error);
           },
           complete: function(e) {
             scroll_element();
@@ -464,9 +490,8 @@ jQuery.noConflict();
           $.each($recaps, function(index, val) {
             if ($(val).find(".g-recaptcha-response").val() === "") {
               $(login_form).find("#login_error").append(_pepro_dev.catpcha);
-
-              error_occured = true;
               show_toast(_pepro_dev.catpcha);
+              error_occured = true;
               return false;
             }
           });
@@ -476,8 +501,8 @@ jQuery.noConflict();
         form_params = $(login_form).find(":input").serialize();
         $(login_form).addClass("loading");
         $(login_form).find(":input").prop("disabled", true)
-        show_toast(_pepro_dev.loading);
         $(login_form).find("#login_error").removeClass("info success error").addClass("info").html(_pepro_dev.loading);
+        show_toast(_pepro_dev.loading);
         _pepro_dev._ajax_req = $.ajax({
           type: "POST",
           dataType: "json",
@@ -492,6 +517,7 @@ jQuery.noConflict();
             if (e.success === true) {
               $(login_form).find(".otp-resend,.otp-changenum").hide();
               $(login_form).find("#login_error").removeClass("info success error").addClass("success").html(e.data.msg);
+              show_toast(e.data.msg);
               if (e.data.is_otp){
                 $(login_form).find("#login_error").removeClass("info success error").addClass("info").html(e.data.msg);
                 $(login_form).find(".verification-wrap").removeClass("hide");
@@ -499,7 +525,6 @@ jQuery.noConflict();
                 if (e.data.select){ setTimeout(function () { $(login_form).find(e.data.focus).first().select(); }, 100); }
                 if (e.data.show){ $(login_form).find(e.data.show).show(); }
                 resend_counndown(e, login_form, _pepro_dev);
-
               }
               else{
                 $(".popup-active").removeClass("popup-active");
@@ -531,14 +556,23 @@ jQuery.noConflict();
                 };
                 $url = true === e.data.redirect ? window.location.href : e.data.redirect;
                 $(login_form).append(`<div class='pepro-login-reg-field'><button href='${$url}' class='ahrefbtn ${$submitBtn.attr("class")}' target='_self' type='submit'>${e.data.redirect_text}</button></div>`);
-                jc = $.confirm({
-                  title: "",
-                  content: e.data.msg,
-                  icon: 'fas fa-check-circle',
-                  type: 'green',
-                  boxWidth: "500px",
-                  buttons: obj_buttons,
-                });
+                if ($(login_form).is(".no_popup_alert")){
+                  show_toast(e.data.msg, $success_color);
+                  setTimeout(function () {
+                    if (true === e.data.redirect){window.location.reload();}
+                    else{window.location.href = e.data.redirect;}
+                  }, 2000);
+                }
+                else{
+                  jc = $.confirm({
+                    title: "",
+                    content: e.data.msg,
+                    icon: 'fas fa-check-circle',
+                    type: 'green',
+                    boxWidth: "500px",
+                    buttons: obj_buttons,
+                  });
+                }
               }
             }
             else {
@@ -550,11 +584,13 @@ jQuery.noConflict();
 
               }
               $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(e.data.msg);
+              show_toast(e.data.msg);
             }
           },
           error: function(e) {
             console.error(e);
             $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(_pepro_dev.error);
+            show_toast(_pepro_dev.error);
           },
           complete: function(e) {
             scroll_element();
@@ -696,8 +732,8 @@ jQuery.noConflict();
           $.each($recaps, function(index, val) {
             if ($(val).find(".g-recaptcha-response").val() === "") {
               $(login_form).find("#login_error").append(_pepro_dev.catpcha);
-              error_occured = true;
               show_toast(_pepro_dev.catpcha);
+              error_occured = true;
               return false;
             }
           });
@@ -707,8 +743,8 @@ jQuery.noConflict();
         form_params = $(login_form).find(":input").serialize();
         $(login_form).addClass("loading");
         $(login_form).find(":input").prop("disabled", true)
-        show_toast(_pepro_dev.loading);
         $(login_form).find("#login_error").removeClass("info success error").addClass("info").html(_pepro_dev.loading);
+        show_toast(_pepro_dev.loading);
         _pepro_dev._ajax_req = $.ajax({
           type: "POST",
           dataType: "json",
@@ -724,6 +760,7 @@ jQuery.noConflict();
             $(login_form).find(".otp-resend,.otp-changenum").hide();
             if (e.success === true) {
               $(login_form).find("#login_error").removeClass("info success error").addClass("success").html(e.data.msg);
+              show_toast(e.data.msg);
               if (e.data.is_otp){
                 $(login_form).find("#login_error").removeClass("info success error").addClass("info").html(e.data.msg);
                 $(login_form).find(".pepro-login-reg-field").addClass("hide");
@@ -791,7 +828,23 @@ jQuery.noConflict();
                     },
                   };
                 }
-                jc = $.confirm({ title: "", content: e.data.msg, icon: 'fas fa-check-circle', type: 'green', boxWidth: "500px", buttons: obj_buttons, });
+                if ($(login_form).is(".no_popup_alert")){
+                  show_toast(e.data.msg, $success_color);
+                  setTimeout(function () {
+                    if (true === e.data.redirect){window.location.reload();}
+                    else{window.location.href = e.data.redirect;}
+                  }, 2000);
+                }
+                else{
+                  jc = $.confirm({
+                    title: "",
+                    content: e.data.msg,
+                    icon: 'fas fa-check-circle',
+                    type: 'green',
+                    boxWidth: "500px",
+                    buttons: obj_buttons, }
+                  );
+                }
               }
             }
             else {
@@ -850,8 +903,8 @@ jQuery.noConflict();
           $.each($recaps, function(index, val) {
             if ($(val).find(".g-recaptcha-response").val() === "") {
               $(login_form).find("#login_error").append(_pepro_dev.catpcha);
-              error_occured = true;
               show_toast(_pepro_dev.catpcha);
+              error_occured = true;
               return false;
             }
           });
@@ -861,8 +914,8 @@ jQuery.noConflict();
         form_params = $(login_form).find(":input").serialize();
         $(login_form).addClass("loading");
         $(login_form).find(":input").prop("disabled", true)
-        show_toast(_pepro_dev.loading);
         $(login_form).find("#login_error").removeClass("info success error").addClass("info").html(_pepro_dev.loading);
+        show_toast(_pepro_dev.loading);
         _pepro_dev._ajax_req = $.ajax({
           type: "POST",
           dataType: "json",
@@ -878,6 +931,7 @@ jQuery.noConflict();
             $(login_form).find(".otp-resend,.otp-changenum").hide();
             if (e.success === true) {
               $(login_form).find("#login_error").removeClass("info success error").addClass("success").html(e.data.msg);
+              show_toast(e.data.msg);
               if (e.data.is_otp){
                 $(login_form).find("#login_error").removeClass("info success error").addClass("info").html(e.data.msg);
                 $(login_form).find(".user_mobile-wrap, .submit-wrap, .optverify-wrap, [data-recaptcha]").removeClass("hide");
@@ -940,7 +994,23 @@ jQuery.noConflict();
                     },
                   };
                 }
-                jc = $.confirm({ title: "", content: e.data.msg, icon: 'fas fa-check-circle', type: 'green', boxWidth: "500px", buttons: obj_buttons, });
+                if ($(login_form).is(".no_popup_alert")){
+                  show_toast(e.data.msg, $success_color);
+                  setTimeout(function () {
+                    if (true === e.data.redirect){window.location.reload();}
+                    else{window.location.href = e.data.redirect;}
+                  }, 2000);
+                }
+                else{
+                  jc = $.confirm({
+                    title: "",
+                    content: e.data.msg,
+                    icon: 'fas fa-check-circle',
+                    type: 'green',
+                    boxWidth: "500px",
+                    buttons: obj_buttons,
+                  });
+                }
               }
             }
             else {
@@ -1076,12 +1146,13 @@ jQuery.noConflict();
       $(this).parents(".pepro-login-reg-container").find("form").removeClass("inline");
       $(this).parents(".pepro-login-reg-container").find("#pepro-pass-inline").addClass("inline");
     });
+    $(window).on('resize', function(){ resizeReCaptcha(); });
+    $(document).on("click tap", ".pepro-form-links a", function(e){setTimeout(function () { resizeReCaptcha(); }, 200);});
     function scroll_element() {
       if ($(".pepro-login-reg-container").length){
         $("html, body, .pepro-login-reg-container").animate({scrollTop: $(".pepro-login-reg-container").offset().top-100});
       }
     }
-
     function resizeReCaptcha() {
       var width = $('.g-recaptcha').parent().width();
       if (width < 400 && width > 100 ){
@@ -1092,15 +1163,15 @@ jQuery.noConflict();
         $('.g-recaptcha').css('-webkit-transform-origin', '0 0');
       }
     };
-    $(window).on('resize', function(){ resizeReCaptcha(); });
-    $(document).on("click tap", ".pepro-form-links a", function(e){setTimeout(function () { resizeReCaptcha(); }, 200);});
     setTimeout(function () { resizeReCaptcha(); }, 200);
-
-    function show_toast(data = "Sample Toast!", delay = 1500) {
-      if (!$("toast").length){$(document.body).append($("<toast>"));}
-      $("toast").html(data).stop().addClass("active").delay(delay).queue(function() {
-        $(this).removeClass("active").dequeue().off("click tap");
-      }).on("click tap", function(e) { e.preventDefault(); $(this).stop().removeClass("active"); });
+    function show_toast(data = "Sample Toast!", bg="", delay = 3500) {
+      $toast = "pdtoast";if (bg !== ""){$toast = "toastwide";}
+    	if (!$($toast).length) {$(document.body).append($(`<${$toast}>`));}else{$($toast).removeClass("active");}
+    	setTimeout(function () {
+    		$($toast).css("--toast-bg", bg).html(data).stop().addClass("active").delay(delay).queue(function () {
+    			$(this).removeClass("active").dequeue().off("click tap");
+    		}).on("click tap", function (e) {e.preventDefault();$(this).stop().removeClass("active");});
+    	}, 200);
     }
     function show_modal_alert(title = "", content = "", icon = "fas fa-info-circle", type = "blue", boxWidth = "500px", $fn = null, theme="modern") {
       $.confirm({

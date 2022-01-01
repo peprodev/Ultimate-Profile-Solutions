@@ -1,30 +1,35 @@
 /**
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2022/01/01 15:16:41
+ * @Last modified time: 2022/01/01 18:45:36
  */
 :root {
 	--tippy-color: #bf1e2e;
 }
 
-toast {
+pdtoast, toastwide {
 	display: block;
-	position: fixed;
-	bottom: 0;
 	padding: 0.5rem 2rem;
-	background: #2b2b2b;
-	color: #e8e8e8;
-	border-radius: 57px;
+	background: var(--toast-bg, rgba(0, 0, 0, .8));
+	color: #fff;
 	text-align: center;
-	left: calc(50%);
+	bottom: 0;
+	width: 100vw;
+	padding: 1rem 0;
+	left: 0;
+	z-index: 99999;
 	box-shadow: 0 2px 11px 0 rgba(0, 0,0, 0.5);
 	cursor: pointer;
-	transition: all 0.28s ease-in-out;
-	transform: translateX(-50%) translateY(110%);
+	transition: all 0.3s ease-in-out;
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
+	-moz-backdrop-filter: blur(10px);
+	transform: translateY(110%);
+	position: fixed;
 	z-index: 9999999999999999 !important;
 }
 
-toast.active {
-	transform: translateX(-50%) translateY(-20%);
+pdtoast.active, toastwide.active {
+	transform: translateY(0);
 }
 
 [data-pepro-reglogin] > form .force-ltr {
@@ -121,6 +126,10 @@ toast.active {
 [data-pepro-reglogin] > form #login_error.error,
 [data-pepro-reglogin] > form .login_error.error {
 	border-color: #d63638;
+}
+
+[data-pepro-reglogin] > form #login_error{
+	display: none !important;
 }
 
 .pepro-verify-container,
@@ -232,6 +241,10 @@ toast.active {
 
 [data-pepro-reglogin] > form.inline {
 	display: block;
+	overflow: auto;
+	max-height: calc(80vh - 3rem);
+	scrollbar-width: thin;
+	padding: 1rem;
 }
 
 .login-action-rp .button.wp-generate-pw {
@@ -251,7 +264,11 @@ toast.active {
 	color: gray;
 }
 
-.pepro-form-links a[class*="switch"] {
+.pepro-form-links a[class*="switch"]:last-of-type {
+	float: inline-end;
+}
+
+.center_extra_button .pepro-form-links a[class*="switch"] {
 	border: 1px solid #ccc;
 	padding: 0.5rem;
 	width: 100%;
@@ -284,9 +301,9 @@ toast.active {
 	margin-bottom: 1.5rem;
 }
 
-.popup-active .pepro-verify-container, .popup-active [data-pepro-reglogin] {
-	overflow-y: auto !important;
-	overflow-x: hidden !important;
+.popup-active .pepro-verify-container,
+.popup-active [data-pepro-reglogin] {
+	overflow: hidden !important;
 }
 
 .pepro-form-links a:not(:last-of-type) {
@@ -297,7 +314,6 @@ toast.active {
 	direction: ltr;
 }
 
-
 .pepro-login-reg-container form h6 {
 	border: none !important;
 	text-align: center;
@@ -305,38 +321,40 @@ toast.active {
 	color: var(--color-content-primary, #019162);
 	font-weight: bold;
 }
+
 .popup-active [data-pepro-reglogin] {
 	border-radius: 1rem !important;
-	padding: 1.5rem !important;
+	padding: 0.5rem !important;
 }
 
-
 form.floating_from_label .pepro-login-reg-field label {
-  position: absolute;
-  top: 0.7rem;
-  padding: 0 1rem;
-  margin: 0 0.5rem;
-  transition: all 0.3s linear;
-  right: auto;
+	position: absolute;
+	top: 0.7rem;
+	padding: 0 1rem;
+	margin: 0 0.5rem;
+	transition: all 0.3s linear;
+	right: auto;
 	left: 0;
 	z-index: 2;
 }
+
 [dir="rtl"] form.floating_from_label .pepro-login-reg-field label {
 	left: auto;
-  right: 0;
+	right: 0;
 }
 
 form.floating_from_label .pepro-login-reg-field.focused label,
-form.floating_from_label .pepro-login-reg-field.filled label{
-  padding: 0 0.5rem;
-  top: -0.6rem;
-  font-size: smaller;
+form.floating_from_label .pepro-login-reg-field.filled label {
+	padding: 0 0.5rem;
+	top: -0.6rem;
+	font-size: smaller;
 	background: var(--color-content-primary, #019162);
 	border-radius: 1rem;
 }
+
 form.floating_from_label .pepro-login-reg-field.filled label,
 form.floating_from_label .pepro-login-reg-field.focused label,
 form.floating_from_label .pepro-login-reg-field.filled label::after,
-form.floating_from_label .pepro-login-reg-field.focused label::after{
+form.floating_from_label .pepro-login-reg-field.focused label::after {
 	color: var(--color-content-bg, #f0f0f0);
 }
