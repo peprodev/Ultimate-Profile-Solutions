@@ -2,8 +2,8 @@
 Contributors: amirhosseinhpv, peprodev, blackswanlab
 Donate link: https://pepro.dev/donate/
 Tags: functionality, pepro, management, administration, profile, login, register
-Version: 2.3.1
-Stable tag: 2.3.1
+Version: 2.3.3
+Stable tag: 2.3.3
 Requires at least: 5.0
 Tested up to: 5.8
 Requires PHP: 7.2
@@ -51,9 +51,10 @@ You can help us improve our works by committing your changes to Pepro Dev's Gith
 
 == Changelog ==
 
-= Ver. 2.3.1 | 2021-12-31/1400-10-10 =
+= Ver. 2.3.3 | 2021-12-31/1400-10-10 =
 * Added floating form labels
 * Changed Popup login/register style
+* Added Option to User Messagebox/Toast
 
 = Ver. 2.3.0 | 2021-12-30/1400-10-09 =
 * Multiple SMS Providers
@@ -115,9 +116,10 @@ You can help us improve our works by committing your changes to Pepro Dev's Gith
 
 == Upgrade Notice ==
 
-= Ver. 2.3.1 | 2021-12-31/1400-10-10 =
+= Ver. 2.3.3 | 2021-12-31/1400-10-10 =
 * Added floating form labels
 * Changed Popup login/register style
+* Added Option to User Messagebox/Toast
 
 = Ver. 2.3.0 | 2021-12-30/1400-10-09 =
 * Multiple SMS Providers
