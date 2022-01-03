@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2022/01/03 10:33:16
+# @Last modified time: 2022/01/03 11:20:12
 
 if ("yes" == get_option("PeproDevUPS_Core___loginregister-activesecurity", "")){
   include_once plugin_dir_path(__FILE__) . "/include/class-login-permalink.php";
@@ -804,12 +804,12 @@ if (!class_exists("PeproDevUPS_Login")){
     public function shortcode__logout_url($atts=array(), $contnent="")
     {
       $atts = extract(shortcode_atts(array(
-        'redirect'=> '',
-        'button'  => '',
-        'class'   => '',
-        'extras'  => '',
+        'redirect' => '',
+        'button'   => '',
+        'class'    => '',
+        'extras'   => '',
       ),$atts));
-      $link = wp_logout_url($redirect);
+      $link = is_user_logged_in() ? wp_logout_url($redirect) : "#";
       if (!empty($button)){
         return "<a href='$link' class='".esc_attr( $class )."' >$button</a>";
       }
