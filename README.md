@@ -2,7 +2,6 @@
 =======================================
 
 One of the most Advanced and The Ultimate Profile Solutions for WordPress
--------------------------------------------------------------------------
 
 * FREE OF ANY CHARGE! UNLIMITED! OPEN-SOURCE FOREVER!
 * Ajaxified Popup Login/Register form
@@ -24,7 +23,6 @@ One of the most Advanced and The Ultimate Profile Solutions for WordPress
 * Easily Integrate your SMS Provider with OTP System
 * Newsletter Mobile-based Subscription (Export to Excel CSV)
 * Compatible with WooCommerce, LearnDash, WooWallet, Wishlist, YITH Plugins
-* Made by Developers for the Developers! [Source code in GitHub](https://github.com/peprodev/Ultimate-Profile-Solutions)
 
 ##### **Developed by** [Perpro Development Group](https://pepro.dev/)
 
