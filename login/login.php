@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2022/01/01 23:38:07
+# @Last modified time: 2022/01/03 10:33:16
 
 if ("yes" == get_option("PeproDevUPS_Core___loginregister-activesecurity", "")){
   include_once plugin_dir_path(__FILE__) . "/include/class-login-permalink.php";
@@ -513,7 +513,7 @@ if (!class_exists("PeproDevUPS_Login")){
           "in-column"   => "no",
           "placeholder" => "",
           "classes"     => "mobile-verification force-ltr",
-          "attributes"  => "pattern=".esc_attr("^(\+98|0098|98|0)?9\d{9}$")." data-error-text=\"".esc_attr__("Enter mobile number with English numbers,<br>e.g. 09123456789", "peprodev-ups")."\" maxlength=14",
+          "attributes"  => "pattern=".esc_attr("^(\+98|0098|98|0)?9\d{9}$")." data-error-text=\"".esc_attr__("Enter mobile number with English numbers,<br>e.g. <en>09123456789</en>", "peprodev-ups")."\" maxlength=14",
         ));
       }
 
@@ -560,10 +560,14 @@ if (!class_exists("PeproDevUPS_Login")){
         array_unshift($fields, $reg_add_displayname);
       }
       if ($this->reg_add_lastname){
-        array_unshift($fields, $reg_add_lastname);
+        if (!is_admin()){
+          array_unshift($fields, $reg_add_lastname);
+        }
       }
       if ($this->reg_add_firstname){
-        array_unshift($fields, $reg_add_firstname);
+        if (!is_admin()){
+          array_unshift($fields, $reg_add_firstname);
+        }
       }
 
       return apply_filters("pepro_reglogin_get_register_fields_altered", $fields);
@@ -2439,8 +2443,8 @@ if (!class_exists("PeproDevUPS_Login")){
         $userdata['user_login'] = $mobile;
       }
 
-      $userdata['first_name']   = "";
-      $userdata['last_name']    = "";
+      $userdata['first_name']   = isset($params["first_name"]) ? $params["first_name"] : "";
+      $userdata['last_name']    = isset($params["last_name"]) ? $params["last_name"] : "";
 
       if ($this->reg_add_firstname){
         $userdata['first_name']   = $params["first_name"];
@@ -2451,18 +2455,22 @@ if (!class_exists("PeproDevUPS_Login")){
 
       $userdata['display_name'] = $userdata['first_name']." ".$userdata['last_name'];
 
-      if (empty(trim($userdata['first_name'])) && empty(trim($userdata['first_name']))){
-        $emailusername = explode("@", $email);
-        $emailusername = isset($emailusername[0]) ? $emailusername[0] : str_replace("@", "--", $email);
-        $emailusername = ucfirst($emailusername);
-        $userdata['first_name'] = $email ? $emailusername : __("New user","peprodev-ups");
-        $userdata['display_name'] = $email ? $emailusername : $mobile;
-        if (empty($userdata['display_name'])){ $userdata['display_name'] = __("Dear user","peprodev-ups"); }
+      if (empty(trim($userdata['first_name'])) && empty(trim($userdata['last_name']))){
+        if ($email){
+          $emailusername = explode("@", $email);
+          $emailusername = isset($emailusername[0]) ? $emailusername[0] : str_replace("@", "--", $email);
+          $emailusername = ucfirst($emailusername);
+          $userdata['first_name'] = $email ? $emailusername : "";
+          $userdata['display_name'] = $email ? $emailusername : ($mobile?$mobile:"");
+        }
       }
 
       if ($this->reg_add_displayname){
         $userdata['display_name'] = isset($params["display_name"]) && !empty($params["display_name"]) ? $userdata['first_name']." ".$userdata['last_name'] : $params["display_name"];
       }
+
+      if (empty($userdata['display_name'])){ $userdata['display_name'] = __("Dear user","peprodev-ups"); }
+      if (empty($userdata['first_name'])){ $userdata['first_name']     = __("New user","peprodev-ups"); }
 
       $user_id = wp_insert_user($userdata);
 
@@ -2780,7 +2788,7 @@ if (!class_exists("PeproDevUPS_Login")){
           "in-column"   => "no",
           "placeholder" => "",
           "classes"     => "mobile-verification force-ltr",
-          "attributes"  => "tabindex=1 data-error-text=\"".esc_attr__("Enter mobile number with English numbers,<br>e.g. 09123456789", "peprodev-ups")."\" pattern=".esc_attr("^(\+98|0098|98|0)?9\d{9}$")." maxlength=14",
+          "attributes"  => "tabindex=1 data-error-text=\"".esc_attr__("Enter mobile number with English numbers,<br>e.g. <en>09123456789</en>", "peprodev-ups")."\" pattern=".esc_attr("^(\+98|0098|98|0)?9\d{9}$")." maxlength=14",
         ),
         array(
           "meta_name"   => "optverify",
@@ -2929,7 +2937,7 @@ if (!class_exists("PeproDevUPS_Login")){
             "in-column"   => "no",
             "placeholder" => "",
             "classes"     => "mobile-verification force-ltr",
-            "attributes"  => "tabindex=$num pattern=".esc_attr("^(\+98|0098|98|0)?9\d{9}$")." data-error-text=\"".esc_attr__("Enter mobile number with English numbers,<br>e.g. 09123456789", "peprodev-ups")."\" maxlength=14",
+            "attributes"  => "tabindex=$num pattern=".esc_attr("^(\+98|0098|98|0)?9\d{9}$")." data-error-text=\"".esc_attr__("Enter mobile number with English numbers,<br>e.g. <en>09123456789</en>", "peprodev-ups")."\" maxlength=14",
           ),
           array(
             "meta_name"   => "optverify",
@@ -2977,7 +2985,7 @@ if (!class_exists("PeproDevUPS_Login")){
               "in-column"   => "no",
               "placeholder" => "",
               "classes"     => "mobile-verification force-ltr",
-              "attributes"  => "tabindex=$num pattern=".esc_attr("^(\+98|0098|98|0)?9\d{9}$")." data-error-text=\"".esc_attr__("Enter mobile number with English numbers,<br>e.g. 09123456789", "peprodev-ups")."\" maxlength=14",
+              "attributes"  => "tabindex=$num pattern=".esc_attr("^(\+98|0098|98|0)?9\d{9}$")." data-error-text=\"".esc_attr__("Enter mobile number with English numbers,<br>e.g. <en>09123456789</en>", "peprodev-ups")."\" maxlength=14",
             )
           );
         }
@@ -2985,7 +2993,7 @@ if (!class_exists("PeproDevUPS_Login")){
       foreach ( (array) $this->register_fileds as $field) {
         if ("tel" == $field["type"] || "mobile" == $field["type"]){
           $field["classes"]    = $field["classes"] . " mobile-verification force-ltr";
-          $field["attributes"] = " data-error-text=\"".esc_attr__("Enter mobile number with English numbers,<br>e.g. 09123456789", "peprodev-ups")."\" tabindex=$num pattern=".esc_attr("^(\+98|0098|98|0)?9\d{9}$")." maxlength=14";
+          $field["attributes"] = " data-error-text=\"".esc_attr__("Enter mobile number with English numbers,<br>e.g. <en>09123456789</en>", "peprodev-ups")."\" tabindex=$num pattern=".esc_attr("^(\+98|0098|98|0)?9\d{9}$")." maxlength=14";
         }
         if (($this->login_mobile_otp || $this->reg_add_mobile) && "user_mobile" == $field["meta_name"]) continue;
         if ("recaptcha" == $field["type"] && "yes" == $field["is-public"]) continue;
@@ -3371,7 +3379,7 @@ if (!class_exists("PeproDevUPS_Login")){
           "in-column"   => "no",
           "placeholder" => "",
           "classes"     => "mobile-verification force-ltr",
-          "attributes"  => "tabindex=1 autocomplete=off data-error-text=\"".esc_attr__("Enter mobile number with English numbers,<br>e.g. 09123456789", "peprodev-ups")."\" pattern=".esc_attr("^(\+98|0098|98|0)?9\d{9}$")." maxlength=14",
+          "attributes"  => "tabindex=1 autocomplete=off data-error-text=\"".esc_attr__("Enter mobile number with English numbers,<br>e.g. <en>09123456789</en>", "peprodev-ups")."\" pattern=".esc_attr("^(\+98|0098|98|0)?9\d{9}$")." maxlength=14",
         ),
         array(
           "meta_name"   => "verification",
@@ -3712,9 +3720,19 @@ if (!class_exists("PeproDevUPS_Login")){
               if (!empty($found_prev_user)){
                 if (count($found_prev_user) == 1 && in_array((string) $user_id, $found_prev_user) ){
                   update_user_meta( $user_id, $field["meta_name"], $valid_mobile);
+                  // auto verify_mobile added by admin
+                  if (is_admin()){
+                    update_user_meta($user_id, "pepro_user_is_sms_verified", "yes");
+                    update_user_meta($user_id, "pepro_user_is_email_verified", "yes");
+                  }
                 }
               }else{
                 update_user_meta( $user_id, $field["meta_name"], $valid_mobile);
+                // auto verify_mobile added by admin
+                if (is_admin()){
+                  update_user_meta($user_id, "pepro_user_is_sms_verified", "yes");
+                  update_user_meta($user_id, "pepro_user_is_email_verified", "yes");
+                }
               }
             }
           }else{

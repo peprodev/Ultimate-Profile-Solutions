@@ -1,6 +1,6 @@
 /**
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2022/01/01 22:52:07
+ * @Last modified time: 2022/01/03 10:33:11
  */
 :root {
 	--tippy-color: #bf1e2e;
@@ -60,6 +60,9 @@ pdtoast.active, toastwide.active {
 	font-size: small;
 	cursor: help;
 }
+[data-pepro-reglogin] > form.floating_from_label.inline error {
+	top: -0.5rem;
+}
 
 [dir="rtl"] [data-pepro-reglogin] > form.inline error {
 	left: 0;
@@ -88,6 +91,10 @@ pdtoast.active, toastwide.active {
 
 .jconfirm.jconfirm-modern .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
 	transform: scale(1) !important;
+}
+
+.tippy-content en{
+	font-family: initial !important;
 }
 
 [data-pepro-reglogin] > form #login_error:empty,

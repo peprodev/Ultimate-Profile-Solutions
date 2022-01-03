@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: PeproDev Ultimate Profile Solutions\n"
-"POT-Creation-Date: 2022-01-01 23:38+0330\n"
+"POT-Creation-Date: 2022-01-03 10:09+0330\n"
 "PO-Revision-Date: 2021-09-11 11:36+0430\n"
 "Last-Translator: Amirhosseinhpv <its@hpv.im>\n"
 "Language-Team: Amirhosseinhpv <its@hpv.im>\n"
@@ -26,7 +26,7 @@ msgctxt "peprocore-appearance-setting"
 msgid "PeproDev Ultimate Profile Solutions"
 msgstr ""
 
-#: core/apps/home.php:52 login/login.php:3998
+#: core/apps/home.php:52 login/login.php:4002
 msgid "WordPress Admin"
 msgstr ""
 
@@ -132,7 +132,7 @@ msgstr ""
 msgid "Empty Database"
 msgstr ""
 
-#: core/main.php:342 login/login.php:4684 profile/profile.php:1713
+#: core/main.php:342 login/login.php:4688 profile/profile.php:1713
 msgid "Settings Successfully Saved."
 msgstr ""
 
@@ -323,7 +323,7 @@ msgid "Saving ..."
 msgstr ""
 
 #: login/include/class-activated.php:21 login/login.php:245 login/login.php:617
-#: login/login.php:3647
+#: login/login.php:3651
 msgctxt "js-translate"
 msgid "Please wait ..."
 msgstr ""
@@ -1301,8 +1301,8 @@ msgstr ""
 msgid "Subscribe"
 msgstr ""
 
-#: login/login.php:234 login/login.php:508 login/login.php:2775
-#: login/login.php:2924 login/login.php:2972 login/login.php:3366
+#: login/login.php:234 login/login.php:508 login/login.php:2779
+#: login/login.php:2928 login/login.php:2976 login/login.php:3370
 msgid "Mobile"
 msgstr ""
 
@@ -1310,7 +1310,7 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: login/login.php:236 login/login.php:3253
+#: login/login.php:236 login/login.php:3257
 msgid "Verify Code"
 msgstr ""
 
@@ -1339,13 +1339,13 @@ msgstr ""
 msgid "Resend OTP Code"
 msgstr ""
 
-#: login/login.php:298 login/login.php:906 login/login.php:2831
-#: login/login.php:3421
+#: login/login.php:298 login/login.php:906 login/login.php:2835
+#: login/login.php:3425
 msgid "Login"
 msgstr ""
 
 #: login/login.php:299 login/login.php:924 login/login.php:934
-#: login/login.php:3035
+#: login/login.php:3039
 msgid "Register"
 msgstr ""
 
@@ -1409,9 +1409,9 @@ msgstr ""
 msgid "Display Name"
 msgstr ""
 
-#: login/login.php:516 login/login.php:2783 login/login.php:2932
-#: login/login.php:2980 login/login.php:2988 login/login.php:3374
-msgid "Enter mobile number with English numbers,<br>e.g. 09123456789"
+#: login/login.php:516 login/login.php:2787 login/login.php:2936
+#: login/login.php:2984 login/login.php:2992 login/login.php:3378
+msgid "Enter mobile number with English numbers,<br>e.g. <en>09123456789</en>"
 msgstr ""
 
 #: login/login.php:525
@@ -1459,7 +1459,7 @@ msgid "This field is required, Please check its validity"
 msgstr ""
 
 #: login/login.php:642 login/login.php:1869 login/login.php:2214
-#: login/login.php:3782 login/login.php:3784 login/login.php:4524
+#: login/login.php:3786 login/login.php:3788 login/login.php:4528
 msgctxt "reg-form-error"
 msgid "<strong>Error:</strong> Please check the reCAPTCHA challenge."
 msgstr ""
@@ -1814,15 +1814,15 @@ msgid ""
 msgstr ""
 
 #: login/login.php:1878 login/login.php:1895 login/login.php:2222
-#: login/login.php:3792 login/login.php:3794 login/login.php:3820
-#: login/login.php:3822 login/login.php:3884 login/login.php:3930
+#: login/login.php:3796 login/login.php:3798 login/login.php:3824
+#: login/login.php:3826 login/login.php:3888 login/login.php:3934
 #, php-format
 msgctxt "reg-form-error"
 msgid "<strong>Error:</strong> Please enter %s."
 msgstr ""
 
-#: login/login.php:1883 login/login.php:3801 login/login.php:3803
-#: login/login.php:3895
+#: login/login.php:1883 login/login.php:3805 login/login.php:3807
+#: login/login.php:3899
 msgctxt "reg-form-error"
 msgid "<strong>Error:</strong> Please enter a valid mobile number."
 msgstr ""
@@ -1834,14 +1834,14 @@ msgid ""
 "choose another one."
 msgstr ""
 
-#: login/login.php:1902 login/login.php:2228 login/login.php:3850
-#: login/login.php:3852
+#: login/login.php:1902 login/login.php:2228 login/login.php:3854
+#: login/login.php:3856
 msgctxt "reg-form-error"
 msgid "<strong>ERROR</strong>: Password field is required."
 msgstr ""
 
-#: login/login.php:1905 login/login.php:2231 login/login.php:3857
-#: login/login.php:3859
+#: login/login.php:1905 login/login.php:2231 login/login.php:3861
+#: login/login.php:3863
 msgctxt "reg-form-error"
 msgid "<strong>ERROR</strong>: Confirm Password field is required."
 msgstr ""
@@ -1851,8 +1851,8 @@ msgctxt "reg-form-error"
 msgid "<strong>Error</strong>: Passwords may not contain the character \"\\\"."
 msgstr ""
 
-#: login/login.php:1913 login/login.php:2237 login/login.php:3866
-#: login/login.php:3868
+#: login/login.php:1913 login/login.php:2237 login/login.php:3870
+#: login/login.php:3872
 msgctxt "reg-form-error"
 msgid ""
 "<strong>ERROR</strong>: Password field and Confirm Password field do not "
@@ -1953,238 +1953,238 @@ msgstr ""
 msgid "Error Clearing Database."
 msgstr ""
 
-#: login/login.php:2458
-msgid "New user"
-msgstr ""
-
-#: login/login.php:2460
+#: login/login.php:2468
 msgid "Dear user"
 msgstr ""
 
-#: login/login.php:2585 login/login.php:2627
+#: login/login.php:2469
+msgid "New user"
+msgstr ""
+
+#: login/login.php:2589 login/login.php:2631
 msgid "Verify Email"
 msgstr ""
 
-#: login/login.php:2705 login/login.php:2732 login/login.php:3277
+#: login/login.php:2709 login/login.php:2736 login/login.php:3281
 msgid "Username/Email"
 msgstr ""
 
-#: login/login.php:2713 login/login.php:2740 login/login.php:3226
+#: login/login.php:2717 login/login.php:2744 login/login.php:3230
 msgid "Enter username or email address correctly"
 msgstr ""
 
-#: login/login.php:2718 login/login.php:3000 login/login.php:3963
+#: login/login.php:2722 login/login.php:3004 login/login.php:3967
 msgid "Password"
 msgstr ""
 
-#: login/login.php:2721
+#: login/login.php:2725
 msgid "You have to enter a password"
 msgstr ""
 
-#: login/login.php:2745 login/login.php:3231
+#: login/login.php:2749 login/login.php:3235
 msgid "Verification Code"
 msgstr ""
 
-#: login/login.php:2754 login/login.php:3240
+#: login/login.php:2758 login/login.php:3244
 msgid ""
 "You have to enter a Verification code or leave it empty and press Enter to "
 "receive a new one"
 msgstr ""
 
-#: login/login.php:2788 login/login.php:2888 login/login.php:2937
-#: login/login.php:3379
+#: login/login.php:2792 login/login.php:2892 login/login.php:2941
+#: login/login.php:3383
 msgid "OTP Code"
 msgstr ""
 
-#: login/login.php:2797 login/login.php:2897 login/login.php:2946
-#: login/login.php:3318 login/login.php:3388
+#: login/login.php:2801 login/login.php:2901 login/login.php:2950
+#: login/login.php:3322 login/login.php:3392
 msgid ""
 "You have to enter an OTP code or leave it empty and press Enter to receive a "
 "new one"
 msgstr ""
 
-#: login/login.php:2832 login/login.php:3415
+#: login/login.php:2836 login/login.php:3419
 msgid "Verify OTP Code"
 msgstr ""
 
-#: login/login.php:2833 login/login.php:2834 login/login.php:3414
+#: login/login.php:2837 login/login.php:2838 login/login.php:3418
 msgid "Receive OTP Code"
 msgstr ""
 
-#: login/login.php:2835
+#: login/login.php:2839
 msgid "Login via OTP/Password"
 msgstr ""
 
-#: login/login.php:2860
+#: login/login.php:2864
 msgid "Username"
 msgstr ""
 
-#: login/login.php:2864
+#: login/login.php:2868
 msgid "Enter username correctly"
 msgstr ""
 
-#: login/login.php:2874 login/login.php:3218
+#: login/login.php:2878 login/login.php:3222
 msgid "Email"
 msgstr ""
 
-#: login/login.php:2878 login/login.php:3281
+#: login/login.php:2882 login/login.php:3285
 msgid "Enter email address correctly"
 msgstr ""
 
-#: login/login.php:3010 login/login.php:3967
+#: login/login.php:3014 login/login.php:3971
 msgid "Confirm Password"
 msgstr ""
 
-#: login/login.php:3028
+#: login/login.php:3032
 msgid "Receive OTP & Register"
 msgstr ""
 
-#: login/login.php:3029
+#: login/login.php:3033
 msgid "Verify OTP & Register"
 msgstr ""
 
-#: login/login.php:3252
+#: login/login.php:3256
 msgid "Receive Code"
 msgstr ""
 
-#: login/login.php:3287
+#: login/login.php:3291
 msgid "New Password"
 msgstr ""
 
-#: login/login.php:3297
+#: login/login.php:3301
 msgid "Confirm New Password"
 msgstr ""
 
-#: login/login.php:3309
+#: login/login.php:3313
 msgid "Email OTP Verification"
 msgstr ""
 
-#: login/login.php:3343
+#: login/login.php:3347
 msgid "Receive OTP & Reset Password"
 msgstr ""
 
-#: login/login.php:3344
+#: login/login.php:3348
 msgid "Verify OTP & Reset Password"
 msgstr ""
 
-#: login/login.php:3586
+#: login/login.php:3590
 msgctxt "metabox"
 msgid "Email Verified"
 msgstr ""
 
-#: login/login.php:3587
+#: login/login.php:3591
 msgctxt "metabox"
 msgid "SMS Verified"
 msgstr ""
 
-#: login/login.php:3630
+#: login/login.php:3634
 msgid "Read value"
 msgstr ""
 
-#: login/login.php:3648
+#: login/login.php:3652
 msgctxt "wc-setting-js"
 msgid "Operation done successfully"
 msgstr ""
 
-#: login/login.php:3649
+#: login/login.php:3653
 msgctxt "js-translate"
 msgid "An unknown error occured"
 msgstr ""
 
-#: login/login.php:3650
+#: login/login.php:3654
 msgctxt "js-translate"
 msgid "Plese fix errors in form"
 msgstr ""
 
-#: login/login.php:3663 login/login.php:4116
+#: login/login.php:3667 login/login.php:4120
 msgid "Personal Information"
 msgstr ""
 
-#: login/login.php:3810 login/login.php:3812
+#: login/login.php:3814 login/login.php:3816
 msgctxt "reg-form-error"
 msgid "<strong>Error:</strong> This mobile number is currently in use."
 msgstr ""
 
-#: login/login.php:3919
+#: login/login.php:3923
 #, php-format
 msgctxt "reg-form-error"
 msgid "<strong>Error:</strong> This mobile number is currently in use by %s."
 msgstr ""
 
-#: login/login.php:3986
+#: login/login.php:3990
 msgid "Home page"
 msgstr ""
 
-#: login/login.php:3990
+#: login/login.php:3994
 msgid "Pepro Profile page"
 msgstr ""
 
-#: login/login.php:3994
+#: login/login.php:3998
 msgid "Pepro Profile Edit page"
 msgstr ""
 
-#: login/login.php:4053
+#: login/login.php:4057
 msgid "Everyone"
 msgstr ""
 
-#: login/login.php:4073
+#: login/login.php:4077
 msgid "Text field"
 msgstr ""
 
-#: login/login.php:4074
+#: login/login.php:4078
 msgid "Textarea field"
 msgstr ""
 
-#: login/login.php:4075
+#: login/login.php:4079
 msgid "Number field"
 msgstr ""
 
-#: login/login.php:4076
+#: login/login.php:4080
 msgid "Email field"
 msgstr ""
 
-#: login/login.php:4077
+#: login/login.php:4081
 msgid "Mobile field"
 msgstr ""
 
-#: login/login.php:4078
+#: login/login.php:4082
 msgid "TinyMCE Editor"
 msgstr ""
 
-#: login/login.php:4079
+#: login/login.php:4083
 msgid "Dropdown list"
 msgstr ""
 
-#: login/login.php:4082
+#: login/login.php:4086
 msgid "reCaptcha"
 msgstr ""
 
-#: login/login.php:4132
+#: login/login.php:4136
 #, php-format
 msgid "Verification Code: [OTP] — %s"
 msgstr ""
 
-#: login/login.php:4140 profile/profile.php:69
+#: login/login.php:4144 profile/profile.php:69
 msgid "Profile"
 msgstr ""
 
-#: login/login.php:4405
+#: login/login.php:4409
 msgctxt "loginregister"
 msgid "Manage Login/Register"
 msgstr ""
 
-#: login/login.php:4687
+#: login/login.php:4691
 #, php-format
 msgctxt "login-section"
 msgid "%1$s Your login page is now here: %2$s. Bookmark this page!"
 msgstr ""
 
-#: login/login.php:4688
+#: login/login.php:4692
 msgctxt "login-section"
 msgid "Warning!"
 msgstr ""
 
-#: login/login.php:4701
+#: login/login.php:4705
 #, php-format
 msgid "OTP SMS sent to %s.<br>Response: %s"
 msgstr ""

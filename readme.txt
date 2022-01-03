@@ -2,8 +2,8 @@
 Contributors: amirhosseinhpv, peprodev, blackswanlab
 Donate link: https://pepro.dev/donate/
 Tags: functionality, pepro, management, administration, profile, login, register
-Version: 2.3.3
-Stable tag: 2.3.3
+Version: 2.3.4
+Stable tag: 2.3.4
 Requires at least: 5.0
 Tested up to: 5.8
 Requires PHP: 7.2
@@ -15,8 +15,30 @@ The most complete and THE Ultimate Profile Solutions for WordPress
 
 == Description ==
 
-The most complete and THE Ultimate Profile Solutions for WordPress
-Adds Profile, Login Register Shortcode and Popup, Custom Fields for login/reg. form, Custom sections for profile and ...
+One of the most Advanced and The Ultimate Profile Solutions for WordPress
+-------------------------------------------------------------------------
+
+* FREE OF ANY CHARGE! UNLIMITED! OPEN-SOURCE FOREVER!
+* Ajaxified Popup Login/Register form
+* Login by Username/Password | Email/Password | Mobile OTP | Email OTP | (social login soon)
+* Show Popup/Toast Notification after Login/Register
+* Unlimited User Customized Registration Fields (reCAPTCHA / Text / Select / WooCommerce Based fields / TinyMCE Editor / DEV: Hooked Extras)
+* Unlimited User Customized Login Redirection rules (based on User Role)
+* Unlimited User Customized Logout Redirection rules (based on User Role)
+* Unlimited User Customized Registration Redirection rules (based on User Role)
+* Hide wp-login.php and Change Login address
+* Customized/Themed wp-login.php login screen
+* Built-in CSS Editor for Login screen
+* Built-in Dashboard with Responsive Design compatible with WooCommerce
+* Unlimited User Customized Profile sections
+* Built-in Individual CSS Editor for Each Profile Section
+* Built-in Individual JS Editor for Each Profile Section
+* Apply Restriction rules for Profile Section based on User Role or LearnDash Course Access
+* Built-in Admin-User Notification system, announcement functionality
+* Easily Integrate your SMS Provider with OTP System
+* Newsletter Mobile-based Subscription (Export to Excel CSV)
+* Compatible with WooCommerce, LearnDash, WooWallet, Wishlist, YITH Plugins
+* Made by Developers for the Developers! [Source code in GitHub](https://github.com/peprodev/Ultimate-Profile-Solutions)
 
 == Installation ==
 
@@ -51,10 +73,19 @@ You can help us improve our works by committing your changes to Pepro Dev's Gith
 
 == Changelog ==
 
-= Ver. 2.3.3 | 2021-12-31/1400-10-10 =
+= Ver. 2.3.4 | 2022-01-03/1400-10-13 =
+* Fixes: Popup Login/Registration form
+* Fixes: Toast Notification Coloring Errors
+* Fixes: Admin User Creation, now Auto Verifies user
+* Fixed: Arabic/Persian numbers in Inputs/Verification
+* Fixes: Registration without saving User first name
+* Fixes: Duplicate user First Name/Last Name on Admin-New User Panel
+* Enhanced: Kavenegar کاوه نگار SMS Gateway
+
+= Ver. 2.3.3 | 2022-01-01/1400-10-11 =
 * Added floating form labels
 * Changed Popup login/register style
-* Added Option to User Messagebox/Toast
+* Added Option to Use Messagebox/Toast Notification
 
 = Ver. 2.3.0 | 2021-12-30/1400-10-09 =
 * Multiple SMS Providers
@@ -116,12 +147,19 @@ You can help us improve our works by committing your changes to Pepro Dev's Gith
 
 == Upgrade Notice ==
 
-= Ver. 2.3.3 | 2021-12-31/1400-10-10 =
+= Ver. 2.3.4 | 2022-01-03/1400-10-13 =
+* Fixes: Popup Login/Registration form
+* Fixes: Toast Notification Coloring Errors
+* Fixes: Admin User Creation, now Auto Verifies user
+* Fixed: Arabic/Persian numbers in Inputs/Verification
+* Fixes: Registration without saving User first name
+* Fixes: Duplicate user First Name/Last Name on Admin-New User Panel
+* Enhanced: Kavenegar کاوه نگار SMS Gateway
+
+= Ver. 2.3
 * Added floating form labels
 * Changed Popup login/register style
 * Added Option to User Messagebox/Toast
-
-= Ver. 2.3.0 | 2021-12-30/1400-10-09 =
 * Multiple SMS Providers
 * Mobile Newsletter Subscription via number verify (SMS OTP)
 * Each SMS Provider has its own sending function

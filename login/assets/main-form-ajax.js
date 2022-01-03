@@ -1,6 +1,6 @@
 /**
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2022/01/01 22:54:51
+ * @Last modified time: 2022/01/03 10:33:13
  * resendtime
  */
 jQuery.noConflict();
@@ -132,7 +132,7 @@ jQuery.noConflict();
         error_occured = false;
         if (!$(`#${_pepro_dev.instance} form#pepro-login-inline`).isValid()) {
           $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(_pepro_dev.fixerr);
-          show_toast(_pepro_dev.fixerr);
+          show_toast(_pepro_dev.fixerr, $error_color);
           $(login_form).find(":input:visible:invalid").each(function(index, val) {
             $errortext = $(val).data("error-text");
             if(!$errortext || "" == $errortext){
@@ -141,7 +141,7 @@ jQuery.noConflict();
                 $errortext = _pepro_dev.check_required;
               }
             }
-            $(val).parent().append(`<error data-tippy-content="${$errortext}">?</error>`);
+            $(val).parent().append(`<error data-tippy-content="${$errortext}">!</error>`);
           });
           tippy('[data-tippy-content]',{allowHTML: true, theme: 'error',});
           scroll_element();
@@ -154,7 +154,7 @@ jQuery.noConflict();
           $.each($recaps, function(index, val) {
             if ($(val).find(".g-recaptcha-response").val() === "") {
               $(login_form).find("#login_error").append(_pepro_dev.catpcha);
-              show_toast(_pepro_dev.catpcha);
+              show_toast(_pepro_dev.catpcha, $error_color);
               error_occured = true;
               return false;
             }
@@ -277,13 +277,13 @@ jQuery.noConflict();
                 resend_counndown(e, login_form, _pepro_dev);
               }
               $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(e.data.msg);
-              show_toast(e.data.msg);
+              show_toast(e.data.msg, $error_color);
             }
           },
           error: function(e) {
             console.error(e);
             $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(_pepro_dev.error);
-            show_toast(_pepro_dev.error);
+            show_toast(_pepro_dev.error, $error_color);
           },
           complete: function(e) {
             scroll_element();
@@ -311,7 +311,7 @@ jQuery.noConflict();
         error_occured = false;
         if (!$(`#${_pepro_dev.instance} form#pepro-verify-inline`).isValid()) {
           $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(_pepro_dev.fixerr);
-          show_toast(_pepro_dev.fixerr);
+          show_toast(_pepro_dev.fixerr, $error_color);
           $(login_form).find(":input:visible:invalid").each(function(index, val) {
             $errortext = $(val).data("error-text");
             if(!$errortext || "" == $errortext){
@@ -320,7 +320,7 @@ jQuery.noConflict();
                 $errortext = _pepro_dev.check_required;
               }
             }
-            $(val).parent().append(`<error data-tippy-content="${$errortext}">?</error>`);
+            $(val).parent().append(`<error data-tippy-content="${$errortext}">!</error>`);
           });
           tippy('[data-tippy-content]',{allowHTML: true, theme: 'error',});
           scroll_element();
@@ -334,7 +334,7 @@ jQuery.noConflict();
           $.each($recaps, function(index, val) {
             if ($(val).find(".g-recaptcha-response").val() === "") {
               $(login_form).find("#login_error").append(_pepro_dev.catpcha);
-              show_toast(_pepro_dev.catpcha);
+              show_toast(_pepro_dev.catpcha, $error_color);
               error_occured = true;
               return false;
             }
@@ -429,13 +429,13 @@ jQuery.noConflict();
 
               }
               $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(e.data.msg);
-              show_toast(e.data.msg);
+              show_toast(e.data.msg, $error_color);
             }
           },
           error: function(e) {
             console.error(e);
             $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(_pepro_dev.error);
-            show_toast(_pepro_dev.error);
+            show_toast(_pepro_dev.error, $error_color);
           },
           complete: function(e) {
             scroll_element();
@@ -463,7 +463,7 @@ jQuery.noConflict();
         error_occured = false;
         if (!$(`#${_pepro_dev.instance} form#pepro-verify-inline-force`).isValid()) {
           $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(_pepro_dev.fixerr);
-          show_toast(_pepro_dev.fixerr);
+          show_toast(_pepro_dev.fixerr, $error_color);
           $(login_form).find(":input:visible:invalid").each(function(index, val) {
             $errortext = $(val).data("error-text");
             if(!$errortext || "" == $errortext){
@@ -472,7 +472,7 @@ jQuery.noConflict();
                 $errortext = _pepro_dev.check_required;
               }
             }
-            $(val).parent().append(`<error data-tippy-content="${$errortext}">?</error>`);
+            $(val).parent().append(`<error data-tippy-content="${$errortext}">!</error>`);
           });
           tippy('[data-tippy-content]',{allowHTML: true, theme: 'error',});
           scroll_element();
@@ -486,7 +486,7 @@ jQuery.noConflict();
           $.each($recaps, function(index, val) {
             if ($(val).find(".g-recaptcha-response").val() === "") {
               $(login_form).find("#login_error").append(_pepro_dev.catpcha);
-              show_toast(_pepro_dev.catpcha);
+              show_toast(_pepro_dev.catpcha, $error_color);
               error_occured = true;
               return false;
             }
@@ -580,13 +580,13 @@ jQuery.noConflict();
 
               }
               $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(e.data.msg);
-              show_toast(e.data.msg);
+              show_toast(e.data.msg, $error_color);
             }
           },
           error: function(e) {
             console.error(e);
             $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(_pepro_dev.error);
-            show_toast(_pepro_dev.error);
+            show_toast(_pepro_dev.error, $error_color);
           },
           complete: function(e) {
             scroll_element();
@@ -595,10 +595,6 @@ jQuery.noConflict();
           },
         });
       });
-
-      // document.querySelectorAll("[data-error-text]").forEach(function(e){
-      // 	e.setCustomValidity(e.attributes["data-error-text"].value);
-      // });
 
       $(document).on("change keyup focus", `#${_pepro_dev.instance} form :input`, function(e) {
         val = $(this).val();
@@ -610,7 +606,6 @@ jQuery.noConflict();
           $(this).parent().removeClass("filled");
         }
       });
-
       $(document).on("focusout", `#${_pepro_dev.instance} form :input`, function(e) {
         $(this).removeClass("focused");
         $(this).parent().removeClass("focused");
@@ -707,7 +702,7 @@ jQuery.noConflict();
         error_occured = false;
         if (!$(`#${_pepro_dev.instance} form#pepro-reg-inline`).isValid()) {
           $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(_pepro_dev.fixerr);
-          show_toast(_pepro_dev.fixerr);
+          show_toast(_pepro_dev.fixerr, $error_color);
           $(login_form).find(":input:visible:invalid").each(function(index, val) {
             $errortext = $(val).data("error-text");
             if(!$errortext || "" == $errortext){
@@ -716,7 +711,7 @@ jQuery.noConflict();
                 $errortext = _pepro_dev.check_required;
               }
             }
-            $(val).parent().append(`<error data-tippy-content="${$errortext}">?</error>`);
+            $(val).parent().append(`<error data-tippy-content="${$errortext}">!</error>`);
           });
           tippy('[data-tippy-content]',{allowHTML: true, theme: 'error',});
           scroll_element();
@@ -729,7 +724,7 @@ jQuery.noConflict();
           $.each($recaps, function(index, val) {
             if ($(val).find(".g-recaptcha-response").val() === "") {
               $(login_form).find("#login_error").append(_pepro_dev.catpcha);
-              show_toast(_pepro_dev.catpcha);
+              show_toast(_pepro_dev.catpcha, $error_color);
               error_occured = true;
               return false;
             }
@@ -852,13 +847,13 @@ jQuery.noConflict();
                 resend_counndown(e, login_form, _pepro_dev);
               }
               $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(e.data.msg);
-              show_toast(e.data.msg);
+              show_toast(e.data.msg, $error_color);
             }
           },
           error: function(e) {
             console.error(e);
             $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(_pepro_dev.error);
-            show_toast(_pepro_dev.error);
+            show_toast(_pepro_dev.error, $error_color);
           },
           complete: function(e) {
             $(login_form).find(":input").prop("disabled", false)
@@ -878,7 +873,7 @@ jQuery.noConflict();
         error_occured = false;
         if (!$(`#${_pepro_dev.instance} form#pepro-pass-inline`).isValid()) {
           $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(_pepro_dev.fixerr);
-          show_toast(_pepro_dev.fixerr);
+          show_toast(_pepro_dev.fixerr, $error_color);
           $(login_form).find(":input:visible:invalid").each(function(index, val) {
             $errortext = $(val).data("error-text");
             if(!$errortext || "" == $errortext){
@@ -887,7 +882,7 @@ jQuery.noConflict();
                 $errortext = _pepro_dev.check_required;
               }
             }
-            $(val).parent().append(`<error data-tippy-content="${$errortext}">?</error>`);
+            $(val).parent().append(`<error data-tippy-content="${$errortext}">!</error>`);
           });
           tippy('[data-tippy-content]',{allowHTML: true, theme: 'error',});
           scroll_element();
@@ -900,7 +895,7 @@ jQuery.noConflict();
           $.each($recaps, function(index, val) {
             if ($(val).find(".g-recaptcha-response").val() === "") {
               $(login_form).find("#login_error").append(_pepro_dev.catpcha);
-              show_toast(_pepro_dev.catpcha);
+              show_toast(_pepro_dev.catpcha, $error_color);
               error_occured = true;
               return false;
             }
@@ -1018,13 +1013,13 @@ jQuery.noConflict();
                 resend_counndown(e, login_form, _pepro_dev);
               }
               $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(e.data.msg);
-              show_toast(e.data.msg);
+              show_toast(e.data.msg, $error_color);
             }
           },
           error: function(e) {
             console.error(e);
             $(login_form).find("#login_error").removeClass("info success error").addClass("error").html(_pepro_dev.error);
-            show_toast(_pepro_dev.error);
+            show_toast(_pepro_dev.error, $error_color);
           },
           complete: function(e) {
             $(login_form).find(":input").prop("disabled", false)
@@ -1035,7 +1030,12 @@ jQuery.noConflict();
       });
 
 
+      // document.querySelectorAll("[data-error-text]").forEach(function(e){
+        // 	e.setCustomValidity(e.attributes["data-error-text"].value);
+      // });
+
     });
+
     function resend_counndown(e, login_form, _pepro_dev) {
       if (".otp-resend,.otp-changenum" == e.data.show){
         $submitBtn = $(login_form).find(".submit-wrap #submit[type=submit]")
@@ -1064,7 +1064,7 @@ jQuery.noConflict();
         }
       }
     }
-    $(document).on("input", "[data-pepro-reglogin]>form.inline input[type=number]", function(e){
+    $(document).on("input", "[data-pepro-reglogin]>form.inline :input", function(e){
       $(this).val(toEnglishDigits($(this).val()));
     });
     $(document).on("click tap", "[data-pepro-reglogin]>form.inline error", function(e){
