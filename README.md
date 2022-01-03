@@ -26,4 +26,4 @@ One of the most Advanced and The Ultimate Profile Solutions for WordPress
 
 ##### **Developed by** [Perpro Development Group](https://pepro.dev/)
 
-*Current Version: 2.3.4* \| *Lead Programmer:* [Amirhosseinhpv](https://hpv.im/)
+*Current Version: 2.3.4* \| *Lead Developer:* [Amirhosseinhpv](https://hpv.im/)
