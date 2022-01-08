@@ -8,7 +8,6 @@ One of the **most** Advanced and **The Ultimate Profile Solutions** for WordPres
 * Login by Username/Password | Email/Password | Mobile OTP | Email OTP | (social login soon)
 * Show Popup/Toast Notification after Login/Register
 * Unlimited User Customized Registration Fields
-<<<<<<< HEAD
   * Text Field
   * Number Field
   * Email Field
@@ -19,17 +18,6 @@ One of the **most** Advanced and **The Ultimate Profile Solutions** for WordPres
   * WooCommerce Based fields
   * TinyMCE Editor
   * *DEV: Hooked Customized Fields*
-** Text Field
-** Number Field
-** Email Field
-** Mobile Number Field
-** reCAPTCHA Field
-** Select Dropdown Field
-** Multiple-choice Field
-** WooCommerce Based fields
-** TinyMCE Editor
-** *DEV: Hooked Customized Fields*
->>>>>>> 2d0e78485e238f28acdaa07309b270a6bcea7236
 * Unlimited User Customized Login Redirection rules (based on User Role)
 * Unlimited User Customized Logout Redirection rules (based on User Role)
 * Unlimited User Customized Registration Redirection rules (based on User Role)
