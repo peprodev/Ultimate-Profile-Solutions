@@ -1,17 +1,34 @@
 /**
- * @Author: Amirhosseinhpv
- * @Date:   2020/05/03 13:33:06
- * @Email:  its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/09/11 11:31:55
- * @License: GPLv2
- * @Copyright: Copyright © 2020 Amirhosseinhpv, All rights reserved.
+ * @Last modified time: 2022/01/04 19:36:48
  */
 
 
 (function($) {
   $(document).ready(function() {
+    $(document.body).append($("<toast>"));
     $(".wrapper").show();
+    $(document).on("click tap", ".copyhwnd", function(e){
+      e.preventDefault();
+      var me = $(this);
+      copy_clipboard($(me.data("copy")).text().replace(/\r/gi,""));
+      show_toast(pepc._copy);
+    });
+    function copy_clipboard(data) {
+      var $temp = $("<textarea>");
+      $("body").append($temp);
+      $temp.val(data).select();
+      document.execCommand("copy");
+      $temp.remove();
+    }
+    function show_toast(data = "Sample Toast!", bg="", delay = 4500) {
+    	if (!$("toast").length) {$(document.body).append($("<toast>"));}else{$("toast").removeClass("active");}
+    	setTimeout(function () {
+    		$("toast").css("--toast-bg", bg).html(data).stop().addClass("active").delay(delay).queue(function () {
+    			$(this).removeClass("active").dequeue().off("click tap");
+    		}).on("click tap", function (e) {e.preventDefault();$(this).stop().removeClass("active");});
+    	}, 200);
+    }
     $(window).on("load", function() {
       $("peploader").hide();
       var $_railalign = $("body").is(".rtl") ? "left":"right";

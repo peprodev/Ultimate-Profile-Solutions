@@ -2,8 +2,8 @@
 Contributors: amirhosseinhpv, peprodev, blackswanlab
 Donate link: https://pepro.dev/donate/
 Tags: functionality, pepro, management, administration, profile, login, register
-Version: 2.3.4
-Stable tag: 2.3.4
+Version: 2.3.5
+Stable tag: 2.3.5
 Requires at least: 5.0
 Tested up to: 5.8
 Requires PHP: 7.2
@@ -72,6 +72,10 @@ You can help us improve our works by committing your changes to Pepro Dev's Gith
 1. Overview
 
 == Changelog ==
+
+= Ver. 2.3.5 | 2022-01-09/1400-10-19 =
+* Enhanced Admin Dashboard UX
+* Added ReadMe to GitHub & WordPress
 
 = Ver. 2.3.4 | 2022-01-03/1400-10-13 =
 * Fixes: Popup Login/Registration form
@@ -146,6 +150,10 @@ You can help us improve our works by committing your changes to Pepro Dev's Gith
 
 
 == Upgrade Notice ==
+
+= Ver. 2.3.5 | 2022-01-09/1400-10-19 =
+* Enhanced Admin Dashboard UX
+* Added ReadMe to GitHub & WordPress
 
 = Ver. 2.3.4 | 2022-01-03/1400-10-13 =
 * Fixes: Popup Login/Registration form

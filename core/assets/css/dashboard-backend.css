@@ -3,7 +3,7 @@
  * @Date:   2020/05/03 13:33:06
  * @Email:  its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/09/01 21:59:24
+ * @Last modified time: 2022/01/04 19:37:55
  * @License: GPLv2
  * @Copyright: Copyright © 2020 Amirhosseinhpv, All rights reserved.
  */
@@ -626,10 +626,6 @@ select {
   line-height: 22px !important;
 }
 
-.form-control::-ms-input-placeholder {
-  line-height: 22px !important;
-}
-
 .form-control::placeholder {
   line-height: 22px !important;
 }
@@ -823,3 +819,30 @@ strong {
 .sidebar .logo .simple-text {
   text-transform: none;
   }
+
+
+toast {
+ 	display: block;
+ 	padding: 0.5rem 2rem;
+ 	background: var(--toast-bg, rgba(0, 0, 0, .8));
+ 	color: #fff;
+ 	text-align: center;
+ 	bottom: 0;
+ 	width: 100vw;
+ 	padding: 1rem 0;
+ 	left: 0;
+ 	z-index: 99999;
+ 	box-shadow: 0 2px 11px 0 rgba(0, 0,0, 0.5);
+ 	cursor: pointer;
+ 	transition: all 0.3s ease-in-out;
+ 	-webkit-backdrop-filter: blur(10px);
+ 	        backdrop-filter: blur(10px);
+ 	-moz-backdrop-filter: blur(10px);
+ 	transform: translateY(110%);
+ 	position: fixed;
+ 	z-index: 9999999999999999 !important;
+ }
+
+ toast.active {
+ 	transform: translateY(0);
+ }

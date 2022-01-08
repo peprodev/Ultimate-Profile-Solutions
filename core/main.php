@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/12/30 23:33:29
+# @Last modified time: 2022/01/09 00:49:58
 if (!class_exists("PeproDevUPS_Core")){
   class PeproDevUPS_Core
   {
@@ -250,10 +250,11 @@ if (!class_exists("PeproDevUPS_Core")){
         apply_filters(
           "peprocore_dashboard_localize",
           array(
-            "ajax" => admin_url( 'admin-ajax.php' ),
-            "folder" => $this->assets_url,
-            "img" => "{$this->assets_url}img/",
-            "_palett"  => array( '#444444', '#dd3333', '#dd9933', '#eeee22', '#81d742', '#1e73be', '#8224e3', '#ff2255', '#559999', '#99CCFF', '#00c1e8', '#F9DE0E', '#111111', '#EEEEDD' ),
+            "ajax"    => admin_url( 'admin-ajax.php' ),
+            "_copy"   => __("Copied!", "peprodev-ups"),
+            "folder"  => $this->assets_url,
+            "img"     => "{$this->assets_url}img/",
+            "_palett" => array( '#444444', '#dd3333', '#dd9933', '#eeee22', '#81d742', '#1e73be', '#8224e3', '#ff2255', '#559999', '#99CCFF', '#00c1e8', '#F9DE0E', '#111111', '#EEEEDD' ),
             "loading" => __("Please wait ...","peprodev-ups"),
           )
         )
@@ -490,28 +491,55 @@ if (!class_exists("PeproDevUPS_Core")){
       <div class="content">
         <div class="container-fluid">
           <div class="row">
-          <div class="col-lg-6 col-md-12">
-            <div class="card card-nav-tabs text-center">
-              <div class="card-header card-header-primary"><?php esc_html_e("PeproDev Ultimate Profile Solutions", "peprodev-ups");?></div>
-              <div class="card-body">
-                <p class="card-text">
-                  <h2><?php esc_attr( sprintf(__("Welcome to v.%s", "peprodev-ups"),"<strong>$this->version</strong>") );?></h2>
-                </p>
-                <a href="<?php esc_attr_e(admin_url());?>" class="btn btn-primary"><?php esc_html_e("WordPress Admin Dashboard", "peprodev-ups");?></a>
-                <a href="<?php esc_attr_e(admin_url("/plugins.php"));?>" class="btn btn-primary"><?php esc_html_e("WordPress Plugins", "peprodev-ups");?></a>
-                <a href="<?php esc_attr_e(home_url());?>" class="btn btn-primary"><?php esc_html_e("Website Home Page", "peprodev-ups");?></a>
-                <?php
-                if (class_exists("PeproDevUPS_Profile")){
-                  echo "<a href='".esc_attr( $PeproDevUPS_Profile->get_profile_page(["i"=>current_time("timestamp")]) )."' class='btn btn-primary'>".__("Profile Page", "peprodev-ups")."</a>";
-                }
-                ?>
+
+            <div class="col-lg-6 col-md-12">
+              <div class="card card-nav-tabs">
+                <div class="card-header card-header-primary text-center"><?php esc_html_e("PeproDev Ultimate Profile Solutions", "peprodev-ups");?></div>
+                <div class="card-body">
+                  <p class="card-text"><h2><?php esc_attr( sprintf(__("Welcome to v.%s", "peprodev-ups"),"<strong>$this->version</strong>") );?></h2></p>
+                  <a href="<?php esc_attr_e(admin_url());?>" class="btn btn-primary"><?php esc_html_e("WordPress Admin Dashboard", "peprodev-ups");?></a>
+                  <a href="<?php esc_attr_e(admin_url("/plugins.php"));?>" class="btn btn-primary"><?php esc_html_e("WordPress Plugins", "peprodev-ups");?></a>
+                  <a href="<?php esc_attr_e(home_url());?>" class="btn btn-primary"><?php esc_html_e("Website Home Page", "peprodev-ups");?></a>
+                    <?php
+                      if (class_exists("PeproDevUPS_Profile")){
+                        echo "<a href='".esc_attr( $PeproDevUPS_Profile->get_profile_page(["i"=>current_time("timestamp")]) )."' class='btn btn-primary'>".__("Profile Page", "peprodev-ups")."</a>";
+                      }
+
+                      // if ( current_user_can( 'install_plugins' ) ) {
+                      // $url = wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=' . $api->slug ), 'install-plugin_' . $api->slug );
+                      // }
+                    ?>
+                  </div>
+                  <style>.navbar-wrapper{display:none !important;}.main-panel>.content{margin-top: 10px !important;}</style>
+                </div>
               </div>
-              <style>.navbar-wrapper{display:none !important;}.main-panel>.content{margin-top: 10px !important;}</style>
-            </div>
-          </div>
-          </div>
+
+              <div class="col-lg-6 col-md-12">
+                <div class="card card-nav-tabs">
+                  <div class="card-header card-header-primary text-center"><?php echo esc_html_x("Samrt Button","login-section", "peprodev-ups");?></div>
+                  <div class="card-body table-responsive">
+                    <p class="text-bold"><?php echo esc_html_x("Use this button to show login/register popup to guests and welcome logged in users","login-section", "peprodev-ups");?></p>
+<pre class="border p-3 text-left copymedata">
+[pepro-smart-btn
+ loggedin_href="/profile"
+ loggedin_avatar="yes"
+ loggedout_form="login"
+ loggedin_avatar_size="32"
+ trigger=".openlogin,.openregister"
+ loggedin_class=""
+ loggedout_class="w-btn us-btn-style_1 ush_btn_1"
+ loggedin_text="Hi {display_name}"
+ loggedout_text="Login/Register"
+ login_popup_title="Login"
+ register_popup_title="Register"
+]</pre>
+                      <button type="button" id="copyshortcode" class="btn btn-primary copyhwnd" data-copy=".copymedata"><span class="material-icons">content_copy</span> COPY</button>
+                    </div>
+                  </div>
+                </div>
+
+
         </div>
-      </div>
         <?php
       }
     public function peprocore_dashboard_setting()
