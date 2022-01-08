@@ -19,7 +19,6 @@ One of the **most** Advanced and **The Ultimate Profile Solutions** for WordPres
   * WooCommerce Based fields
   * TinyMCE Editor
   * *DEV: Hooked Customized Fields*
-=======
 ** Text Field
 ** Number Field
 ** Email Field
