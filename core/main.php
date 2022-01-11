@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2022/01/09 00:49:58
+# @Last modified time: 2022/01/11 20:46:04
 if (!class_exists("PeproDevUPS_Core")){
   class PeproDevUPS_Core
   {
@@ -488,13 +488,21 @@ if (!class_exists("PeproDevUPS_Core")){
     {
       global $PeproDevUPS_Profile;
       ?>
+      <style media="screen">
+      #health-check-debug {
+        max-height: 300px;
+        overflow: auto;
+        scrollbar-width: thin;
+      }
+      </style>
       <div class="content">
         <div class="container-fluid">
           <div class="row">
-
             <div class="col-lg-6 col-md-12">
               <div class="card card-nav-tabs">
-                <div class="card-header card-header-primary text-center"><?php esc_html_e("PeproDev Ultimate Profile Solutions", "peprodev-ups");?></div>
+                <div class="card-header card-header-primary text-center">
+                  <?php esc_html_e("PeproDev Ultimate Profile Solutions", "peprodev-ups");?>
+                </div>
                 <div class="card-body">
                   <p class="card-text"><h2><?php esc_attr( sprintf(__("Welcome to v.%s", "peprodev-ups"),"<strong>$this->version</strong>") );?></h2></p>
                   <a href="<?php esc_attr_e(admin_url());?>" class="btn btn-primary"><?php esc_html_e("WordPress Admin Dashboard", "peprodev-ups");?></a>
@@ -504,41 +512,83 @@ if (!class_exists("PeproDevUPS_Core")){
                       if (class_exists("PeproDevUPS_Profile")){
                         echo "<a href='".esc_attr( $PeproDevUPS_Profile->get_profile_page(["i"=>current_time("timestamp")]) )."' class='btn btn-primary'>".__("Profile Page", "peprodev-ups")."</a>";
                       }
-
-                      // if ( current_user_can( 'install_plugins' ) ) {
-                      // $url = wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=' . $api->slug ), 'install-plugin_' . $api->slug );
-                      // }
+                      /*if ( current_user_can( 'install_plugins' ) ) {
+                        $url = wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=' . $api->slug ), 'install-plugin_' . $api->slug );
+                      }*/
                     ?>
-                  </div>
-                  <style>.navbar-wrapper{display:none !important;}.main-panel>.content{margin-top: 10px !important;}</style>
                 </div>
+                <style>.navbar-wrapper{display:none !important;}.main-panel>.content{margin-top: 10px !important;}</style>
               </div>
 
-              <div class="col-lg-6 col-md-12">
-                <div class="card card-nav-tabs">
-                  <div class="card-header card-header-primary text-center"><?php echo esc_html_x("Samrt Button","login-section", "peprodev-ups");?></div>
-                  <div class="card-body table-responsive">
-                    <p class="text-bold"><?php echo esc_html_x("Use this button to show login/register popup to guests and welcome logged in users","login-section", "peprodev-ups");?></p>
-<pre class="border p-3 text-left copymedata">
-[pepro-smart-btn
- loggedin_href="/profile"
- loggedin_avatar="yes"
- loggedout_form="login"
- loggedin_avatar_size="32"
- trigger=".openlogin,.openregister"
- loggedin_class=""
- loggedout_class="w-btn us-btn-style_1 ush_btn_1"
- loggedin_text="Hi {display_name}"
- loggedout_text="Login/Register"
- login_popup_title="Login"
- register_popup_title="Register"
-]</pre>
-                      <button type="button" id="copyshortcode" class="btn btn-primary copyhwnd" data-copy=".copymedata"><span class="material-icons">content_copy</span> COPY</button>
-                    </div>
+              <div class="card card-nav-tabs mt-5">
+                <div class="card-header card-header-primary text-center"><?php esc_html_e("Site Health Info");?></div>
+                <div class="card-body">
+                  <?php
+                    if ( ! class_exists( 'WP_Debug_Data' ) ) { require_once ABSPATH . 'wp-admin/includes/class-wp-debug-data.php'; }
+                    if ( ! class_exists( 'WP_Site_Health' ) ) { require_once ABSPATH . 'wp-admin/includes/class-wp-site-health.php'; }
+                    $health_check_site_status = WP_Site_Health::get_instance();
+                    WP_Debug_Data::check_for_updates();
+                    $info = WP_Debug_Data::debug_data();
+                  ?>
+                  <div id="health-check-debug">
+            		    <?php
+                		$sizes_fields = array( 'uploads_size', 'themes_size', 'plugins_size', 'wordpress_size', 'database_size', 'total_size' );
+                		foreach ( $info as $section => $details ) {
+                			if ( ! isset( $details['fields'] ) || empty( $details['fields'] ) || 'wp-paths-sizes' === $section) { continue; }
+                			 if ( isset( $details['description'] ) && ! empty( $details['description'] ) ) { printf( '<p>%s</p>', $details['description'] ); }
+                       ?>
+                				<table class="table table-striped table-small table-border mb-3 border-bottom">
+                          <thead><tr><th colspan="2" class="text-sm"><b><?php echo esc_html( $details['label'] ); if ( isset( $details['show_count'] ) && $details['show_count'] ) {printf( ' (%d)', count( $details['fields'] ) );} ?></b></th></tr></thead>
+                					<tbody>
+                					<?php
+                  					foreach ( $details['fields'] as $field_name => $field ) {
+                  						if ( is_array( $field['value'] ) ) { $values = '<ul>';
+                  							foreach ( $field['value'] as $name => $value ) {
+                                  $values .= sprintf( '<li>%s: %s</li>', esc_html( $name ), esc_html( $value ) );
+                                }
+                  							$values .= '</ul>';
+                  						}
+                              else {
+                                $values = esc_html( $field['value'] );
+                              }
+                  						if ( in_array( $field_name, $sizes_fields, true ) ) {
+                  							printf( '<tr><td>%s</td><td class="%s">%s</td></tr>', esc_html( $field['label'] ), esc_attr( $field_name ), $values );
+                  						}
+                              else {
+                  							printf( '<tr><td>%s</td><td>%s</td></tr>', esc_html( $field['label'] ), $values );
+                  						}
+                  					}
+                					?>
+                					</tbody>
+                				</table>
+                		<?php } ?>
+                	</div>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="card card-nav-tabs">
+                <div class="card-header card-header-primary text-center"><?php echo esc_html_x("Samrt Button","login-section", "peprodev-ups");?></div>
+                <div class="card-body table-responsive">
+                  <p class="text-bold"><?php echo esc_html_x("Use this button to show login/register popup to guests and welcome logged in users","login-section", "peprodev-ups");?></p>
+                      <pre class="border p-3 text-left copymedata" style="direction: ltr"><?=str_replace("  ", "",'[pepro-smart-btn
+                      loggedin_href="/profile"
+                      loggedin_avatar="yes"
+                      loggedout_form="login"
+                      loggedin_avatar_size="32"
+                      trigger=".openlogin,.openregister"
+                      loggedin_class=""
+                      loggedout_class="w-btn us-btn-style_1 ush_btn_1"
+                      loggedin_text="Hi {display_name}"
+                      loggedout_text="Login/Register"
+                      login_popup_title="Login"
+                      register_popup_title="Register"
+                      ]');?></pre>
+                    <button type="button" id="copyshortcode" class="btn btn-primary copyhwnd" data-copy=".copymedata"><span class="material-icons">content_copy</span> COPY</button>
                   </div>
                 </div>
-
-
+              </div>
         </div>
         <?php
       }

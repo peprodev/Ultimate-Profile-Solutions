@@ -1,18 +1,18 @@
 <?php
 /*
 Plugin Name: PeproDev Ultimate Profile Solutions
-Description: The most complete and THE Ultimate Profile Solutions for WordPress
+Description: One of the most Advanced and *The Ultimate Profile Solutions* for WordPress. FREE OF ANY CHARGE, UNLIMITED and OPEN-SOURCE FOREVER!
 Contributors: amirhosseinhpv
 Tags: functionality, pepro, management, administration, profile, login, register
 Author: Pepro Dev. Group
 Author URI: https://pepro.dev/
 Plugin URI: https://pepro.dev/ups
-Version: 2.3.5
-Stable tag: 2.3.5
+Version: 2.3.6
+Stable tag: 2.3.6
 Requires at least: 5.0
-Tested up to: 5.8
+Tested up to: 5.8.3
 Requires PHP: 7.2
-WC tested up to: 5.5
+WC tested up to: 6.0
 Text Domain: peprodev-ups
 Domain Path: /languages
 Copyright: (c) 2021 Pepro Dev. Group, All rights reserved.
@@ -20,7 +20,7 @@ License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2022/01/09 00:47:59
+# @Last modified time: 2022/01/11 20:53:34
 
 defined("ABSPATH") or die("PeproDev Ultimate Profile Solutions :: Unauthorized Access! (https://pepro.dev/)");
 
@@ -29,7 +29,7 @@ if (!class_exists("PeproDevUPS")) {
     {
         public function __construct()
         {
-            define('PEPRODEVUPS', '2.3.5');
+            define('PEPRODEVUPS', '2.3.6');
 
             add_action("init", function() {
               load_plugin_textdomain("wpserveur-hide-login", false, dirname(plugin_basename(__FILE__))."/languages/");

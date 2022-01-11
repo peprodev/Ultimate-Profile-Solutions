@@ -3,7 +3,7 @@
  * @Date:   2020/05/03 13:33:06
  * @Email:  its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/09/15 14:33:12
+ * @Last modified time: 2022/01/11 20:14:45
  * @License: GPLv2
  * @Copyright: Copyright © 2020 Amirhosseinhpv, All rights reserved.
  */
@@ -47,10 +47,6 @@
 
 
 /* common vc css fix for rtl-ready */
-
-.select2-container {
-    z-index: 9999999999999;
-}
 
 .select2-container .select2-search--inline .select2-search__field {
     margin: 0 !important;
@@ -109,4 +105,8 @@
 .nav-link .fas::before,
 .nav-link .fa::before {
 	font-size: 1.1rem;
+}
+
+.copyme{
+  cursor: pointer;
 }

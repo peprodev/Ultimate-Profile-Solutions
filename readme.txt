@@ -2,12 +2,12 @@
 Contributors: amirhosseinhpv, peprodev, blackswanlab
 Donate link: https://pepro.dev/donate/
 Tags: functionality, pepro, management, administration, profile, login, register
-Version: 2.3.5
-Stable tag: 2.3.5
+Version: 2.3.6
+Stable tag: 2.3.6
 Requires at least: 5.0
-Tested up to: 5.8
+Tested up to: 5.8.3
 Requires PHP: 7.2
-WC tested up to: 5.5
+WC tested up to: 6.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -72,6 +72,11 @@ You can help us improve our works by committing your changes to Pepro Dev's Gith
 1. Overview
 
 == Changelog ==
+
+= Ver. 2.3.6 | 2022-01-11/1400-10-21 =
+* Added new Admin Dashboard UX Widget
+* Added Expire Auth. Option
+* Backend UX Improvement
 
 = Ver. 2.3.5 | 2022-01-09/1400-10-19 =
 * Enhanced Admin Dashboard UX
@@ -150,6 +155,11 @@ You can help us improve our works by committing your changes to Pepro Dev's Gith
 
 
 == Upgrade Notice ==
+
+= Ver. 2.3.6 | 2022-01-11/1400-10-21 =
+* Added new Admin Dashboard UX Widget
+* Added Expire Auth. Option
+* Backend UX Improvement
 
 = Ver. 2.3.5 | 2022-01-09/1400-10-19 =
 * Enhanced Admin Dashboard UX

@@ -1,6 +1,6 @@
 /**
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2022/01/03 10:33:11
+ * @Last modified time: 2022/01/09 05:21:20
  */
 :root {
 	--tippy-color: #bf1e2e;
@@ -35,6 +35,9 @@ pdtoast.active, toastwide.active {
 [data-pepro-reglogin] > form .force-ltr {
 	direction: ltr;
 	text-align: left;
+}
+
+body:not(.section-edit) [data-pepro-reglogin] > form .force-ltr {
 	padding: 0 1rem;
 }
 
@@ -335,7 +338,7 @@ pdtoast.active, toastwide.active {
 
 form.floating_from_label .pepro-login-reg-field label {
 	position: absolute;
-	top: 0.7rem;
+	top: 0.5rem;
 	padding: 0 1rem;
 	margin: 0 0.5rem;
 	transition: all 0.3s linear;

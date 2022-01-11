@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/12/31 03:57:07
+# @Last modified time: 2022/01/11 20:11:43
 if (!class_exists("PeproDevUPS_Profile")) {
     class PeproDevUPS_Profile
     {
@@ -309,7 +309,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                       array(
                         "title"    => __("Newsletter", "peprodev-ups"),
                         "titleW"   => __("Manage Newsletter Subscriber", "peprodev-ups"),
-                        "icon"     => "<i class=\"material-icons\">auto_fix_high</i>",
+                        "icon"     => "<i class=\"material-icons\">mail</i>",
                         "link"     => "@newsletter",
                         "fn"       => array($this,"htmlwrapper_newsletter"),
                         "id"       => "{$this->id}_newsletter",
@@ -2376,7 +2376,10 @@ if (!class_exists("PeproDevUPS_Profile")) {
             wp_enqueue_style(__CLASS__ . "-ide",      plugins_url("/assets/ide/ace.css"       , __FILE__));
 
 
-            wp_localize_script(__CLASS__, "pepc", array( "ajax" => admin_url('admin-ajax.php')));
+            wp_localize_script(__CLASS__, "pepc", array(
+              "ajax" => admin_url('admin-ajax.php'),
+              "_copy"   => __("Copied!", "peprodev-ups"),
+            ));
             wp_enqueue_style(__CLASS__, plugins_url("/assets/css/peprocore-backend-style.css", __FILE__), array(), $this->current_version);
             is_rtl() AND wp_enqueue_style(__CLASS__."rtl", plugins_url("/assets/css/peprocore-backend-style.rtl.css", __FILE__), array(), $this->current_version);
         }

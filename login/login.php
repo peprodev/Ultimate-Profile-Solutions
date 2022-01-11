@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2022/01/03 11:20:12
+# @Last modified time: 2022/01/11 19:56:24
 
 if ("yes" == get_option("PeproDevUPS_Core___loginregister-activesecurity", "")){
   include_once plugin_dir_path(__FILE__) . "/include/class-login-permalink.php";
@@ -127,6 +127,7 @@ if (!class_exists("PeproDevUPS_Login")){
       $this->hide_username_field    = "yes" !== get_option("{$this->save_prefix}-_regdef_username");
       $this->is_username_field_req  = "yes" == get_option("{$this->save_prefix}-_regdef_username-req");
 
+      $this->auth_expire                    = get_option("{$this->save_prefix}-auth_expire", "0");
       $this->sms_expiration                 = get_option("{$this->save_prefix}-sms_expiration", "90");
       $this->email_expiration               = get_option("{$this->save_prefix}-email_expiration", "120");
       $this->verification_digits            = get_option("{$this->save_prefix}-verification_digits", "5");
@@ -291,7 +292,16 @@ if (!class_exists("PeproDevUPS_Login")){
     }
     public function auth_cookie_expiration( $expiration, $user_id, $remember )
     {
-    	return 100 * YEAR_IN_SECONDS;
+      if ( "-1" == $this->auth_expire){
+        return 1000 * YEAR_IN_SECONDS;
+      }
+      if ("0" == $this->auth_expire){
+        return $expiration;
+      }
+      if (is_numeric($this->auth_expire)){
+        return $this->auth_expire * HOUR_IN_SECONDS;
+      }
+      return $expiration;
     }
     public function shortcode__smart_btn($atts=array(), $content="")
     {
@@ -1213,8 +1223,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       if ($verified){
                         wp_clear_auth_cookie();
                         $user = new \WP_User($user_id);
-                        wp_set_current_user($user->ID);
-                        wp_set_auth_cookie($user->ID);
+                        $this->login_user($user->ID);
                         $username = get_the_author_meta("display_name", $user->ID);
                         update_user_meta($user->ID, "pepro_user_is_sms_verified", "yes");
                         wp_send_json_success(array(
@@ -1335,8 +1344,7 @@ if (!class_exists("PeproDevUPS_Login")){
                   if ($verified){
                     wp_clear_auth_cookie();
                     $user = new \WP_User($user_id);
-                    wp_set_current_user($user->ID);
-                    wp_set_auth_cookie($user->ID);
+                    $this->login_user($user->ID);
                     $username = get_the_author_meta("display_name", $user->ID);
                     wp_send_json_success(array(
                       "msg"           => sprintf(__("Hi %s, You have successfully logged in!", "peprodev-ups"), $username),
@@ -1431,9 +1439,7 @@ if (!class_exists("PeproDevUPS_Login")){
             }
 
             if ( $user && wp_check_password( $param["password"], $user->data->user_pass, $user->ID )){
-              wp_clear_auth_cookie();
-              wp_set_current_user($user->ID);
-              wp_set_auth_cookie($user->ID);
+              $this->login_user($user->ID);
               $username = get_the_author_meta("display_name", $user->ID);
               wp_send_json_success(array(
                 "msg"           => sprintf(__("Hi %s, You have successfully logged in!", "peprodev-ups"), $username),
@@ -2255,9 +2261,7 @@ if (!class_exists("PeproDevUPS_Login")){
                   $update = wp_update_user( array( 'ID' => $user_id, 'user_pass' => trim($param['password1']) ) );
                   if ($update){
                     if ($this->auto_login_after_reg){
-                      wp_clear_auth_cookie();
-                      wp_set_current_user($user_id);
-                      wp_set_auth_cookie($user_id);
+                      $this->login_user($user_id);
                     }
                     update_user_meta($user_id, "pepro_user_is_email_verified", "yes");
                     wp_send_json_success(array(
@@ -2510,14 +2514,25 @@ if (!class_exists("PeproDevUPS_Login")){
         }
 
         if ($this->auto_login_after_reg){
-          wp_clear_auth_cookie();
-          wp_set_current_user($user_id);
-          wp_set_auth_cookie($user_id);
+          $this->login_user($user_id);
         }
         do_action( "pepro_reglogin_register_new_user", $username, $email, $mobile, $params);
         return new \WP_User($user_id);
       }
       return false;
+    }
+    protected function login_user($user_id=0)
+    {
+      wp_clear_auth_cookie();
+      wp_set_current_user($user_id);
+      $remember = false;
+      if ("-1" == $this->auth_expire){
+        $remember = true;
+      }
+      if ("0" != $this->auth_expire && is_numeric($this->auth_expire)){
+        $remember = true;
+      }
+      wp_set_auth_cookie($user_id, $remember, is_ssl());
     }
     public function make_otp($user_id=0, $otp_digits=5, $type="sms")
     {
@@ -3747,9 +3762,7 @@ if (!class_exists("PeproDevUPS_Login")){
           wp_set_password( $_POST['password1'], $user_id ); //Password previously checked in add_filter > registration_errors
         }
         if ($this->auto_login_after_reg && (isset($_POST['peprologinregisterform']) && "yes" == $_POST['peprologinregisterform']) ) {
-            wp_clear_auth_cookie();
-            wp_set_current_user($user_id);
-            wp_set_auth_cookie($user_id);
+            $this->login_user($user_id);
             if (isset($_POST['redirect_to']) && !empty($_POST['redirect_to'])) {
               $redirect = $_POST['redirect_to'];
             } else {
@@ -4577,6 +4590,7 @@ if (!class_exists("PeproDevUPS_Login")){
                 "sms_api_url",
                 "sms_secret_key",
                 "sms_api_key",
+                "auth_expire",
                 "sms_expiration",
                 "email_expiration",
                 "sms_ultrafastsend_id",
@@ -4720,7 +4734,7 @@ if (!class_exists("PeproDevUPS_Login")){
                 "sms" => $sms,
               ));
             }
-            wp_send_json_error(__("{$this->title} :: Incorrect Data Supplied.","peprodev-ups"));
+            wp_send_json_error(["msg" => __("Incorrect Data Supplied.","peprodev-ups")]);
           break;
           default:
             wp_send_json_error(__("{$this->title} :: Incorrect Data Supplied.","peprodev-ups"));

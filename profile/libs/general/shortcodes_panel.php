@@ -1,10 +1,9 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/19 08:50:21
+# @Last modified time: 2022/01/11 20:19:39
 ?>
 <style media="screen">
-.table.pepcappearance tr td:first-child { min-width: unset !important; }
-.table.pepcappearance tr td { min-width: unset !important; vertical-align: top !important; }
+.table.pepcappearance tr td {vertical-align: top !important; }
 .table thead tr th:last-of-type { text-align: left; }
 </style>
 <div class="col-lg-12">
@@ -26,7 +25,7 @@
               foreach (apply_filters("peprofile_shortcodes",array()) as $key => $value) {
                 $samole = esc_html( $value['sample'] );
                 echo "<tr>";
-                  echo "<td><strong>[{$key}]</strong></td>";
+                  echo "<td><pre>[{$key}]</pre></td>";
                   echo "<td>" . wp_kses_post(isset($value['title']) ? $value['title'] : $key) . "</td>";
                   if (isset($value['syntax'])){
                     echo "<td><ul style=\"margin: 0;padding: 0;list-style: none;\">";
@@ -38,7 +37,7 @@
                   }
                   echo "<td class='copy-shortcode' style='text-align: left;'>
                   <code title='".__("Click to copy","peprodev-ups")."' style=\"cursor: pointer; direction: ltr; unicode-bidi: bidi-override;\"
-                  data-copy='".esc_attr($samole)."'><strong>".wp_kses_post(nl2br($samole))."</strong></code></td>";
+                  data-copy='".esc_attr($samole)."'><pre>".wp_kses_post($samole)."</pre></code></td>";
                 echo "</tr>";
               }
             ?>

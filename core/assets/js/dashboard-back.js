@@ -1,6 +1,6 @@
 /**
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2022/01/04 19:36:48
+ * @Last modified time: 2022/01/11 20:13:33
  */
 
 
@@ -12,7 +12,12 @@
       e.preventDefault();
       var me = $(this);
       copy_clipboard($(me.data("copy")).text().replace(/\r/gi,""));
-      show_toast(pepc._copy);
+      show_toast(pepc._copy, "rgba(21, 139, 2, 0.8)");
+    });
+    $(document).on("click tap", ".copyme", function(e){
+      e.preventDefault();
+      copy_clipboard($(this).data("copy"));
+      show_toast(pepc._copy, "rgba(21, 139, 2, 0.8)");
     });
     function copy_clipboard(data) {
       var $temp = $("<textarea>");

@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/12/31 03:53:26
+# @Last modified time: 2022/01/11 20:14:26
 global $PeproDevUPS_Profile;
 $rtl         = is_rtl() ? "right" : "left";
 $page        = (int) isset($_GET['cpage']) ? sanitize_text_field($_GET['cpage']) : 1;
@@ -26,7 +26,7 @@ $loadingRing = '<div class="lds-ring2"><div></div><div></div><div></div><div></d
       <div class="card-header card-header-primary">
         <div class="lds-ring2"><div></div><div></div><div></div><div></div></div>
         <h4 class="card-title"><?php echo esc_html_x("Manage Newsletter Subscriber", "section-panel", "peprodev-ups");?></h4>
-        <p class="card-category"><?php echo esc_html_x("You can manage Newsletter Subscribers from here", "section-panel", "peprodev-ups");?></p>
+        <p class="card-category"><?php echo esc_html_x("You can manage Newsletter Subscribers from here, to use subscription form add this shortcode to your page: ", "section-panel", "peprodev-ups");?> <strong class="copyme" data-copy="[pepro-sms-subscription]">[pepro-sms-subscription]</strong></p>
       </div>
       <div class="card-body">
         <p class="float-right">

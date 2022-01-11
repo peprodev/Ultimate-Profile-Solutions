@@ -3,7 +3,7 @@
  * @Date:   2020/05/03 13:33:07
  * @Email:  its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/09/11 11:32:48
+ * @Last modified time: 2022/01/11 20:13:11
  * @License: GPLv2
  * @Copyright: Copyright © 2020 Amirhosseinhpv, All rights reserved.
  */
@@ -192,9 +192,16 @@
       e.preventDefault();
       var me = $(this);
       copyToClipboard(me.attr("data-copy"));
-      $.notify({ icon: "thumb_up", message: "Copied to clipboard !" }, { type: 'success', timer: 5000, delay: 1000, placement: { from: "top", align: "right" } });
+      show_toast(pepc._copy, "rgba(21, 139, 2, 0.8)");
     });
-
+    function show_toast(data = "Sample Toast!", bg="", delay = 4500) {
+    	if (!$("toast").length) {$(document.body).append($("<toast>"));}else{$("toast").removeClass("active");}
+    	setTimeout(function () {
+    		$("toast").css("--toast-bg", bg).html(data).stop().addClass("active").delay(delay).queue(function () {
+    			$(this).removeClass("active").dequeue().off("click tap");
+    		}).on("click tap", function (e) {e.preventDefault();$(this).stop().removeClass("active");});
+    	}, 200);
+    }
     function copyToClipboard(element) {
       var $temp = $("<textarea>");
       $("body").append($temp);
