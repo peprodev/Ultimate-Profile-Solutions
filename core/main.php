@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2022/01/11 20:46:04
+# @Last modified time: 2022/01/18 01:38:38
 if (!class_exists("PeproDevUPS_Core")){
   class PeproDevUPS_Core
   {
@@ -22,7 +22,6 @@ if (!class_exists("PeproDevUPS_Core")){
     public function __construct()
     {
         global $wpdb;
-
         $this->ns              = __CLASS__;
         $this->td              = "peprodev-ups";
         self::$_instance       = $this;
@@ -39,13 +38,27 @@ if (!class_exists("PeproDevUPS_Core")){
 
         if (isset($_GET['page'])){
           if($this->db_slug == sanitize_text_field($_GET['page'])){
+            update_option("peprodevups_alert_viewed_yet", PEPRODEVUPS);
+            do_action("peprodevups_admin_panel_very_first_action");
             if (!isset($_GET['section']) || empty($_GET['section'])){
               wp_safe_redirect( admin_url("admin.php?page=$this->db_slug&section=home"), 301); die();
             }
           }
         }
-
         add_action("init", array($this, 'plugin_init'));
+        add_action("admin_notices", array( $this, "admin_notices"));
+    }
+    public function admin_notices()
+    {
+      $message = "";
+      $seen = get_option("peprodevups_alert_viewed_yet", "");
+      if (!$seen || $seen !== PEPRODEVUPS){
+        $url = admin_url("admin.php?page=peprodev-ups&section=home");
+        $message = "<div style='padding: 0.3rem 0.5rem;line-height: 1; margin-inline-start: -0.5rem;'><img src='{$this->assets_url}img/peprodev.svg' width='32px' /></div>";
+        $message .= "<div>" . sprintf(__("Welcome to %s! Please Take a minute and check its features and configurations, <a href='%s'>start here</a>.", "peprodev-ups"), "<strong>{$this->title}</strong>", $url) . "</div>";
+      }
+      $message = apply_filters("peprodevups_alert_after_active", $message);
+      if (!empty($message)) printf( '<div class="%1$s" style="border-color: #ffa176;"><div class="pepro_alert" style="display: flex;align-items: center;">%2$s</div></div>', esc_attr("notice notice-info is-not-dismissible"), $message);
     }
     public function plugins_row_links($links)
     {
@@ -188,21 +201,21 @@ if (!class_exists("PeproDevUPS_Core")){
     }
     public function load_dashboard_before_initiated()
     {
-      wp_dequeue_style( "us-font-awesome" );
-      wp_dequeue_style( "us-core" );
-      wp_dequeue_script( "us-core" );
-      wp_dequeue_style( "us-font-awesome-duotone" );
-      wp_dequeue_style( "font-awesome" );
-      wp_enqueue_style("RobotoSlabMaterialIcons", "//fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons", array(), '1.0', 'all');
-      wp_enqueue_style("font-awesome", "{$this->assets_url}/fa-pro/css/all.min.css", array(), '1.0', 'all');
-      wp_enqueue_style("material-dashboard", "{$this->assets_url}css/material-dashboard.min.css", array(), '2.1.0', 'all');
-      wp_enqueue_style("dashboard-back", "{$this->assets_url}css/dashboard-backend.css", array(), '1.0', 'all');
-      wp_enqueue_style("bootstrap-select", "{$this->assets_url}js/plugins/bootstrap-select.min.css", array(), '1.0', 'all');
+      wp_dequeue_style("us-font-awesome");
+      wp_dequeue_style("us-core");
+      wp_dequeue_script("us-core");
+      wp_dequeue_style("us-font-awesome-duotone");
+      wp_dequeue_style("font-awesome");
+      wp_enqueue_style("RobotoSlabMaterialIcons",         "//fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons", array(), '1.0', 'all');
+      wp_enqueue_style("font-awesome",                    "{$this->assets_url}/fa-pro/css/all.min.css", array(), '1.0', 'all');
+      wp_enqueue_style("material-dashboard",              "{$this->assets_url}css/material-dashboard.min.css", array(), '2.1.0', 'all');
+      wp_enqueue_style("dashboard-back",                  "{$this->assets_url}css/dashboard-backend.css", array(), '1.0', 'all');
+      wp_enqueue_style("bootstrap-select",                "{$this->assets_url}js/plugins/bootstrap-select.min.css", array(), '1.0', 'all');
       is_rtl() AND wp_enqueue_style("dashboard-back-rtl", "{$this->assets_url}css/rtl.css", array(), '1.0', 'all');
-      add_filter( "peprocore_dashboard_nav_menuitems", array($this, "peprocore_dashboard_nav_menuitems"));
+      add_filter( "peprocore_dashboard_nav_menuitems",    array($this, "peprocore_dashboard_nav_menuitems"));
       do_action( "peprocore_dashboard_before_initiated");
     }
-    function peprocore_dashboard_nav_menuitems($menuitems)
+    public function peprocore_dashboard_nav_menuitems($menuitems)
     {
       return array_merge($menuitems, array(
         array(
@@ -489,11 +502,11 @@ if (!class_exists("PeproDevUPS_Core")){
       global $PeproDevUPS_Profile;
       ?>
       <style media="screen">
-      #health-check-debug {
-        max-height: 300px;
-        overflow: auto;
-        scrollbar-width: thin;
-      }
+        #health-check-debug {
+          max-height: 620px;
+          overflow: auto;
+          scrollbar-width: thin;
+        }
       </style>
       <div class="content">
         <div class="container-fluid">
@@ -508,90 +521,98 @@ if (!class_exists("PeproDevUPS_Core")){
                   <a href="<?php esc_attr_e(admin_url());?>" class="btn btn-primary"><?php esc_html_e("WordPress Admin Dashboard", "peprodev-ups");?></a>
                   <a href="<?php esc_attr_e(admin_url("/plugins.php"));?>" class="btn btn-primary"><?php esc_html_e("WordPress Plugins", "peprodev-ups");?></a>
                   <a href="<?php esc_attr_e(home_url());?>" class="btn btn-primary"><?php esc_html_e("Website Home Page", "peprodev-ups");?></a>
-                    <?php
-                      if (class_exists("PeproDevUPS_Profile")){
-                        echo "<a href='".esc_attr( $PeproDevUPS_Profile->get_profile_page(["i"=>current_time("timestamp")]) )."' class='btn btn-primary'>".__("Profile Page", "peprodev-ups")."</a>";
-                      }
-                      /*if ( current_user_can( 'install_plugins' ) ) {
-                        $url = wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=' . $api->slug ), 'install-plugin_' . $api->slug );
-                      }*/
-                    ?>
+                  <style>.navbar-wrapper{ display:none !important; } .main-panel>.content{ margin-top: 10px !important; } </style>
+                  <?php
+                    echo "<a href='".esc_attr( $PeproDevUPS_Profile->get_profile_page(["i"=>current_time("timestamp")]) )."' class='btn btn-primary'>".__("Profile Page", "peprodev-ups")."</a>";
+                    /*
+                    if ( current_user_can( 'install_plugins' ) ) {
+                    $url = wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=' . $api->slug ), 'install-plugin_' . $api->slug );
+                  }
+                  */
+                  ?>
                 </div>
-                <style>.navbar-wrapper{display:none !important;}.main-panel>.content{margin-top: 10px !important;}</style>
               </div>
 
               <div class="card card-nav-tabs mt-5">
+                <div class="card-header card-header-primary text-center">
+                  <?php echo esc_html_x("Samrt Button","login-section", "peprodev-ups");?>
+                </div>
+                <div class="card-body table-responsive">
+                  <p class="text-bold">
+                    <?php echo esc_html_x("Use this button to show login/register popup to guests and welcome logged in users","login-section", "peprodev-ups");?>
+                  </p>
+                  <pre class="border p-3 text-left copymedata" style="direction: ltr"><?=str_replace("  ", "",'[pepro-smart-btn
+                    loggedin_href="/profile"
+                    loggedin_avatar="yes"
+                    loggedout_form="login"
+                    loggedin_avatar_size="32"
+                    trigger=".openlogin,.openregister"
+                    loggedin_class=""
+                    loggedout_class="w-btn us-btn-style_1 ush_btn_1"
+                    loggedin_text="Hi {display_name}"
+                    loggedout_text="Login/Register"
+                    login_popup_title="Login"
+                    register_popup_title="Register"
+                  ]');?></pre>
+                  <button type="button" id="copyshortcode" class="btn btn-primary copyhwnd" data-copy=".copymedata"><span class="material-icons">content_copy</span> <?=__("Copy", "peprodev-ups");?></button>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+
+              <div class="card card-nav-tabs">
                 <div class="card-header card-header-primary text-center"><?php esc_html_e("Site Health Info");?></div>
                 <div class="card-body">
                   <?php
-                    if ( ! class_exists( 'WP_Debug_Data' ) ) { require_once ABSPATH . 'wp-admin/includes/class-wp-debug-data.php'; }
-                    if ( ! class_exists( 'WP_Site_Health' ) ) { require_once ABSPATH . 'wp-admin/includes/class-wp-site-health.php'; }
-                    $health_check_site_status = WP_Site_Health::get_instance();
-                    WP_Debug_Data::check_for_updates();
-                    $info = WP_Debug_Data::debug_data();
+                  if ( ! class_exists( 'WP_Debug_Data' ) ) { require_once ABSPATH . 'wp-admin/includes/class-wp-debug-data.php'; }
+                  if ( ! class_exists( 'WP_Site_Health' ) ) { require_once ABSPATH . 'wp-admin/includes/class-wp-site-health.php'; }
+                  $health_check_site_status = WP_Site_Health::get_instance();
+                  WP_Debug_Data::check_for_updates();
+                  $info = WP_Debug_Data::debug_data();
                   ?>
                   <div id="health-check-debug">
-            		    <?php
-                		$sizes_fields = array( 'uploads_size', 'themes_size', 'plugins_size', 'wordpress_size', 'database_size', 'total_size' );
-                		foreach ( $info as $section => $details ) {
-                			if ( ! isset( $details['fields'] ) || empty( $details['fields'] ) || 'wp-paths-sizes' === $section) { continue; }
-                			 if ( isset( $details['description'] ) && ! empty( $details['description'] ) ) { printf( '<p>%s</p>', $details['description'] ); }
-                       ?>
-                				<table class="table table-striped table-small table-border mb-3 border-bottom">
-                          <thead><tr><th colspan="2" class="text-sm"><b><?php echo esc_html( $details['label'] ); if ( isset( $details['show_count'] ) && $details['show_count'] ) {printf( ' (%d)', count( $details['fields'] ) );} ?></b></th></tr></thead>
-                					<tbody>
-                					<?php
-                  					foreach ( $details['fields'] as $field_name => $field ) {
-                  						if ( is_array( $field['value'] ) ) { $values = '<ul>';
-                  							foreach ( $field['value'] as $name => $value ) {
-                                  $values .= sprintf( '<li>%s: %s</li>', esc_html( $name ), esc_html( $value ) );
-                                }
-                  							$values .= '</ul>';
-                  						}
-                              else {
-                                $values = esc_html( $field['value'] );
+                    <?php
+                    $sizes_fields = array( 'uploads_size', 'themes_size', 'plugins_size', 'wordpress_size', 'database_size', 'total_size' );
+                    foreach ( $info as $section => $details ) {
+                      if ( ! isset( $details['fields'] ) || empty( $details['fields'] ) || 'wp-paths-sizes' === $section) { continue; }
+                      if ( isset( $details['description'] ) && ! empty( $details['description'] ) ) { printf( '<p>%s</p>', $details['description'] ); }
+                      ?>
+                      <table class="table table-striped table-small table-border mb-3 border-bottom">
+                        <thead><tr><th colspan="2" class="text-sm"><b><?php echo esc_html( $details['label'] ); if ( isset( $details['show_count'] ) && $details['show_count'] ) {printf( ' (%d)', count( $details['fields'] ) );} ?></b></th></tr></thead>
+                        <tbody>
+                          <?php
+                          foreach ( $details['fields'] as $field_name => $field ) {
+                            if ( is_array( $field['value'] ) ) { $values = '<ul>';
+                              foreach ( $field['value'] as $name => $value ) {
+                                $values .= sprintf( '<li>%s: %s</li>', esc_html( $name ), esc_html( $value ) );
                               }
-                  						if ( in_array( $field_name, $sizes_fields, true ) ) {
-                  							printf( '<tr><td>%s</td><td class="%s">%s</td></tr>', esc_html( $field['label'] ), esc_attr( $field_name ), $values );
-                  						}
-                              else {
-                  							printf( '<tr><td>%s</td><td>%s</td></tr>', esc_html( $field['label'] ), $values );
-                  						}
-                  					}
-                					?>
-                					</tbody>
-                				</table>
-                		<?php } ?>
-                	</div>
-
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6 col-md-12">
-              <div class="card card-nav-tabs">
-                <div class="card-header card-header-primary text-center"><?php echo esc_html_x("Samrt Button","login-section", "peprodev-ups");?></div>
-                <div class="card-body table-responsive">
-                  <p class="text-bold"><?php echo esc_html_x("Use this button to show login/register popup to guests and welcome logged in users","login-section", "peprodev-ups");?></p>
-                      <pre class="border p-3 text-left copymedata" style="direction: ltr"><?=str_replace("  ", "",'[pepro-smart-btn
-                      loggedin_href="/profile"
-                      loggedin_avatar="yes"
-                      loggedout_form="login"
-                      loggedin_avatar_size="32"
-                      trigger=".openlogin,.openregister"
-                      loggedin_class=""
-                      loggedout_class="w-btn us-btn-style_1 ush_btn_1"
-                      loggedin_text="Hi {display_name}"
-                      loggedout_text="Login/Register"
-                      login_popup_title="Login"
-                      register_popup_title="Register"
-                      ]');?></pre>
-                    <button type="button" id="copyshortcode" class="btn btn-primary copyhwnd" data-copy=".copymedata"><span class="material-icons">content_copy</span> COPY</button>
+                              $values .= '</ul>';
+                            }
+                            else {
+                              $values = esc_html( $field['value'] );
+                            }
+                            if ( in_array( $field_name, $sizes_fields, true ) ) {
+                              printf( '<tr><td>%s</td><td class="%s">%s</td></tr>', esc_html( $field['label'] ), esc_attr( $field_name ), $values );
+                            }
+                            else {
+                              printf( '<tr><td>%s</td><td>%s</td></tr>', esc_html( $field['label'] ), $values );
+                            }
+                          }
+                          ?>
+                        </tbody>
+                      </table>
+                    <?php } ?>
                   </div>
                 </div>
               </div>
+
+            </div>
+
         </div>
-        <?php
-      }
+      <?php
+    }
     public function peprocore_dashboard_setting()
     {
       ?>
@@ -757,12 +778,7 @@ if (!class_exists("PeproDevUPS_Core")){
           // Nothing more to compare with, so $first == $second
           return 0;
       };
-
       return $comparer;
-    }
-    public function RetriveModules()
-    {
-      return apply_filters( "peprocore_modules_list",array());
     }
   }
 }

@@ -35,4 +35,4 @@ One of the **most** Advanced and **The Ultimate Profile Solutions** for WordPres
 * Compatible with WooCommerce, LearnDash, WooWallet, Wishlist, YITH Plugins
 
 ##### **Developed by** [Perpro Development Group](https://pepro.dev/)
-##### *Current Version: 2.3.6* \| *Lead Developer:* [Amirhosseinhpv](https://hpv.im/)
+##### *Current Version: 2.4.0* \| *Lead Developer:* [Amirhosseinhpv](https://hpv.im/)

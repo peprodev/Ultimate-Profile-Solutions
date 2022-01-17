@@ -2,8 +2,8 @@
 Contributors: amirhosseinhpv, peprodev, blackswanlab
 Donate link: https://pepro.dev/donate/
 Tags: functionality, pepro, management, administration, profile, login, register
-Version: 2.3.6
-Stable tag: 2.3.6
+Version: 2.4.0
+Stable tag: 2.4.0
 Requires at least: 5.0
 Tested up to: 5.8.3
 Requires PHP: 7.2
@@ -56,22 +56,31 @@ e.g.
 1. This Plugin has 100% compatibility with Zephyr theme and could be used with any other themes
 
 == About Us ==
-
-PEPRO DEV is a premium supplier of quality WordPress plugins, services and support.
-Join us at [https://pepro.dev/](https://pepro.dev/) and also don't forget to check our [free offerings](http://profiles.wordpress.org/peprodev/), we hope you enjoy them!
+PeproDev is a premium supplier of quality WordPress plugins, services and support. Join us at [https://pepro.dev/](https://pepro.dev/) and also don't forget to check out our [free offerings](http://profiles.wordpress.org/peprodev/), we hope you enjoy them!
 
 
 == Frequently Asked Questions ==
 
 = How can I contribute to this plugin? =
+You can help us improve our works by committing your changes to [GitHub/Ultimate-Profile-Solutions repository](https://github.com/peprodev/Ultimate-Profile-Solutions)
 
-You can help us improve our works by committing your changes to Pepro Dev's Github repository: https://github.com/peprodev/ups
+= How can I Order a Customized version of this plugin? =
+Our professional development team is here to offer you a fully Customized-Pro version of this plugin to fulfill your request. Contact us at [support@peprodev.com](mailto:support@pepro.dev)
 
 
 == Screenshots ==
 1. Overview
 
 == Changelog ==
+
+= Ver. 2.4.0 | 2022-01-18/1400-10-28 =
+* Backend UX Improvement
+* Backend UI Improvement
+* Changed translation
+* Added notice on after Installation
+* DEV: Removed redundant lines
+* DEV: Improved toast on Profile panel
+* DEV: Fixed some CSS
 
 = Ver. 2.3.6 | 2022-01-11/1400-10-21 =
 * Added new Admin Dashboard UX Widget
@@ -155,6 +164,15 @@ You can help us improve our works by committing your changes to Pepro Dev's Gith
 
 
 == Upgrade Notice ==
+
+= Ver. 2.4.0 | 2022-01-18/1400-10-28 =
+* Backend UX Improvement
+* Backend UI Improvement
+* Changed translation
+* Added notice on after Installation
+* DEV: Removed redundant lines
+* DEV: Improved toast on Profile panel
+* DEV: Fixed some CSS
 
 = Ver. 2.3.6 | 2022-01-11/1400-10-21 =
 * Added new Admin Dashboard UX Widget

@@ -1,6 +1,6 @@
 /**
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2022/01/11 20:13:33
+ * @Last modified time: 2022/01/18 01:03:42
  */
 
 
@@ -19,6 +19,13 @@
       copy_clipboard($(this).data("copy"));
       show_toast(pepc._copy, "rgba(21, 139, 2, 0.8)");
     });
+    $(document).on("click tap", "copy", function(e){
+      e.preventDefault();
+      var me = $(this);
+      copy_clipboard(me.text());
+      show_toast(pepc._copy, "rgba(21, 139, 2, 0.8)");
+    });
+
     function copy_clipboard(data) {
       var $temp = $("<textarea>");
       $("body").append($temp);

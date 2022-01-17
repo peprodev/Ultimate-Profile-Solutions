@@ -3,7 +3,7 @@
  * @Date:   2021/08/02 22:04:09
  * @Email:  its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2022/01/11 20:13:22
+ * @Last modified time: 2022/01/18 01:09:56
  * @License: GPLv2
  * @Copyright: Copyright © Amirhosseinhpv (https://hpv.im), all rights reserved.
  */
@@ -63,7 +63,9 @@ jQuery.noConflict();
       escapeKey: true,
     };
     setTimeout(function () { $(document).trigger("pepro_register_fields_load_json"); }, 100);
+    setTimeout(function () { $(document).trigger("pepro_register_fields_make_json"); }, 200);
     setTimeout(function () { $(document).trigger("pepro_redirection_fields_load_json"); }, 100);
+    setTimeout(function () { $(document).trigger("pepro_redirection_fields_make_json"); }, 200);
     setTimeout(function () { $("[name='reglogin_type']").trigger("refesh", [true]); }, 100);
     $('input[colorpicker]').each(function(){
       $(this).wpColorPicker({ palettes: _register_fields._palett});
@@ -151,7 +153,7 @@ jQuery.noConflict();
 
     shortcut("Ctrl+S",function() {
       event.preventDefault()
-      show_toast(_register_fields.saving);
+      // show_toast(_register_fields.saving);
       $(".login-section-save").first().trigger("click");
     });
 
@@ -679,6 +681,12 @@ jQuery.noConflict();
       copy_clipboard($(this).data("copy"));
       show_toast(_register_fields._copy, "rgba(21, 139, 2, 0.8)");
     });
+    $(document).on("click tap", "copy", function(e){
+      e.preventDefault();
+      var me = $(this);
+      copy_clipboard(me.text());
+      show_toast(_register_fields._copy, "rgba(21, 139, 2, 0.8)");
+    });
 
     if ("" !== window.location.hash){
       $tab = $(`.tab-content>.tab-pane${window.location.hash}`);
@@ -688,12 +696,6 @@ jQuery.noConflict();
       }
     }
 
-    $(document).on("click tap", "copy", function(e){
-      e.preventDefault();
-      var me = $(this);
-      copy_clipboard(me.text());
-      show_toast(_register_fields._copy);
-    });
     function scroll_element(element, offset = 0) {
     	$("html, body").animate({ scrollTop: element.offset().top - offset }, 500);
     }
@@ -718,11 +720,13 @@ jQuery.noConflict();
       var arabicAlphabetDigits = /[\u0600-\u06ff]|[\u0750-\u077f]|[\ufb50-\ufc3f]|[\ufe70-\ufefc]|[\u0200]|[\u00A0]/g;
       return arabicAlphabetDigits.test(character);
     }
-    function show_toast(data = "Sample Toast!", delay = 1500) {
-     if (!$("toast").length){$(document.body).append($("<toast>"));}
-     $("toast").html(data).stop().addClass("active").delay(delay).queue(function() {
-     $(this).removeClass("active").dequeue().off("click tap");
-     }).on("click tap", function(e) { e.preventDefault(); $(this).stop().removeClass("active"); });
+    function show_toast(data = "Sample Toast!", bg="", delay = 4500) {
+    	if (!$("toast").length) {$(document.body).append($("<toast>"));}else{$("toast").removeClass("active");}
+    	setTimeout(function () {
+    		$("toast").css("--toast-bg", bg).html(data).stop().addClass("active").delay(delay).queue(function () {
+    			$(this).removeClass("active").dequeue().off("click tap");
+    		}).on("click tap", function (e) {e.preventDefault();$(this).stop().removeClass("active");});
+    	}, 200);
     }
     function copy_clipboard(data) {
       var $temp = $("<textarea>");

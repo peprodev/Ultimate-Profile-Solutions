@@ -3,7 +3,7 @@
  * @Date:   2020/05/03 13:33:06
  * @Email:  its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2022/01/11 20:17:42
+ * @Last modified time: 2022/01/18 01:42:09
  * @License: GPLv2
  * @Copyright: Copyright © 2020 Amirhosseinhpv, All rights reserved.
  */
@@ -138,6 +138,7 @@ textarea {
   font-family: iranyekan, roboto, Arial !important;
 }
 /* .sidebar .sidebar-wrapper, .main-panel */
+
 .card .card-header-primary .card-icon,
 .card .card-header-primary .card-text,
 .card .card-header-primary:not(.card-header-icon):not(.card-header-text),
@@ -469,29 +470,37 @@ html.wp-toolbar {
   animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
-.sidebar-wrapper > ul.nav > li,
-.animation-transition-slow, .sidebar .nav p {
-	transition: none !important;
+.animation-transition-slow,
+.sidebar .nav p,
+.sidebar-wrapper > ul.nav > li {
+  transition: none !important;
 }
+
 .dark-edition code {
-	color: #b8a9ae;
+  color: #b8a9ae;
 }
+
 .dark-edition .faselectorsticky,
 .dark-edition .icon-set {
-	background: #202940 !important;
+  background: #202940 !important;
 }
+
 .dark-edition .text-primary {
-	color: #c2c2c2 !important;
+  color: #c2c2c2 !important;
 }
-.dark-edition .table-striped > tbody > tr:nth-of-type(2n+1){
+
+.dark-edition .table-striped > tbody > tr:nth-of-type(2n+1) {
   background-color: #1a20352e;
 }
+
 .wp-editor-tabs {
-	margin-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
 }
+
 .popup-shortcode-select {
-	margin: 0.5rem -0.1rem;
+  margin: 0.5rem -0.1rem;
 }
+
 .flex {
   display: flex;
   align-items: center;
@@ -565,7 +574,6 @@ a {
 .icn-btn .material-icons {
   font-size: 1.5rem;
 }
-
 
 table.table-small.table {
   margin-bottom: 0;
@@ -780,66 +788,92 @@ strong {
 }
 
 .ace_gutter {
-	z-index: 1 !important;
+  z-index: 1 !important;
 }
 
-.nav-tabs .nav-item .nav-link, .nav-tabs .nav-item .nav-link:focus, .nav-tabs .nav-item .nav-link:hover {
-    position: relative;
+.nav-tabs .nav-item .nav-link,
+.nav-tabs .nav-item .nav-link:focus,
+.nav-tabs .nav-item .nav-link:hover {
+  position: relative;
 }
 
 .nav-item.multiple {
-	display: flex;
-	justify-content: space-evenly;
-	width: calc(100% - 1rem);
-	position: relative;
-	margin: auto;
+  display: flex;
+  justify-content: space-evenly;
+  width: calc(100% - 1rem);
+  position: relative;
+  margin: auto;
 }
+
 .nav-item.multiple > a {
-	display: block;
-	margin: 0 !important;
-	text-align: center;
+  display: block;
+  margin: 0 !important;
+  text-align: center;
 }
+
 .nav-item.multiple > a > i {
-	margin: 0 !important;
-	padding: 0 !important;
-	float: unset;
+  margin: 0 !important;
+  padding: 0 !important;
+  float: unset;
 }
+
 .nav-item.multiple:hover a {
   background: transparent !important;
 }
+
 .nav-item.multiple a:hover {
-    background-color: #c7c7c733 !important;
-    color: #3c4858 !important;
-    box-shadow: none !important;
+  background-color: #c7c7c733 !important;
+  color: #3c4858 !important;
+  box-shadow: none !important;
 }
 
 .sidebar .logo .simple-text {
   text-transform: none;
-  }
-
+}
 
 toast {
- 	display: block;
- 	padding: 0.5rem 2rem;
- 	background: var(--toast-bg, rgba(0, 0, 0, .8));
- 	color: #fff;
- 	text-align: center;
- 	bottom: 0;
- 	width: 100vw;
- 	padding: 1rem 0;
- 	left: 0;
- 	z-index: 99999;
- 	box-shadow: 0 2px 11px 0 rgba(0, 0,0, 0.5);
- 	cursor: pointer;
- 	transition: all 0.3s ease-in-out;
- 	-webkit-backdrop-filter: blur(10px);
- 	        backdrop-filter: blur(10px);
- 	-moz-backdrop-filter: blur(10px);
- 	transform: translateY(110%);
- 	position: fixed;
- 	z-index: 9999999999999999 !important;
- }
+  display: block;
+  padding: 0.5rem 2rem;
+  background: var(--toast-bg, rgba(0, 0, 0, .8));
+  color: #fff;
+  text-align: center;
+  bottom: 0;
+  width: 100vw;
+  padding: 1rem 0;
+  left: 0;
+  z-index: 99999;
+  box-shadow: 0 2px 11px 0 rgba(0, 0,0, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  -moz-backdrop-filter: blur(10px);
+  transform: translateY(110%);
+  position: fixed;
+  z-index: 9999999999999999 !important;
+}
 
- toast.active {
- 	transform: translateY(0);
- }
+toast.active {
+  transform: translateY(0);
+}
+
+toast:empty {
+  display: none !important;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.card .card-header .card-category {
+	font-weight: normal !important;
+	color: #fff !important;
+}
+.card .card-header .card-title {
+	font-weight: 900;
+	color: #fff !important;
+}
+
+.main-panel > .content {
+	margin-top: 40px !important;
+}

@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2022/01/11 20:11:43
+# @Last modified time: 2022/01/17 22:30:26
 if (!class_exists("PeproDevUPS_Profile")) {
     class PeproDevUPS_Profile
     {
@@ -226,44 +226,6 @@ if (!class_exists("PeproDevUPS_Profile")) {
         public function init_plugin()
         {
           $this->url = $this->get_profile_page(["i"=>current_time("timestamp")]);
-          add_filter( "peprocore_modules_list", function ($modules) {
-            return array_merge( $modules,
-              array(
-                array(
-                  "priority"          => $this->priority,
-                  "id"                => $this->id,
-                  "hwnd"              => $this->hwnd,
-                  "instance"          => $this->instance,
-                  "menu_label"        => $this->menu_label,
-                  "page_label"        => $this->page_label,
-                  "icon_html"         => $this->icon_html,
-                  "current_version"   => $this->current_version,
-                  "date_last_edit"    => $this->date_last_edit,
-                  "wp_tested"         => $this->wp_tested,
-                  "wp_minimum"        => $this->wp_minimum,
-                  "wc_tested"         => $this->wc_tested,
-                  "wc_minimum"        => $this->wc_minimum,
-                  "php_minimum"       => $this->php_minimum,
-                  "php_recomonded"    => $this->php_recomonded,
-                  "pepc_tested"       => $this->pepc_tested,
-                  "pepc_minimum"      => $this->pepc_minimum,
-                  "setting_slug"      => $this->setting_slug,
-                  "activation_status" => $this->activation_status,
-                  "html_wrapper"      => $this->html_wrapper,
-                  "ajax_hndlr"        => $this->ajax_hndlr,
-                  "developer"         => $this->developer,
-                  "developerURI"      => $this->developerURI,
-                  "author"            => $this->author,
-                  "authorURI"         => $this->authorURI,
-                  "copyright"         => $this->copyright,
-                  "license"           => $this->license,
-                  "licenseURI"        => $this->licenseURI,
-                  "pluginURI"         => $this->pluginURI,
-                  "description"       => $this->description,
-                )
-              )
-            );
-          });
           add_filter( "peprocore_{$this->id}_dashboard_nav_menuitems", function(){
             return array(
                       array(
