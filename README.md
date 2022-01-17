@@ -1,6 +1,9 @@
 **PeproDev Ultimate Profile Solutions**
 =======================================
 
+<img src="https://ps.w.org/peprodev-ups/assets/banner-1544x500.png?rev=2659020" style="border-radius: 7px;"/>
+<img src="https://ps.w.org/peprodev-ups/assets/banner-1544x500-rtl.png?rev=2659020" style="border-radius: 7px;"/>
+
 One of the **most** Advanced and **The Ultimate Profile Solutions** for WordPress
 
 * FREE OF ANY CHARGE! UNLIMITED! **OPEN-SOURCE FOREVER!**
