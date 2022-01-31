@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2022/01/17 22:30:43
+# @Last modified time: 2022/01/27 17:43:44
 
 if ("yes" == get_option("PeproDevUPS_Core___loginregister-activesecurity", "")){
   include_once plugin_dir_path(__FILE__) . "/include/class-login-permalink.php";
@@ -424,7 +424,7 @@ if (!class_exists("PeproDevUPS_Login")){
     }
     public function _wc_activated()
     {
-      if (!is_plugin_active('woocommerce/woocommerce.php') || !function_exists('is_woocommerce') || !class_exists('woocommerce') ) { return false; }
+      if (!function_exists('is_woocommerce') || !class_exists('woocommerce') ) { return false; }
       return true;
     }
     public function _ld_activated()

@@ -2,10 +2,10 @@
 Contributors: amirhosseinhpv, peprodev, blackswanlab
 Donate link: https://pepro.dev/donate/
 Tags: functionality, pepro, management, administration, profile, login, register
-Version: 2.4.0
-Stable tag: 2.4.0
+Version: 2.4.1
+Stable tag: 2.4.1
 Requires at least: 5.0
-Tested up to: 5.8.3
+Tested up to: 5.9
 Requires PHP: 7.2
 WC tested up to: 6.0
 License: GPLv2 or later
