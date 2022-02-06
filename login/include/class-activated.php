@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2022/01/18 02:06:37
+# @Last modified time: 2022/02/06 17:36:26
 add_thickbox();
 wp_enqueue_style("wp-color-picker");
 wp_enqueue_script("wp-color-picker");
@@ -502,10 +502,10 @@ foreach ($styleFiles as $style) {
                     }
                   ?>
                 </div>
-                <div class="card login-authexpire">
+                <div class="card login-authexpire save_sms_settings">
                   <div class='card-body'>
                     <p class="text-bold"><?php echo esc_html_x("Auth. Expiration","login-section", "peprodev-ups");?></p>
-                    <input class="form-input single-required mb-3" type="number" min="-1" step="1" lang="en_US" dir="ltr" value="<?php echo esc_attr( get_option("{$this->activation_status}-auth_expire", "0"));?>" placeholder="<?php echo esc_html_x("Auth. Expiration","login-section", "peprodev-ups");?>" />
+                    <input class="form-input single-required mb-3" name="auth_expire" type="number" min="-1" step="1" lang="en_US" dir="ltr" value="<?php echo esc_attr( get_option("{$this->activation_status}-auth_expire", "0"));?>" placeholder="<?php echo esc_html_x("Auth. Expiration","login-section", "peprodev-ups");?>" />
                     <p><?=__("How long a user stay logged in? Enter time in hour format (<ltr>1</ltr>: one hour | <ltr>24</ltr>: one day | <ltr>168</ltr>: one week | <ltr>0</ltr>: Default | <ltr>-1</ltr>: Forevr)", "peprodev-ups");?></p>
                   </div>
                 </div>

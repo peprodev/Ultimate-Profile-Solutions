@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2022/01/27 17:43:44
+# @Last modified time: 2022/02/06 17:35:29
 
 if ("yes" == get_option("PeproDevUPS_Core___loginregister-activesecurity", "")){
   include_once plugin_dir_path(__FILE__) . "/include/class-login-permalink.php";
@@ -127,7 +127,12 @@ if (!class_exists("PeproDevUPS_Login")){
       $this->hide_username_field    = "yes" !== get_option("{$this->save_prefix}-_regdef_username");
       $this->is_username_field_req  = "yes" == get_option("{$this->save_prefix}-_regdef_username-req");
 
-      $this->auth_expire                    = get_option("{$this->save_prefix}-auth_expire", "0");
+      $this->change_number_text = __("Change Number", "peprodev-ups");
+
+      if($this->login_mobile_otp) $this->change_number_text = __("Change Number", "peprodev-ups");
+      if($this->login_email_otp) $this->change_number_text  = __("Change Email", "peprodev-ups");
+
+      $this->auth_expire                    = get_option("{$this->save_prefix}-auth_expire", 0);
       $this->sms_expiration                 = get_option("{$this->save_prefix}-sms_expiration", "90");
       $this->email_expiration               = get_option("{$this->save_prefix}-email_expiration", "120");
       $this->verification_digits            = get_option("{$this->save_prefix}-verification_digits", "5");
@@ -191,9 +196,6 @@ if (!class_exists("PeproDevUPS_Login")){
       $this->form_resetpass_fields = $this->get_form_resetpass_fields();
       $this->login_fields          = $this->get_login_fields();
       $this->verify_mobile_fields  = $this->get_verify_mobile_fields();
-
-      if($this->login_mobile_otp) $this->change_number_text = __("Change Number", "peprodev-ups");
-      if($this->login_email_otp) $this->change_number_text  = __("Change Email", "peprodev-ups");
 
       $this->form_class = array();
       if ($this->floating_input_label) $this->form_class[] = "floating_from_label";
@@ -292,14 +294,14 @@ if (!class_exists("PeproDevUPS_Login")){
     }
     public function auth_cookie_expiration( $expiration, $user_id, $remember )
     {
-      if ( "-1" == $this->auth_expire){
+      if ("-1" === (string) $this->auth_expire){
         return 1000 * YEAR_IN_SECONDS;
       }
-      if ("0" == $this->auth_expire){
+      if ("0" === (string) $this->auth_expire){
         return $expiration;
       }
       if (is_numeric($this->auth_expire)){
-        return $this->auth_expire * HOUR_IN_SECONDS;
+        return ((int) $this->auth_expire) * HOUR_IN_SECONDS;
       }
       return $expiration;
     }
@@ -2526,10 +2528,10 @@ if (!class_exists("PeproDevUPS_Login")){
       wp_clear_auth_cookie();
       wp_set_current_user($user_id);
       $remember = false;
-      if ("-1" == $this->auth_expire){
+      if ("-1" === (string) $this->auth_expire){
         $remember = true;
       }
-      if ("0" != $this->auth_expire && is_numeric($this->auth_expire)){
+      if ("0" !== (string) $this->auth_expire && is_numeric($this->auth_expire) && ((int) $this->auth_expire) > 1){
         $remember = true;
       }
       wp_set_auth_cookie($user_id, $remember, is_ssl());
