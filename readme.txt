@@ -2,8 +2,8 @@
 Contributors: amirhosseinhpv, peprodev, blackswanlab
 Donate link: https://pepro.dev/donate/
 Tags: functionality, pepro, management, administration, profile, login, register
-Version: 2.4.2
-Stable tag: 2.4.2
+Version: 2.4.3
+Stable tag: 2.4.3
 Requires at least: 5.0
 Tested up to: 5.9
 Requires PHP: 7.2
@@ -73,8 +73,14 @@ Our professional development team is here to offer you a fully Customized-Pro ve
 
 == Changelog ==
 
-= Ver. 2.4.2 | 2022-02-06/1400-11-17 =
-* Some Fixes on Keep LoggedIn
+= Ver. 2.4.3 | 2022-02-11/1400-11-22 =
+* Fixes on Keep User Logged In forever
+* Fixes on Persian Translation
+* Fixes to keep new lines on copy shortcode
+* Added Welcome page after activating plugin
+* DEV: Enhancement for creating profile page on first-use
+* DEV: Added placeholder to test-mobile-otp field
+* DEV: Enhanced function :: get_profile_page
 
 = Ver. 2.4.0 | 2022-01-18/1400-10-28 =
 * Backend UX Improvement
@@ -163,13 +169,16 @@ Our professional development team is here to offer you a fully Customized-Pro ve
 * added translation
 
 
-
-
-
 == Upgrade Notice ==
 
-= Ver. 2.4.2 | 2022-02-06/1400-11-17 =
-* Some Fixes on Keep LoggedIn
+= Ver. 2.4.3 | 2022-02-11/1400-11-22 =
+* Fixes on Keep User Logged In forever
+* Fixes on Persian Translation
+* Fixes to keep new lines on copy shortcode
+* Added Welcome page after activating plugin
+* DEV: Enhancement for creating profile page on first-use
+* DEV: Added placeholder to test-mobile-otp field
+* DEV: Enhanced function :: get_profile_page
 
 = Ver. 2.4.0 | 2022-01-18/1400-10-28 =
 * Backend UX Improvement
@@ -179,42 +188,3 @@ Our professional development team is here to offer you a fully Customized-Pro ve
 * DEV: Removed redundant lines
 * DEV: Improved toast on Profile panel
 * DEV: Fixed some CSS
-
-= Ver. 2.3.6 | 2022-01-11/1400-10-21 =
-* Added new Admin Dashboard UX Widget
-* Added Expire Auth. Option
-* Backend UX Improvement
-
-= Ver. 2.3.5 | 2022-01-09/1400-10-19 =
-* Enhanced Admin Dashboard UX
-* Added ReadMe to GitHub & WordPress
-
-= Ver. 2.3.4 | 2022-01-03/1400-10-13 =
-* Fixes: Popup Login/Registration form
-* Fixes: Toast Notification Coloring Errors
-* Fixes: Admin User Creation, now Auto Verifies user
-* Fixed: Arabic/Persian numbers in Inputs/Verification
-* Fixes: Registration without saving User first name
-* Fixes: Duplicate user First Name/Last Name on Admin-New User Panel
-* Enhanced: Kavenegar کاوه نگار SMS Gateway
-
-= Ver. 2.3
-* Added floating form labels
-* Changed Popup login/register style
-* Added Option to User Messagebox/Toast
-* Multiple SMS Providers
-* Mobile Newsletter Subscription via number verify (SMS OTP)
-* Each SMS Provider has its own sending function
-* Each SMS Provider has its own setting panel
-* Now you can live-test your SMS OTP code
-* Change Mobile after OTP sent
-* OTP Login Enhancement
-* OTP Registration Enhancement
-* Login/Registration clears stored OTP on database
-* Popup form design changed
-* Smart Button now receives 'trigger' argument to let other elements trigger it
-* 'trigger' argument element could have classes to activate popup form (active-register|active-login)
-* 'trigger' could also be used with multiple selectors, e.g. '.openlogin, .openregister, .openpup, #login_btn'
-* Added Shortcode `[pepro-sms-subscription]`
-* Added Newsletter Section in Setting for managing Users
-* Added Option to Export Newsletter Users as CSV

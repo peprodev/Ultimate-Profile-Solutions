@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2022/01/17 22:30:26
+# @Last modified time: 2022/02/11 03:14:19
 if (!class_exists("PeproDevUPS_Profile")) {
     class PeproDevUPS_Profile
     {
@@ -66,7 +66,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
             $this->tbl_notif         = "{$this->db_table}_notif";
             $this->tbl_sections      = "{$this->db_table}_sections";
             $this->title             = __("PeproDev Ultimate Profile Solutions — Profile", "peprodev-ups");
-            $this->menu_label        = __("Profile", "peprodev-ups");
+            $this->menu_label        = __("Profile Design", "peprodev-ups");
             $this->page_label        = __("Profile Setting", "peprodev-ups");
             $this->description       = __("Modern profile for users", "peprodev-ups");
             $this->developer         = __("Pepro Dev. Group", "peprodev-ups");
@@ -120,37 +120,35 @@ if (!class_exists("PeproDevUPS_Profile")) {
 
 
             if (isset($_GET["peprodev_subscribers"]) && "export_csv" === trim($_GET["peprodev_subscribers"])){
-
-
-              $data = array();
-              $notifs = $wpdb->get_results($wpdb->prepare("SELECT * FROM `$this->tbl_subscribers` ORDER BY `date_created` DESC"));
-              if (false !== $notifs && 0 !== $notifs && !empty($notifs)) {
-                foreach ($notifs as $notif) {
-                  $data[] = array(
-                    "date"   => $notif->date_created,
-                    "name"   => $notif->name,
-                    "mobile" => $notif->mobile,
-                    "email"  => $notif->email,
-                    "uid"    => $notif->user,
-                  );
+              if (current_user_can("administrator")) {
+                $data = array();
+                $notifs = $wpdb->get_results($wpdb->prepare("SELECT * FROM `$this->tbl_subscribers` ORDER BY `date_created` DESC"));
+                if (false !== $notifs && 0 !== $notifs && !empty($notifs)) {
+                  foreach ($notifs as $notif) {
+                    $data[] = array(
+                      "date"   => $notif->date_created,
+                      "name"   => $notif->name,
+                      "mobile" => $notif->mobile,
+                      "email"  => $notif->email,
+                      "uid"    => $notif->user,
+                    );
+                  }
                 }
+                else{
+                  wp_die(__("No subscriber found!", "notifications-priority", $this->td));
+                }
+                $filename = "PeproDevUPS Subscribers " . current_time("timestamp").".csv";
+                header('Content-Description: File Transfer');
+                header("Content-Type: application/vnd.ms-excel; charset=utf-8");
+                header('Content-Transfer-Encoding: binary');
+                header("Content-Disposition: attachment; filename=\"$filename\"");
+                header('Expires: 0');
+                header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+                header('Pragma: no-cache');
+                header('Pragma: public');
+                echo "\xEF\xBB\xBF"; // UTF-8 BOM
+                $this->ExportFileAsExcel($data);
               }
-              else{
-                wp_die(__("No subscriber found!", "notifications-priority", $this->td));
-              }
-
-
-              $filename = "PeproDevUPS Subscribers " . current_time("timestamp").".csv";
-              header('Content-Description: File Transfer');
-              header("Content-Type: application/vnd.ms-excel; charset=utf-8");
-              header('Content-Transfer-Encoding: binary');
-              header("Content-Disposition: attachment; filename=\"$filename\"");
-              header('Expires: 0');
-              header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-              header('Pragma: no-cache');
-              header('Pragma: public');
-              echo "\xEF\xBB\xBF"; // UTF-8 BOM
-              $this->ExportFileAsExcel($data);
             }
 
             add_action("init", array( $this, "init_plugin" ));
@@ -182,9 +180,12 @@ if (!class_exists("PeproDevUPS_Profile")) {
         }
         public function get_profile_page($queryVar=null)
         {
-          $profile_page = get_option("{$this->activation_status}-profile-dash-page");
+          $profile_page = get_option("{$this->activation_status}-profile-dash-page", false);
+          if (!get_post($profile_page)) {
+            $profile_page = false;
+          }
           if ($queryVar && null !== $queryVar && is_array($queryVar)){
-            $url          = get_permalink($profile_page);
+            $url          = $profile_page ? get_permalink($profile_page) : home_url();
             $lang         = defined('ICL_LANGUAGE_CODE') ? ICL_LANGUAGE_CODE : "en";
             $url          = apply_filters( 'wpml_permalink', $url , $lang);
             $profile_page = add_query_arg( $queryVar, $url);
@@ -3175,17 +3176,16 @@ if (!class_exists("PeproDevUPS_Profile")) {
         }
         public function add_special_post($force = false)
         {
-          $profile_template = array(
-           'post_type'     => 'page',
-           'post_title'    => __("User Dashboard","peprodev-ups"),
-           'post_content'  => '[pepro-profile]',
-           'post_name'     => 'profile',
-           'post_status'   => 'publish',
-           'page_template' => 'peprofile-template.php',
-           'comment_status'=> 'closed',
-          );
-
-          if ("yes" != get_option("{$this->activation_status}-profile-dash-page-created","")){
+          if (false === $this->get_profile_page() || "yes" != get_option("{$this->activation_status}-profile-dash-page-created","")){
+            $profile_template = array(
+              'post_type'     => 'page',
+              'post_title'    => __("User Dashboard","peprodev-ups"),
+              'post_content'  => '[pepro-profile]',
+              'post_name'     => 'profile',
+              'post_status'   => 'publish',
+              'page_template' => 'peprofile-template.php',
+              'comment_status'=> 'closed',
+            );
             $post_id = wp_insert_post( $profile_template );
             if(!is_wp_error($post_id)){
               update_post_meta( $post_id, '_wp_page_template', 'peprofile-template.php' );

@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2022/02/06 17:36:26
+# @Last modified time: 2022/02/11 03:07:41
 add_thickbox();
 wp_enqueue_style("wp-color-picker");
 wp_enqueue_script("wp-color-picker");
@@ -94,17 +94,17 @@ foreach ($styleFiles as $style) {
             <div class="smart_btn_workspace">
               <div class="mt-3 mb-3">
                 <pre class="border p-3 text-left copymedata" style="direction: ltr"><?=str_replace("  ", "",'[pepro-smart-btn
-                loggedin_href="/profile"
-                loggedin_avatar="yes"
-                loggedout_form="login"
-                loggedin_avatar_size="32"
-                trigger=".openlogin,.openregister"
-                loggedin_class=""
-                loggedout_class="w-btn us-btn-style_1 ush_btn_1"
-                loggedin_text="Hi {display_name}"
-                loggedout_text="Login/Register"
-                login_popup_title="Login"
-                register_popup_title="Register"
+                  loggedin_href="/profile"
+                  loggedin_avatar="yes"
+                  loggedout_form="login"
+                  loggedin_avatar_size="32"
+                  trigger=".openlogin,.openregister"
+                  loggedin_class=""
+                  loggedout_class="w-btn us-btn-style_1 ush_btn_1"
+                  loggedin_text="'.__("Hi {display_name}", $this->td).'"
+                  loggedout_text="'.__("Login/Register",   $this->td).'"
+                  login_popup_title="'.__("Login",         $this->td).'"
+                  register_popup_title="'.__("Register",   $this->td).'"
                 ]');?></pre>
                 <button type="button" id="copyshortcode" class="btn btn-primary" style="position: relative;transform: translate(-0.5rem, -4.5rem);"><span class="material-icons">content_copy</span></button>
               </div>
@@ -514,7 +514,7 @@ foreach ($styleFiles as $style) {
                     <div class='checkotp-test'>
                       <p class="pt-3"><strong><?php esc_html_e("TEST Sending OTP SMS", "peprodev-ups");?></strong> <span>(<?=__("First Save changes (Ctrl+S), then test SMS Sending", "peprodev-ups");?>)</span></p>
                       <div class="row justify-content-between align-items-center">
-                        <div class="col-8"><input id="sms_test" value="<?php echo esc_attr( get_the_author_meta("user_mobile", get_current_user_id()) );?>" autocomplete="off" type="text" dir="ltr" class='form-input single-required' /></div>
+                        <div class="col-8"><input id="sms_test" placeholder="<?=__("Test mobile number", $this->td);?>" value="<?php echo esc_attr( get_the_author_meta("user_mobile", get_current_user_id()) );?>" autocomplete="off" type="text" dir="ltr" class='form-input single-required' /></div>
                         <div class="col-4"><button integrity="<?php echo esc_attr(wp_create_nonce('peprocorenounce')); ?>" class="btn btn-success btn-primary icn-btn btn-wide testotp"><i class="material-icons">send</i> <?=__("Send a Test SMS", $this->td);?></button></div>
                       </div>
                     </div>

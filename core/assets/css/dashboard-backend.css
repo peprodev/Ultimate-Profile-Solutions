@@ -3,7 +3,7 @@
  * @Date:   2020/05/03 13:33:06
  * @Email:  its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2022/01/18 01:42:09
+ * @Last modified time: 2022/02/11 02:55:58
  * @License: GPLv2
  * @Copyright: Copyright © 2020 Amirhosseinhpv, All rights reserved.
  */
@@ -869,11 +869,14 @@ toast:empty {
 	font-weight: normal !important;
 	color: #fff !important;
 }
+.card .card-header .card-title-single,
 .card .card-header .card-title {
 	font-weight: 900;
 	color: #fff !important;
 }
-
+.sidebar .nav p {
+    font-weight: normal;
+}
 .main-panel > .content {
 	margin-top: 40px !important;
 }

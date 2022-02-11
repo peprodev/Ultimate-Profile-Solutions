@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2022/01/18 01:38:38
+# @Last modified time: 2022/02/11 02:54:46
 if (!class_exists("PeproDevUPS_Core")){
   class PeproDevUPS_Core
   {
@@ -53,12 +53,12 @@ if (!class_exists("PeproDevUPS_Core")){
       $message = "";
       $seen = get_option("peprodevups_alert_viewed_yet", "");
       if (!$seen || $seen !== PEPRODEVUPS){
-        $url = admin_url("admin.php?page=peprodev-ups&section=home");
+        $url = admin_url("admin.php?page=peprodev-ups&section=home&welcome=true");
         $message = "<div style='padding: 0.3rem 0.5rem;line-height: 1; margin-inline-start: -0.5rem;'><img src='{$this->assets_url}img/peprodev.svg' width='32px' /></div>";
-        $message .= "<div>" . sprintf(__("Welcome to %s! Please Take a minute and check its features and configurations, <a href='%s'>start here</a>.", "peprodev-ups"), "<strong>{$this->title}</strong>", $url) . "</div>";
+        $message .= "<div>" . sprintf(__("Welcome to %s! Please setup <a href='%s'>from here</a>.", "peprodev-ups"), "<strong>{$this->title}</strong>", $url) . "</div>";
       }
       $message = apply_filters("peprodevups_alert_after_active", $message);
-      if (!empty($message)) printf( '<div class="%1$s" style="border-color: #ffa176;"><div class="pepro_alert" style="display: flex;align-items: center;">%2$s</div></div>', esc_attr("notice notice-info is-not-dismissible"), $message);
+      if (!empty($message)) printf( '<div class="%1$s" style="border-color: #ffa176;"><div class="pepro_alert" style="display: flex;align-items: center;">%2$s</div></div>', esc_attr("notice notice-info is-dismissible"), $message);
     }
     public function plugins_row_links($links)
     {
@@ -228,9 +228,9 @@ if (!class_exists("PeproDevUPS_Core")){
           "fn"       => array($this,"peprocore_dashboard_homepage"),
         ),
         array(
-          "title"    => __("Setting","peprodev-ups"),
-          "titleW"   => __("PeproDev UPS Settings","peprodev-ups"),
-          "icon"     => '<i class="material-icons">settings</i>',
+          "title"    => __("Appearance","peprodev-ups"),
+          "titleW"   => __("PeproDev UPS Appearance","peprodev-ups"),
+          "icon"     => '<i class="material-icons">brush</i>',
           "link"     => "@setting",
           "id"       => "built_in_setting",
           "priority" => 1000,
@@ -369,7 +369,7 @@ if (!class_exists("PeproDevUPS_Core")){
     {
       add_menu_page(
         $this->title_w,
-        __("PeproDev UPS","peprodev-ups"),
+        _x("PeproDev UPS","menu-name","peprodev-ups"),
         "manage_options",
         $this->db_slug,
         array($this,'peprocore_modern_mother_dashboard_wrapper'),
@@ -500,6 +500,10 @@ if (!class_exists("PeproDevUPS_Core")){
     public function peprocore_dashboard_homepage()
     {
       global $PeproDevUPS_Profile;
+      if (isset($_GET["welcome"]) && "true" == $_GET["welcome"]) {
+        $this->peprocore_dashboard_welcome();
+        return false;
+      }
       ?>
       <style media="screen">
         #health-check-debug {
@@ -511,35 +515,18 @@ if (!class_exists("PeproDevUPS_Core")){
       <div class="content">
         <div class="container-fluid">
           <div class="row">
+            <style>.navbar-wrapper{ display:none !important; } .main-panel>.content{ margin-top: 10px !important; } </style>
             <div class="col-lg-6 col-md-12">
+
               <div class="card card-nav-tabs">
                 <div class="card-header card-header-primary text-center">
-                  <?php esc_html_e("PeproDev Ultimate Profile Solutions", "peprodev-ups");?>
-                </div>
-                <div class="card-body">
-                  <p class="card-text"><h2><?php esc_attr( sprintf(__("Welcome to v.%s", "peprodev-ups"),"<strong>$this->version</strong>") );?></h2></p>
-                  <a href="<?php esc_attr_e(admin_url());?>" class="btn btn-primary"><?php esc_html_e("WordPress Admin Dashboard", "peprodev-ups");?></a>
-                  <a href="<?php esc_attr_e(admin_url("/plugins.php"));?>" class="btn btn-primary"><?php esc_html_e("WordPress Plugins", "peprodev-ups");?></a>
-                  <a href="<?php esc_attr_e(home_url());?>" class="btn btn-primary"><?php esc_html_e("Website Home Page", "peprodev-ups");?></a>
-                  <style>.navbar-wrapper{ display:none !important; } .main-panel>.content{ margin-top: 10px !important; } </style>
-                  <?php
-                    echo "<a href='".esc_attr( $PeproDevUPS_Profile->get_profile_page(["i"=>current_time("timestamp")]) )."' class='btn btn-primary'>".__("Profile Page", "peprodev-ups")."</a>";
-                    /*
-                    if ( current_user_can( 'install_plugins' ) ) {
-                    $url = wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=' . $api->slug ), 'install-plugin_' . $api->slug );
-                  }
-                  */
-                  ?>
-                </div>
-              </div>
-
-              <div class="card card-nav-tabs mt-5">
-                <div class="card-header card-header-primary text-center">
-                  <?php echo esc_html_x("Samrt Button","login-section", "peprodev-ups");?>
+                  <div class="card-title-single">
+                    <?php echo esc_html_x("Samrt Button","login-section", "peprodev-ups");?>
+                  </div>
                 </div>
                 <div class="card-body table-responsive">
                   <p class="text-bold">
-                    <?php echo esc_html_x("Use this button to show login/register popup to guests and welcome logged in users","login-section", "peprodev-ups");?>
+                    <?php echo esc_html_x("To set-up you just need to copy shortcode below and use it in everywhere you want e.g. header.","login-section", "peprodev-ups");?>
                   </p>
                   <pre class="border p-3 text-left copymedata" style="direction: ltr"><?=str_replace("  ", "",'[pepro-smart-btn
                     loggedin_href="/profile"
@@ -549,10 +536,10 @@ if (!class_exists("PeproDevUPS_Core")){
                     trigger=".openlogin,.openregister"
                     loggedin_class=""
                     loggedout_class="w-btn us-btn-style_1 ush_btn_1"
-                    loggedin_text="Hi {display_name}"
-                    loggedout_text="Login/Register"
-                    login_popup_title="Login"
-                    register_popup_title="Register"
+                    loggedin_text="'.__("Hi {display_name}", $this->td).'"
+                    loggedout_text="'.__("Login/Register",   $this->td).'"
+                    login_popup_title="'.__("Login",         $this->td).'"
+                    register_popup_title="'.__("Register",   $this->td).'"
                   ]');?></pre>
                   <button type="button" id="copyshortcode" class="btn btn-primary copyhwnd" data-copy=".copymedata"><span class="material-icons">content_copy</span> <?=__("Copy", "peprodev-ups");?></button>
                 </div>
@@ -561,9 +548,12 @@ if (!class_exists("PeproDevUPS_Core")){
             </div>
 
             <div class="col-lg-6 col-md-12">
-
               <div class="card card-nav-tabs">
-                <div class="card-header card-header-primary text-center"><?php esc_html_e("Site Health Info");?></div>
+                <div class="card-header card-header-primary text-center">
+                  <div class="card-title-single">
+                    <?php esc_html_e("Site Health Info");?>
+                  </div>
+                </div>
                 <div class="card-body">
                   <?php
                   if ( ! class_exists( 'WP_Debug_Data' ) ) { require_once ABSPATH . 'wp-admin/includes/class-wp-debug-data.php'; }
@@ -610,6 +600,94 @@ if (!class_exists("PeproDevUPS_Core")){
 
             </div>
 
+        </div>
+      <?php
+    }
+    public function peprocore_dashboard_welcome()
+    {
+      global $PeproDevUPS_Profile;
+      ?>
+      <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <style>.navbar-wrapper{ display:none !important; } .main-panel>.content{ margin-top: 10px !important; } </style>
+            <div class="col-lg-6 col-md-12">
+              <div class="card card-nav-tabs">
+                <div class="card-header card-header-primary text-center">
+                  <div class="card-title-single">
+                    <?php echo esc_html_x("Welcome to PeproDev Ultimate Profile","login-section", "peprodev-ups");?>
+                  </div>
+                </div>
+                <div class="card-body table-responsive">
+                  <p class="text-bold">
+                    <?php echo esc_html_x("To set-up you just need to copy shortcode below and use it in everywhere you want e.g. header.","login-section", "peprodev-ups");?>
+                  </p>
+                  <pre class="border p-3 text-left copymedata" style="direction: ltr"><?=str_replace("  ", "",'[pepro-smart-btn
+                    loggedin_href="/profile"
+                    loggedin_avatar="yes"
+                    loggedout_form="login"
+                    loggedin_avatar_size="32"
+                    trigger=".openlogin,.openregister"
+                    loggedin_class=""
+                    loggedout_class="w-btn us-btn-style_1 ush_btn_1"
+                    loggedin_text="'.__("Hi {display_name}", $this->td).'"
+                    loggedout_text="'.__("Login/Register",   $this->td).'"
+                    login_popup_title="'.__("Login",         $this->td).'"
+                    register_popup_title="'.__("Register",   $this->td).'"
+                  ]');?></pre>
+                  <button type="button" id="copyshortcode" class="btn btn-primary copyhwnd" data-copy=".copymedata"><span class="material-icons">content_copy</span> <?=__("Copy", "peprodev-ups");?></button>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="card card-nav-tabs">
+                <div class="card-header card-header-primary text-center">
+                  <div class="card-title-single">
+                    <?php echo esc_html_x("Changelog","login-section", "peprodev-ups");?>
+                  </div>
+                </div>
+                <div class="card-body table-responsive">
+                  <div id="section-changelog" class="section" style="direction: ltr; text-align: left;">
+                    <strong>Ver. 2.4.2 | 2022-02-06/1400-11-17</strong>
+                    <ul>
+                      <li>Some Fixes on Keep LoggedIn</li>
+                    </ul>
+                    <strong>Ver. 2.4.0 | 2022-01-18/1400-10-28</strong>
+                    <ul>
+                      <li>Backend UX Improvement</li>
+                      <li>Backend UI Improvement</li>
+                      <li>Changed translation</li>
+                      <li>Added notice on after Installation</li>
+                      <li>DEV: Removed redundant lines</li>
+                      <li>DEV: Improved toast on Profile panel</li>
+                      <li>DEV: Fixed some CSS</li>
+                    </ul>
+                    <strong>Ver. 2.3.6 | 2022-01-11/1400-10-21</strong>
+                    <ul>
+                      <li>Added new Admin Dashboard UX Widget</li>
+                      <li>Added Expire Auth. Option</li>
+                      <li>Backend UX Improvement</li>
+                    </ul>
+                    <strong>Ver. 2.3.5 | 2022-01-09/1400-10-19</strong>
+                    <ul>
+                      <li>Enhanced Admin Dashboard UX</li>
+                      <li>Added ReadMe to GitHub &amp; WordPress</li>
+                    </ul>
+                    <strong>Ver. 2.3.4 | 2022-01-03/1400-10-13</strong>
+                    <ul>
+                      <li>Fixes: Popup Login/Registration form</li>
+                      <li>Fixes: Toast Notification Coloring Errors</li>
+                      <li>Fixes: Admin User Creation, now Auto Verifies user</li>
+                      <li>Fixed: Arabic/Persian numbers in Inputs/Verification</li>
+                      <li>Fixes: Registration without saving User first name</li>
+                      <li>Fixes: Duplicate user First Name/Last Name on Admin-New User Panel</li>
+                      <li>Enhanced: Kavenegar کاوه نگار SMS Gateway</li>
+                    </ul>
+                  </div>
+                  <a type="button" href="https://wordpress.org/plugins/peprodev-ups/#developers" target="_blank" class="btn btn-primary"><?=__("View Changelog", "peprodev-ups");?></a>
+                </div>
+              </div>
+            </div>
         </div>
       <?php
     }

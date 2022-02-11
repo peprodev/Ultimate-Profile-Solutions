@@ -3,7 +3,7 @@
  * @Date:   2021/08/02 22:04:09
  * @Email:  its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2022/01/18 01:09:56
+ * @Last modified time: 2022/02/11 03:04:55
  * @License: GPLv2
  * @Copyright: Copyright © Amirhosseinhpv (https://hpv.im), all rights reserved.
  */
@@ -667,7 +667,7 @@ jQuery.noConflict();
     $(document).on("click tap", "#copyshortcode", function(e){
       e.preventDefault();
       var me = $(this);
-      copy_clipboard($(".smart_btn_workspace pre").text().replace(/\n/gi,""));
+      copy_clipboard($(".smart_btn_workspace pre").html());
       show_toast(_register_fields._copy, "rgba(21, 139, 2, 0.8)");
     });
     $(document).on("click tap", ".copyhwnd", function(e){

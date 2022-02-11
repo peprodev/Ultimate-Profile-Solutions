@@ -3,7 +3,7 @@
  * @Date:2020/05/03 13:33:07
  * @Email:its@hpv.im
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/11/08 00:33:34
+ * @Last modified time: 2022/02/11 03:18:54
  * @License:GPLv2
  * @Copyright:Copyright © 2020 Amirhosseinhpv,All rights reserved.
  */
@@ -519,4 +519,10 @@ label[for="avatar"] {
 }
 .menu-sidebar .logo a img, .menu-sidebar .logo a {
 	max-height: 60px !important;
+}
+
+.woocommerce-button.button {
+	line-height: 1.5;
+	-webkit-margin-end: 0.8rem;
+	        margin-inline-end: 0.8rem;
 }
