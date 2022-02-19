@@ -2,8 +2,8 @@
 Contributors: amirhosseinhpv, peprodev, blackswanlab
 Donate link: https://pepro.dev/donate/
 Tags: functionality, pepro, management, administration, profile, login, register
-Version: 2.4.3
-Stable tag: 2.4.3
+Version: 2.4.4
+Stable tag: 2.4.4
 Requires at least: 5.0
 Tested up to: 5.9
 Requires PHP: 7.2
@@ -73,7 +73,7 @@ Our professional development team is here to offer you a fully Customized-Pro ve
 
 == Changelog ==
 
-= Ver. 2.4.3 | 2022-02-11/1400-11-22 =
+= Ver. 2.4.4 | 2022-02-11/1400-11-22 =
 * Fixes on Keep User Logged In forever
 * Fixes on Persian Translation
 * Fixes to keep new lines on copy shortcode

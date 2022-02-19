@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PeproDev Ultimate Profile Solutions\n"
 "POT-Creation-Date: 2022-02-11 03:01+0330\n"
-"PO-Revision-Date: 2022-02-11 03:06+0330\n"
+"PO-Revision-Date: 2022-02-12 23:16+0330\n"
 "Last-Translator: Amirhosseinhpv <its@hpv.im>\n"
 "Language-Team: Amirhosseinhpv <its@hpv.im>\n"
 "Language: fa_IR\n"
@@ -24,7 +24,7 @@ msgstr ""
 #: core/apps/home.php:9
 msgctxt "peprocore-appearance-setting"
 msgid "PeproDev Ultimate Profile Solutions"
-msgstr "پروفایل ساز حرفه‌ای پپرو"
+msgstr "پروفایل ساز پپرو"
 
 #: core/apps/home.php:52 login/login.php:4031
 msgid "WordPress Admin"
@@ -58,7 +58,7 @@ msgstr ""
 #. Plugin Name of the plugin/theme
 #: core/main.php:36
 msgid "PeproDev Ultimate Profile Solutions"
-msgstr "پروفایل ساز حرفه‌ای پپرو"
+msgstr "پروفایل ساز پپرو"
 
 #: core/main.php:37
 #, php-format
@@ -82,11 +82,11 @@ msgstr "پیشخوان"
 #: core/main.php:163 core/main.php:788 core/main.php:789
 msgctxt "peprocore-appearance-setting"
 msgid "PeproDev UPS"
-msgstr "پروفایل ساز حرفه‌ای پپرو"
+msgstr "پروفایل ساز پپرو"
 
 #: core/main.php:223
 msgid "PeproDev UPS Dashboard"
-msgstr "پیشخوان پروفایل ساز حرفه‌ای پپرو"
+msgstr "پیشخوان پروفایل ساز پپرو"
 
 #: core/main.php:231
 msgid "Appearance"
@@ -94,7 +94,7 @@ msgstr "نمایش"
 
 #: core/main.php:232
 msgid "PeproDev UPS Appearance"
-msgstr "تنظیمات نمایش پروفایل ساز حرفه‌ای پپرو"
+msgstr "تنظیمات نمایش پروفایل ساز پپرو"
 
 #: core/main.php:267 login/include/class-activated.php:19
 #: profile/profile.php:2343
@@ -218,7 +218,7 @@ msgstr "اطلاعات سلامت سایت"
 #: core/main.php:618
 msgctxt "login-section"
 msgid "Welcome to PeproDev Ultimate Profile"
-msgstr "به پروفایل ساز حرفه‌ای پپرو خوش آمدید"
+msgstr "به پروفایل ساز پپرو خوش آمدید"
 
 #: core/main.php:646
 msgctxt "login-section"
@@ -1363,7 +1363,7 @@ msgstr "شناسه قالب ارسال سریع یا متن پیامک حاوی 
 
 #: login/login.php:79
 msgid "PeproDev Ultimate Profile Solutions — Login"
-msgstr "پروفایل ساز حرفه‌ای پپرو — لاگین"
+msgstr "پروفایل ساز پپرو — لاگین"
 
 #: login/login.php:81
 msgid "Login Setting"
@@ -2328,8 +2328,7 @@ msgstr "پیشخوان کاربر"
 msgid ""
 "Current selected dashboard page's template should be 'PeproDev Ultimate "
 "Profile Solutions — Profile'. %s"
-msgstr ""
-"قالب صفحه پیشخوان کاربر انتخاب شده از نوع پروفایل ساز حرفه‌ای پپرو نمیباشد. %s"
+msgstr "قالب صفحه پیشخوان کاربر انتخاب شده از نوع پروفایل ساز پپرو نمیباشد. %s"
 
 #: profile/libs/general/activated.php:53
 #: profile/libs/templates/wc/my-address.php:71 profile/profile.php:1664
@@ -3503,7 +3502,7 @@ msgstr "l jS \\o\\f F Y, h:ia"
 
 #: profile/profile.php:68
 msgid "PeproDev Ultimate Profile Solutions — Profile"
-msgstr "پروفایل ساز حرفه‌ای پپرو — پروفایل"
+msgstr "پروفایل ساز پپرو — پروفایل"
 
 #: profile/profile.php:69
 msgid "Profile Design"
