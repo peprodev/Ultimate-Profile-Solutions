@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2022/02/06 17:35:29
+# @Last modified time: 2022/02/20 01:56:50
 
 if ("yes" == get_option("PeproDevUPS_Core___loginregister-activesecurity", "")){
   include_once plugin_dir_path(__FILE__) . "/include/class-login-permalink.php";
@@ -665,7 +665,7 @@ if (!class_exists("PeproDevUPS_Login")){
       ob_start();
       $uniqd = uniqid("pepro_verify_");
       $this->enqueue_shortcode_styles(array( "uniqd" => $uniqd, ));
-      if ($this->show_email_field && get_current_user_id()){
+      if (get_current_user_id()){
         ?>
         <div class="col-lg-6 col-md-12">
           <div class="card">
@@ -1124,7 +1124,7 @@ if (!class_exists("PeproDevUPS_Login")){
                     "msg"       => sprintf(__("Sending Verification failed, you can request one code every %s seconds.", "peprodev-ups"), $this->sms_expiration),
                     "is_otp"    => true,
                     "focus"     => ".mobile-verification",
-                    "show"      => ".otp-resend,.otp-changenum",
+                    "show"      => ".otp-resend, .otp-changenum, .optverify-wrap, .verification-wrap",
                     "last_attemp" => $last_attemp,
                     "cur_time"    => $this->wp_date(),
                     "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp) + $this->sms_expiration),
@@ -1284,7 +1284,7 @@ if (!class_exists("PeproDevUPS_Login")){
                             "msg"         => sprintf(__("Error Sending Verification, you can request one code every %s seconds.", "peprodev-ups"), $this->sms_expiration),
                             "is_otp"      => true,
                             "focus"       => ".mobile-verification",
-                            "show"        => ".otp-resend,.otp-changenum",
+                            "show"        => ".otp-resend, .otp-changenum, .optverify-wrap, .verification-wrap",
                             "last_attemp" => $last_attemp,
                             "cur_time"    => $this->wp_date(),
                             "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp) + $this->sms_expiration),
@@ -1404,7 +1404,7 @@ if (!class_exists("PeproDevUPS_Login")){
                         "msg"         => sprintf(__("Error Sending Verification, you can request one code every %s seconds.", "peprodev-ups"), $this->email_expiration),
                         "is_otp"      => true,
                         "focus"       => ".code-verification",
-                        "show"        => ".otp-resend,.otp-changenum",
+                        "show"        => ".otp-resend, .otp-changenum, .optverify-wrap, .verification-wrap",
                         "last_attemp" => $last_attemp,
                         "cur_time"    => $this->wp_date(),
                         "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp) + $this->email_expiration),
@@ -1544,7 +1544,7 @@ if (!class_exists("PeproDevUPS_Login")){
                         "msg"         => sprintf(__("Error Sending Verification, you can request one code every %s seconds.", "peprodev-ups"), $this->sms_expiration),
                         "is_otp"      => true,
                         "focus"       => ".mobile-verification",
-                        "show"        => ".otp-resend,.otp-changenum",
+                        "show"        => ".otp-resend, .otp-changenum, .optverify-wrap, .verification-wrap",
                         "last_attemp" => $last_attemp,
                         "cur_time"    => $this->wp_date(),
                         "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp) + $this->sms_expiration),
@@ -1659,7 +1659,7 @@ if (!class_exists("PeproDevUPS_Login")){
                         "msg"         => sprintf(__("Error Sending Verification, you can request one code every %s seconds.", "peprodev-ups"), $this->email_expiration),
                         "is_otp"      => true,
                         "focus"       => ".email-verification",
-                        "show"        => ".otp-resend,.otp-changenum",
+                        "show"        => ".otp-resend, .otp-changenum, .optverify-wrap, .verification-wrap",
                         "last_attemp" => $last_attemp,
                         "cur_time"    => $this->wp_date(),
                         "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp) + $this->email_expiration),
@@ -1785,7 +1785,7 @@ if (!class_exists("PeproDevUPS_Login")){
                         "msg"         => sprintf(__("Error Sending Verification, you can request one code every %s seconds.", "peprodev-ups"), $this->sms_expiration),
                         "is_otp"      => true,
                         "focus"       => ".mobile-verification",
-                        "show"        => ".otp-resend,.otp-changenum",
+                        "show"        => ".otp-resend, .otp-changenum, .optverify-wrap, .verification-wrap",
                         "last_attemp" => $last_attemp,
                         "cur_time"    => $this->wp_date(),
                         "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp) + $this->sms_expiration),
@@ -1871,6 +1871,22 @@ if (!class_exists("PeproDevUPS_Login")){
                   }
                   $email = sanitize_text_field(wp_unslash(strtolower($param["email"])));
                 }
+              }
+            }
+            // its otp and we have email!
+            else{
+              if ($this->show_email_field && isset($param["email"])) {
+                $param["email"] = strtolower($param["email"]);
+                if (!filter_var($param["email"], FILTER_VALIDATE_EMAIL)){
+                  $error_array['pepro_dev_login_invalid_email'] = _x("<strong>Error</strong>: The given email address is not valid.", "reg-form-error", "peprodev-ups");
+                }
+                if (!is_email($param["email"])){
+                  $error_array['pepro_dev_login_invalid_email'] = _x("<strong>Error</strong>: The given email address is not valid.", "reg-form-error", "peprodev-ups");
+                }
+                if (email_exists($param["email"])){
+                  $error_array['pepro_dev_login_email_exists'] = _x("<strong>Error</strong>: This email is already registered. Please choose another one.", "reg-form-error", "peprodev-ups");
+                }
+                $email = sanitize_text_field(wp_unslash(strtolower($param["email"])));
               }
             }
             foreach ($this->form_register_fields as $field) {
@@ -2021,7 +2037,7 @@ if (!class_exists("PeproDevUPS_Login")){
                           "msg"       => sprintf(__("<strong>Error:</strong> Sending Verification failed, you can request one code every %s seconds.", "peprodev-ups"), $this->sms_expiration),
                           "is_otp"    => true,
                           "focus"     => ".mobile-verification",
-                          "show"      => ".otp-resend,.otp-changenum",
+                          "show"      => ".otp-resend, .otp-changenum, .optverify-wrap, .verification-wrap",
                           "last_attemp" => $last_attemp,
                           "cur_time"    => $this->wp_date(),
                           "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp) + $this->sms_expiration),
@@ -2149,7 +2165,7 @@ if (!class_exists("PeproDevUPS_Login")){
                           "msg"       => sprintf(__("<strong>Error:</strong> Sending Verification failed, you can request one code every %s seconds.", "peprodev-ups"), $this->email_expiration),
                           "is_otp"    => true,
                           "focus"     => ".email-verification",
-                          "show"      => ".otp-resend,.otp-changenum",
+                          "show"      => ".otp-resend, .otp-changenum, .optverify-wrap, .verification-wrap",
                           "last_attemp" => $last_attemp,
                           "cur_time"    => $this->wp_date(),
                           "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp) + $this->email_expiration),
@@ -2326,7 +2342,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       "msg"         => sprintf(__("<strong>Error:</strong> Sending Verification failed, you can request one code every %s seconds.", "peprodev-ups"), $this->email_expiration),
                       "is_otp"      => true,
                       "focus"       => ".email-verification",
-                      "show"        => ".otp-resend,.otp-changenum",
+                      "show"        => ".otp-resend, .otp-changenum, .optverify-wrap, .verification-wrap",
                       "last_attemp" => $last_attemp,
                       "cur_time"    => $this->wp_date(),
                       "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp) + $this->email_expiration),
@@ -2472,11 +2488,12 @@ if (!class_exists("PeproDevUPS_Login")){
       }
 
       if ($this->reg_add_displayname){
-        $userdata['display_name'] = isset($params["display_name"]) && !empty($params["display_name"]) ? $userdata['first_name']." ".$userdata['last_name'] : $params["display_name"];
+        $userdata['display_name'] = $userdata['first_name']." ".$userdata['last_name'];
+        $userdata['display_name'] = isset($params["display_name"]) && !empty($params["display_name"]) ? $params["display_name"] : $userdata['display_name'];
       }
 
-      if (empty($userdata['display_name'])){ $userdata['display_name'] = __("Dear user","peprodev-ups"); }
-      if (empty($userdata['first_name'])){ $userdata['first_name']     = __("New user","peprodev-ups"); }
+      if (empty(trim($userdata['display_name']))){ $userdata['display_name'] = __("Dear user","peprodev-ups"); }
+      if (empty(trim($userdata['first_name']))){ $userdata['first_name']     = __("New user","peprodev-ups"); }
 
       $user_id = wp_insert_user($userdata);
 
@@ -2838,11 +2855,10 @@ if (!class_exists("PeproDevUPS_Login")){
         ),
       );
       // default otp-login
-      if ($this->login_mobile_otp && !$this->show_email_field){$login_fields = $mobile_fields;}
-      if ($this->login_mobile_otp && $this->show_email_field){
-        $login_fields = array_merge($login_fields, $mobile_fields);
-      }
+      if ($this->login_mobile_otp && !$this->show_email_field) $login_fields = $mobile_fields;
+      if ($this->login_mobile_otp && $this->show_email_field) $login_fields = array_merge($login_fields, $mobile_fields);
       if ($this->login_email_otp && $this->show_email_field){$login_fields = $login_mailotp;}
+      if ($this->login_mobile_otp) $login_fields = $mobile_fields;
 
       $num = 2;
       // add reCaptcha
@@ -2905,7 +2921,7 @@ if (!class_exists("PeproDevUPS_Login")){
           "is-public"   => "yes",
           "no-label"    => "no",
         ));
-        if ($this->is_email_field_req){
+        if ($this->is_email_field_req && !$this->login_mobile_otp){
           array_push($login_fields,
             array(
               "meta_name"   => "optverify",

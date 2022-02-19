@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2022/02/11 03:14:19
+# @Last modified time: 2022/02/20 02:01:23
 if (!class_exists("PeproDevUPS_Profile")) {
     class PeproDevUPS_Profile
     {
@@ -1488,9 +1488,11 @@ if (!class_exists("PeproDevUPS_Profile")) {
                       return;
                 		}
                     elseif (empty( $pass_cur ) && (!empty( $pass1 ) || !empty( $pass2 )) ){
-                      wp_send_json_error(array( "msg"=>__("Please enter your current password.", "peprodev-ups")));
-                			$save_pass = false;
-                      return;
+                      if (!wp_check_password($pass_cur, $current_user->user_pass, $current_user->ID )) {
+                        wp_send_json_error(array( "msg"=>__("Please enter your current password.", "peprodev-ups")));
+                        $save_pass = false;
+                        return;
+                      }
                 		}
                     elseif (!empty( $pass_cur ) && ($pass1 != $pass2)){
                       wp_send_json_error(array( "msg"=>__("New password and Confirm password does not match.", "peprodev-ups")));

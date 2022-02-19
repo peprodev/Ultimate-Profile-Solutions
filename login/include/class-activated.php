@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2022/02/11 03:07:41
+# @Last modified time: 2022/02/20 01:22:20
 add_thickbox();
 wp_enqueue_style("wp-color-picker");
 wp_enqueue_script("wp-color-picker");
@@ -278,7 +278,7 @@ foreach ($styleFiles as $style) {
                           <label class="w-100 row align-items-center m-0 mb-2">
                             <input autocomplete="off" type="radio" class='form-checkbox iostoggle single-required mr-2 reglogin_type' <?php checked($this->reglogin_type === "email", true);?> name="reglogin_type" value="email" /><?php esc_html_e("Using Email/Username & Password", "peprodev-ups");?>
                           </label>
-                          <label class="w-100 row align-items-center m-0 mb-2">
+                          <label class="w-100 row align-items-center m-0 mb-2 mt-4">
                             <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required mr-2 auto_login_after_reg' <?php checked( $this->auto_login_after_reg, true);?> name="auto_login_after_reg" /> <?php esc_html_e("Auto-login After Registeration","peprodev-ups");?>
                           </label>
                           <label class="w-100 row align-items-center m-0 mb-2">

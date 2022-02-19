@@ -1,7 +1,7 @@
 <?php
 
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/10/09 03:04:46
+# @Last modified time: 2022/02/20 02:03:15
 
 global $PeproDevUPS_Profile, $PeproDevUPS_Login;
 $current_user = wp_get_current_user();
@@ -52,11 +52,18 @@ $PeproDevUPS_Profile->change_dashboard_title(_x("Edit", "user-dashboard", "pepro
                           $PeproDevUPS_Profile->add_input(_x("Last Name", "edit-user", "peprodev-ups"), "lastname", "$current_user->user_lastname", "required ", "");
                         ?>
                       </div>
-                      <div class="col-lg-12 col-md-12 mt-3">
-                        <?php
-                          $PeproDevUPS_Profile->add_input(_x("Current Password", "edit-user", "peprodev-ups"), "password_current", "", 'autocomplete="off" ', "", "password");
+                      <?php
+                        // show current password if there's any
+                        if (!wp_check_password("", $current_user->user_pass, $current_user->ID )) {
                           ?>
-                      </div>
+                          <div class="col-lg-12 col-md-12 mt-3">
+                            <?php
+                              $PeproDevUPS_Profile->add_input(_x("Current Password", "edit-user", "peprodev-ups"), "password_current", "", 'autocomplete="off" ', "", "password");
+                              ?>
+                          </div>
+                          <?php
+                        }
+                      ?>
                       <div class="col-lg-6 col-md-12 mt-3">
                         <?php
                           $PeproDevUPS_Profile->add_input(_x("New Password", "edit-user", "peprodev-ups"), "password_new", "", 'autocomplete="off" ', "", "password");

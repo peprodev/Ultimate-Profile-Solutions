@@ -2,8 +2,8 @@
 Contributors: amirhosseinhpv, peprodev, blackswanlab
 Donate link: https://pepro.dev/donate/
 Tags: functionality, pepro, management, administration, profile, login, register
-Version: 2.4.4
-Stable tag: 2.4.4
+Version: 2.5.0
+Stable tag: 2.5.0
 Requires at least: 5.0
 Tested up to: 5.9
 Requires PHP: 7.2
@@ -72,6 +72,16 @@ Our professional development team is here to offer you a fully Customized-Pro ve
 1. Overview
 
 == Changelog ==
+
+= Ver. 2.5.0 | 2022-02-20/1400-12-01 =
+* Fixed showing email login when SMS OTP is turned on
+* Fixed adding email field to SMS OTP register (optional, required)
+* Fixed asking for current password when there's none!
+* Fixed not showing OTP input when change mobile/email after request
+* Fixed always showing edit email section in profile edit
+* Fixed profile font and changed to IranYekan
+* Fixed generating user name from Email, Mobile, "Dear User" when name field does not exists
+* Fixed some translation changed
 
 = Ver. 2.4.4 | 2022-02-11/1400-11-22 =
 * Fixes on Keep User Logged In forever
@@ -171,20 +181,27 @@ Our professional development team is here to offer you a fully Customized-Pro ve
 
 == Upgrade Notice ==
 
-= Ver. 2.4.3 | 2022-02-11/1400-11-22 =
+= Ver. 2.5.0 | 2022-02-20/1400-12-01 =
+* Fixed showing email login when SMS OTP is turned on
+* Fixed adding email field to SMS OTP register (optional, required)
+* Fixed asking for current password when there's none!
+* Fixed not showing OTP input when change mobile/email after request
+* Fixed always showing edit email section in profile edit
+* Fixed profile font and changed to IranYekan
+* Fixed generating user name from Email, Mobile, "Dear User" when name field does not exists
+* Fixed some translation changed
+
+= Ver. 2.4.x | 2022-02-11/1400-11-22 =
+* Backend UX Improvement
+* Backend UI Improvement
+* Added notice on after Installation
+* Added Welcome page after activating plugin
 * Fixes on Keep User Logged In forever
 * Fixes on Persian Translation
 * Fixes to keep new lines on copy shortcode
-* Added Welcome page after activating plugin
 * DEV: Enhancement for creating profile page on first-use
 * DEV: Added placeholder to test-mobile-otp field
 * DEV: Enhanced function :: get_profile_page
-
-= Ver. 2.4.0 | 2022-01-18/1400-10-28 =
-* Backend UX Improvement
-* Backend UI Improvement
-* Changed translation
-* Added notice on after Installation
 * DEV: Removed redundant lines
 * DEV: Improved toast on Profile panel
 * DEV: Fixed some CSS
