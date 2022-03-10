@@ -26,6 +26,19 @@
       show_toast(pepc._copy, "rgba(21, 139, 2, 0.8)");
     });
 
+    $(document).on("click tap", ".viewpagetab", function(e){
+      e.preventDefault();
+      var me = $(this);
+      $pageid = $("#profile_dash_page").val();
+      window.open(pepc.home + "?p=" + $pageid);
+    });
+    $(document).on("click tap", ".editpagetab", function(e){
+      e.preventDefault();
+      var me = $(this);
+      $pageid = $("#profile_dash_page").val();
+      window.open(pepc.edit.replace(/00/gi, $pageid));
+    });
+
     function copy_clipboard(data) {
       var $temp = $("<textarea>");
       $("body").append($temp);

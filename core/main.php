@@ -2,7 +2,6 @@
 # @Last modified by:   Amirhosseinhpv
 # @Last modified time: 2022/02/11 02:54:46
 namespace PeproDev;
-use PeproDev;
 if (!class_exists("PeproDevUPS_Core")){
   class PeproDevUPS_Core
   {
@@ -209,10 +208,10 @@ if (!class_exists("PeproDevUPS_Core")){
       wp_dequeue_style("us-font-awesome-duotone");
       wp_dequeue_style("font-awesome");
       wp_enqueue_style("RobotoSlabMaterialIcons",         "//fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons", array(), '1.0', 'all');
-      wp_enqueue_style("font-awesome",                    "{$this->assets_url}/fa-pro/css/all.min.css", array(), '1.0', 'all');
+      wp_enqueue_style("pd-fafa",                         PEPRODEVUPS_URL . "/core/assets/css/fonts.css");
       wp_enqueue_style("material-dashboard",              "{$this->assets_url}css/material-dashboard.min.css", array(), '2.1.0', 'all');
       wp_enqueue_style("dashboard-back",                  "{$this->assets_url}css/dashboard-backend.css", array(), '1.0', 'all');
-      wp_enqueue_style("bootstrap-select",                "{$this->assets_url}js/plugins/bootstrap-select.min.css", array(), '1.0', 'all');
+      wp_enqueue_style("bootstrap-select",                "{$this->assets_url}js/bootstrap-select.min.css", array(), '1.0', 'all');
       is_rtl() AND wp_enqueue_style("dashboard-back-rtl", "{$this->assets_url}css/rtl.css", array(), '1.0', 'all');
       add_filter( "peprocore_dashboard_nav_menuitems",    array($this, "peprocore_dashboard_nav_menuitems"));
       do_action( "peprocore_dashboard_before_initiated");
@@ -242,19 +241,14 @@ if (!class_exists("PeproDevUPS_Core")){
     }
     public function load_dashboard_after_initiated()
     {
-      global $PeproDevUPS_Login;
       // Core JS Files
       wp_enqueue_script('jquery');
-      wp_enqueue_script("popper",                     "{$PeproDevUPS_Login->assets_url}assets/popper.min.js", array( 'jquery' ), "1.6.0", true); //'1.16.0'
-      wp_enqueue_script("bootstrap-material-design",  "{$this->assets_url}js/core/bootstrap-material-design.min.js", array( 'jquery' ), "1.6.0", true); //'3.0.2'
-      wp_enqueue_script("default-passive-events",     "{$this->assets_url}js/default-passive-events.js", array( 'jquery' ), "1.6.0", true); //'1.0.10'
-      // Google Maps Plugin
-      // wp_enqueue_script("google-map", "https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE", array( 'jquery' ), '1.0.0', true);
-      // Chartist JS
-      wp_enqueue_script("chartist",         "{$this->assets_url}js/plugins/chartist.min.js", array( 'jquery' ), '0.11.0', true);
+      wp_enqueue_script("popper",                    PEPRODEVUPS_URL . "/login/assets/popper.min.js", array( 'jquery' ), "1.6.0", true); //'1.16.0'
+      wp_enqueue_script("bootstrap-material-design", "{$this->assets_url}js/bootstrap-material-design.min.js", array( 'jquery' ), "1.6.0", true); //'3.0.2'
+      wp_enqueue_script("default-passive-events",    "{$this->assets_url}js/default-passive-events.js", array( 'jquery' ), "1.6.0", true); //'1.0.10'
       // Notifications Plugin
-      wp_enqueue_script("bootstrap-notify", "{$this->assets_url}js/plugins/bootstrap-notify.js", array( 'jquery' ), '3.1.5', true);
-      wp_enqueue_script("bootstrap-select", "{$this->assets_url}js/plugins/bootstrap-select.min.js", array( 'jquery' ), '3.1.5', true);
+      wp_enqueue_script("bootstrap-notify",          "{$this->assets_url}js/bootstrap-notify.js", array( 'jquery' ), '3.1.5', true);
+      wp_enqueue_script("bootstrap-select",          "{$this->assets_url}js/bootstrap-select.min.js", array( 'jquery' ), '3.1.5', true);
       // Control Center for Material Dashboard: parallax effects, scripts for the example pages etc
       // Material Dashboard DEMO methods, don't include it in your project!
 
@@ -265,11 +259,13 @@ if (!class_exists("PeproDevUPS_Core")){
         apply_filters(
           "peprocore_dashboard_localize",
           array(
-            "ajax"    => admin_url( 'admin-ajax.php' ),
-            "_copy"   => __("Copied!", "peprodev-ups"),
+            "home"    => home_url(),
+            "edit"    => admin_url("post.php?post=00&action=edit"),
+            "ajax"    => admin_url('admin-ajax.php'),
             "folder"  => $this->assets_url,
-            "img"     => "{$this->assets_url}img/",
+            "img"     => $this->assets_url."/img/",
             "_palett" => array( '#444444', '#dd3333', '#dd9933', '#eeee22', '#81d742', '#1e73be', '#8224e3', '#ff2255', '#559999', '#99CCFF', '#00c1e8', '#F9DE0E', '#111111', '#EEEEDD' ),
+            "_copy"   => __("Copied!", "peprodev-ups"),
             "loading" => __("Please wait ...","peprodev-ups"),
           )
         )
@@ -288,7 +284,7 @@ if (!class_exists("PeproDevUPS_Core")){
           return sprintf(_x("Version %s", "footer-copyright", "peprodev-ups"), $this->version);
       }, 11);
       do_action("peprocore_before_dashboard_call");
-      include "{$this->plugin_dir}/apps/home.php";
+      include "{$this->plugin_dir}/dashboard.php";
       do_action("peprocore_after_dashboard_call");
       $tcona = ob_get_contents();
       ob_end_clean();
@@ -530,11 +526,11 @@ if (!class_exists("PeproDevUPS_Core")){
                 </div>
                 <div class="card-body">
                   <?php
-                  if ( ! class_exists( 'WP_Debug_Data' ) ) { require_once ABSPATH . 'wp-admin/includes/class-wp-debug-data.php'; }
-                  if ( ! class_exists( 'WP_Site_Health' ) ) { require_once ABSPATH . 'wp-admin/includes/class-wp-site-health.php'; }
-                  $health_check_site_status = WP_Site_Health::get_instance();
-                  WP_Debug_Data::check_for_updates();
-                  $info = WP_Debug_Data::debug_data();
+                  if ( ! class_exists( '\WP_Debug_Data' ) ) { require_once ABSPATH . 'wp-admin/includes/class-wp-debug-data.php'; }
+                  if ( ! class_exists( '\WP_Site_Health' ) ) { require_once ABSPATH . 'wp-admin/includes/class-wp-site-health.php'; }
+                  $health_check_site_status = \WP_Site_Health::get_instance();
+                  \WP_Debug_Data::check_for_updates();
+                  $info = \WP_Debug_Data::debug_data();
                   ?>
                   <div id="health-check-debug">
                     <?php

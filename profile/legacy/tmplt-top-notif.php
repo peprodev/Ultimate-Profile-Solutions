@@ -5,8 +5,8 @@
 
 
 global $PeproDevUPS_Profile, $wp;
-$url_notifications = $this->get_profile_page(["section"=>"notifications"]);
-$url_announcements = $this->get_profile_page(["section"=>"announcements"]);
+$url_notifications = $PeproDevUPS_Profile->get_profile_page(["section"=>"notifications"]);
+$url_announcements = $PeproDevUPS_Profile->get_profile_page(["section"=>"announcements"]);
 
 $number = $PeproDevUPS_Profile->get_user_notification_count(get_current_user_id());
 $notif = __("You have no new notification.", "peprodev-ups");

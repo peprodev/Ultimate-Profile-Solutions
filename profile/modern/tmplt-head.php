@@ -13,8 +13,8 @@ class header extends PeproDevUPS_Profile
     echo "<pre style='text-align: left; direction: ltr; border:1px solid indianred; padding: 1rem; color: indianred;
     display: block;z-index: 77777777777 !important;position: relative;background: white;'>".print_r($this->get_profile_page(["i"=>current_time("timestamp")]),1)."</pre>";
 
+    wp_enqueue_style("peprodev-fafa",  PEPRODEVUPS_URL . "/core/assets/css/fonts.css");
     wp_enqueue_style("peprodev-theme", "$this->modern_assets/css/modern.css", [], $this->script_version);
-    wp_enqueue_style("peprodev-fafa", "$this->modern_assets/css/all.min.css", [], $this->script_version);
 
     if (!empty($this->custom_css)) {
       wp_add_inline_style("peprodev-theme", '/*'.PHP_EOL.

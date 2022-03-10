@@ -150,7 +150,6 @@ if (!class_exists("PeproDevUPS_Profile")) {
               add_filter('show_admin_bar', '__return_false');
             }
             add_action("template_redirect", array( $this, "remove_yoast_wpseo") );
-            add_action("template_redirect", array( $this, "template_redirect"));
             add_action("admin_bar_menu",  array( $this, "admin_bar_menu_items"), 31);
             add_filter("get_avatar_url",  array( $this, "change_avatar_url"), 1, 3);
         }
@@ -167,9 +166,6 @@ if (!class_exists("PeproDevUPS_Profile")) {
             }
             exit;
           }
-        }
-        public function template_redirect()
-        {
         }
         public function get_profile_page($queryVar=null)
         {
@@ -283,6 +279,8 @@ if (!class_exists("PeproDevUPS_Profile")) {
           add_action( "wp_ajax_nopriv_{$this->id}",          array($this, "front_side_ajax_handler"));
           add_action( "wp_ajax_{$this->id}",                 array($this, "front_side_ajax_handler"));
           if (!is_admin()){
+
+            add_filter("the_content",                        array($this, "the_content"), 1);
             add_shortcode("pepro-profile",                   array($this, "peprofile_shortcode_main"));
             add_shortcode("user",                            array($this, "peprofile_shortcode_user"));
             add_shortcode("pepro-profile-url",               array($this, "peprofile_shortcode_profile_url"));
@@ -331,6 +329,10 @@ if (!class_exists("PeproDevUPS_Profile")) {
             add_filter( 'show_admin_bar', '__return_false');
           }});
 
+        }
+        public function the_content ( $content )
+        {
+          return $content;
         }
         public function peprofile_shortcodes_list($array)
         {
@@ -583,7 +585,11 @@ if (!class_exists("PeproDevUPS_Profile")) {
           global $wp;
           do_action("peprofile_before_shortcode_print", $atts, $content);
           wp_enqueue_script("jquery");
-          add_filter( "the_content", function ( $content ) { $this->peprofile_get_template_part("dash-index"); return; }, 999 );
+          add_filter( "the_content", function ( $content ) {
+            if ("peprofile-template.php" !== get_page_template_slug(get_the_id())) $this->user_modern = true;
+            $this->peprofile_get_template_part("dash-index");
+            return;
+           }, 999 );
         }
         public function peprofile_shortcode_wc_downloads($atts=array(),$content="")
         {
@@ -1095,24 +1101,24 @@ if (!class_exists("PeproDevUPS_Profile")) {
         }
         public function theme_page_templates( $post_templates, $wp_theme, $post, $post_type )
         {
-            $post_templates['peprofile-template.php'] = $this->title;
+            $post_templates['peprofile-template.php'] = __("Pepro Profile - Legacy", "peprodev-ups");
             return $post_templates;
         }
         public function template_include( $template )
         {
-            $slug = get_page_template_slug();
-            $len = strlen("peprofile-");
-            if((substr("$slug", 0, $len) === "peprofile-")) {
-                if ($theme_file = locate_template(array($slug)) ) {
-                    $template = $theme_file;
-                } else {
-                    $template = plugin_dir_path(__FILE__) . "/libs/$slug";
-                }
-            }
-            if($template == '') {
-                throw new \Exception('No template found');
-            }
-            return $template;
+          $slug = get_page_template_slug();
+          $len = strlen("peprofile-");
+          if((substr("$slug", 0, $len) === "peprofile-")) {
+              if ($theme_file = locate_template(array($slug)) ) {
+                $template = $theme_file;
+              } else {
+                $template = plugin_dir_path(__FILE__) . "/libs/general/$slug";
+              }
+          }
+          if($template == '') {
+            throw new \Exception('No template found');
+          }
+          return $template;
         }
         public function change_dashboard_title($title="")
         {
@@ -1228,8 +1234,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
             "error_validate_form" => __("Error validating form, please check marked fields.","peprodev-ups"),
             "error_parsing_data"  => __("Error parsing item data.","peprodev-ups"),
             "error_unknown_error" => __("An unknown error occurred.","peprodev-ups"),
-          ));
-
+            ));
         }
         public function notif_exist($id)
         {
@@ -2296,26 +2301,22 @@ if (!class_exists("PeproDevUPS_Profile")) {
         }
         public function filter_content($content = "", $obj = null)
         {
-          // $content = apply_filters("the_content", $content );
           return apply_filters( "peprofile_get_notifications_content", do_shortcode(stripcslashes($content)), $content, $obj);
         }
         private function enqueue_scripts_and_styles()
         {
-            wp_enqueue_style('wp-color-picker');
-            wp_enqueue_script('wp-color-picker');
-            wp_enqueue_style("fontawesome", PEPRODEVUPS_URL . "/core/assets/css/fonts.css");
-            wp_enqueue_script("select2", "{$this->assets_url}/assets/js/select2.min.js", array("jquery"), $this->current_version);
-            wp_enqueue_style("select2", "{$this->assets_url}/assets/css/select2.min.css");
-            add_filter( "peprocore_dashboard_localize", function($ar){
-              $ar["customhtml_tad"] = "{$this->activation_status}-customhtml";
-              return $ar;});
-            wp_enqueue_script("wp-color-picker-alpha", plugins_url("/assets/js/wp-color-picker-alpha.min.js", __FILE__), array("jquery"), $this->current_version);
-            wp_enqueue_script("peprodev-ups", plugins_url("/assets/js/peprocore-setting.js", __FILE__), array("jquery"), $this->current_version);
-            wp_enqueue_script("peprodev-ide", plugins_url("/assets/ide/ace.js" , __FILE__), array('jquery'), $this->current_version, true);
-            wp_enqueue_style("peprodev-ide", plugins_url("/assets/ide/ace.css" , __FILE__));
-            wp_localize_script("peprodev-ups", "pepc", array("ajax" => admin_url('admin-ajax.php'),"_copy"=> __("Copied!", "peprodev-ups")));
-            wp_enqueue_style("peprodev-ups", plugins_url("/assets/css/peprocore-backend-style.css", __FILE__), [], $this->current_version);
-            is_rtl() AND wp_enqueue_style("peprodev-ups-rtl", plugins_url("/assets/css/peprocore-backend-style.rtl.css", __FILE__), [], $this->current_version);
+          wp_enqueue_style('wp-color-picker');
+          wp_enqueue_script('wp-color-picker');
+          wp_enqueue_script("select2", "{$this->assets_url}/assets/js/select2.min.js", array("jquery"), $this->current_version);
+          wp_enqueue_style("select2", "{$this->assets_url}/assets/css/select2.min.css");
+          add_filter("peprocore_dashboard_localize", function($ar){$ar["customhtml_tad"] = "{$this->activation_status}-customhtml";return $ar;});
+          wp_enqueue_script("wp-color-picker-alpha", plugins_url("/assets/js/wp-color-picker-alpha.min.js", __FILE__), array("jquery"), $this->current_version);
+          wp_enqueue_script("peprodev-ups", plugins_url("/assets/js/peprocore-setting.js", __FILE__), array("jquery"), $this->current_version);
+          wp_enqueue_script("peprodev-ide", plugins_url("/assets/ide/ace.js" , __FILE__), array('jquery'), $this->current_version, true);
+          wp_enqueue_style("peprodev-ide", plugins_url("/assets/ide/ace.css" , __FILE__));
+          wp_localize_script("peprodev-ups", "pepc", array("ajax"=>admin_url('admin-ajax.php'),"_copy"=>__("Copied!", "peprodev-ups")));
+          wp_enqueue_style("peprodev-ups", plugins_url("/assets/css/peprocore-backend-style.css", __FILE__), [], $this->current_version);
+          is_rtl() AND wp_enqueue_style("peprodev-ups-rtl", plugins_url("/assets/css/peprocore-backend-style.rtl.css", __FILE__), [], $this->current_version);
         }
         public function display_post_states( $post_states, $post )
         {

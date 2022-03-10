@@ -45,7 +45,11 @@
                       'sort_column'      => 'menu_order, post_title',
                     );
                     $pages = wp_dropdown_pages( $dropdown_args );
-
+                    ?>
+                    <p class="mb-0 mt-2">
+                      <a href="#" class="viewpagetab"><?=__("view page in new tab", "peprodev-ups");?></a> / <a href="#" class="editpagetab"><?=__("edit page in new tab", "peprodev-ups");?></a>
+                    </p>
+                    <?php
                     $notify_user_of_page_template = sprintf(
                       __("Current selected dashboard page's template should be 'PeproDev Ultimate Profile Solutions — Profile'. %s","peprodev-ups"),
                       "<a class='btm btn btn-sm btn-danger' href='".
