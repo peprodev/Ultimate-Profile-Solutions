@@ -3,8 +3,7 @@
 # @Last modified by:   Amirhosseinhpv
 # @Last modified time: 2021/09/04 14:32:59
 
-global $PeproDevUPS_Profile, $rtl, $current_profile_url, $PeproDevUPS_Login, $wp;
-$current_profile_url = home_url( $wp->request );
+global $PeproDevUPS_Profile, $rtl, $PeproDevUPS_Login, $wp;
 wp_enqueue_style( "peporups_bootstrap",                 "{$PeproDevUPS_Login->assets_url}assets/bootstrap.min.css");
 if (is_rtl()){ wp_enqueue_style( "peporups_bootstrap",  "{$PeproDevUPS_Login->assets_url}assets/bootstrap.rtl.min.css"); }
 wp_enqueue_style( "peporups_theme",                     plugins_url("/css/theme{$rtl}.css", __FILE__), array(), "1.6.0");

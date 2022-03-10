@@ -38,7 +38,6 @@ if (!class_exists("PeproDevUPS_Profile")) {
         public $license;
         public $licenseURI;
         public $pluginURI;
-        public $current_profile_url;
         public $lang;
         public $db_slug;
         public $db_table;
@@ -58,7 +57,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
             $this->priority            = 4;
             $this->hwnd                = __CLASS__;
             $this->current_version     = "4.3.0";
-            $this->profile_assets      = plugins_url("", __FILE__);
+            $this->modern_assets       = apply_filters("peprofile_get_modern_assets_url", plugins_url("/modern", __FILE__));
             $this->assets_url          = plugins_url("/", __FILE__);
             $this->assets_url_as       = plugins_url("/assets/", __FILE__);
             $this->script_version      = current_time("timestamp");
@@ -66,7 +65,6 @@ if (!class_exists("PeproDevUPS_Profile")) {
             $this->modern_dir          = plugin_dir_path(__FILE__) . "/modern/";
             $this->instance            = $this;
             $this->file                = plugin_basename(__FILE__);
-            $this->current_profile_url = home_url( $wp->request );
             $this->icon                = "{$this->assets_url}/libs/templates/images/icon/logo.png";
             $this->setting_slug        = "profile";
             $this->db_slug             = "pc_profile";
@@ -83,7 +81,9 @@ if (!class_exists("PeproDevUPS_Profile")) {
             $this->ajax_hndlr          = array($this,"admin_side_ajax_handler");
             $this->useLD               = function_exists("sfwd_lms_has_access");
             $this->lang                = dirname(plugin_basename(__FILE__))."/languages/";
+            $this->notifs_js           = "";
             $this->custom_css          = get_option("{$this->activation_status}-css", "");
+            $this->custom_js           = get_option("{$this->activation_status}-js", "");
             $this->copyright           = sprintf(__("Copyright (c) %s Pepro Dev, All rights reserved", "peprodev-ups"), date("Y"));
             $this->setting_options     = array(
                 array(
@@ -1305,9 +1305,6 @@ if (!class_exists("PeproDevUPS_Profile")) {
                         }
                       }
 
-                      global $current_profile_url;
-                      $current_profile_url = ( isset($_POST["cprl"]) && !empty(trim($_POST["cprl"])) ) ? trim($_POST["cprl"]) : "/";
-
                       $shorts = ""; $notif = __("You have no new notification.", "peprodev-ups");
                       $number = $this->get_user_notification_count(get_current_user_id());
                       if ($number > 0){ $notif = sprintf(__("You have %s unread notifications.", "peprodev-ups"), "<span class='nunread'>$number</span>"); }
@@ -2016,7 +2013,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
         }
         public function get_user_notifications_short($user_id, $limit=4)
         {
-            global $wpdb,$current_profile_url;
+            global $wpdb;
             $notifs = "";
             $private_msgs_unseen = $wpdb->get_results($wpdb->prepare(
               "SELECT a.*, b.has_seen
@@ -2027,7 +2024,8 @@ if (!class_exists("PeproDevUPS_Profile")) {
 
             if ($private_msgs_unseen !== null) {
                 foreach ($private_msgs_unseen as $notif) {
-                    $notifs .= "<a href=\"$current_profile_url?section=notifications#view-$notif->id\" data-id=\"$notif->id\" class=\"notifi__item\">
+                    $url = $this->get_profile_page(["section"=>"notifications#view-$notif->id"]);
+                    $notifs .= "<a href=\"$url\" data-id=\"$notif->id\" class=\"notifi__item\">
                     <div class=\"$notif->color img-cir img-40\">
                     <i class=\"$notif->icon\"></i>
                     </div>
@@ -2042,7 +2040,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
         }
         public function get_user_notifications($user_id)
         {
-          global $wpdb,$current_profile_url;
+          global $wpdb;
           $private_msgs = $wpdb->get_results($wpdb->prepare(
             "SELECT a.*, b.has_seen, b.seen_first_date, b.seen_last_date
             FROM `{$this->tbl_notif}` AS a
@@ -2131,7 +2129,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
           }
         public function get_user_announcements_short($user_id, $limit=4)
         {
-          global $wpdb, $current_profile_url; $notifs = "";
+          global $wpdb; $notifs = "";
           $private_msgs = $wpdb->get_results("SELECT * FROM `{$this->tbl_notif}` WHERE users_list = 'all' and date_scheduled <= NOW() ORDER BY date_scheduled DESC");
           if ($private_msgs !== null) {
             $arrayIDs = []; foreach ($private_msgs as $key => $value) { $arrayIDs[] = $value->id; }
@@ -2148,7 +2146,8 @@ if (!class_exists("PeproDevUPS_Profile")) {
             foreach ($private_msgs as $notif) {
               if (!in_array($notif->id, $arrayIDsSeen) && $cur <= $limit ){
                 $cur ++;
-                $notifs .= "<a href=\"$current_profile_url?section=announcements#view-$notif->id\" data-id=\"$notif->id\" class=\"notifi__item\">
+                $url = $this->get_profile_page(["section"=>"announcements#view-$notif->id"]);
+                $notifs .= "<a href=\"$url\" data-id=\"$notif->id\" class=\"notifi__item\">
                 <div class=\"$notif->color img-cir img-40\">
                 <i class=\"$notif->icon\"></i>
                 </div>
@@ -2164,7 +2163,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
         }
         public function get_user_announcements($user_id)
         {
-          global $wpdb, $current_profile_url;
+          global $wpdb;
 
           $private_msgs = $wpdb->get_results("SELECT * FROM `{$this->tbl_notif}` WHERE users_list = 'all' and date_scheduled <= NOW() ORDER BY date_scheduled DESC");
           if ($private_msgs !== null) {
@@ -2507,7 +2506,8 @@ if (!class_exists("PeproDevUPS_Profile")) {
               wp_dequeue_style( "font-awesome" );
 
               global $PeproDevUPS_ProfileStripslashesNotifsJs;
-              $PeproDevUPS_ProfileStripslashesNotifsJs = stripslashes($notifs->js);
+              $this->notifs_js = stripslashes($notifs->js);
+              $PeproDevUPS_ProfileStripslashesNotifsJs = $this->notifs_js;
 
               $this->change_dashboard_title($notifs->title);
               ?>

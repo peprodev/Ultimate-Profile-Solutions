@@ -201,7 +201,6 @@ $ = jQuery;!function(e,t){"object"==typeof exports&&"object"==typeof module?modu
         data: {
           action: _i18n.td,
           integrity: _i18n.nonce,
-          cprl: _i18n.current_profile_url,
           wparam: "profile",
           lparam: "read-notif",
           dparam: nID,
@@ -257,7 +256,7 @@ $ = jQuery;!function(e,t){"object"==typeof exports&&"object"==typeof module?modu
       const size = (this.files[0].size / 1024 / 1024).toFixed(0);
       $(".alert-box").html("").removeClass("error success info");
       if (size > 2 ) {
-        $(".alert-box").html(_i18n.max_size_err.replace(/#fs#/gi, `(${size} MB)`)).addClass("error");
+        $(".alert-box").html(_i18n.max_size_err.replace(/#fs#/gi, `${size} MB`)).addClass("error");
         $("#attachment").val("");
         return false;
       }
@@ -293,7 +292,6 @@ $ = jQuery;!function(e,t){"object"==typeof exports&&"object"==typeof module?modu
       form_data.append("file"       , file_data);
       form_data.append("action"     , _i18n.td);
       form_data.append("integrity"  , _i18n.nonce);
-      form_data.append("cprl"       , _i18n.current_profile_url);
       form_data.append("wparam"     , "profile");
       form_data.append("lparam"     , "edit-profile");
       form_data.append("dparam"     , JSON.stringify(nID));

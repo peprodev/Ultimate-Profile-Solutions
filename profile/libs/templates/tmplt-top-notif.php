@@ -4,9 +4,9 @@
 # @Last modified time: 2021/09/15 14:51:30
 
 
-global $PeproDevUPS_Profile , $wp , $current_profile_url;
-$current_page = home_url($wp->request);
-$current_profile_url = $current_page;
+global $PeproDevUPS_Profile, $wp;
+$url_notifications = $this->get_profile_page(["section"=>"notifications"]);
+$url_announcements = $this->get_profile_page(["section"=>"announcements"]);
 
 $number = $PeproDevUPS_Profile->get_user_notification_count(get_current_user_id());
 $notif = __("You have no new notification.", "peprodev-ups");
@@ -33,7 +33,7 @@ if ($Anumber > 0) {  $Anotif = sprintf(__("You have %s unread announcements.", "
         } ?>
 
         <div class="notifi__footer">
-            <a href="<?php echo "{$current_page}/?section=notifications";?>"><?php esc_html_e("All notifications","peprodev-ups");?></a>
+            <a href="<?=$url_notifications;?>" ><?php esc_html_e("All notifications","peprodev-ups");?></a>
         </div>
     </div>
 </div>
@@ -52,8 +52,6 @@ if ($Anumber > 0) {  $Anotif = sprintf(__("You have %s unread announcements.", "
           echo $PeproDevUPS_Profile->get_user_announcements_short(get_current_user_id(),4);
         } ?>
 
-        <div class="notifi__footer">
-            <a href="<?php echo "{$current_page}/?section=announcements";?>"><?php esc_html_e("All announcements","peprodev-ups");?></a>
-        </div>
+        <div class="notifi__footer"><a href="<?=$url_announcements;?>" ><?php esc_html_e("All announcements","peprodev-ups");?></a></div>
     </div>
 </div>

@@ -22,7 +22,7 @@
  */
 
 defined( 'ABSPATH' ) || exit;
-global $current_page;
+global $current_page, $PeproDevUPS_Profile;
 $current_page = empty( $current_page ) ? 1 : absint( $current_page );
 $customer_orders = wc_get_orders(
 	apply_filters(
@@ -82,14 +82,12 @@ do_action( 'woocommerce_before_account_orders', $has_orders ); ?>
 								<?php elseif ( 'order-actions' === $column_id ) : ?>
 									<?php
 									$actions = wc_get_account_orders_actions( $order );
-									global $current_profile_url;
 									if ( ! empty( $actions ) ) {
-
 										foreach ( $actions as $key => $action ) { // phpcs:ignore WordPress.WP.GlobalVariablesOverride.OverrideProhibited
 											switch ($key) {
 												case 'view':
 													$icon = '<i class="fa fa-eye"></i>';
-													$action['url'] = "$current_profile_url?section=orders&view=" . $order->get_id();
+													$action['url'] = $PeproDevUPS_Profile->get_profile_page(["section"=>"orders", "view"=>$order->get_id()]);
 													break;
 												case 'puice_pdf':
 													$icon = '<i class="fa fa-file-pdf"></i>';

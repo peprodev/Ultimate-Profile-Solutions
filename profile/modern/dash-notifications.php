@@ -3,7 +3,7 @@
 # @Last modified by:   Amirhosseinhpv
 # @Last modified time: 2021/09/15 14:49:26
 
-global $PeproDevUPS_Profile,$current_profile_url;
+global $PeproDevUPS_Profile;
 $PeproDevUPS_Profile->change_dashboard_title(_x("Notifications","user-dashboard","peprodev-ups"));
 
 $html = $PeproDevUPS_Profile->get_user_notifications(get_current_user_id());

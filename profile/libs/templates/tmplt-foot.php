@@ -3,7 +3,7 @@
 # @Last modified by:   Amirhosseinhpv
 # @Last modified time: 2021/09/17 21:06:51
 
-global $PeproDevUPS_Profile, $current_profile_url, $PeproDevUPS_Login, $PeproDevUPS_ProfileStripslashesNotifsJs;
+global $PeproDevUPS_Profile, $PeproDevUPS_Login, $PeproDevUPS_ProfileStripslashesNotifsJs;
 wp_enqueue_script( "jquery" );
 wp_enqueue_script( "peprodev-popper",    "{$PeproDevUPS_Login->assets_url}assets/popper.min.js", array("jquery"));
 wp_enqueue_script( "peprodev-bootstrap", "{$PeproDevUPS_Login->assets_url}assets/bootstrap.min.js", array("jquery"));
@@ -16,9 +16,8 @@ wp_localize_script( "peprodev--custom",  "_i18n", array(
   "prductnames"         => __("Product name", "peprodev-ups"),
   "wishlistempty"       => __("No products added to the wishlist", "peprodev-ups"),
   "fillreq"             => __("Please fill out all required fields.", "peprodev-ups"),
-  "max_size_err"        => sprintf(__("Error, File is too large. Maximum file size is %s MB","peprodev-ups"), "2"),
+  "max_size_err"        => __("Error, file is too large. Maximum allowed file size is #fs#","peprodev-ups"),
   "nonce"               => wp_create_nonce( "pepro_profile" ),
-  "current_profile_url" => $current_profile_url,
 ) );
 wp_enqueue_script("peprodev--custom");
 $js1 = wp_unslash(get_option("{$PeproDevUPS_Profile->activation_status}-js"));

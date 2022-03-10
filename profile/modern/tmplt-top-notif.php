@@ -4,9 +4,8 @@
 # @Last modified time: 2021/09/15 14:51:30
 
 
-global $PeproDevUPS_Profile , $wp , $current_profile_url;
+global $PeproDevUPS_Profile , $wp;
 $current_page = home_url($wp->request);
-$current_profile_url = $current_page;
 
 $number = $PeproDevUPS_Profile->get_user_notification_count(get_current_user_id());
 $notif = __("You have no new notification.", "peprodev-ups");
