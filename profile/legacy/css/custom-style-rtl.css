@@ -8,22 +8,8 @@
  * @Copyright: Copyright © Amirhosseinhpv (https://hpv.im), all rights reserved.
  */
 
-
-@font-face {
-  font-family: dana;
-  font-style: normal;
-  font-weight: bold;
-  src: url("fonts/woff/iranyekanwebbold.woff") format('woff');
-}
-@font-face {
-  font-family: dana;
-  font-style: normal;
-  font-weight: normal;
-  src: url("fonts/woff/iranyekanwebregular.woff") format('woff');
-}
-
 body {
-  font-family: dana,Tahoma,sans-serif !important;
+  font-family: IranYekan,Tahoma,sans-serif !important;
 }
 
 .au-inbox-wrap.show-chat-box {

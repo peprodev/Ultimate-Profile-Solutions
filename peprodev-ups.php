@@ -32,6 +32,8 @@ if (!class_exists("PeproDevUPS")) {
         public function __construct()
         {
             define('PEPRODEVUPS', '3.0.0');
+            define('PEPRODEVUPS_DIR', plugin_dir_path(__FILE__));
+            define('PEPRODEVUPS_URL', plugins_url("", __FILE__));
 
             load_plugin_textdomain("peprodev-ups", false, dirname(plugin_basename(__FILE__))."/languages/");
             load_plugin_textdomain("wpserveur-hide-login", false, dirname(plugin_basename(__FILE__))."/languages/");

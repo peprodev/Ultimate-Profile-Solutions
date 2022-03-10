@@ -7,19 +7,6 @@
  * @License:GPLv2
  * @Copyright:Copyright © 2020 Amirhosseinhpv,All rights reserved.
  */
-@font-face {
-	font-family: IranYekan;
-  font-style: normal;
-  font-weight: bold;
-  src: url("fonts/woff/iranyekanwebbold.woff") format('woff');
-}
-
-@font-face {
-	font-family: IranYekan;
-  font-style: normal;
-  font-weight: normal;
-  src: url("fonts/woff/iranyekanwebregular.woff") format('woff');
-}
 
 li,
 ol,

@@ -52,40 +52,41 @@ if (!class_exists("PeproDevUPS_Profile")) {
         public function __construct()
         {
             global $wpdb, $wp;
-            $this->id                  = "peprocoreprofile";
-            $this->td                  = "peprodev-ups";
-            $this->priority            = 4;
-            $this->hwnd                = __CLASS__;
-            $this->current_version     = "4.3.0";
-            $this->modern_assets       = apply_filters("peprofile_get_modern_assets_url", plugins_url("/modern", __FILE__));
-            $this->assets_url          = plugins_url("/", __FILE__);
-            $this->assets_url_as       = plugins_url("/assets/", __FILE__);
-            $this->script_version      = current_time("timestamp");
-            $this->assets_dir          = plugin_dir_path(__FILE__);
-            $this->modern_dir          = plugin_dir_path(__FILE__) . "/modern/";
-            $this->instance            = $this;
-            $this->file                = plugin_basename(__FILE__);
-            $this->icon                = "{$this->assets_url}/libs/templates/images/icon/logo.png";
-            $this->setting_slug        = "profile";
-            $this->db_slug             = "pc_profile";
-            $this->db_table            = "{$wpdb->prefix}pepro_core_profile";
-            $this->tbl_subscribers     = "{$wpdb->prefix}peprofile_subscribers";
-            $this->tbl_notif           = "{$this->db_table}_notif";
-            $this->tbl_sections        = "{$this->db_table}_sections";
-            $this->menu_label          = __("Profile Design", "peprodev-ups");
-            $this->page_label          = __("Profile Setting", "peprodev-ups");
-            $this->title               = __("PeproDev Ultimate Profile Solutions — Profile", "peprodev-ups");
-            $this->icon_html           = "<i class=\"material-icons\">account_circle</i>";
-            $this->activation_status   = "PeproDevUPS_Core___{$this->setting_slug}";
-            $this->html_wrapper        = array($this,"htmlwrapper");
-            $this->ajax_hndlr          = array($this,"admin_side_ajax_handler");
-            $this->useLD               = function_exists("sfwd_lms_has_access");
-            $this->lang                = dirname(plugin_basename(__FILE__))."/languages/";
-            $this->notifs_js           = "";
-            $this->custom_css          = get_option("{$this->activation_status}-css", "");
-            $this->custom_js           = get_option("{$this->activation_status}-js", "");
-            $this->copyright           = sprintf(__("Copyright (c) %s Pepro Dev, All rights reserved", "peprodev-ups"), date("Y"));
-            $this->setting_options     = array(
+            $this->id                = "peprocoreprofile";
+            $this->td                = "peprodev-ups";
+            $this->priority          = 4;
+            $this->hwnd              = __CLASS__;
+            $this->current_version   = "4.3.0";
+            $this->modern_assets     = apply_filters("peprofile_get_modern_assets_url", plugins_url("/modern", __FILE__));
+            $this->assets_url        = plugins_url("/", __FILE__);
+            $this->assets_url_as     = plugins_url("/assets/", __FILE__);
+            $this->script_version    = current_time("timestamp");
+            $this->assets_dir        = plugin_dir_path(__FILE__);
+            $this->modern_dir        = plugin_dir_path(__FILE__) . "/modern/";
+            $this->instance          = $this;
+            $this->file              = plugin_basename(__FILE__);
+            $this->icon              = "{$this->assets_url}/legacy/images/logo.png";
+            $this->setting_slug      = "profile";
+            $this->db_slug           = "pc_profile";
+            $this->db_table          = "{$wpdb->prefix}pepro_core_profile";
+            $this->tbl_subscribers   = "{$wpdb->prefix}peprofile_subscribers";
+            $this->tbl_notif         = "{$this->db_table}_notif";
+            $this->tbl_sections      = "{$this->db_table}_sections";
+            $this->menu_label        = __("Profile Design", "peprodev-ups");
+            $this->page_label        = __("Profile Setting", "peprodev-ups");
+            $this->title             = __("PeproDev Ultimate Profile Solutions — Profile", "peprodev-ups");
+            $this->icon_html         = "<i class=\"material-icons\">account_circle</i>";
+            $this->activation_status = "PeproDevUPS_Core___{$this->setting_slug}";
+            $this->html_wrapper      = array($this,"htmlwrapper");
+            $this->ajax_hndlr        = array($this,"admin_side_ajax_handler");
+            $this->useLD             = function_exists("sfwd_lms_has_access");
+            $this->lang              = dirname(plugin_basename(__FILE__))."/languages/";
+            $this->notifs_js         = "";
+            $this->user_modern       = false;
+            $this->custom_css        = get_option("{$this->activation_status}-css", "");
+            $this->custom_js         = get_option("{$this->activation_status}-js", "");
+            $this->copyright         = sprintf(__("Copyright (c) %s Pepro Dev, All rights reserved", "peprodev-ups"), date("Y"));
+            $this->setting_options   = array(
                 array(
                   "name" => "{$this->db_slug}_general",
                   "data" => array(
@@ -1075,13 +1076,13 @@ if (!class_exists("PeproDevUPS_Profile")) {
                     break;
 
                 // Check modern theme location
-                } elseif (file_exists(trailingslashit($this->modern_dir) . $template_name) ) {
+                } elseif ($this->user_modern && file_exists(trailingslashit($this->modern_dir) . $template_name) ) {
                     $located = trailingslashit($this->modern_dir) . $template_name;
                     break;
 
                 // Check default theme in profile
-                } elseif (file_exists(trailingslashit("$this->assets_dir/libs/templates") . $template_name) ) {
-                    $located = trailingslashit("$this->assets_dir/libs/templates") . $template_name;
+                } elseif (file_exists(trailingslashit("$this->assets_dir/legacy") . $template_name) ) {
+                    $located = trailingslashit("$this->assets_dir/legacy") . $template_name;
                     break;
                 }
             }
@@ -1168,21 +1169,18 @@ if (!class_exists("PeproDevUPS_Profile")) {
         {
             $this->remove_us_css();
             $this->enqueue_scripts_and_styles();
-            wp_enqueue_style(__CLASS__."simple-fapro", plugins_url("libs/templates/fonts/fa-pro/css/all.css", __FILE__));
             include plugin_dir_path(__FILE__) . "/libs/general/activated.php";
         }
         public function htmlwrapper_shortcodes()
         {
             $this->remove_us_css();
             $this->enqueue_scripts_and_styles();
-            wp_enqueue_style(__CLASS__."simple-fapro", plugins_url("libs/templates/fonts/fa-pro/css/all.css", __FILE__));
             include plugin_dir_path(__FILE__) . "/libs/general/shortcodes_panel.php";
         }
         public function htmlwrapper_sections()
         {
           $this->remove_us_css();
           $this->enqueue_scripts_and_styles();
-          wp_enqueue_style(__CLASS__."simple-fapro", plugins_url("libs/templates/fonts/fa-pro/css/all.css", __FILE__));
           include plugin_dir_path(__FILE__) . "/libs/general/sections_panel.php";
           wp_enqueue_script(__CLASS__."date",              plugins_url("/assets/js/persian-date.min.js", __FILE__), array("jquery"), "3.0.0", true);
           wp_enqueue_script(__CLASS__."datepicker",        plugins_url("/assets/js/persian-datepicker.min.js", __FILE__), array("jquery"), "3.0.0", true);
@@ -1202,7 +1200,6 @@ if (!class_exists("PeproDevUPS_Profile")) {
         {
           $this->remove_us_css();
           $this->enqueue_scripts_and_styles();
-          wp_enqueue_style(__CLASS__."simple-fapro", plugins_url("libs/templates/fonts/fa-pro/css/all.css", __FILE__));
           include plugin_dir_path(__FILE__) . "/libs/general/notifs_panel.php";
           wp_enqueue_script(__CLASS__."date",              plugins_url("/assets/js/persian-date.min.js", __FILE__), array("jquery"), "3.0.0", true);
           wp_enqueue_script(__CLASS__."datepicker",        plugins_url("/assets/js/persian-datepicker.min.js", __FILE__), array("jquery"), "3.0.0", true);
@@ -2306,27 +2303,19 @@ if (!class_exists("PeproDevUPS_Profile")) {
         {
             wp_enqueue_style('wp-color-picker');
             wp_enqueue_script('wp-color-picker');
-
+            wp_enqueue_style("fontawesome", PEPRODEVUPS_URL . "/core/assets/css/fonts.css");
             wp_enqueue_script("select2", "{$this->assets_url}/assets/js/select2.min.js", array("jquery"), $this->current_version);
             wp_enqueue_style("select2", "{$this->assets_url}/assets/css/select2.min.css");
             add_filter( "peprocore_dashboard_localize", function($ar){
               $ar["customhtml_tad"] = "{$this->activation_status}-customhtml";
               return $ar;});
-            wp_enqueue_script(__CLASS__."s", plugins_url("/assets/js/wp-color-picker-alpha.min.js", __FILE__), array("jquery"), $this->current_version);
-            wp_enqueue_script(__CLASS__, plugins_url("/assets/js/peprocore-setting.js", __FILE__), array("jquery"), $this->current_version);
-
-
-            wp_enqueue_script(__CLASS__ . "-ide",     plugins_url("/assets/ide/ace.js"        , __FILE__),        array('jquery'), $this->current_version, true);
-            // wp_enqueue_script(__CLASS__ . "-ide-wc",  plugins_url("/assets/ide/css_worker.js" , __FILE__), array('jquery'), $this->current_version, true);
-            wp_enqueue_style(__CLASS__ . "-ide",      plugins_url("/assets/ide/ace.css"       , __FILE__));
-
-
-            wp_localize_script(__CLASS__, "pepc", array(
-              "ajax" => admin_url('admin-ajax.php'),
-              "_copy"   => __("Copied!", "peprodev-ups"),
-            ));
-            wp_enqueue_style(__CLASS__, plugins_url("/assets/css/peprocore-backend-style.css", __FILE__), array(), $this->current_version);
-            is_rtl() AND wp_enqueue_style(__CLASS__."rtl", plugins_url("/assets/css/peprocore-backend-style.rtl.css", __FILE__), array(), $this->current_version);
+            wp_enqueue_script("wp-color-picker-alpha", plugins_url("/assets/js/wp-color-picker-alpha.min.js", __FILE__), array("jquery"), $this->current_version);
+            wp_enqueue_script("peprodev-ups", plugins_url("/assets/js/peprocore-setting.js", __FILE__), array("jquery"), $this->current_version);
+            wp_enqueue_script("peprodev-ide", plugins_url("/assets/ide/ace.js" , __FILE__), array('jquery'), $this->current_version, true);
+            wp_enqueue_style("peprodev-ide", plugins_url("/assets/ide/ace.css" , __FILE__));
+            wp_localize_script("peprodev-ups", "pepc", array("ajax" => admin_url('admin-ajax.php'),"_copy"=> __("Copied!", "peprodev-ups")));
+            wp_enqueue_style("peprodev-ups", plugins_url("/assets/css/peprocore-backend-style.css", __FILE__), [], $this->current_version);
+            is_rtl() AND wp_enqueue_style("peprodev-ups-rtl", plugins_url("/assets/css/peprocore-backend-style.rtl.css", __FILE__), [], $this->current_version);
         }
         public function display_post_states( $post_states, $post )
         {
