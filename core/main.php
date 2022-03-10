@@ -207,12 +207,13 @@ if (!class_exists("PeproDevUPS_Core")){
       wp_dequeue_script("us-core");
       wp_dequeue_style("us-font-awesome-duotone");
       wp_dequeue_style("font-awesome");
-      wp_enqueue_style("RobotoSlabMaterialIcons",         "//fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons", array(), '1.0', 'all');
-      wp_enqueue_style("pd-fafa",                         PEPRODEVUPS_URL . "/core/assets/css/fonts.css");
-      wp_enqueue_style("material-dashboard",              "{$this->assets_url}css/material-dashboard.min.css", array(), '2.1.0', 'all');
-      wp_enqueue_style("dashboard-back",                  "{$this->assets_url}css/dashboard-backend.css", array(), '1.0', 'all');
-      wp_enqueue_style("bootstrap-select",                "{$this->assets_url}js/bootstrap-select.min.css", array(), '1.0', 'all');
-      is_rtl() AND wp_enqueue_style("dashboard-back-rtl", "{$this->assets_url}css/rtl.css", array(), '1.0', 'all');
+      wp_enqueue_style("RobotoSlabMaterialIcons",         "//fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons", [], '1.0');
+      wp_enqueue_style("pd-fafo",                         PEPRODEVUPS_URL . "/core/assets/css/fonts.css", [], $this->script_version);
+      wp_enqueue_style("pd-fafa",                         PEPRODEVUPS_URL . "/core/assets/css/all.min.css", [], $this->script_version);
+      wp_enqueue_style("material-dashboard",              $this->assets_url . "css/material-dashboard.min.css", [], $this->script_version);
+      wp_enqueue_style("dashboard-back",                  $this->assets_url . "css/dashboard-backend.css", [], $this->script_version);
+      wp_enqueue_style("bootstrap-select",                $this->assets_url . "js/bootstrap-select.min.css", [], $this->script_version);
+      is_rtl() AND wp_enqueue_style("dashboard-back-rtl", $this->assets_url . "css/rtl.css", [], $this->script_version);
       add_filter( "peprocore_dashboard_nav_menuitems",    array($this, "peprocore_dashboard_nav_menuitems"));
       do_action( "peprocore_dashboard_before_initiated");
     }

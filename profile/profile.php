@@ -57,12 +57,10 @@ if (!class_exists("PeproDevUPS_Profile")) {
             $this->priority          = 4;
             $this->hwnd              = __CLASS__;
             $this->current_version   = "4.3.0";
-            $this->modern_assets     = apply_filters("peprofile_get_modern_assets_url", plugins_url("/modern", __FILE__));
             $this->assets_url        = plugins_url("/", __FILE__);
             $this->assets_url_as     = plugins_url("/assets/", __FILE__);
             $this->script_version    = current_time("timestamp");
             $this->assets_dir        = plugin_dir_path(__FILE__);
-            $this->modern_dir        = plugin_dir_path(__FILE__) . "/modern/";
             $this->instance          = $this;
             $this->file              = plugin_basename(__FILE__);
             $this->icon              = "{$this->assets_url}/legacy/images/logo.png";
@@ -83,6 +81,10 @@ if (!class_exists("PeproDevUPS_Profile")) {
             $this->lang              = dirname(plugin_basename(__FILE__))."/languages/";
             $this->notifs_js         = "";
             $this->user_modern       = false;
+            $this->modern_dir        = plugin_dir_path(__FILE__) . "/modern/";
+            $this->modern_assets     = apply_filters("peprofile_get_modern_assets_url", plugins_url("/modern", __FILE__));
+            $this->use_front_fa      = true; // use font-awesome font in front-end
+            $this->use_front_fo      = false; // use farsi-iranyekan font in front-end
             $this->custom_css        = get_option("{$this->activation_status}-css", "");
             $this->custom_js         = get_option("{$this->activation_status}-js", "");
             $this->copyright         = sprintf(__("Copyright (c) %s Pepro Dev, All rights reserved", "peprodev-ups"), date("Y"));
@@ -301,11 +303,13 @@ if (!class_exists("PeproDevUPS_Profile")) {
             add_filter( "template_include",                  array($this, "template_include"));
             add_filter( "theme_page_templates",              array($this, "theme_page_templates"), 10, 4);
           }
+          add_filter( "body_class",                          array($this, "body_class"), 1, 1);
           add_filter( "peprofile_dashboard_slugs",           array($this, "peprofile_dashboard_slugs"), 10, 1);
           add_filter( "display_post_states",                 array($this, "display_post_states"), 10, 2);
           add_filter( "peprofile_get_nav_items",             array($this, "peprofile_get_nav_items"),10,1);
           add_filter( "peprofile_get_nav_items",             array($this, "peprofile_get_custom_user_nav_items"),11,1);
           add_action( "peprofile_get_template_part_nav-bar", array($this, "peprofile_get_template_part_nav"));
+
           $this->peprofile_custom_user_nav_items_hndlr();
           $this->CreateDatabase();
           $this->add_special_post();
@@ -320,15 +324,35 @@ if (!class_exists("PeproDevUPS_Profile")) {
                   vc_add_shortcode_param("{$this->id}_about", array($this,'vc_add_pepro_about'), plugins_url("/assets/js/vc.init.js", __FILE__));
               }
           }
-          add_action( 'admin_init',                    function(){ if (!current_user_can('edit_posts') && ( !wp_doing_ajax() ) ) {
-            $url = apply_filters("peprofile_admin_redirect_url_if_no_access",home_url());
+          add_action( 'admin_init',        array( $this, "redirect_url_if_no_access"), 1 );
+          add_action( 'after_setup_theme', array( $this, "after_setup_theme"));
+
+        }
+        public function redirect_url_if_no_access()
+        {
+          if (!current_user_can('edit_posts') && ( !wp_doing_ajax() ) ) {
+            $url = apply_filters("peprofile_admin_redirect_url_if_no_access", home_url());
             wp_safe_redirect( $url );
-            exit; } }, 1 );
-          add_action( 'after_setup_theme',             function(){ if (!current_user_can('edit_posts')  && !is_admin()) {
+            exit;
+          }
+        }
+        public function after_setup_theme()
+        {
+          if (!current_user_can('edit_posts')  && !is_admin()) {
             show_admin_bar(false);
             add_filter( 'show_admin_bar', '__return_false');
-          }});
-
+          }
+        }
+        public function body_class( $classes )
+        {
+          global $post;
+          if ( is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'pepro-profile') ) {
+            wp_enqueue_script( 'wpdocs-script');
+            $current = isset($_GET["section"]) ? "section-" . sanitize_text_field(trim($_GET["section"])) : "";
+            $classez = (array) apply_filters("peprofile_body_class", ["peprodev-ups", $current]);
+            $classes = array_merge( $classes, $classez);
+          }
+          return $classes;
         }
         public function the_content ( $content )
         {
@@ -2322,11 +2346,13 @@ if (!class_exists("PeproDevUPS_Profile")) {
         {
             $slug = get_page_template_slug($post);
             $len = strlen("peprofile-");
+
             if((substr("$slug", 0, $len) === "peprofile-")) {
-                // $post_states[] = __("Pepro Profile Template", "peprodev-ups");
+              $post_states["peprodev_ups"] = "<span class='pepro-profile-legacy-dashboard'>".__("Pepro Profile - Legacy Dashboard", "peprodev-ups")."</span>";
             }
+
             if (get_option("{$this->activation_status}-profile-dash-page","") == $post->ID){
-              $post_states[] = __("User Dashboard Page", "peprodev-ups");
+              $post_states["peprodev_ups"] = "<span class='pepro-profile-modern-dashboard'>".__("Pepro Profile - Modern Dashboard", "peprodev-ups")."</span>";
             }
 
             return $post_states;
@@ -2535,12 +2561,12 @@ if (!class_exists("PeproDevUPS_Profile")) {
         }
         public function peprofile_get_template_part_nav()
         {
-            global $wp;
-            $ssection = isset($_GET['section']) ? sanitize_text_field(trim($_GET['section'])) : "home";
-            foreach ($this->peprofile_get_nav_items_array() as $key => $value) {
-                echo "<li data-ref='".esc_attr($key)."' class='item-priority-".esc_attr($value["priority"])."'><a href='".esc_attr($value["url"])."'>".wp_kses_post($value["title"])."</a></li>";
-            }
-            echo "<script>function makeactiveli(e){var divs = document.querySelectorAll(`[data-ref='".esc_html($ssection)."']`), i;for (i = 0; i < divs.length; ++i) {divs[i].className = divs[i].className + ' active';}} window.onload = makeactiveli; makeactiveli(); setTimeout(function () { makeactiveli() }, 500);</script>";
+          global $wp;
+          $ssection = isset($_GET['section']) ? sanitize_text_field(trim($_GET['section'])) : "home";
+          foreach ($this->peprofile_get_nav_items_array() as $key => $value) {
+              echo "<li data-ref='".esc_attr($key)."' class='item-priority-".esc_attr($value["priority"])."'><a href='".esc_attr($value["url"])."'>".wp_kses_post($value["title"])."</a></li>";
+          }
+          echo "<script>function makeactiveli(e){var divs = document.querySelectorAll(`[data-ref='".esc_html($ssection)."']`), i;for (i = 0; i < divs.length; ++i) {divs[i].className = divs[i].className + ' active';}} window.onload = makeactiveli; makeactiveli(); setTimeout(function () { makeactiveli() }, 500);</script>";
         }
         public function peprofile_dashboard_slugs($oldArray=array())
         {
@@ -3156,12 +3182,11 @@ if (!class_exists("PeproDevUPS_Profile")) {
               'post_content'  => '[pepro-profile]',
               'post_name'     => 'profile',
               'post_status'   => 'publish',
-              'page_template' => 'peprofile-template.php',
+              'page_template' => '',
               'comment_status'=> 'closed',
             );
             $post_id = wp_insert_post( $profile_template );
             if(!is_wp_error($post_id)){
-              update_post_meta( $post_id, '_wp_page_template', 'peprofile-template.php' );
               update_option("{$this->activation_status}-profile-dash-page", $post_id);
               update_option("{$this->activation_status}-profile-dash-page-created", "yes");
             }
