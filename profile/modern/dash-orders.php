@@ -4,7 +4,6 @@
 # @Last modified time: 2021/09/15 14:49:39
 
 global $PeproDevUPS_Profile;
-$PeproDevUPS_Profile->change_dashboard_title(_x("Orders","user-dashboard","peprodev-ups"));
 ?>
 <div class="container-fluid">
   <div class="row">

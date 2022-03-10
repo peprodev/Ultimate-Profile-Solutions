@@ -80,7 +80,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
             $this->useLD             = function_exists("sfwd_lms_has_access");
             $this->lang              = dirname(plugin_basename(__FILE__))."/languages/";
             $this->notifs_js         = "";
-            $this->user_modern       = false;
+            $this->user_modern       = true;
             $this->modern_dir        = plugin_dir_path(__FILE__) . "/modern/";
             $this->modern_assets     = apply_filters("peprofile_get_modern_assets_url", plugins_url("/modern", __FILE__));
             $this->use_front_fa      = true; // use font-awesome font in front-end
@@ -281,7 +281,6 @@ if (!class_exists("PeproDevUPS_Profile")) {
           add_action( "wp_ajax_nopriv_{$this->id}",          array($this, "front_side_ajax_handler"));
           add_action( "wp_ajax_{$this->id}",                 array($this, "front_side_ajax_handler"));
           if (!is_admin()){
-
             add_filter("the_content",                        array($this, "the_content"), 1);
             add_shortcode("pepro-profile",                   array($this, "peprofile_shortcode_main"));
             add_shortcode("user",                            array($this, "peprofile_shortcode_user"));
@@ -309,6 +308,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
           add_filter( "peprofile_get_nav_items",             array($this, "peprofile_get_nav_items"),10,1);
           add_filter( "peprofile_get_nav_items",             array($this, "peprofile_get_custom_user_nav_items"),11,1);
           add_action( "peprofile_get_template_part_nav-bar", array($this, "peprofile_get_template_part_nav"));
+          add_filter( "pre_get_document_title",              array($this, "change_wp_title"));
 
           $this->peprofile_custom_user_nav_items_hndlr();
           $this->CreateDatabase();
@@ -327,6 +327,19 @@ if (!class_exists("PeproDevUPS_Profile")) {
           add_action( 'admin_init',        array( $this, "redirect_url_if_no_access"), 1 );
           add_action( 'after_setup_theme', array( $this, "after_setup_theme"));
 
+        }
+        public function change_wp_title()
+        {
+          return $this->get_title() . " &#8211; " . get_the_title();
+        }
+        public function get_title()
+        {
+          $this->cur_slug = isset($_GET['section']) ? sanitize_text_field(trim($_GET['section'])) : "home";
+          foreach ($this->peprofile_get_nav_items_array() as $key => $value) {
+              if ($this->cur_slug == $key){
+                return wp_kses($value["raw_title"], "", "");
+              }
+          }
         }
         public function redirect_url_if_no_access()
         {
@@ -609,11 +622,14 @@ if (!class_exists("PeproDevUPS_Profile")) {
           global $wp;
           do_action("peprofile_before_shortcode_print", $atts, $content);
           wp_enqueue_script("jquery");
-          add_filter( "the_content", function ( $content ) {
-            if ("peprofile-template.php" !== get_page_template_slug(get_the_id())) $this->user_modern = true;
+          if ($this->user_modern) {
             $this->peprofile_get_template_part("dash-index");
-            return;
-           }, 999 );
+            $txt = (new \PeproDev\dashboard)->handle_body();
+            return $txt;
+          }
+          else{
+            add_filter( "the_content", function ( $content ) { $this->peprofile_get_template_part("dash-index"); return; }, 999 );
+          }
         }
         public function peprofile_shortcode_wc_downloads($atts=array(),$content="")
         {
@@ -1146,14 +1162,8 @@ if (!class_exists("PeproDevUPS_Profile")) {
         }
         public function change_dashboard_title($title="")
         {
-            $title = apply_filters(
-                "peprofile_default_title", sprintf(
-                    ("%s — %s"),
-                    (!empty(trim($title)) ? trim($title) : _x("Dashboard", "user-dashboard", "peprodev-ups")),
-                    get_bloginfo("name")
-                )
-            );
-            echo "<script>document.title = '".esc_html( $title )."';</script>";
+          $title = apply_filters( "peprofile_default_title", sprintf( ("%s — %s"), (!empty(trim($title)) ? trim($title) : _x("Dashboard", "user-dashboard", "peprodev-ups")), get_bloginfo("name") ) );
+          echo "<script>document.title = '".esc_html( $title )."';</script>";
         }
         /* Woocommerce tempalate overwrite hooks
         */
@@ -2524,8 +2534,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
               global $PeproDevUPS_ProfileStripslashesNotifsJs;
               $this->notifs_js = stripslashes($notifs->js);
               $PeproDevUPS_ProfileStripslashesNotifsJs = $this->notifs_js;
-
-              $this->change_dashboard_title($notifs->title);
+              if (!$this->user_modern) $this->change_dashboard_title($notifs->title);
               ?>
               <style media="screen">
                 /* Inline CSS @ Pepro Profile // https://pepro.dev/ */
@@ -2546,6 +2555,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
           $array = apply_filters( "peprofile_get_nav_items", array());
           // sort navigation items based on priority
           foreach ($array as $notif_id => $notif) {
+            $array[$notif_id]["raw_title"] = strip_tags($array[$notif_id]["title"]);
             if (isset($notif["built_in"]) && true == $notif["built_in"]){
               $priority = get_option( "peprofile_builtin_{$notif_id}_priority", false );
               $array[$notif_id]["priority"] = ($priority && !empty($priority)) ? $priority : $notif["priority"];

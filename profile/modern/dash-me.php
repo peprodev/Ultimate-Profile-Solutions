@@ -6,7 +6,6 @@ global $PeproDevUPS_Profile, $PeproDevUPS_Login;
 $current_user = wp_get_current_user();
 $avatar_url   = get_avatar_url( get_current_user_id(), array("size"=> 250,));
 $user_id      = get_current_user_id();
-$PeproDevUPS_Profile->change_dashboard_title(_x("Profile","user-dashboard","peprodev-ups"));
 ?>
 <div class="container-fluid">
   <div class="row">

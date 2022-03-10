@@ -5,7 +5,6 @@
 
 global $PeproDevUPS_Profile, $PeproDevUPS_Login;
 $current_user = wp_get_current_user();
-$PeproDevUPS_Profile->change_dashboard_title(_x("Edit", "user-dashboard", "peprodev-ups"));
 ?>
 
 <div class="container-fluid">

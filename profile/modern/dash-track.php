@@ -4,7 +4,6 @@
 
 global $PeproDevUPS_Profile, $wp;
 $current_page = $_SERVER['REQUEST_URI'];
-$PeproDevUPS_Profile->change_dashboard_title(_x("Order Tracking","user-dashboard","peprodev-ups"));
 $PeproDevUPS_Profile->dashboard_add_css($PeproDevUPS_Profile->get_wc_asset_url( 'assets/css/woocommerce-layout.css' ));
 $PeproDevUPS_Profile->dashboard_add_css($PeproDevUPS_Profile->get_wc_asset_url( 'assets/css/woocommerce-smallscreen.css' ));
 $PeproDevUPS_Profile->dashboard_add_css($PeproDevUPS_Profile->get_wc_asset_url( 'assets/css/woocommerce.css' ));

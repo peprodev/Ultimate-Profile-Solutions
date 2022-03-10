@@ -4,7 +4,6 @@
 # @Last modified time: 2021/09/15 14:47:43
 
 global $PeproDevUPS_Profile;
-$PeproDevUPS_Profile->change_dashboard_title(_x("My Courses","user-dashboard","peprodev-ups"));
 do_action( 'wp_head' );
 ?>
 <div class="container-fluid">

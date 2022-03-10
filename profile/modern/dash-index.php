@@ -15,6 +15,7 @@ class dashboard extends PeproDevUPS_Profile
   }
   public function handle_body()
   {
+    ob_start();
     // remove wp-seo
     if (class_exists("WPSEO_Options")){
       $front_end = YoastSEO()->classes->get( Yoast\WP\SEO\Integrations\Front_End_Integration::class );
@@ -35,29 +36,38 @@ class dashboard extends PeproDevUPS_Profile
       </pdaside>
       <pdmain>
         <?php
+        // user is NOT logged-in
         if (!get_current_user_id()){
           $this->peprofile_get_template_part("dash", "loggedout");
         }
+        // user is logged-in
         else{
           $allowed_slugs_whitelist = array_unique(apply_filters( "peprofile_dashboard_slugs", array("edit","me")));
+          // requested slug is not allowed
           if (empty($this->cur_slug) || !in_array($this->cur_slug, $allowed_slugs_whitelist)){
             $this->peprofile_get_template_part("dash","home");
           }
+          // requested slug has force-action
           else{
             if (has_action("peprofile_dashboard_content_{$this->cur_slug}_force")){
               do_action("peprofile_dashboard_content_{$this->cur_slug}_force");
             }
+            // requested slug has template-file
             else{
+              // if it's woocommerce view order
               if ( "orders" == $this->cur_slug && isset($_GET['view']) && !empty(trim($_GET['view']))){
-                $located_requested_slug_template = $this->peprofile_get_template_part("dash", "orders-view");
+                $located_template = $this->peprofile_get_template_part("dash", "orders-view");
               }
+              // if is normal slug with template file
               else{
-                $located_requested_slug_template = $this->peprofile_get_template_part("dash", $this->cur_slug);
+                $located_template = $this->peprofile_get_template_part("dash", $this->cur_slug);
               }
-              if (!$located_requested_slug_template){
+              if (!$located_template){
+                // if no template found but we have hooked-action
                 if (has_action("peprofile_dashboard_content_{$this->cur_slug}")){
                   do_action("peprofile_dashboard_content_{$this->cur_slug}");
                 }
+                // if no template found, no hooked, show home dashboard
                 else{
                   $this->peprofile_get_template_part("dash","home");
                 }
@@ -69,6 +79,9 @@ class dashboard extends PeproDevUPS_Profile
       </pdmain>
     </pdwrapper>
     <?php
+    $htmloutput = ob_get_contents();
+    ob_end_clean();
+    return $htmloutput;
   }
   public function wp_enqueue_scripts()
   {

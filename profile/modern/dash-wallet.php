@@ -5,7 +5,6 @@
 
 
 global $PeproDevUPS_Profile;
-$PeproDevUPS_Profile->change_dashboard_title(_x("Wallet", "user-dashboard", "peprodev-ups"));
 ?>
 <div class="container-fluid">
   <div class="row">

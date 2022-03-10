@@ -9,7 +9,6 @@
 
 
 global $PeproDevUPS_Profile;
-$PeproDevUPS_Profile->change_dashboard_title(_x("View Order","user-dashboard","peprodev-ups"));
 ?>
 <div class="container-fluid">
   <div class="row">
