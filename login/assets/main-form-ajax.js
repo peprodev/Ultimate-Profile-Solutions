@@ -1,6 +1,6 @@
 /**
  * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2022/01/03 10:33:13
+ * @Last modified time: 2022/02/23 16:11:52
  * resendtime
  */
 jQuery.noConflict();
@@ -596,7 +596,7 @@ jQuery.noConflict();
         });
       });
 
-      $(document).on("change keyup focus", `#${_pepro_dev.instance} form :input`, function(e) {
+      $(document).on("change keyup focus refresh", `#${_pepro_dev.instance} form :input`, function(e) {
         val = $(this).val();
         if ($.trim(val) !== "") {
           $(this).addClass("filled");
@@ -1029,6 +1029,10 @@ jQuery.noConflict();
         });
       });
 
+      setTimeout(function () {
+        $(`#${_pepro_dev.instance} form :input`).trigger("refresh");
+      }, 500);
+
 
       // document.querySelectorAll("[data-error-text]").forEach(function(e){
         // 	e.setCustomValidity(e.attributes["data-error-text"].value);
@@ -1152,6 +1156,7 @@ jQuery.noConflict();
       }
     }
     function resizeReCaptcha() {
+      return false;
       var width = $('.g-recaptcha').parent().width();
       if (width < 400 && width > 100 ){
         var scale = width / 302;

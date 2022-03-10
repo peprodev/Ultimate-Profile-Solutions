@@ -2,7 +2,8 @@
 
 # @Last modified by:   Amirhosseinhpv
 # @Last modified time: 2021/09/04 14:49:03
-
+namespace PeproDev;
+use PeproDev;
 define( 'PEPROCORELOGINSLUGCHANGERBASENAMME', plugin_basename( __FILE__ ) );
 class PeproCoreLoginSlugChangerClass {
 	// use Singleton;

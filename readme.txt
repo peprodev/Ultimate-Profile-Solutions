@@ -73,6 +73,10 @@ Our professional development team is here to offer you a fully Customized-Pro ve
 
 == Changelog ==
 
+= Ver. 2.6.0 =
+* Compatible with *Nextend Social Login* and dedicated Settings on Login/Registration section
+* Fixed showing popup header/footer custom content
+
 = Ver. 2.5.0 | 2022-02-20/1400-12-01 =
 * Fixed showing email login when SMS OTP is turned on
 * Fixed adding email field to SMS OTP register (optional, required)

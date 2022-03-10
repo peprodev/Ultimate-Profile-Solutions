@@ -3,7 +3,8 @@
 # @Last modified by:   Amirhosseinhpv
 # @Last modified time: 2021/09/02 14:30:52
 
-namespace PeproDev\PeproCore\RegLogin;
+namespace PeproDev;
+use PeproDev;
 class peproSendSMS
 {
     public function __construct()

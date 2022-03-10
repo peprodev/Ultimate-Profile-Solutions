@@ -1,11 +1,12 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2022/02/20 01:56:50
+# @Last modified time: 2022/02/23 16:52:46
+namespace PeproDev;
+use PeproDev;
 
 if ("yes" == get_option("PeproDevUPS_Core___loginregister-activesecurity", "")){
   include_once plugin_dir_path(__FILE__) . "/include/class-login-permalink.php";
 }
-
 if (!class_exists("PeproDevUPS_Login")){
   class PeproDevUPS_Login
   {
@@ -45,6 +46,8 @@ if (!class_exists("PeproDevUPS_Login")){
     public $title;
     public $show_password_field;
     public $auto_login_after_reg;
+    public $auto_activate_nsl;
+    public $auto_add_nsl;
     public $floating_input_label;
     public $no_popup_alert;
     public $verify_email;
@@ -66,7 +69,7 @@ if (!class_exists("PeproDevUPS_Login")){
     {
       global $wpdb;
       $this->db_table = "{$wpdb->prefix}peprofile_subscribers";
-      if (class_exists("PeproCoreLoginSlugChangerClass")){new PeproCoreLoginSlugChangerClass;}
+      if (class_exists("PeproCoreLoginSlugChangerClass")){new \PeproCoreLoginSlugChangerClass;}
       $this->priority               = 3;
       $this->assets_url             = plugins_url("/", __FILE__);
       $this->assets_dir             = plugin_dir_path(__FILE__);
@@ -105,6 +108,8 @@ if (!class_exists("PeproDevUPS_Login")){
       $this->copyright              = sprintf(__("Copyright (c) %s Pepro Dev. Group, All rights reserved","peprodev-ups"), date("Y"));
       $this->reglogin_type          = get_option("{$this->save_prefix}-reglogin_type");
       $this->auto_login_after_reg   = "yes"    == get_option("{$this->save_prefix}-auto_login_after_reg");
+      $this->auto_activate_nsl      = "yes"    == get_option("{$this->save_prefix}-auto_activate_nsl");
+      $this->auto_add_nsl           = "yes"    == get_option("{$this->save_prefix}-auto_add_nsl");
       $this->floating_input_label   = "yes"    == get_option("{$this->save_prefix}-floating_input_label");
       $this->no_popup_alert         = "yes"    == get_option("{$this->save_prefix}-no_popup_alert");
       $this->login_mobile_otp       = "mobile" == $this->reglogin_type;
@@ -157,6 +162,7 @@ if (!class_exists("PeproDevUPS_Login")){
       add_action("wp_ajax_nopriv_pepro_reglogin",     array( $this, "handel_ajax_req"));
       add_action("register_form",                     array( $this, "register_form" ));
       add_action("user_new_form",                     array( $this, "register_form_admin" ));
+      add_action("nsl_login",                         array( $this, "nsl_login" ), 10, 2);
       add_action("user_register",                     array( $this, "user_register" ));
       add_action("edit_user_created_user",            array( $this, "user_register" ));
       add_action("show_user_profile",                 array( $this, "show_profile_custom_fields" ), 10, 3);
@@ -206,8 +212,6 @@ if (!class_exists("PeproDevUPS_Login")){
       require_once plugin_dir_path(__FILE__) . "/include/class-smsir.php";
       require_once plugin_dir_path(__FILE__) . "/include/class-kavenegar.php";
 
-      $this->smsir = new \PeproDev\PeproCore\RegLogin\peproSendSMS;
-      $this->smsir = new \PeproDev\PeproCore\RegLogin\peproKavenegarSMS;
       $this->CreateDatabase();
 
     }
@@ -227,6 +231,14 @@ if (!class_exists("PeproDevUPS_Login")){
           `extra_info` TEXT,
           PRIMARY KEY id (id)
         ) $charset_collate;");
+      }
+    }
+    // auto-activate email if user signed in using Nextend Social Login plugin
+    public function nsl_login($user_id, $provider)
+    {
+      if ($this->auto_activate_nsl) {
+        update_user_meta($user_id, "pepro_user_is_email_verified", "yes");
+        update_user_meta($user_id, "pepro_user_is_email_verified_by", $provider);
       }
     }
     public function shortcode__sms_subscription($atts=array(), $content="")
@@ -849,7 +861,11 @@ if (!class_exists("PeproDevUPS_Login")){
             ),
           );
       $array["pepro-login-popup"] = array(
-            "sample" => "[pepro-login-popup button='Open Login']".PHP_EOL."[pepro-login-popup trigger='#popup']<a id='popup' href='#'>Login/Register</a>",
+            "sample" => "[pepro-login-popup button='Open Login']".PHP_EOL.
+            "[pepro-login-popup trigger='#popup']".PHP_EOL.
+            "1. <a href='#' id='popup' class='mybutton'>Login/Register</a>".PHP_EOL.
+            "2. <a href='#' id='popup' class='mybutton active-login'>Open Login</a>".PHP_EOL.
+            "3. <a href='#' id='popup' class='mybutton active-register'>Open Register</a>",
             "title"  => __("Login/Register Popup form","peprodev-ups"),
             "syntax" => array(
               "trigger"      => __("A jQuery selector to trigger popup","peprodev-ups"),
@@ -913,12 +929,17 @@ if (!class_exists("PeproDevUPS_Login")){
       $uniqd = uniqid("pepro_reg_login_");
       $this->enqueue_shortcode_styles(array("uniqd" => $uniqd, "trigger" => $trigger, ));
       echo '<div class="pepro-login-reg-container" id="'.esc_attr($uniqd).'" data-pepro-reglogin="'.esc_attr($uniqd).'">';
-      echo wp_unslash(get_option("{$this->save_prefix}-headerhtml"));
+      $headerhtml = wp_unslash(get_option("{$this->save_prefix}-headerhtml"));
+      $footerhtml = wp_unslash(get_option("{$this->save_prefix}-footerhtml"));
+      if ($this->auto_add_nsl) {
+        $after = "<div class='peprodev_ndscl_login'>[nextend_social_login]</div>" . $after;
+      }
       if (!is_user_logged_in()){
-        echo "$before";
         ?>
           <!-- PeproDev Ultimate Profile Solutions Login Form -->
           <form novalidate id="pepro-login-inline" class="pepro-login-reg <?=$this->form_class . ("login" === $active?" inline ":"");?>" method="post">
+            <div class='peprodev-form-heading'><?=do_shortcode($headerhtml);?></div>
+            <div class='peprodev-form-head'><?=do_shortcode($before);?></div>
             <h6 style="margin-bottom: 1rem; border-bottom: 1px solid #ccc;padding: 0 0 1rem 0;"><?php echo (!empty($title) ? $title : __("Login", "peprodev-ups"));?></h6>
             <div id="login_error"></div>
             <?php
@@ -940,6 +961,8 @@ if (!class_exists("PeproDevUPS_Login")){
                 if (get_option('users_can_register')){?><a class="switch-form-register"  href="javascript:;"><?php esc_html_e("Register", "peprodev-ups");?></a><?php }
               ?>
             </div>
+            <div class='peprodev-form-foot'><?=do_shortcode($after);?></div>
+            <div class='peprodev-form-footing'><?=do_shortcode($footerhtml);?></div>
           </form>
           <?php
             // form register
@@ -947,6 +970,8 @@ if (!class_exists("PeproDevUPS_Login")){
               ?>
                 <!-- PeproDev Ultimate Profile Solutions Register Form -->
                 <form novalidate id="pepro-reg-inline" class="pepro-login-reg <?=$this->form_class . ("register" === $active?" inline ":"");?>" method="post">
+                  <div class='peprodev-form-heading'><?=do_shortcode($headerhtml);?></div>
+                  <div class='peprodev-form-head'><?=do_shortcode($before);?></div>
                   <h6 style="margin-bottom: 1rem; border-bottom: 1px solid #ccc;padding: 0 0 1rem 0;"><?php echo (!empty($reg_title) ? $reg_title : __("Register", "peprodev-ups"));?></h6>
                   <div id="login_error"></div>
                   <?php
@@ -966,6 +991,8 @@ if (!class_exists("PeproDevUPS_Login")){
                     <a href="javascript:;" style="display: none;" class="otp-resend"><?php printf(__("Resend Code in (%s)", "peprodev-ups"), 60);?></a>
                     <a class="switch-form-login" href="javascript:;"><?php esc_html_e("Back to Login", "peprodev-ups");?></a>
                   </div>
+                  <div class='peprodev-form-foot'><?=do_shortcode($after);?></div>
+                  <div class='peprodev-form-footing'><?=do_shortcode($footerhtml);?></div>
                 </form>
               <?php
             }
@@ -974,6 +1001,8 @@ if (!class_exists("PeproDevUPS_Login")){
               ?>
                 <!-- PeproDev Ultimate Profile Solutions Reset Password Form -->
                 <form novalidate id="pepro-pass-inline" class="pepro-login-reg <?=$this->form_class . ("resetpass" === $active?" inline ":"");?>" method="post">
+                  <div class='peprodev-form-heading'><?=do_shortcode($headerhtml);?></div>
+                  <div class='peprodev-form-head'><?=do_shortcode($before);?></div>
                   <h6 style="margin-bottom: 1rem; border-bottom: 1px solid #ccc;padding: 0 0 1rem 0;"><?php echo (!empty($reset_title) ? $reset_title : __("Recover Password", $this->td));?></h6>
                   <div id="login_error"></div>
                   <?php
@@ -998,12 +1027,11 @@ if (!class_exists("PeproDevUPS_Login")){
                     <a href="javascript:;" style="display: none;" class="otp-resend"><?php printf(__("Resend Code in (%s)", "peprodev-ups"), 60);?></a>
                     <a class="switch-form-login" href="javascript:;"><?php esc_html_e("Back to Login", "peprodev-ups");?></a>
                   </div>
+                  <div class='peprodev-form-foot'><?=do_shortcode($after);?></div>
+                  <div class='peprodev-form-footing'><?=do_shortcode($footerhtml);?></div>
                 </form>
               <?php
             }
-          ?>
-        <?php
-        echo "$after";
       }
       else{
         if (!empty($contnent)){
@@ -1015,7 +1043,6 @@ if (!class_exists("PeproDevUPS_Login")){
           }
         }
       }
-      echo wp_unslash(get_option("{$this->save_prefix}-footerhtml"));
       echo '</div>';
       $htmloutput = ob_get_contents();
       ob_end_clean();
@@ -1044,7 +1071,7 @@ if (!class_exists("PeproDevUPS_Login")){
       $popupid = uniqid("pepro-reglogin--");
 
       echo "<div style='display: none;' data-trigger-ref='$trigger' class='pepro-regpepro-login-popup-wrapper'>{$before_popup}".
-        $this->shortcode__pepro_login_form(array(
+          $this->shortcode__pepro_login_form(array(
             "before"    => $before,
             "after"     => $after,
             "trigger"   => $trigger,
@@ -1052,10 +1079,8 @@ if (!class_exists("PeproDevUPS_Login")){
             "title"     => $title,
             "reg_title" => $reg_title,
             "reset_title" => $reset_title,
-            "loggedout" => "no",
-          ), $contnent).
-        "{$after_popup}</div>
-      {$extras}";
+            "loggedout" => "no"), $contnent).
+          "{$after_popup}</div>{$extras}";
 
       $htmloutput = ob_get_contents();
       ob_end_clean();
@@ -3095,6 +3120,7 @@ if (!class_exists("PeproDevUPS_Login")){
         "label_class"     => "",
         "user_id"         => false,
         "skip_recaptcha"  => false,
+        "skip_req"        => false,
         "isourprofile"    => false,
         "skip_profile"    => false,
         ));
@@ -3138,9 +3164,11 @@ if (!class_exists("PeproDevUPS_Login")){
           "verification" => "",
         ));
 
-        if (!empty(trim($field["placeholder"]))){$row_class .= " has-placeholder ";}
-        if ("select" == $field["type"]){$row_class .= " has-dropdown ";}
-        if ("button" != $field["type"]){$row_class .= " {$field["type"]}";}
+        if (!empty(trim($field["placeholder"]))) $row_class .= " has-placeholder ";
+        if ("select" == $field["type"]) $row_class .= " has-dropdown ";
+        if ("button" != $field["type"]) $row_class .= " {$field["type"]}";
+        if (true == $skip_req) $field["is-required"] = "no";
+        if (true == $skip_req) $row_class .= " required-field ";
 
         switch ($field["type"]) {
 
@@ -3922,65 +3950,6 @@ if (!class_exists("PeproDevUPS_Login")){
     }
     public function registration_errors_admin( $errors, $update, $user )
     {
-      foreach ($this->get_register_fields() as $field) {
-        switch ($field["type"]) {
-          case 'recaptcha':
-            // skip
-          break;
-          case 'tel':
-          case 'mobile':
-            if ("yes" == $field["is-required"] && empty(trim($_POST[$field["meta_name"]])) ){
-              $errors->add("pepro_dev_login_{$field["meta_name"]}", sprintf(_x("<strong>Error:</strong> Please enter %s.", "reg-form-error", "peprodev-ups"), $field["title"]) );
-            }
-
-            $valid_mobile = $this->clean_mobile_number($_POST[$field["meta_name"]], $field["meta_name"]);
-
-            // $this->error_log_dump($valid_mobile, "validate_before_save ~> start");
-
-            if(!empty(trim($_POST[$field["meta_name"]])) && false == $valid_mobile){
-
-              // $this->error_log_dump($valid_mobile, "validate_before_save ~> not valid");
-
-              $errors->add("pepro_dev_login_{$field["meta_name"]}--invalid", _x("<strong>Error:</strong> Please enter a valid mobile number.", "reg-form-error", "peprodev-ups"));
-            }
-
-            if(!empty(trim($_POST[$field["meta_name"]])) && false != $valid_mobile){
-
-              // $this->error_log_dump($valid_mobile, "validate_before_save ~> is valid");
-
-              $found_prev_user = (array) $this->get_users_by_mobile($valid_mobile);
-
-              // $this->error_log_dump($found_prev_user, "validate_before_save ~> associated users");
-
-              if (!empty($found_prev_user)){
-                $foundusers = [];
-                foreach ($found_prev_user as $key => $value) { $foundusers[] = "<a href='".admin_url("user-edit.php?user_id=$value")."'>ID #$value</a>"; }
-
-                // $this->error_log_dump(false, "validate_before_save ~> found prev users");
-
-                if (count($found_prev_user) == 1 && in_array((string) $user->ID, $found_prev_user) ){
-                  // $this->error_log_dump(false, "validate_before_save ~> we are the only one in list, FINE!");
-                }
-                else{
-
-                  // $this->error_log_dump(false, "validate_before_save ~> cur_user is not in list or is not alone!");
-
-                  $err = sprintf(_x("<strong>Error:</strong> This mobile number is currently in use by %s.", "reg-form-error", "peprodev-ups"), implode(" / ", $foundusers));
-                  $errors->add("pepro_dev_login_{$field["meta_name"]}-duplicate", $err);
-
-
-                }
-              }
-            }
-
-          break;
-          default:
-            if ("yes" == $field["is-required"] && empty(trim($_POST[$field["meta_name"]])) ){
-                $errors->add("pepro_dev_login_{$field["meta_name"]}", sprintf(_x("<strong>Error:</strong> Please enter %s.", "reg-form-error", "peprodev-ups"), $field["title"]) );
-            }
-          break;
-        }
-      }
       if ($this->hide_username_field){
         if(isset($errors->errors['empty_username'])){
           unset($errors->errors['empty_username']);
@@ -4158,11 +4127,17 @@ if (!class_exists("PeproDevUPS_Login")){
     {
       if ( 'add-new-user' !== $operation ) {return;}
       $fields = $this->printout_fields(array(
+        "skip_req"        => true,
         "skip_not_public" => true,
         "skip_recaptcha"  => true,
       ));
       if (!empty($fields)){
-        echo "<h3>".__("Personal Information","peprodev-ups")."</h3><table class='form-table'>$fields</table>";
+        echo "<h3>".__("Personal Information","peprodev-ups")."</h3>
+        <p>".__("Fields marked with red asterisk (*) are required, but because you are administrator you can skip them.","peprodev-ups")."</p>
+        <table class='form-table'>$fields</table>";
+        ?>
+        <style media="screen">.required-field label::after {content: " *";color: red;}</style>
+        <?php
       }
     }
     public function admin_init()
@@ -4189,6 +4164,8 @@ if (!class_exists("PeproDevUPS_Login")){
             "pepro-profile-redirection-fileds"                    => '[{"role": "everyone", "url": "{profile}", "text": "'.__("Profile","peprodev-ups").'", "login": "yes", "register": "yes", "logout": "no" }]',
             "{$this->save_prefix}-reglogin_type"                  => "email",
             "{$this->save_prefix}-auto_login_after_reg"           => "yes",
+            "{$this->save_prefix}-auto_activate_nsl"              => "yes",
+            "{$this->save_prefix}-auto_add_nsl"                   => "yes",
             "{$this->save_prefix}-floating_input_label"           => "yes",
             "{$this->save_prefix}-no_popup_alert"                 => "no",
             "{$this->save_prefix}-_regdef_passwords"              => "yes",
@@ -4239,10 +4216,10 @@ if (!class_exists("PeproDevUPS_Login")){
       }
       add_filter( "login_link_separator",function () {return get_option("{$this->save_prefix}-link-separator"," | ");});
       add_action( "login_head", function () {
-        echo do_shortcode(get_option("{$this->save_prefix}-headerhtml"));
+        // echo do_shortcode(get_option("{$this->save_prefix}-headerhtml"));
       });
       add_action( "login_footer", function () {
-        echo do_shortcode(get_option("{$this->save_prefix}-footerhtml"));
+        // echo do_shortcode(get_option("{$this->save_prefix}-footerhtml"));
       });
 
       if (isset($_GET["bulk_useremail_approve"]) && !empty($_GET["bulk_useremail_approve"]) && is_admin())
@@ -4559,8 +4536,8 @@ if (!class_exists("PeproDevUPS_Login")){
               if(isset($_POST["dparam"]["loginslug"]) && !empty($_POST["dparam"]["loginslug"])) { update_option("whl_page", $_POST["dparam"]["loginslug"]);}
               if(isset($_POST["dparam"]["redirectslug"]) && !empty($_POST["dparam"]["redirectslug"])) { update_option("whl_redirect_admin", $_POST["dparam"]["redirectslug"]);}
               $data = "force-style";        if(isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])){ update_option("{$this->save_prefix}-wp", sanitize_textarea_field($_POST["dparam"][$data])); }
-              $data = "html-header";        if(isset($_POST["dparam"][$data])) { update_option("{$this->save_prefix}-headerhtml", sanitize_textarea_field($_POST["dparam"][$data]));}
-              $data = "html-footer";        if(isset($_POST["dparam"][$data])) { update_option("{$this->save_prefix}-footerhtml", sanitize_textarea_field($_POST["dparam"][$data]));}
+              $data = "html-header";        if(isset($_POST["dparam"][$data])) { update_option("{$this->save_prefix}-headerhtml", ($_POST["dparam"][$data]));}
+              $data = "html-footer";        if(isset($_POST["dparam"][$data])) { update_option("{$this->save_prefix}-footerhtml", ($_POST["dparam"][$data]));}
               $data = "redirection_fileds"; if(isset($_POST["dparam"][$data])) { update_option("pepro-profile-redirection-fileds", (wp_filter_nohtml_kses($_POST["dparam"][$data])));}
               $data = "register_fileds";    if(isset($_POST["dparam"][$data])) { update_option("pepro-profile-register-fileds", (wp_filter_nohtml_kses($_POST["dparam"][$data])));}
 
@@ -4583,6 +4560,8 @@ if (!class_exists("PeproDevUPS_Login")){
                 "customcss",
                 "show_password_field",
                 "auto_login_after_reg",
+                "auto_activate_nsl",
+                "auto_add_nsl",
                 "floating_input_label",
                 "no_popup_alert",
                 "smsir_message",

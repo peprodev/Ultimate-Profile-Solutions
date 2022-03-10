@@ -262,13 +262,13 @@ foreach ($styleFiles as $style) {
 
               <div class="row">
 
-                <div class="col-12">
+                <div class="col-6">
                   <div class="card m mb-0">
                     <div class="card-body">
                       <div class="fields--tools">
-                        <p class="text-bold"><?php esc_html_e("Login/Registeration Type", "peprodev-ups");?></p>
 
                         <div class="save_checkboxes">
+                          <p class="text-bold"><?php esc_html_e("Login/Registeration Type", "peprodev-ups");?></p>
                           <label class="w-100 row align-items-center m-0 mb-2">
                             <input autocomplete="off" type="radio" class='form-checkbox iostoggle single-required mr-2 reglogin_type' <?php checked($this->reglogin_type === "mobile", true);?> name="reglogin_type" value="mobile" /><?php esc_html_e("Using Mobile OTP", "peprodev-ups");?>
                           </label>
@@ -278,14 +278,33 @@ foreach ($styleFiles as $style) {
                           <label class="w-100 row align-items-center m-0 mb-2">
                             <input autocomplete="off" type="radio" class='form-checkbox iostoggle single-required mr-2 reglogin_type' <?php checked($this->reglogin_type === "email", true);?> name="reglogin_type" value="email" /><?php esc_html_e("Using Email/Username & Password", "peprodev-ups");?>
                           </label>
+                          <p class="text-bold mt-4"><?php esc_html_e("Form Label and Toast", "peprodev-ups");?></p>
                           <label class="w-100 row align-items-center m-0 mb-2 mt-4">
-                            <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required mr-2 auto_login_after_reg' <?php checked( $this->auto_login_after_reg, true);?> name="auto_login_after_reg" /> <?php esc_html_e("Auto-login After Registeration","peprodev-ups");?>
-                          </label>
-                          <label class="w-100 row align-items-center m-0 mb-2">
                             <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required mr-2 floating_input_label' <?php checked( $this->floating_input_label, true);?> name="floating_input_label" /> <?php esc_html_e("Use floating form labels","peprodev-ups");?>
                           </label>
                           <label class="w-100 row align-items-center m-0 mb-2">
-                            <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required mr-2 no_popup_alert' <?php checked( $this->no_popup_alert, true);?> name="no_popup_alert" /> <?php esc_html_e("Don't use Popup after Login/Register","peprodev-ups");?>
+                            <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required mr-2 no_popup_alert' <?php checked( $this->no_popup_alert, true);?> name="no_popup_alert" /> <?php esc_html_e("Use Toast instead of Popup message","peprodev-ups");?>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="card m mb-0">
+                    <div class="card-body">
+                      <div class="fields--tools">
+                        <div class="save_checkboxes">
+                          <p class="text-bold"><?php esc_html_e("Login/Registeration Modules", "peprodev-ups");?></p>
+                          <label class="w-100 row align-items-center m-0 mb-2">
+                            <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required mr-2 auto_login_after_reg' <?php checked( $this->auto_login_after_reg, true);?> name="auto_login_after_reg" /> <?php esc_html_e("Auto-login After Registeration","peprodev-ups");?>
+                          </label>
+                          <p class="text-bold mt-4">Nextend Social Login</p>
+                          <label class="w-100 row align-items-center m-0 mb-2">
+                            <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required mr-2 auto_activate_nsl' <?php checked( $this->auto_activate_nsl, true);?> name="auto_activate_nsl" /> <?php esc_html_e("Auto-activate Email","peprodev-ups");?>
+                          </label>
+                          <label class="w-100 row align-items-center m-0 mb-2">
+                            <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required mr-2 auto_add_nsl' <?php checked( $this->auto_add_nsl, true);?> name="auto_add_nsl" /> <?php esc_html_e("Add Social Login to form","peprodev-ups");?>
                           </label>
                         </div>
                       </div>
@@ -306,7 +325,6 @@ foreach ($styleFiles as $style) {
                     </div>
                   </div>
                 </div>
-
                 <div class="col-lg-8 col-md-12">
                   <div class="card">
                     <div class="card-body">

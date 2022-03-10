@@ -1,8 +1,8 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
 # @Last modified time: 2021/12/30 23:26:38
-
-namespace PeproDev\PeproCore\RegLogin;
+namespace PeproDev;
+use PeproDev;
 class peproKavenegarSMS
 {
   function __construct()

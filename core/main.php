@@ -1,6 +1,8 @@
 <?php
 # @Last modified by:   Amirhosseinhpv
 # @Last modified time: 2022/02/11 02:54:46
+namespace PeproDev;
+use PeproDev;
 if (!class_exists("PeproDevUPS_Core")){
   class PeproDevUPS_Core
   {
@@ -449,34 +451,6 @@ if (!class_exists("PeproDevUPS_Core")){
     {
         return $a;
     }
-    public function getIP()
-    {
-        // Get server IP address
-        $server_ip = (isset($_SERVER['SERVER_ADDR'])) ? $_SERVER['SERVER_ADDR'] : '';
-
-        // If website is hosted behind CloudFlare protection.
-        if (isset($_SERVER['HTTP_CF_CONNECTING_IP']) && filter_var($_SERVER['HTTP_CF_CONNECTING_IP'], FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
-            return $_SERVER['HTTP_CF_CONNECTING_IP'];
-        }
-
-        if (isset($_SERVER['X-Real-IP']) && filter_var($_SERVER['X-Real-IP'], FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
-            return $_SERVER['X-Real-IP'];
-        }
-
-        if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            $ip = trim(current(explode(',', $_SERVER['HTTP_X_FORWARDED_FOR'])));
-
-            if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) && $ip != $server_ip) {
-                return $ip;
-            }
-        }
-
-        if (isset($_SERVER['DEV_MODE'])) {
-            return '175.138.84.5';
-        }
-
-        return $_SERVER['REMOTE_ADDR'];
-    }
     public function DummyData()
     {
       ?>
@@ -824,10 +798,6 @@ if (!class_exists("PeproDevUPS_Core")){
           ?>
         </div>
       <?php
-    }
-    public function RetriveClassName()
-    {
-      return __CLASS__;
     }
     public function advanced_2dArray_compare()
     {

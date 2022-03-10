@@ -7,6 +7,30 @@
  * @License:GPLv2
  * @Copyright:Copyright © 2020 Amirhosseinhpv,All rights reserved.
  */
+@font-face {
+	font-family: IranYekan;
+  font-style: normal;
+  font-weight: bold;
+  src: url("fonts/woff/iranyekanwebbold.woff") format('woff');
+}
+
+@font-face {
+	font-family: IranYekan;
+  font-style: normal;
+  font-weight: normal;
+  src: url("fonts/woff/iranyekanwebregular.woff") format('woff');
+}
+
+li,
+ol,
+ul {
+	margin: 0 !important;
+}
+
+
+body {
+	font-family: IranYekan,Tahoma,sans-serif !important;
+}
 
 .bg-c1 {
 	background: #00ad5f;
@@ -49,15 +73,6 @@
 .au-message__item-text .text {
 	margin-left: 0;
 	margin-right: 0;
-}
-
-#wpadminbar:hover {
-	opacity: 1;
-	transition: all 0.3s ease-in-out;
-}
-
-#wpadminbar {
-	opacity: 0.1;
 }
 
 .table-earning tbody tr.woocommerce-orders-table__row:hover td {
@@ -210,10 +225,6 @@ p.order-again {
 	white-space: nowrap;
 }
 
-#wpadminbar {
-	visibility: hidden;
-}
-
 .woocommerce-column.woocommerce-column--1 {
 	max-width: 100% !important;
 	padding: 0;
@@ -292,18 +303,13 @@ p.order-again {
 	font-size: 1.3rem;
 }
 
-footer {
-	display: none;
-}
-
 .header-mobile .header-mobile-inner {
-    height: 25px;
+	height: 25px;
 }
 
 .header-mobile .navbar-mobile {
-    top: 48px;
+	top: 48px;
 }
-
 
 .alert-box {
 	display: block;
@@ -345,12 +351,6 @@ footer {
 	max-height: 100%;
 }
 
-
-li,
-ol,
-ul {
-	margin: 0 !important;
-}
 
 .active i::before,
 .fab::before,
@@ -398,6 +398,7 @@ ul {
 .btn-outline-primary::before {
 	display: none;
 }
+
 @media screen and (max-width: 600px) {
 	tr {
 		justify-content: center;
@@ -446,7 +447,7 @@ ul {
 	}
 
 	tr td,
-	tr th {
+  tr th {
 		width: 100% !important;
 		align-items: center;
 		justify-content: center;
@@ -499,35 +500,61 @@ label[for="avatar"] {
 	padding: 0.2rem;
 	border-radius: 4px;
 	-webkit-padding-end: 1rem;
-	        padding-inline-end: 1rem;
+	padding-inline-end: 1rem;
 	cursor: pointer;
 }
 
 .row.nowarp > * {
 	width: auto;
 }
+
 .form-control {
-    -webkit-appearance: auto;
-    -moz-appearance: auto;
-    appearance: auto;
+	-webkit-appearance: auto;
+	-moz-appearance: auto;
+	appearance: auto;
 }
 
-.account-wrap .image a,
-.account-wrap .image {
+.account-wrap .image,
+.account-wrap .image a {
 	display: flex;
 	align-items: stretch;
 }
-.menu-sidebar .logo a img, .menu-sidebar .logo a {
+
+.menu-sidebar .logo a,
+.menu-sidebar .logo a img {
 	max-height: 60px !important;
 }
 
 .woocommerce-button.button {
 	line-height: 1.5;
 	-webkit-margin-end: 0.8rem;
-	        margin-inline-end: 0.8rem;
+	margin-inline-end: 0.8rem;
 }
 
-pdcontainer{
+pdcontainer {
 	max-width: 600px;
 	margin: auto;
+}
+
+.au-inbox-wrap.show-chat-box {
+	transform: translateX(50%);
+}
+
+.active i::before,
+.fab::before,
+.fas::before {
+	color: currentColor !important;
+}
+
+.email-dropdown::before,
+.mess-dropdown::before,
+.notifi-dropdown::before,
+.setting-dropdown::before {
+	right: auto;
+	left: 1rem;
+}
+
+.mess-dropdown {
+	left: -1rem;
+	right: auto;
 }
