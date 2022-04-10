@@ -1078,6 +1078,9 @@ section {
 		width: 100%;
 		justify-content: space-between;
 	}
+	[dir="rtl"] .header-button {
+		flex-direction: row-reverse;
+	}
 }
 
 .noti-wrap {
@@ -5144,7 +5147,7 @@ section {
 }
 
 .m-b-25 {
-	margin-bottom: 25px;
+	margin-bottom: 25px !important;
 }
 
 .m-t-25 {

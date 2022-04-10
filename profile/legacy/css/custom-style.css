@@ -450,7 +450,6 @@ ul {
 		width: 100% !important;
 		align-items: center;
 		justify-content: center;
-		display: flex;
 	}
 
 	.table-earning tbody td:last-of-type {

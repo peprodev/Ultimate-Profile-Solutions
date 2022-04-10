@@ -34,6 +34,6 @@
   font-weight: normal;
   src: url("../webfonts/robotoregular.woff") format('woff');
 }
-.pdfont {
+.pdfont, pdwrapper{
   font-family: IranYekan, roboto, Arial !important;
 }

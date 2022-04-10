@@ -27,9 +27,24 @@ class dashboard extends PeproDevUPS_Profile
         <ul class="navbar__list">
           <?php
             foreach ($this->peprofile_get_nav_items_array() as $key => $value) {
-                $active = false;
-                if ($this->cur_slug == $key) $active = true;
-                echo "<li class='nav-item ".($active?"active":"")."'><a href='".esc_attr($value["url"])."'>".wp_kses_post($value["title"])."</a></li>";
+              $ul = "";
+              $subitems = array();
+              $isActiveItem = $this->cur_slug == $key;
+              if (isset($value["subitems"]) && !empty($value["subitems"])) {
+                $navs = array_column($value["subitems"], "priority");
+                array_multisort($navs, SORT_ASC, $value["subitems"]);
+                foreach ($value["subitems"] as $ty => $child) {
+                  if ($this->cur_slug == $child["slug"]) { $isActiveItem = true; }
+                  $subitems[] = "<li class='nav-item {$child["slug"]} ".($this->cur_slug == $child["slug"]?"active":"")."'><a href='".esc_attr($child["url"])."'>".wp_kses_post($child["title"])."</a></li>";
+                }
+                if (!empty($subitems)){ $ul = "<ul class='subitems'>".implode("", $subitems)."</ul>"; }
+              }
+              $extraClass = apply_filters("peprofile_nav_parent_items_class", array(
+                "nav-item" . ($isActiveItem?" active":""),
+                "nav-$key",
+                (!empty($subitems) ? "has-subitem" : "signle-item"),
+              ));
+              echo "<li class='".implode(" ", $extraClass)."'><a href='".esc_attr($value["url"])."'>".wp_kses_post($value["title"])."</a>$ul</li>";
             }
           ?>
         </ul>

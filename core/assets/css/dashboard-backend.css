@@ -876,3 +876,22 @@ toast:empty {
 .dark-edition pre {
 	color: #ccc;
 }
+
+#wpbody-content > .notice {
+	max-width: 70%;
+	display: block;
+	margin: auto;
+}
+
+
+#wp-link label input[type="text"] {
+    min-width: 350px;
+}
+#wp-link #link-options label span, #wp-link #search-panel label span.search-label {
+    width: auto;
+}
+
+
+.smart_btn_workspace #copyshortcode {
+	float: right;
+}

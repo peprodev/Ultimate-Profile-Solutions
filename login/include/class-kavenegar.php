@@ -171,3 +171,4 @@ class peproKavenegarSMS
     return ' <a href="'.esc_url($url).'" class="btn btn-sm btn-round btn-group btn-info float-left m-0" target="_blank"><i class="fas fa-external-link-alt"></i></a>';
   }
 }
+return new peproKavenegarSMS;

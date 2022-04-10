@@ -192,3 +192,4 @@ class peproSendSMS
         return "{$this->api_url}/api/Token";
     }
 }
+return new peproSendSMS;

@@ -1,5 +1,6 @@
 <?php
-
+namespace PeproDev;
+use PeproDev;
 # @Last modified by:   Amirhosseinhpv
 # @Last modified time: 2022/02/20 02:03:15
 
@@ -12,7 +13,7 @@ $PeproDevUPS_Profile->change_dashboard_title(_x("Edit", "user-dashboard", "pepro
   <div class="row">
     <div class="col-md-12">
         <div class="overview-wrap">
-            <h2 class="title-1"><?php echo esc_html_x("Edit", "edit-user", "peprodev-ups");?></h2>
+            <h2 class="title-1 m-b-25"><?php echo esc_html_x("Edit", "edit-user", "peprodev-ups");?></h2>
         </div>
     </div>
   </div>
@@ -75,7 +76,7 @@ $PeproDevUPS_Profile->change_dashboard_title(_x("Edit", "user-dashboard", "pepro
                           ?>
                       </div>
                       <?php
-                      if (class_exists("PeproDevUPS_Login")){
+                      if (class_exists("\PeproDev\PeproDevUPS_Login")){
                         do_action("peprofile_user_details_before_custom_fields");
                         global $PeproDevUPS_Login; $PeproDevUPS_Login->pepro_profile_sections();
                         do_action("peprofile_user_details_after_custom_fields");
@@ -96,7 +97,7 @@ $PeproDevUPS_Profile->change_dashboard_title(_x("Edit", "user-dashboard", "pepro
     <div class="col-lg-12 col-md-12">
       <div class="row">
         <?php
-          if (class_exists("PeproDevUPS_Login")){
+          if (class_exists("\PeproDev\PeproDevUPS_Login")){
             do_action("peprofile_user_details_before_verify_mobile");
             global $PeproDevUPS_Login;
             echo $PeproDevUPS_Login->verify_user_mobile_email_inline();

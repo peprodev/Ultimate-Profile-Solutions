@@ -14,7 +14,6 @@ pdwrapper,
 ul {
 	list-style: none;
 	margin: 0 !important;
-	font-family: IranYekan, Tahoma, sans-serif !important;
 }
 
 .bg-c1 {
@@ -539,6 +538,9 @@ pdaside {
 	background: #FFFFFF;
 	border-radius: 4px;
 	padding: 1rem;
+	height: -webkit-fit-content;
+	height: -moz-fit-content;
+	height: fit-content;
 }
 
 pdcart {
@@ -553,6 +555,9 @@ pdtickets {
 	border-radius: 4px;
 	padding: 2rem;
 	box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.05);
+	height: -webkit-fit-content;
+	height: -moz-fit-content;
+	height: fit-content;
 }
 
 .container-fluid {
@@ -574,6 +579,9 @@ pdbalace {
 	border-radius: 4px;
 	padding: 2rem;
 	box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.05);
+	height: -webkit-fit-content;
+	height: -moz-fit-content;
+	height: fit-content;
 }
 
 pdwrapper {
@@ -639,15 +647,15 @@ pdpromos {
 }
 
 .button-procceed-arrow {
-	width: 2.5rem;
-	height: 2.5rem;
-	display: inline-block;
+	width: 2rem;
+	height: 2rem;
+	display: block;
 	border-radius: 10px;
 	text-align: center;
 	line-height: 2.3;
 	background: #ffffff21 url("data:image/svg+xml,%3Csvg width='5' height='8' viewBox='0 0 5 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L4 4L1 7' stroke='white' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A") no-repeat center/0.5rem;
-	margin-top: -0.5rem;
-	margin-left: auto;
+	margin: 5px;
+	float: right;
 }
 
 .button-procceed-arrow:is(:hover, :active, :focus) {
@@ -655,7 +663,6 @@ pdpromos {
 }
 
 td .button-procceed-arrow {
-	margin-top: 0;
 	background: #5946B021 url("data:image/svg+xml,%3Csvg width='5' height='8' viewBox='0 0 5 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L4 4L1 7' stroke='%235946B0' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A") no-repeat center/0.5rem;
 }
 
@@ -675,8 +682,9 @@ td .button-procceed-arrow:is(:hover, :active, :focus) {
 
 .pdpromos-subtitle {
 	font-weight: 300;
-	margin-top: 1rem;
+	margin-top: 0.5rem;
 	color: #000000a8;
+	font-size: smaller;
 }
 
 .promo-code-wrapper {
@@ -692,9 +700,15 @@ td .button-procceed-arrow:is(:hover, :active, :focus) {
 
 li.nav-item a {
 	display: block;
+	letter-spacing: 1px;
 	padding: 1rem;
+	color: #272727;
+	font-weight: 300;
+}
+
+li.nav-item.active > a {
 	color: rgba(89, 70, 176, 1) !important;
-	font-weight: 500;
+	font-weight: 500 !important;
 }
 
 li.nav-item.active,
@@ -715,12 +729,14 @@ li.nav-item a i {
 
 .pdtickets-list {
 	margin-top: 1rem;
+	margin-inline: -1rem;
 }
 
 .pdorder-title-cta a {
 	color: #5946B0;
 	font-weight: 500;
 }
+
 .pdbalace-title,
 pdtickets .pdorder-title {
 	color: #242424;
@@ -729,22 +745,28 @@ pdtickets .pdorder-title {
 }
 
 .pdbalace-title-wrap {
-	display: grid;
-	grid-template-rows: 0fr 0fr 0fr 0fr;
-	grid-row-gap: 2rem;
 	text-align: center;
 }
-.pdbalace-subtitle{
+
+.pdbalace-subtitle {
 	color: #FF354C;
 	font-size: xxx-large;
-	font-weight: 800;
+	font-weight: 700;
+	padding: 3rem 0;
+	display: block;
 }
+
+.pdbalace-cta-wrap {
+	padding: 2rem 0 0;
+}
+
 .pdbalance-dlr {
 	font-size: x-large;
 	margin-left: 0.5rem;
 }
+
 .pdbalace-cta.button-simple-gray,
-.pdbalace-cta.button-simple-gray:is(:hover, :active, :focus){
+.pdbalace-cta.button-simple-gray:is(:hover, :active, :focus) {
 	border: 2px solid #000000;
 	border-radius: 3px;
 	padding: 0.5rem 1rem;
@@ -762,4 +784,65 @@ pdtickets .pdorder-title {
 
 .title-1 {
 	margin-bottom: 1rem !important;
+}
+
+.pdtickets-list td,
+.pdtickets-list th {
+	vertical-align: middle;
+	padding: 0 1rem;
+	font-weight: 400;
+	color: rgba(0, 0, 0, 0.6);
+	border: none !important;
+}
+
+.pdtickets-list th {
+	font-weight: 400;
+	background: #F9F9F9;
+	color: #757E90;
+	font-size: small;
+	padding: 0.5rem 1rem;
+}
+
+.pdtickets-list tr td:first-of-type {
+	padding-left: 1rem;
+	font-weight: 500;
+	color: #000;
+}
+
+.pdtickets-list table {
+	font-size: smaller;
+}
+
+pdorders .pdorder-title-cta {
+	margin: -0.5rem;
+}
+
+pdaside .navbar__list .subitems {
+	font-size: small;
+	padding-left: 1.5rem;
+}
+
+pdaside .navbar__list .subitems {
+	display: none;
+}
+pdaside .navbar__list .active .subitems {
+	display: block;
+}
+
+pdaside .navbar__list .subitems,
+pdaside .navbar__list .subitems a {
+	font-size: small;
+	padding-left: 1.5rem;
+	background: #F8F8F8;
+}
+
+.nav-item.has-subitem > a::after {
+	content: "";
+	float: right;
+	background: url("data:image/svg+xml,%3Csvg width='10' height='5' viewBox='0 0 10 5' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9 0.5L5 4.5L1 0.5' stroke='%23272727' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A") no-repeat center/contain;
+	width: 1rem;
+	height: 2rem;
+}
+.nav-item.active.has-subitem > a::after {
+	background: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 5L5 1L9 5' stroke='%235946B0' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A") no-repeat center/contain;
 }

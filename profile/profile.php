@@ -75,16 +75,17 @@ if (!class_exists("PeproDevUPS_Profile")) {
             $this->title             = __("PeproDev Ultimate Profile Solutions — Profile", "peprodev-ups");
             $this->icon_html         = "<i class=\"material-icons\">account_circle</i>";
             $this->activation_status = "PeproDevUPS_Core___{$this->setting_slug}";
+            $this->save_prefix       = "PeproDevUPS_Core___loginregister";
             $this->html_wrapper      = array($this,"htmlwrapper");
             $this->ajax_hndlr        = array($this,"admin_side_ajax_handler");
             $this->useLD             = function_exists("sfwd_lms_has_access");
             $this->lang              = dirname(plugin_basename(__FILE__))."/languages/";
             $this->notifs_js         = "";
-            $this->user_modern       = true;
+            $this->user_modern       = "yes" == get_option("{$this->save_prefix}-use_modern");
             $this->modern_dir        = plugin_dir_path(__FILE__) . "/modern/";
             $this->modern_assets     = apply_filters("peprofile_get_modern_assets_url", plugins_url("/modern", __FILE__));
-            $this->use_front_fa      = true; // use font-awesome font in front-end
-            $this->use_front_fo      = false; // use farsi-iranyekan font in front-end
+            $this->use_front_fa      = "yes" == get_option("{$this->save_prefix}-use_fa"); // use font-awesome font in front-end
+            $this->use_front_fo      = "yes" == get_option("{$this->save_prefix}-use_irfo"); // use farsi-iranyekan font in front-end
             $this->custom_css        = get_option("{$this->activation_status}-css", "");
             $this->custom_js         = get_option("{$this->activation_status}-js", "");
             $this->copyright         = sprintf(__("Copyright (c) %s Pepro Dev, All rights reserved", "peprodev-ups"), date("Y"));
@@ -209,7 +210,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
           /** Removes output from Yoast SEO on the frontend */
           $dashpage = get_option("{$this->activation_status}-profile-dash-page","");
           if ( !empty($dashpage) && is_single($dashpage)) {
-            if (class_exists("WPSEO_Options")){
+            if (class_exists("\WPSEO_Options")){
               $front_end = YoastSEO()->classes->get( Yoast\WP\SEO\Integrations\Front_End_Integration::class );
               remove_action( 'wpseo_head', [ $front_end, 'present_head' ], -9999 );
             }
@@ -330,15 +331,19 @@ if (!class_exists("PeproDevUPS_Profile")) {
         }
         public function change_wp_title()
         {
-          return $this->get_title() . " &#8211; " . get_the_title();
+          $title = $this->get_title();
+          return !empty($title) ? $title . " &#8211; " . get_the_title() : get_the_title();
         }
         public function get_title()
         {
           $this->cur_slug = isset($_GET['section']) ? sanitize_text_field(trim($_GET['section'])) : "home";
           foreach ($this->peprofile_get_nav_items_array() as $key => $value) {
-              if ($this->cur_slug == $key){
-                return wp_kses($value["raw_title"], "", "");
-              }
+            if (isset($value["subitems"]) && !empty($value["subitems"])) {
+                foreach ($value["subitems"] as $tq => $child) {
+                  if ($this->cur_slug == $child["slug"]) return wp_kses($child["title"], "", "");
+                }
+            }
+            if ($this->cur_slug == $key) return wp_kses($value["raw_title"], "", "");
           }
         }
         public function redirect_url_if_no_access()
@@ -662,7 +667,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                 ?>
                 <div class="container-fluid">
                   <div class="row">
-                    <div class="col-md-12"><div class="overview-wrap"><h2 class="title-2"><?php echo $catName?></h2></div></div>
+                    <div class="col-md-12"><div class="overview-wrap"><h2 class="title-2 m-b-25"><?php echo $catName?></h2></div></div>
                   </div>
                   <div class="row m-t-25">
                     <div class="col-lg-12">
@@ -799,7 +804,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
               ?>
               <div class="container-fluid">
                 <div class="row">
-                  <div class="col-md-12"><div class="overview-wrap"><h2 class="title-2"><?php echo $catName?></h2></div></div>
+                  <div class="col-md-12"><div class="overview-wrap"><h2 class="title-2 m-b-25"><?php echo $catName?></h2></div></div>
                 </div>
                 <div class="row m-t-25">
                   <div class="col-lg-12">
@@ -940,7 +945,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
           ob_start();
           ?>
             <div class="row <?php echo esc_attr( $class ); ?>">
-              <div class="<?php echo (!class_exists('Woo_Wallet_Wallet')) ? "col-sm-6 col-lg-4" : "col-sm-6 col-lg-3";?>">
+              <div class="<?php echo (!class_exists('\Woo_Wallet_Wallet')) ? "col-sm-6 col-lg-4" : "col-sm-6 col-lg-3";?>">
                   <div class="overview-item overview-item--c3">
                       <div class="overview__inner">
                           <div class="overview-box clearfix">
@@ -957,7 +962,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                       </div>
                   </div>
               </div>
-              <div class="<?php echo (!class_exists('Woo_Wallet_Wallet')) ? "col-sm-6 col-lg-4" : "col-sm-6 col-lg-3";?>">
+              <div class="<?php echo (!class_exists('\Woo_Wallet_Wallet')) ? "col-sm-6 col-lg-4" : "col-sm-6 col-lg-3";?>">
                   <div class="overview-item overview-item--c1">
                       <div class="overview__inner">
                           <div class="overview-box clearfix">
@@ -974,7 +979,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                       </div>
                   </div>
               </div>
-              <div class="<?php echo (!class_exists('Woo_Wallet_Wallet')) ? "col-sm-6 col-lg-4" : "col-sm-6 col-lg-3";?>">
+              <div class="<?php echo (!class_exists('\Woo_Wallet_Wallet')) ? "col-sm-6 col-lg-4" : "col-sm-6 col-lg-3";?>">
                   <div class="overview-item overview-item--c2">
                       <div class="overview__inner">
                           <div class="overview-box clearfix">
@@ -992,9 +997,9 @@ if (!class_exists("PeproDevUPS_Profile")) {
                   </div>
               </div>
               <?php
-              if  (class_exists('Woo_Wallet_Wallet')){
+              if  (class_exists('\Woo_Wallet_Wallet')){
                 ?>
-                <div class="<?php echo (!class_exists('Woo_Wallet_Wallet')) ? "" : "col-sm-6 col-lg-3";?>" >
+                <div class="<?php echo (!class_exists('\Woo_Wallet_Wallet')) ? "" : "col-sm-6 col-lg-3";?>" >
                   <div class="overview-item overview-item--c4">
                     <div class="overview__inner">
                       <div class="overview-box clearfix">
@@ -1364,8 +1369,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                           "Atiny"   => $Ashorts,
                           "Ahtml"   => $Ahtmldata)
                         );
-
-                    break;
+                  break;
                   case 'edit-profile':
                     if (empty($_POST["dparam"]))
                       wp_send_json_error(array( "msg"=>__("There was a problem with your request. Error 0x10027", "peprodev-ups")));
@@ -1380,7 +1384,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                     $save_pass          = true;
                     $pass_cur           = "";
                     $pass1              = "";
-                		$user               = new stdClass();
+                		$user               = new \stdClass();
                 		$user->ID           = $user_id;
                     $retuen             = array();
 
@@ -1444,7 +1448,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                         }
                       }
 
-                      if (class_exists("PeproDevUPS_Login")){
+                      if (class_exists("\PeproDev\PeproDevUPS_Login")){
                         global $PeproDevUPS_Login;
                         foreach ($PeproDevUPS_Login->get_register_fields() as $field) {
                           if ("yes" == $field["is-editable"]){
@@ -1546,12 +1550,10 @@ if (!class_exists("PeproDevUPS_Profile")) {
                       'img'     => wp_upload_dir()["basedir"] . "/profile/$saved",
                       "refresh" => $save_pass?true:false,
                       ));
-
-                    break;
+                  break;
                   default:
                     wp_send_json_error(array( "msg"=>__("There was a problem with your request. Error 0x10030", "peprodev-ups")));
-                    break;
-
+                  break;
                 }
                 wp_send_json_error(array( "msg"=>__("There was a problem with your request. Error 0x10028", "peprodev-ups")));
               }
@@ -2371,13 +2373,37 @@ if (!class_exists("PeproDevUPS_Profile")) {
         public function peprofile_get_nav_items($arr)
         {
             global $wp;
-            $arr = array_merge( $arr, array(
-              "home"          => array(
-                "title"       => "<i class='fas fa-tachometer-alt'></i> ".__("Dashboard", "peprodev-ups"),
-                "url"         => $this->get_profile_page(["i"=>current_time("timestamp")]),
-                "priority"    => 10,
-                "built_in"    => true,
-              )));
+            $arr = array_merge( $arr,
+            array(
+              "home"        => array(
+                "title"     => "<i class='fas fa-tachometer-alt'></i> ".__("Dashboard", "peprodev-ups"),
+                "url"       => $this->get_profile_page(["i"=>current_time("timestamp")]),
+                "priority"  => 10,
+                "built_in"  => true,
+              ),
+              "information" => array(
+                "title"     => "<i class='fas fa-tachometer-alt'></i> ".__("Information", "peprodev-ups"),
+                "url"       => $this->get_profile_page(["section"=>"edit"]),
+                "priority"  => 10,
+                "built_in"  => true,
+                "subitems"  => array(
+                  array(
+                    "slug"     => "edit",
+                    "priority" => 1,
+                    "title"    => __("Edit Profile", "peprodev-ups"),
+                    "url"      => $this->get_profile_page(["section"=>"edit"]),
+                  ),
+                  array(
+                    "slug"     => "pswd",
+                    "priority" => 2,
+                    "title"    => __("Change Password", "peprodev-ups"),
+                    "url"      => $this->get_profile_page(["section"=>"pswd"]),
+                  ),
+                )
+              ),
+
+            )
+          );
             if ($this->_wc_activated()) {
               $arr = array_merge( $arr,
                 array(
@@ -2400,7 +2426,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                     "priority"   => 704,
                   ),
                 ));
-              if (class_exists( 'Woo_Wallet_Wallet' )){
+              if (class_exists( '\Woo_Wallet_Wallet' )){
                 $arr = array_merge( $arr, array(
                   "wallet" =>
                   array(
@@ -2418,12 +2444,6 @@ if (!class_exists("PeproDevUPS_Profile")) {
                     "url"         => $this->get_profile_page(["section"=> "notifications"]),
                     "built_in"    => true,
                     "priority"    => 900,
-                  ),
-                  "announcements" =>  array(
-                    "title"       => '<i class="fa fa-bullhorn"></i> ' .__("Announcements", "peprodev-ups"),
-                    "url"         => $this->get_profile_page(["section"=> "announcements"]),
-                    "built_in"    => true,
-                    "priority"    => 901,
                   )
                 )
             );
@@ -2541,7 +2561,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                 <?php echo stripslashes($notifs->css);?>
               </style>
               <div class="container-fluid">
-                <div class="row"><div class="col-md-12"><div class="overview-wrap"><h2 class="title-1"><?php echo $notifs->subject;?></h2></div></div></div>
+                <div class="row"><div class="col-md-12"><div class="overview-wrap"><h2 class="title-1 m-b-25"><?php echo $notifs->subject;?></h2></div></div></div>
                 <?php echo $this->filter_content($notifs->content);?>
               </div>
 
@@ -2554,14 +2574,14 @@ if (!class_exists("PeproDevUPS_Profile")) {
           global $wp;
           $array = apply_filters( "peprofile_get_nav_items", array());
           // sort navigation items based on priority
-          foreach ($array as $notif_id => $notif) {
-            $array[$notif_id]["raw_title"] = strip_tags($array[$notif_id]["title"]);
+          foreach ($array as $id => $notif) {
+            $array[$id]["raw_title"] = strip_tags($array[$id]["title"]);
             if (isset($notif["built_in"]) && true == $notif["built_in"]){
-              $priority = get_option( "peprofile_builtin_{$notif_id}_priority", false );
-              $array[$notif_id]["priority"] = ($priority && !empty($priority)) ? $priority : $notif["priority"];
+              $priority = get_option( "peprofile_builtin_{$id}_priority", false );
+              $array[$id]["priority"] = ($priority && !empty($priority)) ? $priority : $notif["priority"];
             }
-            if (false == get_option( "peprofile_builtin_{$notif_id}_is_enabled", true )){
-              unset($array[$notif_id]);
+            if (false == get_option( "peprofile_builtin_{$id}_is_enabled", true )){
+              unset($array[$id]);
             }
           }
 
@@ -2621,7 +2641,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
         public function get_customer_get_credit_balance()
         {
           $wallet = 00;
-          if (class_exists( 'Woo_Wallet_Wallet' )){
+          if (class_exists( '\Woo_Wallet_Wallet' )){
             $wallet = woo_wallet()->wallet->get_wallet_balance( get_current_user_id() , '' );
             $wallet = wp_kses($wallet,array());
           }
@@ -3238,7 +3258,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
         }
         public function _wc_activated()
         {
-          if (!is_plugin_active('woocommerce/woocommerce.php') || !function_exists('is_woocommerce') || !class_exists('woocommerce') ) { return false; }
+          if (!is_plugin_active('woocommerce/woocommerce.php') || !function_exists('is_woocommerce') || !class_exists('\woocommerce') ) { return false; }
           return true;
         }
         public function _ld_activated()

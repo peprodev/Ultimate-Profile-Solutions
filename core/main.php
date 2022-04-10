@@ -2,6 +2,8 @@
 # @Last modified by:   Amirhosseinhpv
 # @Last modified time: 2022/02/11 02:54:46
 namespace PeproDev;
+use PeproDev;
+
 if (!class_exists("PeproDevUPS_Core")){
   class PeproDevUPS_Core
   {
@@ -244,7 +246,8 @@ if (!class_exists("PeproDevUPS_Core")){
     {
       // Core JS Files
       wp_enqueue_script('jquery');
-      wp_enqueue_script("popper",                    PEPRODEVUPS_URL . "/login/assets/popper.min.js", array( 'jquery' ), "1.6.0", true); //'1.16.0'
+      wp_enqueue_script("popper",                    PEPRODEVUPS_URL . "/login/assets/popper.min.js", array( 'jquery' ), "2.11.4", true); //'2.11.4'
+      wp_enqueue_script("tippy",                    PEPRODEVUPS_URL . "/login/assets/tippy-bundle.umd.min.js", array( 'jquery' ), "2.11.4", true); //'2.11.4'
       wp_enqueue_script("bootstrap-material-design", "{$this->assets_url}js/bootstrap-material-design.min.js", array( 'jquery' ), "1.6.0", true); //'3.0.2'
       wp_enqueue_script("default-passive-events",    "{$this->assets_url}js/default-passive-events.js", array( 'jquery' ), "1.6.0", true); //'1.0.10'
       // Notifications Plugin

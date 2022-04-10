@@ -5,10 +5,11 @@
 
 global $PeproDevUPS_Profile, $PeproDevUPS_Login, $PeproDevUPS_ProfileStripslashesNotifsJs;
 wp_enqueue_script( "jquery" );
-wp_enqueue_script( "peprodev-popper",    "{$PeproDevUPS_Login->assets_url}assets/popper.min.js", array("jquery"));
+wp_enqueue_script( "peprodev-popper",    "{$PeproDevUPS_Login->assets_url}assets/popper.min.js", array("jquery"), "2.11.4");
+wp_enqueue_script( "peprodev-tippy",     "{$PeproDevUPS_Login->assets_url}assets/tippy-bundle.umd.min.js", array("jquery"), "2.11.4");
 wp_enqueue_script( "peprodev-bootstrap", "{$PeproDevUPS_Login->assets_url}assets/bootstrap.min.js", array("jquery"));
 wp_enqueue_script( "peprodev-main",      plugins_url("/js/main.js", __FILE__), array("jquery"));
-wp_enqueue_script( "peprodev--extras",  plugins_url("/js/extras.js", __FILE__), array("jquery"), "1.6.0", true);
+wp_enqueue_script( "peprodev--extras",   plugins_url("/js/extras.js", __FILE__), array("jquery"), "1.6.0", true);
 wp_register_script( "peprodev--custom",  plugins_url("/js/custom-js.js", __FILE__), array("jquery"), "1.6.0", true);
 wp_localize_script( "peprodev--custom",  "_i18n", array(
   "td"                  => "peprocoreprofile",

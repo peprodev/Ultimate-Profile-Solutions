@@ -278,8 +278,17 @@ foreach ($styleFiles as $style) {
                           <label class="w-100 row align-items-center m-0 mb-2">
                             <input autocomplete="off" type="radio" class='form-checkbox iostoggle single-required mr-2 reglogin_type' <?php checked($this->reglogin_type === "email", true);?> name="reglogin_type" value="email" /><?php esc_html_e("Using Email/Username & Password", "peprodev-ups");?>
                           </label>
-                          <p class="text-bold mt-4"><?php esc_html_e("Form Label and Toast", "peprodev-ups");?></p>
+                          <p class="text-bold mt-4"><?php esc_html_e("Profile Design", "peprodev-ups");?></p>
                           <label class="w-100 row align-items-center m-0 mb-2 mt-4">
+                            <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required mr-2 use_modern' <?php checked( $this->use_modern, true);?> name="use_modern" /> <?php esc_html_e("Use Modern Dashboard UI","peprodev-ups");?>
+                          </label>
+                          <label class="w-100 row align-items-center m-0 mb-2">
+                            <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required mr-2 use_fa' <?php checked( $this->use_fa, true);?> name="use_fa" /> <?php esc_html_e("Use Built-in FontAwesome Font","peprodev-ups");?>
+                          </label>
+                          <label class="w-100 row align-items-center m-0 mb-2">
+                            <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required mr-2 use_irfo' <?php checked( $this->use_irfo, true);?> name="use_irfo" /> <?php esc_html_e("Use Built-in Farsi Font","peprodev-ups");?>
+                          </label>
+                          <label class="w-100 row align-items-center m-0 mb-2">
                             <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required mr-2 floating_input_label' <?php checked( $this->floating_input_label, true);?> name="floating_input_label" /> <?php esc_html_e("Use floating form labels","peprodev-ups");?>
                           </label>
                           <label class="w-100 row align-items-center m-0 mb-2">

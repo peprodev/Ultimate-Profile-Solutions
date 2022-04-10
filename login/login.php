@@ -49,6 +49,7 @@ if (!class_exists("PeproDevUPS_Login")){
     public $auto_activate_nsl;
     public $auto_add_nsl;
     public $floating_input_label;
+    public $use_modern;
     public $no_popup_alert;
     public $verify_email;
     public $verify_mobile;
@@ -110,6 +111,9 @@ if (!class_exists("PeproDevUPS_Login")){
       $this->auto_login_after_reg   = "yes"    == get_option("{$this->save_prefix}-auto_login_after_reg");
       $this->auto_activate_nsl      = "yes"    == get_option("{$this->save_prefix}-auto_activate_nsl");
       $this->auto_add_nsl           = "yes"    == get_option("{$this->save_prefix}-auto_add_nsl");
+      $this->use_modern             = "yes"    == get_option("{$this->save_prefix}-use_modern");
+      $this->use_fa                 = "yes"    == get_option("{$this->save_prefix}-use_fa");
+      $this->use_irfo               = "yes"    == get_option("{$this->save_prefix}-use_irfo");
       $this->floating_input_label   = "yes"    == get_option("{$this->save_prefix}-floating_input_label");
       $this->no_popup_alert         = "yes"    == get_option("{$this->save_prefix}-no_popup_alert");
       $this->login_mobile_otp       = "mobile" == $this->reglogin_type;
@@ -438,7 +442,7 @@ if (!class_exists("PeproDevUPS_Login")){
     }
     public function _wc_activated()
     {
-      if (!function_exists('is_woocommerce') || !class_exists('woocommerce') ) { return false; }
+      if (!function_exists('is_woocommerce') || !class_exists('\woocommerce') ) { return false; }
       return true;
     }
     public function _ld_activated()
@@ -632,7 +636,8 @@ if (!class_exists("PeproDevUPS_Login")){
       wp_enqueue_style("pepro-login-reg-formaction",    "{$this->assets_url}/assets/main-form.css", array(), "1.6.0");
       wp_enqueue_style("pepro-login-reg-formconfirm",   "{$this->assets_url}/assets/jquery-confirm.css", array(), "1.6.0");
       wp_enqueue_script("pepro-login-reg-formconfirm",  "{$this->assets_url}/assets/jquery-confirm.js", array("jquery"), "1.6.0", true);
-      wp_enqueue_script("pepro-login-reg-popper",       "{$PeproDevUPS_Login->assets_url}assets/popper.min.js", array("jquery"), "1.6.0", true);
+      wp_enqueue_script("pepro-login-reg-popper",       "{$this->assets_url}/assets/popper.min.js", array("jquery"), "2.11.4", true);
+      wp_enqueue_script("pepro-login-reg-tippy",        "{$this->assets_url}/assets/tippy-bundle.umd.min.js", array("jquery"), "2.11.4", true);
       wp_enqueue_script("pepro-login-reg-tippy-bundle", "{$this->assets_url}/assets/tippy-bundle.umd.min.js", array("jquery"), "1.6.0", true);
       wp_enqueue_script("pepro-login-reg-countdown",    "{$this->assets_url}/assets/jquery.countdown.min.js", array("jquery"), "1.6.0", true);
       wp_enqueue_script("pepro-login-reg-formaction",   "{$this->assets_url}/assets/main-form-ajax.js", array("jquery"), time(), true);
@@ -677,9 +682,10 @@ if (!class_exists("PeproDevUPS_Login")){
       ob_start();
       $uniqd = uniqid("pepro_verify_");
       $this->enqueue_shortcode_styles(array( "uniqd" => $uniqd, ));
+      $cols = $this->reg_add_mobile?"6":"12";
       if (get_current_user_id()){
         ?>
-        <div class="col-lg-6 col-md-12">
+        <div class="col-lg-<?=$cols;?> col-md-12">
           <div class="card">
             <div class="card-header"><?php esc_html_e("Verify/Change your email address", "peprodev-ups");?></div>
             <div class="card-body">
@@ -4167,6 +4173,9 @@ if (!class_exists("PeproDevUPS_Login")){
             "{$this->save_prefix}-auto_activate_nsl"              => "yes",
             "{$this->save_prefix}-auto_add_nsl"                   => "yes",
             "{$this->save_prefix}-floating_input_label"           => "yes",
+            "{$this->save_prefix}-use_modern"                     => "no",
+            "{$this->save_prefix}-use_fa"                         => "no",
+            "{$this->save_prefix}-use_irfo"                       => "no",
             "{$this->save_prefix}-no_popup_alert"                 => "no",
             "{$this->save_prefix}-_regdef_passwords"              => "yes",
             "{$this->save_prefix}-_regdef_passwords-req"          => "yes",
@@ -4563,6 +4572,9 @@ if (!class_exists("PeproDevUPS_Login")){
                 "auto_activate_nsl",
                 "auto_add_nsl",
                 "floating_input_label",
+                "use_modern",
+                "use_fa",
+                "use_irfo",
                 "no_popup_alert",
                 "smsir_message",
                 "verify_email",

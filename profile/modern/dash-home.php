@@ -58,8 +58,8 @@ if ("p4" == $cpos && "true" == $showct){ ?><pdcart><?=wp_kses_post($that->get_pr
       <table>
         <thead>
           <th>TITLE</th>
-          <th>DATE</th>
-          <th>STATUS</th>
+          <th>DATE OF TICKET</th>
+          <th>STATE OF TICKET</th>
           <th></th>
         </thead>
         <tbody>

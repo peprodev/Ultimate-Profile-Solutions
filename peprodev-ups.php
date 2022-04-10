@@ -41,12 +41,12 @@ if (!class_exists("PeproDevUPS")) {
             global $PeproDevUPS_Core, $PeproDevUPS_Profile, $PeproDevUPS_Login;
 
             require_once plugin_dir_path(__FILE__) . "/core/main.php";
-            require_once plugin_dir_path(__FILE__) . "/profile/profile.php";
             require_once plugin_dir_path(__FILE__) . "/login/login.php";
+            require_once plugin_dir_path(__FILE__) . "/profile/profile.php";
 
-            $PeproDevUPS_Core    = new PeproDevUPS_Core;
-            $PeproDevUPS_Profile = new PeproDevUPS_Profile;
-            $PeproDevUPS_Login   = new PeproDevUPS_Login;
+            $PeproDevUPS_Core    = new \PeproDev\PeproDevUPS_Core;
+            $PeproDevUPS_Profile = new \PeproDev\PeproDevUPS_Profile;
+            $PeproDevUPS_Login   = new \PeproDev\PeproDevUPS_Login;
 
             register_deactivation_hook( __FILE__, function () { update_option("peprodevups_alert_viewed_yet", ""); });
         }

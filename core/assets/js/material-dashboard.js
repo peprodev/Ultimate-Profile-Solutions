@@ -79,7 +79,11 @@
      }
 
      //  Activate the tooltips
-     $('[rel="tooltip"]').tooltip();
+     // $('[rel="tooltip"]').tooltip();
+
+     $("[rel=tooltip]").each(function(index, val) {
+       tippy(this, {content: $(val).attr("title"), arrow: true,});
+     });
 
      $('.form-control').on("focus", function() {
        $(this).parent('.input-group').addClass("input-group-focus");
