@@ -2,8 +2,8 @@
 # @Author: Amirhosseinhpv
 # @Date:   2021/08/28 00:07:32
 # @Email:  its@hpv.im
-# @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/15 14:49:35
+# @Last modified by:   amirhp-com
+# @Last modified time: 2022/05/12 02:44:04
 # @License: GPLv2
 # @Copyright: Copyright © Amirhosseinhpv (https://hpv.im), all rights reserved.
 
@@ -11,18 +11,7 @@
 global $PeproDevUPS_Profile;
 ?>
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12">
-        <div class="overview-wrap">
-            <h2 class="title-1 m-b-25"><?php echo esc_html_x("View Order","user-dashboard","peprodev-ups");?></h2>
-        </div>
-    </div>
-  </div>
-  <div class="row m-t-25">
-    <div class="col-lg-12 view-wc-orders">
-      <?php
-        $PeproDevUPS_Profile->peprofile_get_template_part("wc/view-order");
-      ?>
-    </div>
-  </div>
+  <?php
+    $PeproDevUPS_Profile->peprofile_get_template_part("wc/view-order");
+  ?>
 </div>

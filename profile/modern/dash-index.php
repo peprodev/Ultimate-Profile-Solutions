@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   amirhp-com
-# @Last modified time: 2022/05/12 00:18:39
+# @Last modified time: 2022/05/12 00:56:38
 namespace PeproDev;
 use PeproDev;
 class dashboard extends PeproDevUPS_Profile
@@ -9,12 +9,12 @@ class dashboard extends PeproDevUPS_Profile
   {
     parent::__construct();
     $this->cur_slug = isset($_GET['section']) ? sanitize_text_field(trim($_GET['section'])) : "home";
+    $this->wp_enqueue_scripts();
   }
-  public function handle_body()
+  public function get_body()
   {
     ob_start();
     // remove wp-seo
-    $this->wp_enqueue_scripts();
     if (class_exists("WPSEO_Options")){
       $front_end = YoastSEO()->classes->get( Yoast\WP\SEO\Integrations\Front_End_Integration::class );
       remove_action( 'wpseo_head', [ $front_end, 'present_head' ], -9999 );
@@ -137,4 +137,4 @@ class dashboard extends PeproDevUPS_Profile
     })(jQuery);', "after");
   }
 }
-new dashboard;
+return new dashboard;

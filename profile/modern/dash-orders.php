@@ -1,23 +1,12 @@
 <?php
 
-# @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/15 14:49:39
+# @Last modified by:   amirhp-com
+# @Last modified time: 2022/05/12 02:44:10
 
 global $PeproDevUPS_Profile;
 ?>
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12">
-        <div class="overview-wrap">
-            <h2 class="title-1 m-b-25"><?php echo esc_html_x("Orders","user-dashboard","peprodev-ups");?></h2>
-        </div>
-    </div>
-  </div>
-  <div class="row m-t-25">
-    <div class="col-lg-12">
-      <?php
-        $PeproDevUPS_Profile->peprofile_get_template_part("wc/orders");
-      ?>
-    </div>
-  </div>
+  <?php
+    $PeproDevUPS_Profile->peprofile_get_template_part("wc/orders");
+  ?>
 </div>

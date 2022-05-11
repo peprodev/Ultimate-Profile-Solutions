@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   amirhp-com
-# @Last modified time: 2022/05/12 00:18:08
+# @Last modified time: 2022/05/12 00:54:45
 namespace PeproDev;
 use PeproDev;
 
@@ -34,6 +34,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
         public $developerURI;
         public $author;
         public $authorURI;
+        public $user_modern;
         public $copyright;
         public $license;
         public $licenseURI;
@@ -627,8 +628,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
           wp_enqueue_script("jquery");
           if ($this->user_modern) {
             $this->peprofile_get_template_part("dash-index");
-            $dashObj = new \PeproDev\dashboard;
-            return $dashObj->handle_body();
+            return (new \PeproDev\dashboard)->get_body();
           }
           else{
             add_filter( "the_content", function ( $content ) { $this->peprofile_get_template_part("dash-index"); return; }, 999 );

@@ -1,29 +1,20 @@
 <?php
-
-# @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/15 14:49:26
-
-global $PeproDevUPS_Profile;
-
-$html = $PeproDevUPS_Profile->get_user_notifications(get_current_user_id());
+# @Last modified by:   amirhp-com
+# @Last modified time: 2022/05/12 02:15:12
+global $PeproDevUPS_Profile, $PeproDevUPS_Login;
+$current_user = wp_get_current_user();
+$current_user_id = get_current_user_id();
+$html = $PeproDevUPS_Profile->get_user_notifications($current_user_id);
+$number = $PeproDevUPS_Profile->get_user_notification_count($current_user_id);
 $titles = $html["titles"];
 $notifs = $html["notifs"];
-$number = $PeproDevUPS_Profile->get_user_notification_count(get_current_user_id());
 $notif_unread_count = __("You have no new notification.", "peprodev-ups");
 if ($number > 0) {
   $notif_unread_count = sprintf(__("You have %s unread messages.", "peprodev-ups"), "<span class='nunread'>$number</span>");
 }
-
 ?>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-12">
-        <div class="overview-wrap">
-            <h2 class="title-1 m-b-25"><?php echo esc_html_x("Notifications","user-dashboard","peprodev-ups");?></h2>
-        </div>
-    </div>
-  </div>
-  <div class="row m-t-25">
     <div class="col-lg-12">
         <div class="au-card au-card--no-shadow au-card--no-pad m-b-40">
             <div class="au-card-title" style="background-image:url('<?php echo plugins_url('images/bg-title-01.jpg',__FILE__);?>');">

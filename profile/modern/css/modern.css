@@ -3,10 +3,11 @@
  * @Date:2020/05/03 13:33:07
  * @Email:its@hpv.im
  * @Last modified by:   amirhp-com
- * @Last modified time: 2022/05/11 20:19:26
+ * @Last modified time: 2022/05/12 02:41:31
  * @License:GPLv2
  * @Copyright:Copyright © 2020 Amirhosseinhpv,All rights reserved.
  */
+
 pdtoast,
 toastwide {
 	display: block;
@@ -892,4 +893,11 @@ form.floating_from_label .pepro-login-reg-field.filled label::after,
 form.floating_from_label .pepro-login-reg-field.focused label,
 form.floating_from_label .pepro-login-reg-field.focused label::after {
 	color: var(--color-content-bg, #f0f0f0);
+}
+
+.woocommerce-MyAccount-content .order-number,
+.woocommerce-MyAccount-content .order-status,
+.woocommerce-orders-table__cell-order-number,
+.woocommerce-orders-table__cell-order-status {
+	font-weight: 300;
 }
