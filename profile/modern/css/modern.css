@@ -2,11 +2,38 @@
  * @Author:Amirhosseinhpv
  * @Date:2020/05/03 13:33:07
  * @Email:its@hpv.im
- * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2022/02/11 03:18:54
+ * @Last modified by:   amirhp-com
+ * @Last modified time: 2022/05/11 20:19:26
  * @License:GPLv2
  * @Copyright:Copyright © 2020 Amirhosseinhpv,All rights reserved.
  */
+pdtoast,
+toastwide {
+	display: block;
+	padding: 0.5rem 2rem;
+	background: var(--toast-bg, rgba(0, 0, 0, .8));
+	color: #fff;
+	text-align: center;
+	bottom: 0;
+	width: 100vw;
+	padding: 1rem 0;
+	left: 0;
+	z-index: 99999;
+	box-shadow: 0 2px 11px 0 rgba(0, 0,0, 0.5);
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
+	-moz-backdrop-filter: blur(10px);
+	transform: translateY(110%);
+	position: fixed;
+	z-index: 9999999999999999 !important;
+}
+
+pdtoast.active,
+toastwide.active {
+	transform: translateY(0);
+}
 
 li,
 ol,
@@ -97,34 +124,6 @@ ul {
 	float: right;
 }
 
-.view-wc-orders .table-earning tfoot tr:last-of-type {
-	background: transparent !important;
-}
-
-[dir="rtl"] .view-wc-orders .table-earning tfoot tr:last-of-type th {
-	border-bottom-right-radius: 10px;
-	border-bottom-left-radius: 0;
-}
-
-[dir="rtl"] .view-wc-orders .table-earning tfoot tr:last-of-type td {
-	border-bottom-right-radius: 0;
-	border-bottom-left-radius: 10px;
-}
-
-.view-wc-orders .table-earning tfoot tr:last-of-type th {
-	border-bottom-left-radius: 10px;
-	border-bottom-right-radius: 0;
-}
-
-.view-wc-orders .table-earning tfoot tr:last-of-type td {
-	border-bottom-left-radius: 0;
-	border-bottom-right-radius: 10px;
-}
-
-.view-wc-orders .table-earning tfoot {
-	border-top: 2px #333 dashed;
-}
-
 .view-wc-orders .wc-item-meta li {
 	list-style: none;
 }
@@ -190,12 +189,6 @@ p.order-again {
 
 .view-wc-orders .table-earning strong {
 	font-weight: normal;
-}
-
-.view-wc-orders .table-earning tfoot tr:last-of-type td,
-.view-wc-orders .table-earning tfoot tr:last-of-type th {
-	background: #333;
-	color: #fff;
 }
 
 .view-wc-orders .table-earning tfoot td,
@@ -471,12 +464,15 @@ p.order-again {
 }
 
 label[for="avatar"] {
-	border: 1px solid;
 	padding: 0.2rem;
 	border-radius: 4px;
 	-webkit-padding-end: 1rem;
 	padding-inline-end: 1rem;
 	cursor: pointer;
+	display: flex;
+	align-items: center;
+	border: 1px solid #e8e8e8;
+	box-shadow: 0 0 0 1px #e8e8e8 inset;
 }
 
 .row.nowarp > * {
@@ -818,21 +814,17 @@ pdorders .pdorder-title-cta {
 }
 
 pdaside .navbar__list .subitems {
-	font-size: small;
-	padding-left: 1.5rem;
-}
-
-pdaside .navbar__list .subitems {
 	display: none;
 }
+
 pdaside .navbar__list .active .subitems {
 	display: block;
 }
 
 pdaside .navbar__list .subitems,
 pdaside .navbar__list .subitems a {
-	font-size: small;
-	padding-left: 1.5rem;
+	font-size: 0.9rem;
+	padding-left: 0.75rem;
 	background: #F8F8F8;
 }
 
@@ -843,6 +835,61 @@ pdaside .navbar__list .subitems a {
 	width: 1rem;
 	height: 2rem;
 }
+
 .nav-item.active.has-subitem > a::after {
 	background: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 5L5 1L9 5' stroke='%235946B0' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A") no-repeat center/contain;
+}
+
+.mt-3 {
+	margin-top: 1.5rem;
+}
+
+pdmain .pepro-verify-container,
+pdmain [data-pepro-reglogin] form {
+	padding: 0 !important;
+}
+
+.form-group.pepro-login-reg-field {
+	position: relative;
+}
+
+form.floating_from_label .pepro-login-reg-field label {
+	position: absolute;
+	top: 0.5rem;
+	padding: 0 1rem;
+	margin: 0 0.5rem;
+	transition: all 0.3s linear;
+	right: auto;
+	left: 0;
+	z-index: 2;
+}
+
+[dir="rtl"] form.floating_from_label .pepro-login-reg-field label {
+	left: auto;
+	right: 0;
+}
+
+form.floating_from_label .pepro-login-reg-field.has-placeholder label,
+form.floating_from_label .pepro-login-reg-field[class*="wc_"] label,
+form.floating_from_label .pepro-login-reg-field.has-dropdown label,
+form.floating_from_label .pepro-login-reg-field.focused label,
+form.floating_from_label .pepro-login-reg-field.filled label {
+	padding: 0 0.5rem;
+	top: -0.6rem;
+	font-size: smaller;
+	background: var(--color-content-primary, #019162);
+	border-radius: 1rem;
+}
+
+form.floating_from_label .pepro-login-reg-field[class*="wc_"] label,
+form.floating_from_label .pepro-login-reg-field[class*="wc_"] label::after,
+form.floating_from_label .pepro-login-reg-field.has-placeholder label,
+form.floating_from_label .pepro-login-reg-field.has-placeholder label::after,
+form.floating_from_label .pepro-login-reg-field.has-dropdown label,
+form.floating_from_label .pepro-login-reg-field.has-dropdown label::after,
+form.floating_from_label .pepro-login-reg-field.filled label,
+form.floating_from_label .pepro-login-reg-field.filled label::after,
+form.floating_from_label .pepro-login-reg-field.focused label,
+form.floating_from_label .pepro-login-reg-field.focused label::after {
+	color: var(--color-content-bg, #f0f0f0);
 }

@@ -7,7 +7,7 @@ Tags: functionality, pepro, management, administration, profile, login, register
 Author: Pepro Dev. Group
 Author URI: https://pepro.dev/
 Plugin URI: https://pepro.dev/ups
-Version: 3.0.0
+Version: 3.1.0
 Stable tag: 2.5.0
 Requires at least: 5.0
 Tested up to: 5.9
@@ -19,8 +19,8 @@ Copyright: (c) 2021 Pepro Dev. Group, All rights reserved.
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
-# @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2022/02/20 02:19:26
+# @Last modified by:   amirhp-com
+# @Last modified time: 2022/05/11 14:19:17
 namespace PeproDev;
 use PeproDev;
 
@@ -31,7 +31,7 @@ if (!class_exists("PeproDevUPS")) {
     {
         public function __construct()
         {
-            define('PEPRODEVUPS', '3.0.0');
+            define('PEPRODEVUPS', '3.1.0');
             define('PEPRODEVUPS_DIR', plugin_dir_path(__FILE__));
             define('PEPRODEVUPS_URL', plugins_url("", __FILE__));
 

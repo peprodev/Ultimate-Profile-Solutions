@@ -1,6 +1,6 @@
 <?php
-# @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2022/02/23 16:52:46
+# @Last modified by:   amirhp-com
+# @Last modified time: 2022/05/11 23:56:45
 namespace PeproDev;
 use PeproDev;
 
@@ -36,6 +36,7 @@ if (!class_exists("PeproDevUPS_Login")){
     public $developerURI;
     public $author;
     public $register_fileds;
+    public $editprofile_fileds;
     public $login_fields;
     public $authorURI;
     public $copyright;
@@ -53,6 +54,7 @@ if (!class_exists("PeproDevUPS_Login")){
     public $no_popup_alert;
     public $verify_email;
     public $verify_mobile;
+    public $form_class;
     public $use_mobile_as_username;
     public $use_email_as_username;
     public $hide_email_field;
@@ -161,51 +163,33 @@ if (!class_exists("PeproDevUPS_Login")){
       $this->default_sender                 = "wordpress@" . parse_url(get_bloginfo('url'), PHP_URL_HOST);
       $this->from_name                      = !empty($this->verification_email_sender_name) ? trim($this->verification_email_sender_name) : get_bloginfo('name','display');
       $this->from_address                   = !empty($this->verification_email_sender) ? trim($this->verification_email_sender) : $this->default_sender;
-      add_action("init",                              array( $this, "admin_init" ));
-      add_action("wp_ajax_pepro_reglogin",            array( $this, "handel_ajax_req"));
-      add_action("wp_ajax_nopriv_pepro_reglogin",     array( $this, "handel_ajax_req"));
-      add_action("register_form",                     array( $this, "register_form" ));
-      add_action("user_new_form",                     array( $this, "register_form_admin" ));
-      add_action("nsl_login",                         array( $this, "nsl_login" ), 10, 2);
-      add_action("user_register",                     array( $this, "user_register" ));
-      add_action("edit_user_created_user",            array( $this, "user_register" ));
-      add_action("show_user_profile",                 array( $this, "show_profile_custom_fields" ), 10, 3);
-      add_action("edit_user_profile",                 array( $this, "show_profile_custom_fields" ), 10, 3);
-      add_action("personal_options_update",           array( $this, "update_profile_custom_fields" ));
-      add_action("edit_user_profile_update",          array( $this, "update_profile_custom_fields" ));
-      add_action("registration_errors",               array( $this, "registration_errors" ), 10, 3);
-      add_action("user_profile_update_errors",        array( $this, "registration_errors_admin" ), 10, 3);
-      add_action("manage_users_columns",              array( $this, "manage_users_columns" ));
-      add_action("manage_users_custom_column",        array( $this, "manage_users_custom_column" ), 100, 3);
-      add_action("admin_enqueue_scripts",             array( $this, "admin_enqueue_scripts" ));
-      add_action("login_form_register",               array( $this, "login_form_register"));
-      add_action("login_form_logout",                 array( $this, "login_form_logout"));
-      add_filter("login_redirect",                    array( $this, "redirect_after_login_register" ), 10, 3);
-      add_filter("registration_redirect",             array( $this, "redirect_after_login_register" ), 10, 3);
-      add_filter("woocommerce_login_redirect",        array( $this, "redirect_after_login_register" ), 10, 3);
-      add_filter("woocommerce_registration_redirect", array( $this, "redirect_after_login_register" ), 10, 3);
-      add_filter("peprofile_shortcodes",              array( $this, "add_peprofile_shortcodes" ), 11000);
-      add_filter("teeny_mce_plugins",                 array( $this, "teeny_mce_plugins" ), 10, 2 );
-      add_shortcode("pepro-login-form",               array( $this, "shortcode__pepro_login_form"));
-      add_shortcode("pepro-login-popup",              array( $this, "shortcode__pepro_login_popup"));
-      add_shortcode("logout-url",                     array( $this, "shortcode__logout_url"));
-      add_shortcode("verified-mobile",                array( $this, "shortcode__user_verified_mobile"));
-      add_shortcode("verified-email",                 array( $this, "shortcode__user_verified_email"));
-      add_shortcode("loggedin",                       array( $this, "shortcode__check_loggedin") );
-      add_shortcode("guest",                          array( $this, "shortcode__check_loggedout") );
-      add_shortcode("loggedout",                      array( $this, "shortcode__check_loggedout") );
-      add_shortcode("pepro-smart-btn",                array( $this, "shortcode__smart_btn") );
-      add_shortcode("pepro-sms-subscription",         array( $this, "shortcode__sms_subscription") );
-
-      add_filter( "pepro_reglogin_get_register_fields",                   array( $this, "pepro_reglogin_get_register_fields" ), 1000);
-      add_action( "pepro_reglogin_show_hide_defaul_registeration_fields", array( $this, "form_defaul_registeration_fields" ), 1000);
-      add_action( "auth_cookie_expiration",                               array( $this, "auth_cookie_expiration" ), 10, 3 );
-
-      $this->register_fileds       = $this->get_register_fields();
-      $this->form_register_fields  = $this->get_form_register_fields();
-      $this->form_resetpass_fields = $this->get_form_resetpass_fields();
-      $this->login_fields          = $this->get_login_fields();
-      $this->verify_mobile_fields  = $this->get_verify_mobile_fields();
+      add_action("wp_ajax_pepro_reglogin",                               array( $this, "handel_ajax_req"));
+      add_action("wp_ajax_nopriv_pepro_reglogin",                        array( $this, "handel_ajax_req"));
+      add_action("register_form",                                        array( $this, "register_form" ));
+      add_action("user_new_form",                                        array( $this, "register_form_admin" ));
+      add_action("nsl_login",                                            array( $this, "nsl_login" ), 10, 2);
+      add_action("user_register",                                        array( $this, "user_register" ));
+      add_action("edit_user_created_user",                               array( $this, "user_register" ));
+      add_action("show_user_profile",                                    array( $this, "show_profile_custom_fields" ), 10, 3);
+      add_action("edit_user_profile",                                    array( $this, "show_profile_custom_fields" ), 10, 3);
+      add_action("personal_options_update",                              array( $this, "update_profile_custom_fields" ));
+      add_action("edit_user_profile_update",                             array( $this, "update_profile_custom_fields" ));
+      add_action("registration_errors",                                  array( $this, "registration_errors" ), 10, 3);
+      add_action("user_profile_update_errors",                           array( $this, "registration_errors_admin" ), 10, 3);
+      add_action("manage_users_columns",                                 array( $this, "manage_users_columns" ));
+      add_action("manage_users_custom_column",                           array( $this, "manage_users_custom_column" ), 100, 3);
+      add_action("admin_enqueue_scripts",                                array( $this, "admin_enqueue_scripts" ));
+      add_action("login_form_register",                                  array( $this, "login_form_register"));
+      add_action("login_form_logout",                                    array( $this, "login_form_logout"));
+      add_filter("login_redirect",                                       array( $this, "redirect_after_login_register" ), 10, 3);
+      add_filter("registration_redirect",                                array( $this, "redirect_after_login_register" ), 10, 3);
+      add_filter("woocommerce_login_redirect",                           array( $this, "redirect_after_login_register" ), 10, 3);
+      add_filter("woocommerce_registration_redirect",                    array( $this, "redirect_after_login_register" ), 10, 3);
+      add_filter("teeny_mce_plugins",                                    array( $this, "teeny_mce_plugins" ), 10, 2 );
+      add_action("pepro_reglogin_show_hide_defaul_registeration_fields", array( $this, "form_defaul_registeration_fields" ), 1000);
+      add_action("auth_cookie_expiration",                               array( $this, "auth_cookie_expiration" ), 10, 3 );
+      add_filter("pepro_reglogin_get_register_fields",                   array( $this, "pepro_reglogin_get_register_fields" ), 1000);
+      add_action("init",                                                 array( $this, "admin_init" ));
 
       $this->form_class = array();
       if ($this->floating_input_label) $this->form_class[] = "floating_from_label";
@@ -218,6 +202,19 @@ if (!class_exists("PeproDevUPS_Login")){
 
       $this->CreateDatabase();
 
+    }
+    public function edit_profile_fields($fields)
+    {
+      $fields[] = array(
+        "meta_name"   => "billing_country",
+        "type"        => "wc_country",
+        "title"       => __("Country / Region","peprodev-ups"),
+        "is-required" => "yes",
+        "is-public"   => "yes",
+        "is-editable" => "yes",
+        "in-column"   => "yes",
+      );
+      return $fields;
     }
     public function CreateDatabase($force = false)
     {
@@ -677,7 +674,7 @@ if (!class_exists("PeproDevUPS_Login")){
       wp_add_inline_style("pepro-login-reg-formaction", get_option("{$this->save_prefix}-customcss"));
       wp_enqueue_script( "pepro_reglogin_recaptcha",    "https://www.google.com/recaptcha/api.js", array(), time(), true);
     }
-    public function verify_user_mobile_email_inline()
+    public function verify_user_mobile_email_inline($header=true)
     {
       ob_start();
       $uniqd = uniqid("pepro_verify_");
@@ -687,7 +684,13 @@ if (!class_exists("PeproDevUPS_Login")){
         ?>
         <div class="col-lg-<?=$cols;?> col-md-12">
           <div class="card">
-            <div class="card-header"><?php esc_html_e("Verify/Change your email address", "peprodev-ups");?></div>
+            <?php
+              if ($header) {
+                ?>
+                  <div class="card-header"><?php esc_html_e("Verify Email address", "peprodev-ups");?></div>
+                <?php
+              }
+            ?>
             <div class="card-body">
               <div class="pepro-verify-container" id="<?=esc_attr($uniqd);?>" data-pepro-reglogin="<?=esc_attr($uniqd);?>">
                 <!-- PeproDev Ultimate Profile Solutions Verify email Form -->
@@ -697,7 +700,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       ?>
                       <div class="login_error success">
                         <?php
-                          _e("You Email address is already verified!", "peprodev-ups");
+                          _e("Your Email is already verified!", "peprodev-ups");
                         ?>
                       </div>
                       <?php
@@ -706,7 +709,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       ?>
                       <div class="login_error error">
                         <?php
-                        _e("You Email address is not verified!", "peprodev-ups");
+                        _e("Your Email is not verified!", "peprodev-ups");
                         ?>
                       </div>
                       <?php
@@ -735,7 +738,7 @@ if (!class_exists("PeproDevUPS_Login")){
         ?>
         <div class="col-lg-6 col-md-12">
           <div class="card">
-            <div class="card-header"><?php esc_html_e("Verify/Change your mobile number", "peprodev-ups");?></div>
+            <div class="card-header"><?php esc_html_e("Verify Mobile number", "peprodev-ups");?></div>
             <div class="card-body">
               <div class="pepro-verify-container" id="<?=esc_attr($uniqd);?>" data-pepro-reglogin="<?=esc_attr($uniqd);?>">
                 <!-- PeproDev Ultimate Profile Solutions Verify mobile Form -->
@@ -745,7 +748,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       ?>
                       <div class="login_error success">
                         <?php
-                          _e("You mobile is already verified!", "peprodev-ups");
+                          _e("Your mobile is already verified!", "peprodev-ups");
                         ?>
                       </div>
                       <?php
@@ -754,7 +757,7 @@ if (!class_exists("PeproDevUPS_Login")){
                       ?>
                       <div class="login_error error">
                         <?php
-                          _e("You mobile is not verified!", "peprodev-ups");
+                          _e("Your mobile is not verified!", "peprodev-ups");
                         ?>
                       </div>
                       <?php
@@ -1657,11 +1660,12 @@ if (!class_exists("PeproDevUPS_Login")){
                 else{
                   $last_attemp = get_the_author_meta("_email_otp_date", $user_id);
                   $_otp_now  = $this->wp_date();
+                  // had request before
                   if ($last_attemp){
                     $today  = strtotime($_otp_now);
                     $expire = strtotime($last_attemp) + $this->email_expiration;
                     if($today >= $expire){
-                      $email = $this->send_verification_email($user->user_email);
+                      $email = $this->send_verification_email( (!isset($param["username"]) ? $user->user_email : sanitize_email( $param["username"] )) );
                       $last_attemp = $this->wp_date();
                       if ($email){
                         wp_send_json_success(array(
@@ -1696,8 +1700,10 @@ if (!class_exists("PeproDevUPS_Login")){
                         "timerdown"   => $this->wp_date("Y/m/d H:i:s", strtotime($last_attemp) + $this->email_expiration),
                       ));
                     }
-                  }else{
-                    $email = $this->send_verification_email($user->user_email);
+                  }
+                  // first time requesting otp
+                  else{
+                    $email = $this->send_verification_email( (!isset($param["username"]) ? $user->user_email : sanitize_email( $param["username"] )) );
                     $last_attemp = $this->wp_date();
                     if ($email){
                       wp_send_json_success(array(
@@ -2768,6 +2774,11 @@ if (!class_exists("PeproDevUPS_Login")){
       }
       return apply_filters("pepro_reglogin_get_register_fields", array());
     }
+    public function get_editprofile_fields()
+    {
+      $fields = $this->get_register_fields();
+      return apply_filters("pepro_reglogin_get_editprofile_fields", $fields);
+    }
     public function get_login_fields()
     {
       // default login inputs
@@ -3132,6 +3143,7 @@ if (!class_exists("PeproDevUPS_Login")){
         ));
       extract($config);
       $printr = "table" === $style;
+
       foreach ( $loop_fields as $field) {
         if ($skip_not_public && "yes" !== $field["is-public"]){ continue; }
         if ($skip_profile && "yes" !== $field["is-editable"]){ continue; }
@@ -3203,7 +3215,7 @@ if (!class_exists("PeproDevUPS_Login")){
             echo "<".($printr?"tr":"{$style}")." class='{$row_class} {$field["meta_name"]}-wrap ".("yes" == $field["is-required"]?"form-required":"")."'>
                    ".($printr?"<th>":"").($no_label?"":"<label class=\"".esc_attr($label_class)."\" for=\"{$field["meta_name"]}\">".esc_html( $field["title"] )."</label>").($printr?"</th>":"")."
                    ".($printr?"<td>":"");
-            woocommerce_form_field( 'billing_country', array( 'type' => 'country' ) );
+            woocommerce_form_field( 'billing_country', array( 'type' => 'country', 'default' => $field["default"] ) );
             echo ($printr?"</td>":""). ($printr?"</tr>":"</{$style}>");
           break;
 
@@ -3324,8 +3336,8 @@ if (!class_exists("PeproDevUPS_Login")){
         }
       }
 
-      $textSend   = __("Receive Code","peprodev-ups");
-      $textVerify = __("Verify Code","peprodev-ups");
+      $textSend   = __("Get Verification Code","peprodev-ups");
+      $textVerify = __("Verify Verification Code","peprodev-ups");
 
       array_push($login_fields, array(
           "meta_name"   => "submit",
@@ -4112,18 +4124,18 @@ if (!class_exists("PeproDevUPS_Login")){
       ob_start();
       echo "<div class='custom-fields'>";
       $this->printout_fields(array(
-        "style"           => "div",
-        "row_class"       => "col-lg-12 col-md-12 mt-3 form-group",
-        "item_class"      => "form-control",
-        "label_class"     => "control-label mb-1",
-        "loop_fields"     => $this->register_fileds,
-        "echo"            => true,
-        "skip_not_public" => true,
-        "skip_profile"    => true,
-        "isourprofile"    => true,
-        "user_id"         => get_current_user_id(),
-        "skip_recaptcha"  => true,
-        ));
+          "style"           => "div",
+          "row_class"       => "col-lg-12 col-md-12 mt-3 form-group pepro-login-reg-field ",
+          "item_class"      => "form-control",
+          "label_class"     => "control-label mb-1",
+          "loop_fields"     => $this->editprofile_fileds,
+          "user_id"         => get_current_user_id(),
+          "echo"            => true,
+          "skip_not_public" => true,
+          "skip_profile"    => true,
+          "isourprofile"    => true,
+          "skip_recaptcha"  => false,
+      ));
       echo "</div>";
       $htmloutput = ob_get_contents();
       ob_end_clean();
@@ -4230,6 +4242,25 @@ if (!class_exists("PeproDevUPS_Login")){
       add_action( "login_footer", function () {
         // echo do_shortcode(get_option("{$this->save_prefix}-footerhtml"));
       });
+
+      $this->register_fileds       = $this->get_register_fields();
+      $this->editprofile_fileds    = $this->get_editprofile_fields();
+      $this->form_register_fields  = $this->get_form_register_fields();
+      $this->form_resetpass_fields = $this->get_form_resetpass_fields();
+      $this->login_fields          = $this->get_login_fields();
+      $this->verify_mobile_fields  = $this->get_verify_mobile_fields();
+
+      add_filter("peprofile_shortcodes",                                 array( $this, "add_peprofile_shortcodes" ), 11000);
+      add_shortcode("pepro-login-form",                                  array( $this, "shortcode__pepro_login_form"));
+      add_shortcode("pepro-login-popup",                                 array( $this, "shortcode__pepro_login_popup"));
+      add_shortcode("logout-url",                                        array( $this, "shortcode__logout_url"));
+      add_shortcode("verified-mobile",                                   array( $this, "shortcode__user_verified_mobile"));
+      add_shortcode("verified-email",                                    array( $this, "shortcode__user_verified_email"));
+      add_shortcode("loggedin",                                          array( $this, "shortcode__check_loggedin") );
+      add_shortcode("guest",                                             array( $this, "shortcode__check_loggedout") );
+      add_shortcode("loggedout",                                         array( $this, "shortcode__check_loggedout") );
+      add_shortcode("pepro-smart-btn",                                   array( $this, "shortcode__smart_btn") );
+      add_shortcode("pepro-sms-subscription",                            array( $this, "shortcode__sms_subscription") );
 
       if (isset($_GET["bulk_useremail_approve"]) && !empty($_GET["bulk_useremail_approve"]) && is_admin())
       {

@@ -1,6 +1,6 @@
 <?php
-# @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/17 21:06:51
+# @Last modified by:   amirhp-com
+# @Last modified time: 2022/05/12 00:18:39
 namespace PeproDev;
 use PeproDev;
 class dashboard extends PeproDevUPS_Profile
@@ -9,14 +9,12 @@ class dashboard extends PeproDevUPS_Profile
   {
     parent::__construct();
     $this->cur_slug = isset($_GET['section']) ? sanitize_text_field(trim($_GET['section'])) : "home";
-
-    $this->wp_enqueue_scripts();
-    $this->handle_body();
   }
   public function handle_body()
   {
     ob_start();
     // remove wp-seo
+    $this->wp_enqueue_scripts();
     if (class_exists("WPSEO_Options")){
       $front_end = YoastSEO()->classes->get( Yoast\WP\SEO\Integrations\Front_End_Integration::class );
       remove_action( 'wpseo_head', [ $front_end, 'present_head' ], -9999 );
@@ -57,7 +55,7 @@ class dashboard extends PeproDevUPS_Profile
         }
         // user is logged-in
         else{
-          $allowed_slugs_whitelist = array_unique(apply_filters( "peprofile_dashboard_slugs", array("edit","me")));
+          $allowed_slugs_whitelist = array_unique(apply_filters( "peprofile_dashboard_slugs", array( "me", "edit", "pswd", "tickets" ) ));
           // requested slug is not allowed
           if (empty($this->cur_slug) || !in_array($this->cur_slug, $allowed_slugs_whitelist)){
             $this->peprofile_get_template_part("dash","home");

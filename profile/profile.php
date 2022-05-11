@@ -1,6 +1,6 @@
 <?php
-# @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2022/02/23 15:55:26
+# @Last modified by:   amirhp-com
+# @Last modified time: 2022/05/12 00:18:08
 namespace PeproDev;
 use PeproDev;
 
@@ -113,8 +113,6 @@ if (!class_exists("PeproDevUPS_Profile")) {
               ),
             );
 
-
-
             if (isset($_GET["peprodev_subscribers"]) && "export_csv" === trim($_GET["peprodev_subscribers"])){
               if (current_user_can("administrator")) {
                 $data = array();
@@ -186,7 +184,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
         }
         public function admin_bar_menu_items($wp_admin_bar)
         {
-          wp_register_style("{$this->id}-adminbar_styles", false);
+          wp_register_style("{$this->id}-adminbar_styles", false, [], false, "all");
           wp_add_inline_style( "{$this->id}-adminbar_styles", '#wpadminbar #wp-admin-bar-peprocoreprofile .ab-icon::before {content: "\f110";top: 2px;}');
           wp_enqueue_style("{$this->id}-adminbar_styles");
           $profile_page = $this->get_profile_page(["i"=>current_time("timestamp")]);
@@ -629,8 +627,8 @@ if (!class_exists("PeproDevUPS_Profile")) {
           wp_enqueue_script("jquery");
           if ($this->user_modern) {
             $this->peprofile_get_template_part("dash-index");
-            $txt = (new \PeproDev\dashboard)->handle_body();
-            return $txt;
+            $dashObj = new \PeproDev\dashboard;
+            return $dashObj->handle_body();
           }
           else{
             add_filter( "the_content", function ( $content ) { $this->peprofile_get_template_part("dash-index"); return; }, 999 );
@@ -1132,7 +1130,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                     break;
 
                 // Check default theme in profile
-                } elseif (file_exists(trailingslashit("$this->assets_dir/legacy") . $template_name) ) {
+                } elseif (!$this->user_modern && file_exists(trailingslashit("$this->assets_dir/legacy") . $template_name) ) {
                     $located = trailingslashit("$this->assets_dir/legacy") . $template_name;
                     break;
                 }
@@ -1450,7 +1448,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
 
                       if (class_exists("\PeproDev\PeproDevUPS_Login")){
                         global $PeproDevUPS_Login;
-                        foreach ($PeproDevUPS_Login->get_register_fields() as $field) {
+                        foreach ($PeproDevUPS_Login->get_editprofile_fields() as $field) {
                           if ("yes" == $field["is-editable"]){
                             update_user_meta( $user_id, $index["name"], sanitize_text_field(trim($index['value'])));
                           }
@@ -2663,7 +2661,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
         */
         public function add_input($title='',$id='',$val='',$extrahtml='',$class='',$type='text')
         {
-            echo "<div class='form-group'>
+            echo "<div class='form-group pepro-login-reg-field $type $id-wrap'>
                 <label for='$id' class='control-label mb-1'>$title</label>
                 <input id='$id' name='$id' type='$type' class='form-control $class' $extrahtml value='".esc_attr($val)."' />
               </div>";

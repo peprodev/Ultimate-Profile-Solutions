@@ -206,35 +206,15 @@ body:not(.section-edit) [data-pepro-reglogin] > form .force-ltr {
 	display: none;
 }
 
-[data-pepro-reglogin] > form input,
-[data-pepro-reglogin] > form input:active,
-[data-pepro-reglogin] > form input:focus,
-[data-pepro-reglogin] > form input:hover,
-[data-pepro-reglogin] > form select,
-[data-pepro-reglogin] > form select:active,
-[data-pepro-reglogin] > form select:focus,
-[data-pepro-reglogin] > form select:hover,
-[data-pepro-reglogin] > form textarea,
-[data-pepro-reglogin] > form textarea:active,
-[data-pepro-reglogin] > form textarea:focus,
-[data-pepro-reglogin] > form textarea:hover {
-	/* border-color: #e8e8e8 !important; */
+pdmain form .form-group :is(input,select, textarea):is(:valid, :invalid, :active, :focus),
+[data-pepro-reglogin] > form :is(input,select, textarea):is(:valid, :invalid, :active, :focus, :hover){
 	box-shadow: 0 0 0 1px #e8e8e8 inset;
 }
-/*
-[data-pepro-reglogin] > form input:valid,
-[data-pepro-reglogin] > form select:valid,
-[data-pepro-reglogin] > form textarea:valid {
-	border-color: #61f599 !important;
-	box-shadow: 0 0 0 1px #61f599 inset;
-}
 
-[data-pepro-reglogin] > form input:invalid,
-[data-pepro-reglogin] > form select:invalid,
-[data-pepro-reglogin] > form textarea:invalid {
-	border-color: #f56171 !important;
-	box-shadow: 0 0 0 1px #f56171 inset;
-}*/
+pdmain form .form-group :is(input,select, textarea):is(:active, :focus),
+pdmain [data-pepro-reglogin] > form.inline :is(input,select, textarea):is(:active, :focus){
+	box-shadow: 0px 0px 0px 1px var(--color-content-primary, currentColor) inset !important;
+}
 
 [data-pepro-reglogin] > form .form-required label::after {
 	content: " *";
