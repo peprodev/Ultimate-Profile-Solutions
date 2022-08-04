@@ -1,6 +1,6 @@
 <?php
-# @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2022/02/11 02:54:46
+# @Last modified by:   amirhp-com
+# @Last modified time: 2022/08/04 21:07:20
 namespace PeproDev;
 use PeproDev;
 
@@ -205,8 +205,6 @@ if (!class_exists("PeproDevUPS_Core")){
     public function load_dashboard_before_initiated()
     {
       wp_dequeue_style("us-font-awesome");
-      wp_dequeue_style("us-core");
-      wp_dequeue_script("us-core");
       wp_dequeue_style("us-font-awesome-duotone");
       wp_dequeue_style("font-awesome");
       wp_enqueue_style("RobotoSlabMaterialIcons",         "//fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons", [], '1.0');

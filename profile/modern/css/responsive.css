@@ -1,0 +1,72 @@
+/**
+ * @Author: amirhp-com
+ * @Date:   2022/08/04 21:40:12
+ * @Email:  its@amirhp.com
+ * @Last modified by:   amirhp-com
+ * @Last modified time: 2022/08/04 22:00:55
+ * @License: GPLv2
+ */
+@media only screen and (max-width: 1280px) {
+  pdwrapper {
+    grid-template-columns: auto;
+  }
+
+  .pdorder-title-wrap {
+    align-items: center;
+  }
+
+  pdaside {
+    display: none;
+  }
+}
+@media only screen and (max-width: 828px) {
+  .pdorder-pdpromos,
+  .pdtickets-pdbalance {
+    grid-template-columns: auto;
+    gap: 2rem;
+  }
+
+  pdorders {
+    min-height: 200px;
+  }
+
+  .pdtickets-list tr td:first-of-type,
+  .pdtickets-list tr th:first-of-type {
+    padding-left: 0.5rem;
+  }
+
+  .pdtickets-list td,
+  .pdtickets-list th {
+    padding: 0 0.3rem;
+    text-align: start;
+  }
+
+  td.col_date .ticket_time {
+    display: none;
+  }
+
+  td.col_state,
+  th.col_state {
+    display: none;
+  }
+
+  .pdtickets-list td,
+  .pdtickets-list th {
+    white-space: nowrap;
+  }
+
+  pdtickets {
+    width: 100%;
+    max-width: 100%;
+    overflow: auto;
+  }
+}
+@media only screen and (max-width: 376px) {
+  .pdorder-stats {
+    grid-template-columns: auto;
+  }
+
+  .pdorder-title-wrap {
+    margin-bottom: 1rem;
+  }
+}

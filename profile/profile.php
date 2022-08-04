@@ -1,9 +1,7 @@
 <?php
 # @Last modified by:   amirhp-com
-# @Last modified time: 2022/05/12 00:54:45
+# @Last modified time: 2022/08/05 00:28:02
 namespace PeproDev;
-use PeproDev;
-
 if (!class_exists("PeproDevUPS_Profile")) {
     class PeproDevUPS_Profile
     {
@@ -147,13 +145,15 @@ if (!class_exists("PeproDevUPS_Profile")) {
             }
 
             add_action("init", array( $this, "init_plugin" ));
+
             if (!current_user_can('edit_posts') && !is_admin()) {
-              show_admin_bar(false);
-              add_filter('show_admin_bar', '__return_false');
+              show_admin_bar(false); add_filter('show_admin_bar', '__return_false');
             }
+
             add_action("template_redirect", array( $this, "remove_yoast_wpseo") );
-            add_action("admin_bar_menu",  array( $this, "admin_bar_menu_items"), 31);
-            add_filter("get_avatar_url",  array( $this, "change_avatar_url"), 1, 3);
+            add_action("admin_bar_menu",    array( $this, "admin_bar_menu_items"), 31);
+            add_filter("get_avatar_url",    array( $this, "change_avatar_url"), 1, 3);
+
         }
         public function ExportFileAsExcel($records = array(), $delimiter = "," )
         {
@@ -302,7 +302,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
             add_filter( "template_include",                  array($this, "template_include"));
             add_filter( "theme_page_templates",              array($this, "theme_page_templates"), 10, 4);
           }
-          add_filter( "body_class",                          array($this, "body_class"), 1, 1);
+          add_filter( "body_class",                          array($this, "body_class"));
           add_filter( "peprofile_dashboard_slugs",           array($this, "peprofile_dashboard_slugs"), 10, 1);
           add_filter( "display_post_states",                 array($this, "display_post_states"), 10, 2);
           add_filter( "peprofile_get_nav_items",             array($this, "peprofile_get_nav_items"),10,1);
@@ -327,6 +327,42 @@ if (!class_exists("PeproDevUPS_Profile")) {
           add_action( 'admin_init',        array( $this, "redirect_url_if_no_access"), 1 );
           add_action( 'after_setup_theme', array( $this, "after_setup_theme"));
 
+          add_action( 'show_user_profile',        array( $this, "user_profile_promotion_fields") );
+          add_action( 'edit_user_profile',        array( $this, "user_profile_promotion_fields") );
+          add_action( 'personal_options_update',  array( $this, "save_user_promotion_fields") );
+          add_action( 'edit_user_profile_update', array( $this, "save_user_promotion_fields") );
+
+          // Redirect WooCommerce checkout page to a custom thank you page
+          add_action( 'woocommerce_thankyou', array($this, "redirect_woo_checkout"));
+
+        }
+        public function redirect_woo_checkout( $order_id ){
+          $order = wc_get_order( $order_id );
+          $url = $this->get_profile_page([ "section" => "orders", "view" => $order_id ]);
+          if (!$order->has_status('failed') ) {
+            wp_safe_redirect($url);
+            exit;
+          }
+        }
+        public function save_user_promotion_fields( $user_id )
+        {
+          if (isset($_POST['ups_promotion_code']) && !empty(trim($_POST['ups_promotion_code']))) {
+            update_user_meta( $user_id, 'ups_promotion_code', sanitize_text_field(trim($_POST['ups_promotion_code'])) );
+          }
+        }
+        public function user_profile_promotion_fields( $user )
+        {
+          echo '<h3 class="heading">'.__("User Promotion Code",$this->td).'</h3>';
+          $promo = get_user_meta($user->ID, 'ups_promotion_code', true);
+          ?>
+          <table class="form-table">
+            <tr>
+              <th><label for="ups_promotion_code"><?=__("Promotion Code", $this->td);?></label></th>
+              <td><input type="text" class="input-text form-control regular-text" name="ups_promotion_code" id="ups_promotion_code" value="<?=$promo;?>" />
+              </td>
+            </tr>
+          </table>
+          <?php
         }
         public function change_wp_title()
         {
@@ -364,10 +400,9 @@ if (!class_exists("PeproDevUPS_Profile")) {
         {
           global $post;
           if ( is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'pepro-profile') ) {
-            wp_enqueue_script( 'wpdocs-script');
             $current = isset($_GET["section"]) ? "section-" . sanitize_text_field(trim($_GET["section"])) : "";
             $classez = (array) apply_filters("peprofile_body_class", ["peprodev-ups", $current]);
-            $classes = array_merge( $classes, $classez);
+            $classes = array_merge($classes, $classez);
           }
           return $classes;
         }
@@ -471,14 +506,9 @@ if (!class_exists("PeproDevUPS_Profile")) {
         }
         public function remove_us_css()
         {
-          wp_dequeue_style("us-core");
-          wp_dequeue_script("us-core");
-          wp_dequeue_style("us-font-awesome-duotone");
-          wp_dequeue_style("font-awesome");
           wp_dequeue_style("tp-material-icons");
           wp_dequeue_style("rs-roboto");
           wp_dequeue_style("revslider-material-icons");
-
         }
         public function change_avatar_url($url, $id_or_email, $args)
         {
@@ -628,7 +658,8 @@ if (!class_exists("PeproDevUPS_Profile")) {
           wp_enqueue_script("jquery");
           if ($this->user_modern) {
             $this->peprofile_get_template_part("dash-index");
-            return (new \PeproDev\dashboard)->get_body();
+            $content = (new \PeproDev\dashboard)->get_body();
+            return do_shortcode( $content );
           }
           else{
             add_filter( "the_content", function ( $content ) { $this->peprofile_get_template_part("dash-index"); return; }, 999 );
@@ -1083,12 +1114,6 @@ if (!class_exists("PeproDevUPS_Profile")) {
         {
             do_action("peprofile_get_template_part_{$slug}", $slug, $name);
             do_action("peprofile_get_template_part_{$slug}-{$name}", $slug, $name);
-            // fix for zephyr theme!
-            wp_dequeue_style( "us-core" );
-            wp_dequeue_style( "us-font-awesome-duotone" );
-            wp_dequeue_style( "font-awesome" );
-            wp_dequeue_script( "us-core" );
-
             // Setup possible parts
             $templates = array();
             if (isset($name) ) {
@@ -2525,9 +2550,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
             $sections = $wpdb->get_results("SELECT * FROM `$this->tbl_sections` ORDER BY `date_created` DESC");
             if ($sections && !empty($sections)){
               foreach ($sections as $section) {
-                if (empty($section->title) || empty($section->slug) || empty($section->icon) || "yes" != $section->is_active)
-                  continue;
-
+                if (empty($section->title) || empty($section->slug) || empty($section->icon) || "yes" != $section->is_active){ continue; }
                 add_action( "peprofile_dashboard_content_{$section->slug}", array( $this, "peprofile_dashboard_content_read_from_db") );
               }
             }
@@ -2543,12 +2566,6 @@ if (!class_exists("PeproDevUPS_Profile")) {
             if ($notifs && !empty($notifs)){
               // fix for wp_enqueue_style and wp_enqueue_script
               do_action( 'wp_head' );
-              // fix for zephyr theme!
-              wp_dequeue_style( "us-core" );
-              wp_dequeue_script( "us-core" );
-              wp_dequeue_style( "us-font-awesome-duotone" );
-              wp_dequeue_style( "font-awesome" );
-
               global $PeproDevUPS_ProfileStripslashesNotifsJs;
               $this->notifs_js = stripslashes($notifs->js);
               $PeproDevUPS_ProfileStripslashesNotifsJs = $this->notifs_js;

@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   amirhp-com
-# @Last modified time: 2022/05/12 00:56:38
+# @Last modified time: 2022/08/04 21:41:06
 namespace PeproDev;
 use PeproDev;
 class dashboard extends PeproDevUPS_Profile
@@ -101,7 +101,8 @@ class dashboard extends PeproDevUPS_Profile
     /* heading */
     if($this->use_front_fa) wp_enqueue_style("pd-fafa", PEPRODEVUPS_URL . "/core/assets/css/all.min.css", [], $this->script_version);
     if($this->use_front_fo) wp_enqueue_style("pd-fafo", PEPRODEVUPS_URL . "/core/assets/css/fonts.css", [], $this->script_version);
-    wp_enqueue_style("peprodev-theme", "$this->modern_assets/css/modern.css", [], $this->script_version);
+    wp_enqueue_style("peprodev-theme-1", "$this->modern_assets/css/modern.css", [], $this->script_version);
+    wp_enqueue_style("peprodev-theme-2", "$this->modern_assets/css/responsive.css", [], $this->script_version);
     if (!empty($this->custom_css)) {
       wp_add_inline_style("peprodev-theme", '/*'.PHP_EOL.
       '* Global CSS @ PeproDev Ultimate Profile Solutions (https://pepro.dev/ups)'.PHP_EOL.
@@ -110,20 +111,20 @@ class dashboard extends PeproDevUPS_Profile
     if (is_rtl()){
       wp_enqueue_style("peprodev-theme-rtl", "$this->modern_assets/css/modern-rtl.css", [], $this->script_version);
     }
-
     /* footer */
     wp_enqueue_script( "jquery" );
     wp_enqueue_script("peprodev-main", "$this->modern_assets/js/main.js", array("jquery"));
     wp_enqueue_script("peprodev-extras", "$this->modern_assets/js/extras.js", array("jquery"), $this->script_version, true);
     wp_register_script("peprodev-custom", "$this->modern_assets/js/custom-js.js", array("jquery"), $this->script_version, true);
     wp_localize_script("peprodev-custom", "_i18n", array(
-      "td"                  => "peprocoreprofile",
-      "ajax"                => admin_url( "admin-ajax.php"),
-      "nonce"               => wp_create_nonce( "pepro_profile" ),
-      "prductnames"         => __("Product name", "peprodev-ups"),
-      "wishlistempty"       => __("No products added to the wishlist", "peprodev-ups"),
-      "fillreq"             => __("Please fill out all required fields.", "peprodev-ups"),
-      "max_size_err"        => __("Error, file is too large. Maximum allowed file size is #fs#","peprodev-ups"),
+      "td"            => "peprocoreprofile",
+      "ajax"          => admin_url( "admin-ajax.php"),
+      "nonce"         => wp_create_nonce( "pepro_profile" ),
+      "prductnames"   => __("Product name", "peprodev-ups"),
+      "wishlistempty" => __("No products added to the wishlist", "peprodev-ups"),
+      "copied"        => __("Copied to clipboard", "peprodev-ups"),
+      "fillreq"       => __("Please fill out all required fields.", "peprodev-ups"),
+      "max_size_err"  => __("Error, file is too large. Maximum allowed file size is #fs#","peprodev-ups"),
       ));
     wp_enqueue_script("peprodev-custom");
     $js1 = wp_unslash($this->custom_js);
