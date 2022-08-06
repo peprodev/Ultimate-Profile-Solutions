@@ -19,16 +19,17 @@
 # @Date:   2022/03/10 10:13:12
 # @Email:  its@amirhp.com
 # @Last modified by:   amirhp-com
-# @Last modified time: 2022/08/05 00:50:19
+# @Last modified time: 2022/08/06 21:43:28
 # @License: GPLv2
  */
 
- defined( 'ABSPATH' ) || exit;
- global $current_page, $PeproDevUPS_Profile;
- $that = $PeproDevUPS_Profile;
+defined( 'ABSPATH' ) || exit;
+global $current_page, $PeproDevUPS_Profile;
+$that     = $PeproDevUPS_Profile;
 $order_id = (int) sanitize_text_field( trim($_GET['view']) );
-$order = wc_get_order( $order_id );
-$notes = $order->get_customer_order_notes();
+$order    = wc_get_order( $order_id );
+$notes    = $order->get_customer_order_notes();
+
 ?>
 
 <div class="view-order-container">
@@ -78,12 +79,9 @@ $show_customer_details = is_user_logged_in() && $order->get_user_id() === get_cu
 $downloads             = $order->get_downloadable_items();
 $show_downloads        = $order->has_downloadable_item() && $order->is_download_permitted();
 
-if ( $show_downloads ) {
-	wc_get_template( 'order/order-downloads.php', array( 'downloads'  => $downloads, 'show_title' => true, ) );
-}
-
 ?>
 <section class="woocommerce-order-details">
+
 	<table class="woocommerce-table woocommerce-table--order shop_table order_details">
 		<thead>
 			<tr>
@@ -95,22 +93,17 @@ if ( $show_downloads ) {
 				<th class="woocommerce-table__product-table product-info"><?=__("INFO", $that->td);?></th>
 			</tr>
 		</thead>
-
 		<tbody>
 			<?php
-			do_action( 'woocommerce_order_details_before_order_table_items', $order );
-
 			foreach ( $order_items as $item_id => $item ) {
 				$product = $item->get_product();
+				if (!has_term("services", 'product_cat', $product->get_id())) continue;
         $purchase_note = $product ? $product->get_purchase_note() : '';
-
         if ( ! apply_filters( 'woocommerce_order_item_visible', true, $item ) ) { return; }
         $is_visible        = $product && $product->is_visible();
         $product_permalink = apply_filters( 'woocommerce_order_item_permalink', $is_visible ? $product->get_permalink( $item ) : '', $item, $order );
         $qty          = $item->get_quantity();
         $refunded_qty = $order->get_qty_refunded_for_item( $item_id );
-
-
         ?>
         <tr class="<?php echo esc_attr( apply_filters( 'woocommerce_order_item_class', 'woocommerce-table__line-item order_item', $item, $order ) ); ?>">
 
@@ -154,24 +147,10 @@ if ( $show_downloads ) {
             </tr>
           <?php
         }
-
       }
-
-			do_action( 'woocommerce_order_details_after_order_table_items', $order );
 			?>
 		</tbody>
-
 		<tfoot>
-			<?php
-			foreach ( $order->get_order_item_totals() as $key => $total ) {
-				?>
-<!--					<tr>
-						<th scope="row"><?php echo esc_html( $total['label'] ); ?></th>
-						<td><?php echo ( 'payment_method' === $key ) ? esc_html( $total['value'] ) : wp_kses_post( $total['value'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
-					</tr>-->
-					<?php
-			}
-			?>
 			<?php if ( $order->get_customer_note() ) : ?>
 				<tr>
 					<th><?php esc_html_e( 'Note:', 'woocommerce' ); ?></th>
@@ -181,5 +160,130 @@ if ( $show_downloads ) {
 		</tfoot>
 	</table>
 
-	<?php do_action( 'woocommerce_order_details_after_order_table', $order ); ?>
+	<table class="woocommerce-table woocommerce-table--order shop_table services_details">
+		<thead>
+			<tr>
+				<th class="woocommerce-table__product-table product-name"><?=__("Product Details", $that->td);?></th>
+				<th class="woocommerce-table__product-table product-quantity"><?=__("QUANTITY", $that->td);?></th>
+				<th class="woocommerce-table__product-table product-support"><?=__("SUPPORT DATE", $that->td);?></th>
+				<th class="woocommerce-table__product-table product-license"><?=__("License", $that->td);?></th>
+				<th class="woocommerce-table__product-table product-download"><?=__("DOWNLOAD", $that->td);?></th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php
+			foreach ( $order_items as $item_id => $item ) {
+				$product = $item->get_product();
+        if (has_term("services", 'product_cat', $product->get_id())) continue;
+				$purchase_note = $product ? $product->get_purchase_note() : '';
+        if ( ! apply_filters( 'woocommerce_order_item_visible', true, $item ) ) { return; }
+        $is_visible        = $product && $product->is_visible();
+        $product_permalink = apply_filters( 'woocommerce_order_item_permalink', $is_visible ? $product->get_permalink( $item ) : '', $item, $order );
+        $qty          = $item->get_quantity();
+        $refunded_qty = $order->get_qty_refunded_for_item( $item_id );
+        ?>
+        <tr class="<?php echo esc_attr( apply_filters( 'woocommerce_order_item_class', 'woocommerce-table__line-item order_item', $item, $order ) ); ?>">
+          <td class="woocommerce-table__product-table product-name">
+            <?=wp_kses_post( apply_filters( 'woocommerce_order_item_name', $product_permalink ? sprintf( '<a href="%s">%s</a>', $product_permalink, $item->get_name() ) : $item->get_name(), $item, $is_visible ) );?>
+          </td>
+					<td class="woocommerce-table__product-table product-quantity">
+						<?php
+						if ( $refunded_qty ) {
+							$qty_display = '<del>' . esc_html( $qty ) . '</del> <ins>' . esc_html( $qty - ( $refunded_qty * -1 ) ) . '</ins>';
+						} else {
+							$qty_display = esc_html( $qty );
+						}
+						echo apply_filters( 'woocommerce_order_item_quantity_html', ' <strong class="product-quantity">' . sprintf( '&times;&nbsp;%s', $qty_display ) . '</strong>', $item );
+						?>
+					</td>
+  				<td class="woocommerce-table__product-table product-support">
+            <span>————</span>
+          </td>
+  				<td class="woocommerce-table__product-table product-license">
+            <span>————</span>
+          </td>
+  				<td class="woocommerce-table__product-table product-download">
+            <a href="#" class="wc-btn-download"></a>
+          </td>
+        </tr>
+        <?php
+      }
+			?>
+		</tbody>
+		<tfoot>
+			<?php if ( $order->get_customer_note() ) : ?>
+				<tr>
+					<th><?php esc_html_e( 'Note:', 'woocommerce' ); ?></th>
+					<td><?php echo wp_kses_post( nl2br( wptexturize( $order->get_customer_note() ) ) ); ?></td>
+				</tr>
+			<?php endif; ?>
+		</tfoot>
+	</table>
+
+	<?php
+
+	if ( $show_downloads ) {
+		?>
+		<section class="woocommerce-order-downloads">
+			<table class="woocommerce-table woocommerce-table--order-downloads shop_table shop_table_responsive order_details">
+				<thead>
+					<tr>
+						<?php
+						$columns = apply_filters( 'woocommerce_account_downloads_columns',
+							array(
+								'download-product'   => __( 'Product Details', 'woocommerce' ),
+								'download-remaining' => __( 'Downloads remaining', 'woocommerce' ),
+								'download-expires'   => __( 'Expires', 'woocommerce' ),
+								'download-file'      => __( 'Download', 'woocommerce' ),
+								'download-actions'   => '&nbsp;',
+							)
+						);
+						foreach ( $columns as $column_id => $column_name ) : ?>
+							<th class="<?php echo esc_attr( $column_id ); ?>"><span class="nobr"><?php echo esc_html( $column_name ); ?></span></th>
+						<?php endforeach; ?>
+					</tr>
+				</thead>
+				<?php foreach ( $downloads as $download ) : ?>
+					<tr>
+						<?php foreach ( wc_get_account_downloads_columns() as $column_id => $column_name ) : ?>
+							<td class="<?php echo esc_attr( $column_id ); ?>" data-title="<?php echo esc_attr( $column_name ); ?>">
+								<?php
+								if ( has_action( 'woocommerce_account_downloads_column_' . $column_id ) ) {
+									do_action( 'woocommerce_account_downloads_column_' . $column_id, $download );
+								}
+								else{
+									switch ( $column_id ) {
+										case 'download-product':
+											if ( $download['product_url'] ) {
+												echo '<a href="' . esc_url( $download['product_url'] ) . '">' . esc_html( $download['product_name'] ) . '</a>';
+											} else {
+												echo esc_html( $download['product_name'] );
+											}
+										break;
+										case 'download-file':
+											echo '<a href="' . esc_url( $download['download_url'] ) . '" class="wc-btn-download"></a>';
+										break;
+										case 'download-remaining':
+											echo is_numeric( $download['downloads_remaining'] ) ? esc_html( $download['downloads_remaining'] ) : esc_html__( '&infin;', 'woocommerce' );
+										break;
+										case 'download-expires':
+											if ( ! empty( $download['access_expires'] ) ) {
+												echo '<time datetime="' . esc_attr( date( 'Y-m-d', strtotime( $download['access_expires'] ) ) ) . '" title="' . esc_attr( strtotime( $download['access_expires'] ) ) . '">' . esc_html( date_i18n( get_option( 'date_format' ), strtotime( $download['access_expires'] ) ) ) . '</time>';
+											} else {
+												esc_html_e( 'Never', 'woocommerce' );
+											}
+										break;
+									}
+								}
+								?>
+							</td>
+						<?php endforeach; ?>
+					</tr>
+				<?php endforeach; ?>
+			</table>
+		</section>
+		<?php
+	}
+
+	?>
 </section>

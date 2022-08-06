@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   amirhp-com
-# @Last modified time: 2022/08/05 00:28:02
+# @Last modified time: 2022/08/06 17:53:28
 namespace PeproDev;
 if (!class_exists("PeproDevUPS_Profile")) {
     class PeproDevUPS_Profile
@@ -153,7 +153,21 @@ if (!class_exists("PeproDevUPS_Profile")) {
             add_action("template_redirect", array( $this, "remove_yoast_wpseo") );
             add_action("admin_bar_menu",    array( $this, "admin_bar_menu_items"), 31);
             add_filter("get_avatar_url",    array( $this, "change_avatar_url"), 1, 3);
-
+            add_action("admin_bar_menu", array($this, "admin_bar_menu_wc_edit"), 999);
+        }
+        public function admin_bar_menu_wc_edit($wp_admin_bar)
+        {
+          if (isset($_GET["section"],$_GET["view"]) && $_GET["section"] == "orders") {
+            $order_id = (int) sanitize_text_field( trim($_GET['view']) );
+            if (current_user_can('edit_shop_orders', $order_id)) {
+              $wp_admin_bar->add_node(array(
+                'id'    => "edit2",
+                'title' => __("Edit Order","peprodev-ups"),
+                'href'  => admin_url("post.php?post={$order_id}&action=edit"),
+                'meta'  => array( 'class' => 'ups-wc-edit-order' ),
+              ));
+            }
+          }
         }
         public function ExportFileAsExcel($records = array(), $delimiter = "," )
         {
@@ -186,15 +200,20 @@ if (!class_exists("PeproDevUPS_Profile")) {
         public function admin_bar_menu_items($wp_admin_bar)
         {
           wp_register_style("{$this->id}-adminbar_styles", false, [], false, "all");
-          wp_add_inline_style( "{$this->id}-adminbar_styles", '#wpadminbar #wp-admin-bar-peprocoreprofile .ab-icon::before {content: "\f110";top: 2px;}');
+          wp_add_inline_style( "{$this->id}-adminbar_styles", '
+          #wpadminbar #wp-admin-bar-peprocoreprofile .ab-icon::before {content: "\f110";top: 2px;}
+          #wpadminbar #wp-admin-bar-edit2 > .ab-item::before { content: "\f464"; top: 2px; }
+          ');
           wp_enqueue_style("{$this->id}-adminbar_styles");
           $profile_page = $this->get_profile_page(["i"=>current_time("timestamp")]);
+
           $wp_admin_bar->add_node(array(
             'id'    => $this->id,
             'title' => '<span class="ab-icon" aria-hidden="true"></span>' . __("User Dashboard","peprodev-ups"),
             'href'  => $profile_page,
             'meta'  => array( 'class' => 'custom-node-class' ),
           ));
+
           foreach ($this->peprofile_get_nav_items_array() as $key => $value) {
             $wp_admin_bar->add_menu(array(
               'id'     => "{$this->id}{$key}",
@@ -364,22 +383,19 @@ if (!class_exists("PeproDevUPS_Profile")) {
           </table>
           <?php
         }
-        public function change_wp_title()
+        public function change_wp_title($title_orignal)
         {
-          $title = $this->get_title();
-          return !empty($title) ? $title . " &#8211; " . get_the_title() : get_the_title();
-        }
-        public function get_title()
-        {
-          $this->cur_slug = isset($_GET['section']) ? sanitize_text_field(trim($_GET['section'])) : "home";
+          $title = "";
+          $this->cur_slug = isset($_GET['section']) ? sanitize_text_field(trim($_GET['section'])) : "";
           foreach ($this->peprofile_get_nav_items_array() as $key => $value) {
             if (isset($value["subitems"]) && !empty($value["subitems"])) {
                 foreach ($value["subitems"] as $tq => $child) {
-                  if ($this->cur_slug == $child["slug"]) return wp_kses($child["title"], "", "");
+                  if ($this->cur_slug == $child["slug"]) $title = wp_kses($child["title"], "", "");
                 }
             }
-            if ($this->cur_slug == $key) return wp_kses($value["raw_title"], "", "");
+            if ($this->cur_slug == $key) $title = wp_kses($value["raw_title"], "", "");
           }
+          return !empty($title) ? $title . " &#8211; " . get_the_title() : $title_orignal;
         }
         public function redirect_url_if_no_access()
         {

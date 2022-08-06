@@ -3,10 +3,11 @@
  * @Date:2020/05/03 13:33:07
  * @Email:its@hpv.im
  * @Last modified by:   amirhp-com
- * @Last modified time: 2022/08/05 00:29:40
+ * @Last modified time: 2022/08/06 21:44:28
  * @License:GPLv2
  * @Copyright:Copyright © 2020 Amirhosseinhpv,All rights reserved.
  */
+
 pdtoast,
 toastwide {
 	display: block;
@@ -1043,15 +1044,34 @@ td .button-procceed-arrow {
 	font-weight: 500;
 	color: rgba(0, 0, 0, 0.8);
 }
+
 .voc-subhead .vocv[class*="wc-"] {
 	color: #5946B0;
 }
-.voc-subhead .vocv.wc-completed{
+
+.voc-subhead .vocv.wc-completed {
 	color: #14C39A;
 }
-.voc-subhead .vocv.wc-pending{
+
+.voc-subhead .vocv.wc-pending {
 	color: #ff7a7a;
 }
-.voc-subhead .vocv.wc-processing{
+
+.voc-subhead .vocv.wc-processing {
 	color: #ffa800;
+}
+
+.wc-btn-download {
+	display: inline-block;
+	margin: auto;
+	width: 2rem;
+	height: 2rem;
+	background-image: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='30' height='30' rx='15' fill='%235946B0'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M5.99609 14.1239C6.00996 15.559 6.06361 16.994 6.15705 18.4291C6.29453 20.3245 8.04478 22.0771 9.94043 22.2145C11.6272 22.3229 13.3114 22.3784 14.9981 22.3784C16.685 22.3784 18.3691 22.3229 20.0559 22.2145C21.9516 22.0771 23.7045 20.3271 23.8393 18.4291C23.9327 16.994 23.9864 15.559 24.0003 14.1239H23.2093C23.1956 15.5453 23.1426 16.9654 23.0504 18.3763C22.9975 19.0927 22.6326 19.8381 22.0484 20.4223C21.4641 21.0065 20.7185 21.3713 20.002 21.4242C18.3416 21.5326 16.6601 21.5881 14.9998 21.5881C13.3394 21.5881 11.6579 21.5326 9.99758 21.4242C9.28109 21.3713 8.53551 21.0065 7.95122 20.4223C7.36692 19.8381 7.00207 19.0927 6.94919 18.3763C6.85698 16.9654 6.80399 15.5453 6.79022 14.1239H5.99609Z' fill='white'/%3E%3Cpath d='M12.4468 12.8993C12.3746 12.8993 12.2994 12.9173 12.2303 12.9535C12.0107 13.0737 11.9295 13.3474 12.0498 13.5669C12.3987 14.2044 13.0303 14.8509 13.7611 15.5666C14.4529 16.2463 15.5387 16.2463 16.2304 15.5666C16.9613 14.8479 17.5928 14.2044 17.9417 13.5669C18.0621 13.3474 17.9808 13.0737 17.7613 12.9535C17.5417 12.8332 17.268 12.9144 17.1477 13.1339C16.859 13.6601 16.2515 14.2796 15.5958 14.9231C15.253 15.2599 14.7326 15.2599 14.3898 14.9231C13.7371 14.2826 13.1265 13.6631 12.8408 13.1339C12.7626 12.9835 12.6062 12.8993 12.4468 12.8993Z' fill='white'/%3E%3Cpath d='M14.9942 7.47803C14.7748 7.47803 14.5977 7.65513 14.5977 7.87455L14.5977 15.481C14.5977 15.7005 14.7748 15.8776 14.9942 15.8776C15.2137 15.8776 15.3908 15.7005 15.3908 15.481V7.87455C15.3908 7.65513 15.2137 7.47803 14.9942 7.47803Z' fill='white'/%3E%3C/svg%3E%0A");
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+td.download-file,
+td.product-download {
+	text-align: center;
 }
