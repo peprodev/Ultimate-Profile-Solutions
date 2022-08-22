@@ -1,12 +1,13 @@
 /**
- * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2022/01/09 05:21:20
+ * @Last modified by:   amirhp-com
+ * @Last modified time: 2022/08/14 21:20:43
  */
 :root {
 	--tippy-color: #bf1e2e;
 }
 
-pdtoast, toastwide {
+pdtoast,
+toastwide {
 	display: block;
 	padding: 0.5rem 2rem;
 	background: var(--toast-bg, rgba(0, 0, 0, .8));
@@ -28,7 +29,8 @@ pdtoast, toastwide {
 	z-index: 9999999999999999 !important;
 }
 
-pdtoast.active, toastwide.active {
+pdtoast.active,
+toastwide.active {
 	transform: translateY(0);
 }
 
@@ -42,7 +44,7 @@ body:not(.section-edit) [data-pepro-reglogin] > form .force-ltr {
 }
 
 [data-pepro-reglogin] > form .pepro-login-reg-field {
-	margin: 0.8rem 0;
+	margin: 1.5rem 0;
 	text-align: start;
 	position: relative;
 }
@@ -62,7 +64,9 @@ body:not(.section-edit) [data-pepro-reglogin] > form .force-ltr {
 	font-weight: 800;
 	font-size: small;
 	cursor: help;
+	line-height: 1.5;
 }
+
 [data-pepro-reglogin] > form.floating_from_label.inline error {
 	top: -0.5rem;
 }
@@ -96,7 +100,7 @@ body:not(.section-edit) [data-pepro-reglogin] > form .force-ltr {
 	transform: scale(1) !important;
 }
 
-.tippy-content en{
+.tippy-content en {
 	font-family: initial !important;
 }
 
@@ -138,7 +142,7 @@ body:not(.section-edit) [data-pepro-reglogin] > form .force-ltr {
 	border-color: #d63638;
 }
 
-[data-pepro-reglogin] > form #login_error{
+[data-pepro-reglogin] > form #login_error {
 	display: none !important;
 }
 
@@ -180,7 +184,6 @@ body:not(.section-edit) [data-pepro-reglogin] > form .force-ltr {
 	scrollbar-width: thin;
 	z-index: 99999 !important;
 }
-
 @media only screen and (max-width: 450px) {
 	.popup-active .pepro-verify-container,
 	.popup-active [data-pepro-reglogin] {
@@ -206,19 +209,19 @@ body:not(.section-edit) [data-pepro-reglogin] > form .force-ltr {
 	display: none;
 }
 
-pdmain form .form-group :is(input,select, textarea):is(:valid, :invalid, :active, :focus),
-[data-pepro-reglogin] > form :is(input,select, textarea):is(:valid, :invalid, :active, :focus, :hover){
+[data-pepro-reglogin] > form :is(input, select, textarea):is(:valid, :invalid, :active, :focus, :hover),
+pdmain form .form-group :is(input, select, textarea):is(:valid, :invalid, :active, :focus) {
 	box-shadow: 0 0 0 1px #e8e8e8 inset;
 }
 
-pdmain form .form-group :is(input,select, textarea):is(:active, :focus),
-pdmain [data-pepro-reglogin] > form.inline :is(input,select, textarea):is(:active, :focus){
-	box-shadow: 0px 0px 0px 1px var(--color-content-primary, currentColor) inset !important;
+pdmain [data-pepro-reglogin] > form.inline :is(input, select, textarea):is(:active, :focus),
+pdmain form .form-group :is(input, select, textarea):is(:active, :focus) {
+	box-shadow: 0 0 0 1px var(--color-content-primary, currentColor) inset !important;
 }
 
 [data-pepro-reglogin] > form .form-required label::after {
 	content: " *";
-	color: currentColor;
+	color: currentColor !important;
 }
 
 .pepro-form-links a:not(:last-of-type) {
@@ -235,6 +238,24 @@ pdmain [data-pepro-reglogin] > form.inline :is(input,select, textarea):is(:activ
 	max-height: calc(80vh - 3rem);
 	scrollbar-width: thin;
 	padding: 1rem;
+}
+@media only screen and (max-width: 480px) {
+	[data-pepro-reglogin] > form.inline {
+		max-height: unset;
+	}
+
+	pdwrapper.guest pdmain {
+		width: unset;
+		margin: auto;
+	}
+
+	.peprodev-ups.guest pdmain .pepro-login-reg-container {
+		padding: 0;
+	}
+
+	.extra-logon-headers h2 {
+		font-size: x-large;
+	}
 }
 
 .login-action-rp .button.wp-generate-pw {
@@ -325,6 +346,7 @@ form.floating_from_label .pepro-login-reg-field label {
 	right: auto;
 	left: 0;
 	z-index: 2;
+	pointer-events: none;
 }
 
 [dir="rtl"] form.floating_from_label .pepro-login-reg-field label {
@@ -355,4 +377,64 @@ form.floating_from_label .pepro-login-reg-field.filled label::after,
 form.floating_from_label .pepro-login-reg-field.focused label,
 form.floating_from_label .pepro-login-reg-field.focused label::after {
 	color: var(--color-content-bg, #f0f0f0);
+}
+
+.extra-logon-headers h2 {
+	color: rgba(35, 31, 32, 1);
+	font-weight: bold;
+}
+
+.extra-logon-headers > a {
+	font-weight: 500;
+	-webkit-margin-start: 1rem;
+	margin-inline-start: 1rem;
+}
+
+.pepro-login-reg-field.recaptcha .g-recaptcha {
+	margin-bottom: 1.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.peprodev-form-foot,
+.peprodev_ndscl_login {
+	position: relative;
+}
+
+.hrline {
+	display: block;
+	width: 100%;
+	height: 1px;
+	background: #ccc;
+	margin: 2rem 0;
+}
+
+.peprodev_ndscl_login span.hrline + span {
+	display: block;
+	margin-top: -3rem;
+	background: white;
+	width: -webkit-fit-content;
+	width: -moz-fit-content;
+	width: fit-content;
+	display: block;
+	padding: 0 5px;
+	margin-inline: auto;
+	margin-bottom: 2rem;
+}
+
+.peprodev_ndscl_login {
+	padding-top: 1rem;
+}
+
+#pepro-login-inline .extra-logon-headers.login-foout {
+	display: block;
+	text-align: center;
+	padding-top: 1rem;
+}
+
+form.floating_from_label .pepro-login-reg-field label {
+	top: 0.65rem !important;
+	font-size: small !important;
+	color: #545454 !important;
 }

@@ -2,8 +2,8 @@
  * @Author: Amirhosseinhpv
  * @Date:   2020/09/28 17:58:05
  * @Email:  its@hpv.im
- * @Last modified by:   amirhp-com
- * @Last modified time: 2022/08/04 21:16:29
+ * @Last modified by:   amirhp-com <its@amirhp.com>
+ * @Last modified time: 2022/08/23 00:34:07
  * @License: GPLv2
  * @Copyright: Copyright © 2020 Amirhosseinhpv, All rights reserved.
  */
@@ -32,9 +32,9 @@
       });
     },
   });
-  var $success_color      = "rgba(21, 139, 2, 0.8)";
-  var $error_color        = "rgba(139, 2, 2, 0.8)";
-  var $info_color         = "rgba(2, 133, 139, 0.8)";
+  var $success_color = "rgba(21, 139, 2, 0.8)";
+  var $error_color = "rgba(139, 2, 2, 0.8)";
+  var $info_color = "rgba(2, 133, 139, 0.8)";
   var _pepro_ajax_request = null;
   $(document).ready(function() {
     $("#us-font-awesome-duotone-css").remove();
@@ -170,7 +170,7 @@
         $(this).parent().removeClass("filled");
       }
     });
-    $(document).on("change",    "input[type='file']#avatar.form-control.primary.bg-light", function(e) {
+    $(document).on("change", "input[type='file']#avatar.form-control.primary.bg-light", function(e) {
       e.preventDefault();
       var file_data = $(this).prop("files")[0];
       if (!file_data) {
@@ -186,11 +186,11 @@
         return false;
       }
     });
-    $(document).on("focusout",  "pdmain form :input", function(e) {
+    $(document).on("focusout", "pdmain form :input", function(e) {
       $(this).removeClass("focused");
       $(this).parent().removeClass("focused");
     });
-    $(document).on("focusin",   "pdmain form :input", function(e) {
+    $(document).on("focusin", "pdmain form :input", function(e) {
       $(this).addClass("focused");
       $(this).parent().addClass("focused");
     });
@@ -346,12 +346,29 @@
       var me = $(this);
       $(`.au-message-list .au-message__item[data-ref="${me.attr("data-id")}"]`).click();
     });
-    $(document).on("click tap", ".copy_input_btn", function(e){
+    $(document).on("click tap", ".copy_input_btn", function(e) {
       e.preventDefault();
       var me = $(this);
       copy_clipboard($(".promo-code-wrapper.copy_input").text());
-      show_toast(_i18n.copied,$success_color);
+      show_toast(_i18n.copied, $success_color);
     });
+    $(document).on("click tap", ".toggleshowpswd", function(e) {
+      e.preventDefault();
+      var me = $(this);
+      pswd = me.parent(".password").find("input");
+      type = pswd.attr("type");
+      pswd.attr("type", type == "password" ? "text" : "password");
+    });
+    $(document).on("click tap", "pdwrapper .nav-item.has-subitem>a, topdrp .nav-item.has-subitem>a", function(e) {
+      e.preventDefault();
+      $(this).parents(".has-subitem").toggleClass("active");
+    });
+
+    $(document).on("click tap", ".topmenu-dropdown-toggle, topdrp .topmenu-bg-overly", function(e){
+      e.preventDefault();
+      $("topdrp .heading-li-item").toggleClass("active")
+    });
+
     function copy_clipboard(data) {
       var $temp = $("<textarea>");
       $("body").append($temp);
@@ -359,6 +376,7 @@
       document.execCommand("copy");
       $temp.remove();
     }
+
     function show_toast(data = "Sample Toast!", bg = "", delay = 4500) {
       if (!$("pdtoast").length) {
         $(document.body).append($("<pdtoast>"));

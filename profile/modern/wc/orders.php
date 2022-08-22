@@ -1,7 +1,7 @@
 <?php
 
-# @Last modified by:   amirhp-com
-# @Last modified time: 2022/08/04 22:42:34
+# @Last modified by:   amirhp-com <its@amirhp.com>
+# @Last modified time: 2022/08/23 00:55:25
 
 /**
  * Orders
@@ -40,7 +40,7 @@ do_action( 'woocommerce_before_account_orders', $has_orders ); ?>
 
 <?php if ( $has_orders ) : ?>
 	<div class="table-responsive table--no-card m-b-40">
-		<table class="table table-borderless table-striped table-earning wc-orders-listing">
+		<table class="table table-borderless table-striped table-earning wc-orders-listing desktop-view">
 			<thead>
 				<tr>
 					<?php foreach ( wc_get_account_orders_columns() as $column_id => $column_name ) : ?>
@@ -85,6 +85,44 @@ do_action( 'woocommerce_before_account_orders', $has_orders ); ?>
 				?>
 			</tbody>
 		</table>
+		<div class="table table-borderless wc-orders-listing mobile-view">
+				<?php
+				foreach ( $customer_orders->orders as $customer_order ) {
+					$order      = wc_get_order( $customer_order ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.OverrideProhibited
+					$item_count = $order->get_item_count() - $order->get_item_count_refunded();
+					?>
+					<div class="woocommerce-orders-table__row mobile-view woocommerce-orders-table__row--status-<?php echo esc_attr( $order->get_status() ); ?> wc-<?php echo esc_attr( $order->get_status() ); ?> order">
+							<div class="order-item-head">
+								<div class="order-item-id-num">
+									<span>ORDER ID</span>
+									<span><?php echo esc_html( sprintf("%06d",$order->get_order_number()) ); ?></span>
+								</div>
+								<div class="order-item-action">
+									<span><?php
+											$action_url = $PeproDevUPS_Profile->get_profile_page([ "section" => "orders", "view" => $order->get_id() ]);
+											echo '<a href="' . esc_url( $action_url ) . '" class="button-procceed-arrow-right"></a>';
+									?></span>
+								</div>
+							</div>
+							<div class="order-item-details">
+								<div class="order-item-details-type">
+									<span class="order-item-details-head">SERVICE TYPE</span>
+									<span class="order-item-details-body">ROSE</span>
+								</div>
+								<div class="order-item-details-date">
+									<span class="order-item-details-head">DATE OF ORDER</span>
+									<span class="order-item-details-body"><?=wc_format_datetime( $order->get_date_created() );?></span>
+								</div>
+								<div class="order-item-details-status">
+									<span class="order-item-details-head">STATUS</span>
+									<span class="order-item-details-body"><span class="vocv wc-<?php echo esc_attr( $order->get_status() ); ?>"><?=wc_get_order_status_name( $order->get_status() );?></span></span>
+								</div>
+							</div>
+					</div>
+					<?php
+				}
+				?>
+		</div>
 	</div>
 
 	<?php do_action( 'woocommerce_before_account_orders_pagination' ); ?>

@@ -1,6 +1,6 @@
 <?php
-# @Last modified by:   amirhp-com
-# @Last modified time: 2022/08/06 17:53:28
+# @Last modified by:   amirhp-com <its@amirhp.com>
+# @Last modified time: 2022/08/23 01:00:19
 namespace PeproDev;
 if (!class_exists("PeproDevUPS_Profile")) {
     class PeproDevUPS_Profile
@@ -355,7 +355,8 @@ if (!class_exists("PeproDevUPS_Profile")) {
           add_action( 'woocommerce_thankyou', array($this, "redirect_woo_checkout"));
 
         }
-        public function redirect_woo_checkout( $order_id ){
+        public function redirect_woo_checkout( $order_id )
+        {
           $order = wc_get_order( $order_id );
           $url = $this->get_profile_page([ "section" => "orders", "view" => $order_id ]);
           if (!$order->has_status('failed') ) {
@@ -365,7 +366,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
         }
         public function save_user_promotion_fields( $user_id )
         {
-          if (isset($_POST['ups_promotion_code']) && !empty(trim($_POST['ups_promotion_code']))) {
+          if (isset($_POST['ups_promotion_code'])) {
             update_user_meta( $user_id, 'ups_promotion_code', sanitize_text_field(trim($_POST['ups_promotion_code'])) );
           }
         }
@@ -416,8 +417,9 @@ if (!class_exists("PeproDevUPS_Profile")) {
         {
           global $post;
           if ( is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'pepro-profile') ) {
-            $current = isset($_GET["section"]) ? "section-" . sanitize_text_field(trim($_GET["section"])) : "";
-            $classez = (array) apply_filters("peprofile_body_class", ["peprodev-ups", $current]);
+            $current = isset($_GET["section"]) ? "section-" . sanitize_text_field(trim($_GET["section"])) : "section-dashboard-home";
+            $loggin  = is_user_logged_in() ? "loggedin" : "guest";
+            $classez = (array) apply_filters("peprofile_body_class", ["peprodev-ups", $loggin, $current]);
             $classes = array_merge($classes, $classez);
           }
           return $classes;
@@ -2694,8 +2696,10 @@ if (!class_exists("PeproDevUPS_Profile")) {
         */
         public function add_input($title='',$id='',$val='',$extrahtml='',$class='',$type='text')
         {
+            $showpass = ("password" == $type) ? "<span title='".__("Toggle Show Password",$this->td)."' class='toggleshowpswd'></span>" : "";
             echo "<div class='form-group pepro-login-reg-field $type $id-wrap'>
                 <label for='$id' class='control-label mb-1'>$title</label>
+                $showpass
                 <input id='$id' name='$id' type='$type' class='form-control $class' $extrahtml value='".esc_attr($val)."' />
               </div>";
         }

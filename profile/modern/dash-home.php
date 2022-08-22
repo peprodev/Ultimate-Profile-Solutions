@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   amirhp-com
-# @Last modified time: 2022/08/04 22:05:38
+# @Last modified time: 2022/08/14 21:24:01
 global $PeproDevUPS_Profile;
 $that   = $PeproDevUPS_Profile;
 $cpos   = get_option("{$that->activation_status}-customposition");
@@ -56,7 +56,11 @@ $current_balance   = function_exists("woo_wallet") ? woo_wallet()->wallet->get_w
     </div>
     <div class="pdpromos-subtitle"><?=__("HERE IS YOUR CUSTOM-MADE PROMOTION CODE TO USE", $that->td);?></div>
     <div class="pdpromos-code-ontainer">
-      <div class="promo-code-wrapper copy_input"><?=get_user_meta($user_id, 'ups_promotion_code', true);?></div>
+      <?php
+      $promotion = get_user_meta($user_id, 'ups_promotion_code', true);
+      if (empty($promotion)) $promotion = "&nbsp;";
+      ?>
+      <div class="promo-code-wrapper copy_input"><?=$promotion;?></div>
       <a href="#" class="copy_input_btn"><svg width="19" height="22" viewBox="0 0 19 22" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="0.5" y="3.5" width="15" height="18" rx="2.5" stroke="black"></rect><path d="M5.49219 1L14.9993 1C16.6562 1 17.9993 2.34315 17.9993 4V15.8979" stroke="black"></path></svg></a>
     </div>
   </pdpromos>

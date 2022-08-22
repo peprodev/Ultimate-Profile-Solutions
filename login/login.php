@@ -1,6 +1,6 @@
 <?php
 # @Last modified by:   amirhp-com
-# @Last modified time: 2022/05/11 23:56:45
+# @Last modified time: 2022/08/14 21:12:22
 namespace PeproDev;
 use PeproDev;
 
@@ -630,8 +630,8 @@ if (!class_exists("PeproDevUPS_Login")){
     public function enqueue_shortcode_styles($args=array())
     {
       global $PeproDevUPS_Login;
-      wp_enqueue_style("pepro-login-reg-formaction",    "{$this->assets_url}/assets/main-form.css", array(), "1.6.0");
-      wp_enqueue_style("pepro-login-reg-formconfirm",   "{$this->assets_url}/assets/jquery-confirm.css", array(), "1.6.0");
+      wp_enqueue_style("pepro-login-reg-formaction",    "{$this->assets_url}/assets/main-form.css", array(), time());
+      wp_enqueue_style("pepro-login-reg-formconfirm",   "{$this->assets_url}/assets/jquery-confirm.css", array(), time());
       wp_enqueue_script("pepro-login-reg-formconfirm",  "{$this->assets_url}/assets/jquery-confirm.js", array("jquery"), "1.6.0", true);
       wp_enqueue_script("pepro-login-reg-popper",       "{$this->assets_url}/assets/popper.min.js", array("jquery"), "2.11.4", true);
       wp_enqueue_script("pepro-login-reg-tippy",        "{$this->assets_url}/assets/tippy-bundle.umd.min.js", array("jquery"), "2.11.4", true);
@@ -941,7 +941,7 @@ if (!class_exists("PeproDevUPS_Login")){
       $headerhtml = wp_unslash(get_option("{$this->save_prefix}-headerhtml"));
       $footerhtml = wp_unslash(get_option("{$this->save_prefix}-footerhtml"));
       if ($this->auto_add_nsl) {
-        $after = "<div class='peprodev_ndscl_login'>[nextend_social_login]</div>" . $after;
+        $after = "<div class='peprodev_ndscl_login'><span class='hrline'></span><span>OR SIGN IN WITH</span>[nextend_social_login]</div>" . $after;
       }
       if (!is_user_logged_in()){
         ?>
@@ -970,8 +970,8 @@ if (!class_exists("PeproDevUPS_Login")){
                 if (get_option('users_can_register')){?><a class="switch-form-register"  href="javascript:;"><?php esc_html_e("Register", "peprodev-ups");?></a><?php }
               ?>
             </div>
-            <div class='peprodev-form-foot'><?=do_shortcode($after);?></div>
             <div class='peprodev-form-footing'><?=do_shortcode($footerhtml);?></div>
+            <div class='peprodev-form-foot'><?=do_shortcode($after);?></div>
           </form>
           <?php
             // form register
@@ -3108,8 +3108,8 @@ if (!class_exists("PeproDevUPS_Login")){
           array_push($login_fields, $field);
         }
       }
-      $textSend   = __("Receive OTP & Register","peprodev-ups");
-      $textVerify = __("Verify OTP & Register","peprodev-ups");
+      $textSend   = __("Register","peprodev-ups");
+      $textVerify = __("Register","peprodev-ups");
       $num++;
       array_push($login_fields, array(
           "meta_name"   => "submit",
@@ -3427,8 +3427,8 @@ if (!class_exists("PeproDevUPS_Login")){
           array_push($login_fields, $value);
         }
       }
-      $textSend   = __("Receive OTP & Reset Password","peprodev-ups");
-      $textVerify = __("Verify OTP & Reset Password","peprodev-ups");
+      $textSend   = __("Reset Password","peprodev-ups");
+      $textVerify = __("Reset Password","peprodev-ups");
       $num++;
       array_push($login_fields, array(
           "meta_name"   => "submit",
