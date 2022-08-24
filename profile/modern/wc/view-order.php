@@ -19,7 +19,7 @@
 # @Date:   2022/03/10 10:13:12
 # @Email:  its@amirhp.com
 # @Last modified by:   amirhp-com <its@amirhp.com>
-# @Last modified time: 2022/08/23 01:45:13
+# @Last modified time: 2022/08/25 00:01:33
 # @License: GPLv2
  */
 
@@ -35,6 +35,7 @@ $orchid_attachment_id     = 1443;
 $rose_attachment_id_two   = 1449;
 $lotus_attachment_id_two  = 1448;
 $orchid_attachment_id_two = 1447;
+
 ?>
 
 <div class="view-order-container">
@@ -95,22 +96,24 @@ $show_downloads        = $order->has_downloadable_item() && $order->is_download_
 					<th class="woocommerce-table__product-table product-quantity"><?=__("QUANTITY", $that->td);?></th>
 					<th class="woocommerce-table__product-table product-total"><?=__("TOTAL", $that->td);?></th>
 					<th class="woocommerce-table__product-table product-download"><?=__("DOWNLOAD", $that->td);?></th>
-					<th class="woocommerce-table__product-table product-info"><?=__("INFO", $that->td);?></th>
+					<th class="woocommerce-table__product-table product-info"></th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php
+				$savedurl = get_post_meta($order->get_id(), "retouch_files", true);
 				foreach ( $order_items as $item_id => $item ) {
 					$product = $item->get_product();
 					if (!has_term("services", 'product_cat', $product->get_id())) continue;
 	        $purchase_note = $product ? $product->get_purchase_note() : '';
 	        if ( ! apply_filters( 'woocommerce_order_item_visible', true, $item ) ) { return; }
 	        $is_visible        = $product && $product->is_visible();
+					$lineitem_download_url = isset($savedurl[$item_id])?$savedurl[$item_id]:false;
 	        $product_permalink = apply_filters( 'woocommerce_order_item_permalink', $is_visible ? $product->get_permalink( $item ) : '', $item, $order );
-	        $qty          = $item->get_quantity();
-	        $refunded_qty = $order->get_qty_refunded_for_item( $item_id );
+	        $qty               = $item->get_quantity();
+	        $refunded_qty      = $order->get_qty_refunded_for_item( $item_id );
 	        ?>
-	        <tr class="<?php echo esc_attr( apply_filters( 'woocommerce_order_item_class', 'woocommerce-table__line-item order_item', $item, $order ) ); ?>">
+	        <tr class="<?="lineitem-$item_id " . esc_attr( apply_filters( 'woocommerce_order_item_class', 'woocommerce-table__line-item order_item', $item, $order ) ); ?>">
 
 	          <td class="woocommerce-table__product-table product-name">
 	            <?php
@@ -150,15 +153,24 @@ $show_downloads        = $order->has_downloadable_item() && $order->is_download_
 	            <strong><?php echo $order->get_formatted_line_subtotal( $item ); ?></strong>
 	          </td>
 	  				<td class="woocommerce-table__product-table product-download ">
-							<a href="#" class="wc-btn-download"></a>
+							<a href="<?=$lineitem_download_url?$lineitem_download_url:"#";?>" class="wc-btn-download <?=$lineitem_download_url?"":"disabled";?>"></a>
 	          </td>
 	  				<td class="woocommerce-table__product-table product-info ">
-							<a href="#" style="font-weight: 400;">SHOW INFO</a>
-	            <?php
-	              do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $order, false );
-	              // wc_display_item_meta( $item );
-	              do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $order, false );
-	            ?>
+							<a href="#" class="show-extra-info">SHOW INFO</a>
+	            <div class="order-details-overly">
+								<div class="overly-clickable"></div>
+								<div class="overly-close">&times;</div>
+								<div class="overly-content">
+									<?php
+			              do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $order, false );
+			              wc_display_item_meta( $item, array(
+											'label_before' => '<strong class="wc-item-meta-label">',
+											'label_after'  => '</strong> ',
+										));
+			              do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $order, false );
+			            ?>
+								</div>
+	            </div>
 	          </td>
 	        </tr>
 	        <?php
@@ -255,8 +267,8 @@ $show_downloads        = $order->has_downloadable_item() && $order->is_download_
 			if ( ! apply_filters( 'woocommerce_order_item_visible', true, $item ) ) { return; }
 			$is_visible        = $product && $product->is_visible();
 			$product_permalink = apply_filters( 'woocommerce_order_item_permalink', $is_visible ? $product->get_permalink( $item ) : '', $item, $order );
-			$qty          = $item->get_quantity();
-			$refunded_qty = $order->get_qty_refunded_for_item( $item_id );
+			$qty               = $item->get_quantity();
+			$refunded_qty      = $order->get_qty_refunded_for_item( $item_id );
 			?>
 			<div class="<?php echo esc_attr( apply_filters( 'woocommerce_order_item_class', 'woocommerce-line-item order_item', $item, $order ) ); ?>">
 				<div class="lineitem-product-name">

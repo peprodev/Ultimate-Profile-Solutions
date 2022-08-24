@@ -1,7 +1,7 @@
 <?php
-# @Last modified by:   amirhp-com
-# @Last modified time: 2022/08/14 21:24:01
-global $PeproDevUPS_Profile;
+# @Last modified by:   amirhp-com <its@amirhp.com>
+# @Last modified time: 2022/08/25 00:42:53
+global $PeproDevUPS_Profile, $pro_ticketing;
 $that   = $PeproDevUPS_Profile;
 $cpos   = get_option("{$that->activation_status}-customposition");
 $showct = get_option("{$that->activation_status}-showcustomtext");
@@ -69,7 +69,7 @@ $current_balance   = function_exists("woo_wallet") ? woo_wallet()->wallet->get_w
   <pdtickets>
     <div class="pdorder-title-wrap">
       <span class="pdorder-title"><?=__("LASTEST 5 TICKETS", $that->td);?></span>
-      <span class="pdorder-title-cta"><a href="<?= $that->get_profile_page(["section"=>"tickets"]); ?>"><?=__("VIEW ALL", $that->td);?></a></span>
+      <span class="pdorder-title-cta"><a href="<?=$that->get_profile_page(["section"=>"tickets"])?>"><?=__("VIEW ALL", $that->td);?></a></span>
     </div>
     <div class="pdtickets-list">
       <table>
@@ -81,16 +81,32 @@ $current_balance   = function_exists("woo_wallet") ? woo_wallet()->wallet->get_w
         </thead>
         <tbody>
           <?php
-          for ($i=0; $i < 6; $i++) {
-            ?>
-            <tr>
-              <td class="col_title" >LOW QUALITY PICS</td>
-              <td class="col_date" >2019.08.09 <span class='ticket_time'>(19:30)</span></td>
-              <td class="col_state" ><span>OPEN</span></td>
-              <td class="col_action" ><a class="button-procceed-arrow" href="#"></a></td>
-            </tr>
-            <?php
+          $qmta = array(
+            'posts_per_page' => 5,
+            'post_status'    => array('publish'),
+            'order'          => 'DESC',
+            'orderby'        => 'date',
+            'post_type'      => "peproticket",
+            'author'         => get_current_user_id(),
+            'nopaging'       => true,
+          );
+          if (current_user_can( "administrator")) { unset($qmta["author"]); }
+          $query = query_posts($qmta);
+          if ($query){
+            foreach ($query as $key => $peproticket) {
+              $edit_url = $that->get_profile_page(["section"=>"tickets","manage"=>"add","cpid"=>$peproticket->ID]);
+              $status = get_post_meta($peproticket->ID, "ticket_status", true);
+              ?>
+              <tr>
+                <td class="col_title"><?=strtoupper(get_the_title($peproticket->ID));?></td>
+                <td class="col_date"><?=date_i18n("Y.m.d", strtotime($peproticket->post_date));?> <span class='ticket_time'><?=date_i18n("(H:i)", strtotime($peproticket->post_date));?></span></td>
+                <td class="col_state"><span class="ticket-status <?=$status;?>"><?=$pro_ticketing->get_ticket_status($peproticket->ID);?></span></td>
+                <td class="col_action"><a class="button-procceed-arrow" href="<?=$edit_url;?>"></a></td>
+              </tr>
+              <?php
+            }
           }
+          wp_reset_postdata();
           ?>
         </tbody>
       </table>

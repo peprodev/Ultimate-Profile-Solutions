@@ -3,7 +3,7 @@
  * @Date:   2022/08/04 21:40:12
  * @Email:  its@amirhp.com
  * @Last modified by:   amirhp-com <its@amirhp.com>
- * @Last modified time: 2022/08/23 01:46:09
+ * @Last modified time: 2022/08/24 15:56:59
  * @License: GPLv2
  */
 @media only screen and (max-width: 900px) {
@@ -11,16 +11,20 @@
   topdrp {
     display: block;
   }
+
   #wpadminbar {
-  	display: none;
+    display: none;
   }
+
   html {
-	   margin-top: 0 !important;
+    margin-top: 0 !important;
   }
-  body:not(.section-dashboard-home) pdwrapper {
+
+  body:not(.section-dashboard-home) pdwrapper{
     margin-top: calc(var(--header-height) - 1.5rem) !important;
   }
 
+  body.section-pswd pdwrapper,
   body.section-dashboard-home pdwrapper {
     margin-top: var(--header-height) !important;
   }
@@ -50,6 +54,11 @@
 
   pdmain .mobile-view {
     display: block;
+  }
+
+  pdmain #submit-profile-changes {
+    width: 100%;
+    border-radius: 0;
   }
 
   pdmain .desktop-view {

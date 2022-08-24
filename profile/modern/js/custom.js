@@ -3,7 +3,7 @@
  * @Date:   2020/09/28 17:58:05
  * @Email:  its@hpv.im
  * @Last modified by:   amirhp-com <its@amirhp.com>
- * @Last modified time: 2022/08/23 00:34:07
+ * @Last modified time: 2022/08/24 17:20:46
  * @License: GPLv2
  * @Copyright: Copyright © 2020 Amirhosseinhpv, All rights reserved.
  */
@@ -159,7 +159,14 @@
       $(`pdmain form :input`).trigger("refresh");
     }, 200);
 
-
+    $(document).on("click tap", ".overly-clickable, .overly-close", function(e){
+      e.preventDefault();
+      $(".overly-clickable, .order-details-overly").removeClass("active")
+    });
+    $(document).on("click tap", ".show-extra-info", function(e){
+      e.preventDefault();
+      $(this).siblings(".overly-clickable, .order-details-overly").addClass("active")
+    });
     $(document).on("change keyup focus refresh", `pdmain form :input`, function(e) {
       val = $(this).val();
       if ($.trim(val) !== "") {

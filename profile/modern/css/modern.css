@@ -3,10 +3,11 @@
  * @Date:2020/05/03 13:33:07
  * @Email:its@hpv.im
  * @Last modified by:   amirhp-com <its@amirhp.com>
- * @Last modified time: 2022/08/23 00:54:09
+ * @Last modified time: 2022/08/25 00:46:13
  * @License:GPLv2
  * @Copyright:Copyright © 2020 Amirhosseinhpv,All rights reserved.
  */
+
 pdtoast,
 toastwide {
 	display: block;
@@ -1134,13 +1135,18 @@ td .button-procceed-arrow {
 }
 
 .give-feedback {
-	font-weight: 400;
+	font-weight: 500;
 }
 
 .go-to-ticket.us-btn-style_3 {
 	position: relative;
 	border-radius: 2rem;
 	padding: 0.8rem 1.5rem;
+}
+
+.wc-btn-download.disabled {
+	filter: grayscale(1) brightness(1.5);
+	pointer-events: none;
 }
 
 .go-to-ticket.us-btn-style_3::after {
@@ -1248,6 +1254,12 @@ pdwrapper.guest {
 .woocommerce-table.woocommerce-table--order-downloads th,
 th.woocommerce-table__product-table {
 	font-weight: 300;
+	color: rgba(117, 126, 144, 1);
+	font-size: 0.8rem;
+}
+
+td.woocommerce-table__product-table.product-name {
+	text-align: left;
 }
 
 .woocommerce-table.woocommerce-table--order,
@@ -1257,12 +1269,28 @@ th.woocommerce-table__product-table {
 }
 
 .rtc-service-image {
-	width: 150px;
+	width: 180px;
 	border-radius: 5px;
 }
 
-.woocommerce-table__product-table.product-name {
-	min-width: 170px !important;
+th.woocommerce-table__product-table.product-name {
+	width: calc(180px + 2rem);
+}
+
+.woocommerce-table__product-table.product-info .show-extra-info {
+	font-weight: 500;
+	color: rgba(89, 70, 176, 1);
+	font-size: 0.9rem;
+}
+
+td.woocommerce-table__product-table.product-total {
+	color: rgba(0, 0, 0, 0.8) !important;
+	font-weight: 500 !important;
+}
+
+td.woocommerce-table__product-table {
+	color: rgba(0, 0, 0, 0.6);
+	font-weight: 400;
 }
 
 .table-responsive {
@@ -1272,5 +1300,148 @@ th.woocommerce-table__product-table {
 
 .woocommerce-table__product-table {
 	vertical-align: middle;
-	text-align: start;
+	text-align: center;
+}
+
+.overly-clickable {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100vw;
+	height: 100vh;
+	background: #0000008c;
+	z-index: -1;
+	cursor: pointer;
+}
+
+.metaval.extrmta-extra_options br {
+	display: none;
+}
+
+.metaval.extrmta-extra_options {
+	margin-top: 0.5rem;
+}
+
+.metaval.extrmta-extra_options .extraitementry {
+	padding: 0.5rem;
+	border: 1.5px solid rgba(0, 0, 0, 0.05);
+	display: block;
+	-webkit-margin-end: 0.5rem;
+	margin-inline-end: 0.5rem;
+	-webkit-margin-after: 0.5rem;
+	margin-block-end: 0.5rem;
+	border-radius: 4px;
+}
+
+.metaval.extrmta-extra_options .extraprice {
+	color: #43cfae;
+	font-weight: 500;
+	margin-inline: 1rem 0.5rem;
+}
+
+.metaval.extrmta-extra_options p {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: safe;
+}
+
+.order-details-overly.active {
+	display: flex;
+}
+
+.order-details-overly {
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 100000;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	width: 100vw;
+	height: 100vh;
+}
+
+.overly-content {
+	width: 50vw;
+	position: relative;
+	background: white;
+	border-radius: 5px;
+	height: 50vh;
+	padding: 2rem;
+}
+
+.overly-content .wc-item-meta {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	overflow: auto;
+	height: 100%;
+}
+
+.wc-item-meta li {
+	padding: 1rem;
+	border-radius: 5px;
+}
+
+.wc-item-meta li:nth-child(even) {
+	background: rgba(249, 249, 249, 1);
+}
+
+.wc-item-meta li > strong {
+	text-align: left;
+	color: rgba(117, 126, 144, 1);
+	width: calc(40% - 0.5rem);
+	font-weight: 300;
+	float: left;
+}
+
+.wc-item-meta li > div.metaval {
+	font-weight: 400;
+	float: right;
+	text-align: right;
+	color: rgba(0, 0, 0, 1);
+	width: 60%;
+}
+
+.overly-close {
+	position: absolute;
+	right: 10vw;
+	top: 15vh;
+	width: 3rem;
+	height: 3rem;
+	background: #454545;
+	line-height: 1.45;
+	font-size: 2rem;
+	border-radius: 44px;
+	z-index: 999;
+	color: #fff;
+	cursor: pointer;
+}
+pdmain .pdtickets-list .col_date {
+	width: 150px;
+}
+pdmain .pdtickets-list .col_state {
+	width: 150px;
+}
+pdmain .pdtickets-list .col_state .ticket-status{
+	font-weight: 500;
+}
+pdmain .pdtickets-list .col_state .ticket-status.spammed{
+	color: #ff364c;
+}
+pdmain .pdtickets-list .col_state .ticket-status.closed{
+	color: #5946b0;
+}
+pdmain .pdtickets-list .col_state .ticket-status.open{
+	color: #14c39a;
+}
+pdmain .pdtickets-list .col_state .ticket-status.pending{
+	color: #ffa800;
+}
+pdmain .chat_signature {
+	position: static !important;
+	color: inherit !important;
+	padding: 0 !important;
+	margin-top: 0rem !important;
+	opacity: 0.6 !important;
 }
