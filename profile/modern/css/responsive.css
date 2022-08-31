@@ -3,7 +3,7 @@
  * @Date:   2022/08/04 21:40:12
  * @Email:  its@amirhp.com
  * @Last modified by:   amirhp-com <its@amirhp.com>
- * @Last modified time: 2022/08/24 15:56:59
+ * @Last modified time: 2022/08/31 18:58:00
  * @License: GPLv2
  */
 @media only screen and (max-width: 900px) {
@@ -16,17 +16,50 @@
     display: none;
   }
 
+  .overly-close {
+    position: absolute;
+    right: calc(50vw - 1.5rem);
+    top: auto;
+    width: 3rem;
+    height: 3rem;
+    background: #454545;
+    line-height: 1.45;
+    font-size: 2rem;
+    border-radius: 44px;
+    z-index: 999;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+    bottom: 5rem;
+  }
+
   html {
     margin-top: 0 !important;
   }
 
-  body:not(.section-dashboard-home) pdwrapper{
+  body:not(.section-dashboard-home) pdwrapper {
     margin-top: calc(var(--header-height) - 1.5rem) !important;
   }
 
-  body.section-pswd pdwrapper,
-  body.section-dashboard-home pdwrapper {
+  .order-details-overly.active .overly-content {
+    width: calc(100vw - 2rem);
+  }
+
+  .wc-item-meta li > div.metaval {
+    width: unset;
+  }
+
+  body.section-dashboard-home pdwrapper,
+  body.section-pswd pdwrapper {
     margin-top: var(--header-height) !important;
+  }
+
+  .total-descr > div {
+    padding: 0 0.5rem;
+  }
+
+  .price-qty-dl > div {
+    padding: 0 0.5rem;
   }
 
   .container-fluid {
@@ -135,10 +168,14 @@
     float: right;
   }
 
-  .woocommerce-order-details.mobile-view {
+  .woocommerce-order-details.mobile-view .table-responsive {
     border: 1.5px solid rgba(0, 0, 0, 0.05);
     border-radius: 5px;
     margin: 1rem 0;
+  }
+
+  .download-file.woocommerce-table__product-table {
+    text-align: center !important;
   }
 
   .woocommerce-line-item.order_item {
@@ -146,6 +183,28 @@
     padding: 0.5rem;
     display: flex;
     justify-content: space-between;
+  }
+
+  .table-responsive.for_products > div:last-child,
+  .table-responsive.for_services > div:last-child {
+    border-bottom: none;
+  }
+
+  .float-bottom-action.mobile-view {
+    max-width: 100vw;
+    margin: 2rem auto 0;
+    position: fixed;
+    left: 0;
+    bottom: 1rem;
+    z-index: 0;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+  }
+
+  .float-bottom-action.mobile-view .go-to-ticket {
+    display: block !important;
+    width: 75vw;
   }
 
   .lineitem-product-name {

@@ -3,11 +3,10 @@
  * @Date:2020/05/03 13:33:07
  * @Email:its@hpv.im
  * @Last modified by:   amirhp-com <its@amirhp.com>
- * @Last modified time: 2022/08/25 00:46:13
+ * @Last modified time: 2022/09/01 01:38:41
  * @License:GPLv2
  * @Copyright:Copyright © 2020 Amirhosseinhpv,All rights reserved.
  */
-
 pdtoast,
 toastwide {
 	display: block;
@@ -60,6 +59,10 @@ topdrp {
 pdwrapper {
 	list-style: none;
 	margin: 0 !important;
+}
+
+pdwrapper .hide {
+	display: none !important;
 }
 
 .bg-c1 {
@@ -1142,6 +1145,7 @@ td .button-procceed-arrow {
 	position: relative;
 	border-radius: 2rem;
 	padding: 0.8rem 1.5rem;
+	text-align: center;
 }
 
 .wc-btn-download.disabled {
@@ -1403,6 +1407,76 @@ td.woocommerce-table__product-table {
 	width: 60%;
 }
 
+.wcitem-thumb {
+	width: 90px;
+	vertical-align: middle;
+	border-radius: 4px;
+	-webkit-margin-end: 0.8rem;
+	margin-inline-end: 0.8rem;
+}
+
+.woocommerce-order-details.mobile-view .for_products .lineitem-product-name img {
+	margin: 0 !important;
+	width: 100%;
+}
+
+.woocommerce-order-details.mobile-view .for_products .lineitem-product-name {
+	display: flex;
+	align-self: center;
+}
+
+.woocommerce-order-details.mobile-view .table-responsive.for_products .lineitem-total {
+	-webkit-margin-end: 1rem;
+	margin-inline-end: 1rem;
+}
+
+.woocommerce-table.woocommerce-table--order.shop_table.product_details .woocommerce-table__product-table-nameimg {
+	display: flex;
+	align-items: center;
+}
+
+.woocommerce-table.woocommerce-table--order.shop_table.product_details .namepricewrapper {
+	display: flex;
+	flex-direction: column;
+}
+
+.woocommerce-order-details.mobile-view .table-responsive.for_products .lineitem-total .lineitem-prop-value {
+	overflow: hidden;
+	width: 16ch;
+	text-overflow: ellipsis;
+	display: block;
+}
+
+.woocommerce-table.woocommerce-table--order.shop_table.product_details td {
+	vertical-align: middle;
+}
+
+.woocommerce-table.woocommerce-table--order.shop_table.product_details th {
+	width: auto;
+}
+
+.woocommerce-table--order-downloads td {
+	text-align: left !important;
+}
+
+.download-file.woocommerce-table__product-table,
+.woocommerce-table--order-downloads th.download-file {
+	text-align: center !important;
+}
+
+.woocommerce-order-details .table-responsive.for_customer_note {
+	padding: 1rem;
+	font-size: 0.88rem;
+	border: 1.5px solid rgba(0, 0, 0, 0.05);
+	margin: 2rem 0 0;
+}
+
+.woocommerce-table__product-purchase-note.product-purchase-note {
+	padding: 0.5rem;
+	font-size: 0.8rem;
+	border-bottom: 1.5px solid #0000000d;
+}
+
 .overly-close {
 	position: absolute;
 	right: 10vw;
@@ -1416,32 +1490,54 @@ td.woocommerce-table__product-table {
 	z-index: 999;
 	color: #fff;
 	cursor: pointer;
+	text-align: center;
 }
+
 pdmain .pdtickets-list .col_date {
 	width: 150px;
 }
+
 pdmain .pdtickets-list .col_state {
 	width: 150px;
 }
-pdmain .pdtickets-list .col_state .ticket-status{
+
+pdmain .pdtickets-list .col_state .ticket-status {
 	font-weight: 500;
 }
-pdmain .pdtickets-list .col_state .ticket-status.spammed{
+
+pdmain .pdtickets-list .ticket-status.spammed,
+pdmain .recent-report .status-spammed,
+pdmain .view-ticket-screen .status-spammed {
 	color: #ff364c;
 }
-pdmain .pdtickets-list .col_state .ticket-status.closed{
+
+pdmain .pdtickets-list .ticket-status.closed,
+pdmain .recent-report .status-closed,
+pdmain .view-ticket-screen .status-closed {
 	color: #5946b0;
 }
-pdmain .pdtickets-list .col_state .ticket-status.open{
+
+pdmain .pdtickets-list .ticket-status.open,
+pdmain .recent-report .status-open,
+pdmain .view-ticket-screen .status-open {
 	color: #14c39a;
 }
-pdmain .pdtickets-list .col_state .ticket-status.pending{
+
+pdmain .pdtickets-list .ticket-status.pending,
+pdmain .recent-report .status-pending,
+pdmain .view-ticket-screen .status-pending {
 	color: #ffa800;
 }
+
 pdmain .chat_signature {
 	position: static !important;
 	color: inherit !important;
 	padding: 0 !important;
-	margin-top: 0rem !important;
+	margin-top: 0 !important;
 	opacity: 0.6 !important;
+}
+
+pdmain a.disabled {
+	filter: grayscale(1) brightness(1.5);
+	pointer-events: none;
 }

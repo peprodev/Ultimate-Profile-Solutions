@@ -1,7 +1,7 @@
 <?php
 
 # @Last modified by:   amirhp-com <its@amirhp.com>
-# @Last modified time: 2022/08/23 00:55:25
+# @Last modified time: 2022/08/30 20:28:52
 
 /**
  * Orders
@@ -34,6 +34,24 @@ $customer_orders = wc_get_orders( apply_filters(
 			)
 	)
 );
+
+function rtc_get_order_service($order)
+{
+	$order_items  = $order->get_items( apply_filters( 'woocommerce_purchase_order_item_types', 'line_item' ) );
+	$service_type = "NO SERVICE";
+
+	foreach ( $order_items as $item_id => $item ) {
+		$product = $item->get_product();
+		if ($service_type == "NO SERVICE") {
+			if (!has_term("services", 'product_cat', $product->get_id())) continue;
+			$service_type = $item->get_name();
+		}
+		continue;
+	}
+ 	return $service_type;
+}
+
+
 $has_orders	= 0 < $customer_orders->total;
 // add_filter( "woocommerce_price_format", function(){return '%2$s %1$s';},10000,2);
 do_action( 'woocommerce_before_account_orders', $has_orders ); ?>
@@ -62,7 +80,7 @@ do_action( 'woocommerce_before_account_orders', $has_orders ); ?>
 								<?php elseif ( 'order-number' === $column_id ) : ?>
 										<span><?php echo esc_html( sprintf("%06d",$order->get_order_number()) ); ?></span>
 								<?php elseif ( 'order-date' === $column_id ) : ?>
-									<span><time datetime="<?php echo esc_attr( $order->get_date_created()->date( 'c' ) ); ?>"><?php echo esc_html( wc_format_datetime( $order->get_date_created() ) ); ?></time></span>
+									<span><time datetime="<?php echo esc_attr( $order->get_date_created()->date( 'c' ) ); ?>"><?php echo esc_html( $order->get_date_created()->date("Y.m.d") ); ?></time></span>
 								<?php elseif ( 'order-status' === $column_id ) : ?>
 									<span><?php echo esc_html( wc_get_order_status_name( $order->get_status() ) ); ?></span>
 								<?php elseif ( 'order-total' === $column_id ) : ?>
@@ -107,7 +125,7 @@ do_action( 'woocommerce_before_account_orders', $has_orders ); ?>
 							<div class="order-item-details">
 								<div class="order-item-details-type">
 									<span class="order-item-details-head">SERVICE TYPE</span>
-									<span class="order-item-details-body">ROSE</span>
+									<span class="order-item-details-body"><?=rtc_get_order_service($order);?></span>
 								</div>
 								<div class="order-item-details-date">
 									<span class="order-item-details-head">DATE OF ORDER</span>

@@ -3,7 +3,7 @@
  * @Date:   2020/09/28 17:58:05
  * @Email:  its@hpv.im
  * @Last modified by:   amirhp-com <its@amirhp.com>
- * @Last modified time: 2022/08/24 17:20:46
+ * @Last modified time: 2022/08/31 16:34:37
  * @License: GPLv2
  * @Copyright: Copyright © 2020 Amirhosseinhpv, All rights reserved.
  */
@@ -159,14 +159,6 @@
       $(`pdmain form :input`).trigger("refresh");
     }, 200);
 
-    $(document).on("click tap", ".overly-clickable, .overly-close", function(e){
-      e.preventDefault();
-      $(".overly-clickable, .order-details-overly").removeClass("active")
-    });
-    $(document).on("click tap", ".show-extra-info", function(e){
-      e.preventDefault();
-      $(this).siblings(".overly-clickable, .order-details-overly").addClass("active")
-    });
     $(document).on("change keyup focus refresh", `pdmain form :input`, function(e) {
       val = $(this).val();
       if ($.trim(val) !== "") {
@@ -177,7 +169,7 @@
         $(this).parent().removeClass("filled");
       }
     });
-    $(document).on("change", "input[type='file']#avatar.form-control.primary.bg-light", function(e) {
+    $(document).on("change",    "input[type='file']#avatar.form-control.primary.bg-light", function(e) {
       e.preventDefault();
       var file_data = $(this).prop("files")[0];
       if (!file_data) {
@@ -193,13 +185,25 @@
         return false;
       }
     });
-    $(document).on("focusout", "pdmain form :input", function(e) {
+    $(document).on("focusout",  "pdmain form :input", function(e) {
       $(this).removeClass("focused");
       $(this).parent().removeClass("focused");
     });
-    $(document).on("focusin", "pdmain form :input", function(e) {
+    $(document).on("focusin",   "pdmain form :input", function(e) {
       $(this).addClass("focused");
       $(this).parent().addClass("focused");
+    });
+    $(document).on("click tap", ".wc-btn-download.multipledl", function(e) {
+      e.preventDefault();
+      scroll_element($(".woocommerce-order-downloads"));
+    });
+    $(document).on("click tap", ".overly-clickable, .overly-close", function(e) {
+      e.preventDefault();
+      $(".overly-clickable, .order-details-overly").removeClass("active")
+    });
+    $(document).on("click tap", ".show-extra-info", function(e) {
+      e.preventDefault();
+      $(this).siblings(".overly-clickable, .order-details-overly").addClass("active")
     });
     $(document).on("click tap", ".au-message__item.unread", function(e) {
       e.preventDefault();
@@ -371,7 +375,7 @@
       $(this).parents(".has-subitem").toggleClass("active");
     });
 
-    $(document).on("click tap", ".topmenu-dropdown-toggle, topdrp .topmenu-bg-overly", function(e){
+    $(document).on("click tap", ".topmenu-dropdown-toggle, topdrp .topmenu-bg-overly", function(e) {
       e.preventDefault();
       $("topdrp .heading-li-item").toggleClass("active")
     });
@@ -398,6 +402,12 @@
           $(this).stop().removeClass("active");
         });
       }, 200);
+    }
+
+    function scroll_element(element, offset = 0) {
+      $("html, body").animate({
+        scrollTop: element.offset().top - offset
+      }, 500);
     }
   });
 })(jQuery);
