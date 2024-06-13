@@ -1,6 +1,6 @@
 <?php
-# @Last modified by:   amirhp-com
-# @Last modified time: 2022/08/04 21:07:20
+# @Last modified by:   amirhp-com <its@amirhp.com>
+# @Last modified time: 2022/09/17 18:48:43
 namespace PeproDev;
 use PeproDev;
 
@@ -34,6 +34,7 @@ if (!class_exists("PeproDevUPS_Core")){
         $this->plugin_basename = plugin_basename(__FILE__);
         $this->plugin_file     = __FILE__;
         $this->version         = defined('PEPRODEVUPS') ? PEPRODEVUPS : "1.0.0";
+        $this->script_version  = $this->version;
         $this->db_slug         = $this->td;
         $this->db_table        = $wpdb->prefix . $this->db_slug;
         $this->title           = __("PeproDev Ultimate Profile Solutions", "peprodev-ups");

@@ -3,7 +3,7 @@
  * @Date:2020/05/03 13:33:07
  * @Email:its@hpv.im
  * @Last modified by:   amirhp-com <its@amirhp.com>
- * @Last modified time: 2022/09/01 01:38:41
+ * @Last modified time: 2022/09/01 05:18:41
  * @License:GPLv2
  * @Copyright:Copyright © 2020 Amirhosseinhpv,All rights reserved.
  */
@@ -34,6 +34,16 @@ toastwide {
 pdtoast.active,
 toastwide.active {
 	transform: translateY(0);
+}
+
+#wpadminbar {
+	z-index: 99999999999999;
+}
+
+pdtoast:empty,
+rtctoast:empty,
+toastwide:empty {
+	display: none !important;
 }
 
 .go-to-ticket,

@@ -1,6 +1,6 @@
 <?php
-# @Last modified by:   amirhp-com
-# @Last modified time: 2022/08/14 21:12:22
+# @Last modified by:   amirhp-com <its@amirhp.com>
+# @Last modified time: 2022/09/17 19:00:10
 namespace PeproDev;
 use PeproDev;
 
@@ -3106,6 +3106,18 @@ if (!class_exists("PeproDevUPS_Login")){
           $num++;
           $field["attributes"] = "tabindex=$num " . (isset($field["attributes"]) ? $field["attributes"] : "");
           array_push($login_fields, $field);
+
+          $num++;
+          array_push($login_fields, array(
+              "title"       => __("Check","peprodev-ups"),
+              "type"        => "accept",
+              "meta_name"   => "privacy",
+              "classes"     => "",
+              "attributes"  => "tabindex=$num data-error-text=\"".esc_attr__("You should accept Terms & Conditions", "peprodev-ups")."\"",
+              "is-required" => "yes",
+              "is-public"   => "no",
+              "no-label"    => "yes",
+          ));
         }
       }
       $textSend   = __("Register","peprodev-ups");
@@ -3269,6 +3281,12 @@ if (!class_exists("PeproDevUPS_Login")){
             echo "<".($printr?"tr":"{$style}")." class='{$row_class} {$field["meta_name"]}-wrap ".("yes" == $field["is-required"]?"form-required":"")."'>
                     <button type=\"".esc_attr( $field["btn-type"] )."\" class=\"".esc_attr( $field["classes"] )."\" id=\"".esc_attr( $field["meta_name"] )."\" ".$field["attributes"]." >".esc_html( $field["title"] )."</button>".
                     ($printr?"</tr>":"</{$style}>");
+          break;
+
+          case 'accept':
+            echo "<".($printr?"tr":"{$style}")." class='{$row_class} {$field["meta_name"]}-wrap form-required'>
+                    <label><label type='checkbox' ". $field["attributes"] ." class='".esc_attr($field["classes"])."' id='".esc_attr($field["meta_name"])."' />".$field["title"]."</label>".
+                  ($printr?"</tr>":"</{$style}>");
           break;
 
           default:
