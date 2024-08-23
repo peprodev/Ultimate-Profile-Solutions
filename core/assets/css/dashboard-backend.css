@@ -7,48 +7,6 @@
  * @License: GPLv2
  * @Copyright: Copyright © 2020 Amirhosseinhpv, All rights reserved.
  */
-@font-face {
-  font-family: IranYekan;
-  font-style: normal;
-  font-weight: bold;
-  src: url("../webfonts/iranyekanwebbold.woff") format('woff');
-}
-@font-face {
-  font-family: IranYekan;
-  font-style: normal;
-  font-weight: 300;
-  src: url("../webfonts/iranyekanweblight.woff") format('woff');
-}
-@font-face {
-  font-family: IranYekan;
-  font-style: normal;
-  font-weight: normal;
-  src: url("../webfonts/iranyekanwebregular.woff") format('woff');
-}
-/* Latin fonts (Roboto) */
-@font-face {
-  font-family: roboto;
-  font-style: normal;
-  font-weight: bold;
-  src: url("../webfonts/robotobold.woff") format('woff');
-}
-@font-face {
-  font-family: roboto;
-  font-style: normal;
-  font-weight: 300;
-  src: url("../webfonts/robotolight.woff") format('woff');
-}
-@font-face {
-  font-family: roboto;
-  font-style: normal;
-  font-weight: normal;
-  src: url("../webfonts/robotoregular.woff") format('woff');
-}
-
-body, h1, h2, h3, h4, h5, h6, input, textarea {
-  font-family: IranYekan, roboto, Arial !important;
-}
-
 :root {
   /* Global Colors */
   --accent-rose: #e91e63;
@@ -126,7 +84,61 @@ body, h1, h2, h3, h4, h5, h6, input, textarea {
   scroll-behavior: smooth;
   overflow: inherit !important;
 }
+@font-face {
+  font-family: iranyekan;
+  font-style: normal;
+  font-weight: bold;
+  src: url("../fonts/woff/iranyekanwebbold.woff") format('woff');
+}
+@font-face {
+  font-family: iranyekan;
+  font-style: normal;
+  font-weight: 300;
+  src: url("../fonts/woff/iranyekanweblight.woff") format('woff');
+}
+@font-face {
+  font-family: iranyekan;
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/woff/iranyekanwebregular.woff") format('woff');
+}
+/* Latin fonts (Roboto) */
+@font-face {
+  font-family: roboto;
+  font-style: normal;
+  font-weight: bold;
+  src: url("../fonts/woff/robotobold.woff") format('woff');
+}
+@font-face {
+  font-family: roboto;
+  font-style: normal;
+  font-weight: 300;
+  src: url("../fonts/woff/robotolight.woff") format('woff');
+}
+@font-face {
+  font-family: roboto;
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/woff/robotoregular.woff") format('woff');
+}
+
+body {
+  font-family: iranyekan, roboto, Arial !important;
+  /* direction: rtl; */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+textarea {
+  font-family: iranyekan, roboto, Arial !important;
+}
 /* .sidebar .sidebar-wrapper, .main-panel */
+
 .card .card-header-primary .card-icon,
 .card .card-header-primary .card-text,
 .card .card-header-primary:not(.card-header-icon):not(.card-header-text),
@@ -589,7 +601,6 @@ table.table-small.table > thead > tr > td,
 table.table-small.table > thead > tr > th {
   padding: 4px 10px;
   /* border-color: transparent; */
-  ;
 }
 
 select {
@@ -617,6 +628,14 @@ select {
 }
 
 .form-control:-ms-input-placeholder {
+  line-height: 22px !important;
+}
+
+.form-control::-webkit-input-placeholder {
+  line-height: 22px !important;
+}
+
+.form-control::-ms-input-placeholder {
   line-height: 22px !important;
 }
 
@@ -855,43 +874,29 @@ toast:empty {
 }
 
 .card .card-header .card-category {
-  font-weight: normal !important;
-  color: #fff !important;
+	font-weight: normal !important;
+	color: #fff !important;
 }
-
-.card .card-header .card-title,
-.card .card-header .card-title-single {
-  font-weight: 900;
-  color: #fff !important;
+.card .card-header .card-title-single,
+.card .card-header .card-title {
+	font-weight: 900;
+	color: #fff !important;
 }
-
 .sidebar .nav p {
-  font-weight: normal;
+    font-weight: normal;
 }
-
 .main-panel > .content {
-  margin-top: 40px !important;
-}
-
-.dark-edition pre {
-	color: #ccc;
+	margin-top: 40px !important;
 }
 
 #wpbody-content > .notice {
-	max-width: 70%;
-	display: block;
-	margin: auto;
-}
-
-
-#wp-link label input[type="text"] {
-    min-width: 350px;
-}
-#wp-link #link-options label span, #wp-link #search-panel label span.search-label {
-    width: auto;
-}
-
-
-.smart_btn_workspace #copyshortcode {
-	float: right;
+	padding: 1rem;
+	background: #ffffff70;
+	border: 1px solid;
+	margin: 0.5rem;
+	width: calc(100% - 260px - 1rem);
+	float: left;
+	clear: both;
+	border-radius: 6px;
+  display: none !important;
 }

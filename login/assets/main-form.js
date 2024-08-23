@@ -17,7 +17,7 @@ jQuery.noConflict();
         $(".g-recaptcha-response").each(function(index, val) {
           if ($(val).val() === "") {
             if (!$("#login_error").length) { $("#registerform").before($("<div id='login_error'></div>")); }
-            $("#login_error").html(_i18nj.catpcha);
+            $("#login_error").html(_i18nj.captcha);
             e.preventDefault();
             return false;
           }

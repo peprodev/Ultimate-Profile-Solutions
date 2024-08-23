@@ -1,28 +1,38 @@
 === PeproDev Ultimate Profile Solutions ===
-Contributors: amirhosseinhpv, peprodev, blackswanlab
+Contributors: amirhpcom, peprodev, blackswanlab
 Donate link: https://pepro.dev/donate/
-Tags: functionality, pepro, management, administration, profile, login, register
-Version: 2.5.0
-Stable tag: 2.5.0
+Tags: profile-builder, user-management, login-forms, registration-forms, OTP-login, WooCommerce
+Version: 7.4.0
+Stable tag: 7.4.0
 Requires at least: 5.0
-Tested up to: 5.9
+Tested up to: 6.6.2
 Requires PHP: 7.2
-WC tested up to: 6.0
+WC tested up to: 9.2.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-The most complete and THE Ultimate Profile Solutions for WordPress
+The Ultimate WordPress Profile Builder & User Management Plugin
 
 == Description ==
 
-One of the most Advanced and The Ultimate Profile Solutions for WordPress
--------------------------------------------------------------------------
+The most powerful and feature-rich profile builder and user management solution for WordPress.
+-----------------------------------------------------------------------------
 
 * FREE OF ANY CHARGE! UNLIMITED! OPEN-SOURCE FOREVER!
 * Ajaxified Popup Login/Register form
 * Login by Username/Password | Email/Password | Mobile OTP | Email OTP | (social login soon)
 * Show Popup/Toast Notification after Login/Register
-* Unlimited User Customized Registration Fields (reCAPTCHA / Text / Select / WooCommerce Based fields / TinyMCE Editor / DEV: Hooked Extras)
+* Unlimited User Customized Registration Fields:
+    * Text Field
+    * Number Field
+    * Email Field
+    * Mobile Number Field
+    * reCAPTCHA Field
+    * Select Dropdown Field
+    * Multiple-choice Field
+    * WooCommerce Based fields
+    * TinyMCE Editor
+    * DEV: Hooked Customized Fields
 * Unlimited User Customized Login Redirection rules (based on User Role)
 * Unlimited User Customized Logout Redirection rules (based on User Role)
 * Unlimited User Customized Registration Redirection rules (based on User Role)
@@ -40,24 +50,67 @@ One of the most Advanced and The Ultimate Profile Solutions for WordPress
 * Compatible with WooCommerce, LearnDash, WooWallet, Wishlist, YITH Plugins
 * Made by Developers for the Developers! [Source code in GitHub](https://github.com/peprodev/Ultimate-Profile-Solutions)
 
+== Plugin Features ==
+* Custom Profile Creation with multiple sections
+* Ability to display shortcodes within profile sections
+* Add custom CSS and JavaScript to profile pages
+* Editable profile with custom fields
+* Customizable profile avatars
+* View WooCommerce orders within profile
+* Send notifications to selected or all users
+* Popup login/register forms
+* Custom redirection after login/register/logout based on user role
+* Migration from Digits plugin
+* Responsive and clean design
+* Change default login URL instead of wp-login.php
+* Add reCAPTCHA for enhanced security
+* Mobile OTP-based subscription list for users
+* Modify default WordPress login design and behavior
+* SMS Providers: SMS.ir (v1, v2), FarazSMS, IPPanel (Normal, Pattern), Kavehnegar (Normal, Pattern), ParsGreen, with options to add more using hooks
+* Fully compatible with Elementor, Zephyr theme, Woodmart theme, Visual Composer, LearnDash, WooWallet, PeproDev Ticketing, WooCommerce, and more
+
 == Installation ==
 
-This section describes how to install the plugin and get it working.
-
-e.g.
-
 1. Upload the plugin files to the `/wp-content/plugins/plugin-name` directory, or install the plugin through the WordPress plugins screen directly.
-1. Activate the plugin through the 'Plugins' screen in WordPress
-1. Use the Settings->Plugin Name screen to configure the plugin
-1. (Make your instructions match the desired user flow for activating and installing your plugin. Include any steps that might be needed for explanatory purposes)
-1. Navigate to `/wp-admin/?page=peprodev-ups&section=loginregister#tab_samrt_button` and copy Magical Button shortcode
-1. Add this shortcode to your header or next to your menubar, so users could use popup login/register
-1. Also check shortcodes panel from your sidebar while you're in Plugin's custom setting page
-1. This Plugin has 100% compatibility with Zephyr theme and could be used with any other themes
+2. Activate the plugin through the 'Plugins' screen in WordPress
+3. Use the Settings->Plugin Name screen to configure the plugin
+4. Navigate to `/wp-admin/?page=peprodev-ups&section=loginregister#tab_samrt_button` and copy Magical Button shortcode
+5. Add this shortcode to your header or next to your menu bar, so users could use popup login/register
+6. Also, check shortcodes panel from your sidebar while you're in Plugin's custom setting page
+7. This Plugin has 100% compatibility with Zephyr theme and could be used with any other themes
+
+== Upgrade Notice ==
+After updating to version 7.4.0, it is recommended to check the login section in the plugin settings via `wp-admin/?page=peprodev-ups&section=loginregister#tab_registration` and double-check everything to ensure all configurations are intact.
+
+== How to Use ==
+Place the shortcode `[pepro-smart-btn]` in your page header or view `wp-admin/?page=peprodev-ups&section=loginregister` for more advanced shortcodes. Explore `wp-admin/?page=peprodev-ups&section=shortcodes` to browse all available shortcodes provided by the plugin.
 
 == About Us ==
-PeproDev is a premium supplier of quality WordPress plugins, services and support. Join us at [https://pepro.dev/](https://pepro.dev/) and also don't forget to check out our [free offerings](http://profiles.wordpress.org/peprodev/), we hope you enjoy them!
+PeproDev is a premium supplier of quality WordPress plugins, services, and support. We are Pepro Dev. Group [peprodev.com], and we make premium WordPress stuff, plugins, and contribute to FOSS. Proudly made in Iran for all web users to use freely, without any commercial influence or support from SMS providers listed in the plugin.
 
+== Maintenance & Warranty ==
+This plugin is provided "as is," with no warranty of any kind. We do not guarantee the plugin's performance or suitability for any specific purpose. Updates are pushed through our GitHub channel.
+
+== How to Contribute ==
+You can help us improve this plugin by forking it on GitHub and submitting your contributions. Visit the [GitHub repository](https://github.com/peprodev/Ultimate-Profile-Solutions) to get started.
+
+== Legal Disclaimer ==
+PeproDev is not liable for any data breaches, hacks, or other security-related issues that may occur as a result of using this plugin. Please ensure that your website is secure and that you follow best practices for security.
+
+**Data Privacy Notice:** We do not collect any data from you. Your usage of this plugin is completely private, and no information is transmitted or stored by us.
+
+== Security and Bug Reporting ==
+Our plugin is submitted through Patchstack, and any bugs or security vulnerabilities are promptly addressed. Please report any issues through our GitHub repository or contact us directly.
+
+== Customization Services ==
+We offer customization services for this plugin. If you need specific features added or changes made, our team is available to assist you, either freely or for a fee. Contact us at [support@peprodev.com](mailto:support@pepro.dev).
+
+== Pro Version ==
+We are working on a new pro version of the plugin with refactored code and enhanced standards, which will be available soon.
+
+== Tips & Tricks ==
+* View the changelog at `wp-admin/admin.php?page=peprodev-ups&section=home&welcome=true`.
+* Regenerate the plugin's database structure by visiting `wp-admin/?pepro_ups_force_db_create=1`.
 
 == Frequently Asked Questions ==
 
@@ -67,145 +120,76 @@ You can help us improve our works by committing your changes to [GitHub/Ultimate
 = How can I Order a Customized version of this plugin? =
 Our professional development team is here to offer you a fully Customized-Pro version of this plugin to fulfill your request. Contact us at [support@peprodev.com](mailto:support@pepro.dev)
 
+= Where can I find the full changelog? =
+The full changelog is available in our [GitHub repository](https://github.com/peprodev/Ultimate-Profile-Solutions/blob/main/changelog.md).
 
 == Screenshots ==
-1. Overview
+1. by Pepro Dev. Group
 
 == Changelog ==
 
-= Ver. 2.6.0 =
-* Compatible with *Nextend Social Login* and dedicated Settings on Login/Registration section
-* Fixed showing popup header/footer custom content
+= Ver. 7.3.3 | 17 August, 2024 | 1403-05-27 =
+Fix User access to orders
+Fix redirect to current page not working
+Support [pepro-profile redirect_to="$url"] and other login shortcode attributes
 
-= Ver. 2.5.0 | 2022-02-20/1400-12-01 =
-* Fixed showing email login when SMS OTP is turned on
-* Fixed adding email field to SMS OTP register (optional, required)
-* Fixed asking for current password when there's none!
-* Fixed not showing OTP input when change mobile/email after request
-* Fixed always showing edit email section in profile edit
-* Fixed profile font and changed to IranYekan
-* Fixed generating user name from Email, Mobile, "Dear User" when name field does not exists
-* Fixed some translation changed
+= Ver. 7.3.0 | 12 August, 2024 | 1403-05-22 =
+Major Security and Performance Enhancement
+Compatibility with Ticketing plugin
+Remove old redundant options from wp_options
+Better options handling with non-autoloading them
+Change view order default URL to point to profile
+Applied Notification and Announcement UI fixes
+DEV: Added `peprodev/profile/helper/add_private_notification` hook for other plugins to create personal and global Notification
 
-= Ver. 2.4.4 | 2022-02-11/1400-11-22 =
-* Fixes on Keep User Logged In forever
-* Fixes on Persian Translation
-* Fixes to keep new lines on copy shortcode
-* Added Welcome page after activating plugin
-* DEV: Enhancement for creating profile page on first-use
-* DEV: Added placeholder to test-mobile-otp field
-* DEV: Enhanced function :: get_profile_page
+= Ver. 7.2.4 | 07 August, 2024 | 1403-05-17 =
+Fix Layout of User Notification chat
+Fix Layout of User Announcement chat
+Change Notification/Announcement icon
+Some CSS fixes
+Make GUEST OTP Records non-autoload
+DEV: added current section name to page wrapper class list
 
-= Ver. 2.4.0 | 2022-01-18/1400-10-28 =
-* Backend UX Improvement
-* Backend UI Improvement
-* Changed translation
-* Added notice on after Installation
-* DEV: Removed redundant lines
-* DEV: Improved toast on Profile panel
-* DEV: Fixed some CSS
+= Ver. 7.1.9 | 03 July, 2024 | 1403-04-13 =
+Fix Layout break of Login page while loading
+Fix showing back "Register" link when user is not registered
 
-= Ver. 2.3.6 | 2022-01-11/1400-10-21 =
-* Added new Admin Dashboard UX Widget
-* Added Expire Auth. Option
-* Backend UX Improvement
+= Ver. 7.1.8 | 25 June, 2024 | 1403-04-05 =
+Fix Failed to send OTP if username is same as mobile and user found by username rather mobile
 
-= Ver. 2.3.5 | 2022-01-09/1400-10-19 =
-* Enhanced Admin Dashboard UX
-* Added ReadMe to GitHub & WordPress
+= Ver. 7.1.7 | 21 June, 2024 | 1403-04-01 =
+Fix login shortcode layout break before full page load
 
-= Ver. 2.3.4 | 2022-01-03/1400-10-13 =
-* Fixes: Popup Login/Registration form
-* Fixes: Toast Notification Coloring Errors
-* Fixes: Admin User Creation, now Auto Verifies user
-* Fixed: Arabic/Persian numbers in Inputs/Verification
-* Fixes: Registration without saving User first name
-* Fixes: Duplicate user First Name/Last Name on Admin-New User Panel
-* Enhanced: Kavenegar کاوه نگار SMS Gateway
+= Ver. 7.1.6 | 21 June, 2024 | 1403-04-01 =
+Fix [pepro-profile] shortcode breaks elementor layout
 
-= Ver. 2.3.3 | 2022-01-01/1400-10-11 =
-* Added floating form labels
-* Changed Popup login/register style
-* Added Option to Use Messagebox/Toast Notification
+= Ver. 7.1.5 | 16 June, 2024 | 1403-03-27 =
+Fixed Pages custom js not added via jQuery
+Fixed Verifying Email error when already exists
+Fixed profile fields not shown on edit account if not shown on Registeration
+Added (*) to required fields and additional html class
 
-= Ver. 2.3.0 | 2021-12-30/1400-10-09 =
-* Multiple SMS Providers
-* Mobile Newsletter Subscription via number verify (SMS OTP)
-* Each SMS Provider has its own sending function
-* Each SMS Provider has its own setting panel
-* Now you can live-test your SMS OTP code
-* Change Mobile after OTP sent
-* OTP Login Enhancement
-* OTP Registration Enhancement
-* Login/Registration clears stored OTP on database
-* Popup form design changed
-* Smart Button now receives 'trigger' argument to let other elements trigger it
-* 'trigger' argument element could have classes to activate popup form (active-register|active-login)
-* 'trigger' could also be used with multiple selectors, e.g. '.openlogin, .openregister, .openpup, #login_btn'
-* Added Shortcode `[pepro-sms-subscription]`
-* Added Newsletter Section in Setting for managing Users
-* Added Option to Export Newsletter Users as CSV
+= Ver. 7.1.2 | 29 May, 2024 | 1403-03-09 =
+Fixed Endpoint parsing
+Fixed redirection and referring for login
+Fixed download icon
+Fixed built-in items not deactivating
+Added hook for nav menu before profile icon
 
-
-= Ver. 1.9.2 | 2021-12-22/1400-10-01 =
-* Verification Enhancement
-
-= Ver. 1.9.1 | 2021-12-11/1400-09-20 =
-* CSS Fixes
-* Enhancement
-* Responsive reCaptcha
-
-= Ver. 1.8.9 | 2021-11-24/1400-09-03 =
-* Fixes for Wrong Date/Time on OTP timeout timer
-* Fixes for No Creating user using Email OTP method
-* Fixes for Translation
-
-= Ver. 1.8.7 | 2021-11-13/1400-08-22 =
-* Fixes for SMS Verification TIMEOUT not showing counter-down
-
-= Ver. 1.8.6 | 2021-11-08/1400-08-17 =
-* Fixes for Profile Notification not accepting HTML
-* Fixes for Profile Dashboard Logo size
-* Added Option to let use WordPress login/register URL structure
-
-= Ver. 1.8.5 | 2021-11-05/1400-08-14 =
-* Fixes applied for verification
-* Bulk approve user emails (/wp-admin/?bulk_useremail_approve=1)
-
-
-= Ver. 1.8.2 | 2021-08-29/1400-06-07 =
-* WPML compatibility
-* Make Smaller version of Avatar on Upload
-
-= Ver. 1.0.0 | 2021-08-29/1400-06-07 =
-* initial release
-* unified all-in-one plugin
-* added translation
-
+= Ver. 7.0.6 | 17 May, 2024 | 1403-02-28 =
+Woodmart Login popup compatibility
+Changed Login/Registeration form fields priority
+Added option to change WC Address on Profile
+Fixed IPPanel SMS Gateway
+Fixed SMS Timeout not applied via TimeZone difference
+Better Compatibility with WooCommerce
+Security & Bug fixes
+UI/UX Enhancement
+Major Update in Code and Recourses
 
 == Upgrade Notice ==
 
-= Ver. 2.5.0 | 2022-02-20/1400-12-01 =
-* Fixed showing email login when SMS OTP is turned on
-* Fixed adding email field to SMS OTP register (optional, required)
-* Fixed asking for current password when there's none!
-* Fixed not showing OTP input when change mobile/email after request
-* Fixed always showing edit email section in profile edit
-* Fixed profile font and changed to IranYekan
-* Fixed generating user name from Email, Mobile, "Dear User" when name field does not exists
-* Fixed some translation changed
+= 7.4.0 =
+After updating to version 7.4.0, it is recommended to check the login section in the plugin settings via `wp-admin/?page=peprodev-ups&section=loginregister#tab_registration`. Double-check all settings, especially those related to login, registration, and redirection, to ensure that your configurations are intact and working as expected.
 
-= Ver. 2.4.x | 2022-02-11/1400-11-22 =
-* Backend UX Improvement
-* Backend UI Improvement
-* Added notice on after Installation
-* Added Welcome page after activating plugin
-* Fixes on Keep User Logged In forever
-* Fixes on Persian Translation
-* Fixes to keep new lines on copy shortcode
-* DEV: Enhancement for creating profile page on first-use
-* DEV: Added placeholder to test-mobile-otp field
-* DEV: Enhanced function :: get_profile_page
-* DEV: Removed redundant lines
-* DEV: Improved toast on Profile panel
-* DEV: Fixed some CSS
+Please also note that the full changelog for this version and previous versions can be found in the [GitHub repository](https://github.com/peprodev/Ultimate-Profile-Solutions/blob/main/changelog.md).

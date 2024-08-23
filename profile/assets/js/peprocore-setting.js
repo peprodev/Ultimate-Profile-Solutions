@@ -59,9 +59,12 @@
     $(document).on("click tap", "#profile-section-save", function(e) {
       e.preventDefault();
       var elID = `#${pepc.customhtml_tad}`;
-      if (tinymce.activeEditor){ tinymce.activeEditor.save(); }
-      if ($(elID).hasClass("tmce-active")){ contentHTML = tinymce.activeEditor.getContent(); } else{ contentHTML = $(elID).val(); }
-      datatosave = {
+      var contentHTML = $(elID).val();
+      try {
+        if (tinymce.activeEditor){ tinymce.activeEditor.save(); }
+        if ($(elID).hasClass("tmce-active")){ contentHTML = tinymce.activeEditor.getContent(); }
+      } catch (e) { }
+      var datatosave = {
         "css":               $("#css").val(),
         "js":                $("#js").val(),
         "logo":              $("#profile-section-logo").val(),

@@ -45,32 +45,39 @@
                       'sort_column'      => 'menu_order, post_title',
                     );
                     $pages = wp_dropdown_pages( $dropdown_args );
-                    ?>
-                    <p class="mb-0 mt-2">
-                      <a href="#" class="viewpagetab"><?=__("view page in new tab", "peprodev-ups");?></a> / <a href="#" class="editpagetab"><?=__("edit page in new tab", "peprodev-ups");?></a>
-                    </p>
-                    <?php
-                    $notify_user_of_page_template = sprintf(
-                      __("Current selected dashboard page's template should be 'PeproDev Ultimate Profile Solutions — Profile'. %s","peprodev-ups"),
-                      "<a class='btm btn btn-sm btn-danger' href='".
-                      admin_url("post.php?post=$dashpage&action=edit#page_template")."' target='_blank'>".
-                      __("Edit","peprodev-ups")."</a>"
-                    );
-
                     $slug = get_page_template_slug($dashpage);
                     $len = strlen("peprofile-");
                     $show_alert = false;
                     if((substr("$slug", 0, $len) !== "peprofile-")) {
                       $show_alert = true;
                     }
-
                    ?>
+                   <small>
+                   <a href="#" class="open-page"><?php echo __("View Page", $this->td);?></a> / <a href="#" class="edit-page"><?php echo __("Edit Page", $this->td);?></a> / <a href="#" class="edit-elementor"><?php echo __("Edit via Elementor", $this->td);?></a>
+                   </small>
                 </td>
 
               </tr>
-                <?php echo "<div class='alert dashpagetemplatenotice alert-inverse'>$notify_user_of_page_template</div>";?>
                 <script type="text/javascript">
                   (function($) {
+                    $(document).on("click tap", ".open-page", function(e){
+                      e.preventDefault();
+                      var me = $(this);
+                      var page_id = $("[name=profile_dash_page]").val();
+                      window.open("<?php echo home_url("/?p=");?>"+page_id);
+                    });
+                    $(document).on("click tap", ".edit-page", function(e){
+                      e.preventDefault();
+                      var me = $(this);
+                      var page_id = $("[name=profile_dash_page]").val();
+                      window.open("<?php echo admin_url("post.php?action=edit&post=");?>"+page_id);
+                    });
+                    $(document).on("click tap", ".edit-elementor", function(e){
+                      e.preventDefault();
+                      var me = $(this);
+                      var page_id = $("[name=profile_dash_page]").val();
+                      window.open("<?php echo admin_url("post.php?action=elementor&post=");?>"+page_id);
+                    });
                     $(".dashpagetemplatenotice").<?php echo esc_html( $show_alert ? "show" : "hide" );?>();
                   })(jQuery);
                 </script>
@@ -84,28 +91,6 @@
                   data-on='check_box'
                   data-off='check_box_outline_blank'
                   data-checked='<?php echo esc_attr( get_option("{$this->activation_status}-showwelcome","true") === "true" ? "true" : "false" );?>' id="showwelcome"></a>
-                </td>
-              </tr>
-              <tr>
-                <td><?php echo esc_html_x("Use Header Hook on Profile Dashboard page","profile-section", "peprodev-ups");?></td>
-                <td>
-                  <a class='btncheckbox'
-                  data-text-on='<?php echo esc_html_x("Yes, Fire this hook","profile-section", "peprodev-ups");?>'
-                  data-text-off='<?php echo esc_html_x("No, Do NOT use it","profile-section", "peprodev-ups");?>'
-                  data-on='check_box'
-                  data-off='check_box_outline_blank'
-                  data-checked='<?php echo esc_attr( get_option("{$this->activation_status}-headerhook","true") === "true" ? "true" : "false" );?>' id="headerhook"></a>
-                </td>
-              </tr>
-              <tr>
-                <td><?php echo esc_html_x("Use Footer Hook on Profile Dashboard page","profile-section", "peprodev-ups");?></td>
-                <td>
-                  <a class='btncheckbox'
-                  data-text-on='<?php echo esc_html_x("Yes, Fire this hook","profile-section", "peprodev-ups");?>'
-                  data-text-off='<?php echo esc_html_x("No, Do NOT use it","profile-section", "peprodev-ups");?>'
-                  data-on='check_box'
-                  data-off='check_box_outline_blank'
-                  data-checked='<?php echo esc_attr( get_option("{$this->activation_status}-footerhook","true") === "true" ? "true" : "false" );?>' id="footerhook"></a>
                 </td>
               </tr>
               <?php if ($this->_wc_activated()){ ?>

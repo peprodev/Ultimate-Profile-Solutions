@@ -67,7 +67,7 @@
     $(document).on("click tap", ".add_edit_save_notification", function(e) {
       e.preventDefault();
       var me = $(this);
-      var breakme = false; var contentHTML = "";
+      var break_me = false; var contentHTML = "";
       if (tinymce.activeEditor){ tinymce.activeEditor.save(); }
       if ($("#notifaddedit-content").hasClass("tmce-active")){
         contentHTML = tinymce.activeEditor.getContent();
@@ -78,47 +78,50 @@
 
       $("#notifaddedit-access, #notifaddedit-ld_lms").trigger("change");
 
-      datatosave = {
-        "id"       : parseInt($("#current_edit_notif_id").val()),
-        "title"    : $("#notifaddedit-title").val(),
-        "subject"  : $("#notifaddedit-subject").val(),
-        "slug"     : $("#notifaddedit-slug").val(),
-        "css"      : $("#css").val(),
-        "js"       : $("#js").val(),
-        "subject"  : $("#notifaddedit-subject").val(),
-        "icon"     : $("#notifaddedit-icon").val(),
-        "access"   : (("" != $("#notifaddedit-access").val() && null !== $("#notifaddedit-access").val()) ? $("#notifaddedit-access").val().join(",") : ""),
-        "ld_lms"   : (("" != $("#notifaddedit-ld_lms").val() && null !== $("#notifaddedit-ld_lms").val()) ? $("#notifaddedit-ld_lms").val() : ""),
-        "priority" : parseInt($("#notifaddedit-priority").val()),
-        "active"   : $("#notifaddedit-active-check").prop("checked") ? "yes" : "no",
-        "content"  : contentHTML,
-        "url"      : location.href,
+      var data_to_save = {
+        "id"      : parseInt($("#current_edit_notif_id").val()),
+        "title"   : $("#notifaddedit-title").val(),
+        "subject" : $("#notifaddedit-subject").val(),
+        "slug"    : $("#notifaddedit-slug").val(),
+        "css"     : $("#css").val(),
+        "js"      : $("#js").val(),
+        "icon"    : $("#notifaddedit-icon").val(),
+        "img"     : $("#notifaddedit-img").val(),
+        "access"  : (("" != $("#notifaddedit-access").val() && null !== $("#notifaddedit-access").val()) ? $("#notifaddedit-access").val().join(",") : ""),
+        "ld_lms"  : (("" != $("#notifaddedit-ld_lms").val() && null !== $("#notifaddedit-ld_lms").val()) ? $("#notifaddedit-ld_lms").val() : ""),
+        "priority": parseInt($("#notifaddedit-priority").val()),
+        "active"  : $("#notifaddedit-active-check").prop("checked") ? "yes" : "no",
+        "content" : contentHTML,
+        "url"     : location.href,
       };
-      $.each(datatosave, function(i, x) {
+      $.each(data_to_save, function(i, x) {
         switch (i) {
           case "priority":
             if (!isNumber( $.trim(x) ) ){
               $(`#notifaddedit-${i}`).parents("tr").first().find("td:first-child>label").first().removeAttr("class").addClass("text-danger");
-              breakme = true;
+              break_me = true;
             }
             break;
           case "id":
           case "css":
+          case "img":
+          case "subject":
           case "js":
           case "active":
           case "ld_lms":
+          case "content":
           case "access":
             break;
           default:
             if ($.trim(x) === "") {
               $(`#notifaddedit-${i}`).parents("tr").first().find("td:first-child>label").first().removeAttr("class").addClass("text-danger");
-              breakme = true;
+              break_me = true;
             } else {
               $(`#notifaddedit-${i}`).parents("tr").first().find("td:first-child>label").first().removeAttr("class").addClass("text-primary");
             }
         }
       });
-      if (breakme) {
+      if (break_me) {
         $.notify({ icon: "error", message: peprofile.error_validate_form }, { type: 'danger', timer: 100, delay: 4000, placement: { from: "top", align: "right" } });
         $("table#add_new label.text-danger").first().parents("tr").find("td:nth-child(2)>*:first-child>*:first-child").focus();
         return false;
@@ -136,70 +139,45 @@
           integrity: nonce,
           wparam: wparam,
           lparam: lparam,
-          dparam: datatosave,
+          dparam: data_to_save,
         },
         success: function(e) {
           if (e.success === true) {
             switch (e.data.type) {
               case "update":
                 $("#notifications_list_table tbody").html(e.data.htmlupdate);
-                // $(`#notifications_list_table tr[data-nofit-tr=${e.data.id}]`);
-                break;
+              break;
               case "add":
                 $("#notifications_list_table tbody").html(e.data.htmlupdate);
-                // $(`#notifications_list_table tbody`).prepend(e.data.htmlupdate);
-                break;
-              default:
-                // nothing !
+              break;
             }
-            $.notify({
-              icon: "thumb_up",
-              message: e.data.msg
-            }, {
-              type: 'success',
-              timer: 100,
-              delay: 5000,
-              placement: {
-                from: "top",
-                align: "right"
-              }
-            });
-          } else {
-            $.notify({
-              icon: "error",
-              message: e.data.msg
-            }, {
-              type: 'danger',
-              timer: 100,
-              delay: 5000,
-              placement: {
-                from: "top",
-                align: "right"
-              }
-            });
+            $.notify({ icon: "thumb_up", message: e.data.msg }, { type: 'success', timer: 100, delay: 5000, placement: { from: "top", align: "right" } });
           }
+          else {
+            $.notify({ icon: "error", message: e.data.msg }, { type: 'danger', timer: 100, delay: 5000, placement: { from: "top", align: "right" } });
+          }
+          setTimeout(function () { $("button.btn[data-dismiss='modal']").click(); }, 100);
         },
         error: function(e) {
           $.notify({ icon: "error", message: peprofile.error_unknown_error }, { type: 'danger', timer: 100, delay: 5000, placement: { from: "top", align: "right" } });
         },
         complete: function(e) {
+          $("tr[data-notif-tr='empty']").hide();
           $("#modal_add_notif *").prop("disabled", false);
           $(".lds-ring,.lds-ring2").hide();
           $(".select2-container").css("z-index", "");
-          $("button.btn[data-dismiss='modal']").click();
-          $("tr[data-nofit-tr='empty']").hide();
         },
       });
     });
     $(document).on("hidden.bs.modal", "#del_notifications", function() {
       let dparam = $(this).data('id');
-      $(`tr[data-nofit-tr=${dparam}]`).removeClass("removing");
-      $(`tr[data-nofit-tr=${dparam}] td.td-actions *`).prop("disabled", false);
+      $(`tr[data-notif-tr=${dparam}]`).removeClass("removing");
+      $(`tr[data-notif-tr=${dparam}] td.td-actions *`).prop("disabled", false);
     });
     $(document).on("hidden.bs.modal", "#edit_section_builtin", function() {
       let dparam = $(this).data('id');
-      $(`tr[data-nofit-tr=${dparam}]`).removeClass("removing");
-      $(`tr[data-nofit-tr=${dparam}] td.td-actions *`).prop("disabled", false);
+      $(`tr[data-notif-tr=${dparam}]`).removeClass("removing");
+      $(`tr[data-notif-tr=${dparam}] td.td-actions *`).prop("disabled", false);
       $("#edit_section_builtin_title span").html("");
     });
     $(document).on("click tap", ".remove_notif_modal", function(e) {
@@ -209,7 +187,7 @@
         wparam = me.attr('wparam'),
         lparam = me.attr('lparam'),
         dparam = me.data('id');
-      $(`tr[data-nofit-tr=${dparam}]`).addClass("removing");
+      $(`tr[data-notif-tr=${dparam}]`).addClass("removing");
       $('#del_notifications').data("integrity", nonce);
       $('#del_notifications').data("wparam", wparam);
       $('#del_notifications').data("lparam", lparam);
@@ -224,15 +202,15 @@
         wparam = me.attr('wparam'),
         lparam = me.attr('lparam'),
         dparam = me.data('id');
-      $(`tr[data-nofit-tr=${dparam}]`).addClass("removing");
+      $(`tr[data-notif-tr=${dparam}]`).addClass("removing");
       $('#edit_section_builtin').data("integrity", nonce);
       $('#edit_section_builtin').data("wparam", wparam);
       $('#edit_section_builtin').data("lparam", lparam);
       $('#edit_section_builtin').data("dparam", dparam);
       $('#edit_section_builtin').data("id", dparam);
-      $("#section_builtin_active_check").prop("checked", $(`tr[data-nofit-tr=${dparam}]`).attr("data-active") == "true").trigger("change");
-      $("#section_builtin_priority").val($(`tr[data-nofit-tr=${dparam}]`).attr("data-priority"));
-      $("#edit_section_builtin_title span").html($(`tr[data-nofit-tr=${dparam}]`).attr("data-title"));
+      $("#section_builtin_active_check").prop("checked", $(`tr[data-notif-tr=${dparam}]`).attr("data-active") == "true").trigger("change");
+      $("#section_builtin_priority").val($(`tr[data-notif-tr=${dparam}]`).attr("data-priority"));
+      $("#edit_section_builtin_title span").html($(`tr[data-notif-tr=${dparam}]`).attr("data-title"));
       $('#edit_section_builtin').modal();
     });
     $(document).on("click tap", "#save_built_in_edit", function(e) {
@@ -246,7 +224,7 @@
       pparam = $("#section_builtin_priority").val();
 
       $(".lds-ring2").show();
-      $(`tr[data-nofit-tr=${dparam}] td.td-actions .edit_notif_builtin`).prop("disabled", true);
+      $(`tr[data-notif-tr=${dparam}] td.td-actions .edit_notif_builtin`).prop("disabled", true);
       $("div#edit_section_builtin .edit_notif_builtin").prop("disabled", true);
       $.ajax({
         url: pepc.ajax,
@@ -263,11 +241,11 @@
         success: function(e) {
           if (e.success === true) {
             $.notify({ icon: "thumb_up", message: e.data.msg }, { type: 'success', timer: 100, delay: 2000, placement: { from: "top", align: "right" } });
-            $(`tr[data-nofit-tr=${dparam}] td.priority`).text(pparam);
-            $(`tr[data-nofit-tr=${dparam}] td.title>div`).removeClass("bg-c1 bg-c3").addClass(aparam=="yes"?"bg-c1":"bg-c3");
+            $(`tr[data-notif-tr=${dparam}] td.priority`).text(pparam);
+            $(`tr[data-notif-tr=${dparam}] td.title>div`).removeClass("bg-c1 bg-c3").addClass(aparam=="yes"?"bg-c1":"bg-c3");
 
-            $(`tr[data-nofit-tr=${dparam}]`).attr("data-active",(aparam=="yes"?"true":"false"));
-            $(`tr[data-nofit-tr=${dparam}]`).attr("data-priority",pparam);
+            $(`tr[data-notif-tr=${dparam}]`).attr("data-active",(aparam=="yes"?"true":"false"));
+            $(`tr[data-notif-tr=${dparam}]`).attr("data-priority",pparam);
 
           } else {
             $.notify({ icon: "error", message: e.data.msg }, { type: 'danger', timer: 100, delay: 2000, placement: { from: "top", align: "right" } });
@@ -279,7 +257,7 @@
         complete: function(e) {
           $(".lds-ring,.lds-ring2").hide();
           $("div#edit_section_builtin *").prop("disabled", false);
-          $(`tr[data-nofit-tr=${dparam}] td.td-actions .edit_notif_builtin`).prop("disabled", false);
+          $(`tr[data-notif-tr=${dparam}] td.td-actions .edit_notif_builtin`).prop("disabled", false);
           $("div#edit_section_builtin .edit_notif_builtin").prop("disabled", false);
           $('#edit_section_builtin').modal("hide");
         },
@@ -290,7 +268,7 @@
       var me = $(this);
       let nonce = me.attr('integrity'), wparam = me.attr('wparam'), lparam = me.attr('lparam'), dparam = me.data('id');
       try {
-        $data = $.parseJSON($(`tr[data-nofit-tr="${me.data("id")}"]`).first().attr("data-json"));
+        $data = $.parseJSON($(`tr[data-notif-tr="${me.data("id")}"]`).first().attr("data-json"));
       } catch (e) {
         $data = null;
       } finally {
@@ -313,10 +291,11 @@
               contentHTML = $("#notifaddedit-content").val($data.content).trigger("change");
             }
 
+            $("#notifaddedit-img").val($data.img).trigger("change");
+
             $("#notifaddedit-icon").val($data.icon).trigger("change");
             if ("" !== $data.icon){
               $(".icon-preview.icon-preview-fa").removeClass("icon-preview-on").addClass("icon-preview-on");
-
               $(".icon-preview.icon-preview-fa.icon-preview-on > button > i").removeAttr("class").addClass("material-icons");
               $(".icon-preview.icon-preview-fa.icon-preview-on > i").removeAttr("class").addClass($data.icon);
             }
@@ -374,7 +353,7 @@
       let nonce = me.attr('integrity'), wparam = me.attr('wparam'), lparam = me.attr('lparam'), dparam = me.data('id');
 
       try {
-        $data = $.parseJSON($(`tr[data-nofit-tr="${me.data("id")}"]`).first().attr("data-json"));
+        $data = $.parseJSON($(`tr[data-notif-tr="${me.data("id")}"]`).first().attr("data-json"));
       } catch (e) {
         $data = null;
       } finally {
@@ -391,7 +370,7 @@
 
       // $(".lds-ring").css("display", "flex");
       $(".lds-ring2").show();
-      $(`tr[data-nofit-tr=${dparam}] td.td-actions *`).prop("disabled", true);
+      $(`tr[data-notif-tr=${dparam}] td.td-actions *`).prop("disabled", true);
       $("div#del_notifications *").prop("disabled", true);
       $.ajax({
         url: pepc.ajax,
@@ -405,7 +384,7 @@
         },
         success: function(e) {
           if (e.success === true) {
-            $(`tr[data-nofit-tr=${dparam}]`).remove();
+            $(`tr[data-notif-tr=${dparam}]`).remove();
             $.notify({
               icon: "thumb_up",
               message: e.data.msg
@@ -418,8 +397,8 @@
                 align: "right"
               }
             });
-            if ($(`tr[data-nofit-tr]`).length < 2) {
-              $("tr[data-nofit-tr='empty']").show();
+            if ($(`tr[data-notif-tr]`).length < 2) {
+              $("tr[data-notif-tr='empty']").show();
             }
           } else {
             $.notify({
@@ -496,7 +475,7 @@
     }
     function CLEAR_NOTIF_FORM() {
       if (tinyMCE.activeEditor){ tinyMCE.activeEditor.setContent(""); }
-      $("#notifaddedit-title, #notifaddedit-access, #notifaddedit-ld_lms, #notifaddedit-slug, #notifaddedit-priority, #notifaddedit-subject, #notifaddedit-content, #notifaddedit-icon, #current_edit_notif_id").val("").trigger("change");
+      $("#notifaddedit-title, #notifaddedit-access, #notifaddedit-ld_lms, #notifaddedit-slug, #notifaddedit-priority, #notifaddedit-subject, #notifaddedit-content, #notifaddedit-icon, #notifaddedit-img, #current_edit_notif_id").val("").trigger("change");
       $("#notifaddedit-priority").val(300).trigger("change");
       $(".remove-icon.btn-sm-sqc").click().trigger("change");
       $("#notifaddedit-active-check").prop("checked", true).trigger("change");

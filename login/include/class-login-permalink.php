@@ -1,10 +1,14 @@
 <?php
+/*
+ * @Author: Amirhossein Hosseinpour <https://amirhp.com>
+ * @Date Created: 2023/02/06 01:05:22
+ * @Last modified by: amirhp-com <its@amirhp.com>
+ * @Last modified time: 2024/08/24 02:39:19
+ */
 
-# @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/04 14:49:03
-namespace PeproDev;
-use PeproDev;
-define( 'PEPROCORELOGINSLUGCHANGERBASENAMME', plugin_basename( __FILE__ ) );
+defined("ABSPATH") or die("PeproDev Ultimate Profile Solutions :: Unauthorized Access! (https://pepro.dev/)");
+
+define("PEPROCORELOGINSLUGCHANGERBASENAMME", plugin_basename( __FILE__ ) );
 class PeproCoreLoginSlugChangerClass {
 	// use Singleton;
 	private $wp_login_php;
@@ -43,11 +47,6 @@ class PeproCoreLoginSlugChangerClass {
 		if ( is_multisite() && is_plugin_active_for_network( PEPROCORELOGINSLUGCHANGERBASENAMME ) ) {
 			add_action( 'wpmu_options', array( $this, 'wpmu_options' ) );
 			add_action( 'update_wpmu_options', array( $this, 'update_wpmu_options' ) );
-
-			add_filter( 'network_admin_plugin_action_links_' . PEPROCORELOGINSLUGCHANGERBASENAMME, array(
-				$this,
-				'plugin_action_links'
-			) );
 		}
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
 		add_action( 'plugins_loaded', array( $this, 'plugins_loaded' ), 9999 );
@@ -55,7 +54,6 @@ class PeproCoreLoginSlugChangerClass {
 		add_action( 'network_admin_notices', array( $this, 'admin_notices' ) );
 		add_action( 'wp_loaded', array( $this, 'wp_loaded' ) );
 		add_action( 'setup_theme', array( $this, 'setup_theme' ), 1 );
-		add_filter( 'plugin_action_links_' . PEPROCORELOGINSLUGCHANGERBASENAMME, array( $this, 'plugin_action_links' ) );
 		add_filter( 'site_url', array( $this, 'site_url' ), 10, 4 );
 		add_filter( 'network_site_url', array( $this, 'network_site_url' ), 10, 3 );
 		add_filter( 'wp_redirect', array( $this, 'wp_redirect' ), 10, 2 );
@@ -336,22 +334,6 @@ class PeproCoreLoginSlugChangerClass {
 		}
 
 	}
-	public function plugin_action_links( $links ) {
-
-		if ( is_network_admin()
-		     && is_plugin_active_for_network( PEPROCORELOGINSLUGCHANGERBASENAMME ) ) {
-
-			array_unshift( $links, '<a href="' . network_admin_url( 'settings.php#whl_settings' ) . '">' . __( 'Settings', 'wpserveur-hide-login' ) . '</a>' );
-
-		} elseif ( ! is_network_admin() ) {
-
-			array_unshift( $links, '<a href="' . admin_url( 'options-general.php#whl_settings' ) . '">' . __( 'Settings', 'wpserveur-hide-login' ) . '</a>' );
-
-		}
-
-		return $links;
-
-	}
 	public function redirect_export_data() {
 		if ( ! empty( $_GET ) && isset( $_GET['action'] ) && 'confirmaction' === $_GET['action'] && isset( $_GET['request_id'] ) && isset( $_GET['confirm_key'] ) ) {
 			$request_id = (int) $_GET['request_id'];
@@ -380,7 +362,7 @@ class PeproCoreLoginSlugChangerClass {
 
 		}
 
-		$request = parse_url( rawurldecode( $_SERVER['REQUEST_URI'] ) );
+		$request = wp_parse_url( rawurldecode( $_SERVER['REQUEST_URI'] ) );
 
 		if ( ( strpos( rawurldecode( $_SERVER['REQUEST_URI'] ), 'wp-login.php' ) !== false
 		       || ( isset( $request['path'] ) && untrailingslashit( $request['path'] ) === site_url( 'wp-login', 'relative' ) ) )
@@ -422,7 +404,7 @@ class PeproCoreLoginSlugChangerClass {
 
 		global $pagenow;
 
-		$request = parse_url( rawurldecode( $_SERVER['REQUEST_URI'] ) );
+		$request = wp_parse_url( rawurldecode( $_SERVER['REQUEST_URI'] ) );
 
 		if ( ! isset( $_POST['post_password'] ) ) {
 
@@ -444,7 +426,7 @@ class PeproCoreLoginSlugChangerClass {
 
 				if ( ( $referer = wp_get_referer() )
 				     && strpos( $referer, 'wp-activate.php' ) !== false
-				     && ( $referer = parse_url( $referer ) )
+				     && ( $referer = wp_parse_url( $referer ) )
 				     && ! empty( $referer['query'] ) ) {
 
 					parse_str( $referer['query'], $referer );

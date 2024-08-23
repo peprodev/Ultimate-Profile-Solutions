@@ -19,7 +19,7 @@
         dparam = $(this).data("id");
       if (confirm("Are you sure you want to delete this?\nThere's no Undo function.")) {
         $(".lds-ring2").show();
-        $(`tr[data-nofit-tr=${dparam}] td.td-actions *`).prop("disabled", true);
+        $(`tr[data-notif-tr=${dparam}] td.td-actions *`).prop("disabled", true);
         $.ajax({
           url: pepc.ajax,
           type: 'POST',
@@ -32,7 +32,7 @@
           },
           success: function(e) {
             if (e.success === true) {
-              $(`tr[data-nofit-tr=${dparam}]`).remove();
+              $(`tr[data-notif-tr=${dparam}]`).remove();
               $(".totaltcountspana").text(parseInt($(".totaltcountspana").text()) - 1);
               $.notify({
                 icon: "thumb_up",
@@ -46,8 +46,8 @@
                   align: "right"
                 }
               });
-              if ($(`tr[data-nofit-tr]`).length < 2) {
-                $("tr[data-nofit-tr='empty']").show();
+              if ($(`tr[data-notif-tr]`).length < 2) {
+                $("tr[data-notif-tr='empty']").show();
               }
             } else {
               $.notify({
@@ -96,7 +96,7 @@
         dparam = $(this).data("id");
       if (confirm("Are you sure you want to delete this? there's no Undo function.")) {
         $(".lds-ring2").show();
-        $(`tr[data-nofit-tr=${dparam}] td.td-actions *`).prop("disabled", true);
+        $(`tr[data-notif-tr=${dparam}] td.td-actions *`).prop("disabled", true);
         $.ajax({
           url: pepc.ajax,
           type: 'POST',
@@ -109,7 +109,7 @@
           },
           success: function(e) {
             if (e.success === true) {
-              $(`tr[data-nofit-tr=${dparam}]`).remove();
+              $(`tr[data-notif-tr=${dparam}]`).remove();
               $.notify({
                 icon: "thumb_up",
                 message: e.data.msg
@@ -122,8 +122,8 @@
                   align: "right"
                 }
               });
-              if ($(`tr[data-nofit-tr]`).length < 2) {
-                $("tr[data-nofit-tr='empty']").show();
+              if ($(`tr[data-notif-tr]`).length < 2) {
+                $("tr[data-notif-tr='empty']").show();
               }
             } else {
               $.notify({
@@ -184,8 +184,8 @@
           },
           success: function(e) {
             if (e.success === true) {
-              $(`tbody tr:not([data-nofit-tr='empty'])`).remove();
-              $("tr[data-nofit-tr='empty']").show();
+              $(`tbody tr:not([data-notif-tr='empty'])`).remove();
+              $("tr[data-notif-tr='empty']").show();
               $(".totaltcountspana").text("0")
               $.notify({
                 icon: "thumb_up",

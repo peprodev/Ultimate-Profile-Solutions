@@ -1,0 +1,197 @@
+<!--
+@Author: Amirhossein Hosseinpour <https://amirhp.com>
+@Date Created: 2024/05/17 11:26:10
+@Last modified by: amirhp-com <its@amirhp.com>
+@Last modified time: 2024/08/21 01:48:10
+-->
+
+<div id="section-changelog" class="section"
+  style="direction: ltr; text-align: left;max-height: 500px; overflow-y: auto;">
+  <ul>
+    <li><strong>Ver. 7.4.0 | 21 August, 2024 | 1403-05-31</strong></li>
+    <li>Added Option to Change Login/Registeration Flow</li>
+    <li>Added Option to Change Login/Registeration Active Tab</li>
+    <li>Added Option to Change Login/Registeration Forms Type</li>
+    <li>Added Option to Change Registeration method</li>
+    <li>Added Option to Force Same Registeration method for both types</li>
+    <li>Added Option to Change Verification Flow</li>
+    <li>Added Option to Set Section slug to @page_slug / #page_id</li>
+    <li>Fixed Registeration form not showing correct fields on Change Email/Mobile</li>
+    <li>Fixed User Redirection after login to wrong address</li>
+    <li>Fixed Popup Login/Registeration form</li>
+    <li>Fixed Not enqueuing reCaptcha if not used on login/registeration form</li>
+    <li>DEV: Cached Form styles to avoid layout breaks</li>
+    <li>DEV: Fixed Database generating on page load</li>
+    <li>DEV: Fixed Options auto-load to "no"</li>
+    <li>DEV: Automatically Disable Cache for Profile page</li>
+    <li>DEV: Automatically Set Profile page as no-index & no-follow</li>
+    <li>DEV: Added Compatibility with WP Rocket</li>
+    <li>DEV: Added Compatibility with Yoast SEO</li>
+    <li>Updated Translation</li>
+
+    <li><strong>Ver. 7.3.3 | 17 August, 2024 | 1403-05-27</strong></li>
+    <li>Fix User access to orders</li>
+    <li>Fix redirect to current page not working</li>
+    <li>Support [pepro-profile redirect_to="$url"] and other login shortcode attributes</li>
+
+    <li><strong>Ver. 7.3.0 | 12 August, 2024 | 1403-05-22</strong></li>
+    <li>Major Security and Performance Enhancement</li>
+    <li>Compatibility with Ticketing plugin</li>
+    <li>Remove old redundant options from wp_options</li>
+    <li>Better options handling with non-autoloading them</li>
+    <li>Change view order default URL to point to profile</li>
+    <li>Applied Notification and Announcement UI fixes</li>
+    <li>DEV: Added `peprodev/profile/helper/add_private_notification` hook for other plugins to create personal and global Notification</li>
+
+    <li><strong>Ver. 7.2.4 | 07 August, 2024 | 1403-05-17</strong></li>
+    <li>Fix Layout of User Notification chat</li>
+    <li>Fix Layout of User Announcement chat</li>
+    <li>Change Notification/Announcement icon</li>
+    <li>Some CSS fixes</li>
+    <li>Make GUEST OTP Records non-autoload</li>
+    <li>DEV: added current section name to page wrapper class list</li>
+
+    <li><strong>Ver. 7.1.9 | 03 July, 2024 | 1403-04-13</strong></li>
+    <li>Fix Layout break of Login page while loading</li>
+    <li>Fix showing back "Register" link when user is not registered</li>
+
+    <li><strong>Ver. 7.1.8 | 25 June, 2024 | 1403-04-05</strong></li>
+    <li>Fix Failed to send OTP if username is same as mobile and user found by username rather mobile</li>
+
+    <li><strong>Ver. 7.1.7 | 21 June, 2024 | 1403-04-01</strong></li>
+    <li>Fix login shortcode layout break before full page load </li>
+
+    <li><strong>Ver. 7.1.6 | 21 June, 2024 | 1403-04-01</strong></li>
+    <li>Fix [pepro-profile] shortcode breaks elementor layout</li>
+
+    <li><strong>Ver. 7.1.5 | 16 June, 2024 | 1403-03-27</strong></li>
+    <li>Fixed Pages custom js not added via jQuery</li>
+    <li>Fixed Verifying Email error when already exists</li>
+    <li>Fixed profile fields not shown on edit account if not shown on Registeration</li>
+    <li>Added (*) to required fields and additional html class</li>
+
+    <li><strong>Ver. 7.1.2 | 29 May, 2024 | 1403-03-09</strong></li>
+    <li>Fixed Endpoint parsing</li>
+    <li>Fixed redirection and referring for login</li>
+    <li>Fixed download icon</li>
+    <li>Fixed built-in items not deactivating</li>
+    <li>Added hook for nav menu before profile icon</li>
+    
+    <li><strong>Ver. 7.0.6 | 17 May, 2024 | 1403-02-28</strong></li>
+    <li>Woodmart Login popup compatibility</li>
+    <li>Changed Login/Registeration form fields priority</li>
+    <li>Added option to change WC Address on Profile</li>
+    <li>Fixed IPPanel SMS Gateway</li>
+    <li>Fixed SMS Timeout not applied via TimeZone difference</li>
+    <li>Better Compatibility with WooCommerce</li>
+    <li>Security & Bug fixes</li>
+    <li>UI/UX Enhancement</li>
+    <li>Major Update in Code and Recourses</li>
+    
+    <li><strong>Ver. 2.5.0 | 2022-02-20 | 1400-12-01</strong></li>
+    <li>Fixed showing email login when SMS OTP is turned on</li>
+    <li>Fixed adding email field to SMS OTP register (optional, required)</li>
+    <li>Fixed asking for current password when there’s none!</li>
+    <li>Fixed not showing OTP input when change mobile/email after request</li>
+    <li>Fixed always showing edit email section in profile edit</li>
+    <li>Fixed profile font and changed to IranYekan</li>
+    <li>Fixed generating user name from Email, Mobile, “Dear User” when name field does not exists</li>
+    <li>Fixed some translation changed</li>
+    
+    <li><strong>Ver. 2.4.4 | 2022-02-11 | 1400-11-22</strong></li>
+    <li>Fixes on Keep User Logged In forever</li>
+    <li>Fixes on Persian Translation</li>
+    <li>Fixes to keep new lines on copy shortcode</li>
+    <li>Added Welcome page after activating plugin</li>
+    <li>DEV: Enhancement for creating profile page on first-use</li>
+    <li>DEV: Added placeholder to test-mobile-otp field</li>
+    <li>DEV: Enhanced function :: get_profile_page</li>
+    
+    <li><strong>Ver. 2.4.0 | 2022-01-18 | 1400-10-28</strong></li>
+    <li>Backend UX Improvement</li>
+    <li>Backend UI Improvement</li>
+    <li>Changed translation</li>
+    <li>Added notice on after Installation</li>
+    <li>DEV: Removed redundant lines</li>
+    <li>DEV: Improved toast on Profile panel</li>
+    <li>DEV: Fixed some CSS</li>
+    
+    <li><strong>Ver. 2.3.6 | 2022-01-11 | 1400-10-21</strong></li>
+    <li>Added new Admin Dashboard UX Widget</li>
+    <li>Added Expire Auth. Option</li>
+    <li>Backend UX Improvement</li>
+    
+    <li><strong>Ver. 2.3.5 | 2022-01-09 | 1400-10-19</strong></li>
+    <li>Enhanced Admin Dashboard UX</li>
+    <li>Added ReadMe to GitHub & WordPress</li>
+    
+    <li><strong>Ver. 2.3.4 | 2022-01-03 | 1400-10-13</strong></li>
+    <li>Fixes: Popup Login/Registration form</li>
+    <li>Fixes: Toast Notification Coloring Errors</li>
+    <li>Fixes: Admin User Creation, now Auto Verifies user</li>
+    <li>Fixed: Arabic/Persian numbers in Inputs/Verification</li>
+    <li>Fixes: Registration without saving User first name</li>
+    <li>Fixes: Duplicate user First Name/Last Name on Admin-New User Panel</li>
+    <li>Enhanced: Kavenegar کاوه نگار SMS Gateway</li>
+    
+    <li><strong>Ver. 2.3.3 | 2022-01-01 | 1400-10-11</strong></li>
+    <li>Added floating form labels</li>
+    <li>Changed Popup login/register style</li>
+    <li>Added Option to Use Message-box/Toast Notification</li>
+    
+    <li><strong>Ver. 2.3.0 | 2021-12-30 | 1400-10-09</strong></li>
+    <li>Multiple SMS Providers</li>
+    <li>Mobile Newsletter Subscription via number verify (SMS OTP)</li>
+    <li>Each SMS Provider has its own sending function</li>
+    <li>Each SMS Provider has its own setting panel</li>
+    <li>Now you can live-test your SMS OTP code</li>
+    <li>Change Mobile after OTP sent</li>
+    <li>OTP Login Enhancement</li>
+    <li>OTP Registration Enhancement</li>
+    <li>Login/Registration clears stored OTP on database</li>
+    <li>Popup form design changed</li>
+    <li>Smart Button now receives ‘trigger’ argument to let other elements trigger it</li>
+    <li>‘trigger’ argument element could have classes to activate popup form (active-register|active-login)</li>
+    <li>‘trigger’ could also be used with multiple selectors, e.g. ‘.openlogin, .openregister, .openpup, #login_btn’
+    </li>
+    <li>Added Shortcode [pepro-sms-subscription]</li>
+    <li>Added Newsletter Section in Setting for managing Users</li>
+    <li>Added Option to Export Newsletter Users as CSV</li>
+    
+    <li><strong>Ver. 1.9.2 | 2021-12-22 | 1400-10-01</strong></li>
+    <li>Verification Enhancement</li>
+    
+    <li><strong>Ver. 1.9.1 | 2021-12-11 | 1400-09-20</strong></li>
+    <li>CSS Fixes</li>
+    <li>Enhancement</li>
+    <li>Responsive reCaptcha</li>
+    
+    <li><strong>Ver. 1.8.9 | 2021-11-24 | 1400-09-03</strong></li>
+    <li>Fixes for Wrong Date/Time on OTP timeout timer</li>
+    <li>Fixes for No Creating user using Email OTP method</li>
+    <li>Fixes for Translation</li>
+    
+    <li><strong>Ver. 1.8.7 | 2021-11-13 | 1400-08-22</strong></li>
+    <li>Fixes for SMS Verification TIMEOUT not showing counter-down</li>
+    
+    <li><strong>Ver. 1.8.6 | 2021-11-08 | 1400-08-17</strong></li>
+    <li>Fixes for Profile Notification not accepting HTML</li>
+    <li>Fixes for Profile Dashboard Logo size</li>
+    <li>Added Option to let use WordPress login/register URL structure</li>
+    
+    <li><strong>Ver. 1.8.5 | 2021-11-05 | 1400-08-14</strong></li>
+    <li>Fixes applied for verification</li>
+    <li>Bulk approve user emails (/wp-admin/?bulk_useremail_approve=1)</li>
+    
+    <li><strong>Ver. 1.8.2 | 2021-08-29 | 1400-06-07</strong></li>
+    <li>WPML compatibility</li>
+    <li>Make Smaller version of Avatar on Upload</li>
+    
+    <li><strong>Ver. 1.0.0 | 2021-08-29 | 1400-06-07</strong></li>
+    <li>unified all-in-one plugin
+    <li>added translation
+    
+      <li><strong>Ver. 0.0.1 | 2020-01-01 | 1398-10-11</strong></li>
+    <li>Initial release</li>
+  </ul>
+</div>

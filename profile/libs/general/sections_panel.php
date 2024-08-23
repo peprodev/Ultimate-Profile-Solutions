@@ -1,6 +1,10 @@
 <?php
-# @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2021/09/17 22:37:48
+/*
+ * @Author: Amirhossein Hosseinpour <https://amirhp.com>
+ * @Last modified by: amirhp-com <its@amirhp.com>
+ * @Last modified time: 2024/08/21 00:45:03
+ */
+
 global $PeproDevUPS_Profile;
 $rtl         = is_rtl() ? "right" : "left";
 $page        = (int) isset($_GET['cpage']) ? sanitize_text_field($_GET['cpage']) : 1;
@@ -61,12 +65,12 @@ $loadingRing = '<div class="lds-ring2"><div></div><div></div><div></div><div></d
                       $PeproDevUPS_Profile->add_notif_input( "is-required", "notifaddedit-title", $t, $tt );
 
                       $t  = _x("Unique Slug", "section-panel", "peprodev-ups");
-                      $tt = sprintf(_x("Enter %s", "section-panel", "peprodev-ups"), $t);
-                      $PeproDevUPS_Profile->add_notif_input( "is-required", "notifaddedit-slug", $t, $tt );
+                      $tt = sprintf(_x("Enter %s, or @page_slug / #page_id", "section-panel", "peprodev-ups"), $t);
+                      $PeproDevUPS_Profile->add_notif_input( "is-required", "notifaddedit-slug", $t, $tt, "text", "force-ltr slug-input", "", "dir=ltr" );
 
                       $t  = _x("Subject", "section-panel", "peprodev-ups");
                       $tt = sprintf(_x("Enter %s", "section-panel", "peprodev-ups"), $t);
-                      $PeproDevUPS_Profile->add_notif_input( "is-required", "notifaddedit-subject", $t, $tt );
+                      $PeproDevUPS_Profile->add_notif_input( "not-required", "notifaddedit-subject", $t, $tt );
 
                       $t  = _x("Content", "section-panel", "peprodev-ups");
                       $tt = sprintf(_x("Enter %s", "section-panel", "peprodev-ups"), $t);
@@ -79,9 +83,13 @@ $loadingRing = '<div class="lds-ring2"><div></div><div></div><div></div><div></d
                                 <input id=\"notifaddedit-icon\" type=\"hidden\" /></div>
                               </td></tr>";
 
+                      $title  = _x("Icon-Image", "section-panel", "peprodev-ups");
+                      $titles = _x("Set Image as Icon (overwrite)", "section-panel", "peprodev-ups");
+                      $PeproDevUPS_Profile->add_notif_input("not-required","notifaddedit-img", $title, $titles, "text", "", "", "");
+
                       $title  = _x("Priority (number)", "section-panel", "peprodev-ups");
                       $toltip = sprintf(_x("Enter %s", "section-panel", "peprodev-ups"), $title);
-                      $PeproDevUPS_Profile->add_notif_input("is-required","notifaddedit-priority",$title,$toltip,"number","",300,"min='0'");
+                      $PeproDevUPS_Profile->add_notif_input("is-required","notifaddedit-priority",$title, $toltip,"number","",300,"min='0'");
 
                       $Yes = _x("Hide Advanced Setting","profile-section", "peprodev-ups");
                       $No  = _x("Show Advanced Setting","profile-section", "peprodev-ups");
@@ -201,7 +209,7 @@ $loadingRing = '<div class="lds-ring2"><div></div><div></div><div></div><div></d
       <div class="modal-body">
         <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
         <p>
-          <?php echo esc_html_x("Are you sure you want to permanently remove this section?<br>There is no Undo action available.", "section-panel", "peprodev-ups");?>
+          <?php echo _x("Are you sure you want to permanently remove this section?<br>There is no Undo action available.", "section-panel", "peprodev-ups");?>
         </p>
       </div>
       <div class="modal-footer">

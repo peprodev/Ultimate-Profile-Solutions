@@ -1,11 +1,7 @@
-/**
- * @Author: Amirhosseinhpv
- * @Date:   2020/05/03 13:33:07
- * @Email:  its@hpv.im
- * @Last modified by:   Amirhosseinhpv
- * @Last modified time: 2021/09/11 11:33:24
- * @License: GPLv2
- * @Copyright: Copyright © 2020 Amirhosseinhpv, All rights reserved.
+/*
+ * @Author: Amirhossein Hosseinpour <https://amirhp.com>
+ * @Last modified by: amirhp-com <its@amirhp.com>
+ * @Last modified time: 2024/08/21 00:50:20
  */
 
 (function($) {
@@ -170,6 +166,11 @@
         },
       });
     });
+    $(document).on("hidden.bs.modal", "#del_notifications", function() {
+      let dparam = $(this).data('id');
+      $(`tr[data-notif-tr=${dparam}]`).removeClass("removing");
+      $(`tr[data-notif-tr=${dparam}] td.td-actions *`).prop("disabled", false);
+    });
     $(document).on("change click", "#notifaddedit-schedule-check", function() {
       var state = $(this).prop("checked");
       if (state) {
@@ -188,9 +189,37 @@
       }
       update_scrolbar();
     });
+    $(document).on("click keyup change paste cut","#searchfontawesome",function(e){
+      e.preventDefault();
+      var searchString = $(this).val();
+      $(".fontawesome-icon-picker .tab-content .tab-pane.active li").each(function(index, value) {
+          currentName = $(value).text()
+          currentName += "" + $(value).attr("class")
+          if( currentName.toUpperCase().indexOf(searchString.toUpperCase()) > -1) {
+            $(value).show();
+          } else {
+            $(value).hide();
+          }
+      });
+    });
     $(document).on("click tap", ".clear_search", function(e) {
       e.preventDefault();
       $("input#search-here").val("").trigger("search");
+    });
+    $(document).on("click tap", ".remove_notif_modal", function(e) {
+      e.preventDefault();
+      var me = $(this);
+      let nonce = me.attr('integrity'),
+        wparam = me.attr('wparam'),
+        lparam = me.attr('lparam'),
+        dparam = me.data('id');
+      $(`tr[data-notif-tr=${dparam}]`).addClass("removing");
+      $('#del_notifications').data("integrity", nonce);
+      $('#del_notifications').data("wparam", wparam);
+      $('#del_notifications').data("lparam", lparam);
+      $('#del_notifications').data("dparam", dparam);
+      $('#del_notifications').data("id", dparam);
+      $('#del_notifications').modal();
     });
     $(document).on("click tap", ".add_edit_save_notification", function(e) {
       e.preventDefault();
@@ -202,23 +231,31 @@
       else{
         contentHTML = $("#notifaddedit-content").val();
       }
+
+      user_roles = $("select[name='user_roles[]']").val().join(",");
+      groups     = $("select[name='access_groups[]']").val().join(",");
+      learn_dash = $("select[name='learn_dash[]']").val().join(",");
+      
       datatosave = {
-        "id": parseInt($("#current_edit_notif_id").val()),
-        "title": $("#notifaddedit-title").val(),
-        "content": contentHTML,
-        "icon": $("#notifaddedit-icon").val(),
-        "color": $("input[name=notifaddedit-color]:checked").val(),
-        "priority": $("input[name=notifaddedit-priority]:checked").val(),
-        "act1": $("#notifaddedit-act1").val(),
-        "act1url": $("#notifaddedit-act1url").val(),
-        "act2": $("#notifaddedit-act2").val(),
-        "act2url": $("#notifaddedit-act2url").val(),
-        "usersList": $("#notifaddedit-usersList").val(),
-        "schedule": $("#notifaddedit-schedule").val(),
-        "scheduleFA": $("#notifaddedit-scheduleFA").val(),
-        "users-check": $("#notifaddedit-users-check").prop("checked") ? "1" : "0",
-        "schedule-check": $("#notifaddedit-schedule-check").prop("checked") ? "1" : "0",
-        "url": location.href,
+        "id"            : parseInt($("#current_edit_notif_id").val()),
+        "title"         : $("#notifaddedit-title").val(),
+        "content"       : contentHTML,
+        "icon"          : $("#notifaddedit-icon").val(),
+        "color"         : $("input[name=notifaddedit-color]:checked").val(),
+        "priority"      : $("input[name=notifaddedit-priority]:checked").val(),
+        "act1"          : $("#notifaddedit-act1").val(),
+        "act1url"       : $("#notifaddedit-act1url").val(),
+        "act2"          : $("#notifaddedit-act2").val(),
+        "act2url"       : $("#notifaddedit-act2url").val(),
+        "usersList"     : $("#notifaddedit-usersList").val(),
+        "schedule"      : $("#notifaddedit-schedule").val(),
+        "scheduleFA"    : $("#notifaddedit-scheduleFA").val(),
+        "users-check"   : $("#notifaddedit-users-check").prop("checked") ? "1"   : "0",
+        "schedule-check": $("#notifaddedit-schedule-check").prop("checked") ? "1": "0",
+        "user-roles"    : user_roles,
+        "access_groups" : groups,
+        "learn_dash"    : learn_dash,
+        "url"           : location.href,
       };
       $.each(datatosave, function(i, x) {
         switch (i) {
@@ -256,6 +293,9 @@
           case "act1url":
           case "act2":
           case "act2url":
+          case "user-roles":
+          case "access_groups":    
+          case "learn_dash":    
           case "icon":
           case "url":
             break;
@@ -295,7 +335,7 @@
             switch (e.data.type) {
               case "update":
                 $("#notifications_list_table tbody").html(e.data.htmlupdate);
-                // $(`#notifications_list_table tr[data-nofit-tr=${e.data.id}]`);
+                // $(`#notifications_list_table tr[data-notif-tr=${e.data.id}]`);
                 break;
               case "add":
                 $("#notifications_list_table tbody").html(e.data.htmlupdate);
@@ -304,71 +344,30 @@
               default:
                 // nothing !
             }
-            $.notify({
-              icon: "thumb_up",
-              message: e.data.msg
-            }, {
-              type: 'success',
-              timer: 100,
-              delay: 2000,
-              placement: {
-                from: "top",
-                align: "right"
-              }
-            });
+            $.notify({ icon: "thumb_up", message: e.data.msg }, { type: 'success', timer: 100, delay: 5000, placement: { from: "top", align: "right" } });
           } else {
-            $.notify({
-              icon: "error",
-              message: e.data.msg
-            }, {
-              type: 'danger',
-              timer: 100,
-              delay: 2000,
-              placement: {
-                from: "top",
-                align: "right"
-              }
-            });
+            $.notify({ icon: "error", message: e.data.msg }, { type: 'danger', timer: 100, delay: 5000, placement: { from: "top", align: "right" } });
           }
+          setTimeout(function () { $("button.btn[data-dismiss='modal']").click(); }, 100);
         },
         error: function(e) {
-          $.notify({ icon: "error", message: peprofile.error_unknown_error }, { type: 'danger', timer: 100, delay: 4000, placement: { from: "top", align: "right" } });
+          $.notify({ icon: "error", message: peprofile.error_unknown_error }, { type: 'danger', timer: 100, delay: 5000, placement: { from: "top", align: "right" } });
         },
         complete: function(e) {
+          $("button.btn[data-dismiss='modal']").click();
+          $("tr[data-notif-tr='empty']").hide();
           $("#modal_add_notif *").prop("disabled", false);
           $(".lds-ring,.lds-ring2").hide();
           $(".select2-container").css("z-index", "");
-          $("button.btn[data-dismiss='modal']").click();
-          $("tr[data-nofit-tr='empty']").hide();
         },
       });
-    });
-    $(document).on("hidden.bs.modal", "#del_notifications", function() {
-      let dparam = $(this).data('id');
-      $(`tr[data-nofit-tr=${dparam}]`).removeClass("removing");
-      $(`tr[data-nofit-tr=${dparam}] td.td-actions *`).prop("disabled", false);
-    });
-    $(document).on("click tap", ".remove_notif_modal", function(e) {
-      e.preventDefault();
-      var me = $(this);
-      let nonce = me.attr('integrity'),
-        wparam = me.attr('wparam'),
-        lparam = me.attr('lparam'),
-        dparam = me.data('id');
-      $(`tr[data-nofit-tr=${dparam}]`).addClass("removing");
-      $('#del_notifications').data("integrity", nonce);
-      $('#del_notifications').data("wparam", wparam);
-      $('#del_notifications').data("lparam", lparam);
-      $('#del_notifications').data("dparam", dparam);
-      $('#del_notifications').data("id", dparam);
-      $('#del_notifications').modal();
     });
     $(document).on("click tap", ".edit_notif_modal", function(e) {
       e.preventDefault();
       var me = $(this);
       let nonce = me.attr('integrity'), wparam = me.attr('wparam'), lparam = me.attr('lparam'), dparam = me.data('id');
       try {
-        $data = $.parseJSON($(`tr[data-nofit-tr="${me.data("id")}"]`).first().attr("data-json"));
+        $data = $.parseJSON($(`tr[data-notif-tr="${me.data("id")}"]`).first().attr("data-json"));
       } catch (e) {
         $data = null;
       } finally {
@@ -428,28 +427,25 @@
 
             $("#notifaddedit-act2url").val($data.action_url_2).trigger("change");
 
+            if ($data.user_roles && "" !== $.trim($data.user_roles)) {
+              $.each($data.user_roles.toString().split(","), function(index, val) {
+              $(`select[name='user_roles[]']`).val($data.user_roles.toString().split(",")).trigger("change");
+              });
+            }
+
+            if ($data.access_groups && "" !== $.trim($data.access_groups)) {
+              $(`select[name='access_groups[]']`).val($data.access_groups.toString().split(",")).trigger("change");
+            }
+            if ($data.learn_dash && "" !== $.trim($data.learn_dash)) {
+              $(`select[name='learn_dash[]']`).val($data.learn_dash.toString().split(",")).trigger("change");
+            }
+
+
             update_scrolbar();
 
           });
         }
       }
-    });
-    $(document).on("click tap",".fontawesome-icon-picker .nav-tabs a.btn",function(e){
-      var me = $(this);
-      $("#searchfontawesome").trigger("change").focus();
-    });
-    $(document).on("click keyup change paste cut","#searchfontawesome",function(e){
-      e.preventDefault();
-      var searchString = $(this).val();
-      $(".fontawesome-icon-picker .tab-content .tab-pane.active li").each(function(index, value) {
-          currentName = $(value).text()
-          currentName += "" + $(value).attr("class")
-          if( currentName.toUpperCase().indexOf(searchString.toUpperCase()) > -1) {
-            $(value).show();
-          } else {
-            $(value).hide();
-          }
-      });
     });
     $(document).on("click tap", ".view_notif_modal", function(e) {
       e.preventDefault();
@@ -457,12 +453,16 @@
       let nonce = me.attr('integrity'), wparam = me.attr('wparam'), lparam = me.attr('lparam'), dparam = me.data('id');
 
       try {
-        $data = $.parseJSON($(`tr[data-nofit-tr="${me.data("id")}"]`).first().attr("data-json"));
+        $data = $.parseJSON($(`tr[data-notif-tr="${me.data("id")}"]`).first().attr("data-json"));
       } catch (e) {
         $data = null;
       } finally {
         console.log($data);
       }
+    });
+    $(document).on("click tap", ".fontawesome-icon-picker .nav-tabs a.btn",function(e){
+      var me = $(this);
+      $("#searchfontawesome").trigger("change").focus();
     });
     $(document).on("click tap", "#remove_notif", function(e) {
       e.preventDefault();
@@ -474,7 +474,7 @@
 
       // $(".lds-ring").css("display", "flex");
       $(".lds-ring2").show();
-      $(`tr[data-nofit-tr=${dparam}] td.td-actions *`).prop("disabled", true);
+      $(`tr[data-notif-tr=${dparam}] td.td-actions *`).prop("disabled", true);
       $("div#del_notifications *").prop("disabled", true);
       $.ajax({
         url: pepc.ajax,
@@ -488,7 +488,7 @@
         },
         success: function(e) {
           if (e.success === true) {
-            $(`tr[data-nofit-tr=${dparam}]`).remove();
+            $(`tr[data-notif-tr=${dparam}]`).remove();
             $.notify({
               icon: "thumb_up",
               message: e.data.msg
@@ -501,8 +501,8 @@
                 align: "right"
               }
             });
-            if ($(`tr[data-nofit-tr]`).length < 2) {
-              $("tr[data-nofit-tr='empty']").show();
+            if ($(`tr[data-notif-tr]`).length < 2) {
+              $("tr[data-notif-tr='empty']").show();
             }
           } else {
             $.notify({
@@ -585,6 +585,9 @@
       $("#notifaddedit-priority-5").click().trigger("change");
       $(".remove-icon.btn-sm-sqc").click().trigger("change");
       $("#notifaddedit-usersList").val("").trigger("change");
+      $("input[name='user_roles[]']").prop("checked", false).trigger("change");
+      $("select[name='access_groups[]']").val("").trigger("change");
+      $("select[name='learn_dash[]']").val("").trigger("change");
       $("#notifaddedit-users-check").prop("checked", true).trigger("change");
       $("#notifaddedit-schedule-check").prop("checked", false).trigger("change");
       $("table#add_new tr td:first-child>label:first-of-type").removeAttr("class").addClass("text-primary");

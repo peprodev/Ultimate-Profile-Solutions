@@ -26,19 +26,6 @@
       show_toast(pepc._copy, "rgba(21, 139, 2, 0.8)");
     });
 
-    $(document).on("click tap", ".viewpagetab", function(e){
-      e.preventDefault();
-      var me = $(this);
-      $pageid = $("#profile_dash_page").val();
-      window.open(pepc.home + "?p=" + $pageid);
-    });
-    $(document).on("click tap", ".editpagetab", function(e){
-      e.preventDefault();
-      var me = $(this);
-      $pageid = $("#profile_dash_page").val();
-      window.open(pepc.edit.replace(/00/gi, $pageid));
-    });
-
     function copy_clipboard(data) {
       var $temp = $("<textarea>");
       $("body").append($temp);
@@ -71,19 +58,21 @@
       if (me.attr("data-checked") === "true") {
         $(`${togglel}`).show();
         me.html(`<i class='material-icons'>${icnon}</i> ${txton}`);
-      } else {
+      } else if (me.attr("data-checked") !== "true") {
         $(`${togglel}`).hide();
         me.html(`<i class='material-icons'>${icnoff}</i> ${txtoff}`);
       }
     });
-    $("select").each(function(i, x) {
+    $(".wrapper select").each(function(i, x) {
       let ff = $(this);
       let ffs = ff.find("option:selected").first();
       if(ffs.attr("data-verified") === "true"){ff.addClass("vs");}
       let filter = ff.attr("data-filter");
-      $(`[${filter}]`).hide();
+      if (filter && "" != filter) {
+        $(`.wrapper [${filter}]`).hide();
+      }
       let ffss = ff.find("option:selected").first();
-      $(`[${filter}=${ffss.attr("filter-item")}]`).show();
+      $(`.wrapper [${filter}=${ffss.attr("filter-item")}]`).show();
     });
     function animate_save_btn(save=true) {
       if (save){

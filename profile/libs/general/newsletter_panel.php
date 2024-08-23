@@ -1,6 +1,11 @@
 <?php
-# @Last modified by:   Amirhosseinhpv
-# @Last modified time: 2022/01/11 20:14:26
+/*
+ * @Author: Amirhossein Hosseinpour <https://amirhp.com>
+ * @Last modified by: amirhp-com <its@amirhp.com>
+ * @Last modified time: 2023/03/13 15:17:20
+ */
+
+
 global $PeproDevUPS_Profile;
 $rtl         = is_rtl() ? "right" : "left";
 $page        = (int) isset($_GET['cpage']) ? sanitize_text_field($_GET['cpage']) : 1;
@@ -30,12 +35,12 @@ $loadingRing = '<div class="lds-ring2"><div></div><div></div><div></div><div></d
       </div>
       <div class="card-body">
         <p class="float-right">
-          <a class="btn btn-primary loadingRings" href="<?=admin_url("?peprodev_subscribers=export_csv");?>"><?php _ex("Export All Users to Excel CSV", "notif-panel", "peprodev-ups");?></a>
-          <a class="btn btn-primary loadingRings" href="<?=admin_url("?page=peprodev-ups&section=newsletter&cpage=1&per_page=9999999999999");?>"><?php _ex("Show ALL at Once", "notif-panel", "peprodev-ups");?></a>
-          <button class="btn btn-primary loadingRings" data-integrity="<?=wp_create_nonce('peprocorenounce');?>" data-wparam="<?=$this->setting_slug;?>" data-lparam="clear_newsletterdb" id="clear_database" href="#"><?php echo $loadingRing . _x("Clear Database", "notif-panel", "peprodev-ups");?></button>
+          <a class="btn btn-primary loadingRings" href="<?php echo admin_url("?peprodev_subscribers=export_csv");?>"><?php _ex("Export All Users to Excel CSV", "notif-panel", "peprodev-ups");?></a>
+          <a class="btn btn-primary loadingRings" href="<?php echo admin_url("?page=peprodev-ups&section=newsletter&cpage=1&per_page=9999999999999");?>"><?php _ex("Show ALL at Once", "notif-panel", "peprodev-ups");?></a>
+          <button class="btn btn-primary loadingRings" data-integrity="<?php echo wp_create_nonce('peprocorenounce');?>" data-wparam="<?php echo $this->setting_slug;?>" data-lparam="clear_newsletterdb" id="clear_database" href="#"><?php echo $loadingRing . _x("Clear Database", "notif-panel", "peprodev-ups");?></button>
         </p>
         <p class="float-left">
-          <?=sprintf(__("Total Records: %s",$this->td), "<span class='totaltcountspana'>".$PeproDevUPS_Profile->show_newsletter_edit_panel(1,"","", 1)."</span>");?>
+          <?php echo sprintf(__("Total Records: %s",$this->td), "<span class='totaltcountspana'>".$PeproDevUPS_Profile->show_newsletter_edit_panel(1,"","", 1)."</span>");?>
         </p>
         <div class="toggle_view_form">
           <table class="table table-hover" id="notifications_list_table">
@@ -49,7 +54,7 @@ $loadingRing = '<div class="lds-ring2"><div></div><div></div><div></div><div></d
               <th><?php echo esc_html_x("Action", "section-panel", "peprodev-ups");?></th>
             </tr>
           </thead>
-          <tbody><?=$PeproDevUPS_Profile->show_newsletter_edit_panel($page, esc_html($srch));?></tbody>
+          <tbody><?php echo $PeproDevUPS_Profile->show_newsletter_edit_panel($page, esc_html($srch));?></tbody>
         </table>
         </div>
       </div>

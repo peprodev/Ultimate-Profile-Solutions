@@ -43,6 +43,14 @@ toast.active {
   line-height: 1.6 !important;
 }
 
+.form-input::-webkit-input-placeholder {
+  line-height: 1.6 !important;
+}
+
+.form-input::-ms-input-placeholder {
+  line-height: 1.6 !important;
+}
+
 .form-input::placeholder {
   line-height: 1.6 !important;
 }
