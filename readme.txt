@@ -192,4 +192,4 @@ Major Update in Code and Recourses
 = 7.4.0 =
 After updating to version 7.4.0, it is recommended to check the login section in the plugin settings via `wp-admin/?page=peprodev-ups&section=loginregister#tab_registration`. Double-check all settings, especially those related to login, registration, and redirection, to ensure that your configurations are intact and working as expected.
 
-Please also note that the full changelog for this version and previous versions can be found in the [GitHub repository](https://github.com/peprodev/Ultimate-Profile-Solutions/blob/main/changelog.md).
+Please also note that the full changelog for this version and previous versions can be found in the [GitHub repository](https://github.com/peprodev/Ultimate-Profile-Solutions/blob/master/changelog.md).

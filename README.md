@@ -100,7 +100,7 @@ While **PeproDev Ultimate Profile Solutions** is built to serve a global audienc
 
 After updating to version 7.4.0, it is recommended to check the login section in the plugin settings via `wp-admin/?page=peprodev-ups&section=loginregister#tab_registration`. Double-check all settings, especially those related to login, registration, and redirection, to ensure that your configurations are intact and working as expected.
 
-For the full changelog, visit the [GitHub repository](https://github.com/peprodev/Ultimate-Profile-Solutions/blob/main/changelog.md).
+For the full changelog, visit the [GitHub repository](https://github.com/peprodev/Ultimate-Profile-Solutions/blob/master/changelog.md).
 
 ## 📘 **How to Use**
 
@@ -151,4 +151,4 @@ You can help us improve our works by committing your changes to the [GitHub/Ulti
 Our professional development team is here to offer you a fully customized version of this plugin to fulfill your request. Contact us at [support@peprodev.com](mailto:support@pepro.dev).
 
 ### **Where can I find the full changelog?**
-The full changelog is available in our [GitHub repository](https://github.com/peprodev/Ultimate-Profile-Solutions/blob/main/changelog.md).
+The full changelog is available in our [GitHub repository](https://github.com/peprodev/Ultimate-Profile-Solutions/blob/master/changelog.md).
