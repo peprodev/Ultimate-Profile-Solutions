@@ -143,6 +143,9 @@ The full changelog is available in our [GitHub repository](https://github.com/pe
 
 == Upgrade Notice ==
 
+= Ver. 7.4.5 =
+- Fixed Change Email on Registeration not worked
+
 = Ver. 7.4.4 =
 - Fixed Name & Last Name fields not showing
 - Fixed SMS.ir API v2 guiding links to new sms.ir panel
