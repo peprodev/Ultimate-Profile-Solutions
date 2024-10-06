@@ -2,7 +2,7 @@
 /*
  * @Author: Amirhossein Hosseinpour <https://amirhp.com>
  * @Last modified by: amirhp-com <its@amirhp.com>
- * @Last modified time: 2024/08/21 01:58:44
+ * @Last modified time: 2024/09/20 22:55:41
  */
 
 if (!class_exists("PeproDevUPS_Core")) {
@@ -63,7 +63,7 @@ if (!class_exists("PeproDevUPS_Core")) {
       }
 
       $profile_page = get_option("{$this->activation_status}-profile-dash-page", false);
-      if (get_the_ID() == $profile_page || is_single($profile_page)){
+      if (get_the_ID() == $profile_page){
         // These constants are commonly checked by various caching plugins_
         // (like W3 Total Cache, WP Super Cache, etc.)._
         // Setting these constants helps ensure that these plugins do not cache the page.
@@ -116,17 +116,17 @@ if (!class_exists("PeproDevUPS_Core")) {
         array(
           "name" => __CLASS__ . "_modules",
           "data" => array(
-            __CLASS__ . "___loginregister"                => "0",
+            __CLASS__ . "___loginregister" => "0",
           )
         ),
         array(
           "name" => __CLASS__ . "_general",
           "data" => array(
-            __CLASS__ . "___theme-color"                  => "azure",
-            __CLASS__ . "___theme-scheme"                 => "",
-            __CLASS__ . "___theme-sidebar-image"          => "{$this->assets_url}img/38577539.jpg",
-            __CLASS__ . "___theme-sidebar-image-custom"   => "",
-            __CLASS__ . "___dashboard-title"              => _x("PeproDev Profile", "peprocore-appearance-setting", "peprodev-ups"),
+            __CLASS__ . "___theme-color" => "azure",
+            __CLASS__ . "___theme-scheme" => "",
+            __CLASS__ . "___theme-sidebar-image" => "{$this->assets_url}img/38577539.jpg",
+            __CLASS__ . "___theme-sidebar-image-custom" => "",
+            __CLASS__ . "___dashboard-title" => _x("PeproDev Profile", "peprocore-appearance-setting", "peprodev-ups"),
           )
         ),
       );

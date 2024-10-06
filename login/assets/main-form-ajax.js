@@ -2,7 +2,7 @@
  * @Author: Amirhossein Hosseinpour <https://amirhp.com>
  * @Date Created: 2023/06/27 02:45:26
  * @Last modified by: amirhp-com <its@amirhp.com>
- * @Last modified time: 2024/08/20 22:50:14
+ * @Last modified time: 2024/10/06 10:58:33
  */
 
 jQuery.noConflict();
@@ -1189,8 +1189,12 @@ jQuery.noConflict();
       $(this).parents(".pepro-login-reg-container").find(".form-register input#user_mobile").val(user_mobile).trigger("change");
       if ($(this).parents(".pepro-login-reg-container.via-email-active").length) {
         $(this).parents(".pepro-login-reg-container").find("form.form-register.via-email").addClass("inline");
+        $(this).parents(".pepro-login-reg-container").find("form.form-register.via-email .pepro-login-reg-field").not(".hidden").removeClass("hide").show();
+        $(this).parents(".pepro-login-reg-container").find("form.form-register.via-email").find(".optverify-wrap, .verification-wrap, .otp-resend").hide();
       } else {
         $(this).parents(".pepro-login-reg-container").find("form.form-register.via-sms").addClass("inline");
+        $(this).parents(".pepro-login-reg-container").find("form.form-register.via-email .pepro-login-reg-field").not(".hidden").removeClass("hide").show();
+        $(this).parents(".pepro-login-reg-container").find("form.form-register.via-email").find(".optverify-wrap, .verification-wrap, .otp-resend").hide();
       }
     });
     $(document).on("click tap", ".otp-resend", function (e) {
@@ -1205,7 +1209,7 @@ jQuery.noConflict();
       var me = $(this);
       me.parents("form").find("#login_error").empty();
       me.parents("form").find(".pepro-login-reg-field, .switch-form-register, .switch-form-login").show();
-      me.parents("form").find("#mobile, #user_mobile, #submit, #username, #email, #optverify").show().prop("disabled", false).prop("readonly", false).removeClass("disabled");
+      me.parents("form").find("#mobile, .mobile-wrap, #user_mobile, .user_mobile-wrap, #submit, .submit-wrap, #username, #email, .email-wrap, #optverify").removeClass("hide").show().prop("disabled", false).prop("readonly", false).removeClass("disabled");
       me.parents("form").find(".optverify-wrap, .verification-wrap, .otp-resend").hide();
       me.parents("form").find(".optverify-wrap input, .verification-wrap input, .otp-resend").val("").trigger("change");
       me.hide();

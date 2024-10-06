@@ -2,12 +2,12 @@
 Contributors: amirhpcom, peprodev, blackswanlab
 Donate link: https://pepro.dev/donate/
 Tags: profile-builder, user-management, login-forms, registration-forms, OTP-login, WooCommerce
-Version: 7.4.0
-Stable tag: 7.4.0
+Version: 7.4.5
+Stable tag: 7.4.5
 Requires at least: 5.0
 Tested up to: 6.6.2
 Requires PHP: 7.2
-WC tested up to: 9.2.2
+WC tested up to: 9.3.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -128,68 +128,27 @@ The full changelog is available in our [GitHub repository](https://github.com/pe
 
 == Changelog ==
 
-= Ver. 7.3.3 | 17 August, 2024 | 1403-05-27 =
-Fix User access to orders
-Fix redirect to current page not working
-Support [pepro-profile redirect_to="$url"] and other login shortcode attributes
+The full changelog is available in our [GitHub repository](https://github.com/peprodev/Ultimate-Profile-Solutions/blob/main/changelog.md).
 
-= Ver. 7.3.0 | 12 August, 2024 | 1403-05-22 =
-Major Security and Performance Enhancement
-Compatibility with Ticketing plugin
-Remove old redundant options from wp_options
-Better options handling with non-autoloading them
-Change view order default URL to point to profile
-Applied Notification and Announcement UI fixes
-DEV: Added `peprodev/profile/helper/add_private_notification` hook for other plugins to create personal and global Notification
+= Ver. 7.4.5 =
+- Fixed Change Email on Registeration not worked
 
-= Ver. 7.2.4 | 07 August, 2024 | 1403-05-17 =
-Fix Layout of User Notification chat
-Fix Layout of User Announcement chat
-Change Notification/Announcement icon
-Some CSS fixes
-Make GUEST OTP Records non-autoload
-DEV: added current section name to page wrapper class list
-
-= Ver. 7.1.9 | 03 July, 2024 | 1403-04-13 =
-Fix Layout break of Login page while loading
-Fix showing back "Register" link when user is not registered
-
-= Ver. 7.1.8 | 25 June, 2024 | 1403-04-05 =
-Fix Failed to send OTP if username is same as mobile and user found by username rather mobile
-
-= Ver. 7.1.7 | 21 June, 2024 | 1403-04-01 =
-Fix login shortcode layout break before full page load
-
-= Ver. 7.1.6 | 21 June, 2024 | 1403-04-01 =
-Fix [pepro-profile] shortcode breaks elementor layout
-
-= Ver. 7.1.5 | 16 June, 2024 | 1403-03-27 =
-Fixed Pages custom js not added via jQuery
-Fixed Verifying Email error when already exists
-Fixed profile fields not shown on edit account if not shown on Registeration
-Added (*) to required fields and additional html class
-
-= Ver. 7.1.2 | 29 May, 2024 | 1403-03-09 =
-Fixed Endpoint parsing
-Fixed redirection and referring for login
-Fixed download icon
-Fixed built-in items not deactivating
-Added hook for nav menu before profile icon
-
-= Ver. 7.0.6 | 17 May, 2024 | 1403-02-28 =
-Woodmart Login popup compatibility
-Changed Login/Registeration form fields priority
-Added option to change WC Address on Profile
-Fixed IPPanel SMS Gateway
-Fixed SMS Timeout not applied via TimeZone difference
-Better Compatibility with WooCommerce
-Security & Bug fixes
-UI/UX Enhancement
-Major Update in Code and Recourses
+= Ver. 7.4.4 =
+- Fixed Name & Last Name fields not showing
+- Fixed SMS.ir API v2 guiding links to new sms.ir panel
+- Fixed Function is_single was called incorrectly
+- Fixed Shortcode not returned content if user was Logged-in
+- Fixed SMS.ir API v2 guiding links to new sms.ir panel
+- Fixed Function is_single was called incorrectly
 
 == Upgrade Notice ==
 
-= 7.4.0 =
-After updating to version 7.4.0, it is recommended to check the login section in the plugin settings via `wp-admin/?page=peprodev-ups&section=loginregister#tab_registration`. Double-check all settings, especially those related to login, registration, and redirection, to ensure that your configurations are intact and working as expected.
+= Ver. 7.4.4 =
+- Fixed Name & Last Name fields not showing
+- Fixed SMS.ir API v2 guiding links to new sms.ir panel
+- Fixed Function is_single was called incorrectly
+- Fixed Shortcode not returned content if user was Logged-in
+- Fixed SMS.ir API v2 guiding links to new sms.ir panel
+- Fixed Function is_single was called incorrectly
 
 Please also note that the full changelog for this version and previous versions can be found in the [GitHub repository](https://github.com/peprodev/Ultimate-Profile-Solutions/blob/master/changelog.md).

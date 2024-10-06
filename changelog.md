@@ -2,6 +2,9 @@
 
 ## Table of Contents
 
+- [Version 7.4.5](#version-745--06-october-2024--1403-07-15)
+- [Version 7.4.4](#version-744--03-october-2024--1403-07-12)
+- [Version 7.4.3](#version-743--20-september-2024--1403-06-30)
 - [Version 7.4.0](#version-740--21-august-2024--1403-05-31)
 - [Version 7.3.3](#version-733--17-august-2024--1403-05-27)
 - [Version 7.3.0](#version-730--12-august-2024--1403-05-22)
@@ -33,6 +36,19 @@
 - [Version 0.0.1](#version-001--01-january-2020--1398-10-11)
 
 ---
+
+## Version 7.4.5 | 06 October 2024 | 1403-07-15
+- **Fixed** Change Email button on Registeration not worked
+
+## Version 7.4.4 | 03 October 2024 | 1403-07-12
+- **Fixed** SMS.ir API v2 guiding links to new sms.ir panel
+- **Fixed** Function is_single was called incorrectly
+- **Fixed** Shortcode not returned content if user was Logged-in
+
+## Version 7.4.3 | 20 September 2024 | 1403-06-30
+- **Fixed** SMS.ir API v2 guiding links to new sms.ir panel
+- **Fixed** Function is_single was called incorrectly
+- **Fixed** Shortcode not returned content if user was Logged-in
 
 ## Version 7.4.0 | 21 August 2024 | 1403-05-31
 

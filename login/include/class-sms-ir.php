@@ -85,11 +85,11 @@ class PeproSMS_SMSIR_Gateway {
       <div class="col-lg-6"><input name="sms_api2_key" value="<?php echo esc_attr($this->api2_key); ?>" autocomplete="off" type="text" dir="ltr" class='form-input single-required mr-2' /></div>
     </div>
     <div class='col-lg-12 row justify-content-between mb-3 field-opt-sms_api2_url'>
-      <div class="col-lg-6 label"><span><?php esc_html_e("Sender Number", "peprodev-ups"); ?></span><?php echo $this->external_link("https://ip.sms.ir/#/UserSetting"); ?></div>
+      <div class="col-lg-6 label"><span><?php esc_html_e("Sender Number", "peprodev-ups"); ?></span><?php echo $this->external_link("https://app.sms.ir/numbers/my-number"); ?></div>
       <div class="col-lg-6"><input name="sms_api2_url" value="<?php echo esc_attr($this->line2_number); ?>" autocomplete="off" type="text" dir="ltr" class='form-input single-required mr-2' /></div>
     </div>
     <div class='col-lg-12 row justify-content-between mb-3 field-opt-smsir2_message'>
-      <div class="col-lg-6 label"><span><?php esc_html_e("Template ID / Message containing [OTP]", "peprodev-ups"); ?></span><?php echo $this->external_link("https://ip.sms.ir/#/User/UltraFastSendSetting"); ?></div>
+      <div class="col-lg-6 label"><span><?php esc_html_e("Template ID / Message containing [OTP]", "peprodev-ups"); ?></span><?php echo $this->external_link("https://app.sms.ir/developer/list"); ?></div>
       <div class="col-lg-6"><textarea name="smsir2_message" autocomplete="off" class='form-input single-required mr-2' placeholder="UltraFastSend Template ID / Message containing [OTP]" /><?php echo wp_strip_all_tags($this->sms2_text); ?></textarea></div>
     </div>
     <?php
