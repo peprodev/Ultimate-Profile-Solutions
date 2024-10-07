@@ -1,9 +1,9 @@
 === PeproDev Ultimate Profile Solutions ===
 Contributors: amirhpcom, peprodev, blackswanlab
 Donate link: https://pepro.dev/donate/
-Tags: profile-builder, user-management, login-forms, registration-forms, OTP-login, WooCommerce
-Version: 7.4.5
-Stable tag: 7.4.5
+Tags: profile-builder, user-dashboard, login-registration, otp-login
+Version: 7.4.6
+Stable tag: 7.4.6
 Requires at least: 5.0
 Tested up to: 6.6.2
 Requires PHP: 7.2
@@ -130,6 +130,9 @@ The full changelog is available in our [GitHub repository](https://github.com/pe
 
 The full changelog is available in our [GitHub repository](https://github.com/peprodev/Ultimate-Profile-Solutions/blob/main/changelog.md).
 
+= Ver. 7.4.6 =
+- Set URL as section slug, to make it external link
+
 = Ver. 7.4.5 =
 - Fixed Change Email on Registeration not worked
 
@@ -142,6 +145,9 @@ The full changelog is available in our [GitHub repository](https://github.com/pe
 - Fixed Function is_single was called incorrectly
 
 == Upgrade Notice ==
+
+= Ver. 7.4.6 =
+- Set URL as section slug, to make it external link
 
 = Ver. 7.4.5 =
 - Fixed Change Email on Registeration not worked

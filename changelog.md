@@ -2,6 +2,7 @@
 
 ## Table of Contents
 
+- [Version 7.4.6](#version-746--06-october-2024--1403-07-15)
 - [Version 7.4.5](#version-745--06-october-2024--1403-07-15)
 - [Version 7.4.4](#version-744--03-october-2024--1403-07-12)
 - [Version 7.4.3](#version-743--20-september-2024--1403-06-30)
@@ -36,6 +37,9 @@
 - [Version 0.0.1](#version-001--01-january-2020--1398-10-11)
 
 ---
+
+## Version 7.4.6 | 06 October 2024 | 1403-07-15
+- **Added** Set URL as section slug, to make it external link
 
 ## Version 7.4.5 | 06 October 2024 | 1403-07-15
 - **Fixed** Change Email button on Registeration not worked

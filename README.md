@@ -3,9 +3,9 @@
 > 
 > **Available at** [WordPress.org/plugins/**peprodev-ups**](https://wordpress.org/plugins/peprodev-ups)
 >
-> **Version:** 7.4.5
+> **Version:** 7.4.6
 > **Contributors:** amirhpcom, peprodev, blackswanlab  
-> **Tags:** profile-builder, user-management, login-forms, registration-forms, OTP-login, WooCommerce  
+> **Tags:** profile-builder, user-dashboard, login-registration, otp-login 
 > **Requires at least:** WordPress 5.0  
 > **Tested up to:** WordPress 6.6.2  
 > **Requires PHP:** 7.2  

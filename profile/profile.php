@@ -2,7 +2,7 @@
 /*
  * @Author: Amirhossein Hosseinpour <https://amirhp.com>
  * @Last modified by: amirhp-com <its@amirhp.com>
- * @Last modified time: 2024/08/24 02:43:05
+ * @Last modified time: 2024/10/07 10:50:42
  */
 defined("ABSPATH") or die("PeproDev Ultimate Profile Solutions :: Unauthorized Access! (https://pepro.dev/)");
 
@@ -1984,7 +1984,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
               "icon"      => sanitize_text_field($icon),
               "is_active" => sanitize_text_field($active),
               "priority"  => sanitize_text_field($priority),
-              "slug"      => ($this->str_starts_with($slug, "@") ? "@" : ($this->str_starts_with($slug, "#") ? "#" : "")) . sanitize_title($slug),
+              "slug"      => $slug,
             );
 
             $update = false;
@@ -3193,6 +3193,9 @@ if (!class_exists("PeproDevUPS_Profile")) {
         $slug = mb_substr($slug, 1);
         if (get_post(intval($slug))) { return get_the_permalink(intval($slug)); }
         return home_url("?p=$slug");
+      }
+      if ($this->str_starts_with($slug, "https://") || $this->str_starts_with($slug, "http://")) {
+        return esc_url_raw($slug);
       }
       return $this->get_profile_page(["section" => sanitize_title($slug)]);
     }

@@ -3,11 +3,11 @@
 Plugin Name: PeproDev Ultimate Profile Solutions
 Description: One of the most Advanced and *The Ultimate Profile Solutions* for WordPress. FREE OF ANY CHARGE, UNLIMITED and OPEN-SOURCE FOREVER!
 Contributors: amirhpcom, peprodev, blackswanlab
-Tags: functionality, pepro, management, administration, profile, login, register
+Tags: profile-builder, user-dashboard, login-registration, otp-login
 Author: Pepro Dev. Group
 Author URI: https://pepro.dev/
 Plugin URI: https://pepro.dev/ups
-Version: 7.4.5
+Version: 7.4.6
 Requires at least: 5.0
 Tested up to: 6.6.2
 Requires PHP: 7.2
@@ -18,7 +18,7 @@ Copyright: (c) Pepro Dev. Group, All rights reserved.
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * @Last modified by: amirhp-com <its@amirhp.com>
- * @Last modified time: 2024/10/06 10:30:45
+ * @Last modified time: 2024/10/07 10:53:17
 */
 
 defined("ABSPATH") or die("PeproDev Ultimate Profile Solutions :: Unauthorized Access! (https://pepro.dev/)");
@@ -26,7 +26,7 @@ defined("ABSPATH") or die("PeproDev Ultimate Profile Solutions :: Unauthorized A
 if (!class_exists("PeproDevUPS")) {
     class PeproDevUPS {
         public $td = "peprodev-ups";
-        public $version = "7.4.5";
+        public $version = "7.4.6";
         public function __construct() {
 
             define("PEPRODEVUPS", $this->version);
