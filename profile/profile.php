@@ -2,7 +2,7 @@
 /*
  * @Author: Amirhossein Hosseinpour <https://amirhp.com>
  * @Last modified by: amirhp-com <its@amirhp.com>
- * @Last modified time: 2024/10/07 10:50:42
+ * @Last modified time: 2024/11/24 12:15:40
  */
 defined("ABSPATH") or die("PeproDev Ultimate Profile Solutions :: Unauthorized Access! (https://pepro.dev/)");
 
@@ -10,14 +10,12 @@ if (!class_exists("PeproDevUPS_Profile")) {
   class PeproDevUPS_Profile {
     public $parent;
     public $td;
-    public $version = "7.1.7";
-    public $db_version = "2.1.0";
+    public $version = "7.4.8";
+    public $db_version = "2.2.0";
     public $priority;
     public $id;
     public $hwnd;
     public $instance;
-    public $menu_label;
-    public $page_label;
     public $icon_html;
     public $current_version;
     public $date_last_edit;
@@ -33,16 +31,12 @@ if (!class_exists("PeproDevUPS_Profile")) {
     public $tbl_subscribers;
     public $tbl_notif;
     public $tbl_sections;
-    public $title;
     public $activation_status;
     public $html_wrapper;
     public $ajax_hndlr;
-    public $developer;
     public $developerURI;
-    public $author;
     public $authorURI;
     public $copyright;
-    public $license;
     public $licenseURI;
     public $pluginURI;
     public $lang;
@@ -50,7 +44,6 @@ if (!class_exists("PeproDevUPS_Profile")) {
     public $db_table;
     public $icon;
     public $url;
-    public $description;
     public $useLD;
     public $categorized_user_roles = array();
     private $file;
@@ -58,6 +51,13 @@ if (!class_exists("PeproDevUPS_Profile")) {
     public $assets_url_as;
     public $assets_dir;
     private $setting_options;
+    public $title = "PeproDev Ultimate Profile Solutions — Profile";
+    public $menu_label = "Profile Design";
+    public $page_label = "Profile Setting";
+    public $description = "Modern profile for users";
+    public $developer = "Pepro Dev. Group";
+    public $author = "Pepro Dev. Group";
+    public $license = "Pepro Dev License";
     public function __construct() {
       global $wpdb, $wp;
       $this->id                = "peprocoreprofile";
@@ -76,13 +76,22 @@ if (!class_exists("PeproDevUPS_Profile")) {
       $this->tbl_subscribers   = "{$wpdb->prefix}peprofile_subscribers";
       $this->tbl_notif         = "{$this->db_table}_notif";
       $this->tbl_sections      = "{$this->db_table}_sections";
-      $this->title             = __("PeproDev Ultimate Profile Solutions — Profile", "peprodev-ups");
-      $this->menu_label        = __("Profile Design", "peprodev-ups");
-      $this->page_label        = __("Profile Setting", "peprodev-ups");
-      $this->description       = __("Modern profile for users", "peprodev-ups");
-      $this->developer         = __("Pepro Dev. Group", "peprodev-ups");
-      $this->author            = __("Pepro Dev. Group", "peprodev-ups");
-      $this->license           = __("Pepro Dev License", "peprodev-ups");
+      
+      /**
+       * Fires after WordPress has finished loading but before any headers are sent.
+       *
+       */
+      add_action("init", function(){
+        $this->title             = __("PeproDev Ultimate Profile Solutions — Profile", "peprodev-ups");
+        $this->menu_label        = __("Profile Design", "peprodev-ups");
+        $this->page_label        = __("Profile Setting", "peprodev-ups");
+        $this->description       = __("Modern profile for users", "peprodev-ups");
+        $this->developer         = __("Pepro Dev. Group", "peprodev-ups");
+        $this->author            = __("Pepro Dev. Group", "peprodev-ups");
+        $this->license           = __("Pepro Dev License", "peprodev-ups");
+        $this->copyright         = sprintf(__("Copyright (c) %s Pepro Dev, All rights reserved", "peprodev-ups"), date("Y"));
+      }, 1);
+
       $this->icon_html         = "<i class=\"material-icons\">account_circle</i>";
       $this->current_version   = "7.0.9";
       $this->date_last_edit    = "1400/06/03";
@@ -103,7 +112,6 @@ if (!class_exists("PeproDevUPS_Profile")) {
       $this->pluginURI         = "https://pepro.dev/ups";
       $this->useLD             = function_exists("sfwd_lms_has_access");
       $this->lang              = dirname(plugin_basename(__FILE__)) . "/languages/";
-      $this->copyright         = sprintf(__("Copyright (c) %s Pepro Dev, All rights reserved", "peprodev-ups"), date("Y"));
       $this->setting_options   = array(
         array(
           "name" => "{$this->db_slug}_general",
@@ -165,15 +173,13 @@ if (!class_exists("PeproDevUPS_Profile")) {
         add_filter("show_admin_bar", "__return_false");
       }
 
-      add_action("peprodev/profile/helper/add_private_notification", function($args){
-        call_user_func([$this, "add_private_notification"], $args);
-      }, 1, 1);
+      add_action("peprodev/profile/helper/add_private_notification", function($args){ call_user_func([$this, "add_private_notification"], $args); }, 1, 1);
       
-      add_action("init"             , array($this, "init_plugin"));
+      add_action("init" , array($this, "init_plugin"));
       add_action("template_redirect", array($this, "remove_yoast_wpseo"));
       add_action("template_redirect", array($this, "template_redirect_learndash_course"));
-      add_action("admin_bar_menu"   , array($this, "admin_bar_menu_items"), 31);
-      add_filter("get_avatar_url"   , array($this, "change_avatar_url"), 10, 3);
+      add_action("admin_bar_menu" , array($this, "admin_bar_menu_items"), 31);
+      add_filter("get_avatar_url" , array($this, "change_avatar_url"), 10, 3);
       
       // Hook to track course access
       add_action('learndash_update_course_access', array($this, "track_course_access"), 10, 4);
@@ -597,10 +603,11 @@ if (!class_exists("PeproDevUPS_Profile")) {
       add_action("after_setup_theme", function () { if (!current_user_can('edit_posts')  && !is_admin()) { show_admin_bar(false); add_filter('show_admin_bar', '__return_false'); } });
     }
     public function check_database(){
-      $cur_version = get_option("peprodev_profile_notifications_db_version", "1.0.0");
-      if (version_compare($cur_version, $this->db_version, "le")) {
-        $this->CreateDatabase(true);
-        update_option("peprodev_profile_notifications_db_version", $this->db_version);
+      $cur_version = get_option("peprodev_profile_notifications_db_version", NULL);
+      // Check if it's the first install or if an update is required
+      if (is_null($cur_version) || version_compare($cur_version, $this->db_version, "lt")) {
+        $this->CreateDatabase(true); // Create or update the database
+        update_option("peprodev_profile_notifications_db_version", $this->db_version); // Update the stored version
       }
     }
     public function change_wc_endpoint_urls($url="", $endpoint="", $value="", $permalink=""){
@@ -827,7 +834,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
       }
     }
     public function media_buttons_add_new() {
-      $current_screen = get_current_screen();
+      $current_screen = function_exists("get_current_screen") ? get_current_screen() : false;
       if ($current_screen && 'toplevel_page_peprodev-ups' === $current_screen->base) {
         ?>
         <button href="#" class="button <?php echo "peprodev-ups"; ?>_shortcodehandler peprofile-open-box">
@@ -3553,19 +3560,15 @@ if (!class_exists("PeproDevUPS_Profile")) {
       );
     }
     public function _wc_activated() {
-      if (!is_plugin_active('woocommerce/woocommerce.php') || !function_exists('is_woocommerce') || !class_exists('woocommerce')) {
-        return false;
-      }
+      if (!function_exists('is_woocommerce') || !class_exists('woocommerce')) return false;
       return true;
     }
     public function _ld_activated() {
       return defined('LEARNDASH_LMS_PLUGIN_DIR') && function_exists("learndash_user_get_enrolled_courses");
     }
     public function _vc_activated() {
-      if (!is_plugin_active('js_composer/js_composer.php') || !defined('WPB_VC_VERSION')) {
-        return false;
-      }
-      return true;
+      if (defined('WPB_VC_VERSION')) return true;
+      return false;
     }
     public function read_opt($mc, $def = "") {
       return get_option($mc, $def);

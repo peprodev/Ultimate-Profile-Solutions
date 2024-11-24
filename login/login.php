@@ -2,7 +2,7 @@
 /*
  * @Author: Amirhossein Hosseinpour <https://amirhp.com>
  * @Last modified by: amirhp-com <its@amirhp.com>
- * @Last modified time: 2024/10/06 10:30:29
+ * @Last modified time: 2024/11/24 12:16:38
 */
 
 defined("ABSPATH") or die("PeproDev Ultimate Profile Solutions :: Unauthorized Access! (https://pepro.dev/)");
@@ -14,6 +14,8 @@ if ("yes" == get_option("PeproDevUPS_Core___loginregister-activesecurity", "")) 
 if (!class_exists("PeproDevUPS_Login")) {
   class PeproDevUPS_Login {
     public $parent;
+    public $version = "7.4.8";
+    public $current_version = "7.4.8";
     public $db_version = "2.0.0";
     public $priority;
     public $id;
@@ -22,7 +24,6 @@ if (!class_exists("PeproDevUPS_Login")) {
     public $menu_label;
     public $page_label;
     public $icon_html;
-    public $current_version;
     public $date_last_edit;
     public $wp_tested;
     public $wp_minimum;
@@ -102,7 +103,6 @@ if (!class_exists("PeproDevUPS_Login")) {
     public $form_resetpass_fields;
     public $verify_mobile_fields;
     public $form_class;
-    public $version;
     public $reglogin_type;
     public $pro_verify;
     public $assets_dir;
@@ -110,9 +110,7 @@ if (!class_exists("PeproDevUPS_Login")) {
     public function __construct() {
       global $wpdb;
       $this->db_table = "{$wpdb->prefix}peprofile_subscribers";
-      if (class_exists("PeproCoreLoginSlugChangerClass")) {
-        new PeproCoreLoginSlugChangerClass;
-      }
+      if (class_exists("PeproCoreLoginSlugChangerClass")) { new PeproCoreLoginSlugChangerClass; }
       $this->priority                       = 3;
       $this->assets_url                     = plugins_url("/", __FILE__);
       $this->assets_dir                     = plugin_dir_path(__FILE__);
@@ -129,8 +127,6 @@ if (!class_exists("PeproDevUPS_Login")) {
       $this->author                         = __("Pepro Dev. Group", "peprodev-ups");
       $this->license                        = __("Pepro Dev License", "peprodev-ups");
       $this->icon_html                      = "<i class=\"material-icons\">fingerprint</i>";
-      $this->current_version                = "7.1.7";
-      $this->version                        = $this->current_version;
       $this->date_last_edit                 = "1400/06/03";
       $this->wp_tested                      = "5.8";
       $this->wp_minimum                     = "5.0";
@@ -478,10 +474,11 @@ if (!class_exists("PeproDevUPS_Login")) {
       add_action("admin_init", array($this, "check_database"));
     }
     public function check_database(){
-      $cur_version = get_option("peprodev_profile_subscribers_db_version", "1.0.0");
-      if (version_compare($cur_version, $this->db_version, "le")) {
-        $this->create_database(true);
-        update_option("peprodev_profile_subscribers_db_version", $this->db_version);
+      $cur_version = get_option("peprodev_profile_subscribers_db_version", NULL);
+      // Check if it's the first install or if an update is required
+      if (is_null($cur_version) || version_compare($cur_version, $this->db_version, "lt")) {
+        $this->create_database(true); // Create or update the database
+        update_option("peprodev_profile_subscribers_db_version", $this->db_version); // Update the stored version
       }
     }
     public function shortcode__current_url() {
@@ -741,19 +738,15 @@ if (!class_exists("PeproDevUPS_Login")) {
       return apply_filters("pepro_reglogin_get_registeration_form_defaul_fields", $form_default_fields);
     }
     public function _wc_activated() {
-      if (!function_exists('is_woocommerce') || !class_exists('woocommerce')) {
-        return false;
-      }
+      if (!function_exists('is_woocommerce') || !class_exists('woocommerce')) return false;
       return true;
     }
     public function _ld_activated() {
-      return defined('LEARNDASH_LMS_PLUGIN_DIR');
+      return defined('LEARNDASH_LMS_PLUGIN_DIR') && function_exists("learndash_user_get_enrolled_courses");
     }
     public function _vc_activated() {
-      if (!is_plugin_active('js_composer/js_composer.php') || !defined('WPB_VC_VERSION')) {
-        return false;
-      }
-      return true;
+      if (defined('WPB_VC_VERSION')) return true;
+      return false;
     }
     public function form_defaul_registeration_fields() {
       $form_default_fields = $this->get_registeration_form_defaul_fields();

@@ -7,18 +7,18 @@ Tags: profile-builder, user-dashboard, login-registration, otp-login
 Author: Pepro Dev. Group
 Author URI: https://pepro.dev/
 Plugin URI: https://pepro.dev/ups
-Version: 7.4.6
+Version: 7.4.8
 Requires at least: 5.0
-Tested up to: 6.6.2
+Tested up to: 6.7.1
 Requires PHP: 7.2
-WC tested up to: 9.3.0
+WC tested up to: 9.4.2
 Text Domain: peprodev-ups
 Domain Path: /languages
 Copyright: (c) Pepro Dev. Group, All rights reserved.
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * @Last modified by: amirhp-com <its@amirhp.com>
- * @Last modified time: 2024/10/07 10:53:17
+ * @Last modified time: 2024/11/24 12:15:22
 */
 
 defined("ABSPATH") or die("PeproDev Ultimate Profile Solutions :: Unauthorized Access! (https://pepro.dev/)");
@@ -26,21 +26,25 @@ defined("ABSPATH") or die("PeproDev Ultimate Profile Solutions :: Unauthorized A
 if (!class_exists("PeproDevUPS")) {
     class PeproDevUPS {
         public $td = "peprodev-ups";
-        public $version = "7.4.6";
+        public $version = "7.4.8";
         public function __construct() {
 
             define("PEPRODEVUPS", $this->version);
             define("PEPRODEV_UPS_FILE", __FILE__);
-            add_filter("load_textdomain_mofile", function ($m, $d) { if ($this->td == $d && "fa_IR" == get_locale()) {return plugin_dir_path(__FILE__) . "languages/{$d}-fa_IR.mo";} return $m; }, 10, 2);
+            add_filter("load_textdomain_mofile", function ($m, $d) {
+                if ($this->td == $d && "fa_IR" == get_locale()) { return plugin_dir_path(__FILE__) . "languages/{$d}-fa_IR.mo"; }
+                return $m;
+            }, 10, 2);
+            
             load_plugin_textdomain("peprodev-ups", false, dirname(plugin_basename(__FILE__)) . "/languages/");
             load_plugin_textdomain("wpserveur-hide-login", false, dirname(plugin_basename(__FILE__)) . "/languages/");
             
-            add_action("plugin_row_meta", array($this, "plugin_row_meta"), 10, 4);
-            add_filter("plugin_action_links", array($this, "plugin_action_links"), 10, 2);
-
             require_once plugin_dir_path(__FILE__) . "/core/main.php";
             require_once plugin_dir_path(__FILE__) . "/profile/profile.php";
             require_once plugin_dir_path(__FILE__) . "/login/login.php";
+
+            add_action("plugin_row_meta", array($this, "plugin_row_meta"), 10, 4);
+            add_filter("plugin_action_links", array($this, "plugin_action_links"), 10, 2);
 
             add_action("before_woocommerce_init", [$this, "add_hpos_support"]);
             add_filter("rocket_cache_reject_uri", array($this, "rocket_add_profile_exclude_pages"));
@@ -48,20 +52,19 @@ if (!class_exists("PeproDevUPS")) {
             register_deactivation_hook(__FILE__, function () {
                 update_option("peprodevups_alert_viewed_yet", "");
             });
+
             register_activation_hook(__FILE__, function () {
                 add_filter("rocket_cache_reject_uri", array($this, "rocket_add_profile_exclude_pages"));
                 if (function_exists("flush_rocket_htaccess")) {
-                    // Update the WP Rocket rules on the .htaccess.
-                    flush_rocket_htaccess();
-                    // Regenerate the config file.
-                    rocket_generate_config_file();
+                    flush_rocket_htaccess(); // Update the WP Rocket rules on the .htaccess.
+                    rocket_generate_config_file(); // Regenerate the config file.
                 }
             });
         }
         // wp-rocket
-        public function rocket_add_profile_exclude_pages($urls){
+        public function rocket_add_profile_exclude_pages($urls) {
             $profile_page = get_option("PeproDevUPS_Core___profile-profile-dash-page", false);
-            if ($profile_page) $urls[] = wp_parse_url(get_permalink($profile_page), PHP_URL_PATH );
+            if ($profile_page) $urls[] = wp_parse_url(get_permalink($profile_page), PHP_URL_PATH);
             return $urls;
         }
         public function add_hpos_support() {
@@ -85,6 +88,8 @@ if (!class_exists("PeproDevUPS")) {
         }
     }
     add_action("plugins_loaded", function () {
+        load_plugin_textdomain("peprodev-ups", false, dirname(plugin_basename(__FILE__)) . "/languages/");
+        load_plugin_textdomain("wpserveur-hide-login", false, dirname(plugin_basename(__FILE__)) . "/languages/");
         global $PeproDevUPS;
         $PeproDevUPS = new PeproDevUPS();
     });

@@ -1,13 +1,13 @@
 === PeproDev Ultimate Profile Solutions ===
 Contributors: amirhpcom, peprodev, blackswanlab
 Donate link: https://pepro.dev/donate/
-Tags: profile-builder, user-dashboard, login-registration, otp-login
-Version: 7.4.6
-Stable tag: 7.4.6
+Tags: profile-builder, user-dashboard, login-registration, pepro-dev
+Version: 7.4.8
+Stable tag: 7.4.8
 Requires at least: 5.0
-Tested up to: 6.6.2
+Tested up to: 6.7.1
 Requires PHP: 7.2
-WC tested up to: 9.3.0
+WC tested up to: 9.4.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -130,34 +130,26 @@ The full changelog is available in our [GitHub repository](https://github.com/pe
 
 The full changelog is available in our [GitHub repository](https://github.com/peprodev/Ultimate-Profile-Solutions/blob/main/changelog.md).
 
-= Ver. 7.4.6 =
-- Set URL as section slug, to make it external link
+= Version 7.4.8 | 2024-11-24 | 1403-09-04 =
+- **Fixed** Fatal Error get_current_screen on ACF pages
 
-= Ver. 7.4.5 =
-- Fixed Change Email on Registeration not worked
-
-= Ver. 7.4.4 =
-- Fixed Name & Last Name fields not showing
-- Fixed SMS.ir API v2 guiding links to new sms.ir panel
-- Fixed Function is_single was called incorrectly
-- Fixed Shortcode not returned content if user was Logged-in
-- Fixed SMS.ir API v2 guiding links to new sms.ir panel
-- Fixed Function is_single was called incorrectly
+= Version 7.4.7 | 2024-11-18 | 1403-08-28 =
+- **Fixed** Translation load
+- **Fixed** Database Creation issue
+- **Fixed** WooCommerce Not Activated Issue
+- **Fixed** Redirection to URL with #hash appended
+- **Fixed** Redirection to Same page on Login/Registeration
 
 == Upgrade Notice ==
 
-= Ver. 7.4.6 =
-- Set URL as section slug, to make it external link
+= Version 7.4.8 | 2024-11-24 | 1403-09-04 =
+- **Fixed** Fatal Error get_current_screen on ACF pages
 
-= Ver. 7.4.5 =
-- Fixed Change Email on Registeration not worked
-
-= Ver. 7.4.4 =
-- Fixed Name & Last Name fields not showing
-- Fixed SMS.ir API v2 guiding links to new sms.ir panel
-- Fixed Function is_single was called incorrectly
-- Fixed Shortcode not returned content if user was Logged-in
-- Fixed SMS.ir API v2 guiding links to new sms.ir panel
-- Fixed Function is_single was called incorrectly
+= Version 7.4.7 | 2024-11-18 | 1403-08-28 =
+- **Fixed** Translation load
+- **Fixed** Database Creation issue
+- **Fixed** WooCommerce Not Activated Issue
+- **Fixed** Redirection to URL with #hash appended
+- **Fixed** Redirection to Same page on Login/Registeration
 
 Please also note that the full changelog for this version and previous versions can be found in the [GitHub repository](https://github.com/peprodev/Ultimate-Profile-Solutions/blob/master/changelog.md).

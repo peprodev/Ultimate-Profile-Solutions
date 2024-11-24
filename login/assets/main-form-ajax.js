@@ -2,7 +2,7 @@
  * @Author: Amirhossein Hosseinpour <https://amirhp.com>
  * @Date Created: 2023/06/27 02:45:26
  * @Last modified by: amirhp-com <its@amirhp.com>
- * @Last modified time: 2024/10/06 10:58:33
+ * @Last modified time: 2024/11/14 20:04:38
  */
 
 jQuery.noConflict();
@@ -254,6 +254,9 @@ jQuery.noConflict();
                         }
                         else if (false !== e.data.redirect) {
                           window.location.href = e.data.redirect;
+                          if (window.location.href == e.data.redirect) {
+                            window.location.reload();
+                          }
                         }
                         $(".popup-active").removeClass("popup-active");
                         jc.close();
@@ -269,6 +272,9 @@ jQuery.noConflict();
                     }
                     else if (false !== e.data.redirect) {
                       window.location.href = e.data.redirect;
+                      if (window.location.href == e.data.redirect) {
+                        window.location.reload();
+                      }
                     }
                   }, 2000);
                 }
@@ -414,6 +420,9 @@ jQuery.noConflict();
                       }
                       else if (false !== e.data.redirect) {
                         window.location.href = e.data.redirect;
+                        if (window.location.href == e.data.redirect) {
+                          window.location.reload();
+                        }
                       }
                       jc.close();
                     }
@@ -435,6 +444,9 @@ jQuery.noConflict();
                     }
                     else if (false !== e.data.redirect) {
                       window.location.href = e.data.redirect;
+                      if (window.location.href == e.data.redirect) {
+                        window.location.reload();
+                      }
                     }
                   }, 2000);
                 }
@@ -579,6 +591,9 @@ jQuery.noConflict();
                       }
                       else if (false !== e.data.redirect) {
                         window.location.href = e.data.redirect;
+                        if (window.location.href == e.data.redirect) {
+                          window.location.reload();
+                        }
                       }
                       jc.close();
                     }
@@ -600,6 +615,9 @@ jQuery.noConflict();
                     }
                     else if (false !== e.data.redirect) {
                       window.location.href = e.data.redirect;
+                      if (window.location.href == e.data.redirect) {
+                        window.location.reload();
+                      }
                     }
                   }, 2000);
                 }
@@ -841,6 +859,9 @@ jQuery.noConflict();
                         }
                         else if (false !== e.data.redirect) {
                           window.location.href = e.data.redirect;
+                          if (window.location.href == e.data.redirect) {
+                            window.location.reload();
+                          }
                         }
                         $(".popup-active").removeClass("popup-active");
                         jc.close();
@@ -862,6 +883,9 @@ jQuery.noConflict();
                         }
                         else if (false !== e.data.redirect) {
                           window.location.href = e.data.redirect;
+                          if (window.location.href == e.data.redirect) {
+                            window.location.reload();
+                          }
                         }
                         $(".popup-active").removeClass("popup-active");
                         jc.close();
@@ -877,6 +901,9 @@ jQuery.noConflict();
                     }
                     else if (false !== e.data.redirect) {
                       window.location.href = e.data.redirect;
+                      if (window.location.href == e.data.redirect) {
+                        window.location.reload();
+                      }
                     }
                   }, 2000);
                 }
@@ -1018,6 +1045,9 @@ jQuery.noConflict();
                         }
                         else if (false !== e.data.redirect) {
                           window.location.href = e.data.redirect;
+                          if (window.location.href == e.data.redirect) {
+                            window.location.reload();
+                          }
                         }
                         $(".popup-active").removeClass("popup-active");
                         jc.close();
@@ -1039,6 +1069,9 @@ jQuery.noConflict();
                         }
                         else if (false !== e.data.redirect) {
                           window.location.href = e.data.redirect;
+                          if (window.location.href == e.data.redirect) {
+                            window.location.reload();
+                          }
                         }
                         $(".popup-active").removeClass("popup-active");
                         jc.close();
@@ -1054,6 +1087,9 @@ jQuery.noConflict();
                     }
                     else if (false !== e.data.redirect) {
                       window.location.href = e.data.redirect;
+                      if (window.location.href == e.data.redirect) {
+                        window.location.reload();
+                      }
                     }
                   }, 2000);
                 }

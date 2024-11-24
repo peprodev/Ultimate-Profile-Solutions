@@ -2,7 +2,7 @@
 /*
  * @Author: Amirhossein Hosseinpour <https://amirhp.com>
  * @Last modified by: amirhp-com <its@amirhp.com>
- * @Last modified time: 2024/09/20 22:55:41
+ * @Last modified time: 2024/11/18 14:23:33
  */
 
 if (!class_exists("PeproDevUPS_Core")) {
@@ -18,9 +18,9 @@ if (!class_exists("PeproDevUPS_Core")) {
     public $plugin_file;
     public $version;
     public $db_slug;
-    public $title;
+    public $title = "PeproDev Ultimate Profile Solutions";
+    public $title_w = "PeproDev Ultimate Profile Solutions";
     public $activation_status = "PeproDevUPS_Core___profile";
-    public $title_w;
     public $db_table = null;
     public function __construct() {
       global $wpdb;
@@ -35,8 +35,11 @@ if (!class_exists("PeproDevUPS_Core")) {
       $this->version         = defined('PEPRODEVUPS') ? PEPRODEVUPS : "1.0.0";
       $this->db_slug         = $this->td;
       $this->db_table        = $wpdb->prefix . $this->db_slug;
-      $this->title           = __("PeproDev Ultimate Profile Solutions", "peprodev-ups");
-      $this->title_w         = sprintf(__("%2\$s ver. %1\$s", "peprodev-ups"), $this->version, $this->title);
+
+      add_action("init", function(){
+        $this->title = __("PeproDev Ultimate Profile Solutions", "peprodev-ups");
+        $this->title_w = sprintf(__("%2\$s ver. %1\$s", "peprodev-ups"), $this->version, $this->title);
+      }, 1);
 
       if (isset($_GET['page']) && $this->db_slug == sanitize_text_field($_GET['page'])) {
           update_option("peprodevups_alert_viewed_yet", PEPRODEVUPS, "no");

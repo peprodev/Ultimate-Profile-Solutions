@@ -3,18 +3,18 @@
 > 
 > **Available at** [WordPress.org/plugins/**peprodev-ups**](https://wordpress.org/plugins/peprodev-ups)
 >
-> **Version:** 7.4.6
+> **Version:** 7.4.8  
 > **Contributors:** amirhpcom, peprodev, blackswanlab  
-> **Tags:** profile-builder, user-dashboard, login-registration, otp-login 
+> **Tags:** profile-builder, user-dashboard, login-registration, pepro-dev  
 > **Requires at least:** WordPress 5.0  
-> **Tested up to:** WordPress 6.6.2  
+> **Tested up to:** WordPress 6.7.1  
 > **Requires PHP:** 7.2  
-> **WC tested up to:** 9.2.2  
+> **WC tested up to:** 9.4.2
 
 |![https://ps.w.org/peprodev-ups/assets/banner-772x250.png](https://ps.w.org/peprodev-ups/assets/banner-772x250.png)|![https://ps.w.org/peprodev-ups/assets/banner-772x250-rtl.png](https://ps.w.org/peprodev-ups/assets/banner-772x250-rtl.png)|
 |--|--|
 
-Developed by **[Pepro Development Group](https://pepro.dev/)** / Lead Developer: **[AmirhpCom](https://amirhp.com/)** / Current Version: **7.4.5**
+Developed by **[Pepro Development Group](https://pepro.dev/)** / Lead Developer: **[AmirhpCom](https://amirhp.com/)** / Current Version: **7.4.7**
 
 
 
