@@ -152,4 +152,4 @@ The full changelog is available in our [GitHub repository](https://github.com/pe
 - **Fixed** Redirection to URL with #hash appended
 - **Fixed** Redirection to Same page on Login/Registeration
 
-Please also note that the full changelog for this version and previous versions can be found in the [GitHub repository](https://github.com/peprodev/Ultimate-Profile-Solutions/blob/master/changelog.md).
+Please also note that the full changelog for this version and previous versions can be found in the [GitHub repository](https://github.com/peprodev/Ultimate-Profile-Solutions/blob/main/changelog.md).
