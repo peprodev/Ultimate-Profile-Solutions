@@ -2,7 +2,7 @@
 /*
  * @Author: Amirhossein Hosseinpour <https://amirhp.com>
  * @Last modified by: amirhp-com <its@amirhp.com>
- * @Last modified time: 2025/04/06 10:26:21
+ * @Last modified time: 2025/04/06 10:35:18
 */
 
 defined("ABSPATH") or die("PeproDev Ultimate Profile Solutions :: Unauthorized Access! (https://pepro.dev/)");
@@ -4254,10 +4254,38 @@ if (!class_exists("PeproDevUPS_Login")) {
       }
     }
     public function update_profile_custom_fields($user_id) {
-      if (!current_user_can('edit_user', $user_id)) {
-        return false;
-      }
-      foreach ($this->get_register_fields() as $field) {
+      if (!current_user_can('edit_user', $user_id)) { return false; }
+      $fields = $this->get_register_fields();
+      if (empty($fields)) return false;
+      $fields[] = array(
+        "meta_name"   => "pepro_user_is_sms_verified",
+        "type"        => "select",
+        "title"       => __("SMS Verified", "peprodev-ups"),
+        "options"     => array(
+          "yes" => __("Yes", "peprodev-ups"),
+          "no"  => __("No", "peprodev-ups"),
+        ),
+        "default"     => "",
+        "is-required" => "no",
+        "is-public"   => "yes",
+        "is-editable" => "yes",
+        "in-column"   => "no",
+      );
+      $fields[] = array(
+        "meta_name"   => "pepro_user_is_email_verified",
+        "type"        => "select",
+        "title"       => __("Email Verified", "peprodev-ups"),
+        "options"     => array(
+          "yes" => __("Yes", "peprodev-ups"),
+          "no"  => __("No", "peprodev-ups"),
+        ),
+        "default"     => "",
+        "is-required" => "no",
+        "is-public"   => "yes",
+        "is-editable" => "yes",
+        "in-column"   => "no",
+      );
+      foreach ($fields as $field) {
         if (isset($_POST[$field["meta_name"]])) {
           $meta_value = sanitize_post(trim($_POST[$field["meta_name"]]));
           if ("mobile" == $field["type"] || "tel" == $field["type"]) {
@@ -4272,7 +4300,6 @@ if (!class_exists("PeproDevUPS_Login")) {
                 update_user_meta($user_id, $field["meta_name"], $valid_mobile);
               }
             }
-
             if ("yes" != $field["is-required"]) {
               update_user_meta($user_id, $field["meta_name"], $valid_mobile ? $valid_mobile : "");
             }
