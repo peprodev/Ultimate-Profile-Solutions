@@ -2,7 +2,7 @@
 /*
  * @Author: Amirhossein Hosseinpour <https://amirhp.com>
  * @Last modified by: amirhp-com <its@amirhp.com>
- * @Last modified time: 2024/11/18 14:23:33
+ * @Last modified time: 2025/02/11 15:37:50
  */
 
 if (!class_exists("PeproDevUPS_Core")) {
@@ -98,7 +98,7 @@ if (!class_exists("PeproDevUPS_Core")) {
         }
         return $robots;
       });
-      
+
       add_action("init", array($this, 'plugin_init'));
       add_action("admin_notices", array($this, "admin_notices"));
     }
@@ -309,7 +309,7 @@ if (!class_exists("PeproDevUPS_Core")) {
       wp_enqueue_style("dashboard-backs", "{$this->assets_url}css/admin-back.css", array(), '1.0', 'all');
     }
     public function admin_print_footer_scripts() {
-      echo '<script>document.querySelector("#toplevel_page_peprodev-ups>a.toplevel_page_peprodev-ups").setAttribute("href","' . admin_url("admin.php?page=peprodev-ups&section=home") . '");</script>';
+      echo '<script>if (document.querySelector("#toplevel_page_peprodev-ups>a.toplevel_page_peprodev-ups")) document.querySelector("#toplevel_page_peprodev-ups>a.toplevel_page_peprodev-ups").setAttribute("href","' . admin_url("admin.php?page=peprodev-ups&section=home") . '");</script>';
     }
     public function read_opt($mc, $def = "") {
       return get_option($mc) <> "" ? get_option($mc) : $def;

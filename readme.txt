@@ -2,12 +2,12 @@
 Contributors: amirhpcom, peprodev, blackswanlab
 Donate link: https://pepro.dev/donate/
 Tags: profile-builder, user-dashboard, login-registration, pepro-dev
-Version: 7.4.8
-Stable tag: 7.4.8
+Version: 7.5.0
+Stable tag: 7.5.0
 Requires at least: 5.0
-Tested up to: 6.7.1
+Tested up to: 6.7
 Requires PHP: 7.2
-WC tested up to: 9.4.2
+WC tested up to: 9.6.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -121,14 +121,20 @@ You can help us improve our works by committing your changes to [GitHub/Ultimate
 Our professional development team is here to offer you a fully Customized-Pro version of this plugin to fulfill your request. Contact us at [support@peprodev.com](mailto:support@pepro.dev)
 
 = Where can I find the full changelog? =
-The full changelog is available in our [GitHub repository](https://github.com/peprodev/Ultimate-Profile-Solutions/blob/main/changelog.md).
+The full changelog is available in our [GitHub repository](https://github.com/peprodev/Ultimate-Profile-Solutions/blob/master/changelog.md).
 
 == Screenshots ==
 1. by Pepro Dev. Group
 
 == Changelog ==
 
-The full changelog is available in our [GitHub repository](https://github.com/peprodev/Ultimate-Profile-Solutions/blob/main/changelog.md).
+The full changelog is available in our [GitHub repository](https://github.com/peprodev/Ultimate-Profile-Solutions/blob/master/changelog.md).
+
+= Version 7.5.0 | 2025-02-18 | 1403-11-30 =
+- **Fixed** Learndash Integration > Course Section Enhanced
+
+= Version 7.4.9 | 2025-02-11 | 1403-11-23 =
+- **Fixed** Elementor Pro 3.27.x Compatibility
 
 = Version 7.4.8 | 2024-11-24 | 1403-09-04 =
 - **Fixed** Fatal Error get_current_screen on ACF pages
@@ -142,6 +148,12 @@ The full changelog is available in our [GitHub repository](https://github.com/pe
 
 == Upgrade Notice ==
 
+= Version 7.5.0 | 2025-02-18 | 1403-11-30 =
+- **Fixed** Learndash Integration > Course Section Enhanced
+
+= Version 7.4.9 | 2025-02-11 | 1403-11-23 =
+- **Fixed** Elementor Pro 3.27.x Compatibility
+
 = Version 7.4.8 | 2024-11-24 | 1403-09-04 =
 - **Fixed** Fatal Error get_current_screen on ACF pages
 
@@ -152,4 +164,4 @@ The full changelog is available in our [GitHub repository](https://github.com/pe
 - **Fixed** Redirection to URL with #hash appended
 - **Fixed** Redirection to Same page on Login/Registeration
 
-Please also note that the full changelog for this version and previous versions can be found in the [GitHub repository](https://github.com/peprodev/Ultimate-Profile-Solutions/blob/main/changelog.md).
+Please also note that the full changelog for this version and previous versions can be found in the [GitHub repository](https://github.com/peprodev/Ultimate-Profile-Solutions/blob/master/changelog.md).

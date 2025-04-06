@@ -3,7 +3,7 @@
  * @Author: Amirhossein Hosseinpour <https://amirhp.com>
  * @Date Created: 2023/02/06 01:05:23
  * @Last modified by: amirhp-com <its@amirhp.com>
- * @Last modified time: 2024/08/24 02:38:04
+ * @Last modified time: 2025/02/18 13:33:29
  */
 
 global $PeproDevUPS_Profile;
@@ -41,7 +41,7 @@ $PeproDevUPS_Profile->change_dashboard_title(_x("My Courses", "user-dashboard", 
       <?php
 
         require_once plugin_dir_path(__FILE__) . "class-jdate.php";
-        add_filter("date_i18n", function ($date, $format, $timestamp, $gmt) { return pu_jdate($format, $timestamp); }, 10, 4); 
+        add_filter("date_i18n", function ($date, $format, $timestamp, $gmt) { return pu_jdate($format, $timestamp, "", "local", "en"); }, 10, 4);
 
         $user_id   = get_current_user_id();
         $courses   = learndash_user_get_enrolled_courses($user_id, array(), false);
@@ -72,11 +72,11 @@ $PeproDevUPS_Profile->change_dashboard_title(_x("My Courses", "user-dashboard", 
           'quiz_num'           => false,
         );
 
-        
-        
+
+
         // echo do_shortcode("<h3>دوره های فعال</h3>[ld_profile]");
         do_action("peprodev_profile_course_welcome");
-        
+
         if (!empty($courses) && !empty($access)) {
           echo "<h3>دوره های فعال من</h3>";
           peprodev_profile_print_ld_courses_list($access);
@@ -89,14 +89,14 @@ $PeproDevUPS_Profile->change_dashboard_title(_x("My Courses", "user-dashboard", 
           echo '<h3>دوره های من</h3>
           <div class="woocommerce-message woocommerce-message--info woocommerce-Message woocommerce-Message--info woocommerce-info">هیچ دوره ای برای شما ثبت نشده است.</div>';
         }
-        
+
       ?>
     </div>
   </div>
 </div>
 
 
-<?php 
+<?php
 
 function peprodev_profile_print_ld_courses_list($array){
   $user_id   = get_current_user_id();
@@ -121,8 +121,8 @@ function peprodev_profile_print_ld_courses_list($array){
           if (!$thumb) $thumb  = "";
         ?>
         <div class="course-cart course-<?php echo $course_id;?>">
-          <div class="course-image-wrapper"><a href='<?php echo get_the_permalink($course_id);?>'><img src="<?php echo $thumb;?>" class="course-img" /></a></div>
-          <div class="course-title-wrapper"><a href='<?php echo get_the_permalink($course_id);?>'><h3><?php echo get_the_title($course_id);?></h3></a></div>
+          <div class="course-image-wrapper"><a href='<?php echo $futureDate < $dateA ? "javascript:void(0);" : get_the_permalink($course_id);?>'><img src="<?php echo $thumb;?>" class="course-img" /></a></div>
+          <div class="course-title-wrapper"><a href='<?php echo $futureDate < $dateA ? "javascript:void(0);" : get_the_permalink($course_id);?>'><h3><?php echo get_the_title($course_id);?></h3></a></div>
           <div class="course-info-wrapper">
             <?php
               echo "
@@ -133,7 +133,7 @@ function peprodev_profile_print_ld_courses_list($array){
             ?>
           </div>
         </div>
-      <?php 
+      <?php
   }
   echo "</div>";
 

@@ -8,6 +8,8 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 7.x.x</strong></summary>
 &nbsp;
 
+- [Version 7.5.0](#version-750)
+- [Version 7.4.9](#version-749)
 - [Version 7.4.8](#version-748)
 - [Version 7.4.7](#version-747)
 - [Version 7.4.6](#version-746)
@@ -53,6 +55,14 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 7.5.0
+- Release date: 2025-02-18 | 1403-11-30  [&uarr;](#table-of-contents)
+- **Fixed** Learndash Integration > Course Section Enhanced
+
+## Version 7.4.9
+- Release date: 2025-02-11 | 1403-11-23  [&uarr;](#table-of-contents)
+- **Fixed** Elementor Pro 3.27.x Compatibility
 
 ## Version 7.4.8
 - Release date: 2024-11-24 | 1403-09-04  [&uarr;](#table-of-contents)

@@ -7,18 +7,18 @@ Tags: profile-builder, user-dashboard, login-registration, otp-login
 Author: Pepro Dev. Group
 Author URI: https://pepro.dev/
 Plugin URI: https://pepro.dev/ups
-Version: 7.4.8
+Version: 7.5.0
 Requires at least: 5.0
-Tested up to: 6.7.1
+Tested up to: 6.7
 Requires PHP: 7.2
-WC tested up to: 9.4.2
+WC tested up to: 9.6.1
 Text Domain: peprodev-ups
 Domain Path: /languages
 Copyright: (c) Pepro Dev. Group, All rights reserved.
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * @Last modified by: amirhp-com <its@amirhp.com>
- * @Last modified time: 2024/11/24 12:15:22
+ * @Last modified time: 2025/02/18 13:51:05
 */
 
 defined("ABSPATH") or die("PeproDev Ultimate Profile Solutions :: Unauthorized Access! (https://pepro.dev/)");
@@ -26,7 +26,7 @@ defined("ABSPATH") or die("PeproDev Ultimate Profile Solutions :: Unauthorized A
 if (!class_exists("PeproDevUPS")) {
     class PeproDevUPS {
         public $td = "peprodev-ups";
-        public $version = "7.4.8";
+        public $version = "7.5.0";
         public function __construct() {
 
             define("PEPRODEVUPS", $this->version);
@@ -35,10 +35,10 @@ if (!class_exists("PeproDevUPS")) {
                 if ($this->td == $d && "fa_IR" == get_locale()) { return plugin_dir_path(__FILE__) . "languages/{$d}-fa_IR.mo"; }
                 return $m;
             }, 10, 2);
-            
+
             load_plugin_textdomain("peprodev-ups", false, dirname(plugin_basename(__FILE__)) . "/languages/");
             load_plugin_textdomain("wpserveur-hide-login", false, dirname(plugin_basename(__FILE__)) . "/languages/");
-            
+
             require_once plugin_dir_path(__FILE__) . "/core/main.php";
             require_once plugin_dir_path(__FILE__) . "/profile/profile.php";
             require_once plugin_dir_path(__FILE__) . "/login/login.php";

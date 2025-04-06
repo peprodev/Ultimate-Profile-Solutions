@@ -2,7 +2,7 @@
 /*
  * @Author: Amirhossein Hosseinpour <https://amirhp.com>
  * @Last modified by: amirhp-com <its@amirhp.com>
- * @Last modified time: 2024/11/24 12:15:40
+ * @Last modified time: 2025/02/14 14:14:26
  */
 defined("ABSPATH") or die("PeproDev Ultimate Profile Solutions :: Unauthorized Access! (https://pepro.dev/)");
 
@@ -76,7 +76,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
       $this->tbl_subscribers   = "{$wpdb->prefix}peprofile_subscribers";
       $this->tbl_notif         = "{$this->db_table}_notif";
       $this->tbl_sections      = "{$this->db_table}_sections";
-      
+
       /**
        * Fires after WordPress has finished loading but before any headers are sent.
        *
@@ -165,7 +165,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
           header('Pragma: public');
           echo "\xEF\xBB\xBF"; // UTF-8 BOM
           $this->ExportFileAsExcel($data);
-        
+
       }
 
       if (!current_user_can("edit_posts") && !is_admin()) {
@@ -174,16 +174,16 @@ if (!class_exists("PeproDevUPS_Profile")) {
       }
 
       add_action("peprodev/profile/helper/add_private_notification", function($args){ call_user_func([$this, "add_private_notification"], $args); }, 1, 1);
-      
+
       add_action("init" , array($this, "init_plugin"));
       add_action("template_redirect", array($this, "remove_yoast_wpseo"));
       add_action("template_redirect", array($this, "template_redirect_learndash_course"));
       add_action("admin_bar_menu" , array($this, "admin_bar_menu_items"), 31);
       add_filter("get_avatar_url" , array($this, "change_avatar_url"), 10, 3);
-      
+
       // Hook to track course access
       add_action('learndash_update_course_access', array($this, "track_course_access"), 10, 4);
-      
+
       add_action("learndash_focus_header_logo_url", array($this, "learndash_focus_header_logo_url"), 10, 3);
       // add_action("learndash-focus-course-steps-before", array($this, "amirhpcom__add_back2course"), 10, 3);
       // add_action("learndash-focus-header-logo-after", array($this, "learndash_focus_header_logo_after"), 10, 2);
@@ -193,17 +193,17 @@ if (!class_exists("PeproDevUPS_Profile")) {
     public function track_course_access($user_id=0, $course_id=0, $course_access_list=[], $remove=false) {
       // Get the user's current course history
       $user_course_history = get_user_meta($user_id, '_ld_course_history', true);
-      
+
       // If the history doesn't exist, initialize it as an empty array
       if (!is_array($user_course_history)) {
         $user_course_history = array();
       }
-      
+
       // Add the course ID to the history array if it's not already there
       if (!in_array($course_id, $user_course_history)) {
         $user_course_history[] = $course_id;
       }
-      
+
       // Update the user's course history metadata
       update_user_meta($user_id, '_ld_course_history', $user_course_history);
     }
@@ -252,7 +252,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
     }
     public function template_redirect_learndash_course() {
       global $post;
-      
+
       if (isset($_GET["course_welcome"]) && !empty($_GET["course_welcome"])) {
         $course_id = intval(sanitize_text_field(trim($_GET["course_welcome"])));
         if (get_post($course_id) && "sfwd-courses" == get_post_type($course_id) ) {
@@ -308,9 +308,9 @@ if (!class_exists("PeproDevUPS_Profile")) {
           remove_action('wpseo_head', [$front_end, 'present_head'], -9999);
         }
       }
-    }  
+    }
     public function init_plugin() {
-      
+
       $this->url = $this->get_profile_page(["i" => current_time("timestamp")]);
       $url_profile = $this->url;
 
@@ -319,7 +319,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
         if (isset($link["my-account"])) $link["my-account"]["url"] = $url_profile;
         return $link;
       });
-      
+
       add_filter("woocommerce_get_myaccount_page_permalink",  function($permalink) use ($url_profile){return $url_profile;}, 10, 1);
       add_filter("woocommerce_get_endpoint_url", array($this, "change_wc_endpoint_urls"), 20, 4);
 
@@ -330,7 +330,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
           wp_die("done, removed #$course_id welcome from user #" . get_current_user_id());
         }
       }
-      
+
       add_filter("peprocore_{$this->id}_dashboard_nav_menuitems", function () {
         return array(
           array(
@@ -403,7 +403,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
         add_filter("learndash_status_icon"             , array($this, "learndash_status_icon"), 10, 5);
         add_filter("learndash-course-row-class"        , array($this, "learndash_course_row_class"), 10, 3);
       }
-      
+
       add_filter("peprocore_dashboard_nav_menuitems" , function ($s) { $d = apply_filters("peprocore_{$this->id}_dashboard_nav_menuitems", array()); return array_merge($s, $d); }, 11 );
       add_action("peprocore_handle_ajaxrequests"     , $this->ajax_hndlr, 11);
       add_action("delete_user"                       , array($this, "after_delete_user"));
@@ -436,9 +436,9 @@ if (!class_exists("PeproDevUPS_Profile")) {
         $this->CreateDatabase(true);
         wp_redirect(admin_url("admin.php?page=peprodev-ups&section=home"));
       }
-      
+
       if (is_blog_admin() && isset($_GET["manually_updated_ld_course_history"]) && !empty($_GET["manually_updated_ld_course_history"])) {
-        
+
         $user_id = get_current_user_id();
         $orders_per_page = -1;
         $current_page = (isset($_GET['page'])) ? absint($_GET['page']) : 1;
@@ -455,7 +455,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
         $current_item = 1;
         // Get the total number of items in the order
         $item_count = count($orders);
-        
+
         echo "
         <style>
           .course-list-ld td {
@@ -478,7 +478,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
         </style>
         <h2>Updating LD Courses History from WooCommerce Completed Orders</h2>
         <table class='course-list-ld' style='direction: ltr;text-align: left;'>";
-        
+
         foreach ($orders as $order) {
           $order_id = $order->get_id();
           $order_status = wc_get_order_status_name($order->get_status()) . " (".$order->get_status().")";
@@ -486,7 +486,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
           $user_email = $order->get_billing_email();
           $full_name = $order->get_formatted_billing_full_name();
           $order_date = $order->get_date_created();
-          
+
           $before = "Before => ". implode(" / ", (array) get_user_meta($user_id, '_ld_course_history', true));
 
           echo "<tr><td center>$current_item / $item_count</td>
@@ -516,7 +516,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
           echo "</tr>";
         }
         echo "</table>";
-        
+
         $total_orders = wc_get_orders(array('status' => $args['status'], 'limit' => -1));
         $total_pages = ceil(count($total_orders) / $orders_per_page);
         $pagination_args = array(
@@ -531,15 +531,15 @@ if (!class_exists("PeproDevUPS_Profile")) {
         echo '<br><div class="pagination">' . $pagination_links . '</div>';
         die("<br>/*################################################## all done ##################################################*/");
       }
-      
+
       if (is_blog_admin() && isset($_GET["manually_updated_ld_course_history_active"]) && !empty($_GET["manually_updated_ld_course_history_active"])) {
-        
+
         $users = get_users();
         // Initialize a variable to keep track of the current item number
         $current_item = 1;
         // Get the total number of items in the order
         $item_count = count($users);
-        
+
         echo "
         <style>
           .course-list-ld td {
@@ -562,12 +562,12 @@ if (!class_exists("PeproDevUPS_Profile")) {
         </style>
         <h2>Updating LD Courses History from Active Courses List</h2>
         <table class='course-list-ld' style='direction: ltr;text-align: left;'>";
-        
+
         foreach ($users as $user) {
           $user_id = $user->ID;
           $full_name = $user->display_name;
           $user_email = $user->user_email;
-          
+
           $before = "Before => ". implode(" / ", (array) get_user_meta($user_id, '_ld_course_history', true));
           $active_courses = learndash_user_get_enrolled_courses($user_id, array(), false);
           foreach ($active_courses as $item) {
@@ -1502,7 +1502,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
         'order'				=>	'ASC',
         'nopaging'			=>	true	// Turns OFF paging logic to get ALL courses
       );
-    
+
       $query = new WP_Query( $query_args );
       if ( $query instanceof WP_Query) {
         return $query->posts;
@@ -2035,7 +2035,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
 
             update_option("peprofile_builtin_{$id}_priority", ($priority ? $priority : ""), "no");
             update_option("peprofile_builtin_{$id}_is_enabled", ($active == "yes" ? "yes" : "no"), "no");
-            
+
             wp_send_json_success(array("msg" => __("Section edited successfully.", "peprodev-ups")));
 
             break;
@@ -2732,7 +2732,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
           )
         );
       }
-      $arr = array_merge( $arr, 
+      $arr = array_merge( $arr,
           array(
             "edituser" => array(
               "title"       => '<i class="fa-fw fas fa-edit"></i> ' . _x("Edit Profile","menu",$this->td),
@@ -2824,12 +2824,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
       if (!empty($current_requested_slug) && in_array($current_requested_slug, $allowed_slugs_whitelist)) {
         $notifs = $wpdb->get_row($wpdb->prepare("SELECT * FROM `$this->tbl_sections` WHERE `slug` = '%s' ORDER BY `date_created` DESC LIMIT 1", $current_requested_slug));
         if ($notifs && !empty($notifs)) {
-          // fix for wp_enqueue_style and wp_enqueue_script
-          do_action('wp_head');
           // fix for zephyr theme!
-          wp_dequeue_style("us-core");
-          wp_dequeue_script("us-core");
-          wp_dequeue_style("us-font-awesome-duotone");
           wp_dequeue_style("font-awesome");
           $this->change_dashboard_title($notifs->title);
           ?>

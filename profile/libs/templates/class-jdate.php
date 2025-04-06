@@ -5,7 +5,7 @@
 * @Last modified time: 2022/12/14 00:56:10
 **/
 if (!function_exists("pu_jdate")) {
-    function pu_jdate($format,$timestamp='',$none='',$time_zone='Asia/Tehran',$pu_tr_num='en')
+    function pu_jdate($format="y-m-d", $timestamp='', $none='', $time_zone='local', $pu_tr_num='en')
     {
         (int) $T_sec=0; // server date bug fix , use + and - following a second number. e.g. +5 -> add five second
         if($time_zone!='local') { date_default_timezone_set(($time_zone==='')?'Asia/Tehran':$time_zone); }
