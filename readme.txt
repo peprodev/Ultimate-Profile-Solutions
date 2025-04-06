@@ -2,12 +2,12 @@
 Contributors: amirhpcom, peprodev, blackswanlab
 Donate link: https://pepro.dev/donate/
 Tags: profile-builder, user-dashboard, login-registration, pepro-dev
-Version: 7.5.0
-Stable tag: 7.5.0
+Version: 7.5.1
+Stable tag: 7.5.1
 Requires at least: 5.0
 Tested up to: 6.7
 Requires PHP: 7.2
-WC tested up to: 9.6.1
+WC tested up to: 9.7.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -130,38 +130,20 @@ The full changelog is available in our [GitHub repository](https://github.com/pe
 
 The full changelog is available in our [GitHub repository](https://github.com/peprodev/Ultimate-Profile-Solutions/blob/master/changelog.md).
 
+= Version 7.5.1 | 2025-04-06 | 1404-01-17 =
+- **Fixed** User mobile field not shown on Edit User Screen
+- **Added** Verify User Email and Mobile on Edit User Screen
+
 = Version 7.5.0 | 2025-02-18 | 1403-11-30 =
 - **Fixed** Learndash Integration > Course Section Enhanced
-
-= Version 7.4.9 | 2025-02-11 | 1403-11-23 =
-- **Fixed** Elementor Pro 3.27.x Compatibility
-
-= Version 7.4.8 | 2024-11-24 | 1403-09-04 =
-- **Fixed** Fatal Error get_current_screen on ACF pages
-
-= Version 7.4.7 | 2024-11-18 | 1403-08-28 =
-- **Fixed** Translation load
-- **Fixed** Database Creation issue
-- **Fixed** WooCommerce Not Activated Issue
-- **Fixed** Redirection to URL with #hash appended
-- **Fixed** Redirection to Same page on Login/Registeration
 
 == Upgrade Notice ==
 
+= Version 7.5.1 | 2025-04-06 | 1404-01-17 =
+- **Fixed** User mobile field not shown on Edit User Screen
+- **Added** Verify User Email and Mobile on Edit User Screen
+
 = Version 7.5.0 | 2025-02-18 | 1403-11-30 =
 - **Fixed** Learndash Integration > Course Section Enhanced
-
-= Version 7.4.9 | 2025-02-11 | 1403-11-23 =
-- **Fixed** Elementor Pro 3.27.x Compatibility
-
-= Version 7.4.8 | 2024-11-24 | 1403-09-04 =
-- **Fixed** Fatal Error get_current_screen on ACF pages
-
-= Version 7.4.7 | 2024-11-18 | 1403-08-28 =
-- **Fixed** Translation load
-- **Fixed** Database Creation issue
-- **Fixed** WooCommerce Not Activated Issue
-- **Fixed** Redirection to URL with #hash appended
-- **Fixed** Redirection to Same page on Login/Registeration
 
 Please also note that the full changelog for this version and previous versions can be found in the [GitHub repository](https://github.com/peprodev/Ultimate-Profile-Solutions/blob/master/changelog.md).

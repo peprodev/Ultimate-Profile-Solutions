@@ -7,7 +7,7 @@ Tags: profile-builder, user-dashboard, login-registration, otp-login
 Author: Pepro Dev. Group
 Author URI: https://pepro.dev/
 Plugin URI: https://pepro.dev/ups
-Version: 7.5.0
+Version: 7.5.1
 Requires at least: 5.0
 Tested up to: 6.7
 Requires PHP: 7.2
@@ -18,7 +18,7 @@ Copyright: (c) Pepro Dev. Group, All rights reserved.
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * @Last modified by: amirhp-com <its@amirhp.com>
- * @Last modified time: 2025/02/18 13:51:05
+ * @Last modified time: 2025/04/06 09:59:04
 */
 
 defined("ABSPATH") or die("PeproDev Ultimate Profile Solutions :: Unauthorized Access! (https://pepro.dev/)");
@@ -26,7 +26,7 @@ defined("ABSPATH") or die("PeproDev Ultimate Profile Solutions :: Unauthorized A
 if (!class_exists("PeproDevUPS")) {
     class PeproDevUPS {
         public $td = "peprodev-ups";
-        public $version = "7.5.0";
+        public $version = "7.5.1";
         public function __construct() {
 
             define("PEPRODEVUPS", $this->version);

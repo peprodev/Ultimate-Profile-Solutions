@@ -2,7 +2,7 @@
 /*
  * @Author: Amirhossein Hosseinpour <https://amirhp.com>
  * @Last modified by: amirhp-com <its@amirhp.com>
- * @Last modified time: 2024/11/24 12:16:38
+ * @Last modified time: 2025/04/06 10:26:21
 */
 
 defined("ABSPATH") or die("PeproDev Ultimate Profile Solutions :: Unauthorized Access! (https://pepro.dev/)");
@@ -186,7 +186,7 @@ if (!class_exists("PeproDevUPS_Login")) {
       $this->change_number_text = __("Change Number", "peprodev-ups");
       if ($this->login_mobile_otp) $this->change_number_text = __("Change Number", "peprodev-ups");
       if ($this->login_email_otp) $this->change_number_text  = __("Change Email", "peprodev-ups");
-      
+
       $this->def_mail_body = [
         '<!DOCTYPE html>', '<html>', '  <head>', '    <meta charset="utf-8">', '  </head>', '  <body>',
         '    <div style="display:block; width:450px; border-radius:0.5rem; margin: 1rem auto; text-align: center; color: #2b2b2b; padding: 1rem; box-shadow: 0 2px 5px 1px #0003; border: 1px solid #ccc;">',
@@ -210,7 +210,7 @@ if (!class_exists("PeproDevUPS_Login")) {
       add_filter("pepro_reglogin_get_register_fields", array($this, "pepro_reglogin_get_register_fields"));
       add_action("pepro_reglogin_show_hide_defaul_registeration_fields", array($this, "form_defaul_registeration_fields"), 99999);
       add_action("auth_cookie_expiration", array($this, "auth_cookie_expiration"), 10, 3);
-      
+
 
       add_action("init", array($this, "wp_init"));
       add_action("register_form", array($this, "register_form"));
@@ -248,7 +248,7 @@ if (!class_exists("PeproDevUPS_Login")) {
 
       add_action("wp_ajax_pepro_reglogin", array($this, "handel_ajax_req"));
       add_action("wp_ajax_nopriv_pepro_reglogin", array($this, "handel_ajax_req"));
-      
+
       if (isset($_GET["bulk_mobile_convert"]) && !empty($_GET["bulk_mobile_convert"]) && current_user_can("manage_options")) {
         if (!is_user_logged_in()) return;
         ob_implicit_flush(true);
@@ -1075,7 +1075,7 @@ if (!class_exists("PeproDevUPS_Login")) {
                 </div>
               </div>
             <?php endif; ?>
-            
+
           </div>
         </div>
         <?php
@@ -2526,7 +2526,7 @@ if (!class_exists("PeproDevUPS_Login")) {
                 ));
               }
             }
-            
+
             if (isset($param["checkemail"])) {
               $valid_email = apply_filters("pepro_reglogin_ajax_register_filter_email", $email, $param);
               if ($valid_email) {
@@ -3580,22 +3580,44 @@ if (!class_exists("PeproDevUPS_Login")) {
       ));
       extract($config);
       $printr = "table" === $style;
+      if ($skip_profile && is_admin()) {
+        $loop_fields[] = array(
+          "meta_name"   => "pepro_user_is_sms_verified",
+          "type"        => "select",
+          "title"       => __("SMS Verified", "peprodev-ups"),
+          "options"     => array(
+            "yes" => __("Yes", "peprodev-ups"),
+            "no"  => __("No", "peprodev-ups"),
+          ),
+          "default"     => "",
+          "is-required" => "no",
+          "is-public"   => "yes",
+          "is-editable" => "yes",
+          "in-column"   => "no",
+        );
+        $loop_fields[] = array(
+          "meta_name"   => "pepro_user_is_email_verified",
+          "type"        => "select",
+          "title"       => __("Email Verified", "peprodev-ups"),
+          "options"     => array(
+            "yes" => __("Yes", "peprodev-ups"),
+            "no"  => __("No", "peprodev-ups"),
+          ),
+          "default"     => "",
+          "is-required" => "no",
+          "is-public"   => "yes",
+          "is-editable" => "yes",
+          "in-column"   => "no",
+        );
+      }
       foreach ($loop_fields as $field) {
-        if ($skip_not_public && "yes" !== $field["is-public"]) {
-          continue;
-        }
-        if ($skip_profile && "yes" !== $field["is-editable"] && !is_admin()) {
-          continue;
-        }
-        if ($isourprofile && "user_mobile" == $field["meta_name"]) {
-          continue;
-        }
-        if ($skip_recaptcha && "recaptcha" == $field["type"]) {
-          continue;
-        }
-        if ($user_id) {
-          $field["default"] = get_the_author_meta($field["meta_name"], $user_id);
-        }
+        if ($skip_not_public && "yes" !== $field["is-public"]) continue;
+        if ($skip_profile && "yes" !== $field["is-editable"] && !is_admin()) continue;
+        if ($isourprofile && "user_mobile" == $field["meta_name"]) continue;
+        if ($skip_recaptcha && "recaptcha" == $field["type"]) continue;
+
+        if ($user_id) $field["default"] = get_the_author_meta($field["meta_name"], $user_id);
+
         $no_label = isset($field["no-label"]) && "yes" == $field["no-label"];
 
         $row_class = $config["row_class"];
@@ -3647,7 +3669,6 @@ if (!class_exists("PeproDevUPS_Login")) {
           $field["placeholder"] = $field["title"];
         }
         switch ($field["type"]) {
-
           case 'select':
             $select_options = "";
             foreach ((array) $field["options"] as $key => $value) {
@@ -3986,15 +4007,15 @@ if (!class_exists("PeproDevUPS_Login")) {
         $this->delete_session("_email_otp_{$user->user_email}_code");
         $this->delete_session("_email_otp_{$user->user_email}_date");
       }
-            
+
       $param = sanitize_post($_POST["param"]);
       parse_str(stripslashes_deep($param), $param);
       $redirect_to_post = isset($param["redirect_to"]) && !empty($param["redirect_to"]) && "0" != $param["redirect_to"] ? sanitize_url($param["redirect_to"]) : false;
 
       if ($redirect_to_post) return $redirect_to_post;
-      
+
       if (empty($this->get_redirection_fields())) return $redirect_to;
-      
+
 
       foreach ((array) $this->get_redirection_fields() as $key => $value) {
         if (("ajax_login" === $requested_redirect_to || "login_redirect" == current_action()) && "yes" == $value["login"]) {
@@ -4225,6 +4246,7 @@ if (!class_exists("PeproDevUPS_Login")) {
       $fields = $this->printout_fields(array(
         "item_class"   => "regular-text",
         "skip_profile" => true,
+        "loop_fields"  => $this->get_register_fields(),
         "user_id"      => $user->ID,
       ));
       if (!empty($fields)) {
@@ -5185,16 +5207,16 @@ if (!class_exists("PeproDevUPS_Login")) {
 
             $data = "verification_email_sender_name";
             if (isset($_POST["dparam"][$data])) { update_option("{$this->save_prefix}-{$data}", empty($_POST["dparam"][$data]) ? get_bloginfo('name', 'display') : sanitize_text_field($_POST["dparam"][$data]), "no"); }
-            
+
             $data = "verification_email_sender";
             if (isset($_POST["dparam"][$data])) { update_option("{$this->save_prefix}-{$data}", empty($_POST["dparam"][$data]) ? $this->default_sender : sanitize_text_field($_POST["dparam"][$data]), "no"); }
-            
+
             $data = "verification_email_template";
             if (isset($_POST["dparam"][$data])) { update_option("{$this->save_prefix}-{$data}", empty($_POST["dparam"][$data]) ? $this->def_mail_body : htmlentities($_POST["dparam"][$data]), "no"); }
-            
+
             $data = "reglogin_type";
             if (isset($_POST["dparam"][$data])) { update_option("{$this->save_prefix}-{$data}", empty($_POST["dparam"][$data]) ? "email" : sanitize_text_field($_POST["dparam"][$data]), "no"); }
-            
+
             $data = "pro_verify";
             if (isset($_POST["dparam"][$data])) { update_option("{$this->save_prefix}-{$data}", empty($_POST["dparam"][$data]) ? "both" : sanitize_text_field($_POST["dparam"][$data]), "no"); }
 

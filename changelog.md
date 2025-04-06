@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 7.x.x</strong></summary>
 &nbsp;
 
+- [Version 7.5.1](#version-751)
 - [Version 7.5.0](#version-750)
 - [Version 7.4.9](#version-749)
 - [Version 7.4.8](#version-748)
@@ -55,6 +56,11 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 7.5.1
+- Release date: 2025-04-06 | 1404-01-17  [&uarr;](#table-of-contents)
+- **Fixed** User mobile field not shown on Edit User Screen
+- **Added** Verify User Email and Mobile on Edit User Screen
 
 ## Version 7.5.0
 - Release date: 2025-02-18 | 1403-11-30  [&uarr;](#table-of-contents)
