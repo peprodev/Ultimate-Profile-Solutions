@@ -2,13 +2,13 @@
 /*
  * @Author: Amirhossein Hosseinpour <https://amirhp.com>
  * @Last modified by: amirhp-com <its@amirhp.com>
- * @Last modified time: 2025/05/28 00:03:07
+ * @Last modified time: 2025/05/28 02:57:49
 */
 
 defined("ABSPATH") or die("PeproDev Ultimate Profile Solutions :: Unauthorized Access! (https://pepro.dev/)");
 
 if ("yes" == $this->read("activesecurity")) {
-  include_once plugin_dir_path(__FILE__) . "/include/class-login-permalink.php";
+  require_once plugin_dir_path(__FILE__) . "include/class-login-permalink.php";
 }
 
 if (!class_exists("PeproDevUPS_Login")) {
@@ -121,7 +121,6 @@ if (!class_exists("PeproDevUPS_Login")) {
       $this->setting_slug                   = "loginregister";
       $this->id                             = "loginregister";
       $this->td                             = "peprodev-ups";
-      $this->title                          = __("PeproDev Ultimate Profile Solutions — Login", "peprodev-ups");
       $this->menu_label                     = __("Login/Register", "peprodev-ups");
       $this->page_label                     = __("Login Setting", "peprodev-ups");
       $this->developer                      = __("Pepro Dev. Group", "peprodev-ups");
@@ -4263,7 +4262,7 @@ if (!class_exists("PeproDevUPS_Login")) {
         </style>
         <div class='peprodev-profile-edit'>
           <h3><?php esc_html_e("User Custom Meta", "peprodev-ups");?></h3>
-          <i><?php echo sprintf(__("Provieded by %s v.%s", $this->td), "<a target='_blank' href='".admin_url("admin.php?page=peprodev-ups&section=loginregister#tab_registration")."'>{$this->title}</a>", $this->version);?></i>
+          <i><?php echo sprintf(__("This setting is Provieded by %s v.%s", $this->td), "<a target='_blank' href='".admin_url("admin.php?page=peprodev-ups&section=loginregister#tab_registration")."'>{$this->title}</a>", $this->version);?></i>
           <table class='form-table'><?=$fields;?></table>
         </div>
         <?php
