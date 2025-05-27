@@ -2,8 +2,8 @@
 Contributors: amirhpcom, peprodev, blackswanlab
 Donate link: https://peprodev.com/donate/
 Tags: profile, dashboard, login-registration
-Version: 8.1.0
-Stable tag: 8.1.0
+Version: 8.0.1
+Stable tag: 8.0.1
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.2

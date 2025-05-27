@@ -7,7 +7,7 @@ Tags: profile, dashboard, login-registration
 Author: Pepro Dev. Group
 Author URI: https://peprodev.com/pepro-ultimate-profile-solution/
 Plugin URI: https://wordpress.org/plugins/peprodev-ups/
-Version: 8.1.0
+Version: 8.0.1
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.2
@@ -18,7 +18,7 @@ Copyright: (c) Pepro Dev. Group, All rights reserved.
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * @Last modified by: amirhp-com <its@amirhp.com>
- * @Last modified time: 2025/05/28 03:01:21
+ * @Last modified time: 2025/05/28 03:12:49
 */
 
 defined("ABSPATH") or die("PeproDev Ultimate Profile Solutions :: Unauthorized Access!");
@@ -27,8 +27,8 @@ if (!class_exists("PeproDevUPS")) {
   class PeproDevUPS {
     public $td          = "peprodev-ups";
     public $db_slug     = "peprodev-ups";
-    public $version     = "8.1.0";
-    public $db_version  = "8.1.0";
+    public $version     = "8.0.1";
+    public $db_version  = "8.0.1";
     public $setting_key = "peprodev_ups_profile";
     public $title = "PeproDev Profile";
     public $title_w = "PeproDev Ultimate Profile Solutions";

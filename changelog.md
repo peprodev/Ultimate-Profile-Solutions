@@ -8,7 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
-- [Version 8.1.0](#version-810)
+- [Version 8.0.1](#version-801)
 - [Version 8.0.0](#version-800)
 
 </details>
@@ -68,7 +68,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 
 ---
 
-## Version 8.1.0
+## Version 8.0.1
 - Release date: 2025-05-28 | 1404-03-07  [&uarr;](#table-of-contents)
 - **Fixed** issue with login slug not functioning correctly
 
