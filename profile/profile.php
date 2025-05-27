@@ -2,20 +2,15 @@
 /*
  * @Author: Amirhossein Hosseinpour <https://amirhp.com>
  * @Last modified by: amirhp-com <its@amirhp.com>
- * @Last modified time: 2025/02/14 14:14:26
+ * @Last modified time: 2025/05/28 00:06:44
  */
 defined("ABSPATH") or die("PeproDev Ultimate Profile Solutions :: Unauthorized Access! (https://pepro.dev/)");
 
 if (!class_exists("PeproDevUPS_Profile")) {
-  class PeproDevUPS_Profile {
+  class PeproDevUPS_Profile extends PeproDevUPS {
     public $parent;
-    public $td;
-    public $version = "7.4.8";
-    public $db_version = "2.2.0";
-    public $priority;
-    public $id;
-    public $hwnd;
-    public $instance;
+    public $id          = "peprocoreprofile";
+    public $priority    = 4;
     public $icon_html;
     public $current_version;
     public $date_last_edit;
@@ -39,6 +34,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
     public $copyright;
     public $licenseURI;
     public $pluginURI;
+    public $assets_dir;
     public $lang;
     public $db_slug;
     public $db_table;
@@ -46,11 +42,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
     public $url;
     public $useLD;
     public $categorized_user_roles = array();
-    private $file;
-    private $assets_url;
     public $assets_url_as;
-    public $assets_dir;
-    private $setting_options;
     public $title = "PeproDev Ultimate Profile Solutions — Profile";
     public $menu_label = "Profile Design";
     public $page_label = "Profile Setting";
@@ -59,17 +51,12 @@ if (!class_exists("PeproDevUPS_Profile")) {
     public $author = "Pepro Dev. Group";
     public $license = "Pepro Dev License";
     public function __construct() {
-      global $wpdb, $wp;
-      $this->id                = "peprocoreprofile";
-      $this->td                = "peprodev-ups";
-      $this->priority          = 4;
+      parent::__construct(false);
+      global $wpdb;
       $this->assets_url_as     = plugins_url("/assets/", __FILE__);
       $this->assets_url        = plugins_url("/", __FILE__);
       $this->assets_dir        = plugin_dir_path(__FILE__);
-      $this->instance          = $this;
-      $this->file              = plugin_basename(__FILE__);
       $this->icon              = "{$this->assets_url}libs/templates/images/icon/logo.png";
-      $this->hwnd              = __CLASS__;
       $this->setting_slug      = "profile";
       $this->db_slug           = "pc_profile";
       $this->db_table          = "{$wpdb->prefix}pepro_core_profile";
@@ -81,7 +68,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
        * Fires after WordPress has finished loading but before any headers are sent.
        *
        */
-      add_action("init", function(){
+      add_action("init", function () {
         $this->title             = __("PeproDev Ultimate Profile Solutions — Profile", "peprodev-ups");
         $this->menu_label        = __("Profile Design", "peprodev-ups");
         $this->page_label        = __("Profile Setting", "peprodev-ups");
@@ -112,60 +99,38 @@ if (!class_exists("PeproDevUPS_Profile")) {
       $this->pluginURI         = "https://pepro.dev/ups";
       $this->useLD             = function_exists("sfwd_lms_has_access");
       $this->lang              = dirname(plugin_basename(__FILE__)) . "/languages/";
-      $this->setting_options   = array(
-        array(
-          "name" => "{$this->db_slug}_general",
-          "data" => array(
-            "{$this->activation_status}"                   => "0",
-            "{$this->db_slug}-clearunistall"               => "no",
-            "{$this->db_slug}-cleardbunistall"             => "no",
-            "{$this->activation_status}-css"               => "",
-            "{$this->activation_status}-js"                => "",
-            "{$this->activation_status}-logo"              => "",
-            "{$this->activation_status}-profile-dash-page" => "profile",
-            "{$this->activation_status}-logo-id"           => "",
-            "{$this->activation_status}-showwelcome"       => "true",
-            "{$this->activation_status}-woocommercestats"  => "true",
-            "{$this->activation_status}-woocommerceorders" => "true",
-            "{$this->activation_status}-showcustomtext"    => "true",
-            "{$this->activation_status}-customhtml"        => "",
-            "{$this->activation_status}-headerhook"        => "no",
-            "{$this->activation_status}-footerhook"        => "no",
-            "{$this->activation_status}-customposition"    => "p2",
-          )
-        ),
-      );
+
+      add_action("admin_init", array($this, "check_database"), 10);
 
       include plugin_dir_path(__FILE__) . "/libs/general/woodmart.php";
 
       if (current_user_can("manage_options") && is_admin() && isset($_GET["peprodev_subscribers"]) && "export_csv" === trim($_GET["peprodev_subscribers"])) {
-          $data = array();
-          $notifs = $wpdb->get_results($wpdb->prepare("SELECT * FROM `$this->tbl_subscribers` ORDER BY `date_created` DESC"));
-          if (false !== $notifs && 0 !== $notifs && !empty($notifs)) {
-            foreach ($notifs as $notif) {
-              $data[] = array(
-                "date"   => $notif->date_created,
-                "name"   => $notif->name,
-                "mobile" => $notif->mobile,
-                "email"  => $notif->email,
-                "uid"    => $notif->user,
-              );
-            }
-          } else {
-            wp_die(__("No subscriber found!", "notifications-priority", $this->td));
+        $data = array();
+        $notifs = $wpdb->get_results($wpdb->prepare("SELECT * FROM `$this->tbl_subscribers` ORDER BY `date_created` DESC"));
+        if (false !== $notifs && 0 !== $notifs && !empty($notifs)) {
+          foreach ($notifs as $notif) {
+            $data[] = array(
+              "date"   => $notif->date_created,
+              "name"   => $notif->name,
+              "mobile" => $notif->mobile,
+              "email"  => $notif->email,
+              "uid"    => $notif->user,
+            );
           }
-          $filename = "PeproDevUPS Subscribers " . current_time("timestamp") . ".csv";
-          header('Content-Description: File Transfer');
-          header("Content-Type: application/vnd.ms-excel; charset=utf-8");
-          header('Content-Transfer-Encoding: binary');
-          header("Content-Disposition: attachment; filename=\"$filename\"");
-          header('Expires: 0');
-          header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-          header('Pragma: no-cache');
-          header('Pragma: public');
-          echo "\xEF\xBB\xBF"; // UTF-8 BOM
-          $this->ExportFileAsExcel($data);
-
+        } else {
+          wp_die(__("No subscriber found!", "notifications-priority", $this->td));
+        }
+        $filename = "PeproDevUPS Subscribers " . current_time("timestamp") . ".csv";
+        header('Content-Description: File Transfer');
+        header("Content-Type: application/vnd.ms-excel; charset=utf-8");
+        header('Content-Transfer-Encoding: binary');
+        header("Content-Disposition: attachment; filename=\"$filename\"");
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Pragma: no-cache');
+        header('Pragma: public');
+        echo "\xEF\xBB\xBF"; // UTF-8 BOM
+        $this->ExportFileAsExcel($data);
       }
 
       if (!current_user_can("edit_posts") && !is_admin()) {
@@ -173,13 +138,15 @@ if (!class_exists("PeproDevUPS_Profile")) {
         add_filter("show_admin_bar", "__return_false");
       }
 
-      add_action("peprodev/profile/helper/add_private_notification", function($args){ call_user_func([$this, "add_private_notification"], $args); }, 1, 1);
+      add_action("peprodev/profile/helper/add_private_notification", function ($args) {
+        call_user_func([$this, "add_private_notification"], $args);
+      }, 1, 1);
 
-      add_action("init" , array($this, "init_plugin"));
+      add_action("init", array($this, "init_plugin"));
       add_action("template_redirect", array($this, "remove_yoast_wpseo"));
       add_action("template_redirect", array($this, "template_redirect_learndash_course"));
-      add_action("admin_bar_menu" , array($this, "admin_bar_menu_items"), 31);
-      add_filter("get_avatar_url" , array($this, "change_avatar_url"), 10, 3);
+      add_action("admin_bar_menu", array($this, "admin_bar_menu_items"), 31);
+      add_filter("get_avatar_url", array($this, "change_avatar_url"), 10, 3);
 
       // Hook to track course access
       add_action('learndash_update_course_access', array($this, "track_course_access"), 10, 4);
@@ -188,9 +155,8 @@ if (!class_exists("PeproDevUPS_Profile")) {
       // add_action("learndash-focus-course-steps-before", array($this, "amirhpcom__add_back2course"), 10, 3);
       // add_action("learndash-focus-header-logo-after", array($this, "learndash_focus_header_logo_after"), 10, 2);
       add_action("learndash_focus_header_element", array($this, "learndash_focus_header_element"), 10, 4);
-
     }
-    public function track_course_access($user_id=0, $course_id=0, $course_access_list=[], $remove=false) {
+    public function track_course_access($user_id = 0, $course_id = 0, $course_access_list = [], $remove = false) {
       // Get the user's current course history
       $user_course_history = get_user_meta($user_id, '_ld_course_history', true);
 
@@ -203,32 +169,33 @@ if (!class_exists("PeproDevUPS_Profile")) {
       if (!in_array($course_id, $user_course_history)) {
         $user_course_history[] = $course_id;
       }
-
-      // Update the user's course history metadata
-      update_user_meta($user_id, '_ld_course_history', $user_course_history);
+      if (current_user_can("edit_user", $user_id)) {
+        // Update the user's course history metadata
+        update_user_meta($user_id, '_ld_course_history', $user_course_history);
+      }
     }
     public function amirhpcom__add_back2course($type, $course_id, $user_id) {
       ?>
       <div class="ld-content-action">
-          <a class="ld-button ld-button-transparent" href="<?php echo $this->get_profile_page(["section" => "courses"]);?>">
-            <span class="ld-icon ld-icon-arrow-right"></span><span class="ld-text"><?php echo __("My Courses", "peprodev-ups");?></span>
-          </a>
+        <a class="ld-button ld-button-transparent" href="<?php echo $this->get_profile_page(["section" => "courses"]); ?>">
+          <span class="ld-icon ld-icon-arrow-right"></span><span class="ld-text"><?php echo __("My Courses", "peprodev-ups"); ?></span>
+        </a>
       </div>
       <?php
     }
     public function learndash_focus_header_logo_after($course_id, $user_id) {
       ?>
       <div class="ld-content-action">
-          <a class="ld-button ld-button-transparent" href="<?php echo $this->get_profile_page(["section" => "courses"]);?>">
-            <span class="ld-icon ld-icon-arrow-right"></span><span class="ld-text"><?php echo __("My Courses", "peprodev-ups");?></span>
-          </a>
+        <a class="ld-button ld-button-transparent" href="<?php echo $this->get_profile_page(["section" => "courses"]); ?>">
+          <span class="ld-icon ld-icon-arrow-right"></span><span class="ld-text"><?php echo __("My Courses", "peprodev-ups"); ?></span>
+        </a>
       </div>
       <?php
     }
     public function learndash_focus_header_element($header_element, $header, $course_id, $user_id) {
       ob_start();
       ?>
-      <a class="ld-button ld-button-transparent" style="display: inline-block !important;width: fit-content !important;font-size: 1rem;line-height: 0;" href="<?php echo $this->get_profile_page(["section" => "courses"]);?>"><?php echo __("Back to Dashboard", "peprodev-ups");?></a>
+      <a class="ld-button ld-button-transparent" style="display: inline-block !important;width: fit-content !important;font-size: 1rem;line-height: 0;" href="<?php echo $this->get_profile_page(["section" => "courses"]); ?>"><?php echo __("Back to Dashboard", "peprodev-ups"); ?></a>
       <?php
       $htmloutput = ob_get_contents();
       ob_end_clean();
@@ -255,22 +222,22 @@ if (!class_exists("PeproDevUPS_Profile")) {
 
       if (isset($_GET["course_welcome"]) && !empty($_GET["course_welcome"])) {
         $course_id = intval(sanitize_text_field(trim($_GET["course_welcome"])));
-        if (get_post($course_id) && "sfwd-courses" == get_post_type($course_id) ) {
+        if (get_post($course_id) && "sfwd-courses" == get_post_type($course_id) && current_user_can("edit_user", get_current_user_id())) {
           update_user_meta(get_current_user_id(), "_ld_intro_{$course_id}", "yes");
           wp_redirect($this->get_profile_page(["section" => "courses", "view" => $course_id]));
           exit;
         }
       }
 
-      if ('sfwd-courses' == get_post_type( $post ) ) {
+      if ('sfwd-courses' == get_post_type($post)) {
         wp_redirect($this->get_profile_page(["section" => "courses", "view" => $post->ID]));
         exit;
       }
     }
     public function get_profile_page($queryVar = null) {
-      $profile_page = get_option("{$this->activation_status}-profile-dash-page", false);
-      if (!get_post($profile_page)) { $profile_page = false; }
-      if (true === $queryVar) { return get_permalink($profile_page); }
+      $profile_page = $this->read("profile_page", false);
+      if (!get_post($profile_page)) $profile_page = false;
+      if (true === $queryVar) return get_permalink($profile_page);
       if ($queryVar && null !== $queryVar && is_array($queryVar)) {
         $url = $profile_page ? get_permalink($profile_page) : home_url();
         $lang = defined('ICL_LANGUAGE_CODE') ? ICL_LANGUAGE_CODE : "en";
@@ -280,9 +247,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
       return apply_filters("peprofile_get_profile_page", $profile_page, $queryVar);
     }
     public function admin_bar_menu_items($wp_admin_bar) {
-      wp_register_style("{$this->id}-adminbar_styles", false);
-      wp_add_inline_style("{$this->id}-adminbar_styles", '#wpadminbar #wp-admin-bar-peprocoreprofile .ab-icon::before {content: "\f110";top: 2px;}');
-      wp_enqueue_style("{$this->id}-adminbar_styles");
+      echo "<style>#wpadminbar #wp-admin-bar-peprocoreprofile .ab-icon::before {content: \"\\f110\";top: 2px;}</style>";
       $profile_page = $this->get_profile_page(["i" => current_time("timestamp")]);
       $wp_admin_bar->add_node(array(
         'id'    => $this->id,
@@ -301,7 +266,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
     }
     public function remove_yoast_wpseo() {
       /** Removes output from Yoast SEO on the frontend */
-      $dashpage = get_option("{$this->activation_status}-profile-dash-page", "");
+      $dashpage = $this->read("profile_page", false);
       if (!empty($dashpage) && is_single($dashpage)) {
         if (class_exists("WPSEO_Options")) {
           $front_end = YoastSEO()->classes->get(Yoast\WP\SEO\Integrations\Front_End_Integration::class);
@@ -314,24 +279,26 @@ if (!class_exists("PeproDevUPS_Profile")) {
       $this->url = $this->get_profile_page(["i" => current_time("timestamp")]);
       $url_profile = $this->url;
 
-      add_filter("woodmart_get_header_links", function ($link) use ( $url_profile ){
+      add_filter("woodmart_get_header_links", function ($link) use ($url_profile) {
         if (isset($link["register"])) $link["register"]["url"] = $url_profile;
         if (isset($link["my-account"])) $link["my-account"]["url"] = $url_profile;
         return $link;
       });
 
-      add_filter("woocommerce_get_myaccount_page_permalink",  function($permalink) use ($url_profile){return $url_profile;}, 10, 1);
+      add_filter("woocommerce_get_myaccount_page_permalink",  function ($permalink) use ($url_profile) {
+        return $url_profile;
+      }, 10, 1);
       add_filter("woocommerce_get_endpoint_url", array($this, "change_wc_endpoint_urls"), 20, 4);
 
       if (current_user_can("manage_options") && is_blog_admin() && isset($_GET["course_welcome_remove"]) && !empty($_GET["course_welcome_remove"])) {
         $course_id = intval(sanitize_text_field(trim($_GET["course_welcome_remove"])));
-        if (get_post($course_id) && "sfwd-courses" == get_post_type($course_id) ) {
+        if (get_post($course_id) && "sfwd-courses" == get_post_type($course_id) && current_user_can("edit_user", get_current_user_id())) {
           update_user_meta(get_current_user_id(), "_ld_intro_{$course_id}", "no");
           wp_die("done, removed #$course_id welcome from user #" . get_current_user_id());
         }
       }
 
-      add_filter("peprocore_{$this->id}_dashboard_nav_menuitems", function () {
+      add_filter("peprocore_peprocoreprofile_dashboard_nav_menuitems", function () {
         return array(
           array(
             "title"    => $this->menu_label,
@@ -341,7 +308,6 @@ if (!class_exists("PeproDevUPS_Profile")) {
             "fn"       => $this->html_wrapper,
             "id"       => $this->id,
             "priority" => $this->priority,
-            "activation_status" => $this->activation_status,
           ),
           array(
             "title"    => __("Sections", "peprodev-ups"),
@@ -351,7 +317,6 @@ if (!class_exists("PeproDevUPS_Profile")) {
             "fn"       => array($this, "htmlwrapper_sections"),
             "id"       => "{$this->id}_sections",
             "priority" => $this->priority + 0.1,
-            "activation_status" => $this->activation_status,
           ),
           array(
             "title"    => __("Notifications", "peprodev-ups"),
@@ -361,7 +326,6 @@ if (!class_exists("PeproDevUPS_Profile")) {
             "fn"       => array($this, "htmlwrapper_notifs"),
             "id"       => "{$this->id}_notifs",
             "priority" => $this->priority + 0.2,
-            "activation_status" => $this->activation_status,
           ),
           array(
             "title"    => __("Shortcodes", "peprodev-ups"),
@@ -371,7 +335,6 @@ if (!class_exists("PeproDevUPS_Profile")) {
             "fn"       => array($this, "htmlwrapper_shortcodes"),
             "id"       => "{$this->id}_shortcodes",
             "priority" => $this->priority + 0.3,
-            "activation_status" => $this->activation_status,
           ),
           array(
             "title"    => __("Newsletter", "peprodev-ups"),
@@ -381,13 +344,12 @@ if (!class_exists("PeproDevUPS_Profile")) {
             "fn"       => array($this, "htmlwrapper_newsletter"),
             "id"       => "{$this->id}_newsletter",
             "priority" => $this->priority + 0.4,
-            "activation_status" => $this->activation_status,
           ),
         );
       });
 
-      add_filter("body_class", function( $classes ) {
-        if ( is_user_logged_in() ) {
+      add_filter("body_class", function ($classes) {
+        if (is_user_logged_in()) {
           $classes[] = 'user-logged-in';
           $classes[] = 'pepro-profile-user';
         } else {
@@ -399,29 +361,31 @@ if (!class_exists("PeproDevUPS_Profile")) {
 
       if ($this->_ld_activated()) {
         add_action("woocommerce_order_status_completed", array($this, "update_ld_course_history"), 10, 1);
-        add_action("learndash-lesson-row-title-before" , array($this, "lesson_row_title_before"), 10, 3);
-        add_filter("learndash_status_icon"             , array($this, "learndash_status_icon"), 10, 5);
-        add_filter("learndash-course-row-class"        , array($this, "learndash_course_row_class"), 10, 3);
+        add_action("learndash-lesson-row-title-before", array($this, "lesson_row_title_before"), 10, 3);
+        add_filter("learndash_status_icon", array($this, "learndash_status_icon"), 10, 5);
+        add_filter("learndash-course-row-class", array($this, "learndash_course_row_class"), 10, 3);
       }
 
-      add_filter("peprocore_dashboard_nav_menuitems" , function ($s) { $d = apply_filters("peprocore_{$this->id}_dashboard_nav_menuitems", array()); return array_merge($s, $d); }, 11 );
-      add_action("peprocore_handle_ajaxrequests"     , $this->ajax_hndlr, 11);
-      add_action("delete_user"                       , array($this, "after_delete_user"));
-      add_action("admin_init"                        , array($this, "admin_init"));
-      add_action("wp_ajax_nopriv_{$this->id}"        , array($this, "front_side_ajax_handler"));
-      add_action("wp_ajax_{$this->id}"               , array($this, "front_side_ajax_handler"));
-      add_shortcode("pepro-profile"                  , array($this, "peprofile_shortcode_main"));
-      add_shortcode("user"                           , array($this, "peprofile_shortcode_user"));
-      add_shortcode("pepro-profile-url"              , array($this, "peprofile_shortcode_profile_url"));
-      add_shortcode("profile-card-1"                 , array($this, "peprofile_shortcode_card_1"));
-      add_shortcode("profile-card-2"                 , array($this, "peprofile_shortcode_card_2"));
-      add_shortcode("profile-card-3"                 , array($this, "peprofile_shortcode_card_3"));
-      add_shortcode("profile-card-4"                 , array($this, "peprofile_shortcode_card_4"));
-      add_shortcode("profile-wc-stats"               , array($this, "peprofile_shortcode_wc_stats"));
-      add_shortcode("profile-wc-orders"              , array($this, "peprofile_shortcode_wc_orders"));
-      add_shortcode("profile-wc-downloads"           , array($this, "peprofile_shortcode_wc_downloads"));
-      add_filter("peprofile_shortcodes"              , array($this, "peprofile_shortcodes_list"), 10, 1);
-      add_filter("media_buttons"                     , array($this, "media_buttons_add_new"), PHP_INT_MAX);
+      add_filter("peprocore_dashboard_nav_menuitems", function ($s) {
+        $d = apply_filters("peprocore_{$this->id}_dashboard_nav_menuitems", array());
+        return array_merge($s, $d);
+      }, 11);
+      add_action("peprocore_handle_ajaxrequests", $this->ajax_hndlr, 11);
+      add_action("delete_user", array($this, "after_delete_user"));
+      add_action("wp_ajax_nopriv_{$this->id}", array($this, "front_side_ajax_handler"));
+      add_action("wp_ajax_{$this->id}", array($this, "front_side_ajax_handler"));
+      add_shortcode("pepro-profile", array($this, "peprofile_shortcode_main"));
+      add_shortcode("user", array($this, "peprofile_shortcode_user"));
+      add_shortcode("pepro-profile-url", array($this, "peprofile_shortcode_profile_url"));
+      add_shortcode("profile-card-1", array($this, "peprofile_shortcode_card_1"));
+      add_shortcode("profile-card-2", array($this, "peprofile_shortcode_card_2"));
+      add_shortcode("profile-card-3", array($this, "peprofile_shortcode_card_3"));
+      add_shortcode("profile-card-4", array($this, "peprofile_shortcode_card_4"));
+      add_shortcode("profile-wc-stats", array($this, "peprofile_shortcode_wc_stats"));
+      add_shortcode("profile-wc-orders", array($this, "peprofile_shortcode_wc_orders"));
+      add_shortcode("profile-wc-downloads", array($this, "peprofile_shortcode_wc_downloads"));
+      add_filter("peprofile_shortcodes", array($this, "peprofile_shortcodes_list"), 10, 1);
+      add_filter("media_buttons", array($this, "media_buttons_add_new"), PHP_INT_MAX);
       if ($this->_ld_activated()) {
         add_shortcode("profile-ld-enrolled", array($this, "peprofile_shortcode_ld_enrolled"));
       }
@@ -431,11 +395,6 @@ if (!class_exists("PeproDevUPS_Profile")) {
       add_filter("peprofile_get_nav_items",             array($this, "peprofile_get_custom_user_nav_items"), 11, 1);
       add_action("peprofile_get_template_part_nav-bar", array($this, "peprofile_get_template_part_nav"));
       $this->peprofile_custom_user_nav_items_hndlr();
-
-      if ( is_blog_admin() && isset($_GET["pepro_ups_force_db_create"]) && !empty($_GET["pepro_ups_force_db_create"])) {
-        $this->CreateDatabase(true);
-        wp_redirect(admin_url("admin.php?page=peprodev-ups&section=home"));
-      }
 
       if (is_blog_admin() && isset($_GET["manually_updated_ld_course_history"]) && !empty($_GET["manually_updated_ld_course_history"])) {
 
@@ -481,19 +440,19 @@ if (!class_exists("PeproDevUPS_Profile")) {
 
         foreach ($orders as $order) {
           $order_id = $order->get_id();
-          $order_status = wc_get_order_status_name($order->get_status()) . " (".$order->get_status().")";
+          $order_status = wc_get_order_status_name($order->get_status()) . " (" . $order->get_status() . ")";
           $user_id = $order->get_user_id();
           $user_email = $order->get_billing_email();
           $full_name = $order->get_formatted_billing_full_name();
           $order_date = $order->get_date_created();
 
-          $before = "Before => ". implode(" / ", (array) get_user_meta($user_id, '_ld_course_history', true));
+          $before = "Before => " . implode(" / ", (array) get_user_meta($user_id, '_ld_course_history', true));
 
           echo "<tr><td center>$current_item / $item_count</td>
           <td center>" . round(($current_item / $item_count) * 100, 3) . "%</td>
           <td center><a href='post.php?post=$order_id&action=edit'>Order <b>#$order_id</b></a></td>
           <td>$order_status</td>
-          <td>$full_name (<a href='".admin_url("user-edit.php?user_id=$user_id")."'>#$user_id</a>)</td>
+          <td>$full_name (<a href='" . admin_url("user-edit.php?user_id=$user_id") . "'>#$user_id</a>)</td>
           <td>$user_email</td>";
           $list = array();
           foreach ($order->get_items() as $item_id => $item_data) {
@@ -505,13 +464,13 @@ if (!class_exists("PeproDevUPS_Profile")) {
             // loop courses
             foreach ($courses as $item) {
               $this->track_course_access($user_id, $item);
-              $course[] = "<a href='post.php?post=$item&action=edit'>".get_the_title($item)."</a>";
+              $course[] = "<a href='post.php?post=$item&action=edit'>" . get_the_title($item) . "</a>";
             }
-            $after = "After => ". implode(" / ", (array) get_user_meta($user_id, '_ld_course_history', true));
-            $list[] = "Product: <a href='$edit_product_url'>$product_name</a> | Courses: ".implode(" / ", $course);
+            $after = "After => " . implode(" / ", (array) get_user_meta($user_id, '_ld_course_history', true));
+            $list[] = "Product: <a href='$edit_product_url'>$product_name</a> | Courses: " . implode(" / ", $course);
             $current_item++;
           }
-          echo "<td>".join("<br>", $list)."</td>";
+          echo "<td>" . join("<br>", $list) . "</td>";
           echo "<td>{$before}</td><td>{$after}</td>";
           echo "</tr>";
         }
@@ -568,15 +527,15 @@ if (!class_exists("PeproDevUPS_Profile")) {
           $full_name = $user->display_name;
           $user_email = $user->user_email;
 
-          $before = "Before => ". implode(" / ", (array) get_user_meta($user_id, '_ld_course_history', true));
+          $before = "Before => " . implode(" / ", (array) get_user_meta($user_id, '_ld_course_history', true));
           $active_courses = learndash_user_get_enrolled_courses($user_id, array(), false);
           foreach ($active_courses as $item) {
             $this->track_course_access($user_id, $item);
           }
-          $after = "After => ". implode(" / ", (array) get_user_meta($user_id, '_ld_course_history', true));
+          $after = "After => " . implode(" / ", (array) get_user_meta($user_id, '_ld_course_history', true));
           echo "<tr><td center>$current_item / $item_count</td>
           <td center>" . round(($current_item / $item_count) * 100, 3) . "%</td>
-          <td>$full_name (<a href='".admin_url("user-edit.php?user_id=$user_id")."'>#$user_id</a>)</td>
+          <td>$full_name (<a href='" . admin_url("user-edit.php?user_id=$user_id") . "'>#$user_id</a>)</td>
           <td>$user_email</td>";
           echo "<td>{$before}</td><td>{$after}</td>";
           echo "</tr>";
@@ -598,49 +557,80 @@ if (!class_exists("PeproDevUPS_Profile")) {
           vc_add_shortcode_param("{$this->id}_about", array($this, 'vc_add_pepro_about'), plugins_url("/assets/js/vc.init.js", __FILE__));
         }
       }
-      add_action("admin_init", array($this, "check_database"));
-      add_action("admin_init", function () { if (!current_user_can('edit_posts') && (!wp_doing_ajax())) { $url = apply_filters("peprofile_admin_redirect_url_if_no_access", home_url()); wp_safe_redirect($url); exit; } }, 1);
-      add_action("after_setup_theme", function () { if (!current_user_can('edit_posts')  && !is_admin()) { show_admin_bar(false); add_filter('show_admin_bar', '__return_false'); } });
+      add_action("admin_init", function () {
+        if (!current_user_can('edit_posts') && (!wp_doing_ajax())) {
+          $url = apply_filters("peprofile_admin_redirect_url_if_no_access", home_url());
+          wp_safe_redirect($url);
+          exit;
+        }
+      }, 1);
+      add_action("after_setup_theme", function () {
+        if (!current_user_can('edit_posts')  && !is_admin()) {
+          show_admin_bar(false);
+          add_filter('show_admin_bar', '__return_false');
+        }
+      });
     }
-    public function check_database(){
-      $cur_version = get_option("peprodev_profile_notifications_db_version", NULL);
-      // Check if it's the first install or if an update is required
+    public function check_database() {
+      $cur_version = $this->read("profile_db_version", get_option("peprodev_ups_profile_db", NULL));
       if (is_null($cur_version) || version_compare($cur_version, $this->db_version, "lt")) {
-        $this->CreateDatabase(true); // Create or update the database
-        update_option("peprodev_profile_notifications_db_version", $this->db_version); // Update the stored version
+        $this->create_database(true);
+        $this->set("profile_db_version", $this->db_version);
       }
     }
-    public function change_wc_endpoint_urls($url="", $endpoint="", $value="", $permalink=""){
+    public function change_wc_endpoint_urls($url = "", $endpoint = "", $value = "", $permalink = "") {
       switch ($endpoint) {
-        case "dashboard"       : return $this->get_profile_page(["i" => current_time("timestamp")]); break;
-        case "my-account"      : return $this->get_profile_page(["i" => current_time("timestamp")]); break;
-        case "orders"          : return $this->get_profile_page(["section" => "orders"]); break;
-        case "view-order"      : return $this->get_profile_page(["section" => "orders", "view" => $value,]); break;
-        case "downloads"       : return $this->get_profile_page(["section" => "downloads"]); break;
-        case "edit-address"    : return $this->get_profile_page(["section" => "address", "part" => $value]); break;
-        case "edit-account"    : return $this->get_profile_page(["section" => "edit"]); break;
-        case "wishlist"        : return $this->get_profile_page(["section" => "wishlist"]); break;
-        case "customer-logout" : return wp_logout_url($this->get_profile_page(["i" => current_time("timestamp")])); break;
+        case "dashboard":
+          return $this->get_profile_page(["i" => current_time("timestamp")]);
+          break;
+        case "my-account":
+          return $this->get_profile_page(["i" => current_time("timestamp")]);
+          break;
+        case "orders":
+          return $this->get_profile_page(["section" => "orders"]);
+          break;
+        case "view-order":
+          return $this->get_profile_page(["section" => "orders", "view" => $value,]);
+          break;
+        case "downloads":
+          return $this->get_profile_page(["section" => "downloads"]);
+          break;
+        case "edit-address":
+          return $this->get_profile_page(["section" => "address", "part" => $value]);
+          break;
+        case "edit-account":
+          return $this->get_profile_page(["section" => "edit"]);
+          break;
+        case "wishlist":
+          return $this->get_profile_page(["section" => "wishlist"]);
+          break;
+        case "customer-logout":
+          return wp_logout_url($this->get_profile_page(["i" => current_time("timestamp")]));
+          break;
       }
       return $url;
     }
-    public function lesson_row_title_before($course_id, $group_id, $user_id){
-      $thumb = get_the_post_thumbnail_url( $course_id, [50, 50]);
-      if ($thumb) { echo "<div class='ld-item-img' style='margin-left: .5em;'><img style='border-radius: 4px;width: 40px;height: 40px;min-width: 40px;object-fit: contain;' src='$thumb' alt='".get_the_title($course_id)."'></div>"; }
+    public function lesson_row_title_before($course_id, $group_id, $user_id) {
+      $thumb = get_the_post_thumbnail_url($course_id, [50, 50]);
+      if ($thumb) {
+        echo "<div class='ld-item-img' style='margin-left: .5em;'><img style='border-radius: 4px;width: 40px;height: 40px;min-width: 40px;object-fit: contain;' src='$thumb' alt='" . get_the_title($course_id) . "'></div>";
+      }
     }
-    public function learndash_course_row_class($class, $course, $user_id){
+    public function learndash_course_row_class($class, $course, $user_id) {
       $class = $class . " c-{$course->ID}";
       global $ld_cur_course_id;
       $ld_cur_course_id = $course->ID;
       return $class;
     }
-    public function learndash_status_icon($markup="", $status="", $post_type="", $args=[], $echo=false){
+    public function learndash_status_icon($markup = "", $status = "", $post_type = "", $args = [], $echo = false) {
       global $ld_cur_course_id;
       $thumb = get_the_post_thumbnail_url($ld_cur_course_id, [50, 50]);
-      if ($thumb) { $markup = "<div class='ld-item-img' style='margin-left: .5em;'><img style='border-radius: 4px;width: 40px;height: 40px;min-width: 40px;object-fit: contain;' src='$thumb' alt='".get_the_title($ld_cur_course_id)."'></div>" . $markup; }
+      if ($thumb) {
+        $markup = "<div class='ld-item-img' style='margin-left: .5em;'><img style='border-radius: 4px;width: 40px;height: 40px;min-width: 40px;object-fit: contain;' src='$thumb' alt='" . get_the_title($ld_cur_course_id) . "'></div>" . $markup;
+      }
       return $markup;
     }
-    public function update_ld_course_history($order_id=0){
+    public function update_ld_course_history($order_id = 0) {
       $order = wc_get_order($order_id);
       if (!$order) return false;
       $user_id = $order->get_user_id();
@@ -739,7 +729,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
         ),
         "pepro-sms-subscription" => array(
           "sample" => "[pepro-sms-subscription]",
-          "title"  => __("A form for Mobile Newsletter subscription (SMS Verified Memebers)", "peprodev-ups"),
+          "title"  => __("A form for Mobile Newsletter subscription (Mobile Verified Memebers)", "peprodev-ups"),
           "syntax" => array(
             "btnclass"  => __("Submit button classes", "peprodev-ups"),
             "subscribe" => __("Translation for Subscribe", "peprodev-ups"),
@@ -836,7 +826,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
     public function media_buttons_add_new() {
       $current_screen = function_exists("get_current_screen") ? get_current_screen() : false;
       if ($current_screen && 'toplevel_page_peprodev-ups' === $current_screen->base) {
-        ?>
+      ?>
         <button href="#" class="button <?php echo "peprodev-ups"; ?>_shortcodehandler peprofile-open-box">
           <i class='fa fa-external-link'></i>
           <?php echo $this->title; ?>
@@ -893,7 +883,9 @@ if (!class_exists("PeproDevUPS_Profile")) {
       }
     }
     public function peprofile_shortcode_main($atts = array(), $content = "") {
-      if (wp_is_json_request()) {return false; }
+      if (wp_is_json_request()) {
+        return false;
+      }
       do_action("peprofile_before_shortcode_print", $atts, $content);
       wp_enqueue_script("jquery");
       $condition = !is_user_logged_in();
@@ -1301,7 +1293,10 @@ if (!class_exists("PeproDevUPS_Profile")) {
       if (!$this->_wc_activated()) return "";
       $atts = extract(shortcode_atts(array('limit' => '10'), $atts));
       ob_start();
-      add_filter('woocommerce_my_account_my_orders_query', function ($a) use($limit) { $a["limit"] = $limit; return $a; }, 10, 1);
+      add_filter('woocommerce_my_account_my_orders_query', function ($a) use ($limit) {
+        $a["limit"] = $limit;
+        return $a;
+      }, 10, 1);
       $this->peprofile_get_template_part("wc/orders");
       $tcona = ob_get_contents();
       ob_end_clean();
@@ -1363,7 +1358,9 @@ if (!class_exists("PeproDevUPS_Profile")) {
       // Setup possible parts
       $templates = array();
       $templates[] = "$slug.php";
-      if (isset($name)) { $templates[] = "{$slug}-{$name}.php"; }
+      if (isset($name)) {
+        $templates[] = "{$slug}-{$name}.php";
+      }
       // Allow template parts to be filtered
       $templates = apply_filters("peprofile_get_template_part", $templates, $slug, $name);
       // Return the part that is found
@@ -1371,7 +1368,9 @@ if (!class_exists("PeproDevUPS_Profile")) {
       // Try to find a template file
       foreach ((array) $templates as $template_name) {
         // Continue if template is empty
-        if (empty($template_name)) {continue;}
+        if (empty($template_name)) {
+          continue;
+        }
         // Trim off any slashes from the template name
         $template_name = ltrim($template_name, '/');
         // Check child theme first
@@ -1430,34 +1429,23 @@ if (!class_exists("PeproDevUPS_Profile")) {
     public function dashboard_add_css_inline($src) {
       echo "<style>$src</style>";
     }
-    /* WordPress Hooks
-        */
-    public function admin_init($hook) {
-      /* register admin settings
-            */
-      foreach ($this->setting_options as $sections) {
-        foreach ($sections["data"] as $id => $def) {
-          add_option($id, $def);
-          register_setting($sections["name"], $id);
-        }
-      }
-    }
+    /* WordPress Hooks */
     public function htmlwrapper() {
       $this->remove_us_css();
       $this->enqueue_scripts_and_styles();
-      wp_enqueue_style("pepro-font-awesome", plugins_url("/core/assets/fa-pro/css/all.min.css", PEPRODEV_UPS_FILE));
+      wp_enqueue_style("pepro-font-awesome", "{$this->assets_url}fa-pro/css/all.min.css", [], $this->version);
       include plugin_dir_path(__FILE__) . "/libs/general/activated.php";
     }
     public function htmlwrapper_shortcodes() {
       $this->remove_us_css();
       $this->enqueue_scripts_and_styles();
-      wp_enqueue_style("pepro-font-awesome", plugins_url("/core/assets/fa-pro/css/all.min.css", PEPRODEV_UPS_FILE));
+      wp_enqueue_style("pepro-font-awesome", "{$this->assets_url}fa-pro/css/all.min.css", [], $this->version);
       include plugin_dir_path(__FILE__) . "/libs/general/shortcodes_panel.php";
     }
     public function htmlwrapper_sections() {
       $this->remove_us_css();
       $this->enqueue_scripts_and_styles();
-      wp_enqueue_style("pepro-font-awesome", plugins_url("/core/assets/fa-pro/css/all.min.css", PEPRODEV_UPS_FILE));
+      wp_enqueue_style("pepro-font-awesome", "{$this->assets_url}fa-pro/css/all.min.css", [], $this->version);
       include plugin_dir_path(__FILE__) . "/libs/general/sections_panel.php";
       wp_enqueue_script(__CLASS__ . "date",              plugins_url("/assets/js/persian-date.min.js", __FILE__), array("jquery"), "3.0.0", true);
       wp_enqueue_script(__CLASS__ . "datepicker",        plugins_url("/assets/js/persian-datepicker.min.js", __FILE__), array("jquery"), "3.0.0", true);
@@ -1476,7 +1464,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
     public function htmlwrapper_notifs() {
       $this->remove_us_css();
       $this->enqueue_scripts_and_styles();
-      wp_enqueue_style("pepro-font-awesome", plugins_url("/core/assets/fa-pro/css/all.min.css", PEPRODEV_UPS_FILE));
+      wp_enqueue_style("pepro-font-awesome", "{$this->assets_url}fa-pro/css/all.min.css", [], $this->version);
       include plugin_dir_path(__FILE__) . "/libs/general/notifs_panel.php";
       wp_enqueue_script(__CLASS__ . "date",              plugins_url("/assets/js/persian-date.min.js", __FILE__), array("jquery"), "3.0.0", true);
       wp_enqueue_script(__CLASS__ . "datepicker",        plugins_url("/assets/js/persian-datepicker.min.js", __FILE__), array("jquery"), "3.0.0", true);
@@ -1495,16 +1483,16 @@ if (!class_exists("PeproDevUPS_Profile")) {
     }
     public function learndash_get_all_course_ids() {
       $query_args = array(
-        'post_type'			=>	'sfwd-courses',
-        'post_status'		=>	'publish',
-        'fields'			=>	'ids',
-        'orderby'			=>	'title',
-        'order'				=>	'ASC',
-        'nopaging'			=>	true	// Turns OFF paging logic to get ALL courses
+        'post_type'      =>  'sfwd-courses',
+        'post_status'    =>  'publish',
+        'fields'      =>  'ids',
+        'orderby'      =>  'title',
+        'order'        =>  'ASC',
+        'nopaging'      =>  true  // Turns OFF paging logic to get ALL courses
       );
 
-      $query = new WP_Query( $query_args );
-      if ( $query instanceof WP_Query) {
+      $query = new WP_Query($query_args);
+      if ($query instanceof WP_Query) {
         return $query->posts;
       }
       return array("0" => __("-- None --", $this->td));
@@ -1670,8 +1658,10 @@ if (!class_exists("PeproDevUPS_Profile")) {
                     }
                     $newimg = wp_upload_dir()["basedir"] . "/profile/" . basename($movefile["file"]);
                     $this->make_thumb($newimg, $newimg, 250);
-                    update_user_meta(get_current_user_id(), 'profile_ifile', basename($movefile["file"]));
-                    update_user_meta(get_current_user_id(), 'profile_image', $movefile["url"]);
+                    if (current_user_can("edit_user", get_current_user_id())) {
+                      update_user_meta(get_current_user_id(), 'profile_ifile', basename($movefile["file"]));
+                      update_user_meta(get_current_user_id(), 'profile_image', $movefile["url"]);
+                    }
                     do_action("poprofile_user_avatar_upload_success");
                   } else {
                     do_action("poprofile_user_avatar_upload_failed");
@@ -1691,8 +1681,8 @@ if (!class_exists("PeproDevUPS_Profile")) {
                   'email'         => __('Email address', "peprodev-ups"),
                 )
               );
-              $show_email_field   = "yes" == get_option("PeproDevUPS_Core___loginregister-_regdef_email");
-              $is_email_field_req = "yes" == get_option("PeproDevUPS_Core___loginregister-_regdef_email-req");
+              $show_email_field   = "yes" == $this->read("regdef_email");
+              $is_email_field_req = "yes" == $this->read("regdef_email_req");
 
               if (!$show_email_field || ($show_email_field && !$is_email_field_req)) {
                 unset($required_fields["email"]);
@@ -1712,9 +1702,11 @@ if (!class_exists("PeproDevUPS_Profile")) {
 
                 if (class_exists("PeproDevUPS_Login")) {
                   global $PeproDevUPS_Login;
-                  foreach ($PeproDevUPS_Login->get_register_fields() as $field) {
-                    if ("yes" == $field["is-editable"]) {
-                      update_user_meta($user_id, $index["name"], sanitize_text_field(trim($index['value'])));
+                  if (current_user_can("edit_user", $user_id)) {
+                    foreach ($PeproDevUPS_Login->get_register_fields() as $field) {
+                      if ("yes" == $field["is-editable"]) {
+                        update_user_meta($user_id, $index["name"], sanitize_text_field(trim($index['value'])));
+                      }
                     }
                   }
                 }
@@ -1851,103 +1843,20 @@ if (!class_exists("PeproDevUPS_Profile")) {
       if ($r["wparam"] === $this->setting_slug) {
         global $wpdb, $wp;
         switch ($r["lparam"]) {
-          case 'activatemodule':
-            $links = apply_filters("peprocore_{$this->id}_dashboard_nav_menuitems", array());
-            $ids = array();
-            foreach ($links as $link) { $ids[] = $link["id"]; }
-            if ($r["dparam"] === "1") {
-              update_option($this->activation_status, "1", "no");
-              wp_send_json_success(
-                array(
-                  "msg"     =>  sprintf(__("%s Successfully Activated.", "peprodev-ups"), $this->menu_label),
-                  "id"      =>  $ids,
-                  "lparam"  =>  $r["lparam"],
-                  "wparam"  =>  $r["wparam"],
-                  "dparam"  =>  $r["dparam"]
-                )
-              );
-            } elseif ($r["dparam"] === "0") {
-              update_option($this->activation_status, "0", "no");
-              wp_send_json_success(
-                array(
-                  "msg"     =>  sprintf(__("%s Successfully Deactivated.", "peprodev-ups"), $this->menu_label),
-                  "id"      =>  $ids,
-                  "lparam"  =>  $r["lparam"],
-                  "wparam"  =>  $r["wparam"],
-                  "dparam"  =>  $r["dparam"]
-                )
-              );
-            }
-            break;
           case 'save_setting':
 
-            $setting_slug = "css";
-            if (isset($_POST["dparam"][$setting_slug])) {
-              update_option("{$this->activation_status}-{$setting_slug}", htmlentities($_POST["dparam"][$setting_slug]), "no");
-            }
-            $setting_slug = "js";
-            if (isset($_POST["dparam"][$setting_slug])) {
-              update_option("{$this->activation_status}-{$setting_slug}", htmlentities($_POST["dparam"][$setting_slug]), "no");
-            }
-            $setting_slug = "logo";
-            if (isset($_POST["dparam"][$setting_slug]) && !empty($_POST["dparam"][$setting_slug])) {
-              update_option("{$this->activation_status}-{$setting_slug}", sanitize_text_field($_POST["dparam"][$setting_slug]), "no");
-            }
-            $setting_slug = "logo-id";
-            if (isset($_POST["dparam"][$setting_slug]) && !empty($_POST["dparam"][$setting_slug])) {
-              update_option("{$this->activation_status}-{$setting_slug}", sanitize_text_field($_POST["dparam"][$setting_slug]), "no");
-            }
-            $setting_slug = "showwelcome";
-            if (isset($_POST["dparam"][$setting_slug]) && !empty($_POST["dparam"][$setting_slug])) {
-              update_option("{$this->activation_status}-{$setting_slug}", sanitize_text_field($_POST["dparam"][$setting_slug]), "no");
-            }
-            $setting_slug = "headerhook";
-            if (isset($_POST["dparam"][$setting_slug]) && !empty($_POST["dparam"][$setting_slug])) {
-              update_option("{$this->activation_status}-{$setting_slug}", sanitize_text_field($_POST["dparam"][$setting_slug]), "no");
-            }
-            $setting_slug = "footerhook";
-            if (isset($_POST["dparam"][$setting_slug]) && !empty($_POST["dparam"][$setting_slug])) {
-              update_option("{$this->activation_status}-{$setting_slug}", sanitize_text_field($_POST["dparam"][$setting_slug]), "no");
-            }
-            $setting_slug = "profile-dash-page";
-            if (isset($_POST["dparam"][$setting_slug]) && !empty($_POST["dparam"][$setting_slug])) {
-              update_option("{$this->activation_status}-{$setting_slug}", sanitize_text_field($_POST["dparam"][$setting_slug]), "no");
-            }
-            $setting_slug = "woocommercestats";
-            if (isset($_POST["dparam"][$setting_slug]) && !empty($_POST["dparam"][$setting_slug])) {
-              update_option("{$this->activation_status}-{$setting_slug}", sanitize_text_field($_POST["dparam"][$setting_slug]), "no");
-            }
-            $setting_slug = "showcustomtext";
-            if (isset($_POST["dparam"][$setting_slug]) && !empty($_POST["dparam"][$setting_slug])) {
-              update_option("{$this->activation_status}-{$setting_slug}", sanitize_text_field($_POST["dparam"][$setting_slug]), "no");
-            }
-            $setting_slug = "woocommerceorders";
-            if (isset($_POST["dparam"][$setting_slug]) && !empty($_POST["dparam"][$setting_slug])) {
-              update_option("{$this->activation_status}-{$setting_slug}", sanitize_text_field($_POST["dparam"][$setting_slug]), "no");
-            }
-            $setting_slug = "customhtml";
-            if (isset($_POST["dparam"][$setting_slug]) && !empty($_POST["dparam"][$setting_slug])) {
-              update_option("{$this->activation_status}-{$setting_slug}", stripslashes($_POST["dparam"][$setting_slug]), "no");
-            }
-            $setting_slug = "customposition";
-            if (isset($_POST["dparam"][$setting_slug]) && !empty($_POST["dparam"][$setting_slug])) {
-              update_option("{$this->activation_status}-{$setting_slug}", sanitize_text_field($_POST["dparam"][$setting_slug]), "no");
-            }
+            $options = apply_filters("peprodev-ups/save-settings/fields", [
+              "logo", "logo-id", "showwelcome", "headerhook", "footerhook", "profile_page",
+              "woocommercestats", "showcustomtext", "woocommerceorders", "customposition",
+            ]);
+            foreach ($options as $slug) { if (isset($_POST["dparam"][$slug])) { $this->set($slug, htmlentities($_POST["dparam"][$slug])); } }
 
-            $dashpage = get_option("{$this->activation_status}-profile-dash-page");
-            $slug = get_page_template_slug($dashpage);
-            $len = strlen("peprofile-");
-            $notify_user = false;
-            if ((substr("$slug", 0, $len) !== "peprofile-")) {
-              $notify_user = true;
-            }
+            $options = apply_filters("peprodev-ups/save-settings/fields/raw", [ "css", "js", "customhtml", ]);
+            foreach ($options as $slug) { if (isset($_POST["dparam"][$slug])) { $this->set($slug, htmlentities($_POST["dparam"][$slug])); } }
 
-            wp_send_json_success(array(
-              "notice" => $notify_user,
-              "notice_html" => "",
-              "msg" => __("Settings Successfully Saved.", "peprodev-ups"),
-            ));
-            break;
+            wp_send_json_success(["notice" => false, "notice_html" => "", "msg" => __("Settings Successfully Saved.", "peprodev-ups")]);
+
+          break;
           case 'add_new_section':
 
             (int) $id = (isset($_POST["dparam"]["id"]) && !empty(trim($_POST["dparam"]["id"])) && is_numeric(trim($_POST["dparam"]["id"]))) ? trim($_POST["dparam"]["id"]) : "-1";
@@ -1968,11 +1877,17 @@ if (!class_exists("PeproDevUPS_Profile")) {
             $content = isset($_POST["dparam"]["content"]) ? (trim($_POST["dparam"]["content"])) : "";
 
             $icon = isset($_POST["dparam"]["icon"]) ? sanitize_text_field(trim($_POST["dparam"]["icon"])) : null;
-            if (empty(trim($icon))) { $icon = "zmdi zmdi-email"; }
+            if (empty(trim($icon))) {
+              $icon = "zmdi zmdi-email";
+            }
             $priority = isset($_POST["dparam"]["priority"]) ? sanitize_text_field(trim($_POST["dparam"]["priority"])) : null;
-            if (empty(trim($priority))) { $priority = 1000; }
+            if (empty(trim($priority))) {
+              $priority = 1000;
+            }
             $active = isset($_POST["dparam"]["active"]) ? sanitize_text_field(trim($_POST["dparam"]["active"])) : null;
-            if (empty(trim($active))) { $active = "no"; }
+            if (empty(trim($active))) {
+              $active = "no";
+            }
             $img    = isset($_POST["dparam"]["img"])    ? sanitize_text_field(trim($_POST["dparam"]["img"])) : null;
             $access = isset($_POST["dparam"]["access"]) ? sanitize_text_field(trim($_POST["dparam"]["access"])) : null;
             $ld_lms = isset($_POST["dparam"]["ld_lms"]) ? sanitize_text_field(trim($_POST["dparam"]["ld_lms"])) : "";
@@ -2033,8 +1948,8 @@ if (!class_exists("PeproDevUPS_Profile")) {
 
             if (empty($id)) wp_send_json_error(array("msg" => __("There was a problem with your request.", "peprodev-ups")));
 
-            update_option("peprofile_builtin_{$id}_priority", ($priority ? $priority : ""), "no");
-            update_option("peprofile_builtin_{$id}_is_enabled", ($active == "yes" ? "yes" : "no"), "no");
+            $this->set("builtin_{$id}_priority", ($priority ? $priority : ""));
+            $this->set("builtin_{$id}_is_enabled", ($active == "yes" ? "yes" : "no"));
 
             wp_send_json_success(array("msg" => __("Section edited successfully.", "peprodev-ups")));
 
@@ -2223,7 +2138,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
         }
       }
     }
-    public function str_starts_with($string, $prefix){
+    public function str_starts_with($string, $prefix) {
       return substr($string, 0, strlen($prefix)) == $prefix;;
     }
     /**
@@ -2235,10 +2150,12 @@ if (!class_exists("PeproDevUPS_Profile")) {
      */
     public function AssignNotification2Users($usersListArray = array(), $id = 0) {
       global $wpdb;
-      if (empty($id)) { return false; }
+      if (empty($id)) {
+        return false;
+      }
 
       // delete all records if no user passed
-      if (empty($usersListArray)){
+      if (empty($usersListArray)) {
         $wpdb->delete("{$this->tbl_notif}_list", array("notif_id" => $id));
         return true;
       }
@@ -2250,11 +2167,11 @@ if (!class_exists("PeproDevUPS_Profile")) {
           // notif already exists!
         } else {
           // add notif to users
-          $wpdb->insert("{$this->tbl_notif}_list",array(
-              'user_id'  => sanitize_text_field($user),
-              'notif_id' => sanitize_text_field($id),
-              'has_seen' => "0",
-            ));
+          $wpdb->insert("{$this->tbl_notif}_list", array(
+            'user_id'  => sanitize_text_field($user),
+            'notif_id' => sanitize_text_field($id),
+            'has_seen' => "0",
+          ));
         }
       }
       // now that all users have been added to notif, loop to remove previously removed users' access
@@ -2273,7 +2190,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
     }
     public function EditnewNotificationFromDb($dataArray = array(), $dataArrayTypes = "%s", $id = 0) {
       global $wpdb;
-      return $wpdb->update("{$this->db_table}_notif", $dataArray, array('id' => sanitize_text_field($id)), $dataArrayTypes, array('%d') );
+      return $wpdb->update("{$this->db_table}_notif", $dataArray, array('id' => sanitize_text_field($id)), $dataArrayTypes, array('%d'));
     }
 
     public function get_user_notification_count($user_id) {
@@ -2365,7 +2282,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
       );
     }
 
-    public function user_has_access_to_annoncment($user_id, $notif){
+    public function user_has_access_to_annoncment($user_id, $notif) {
       if (!$user_id) $user_id = get_current_user_id();
       if (!$notif) return false;
       $has_access = true;
@@ -2374,22 +2291,27 @@ if (!class_exists("PeproDevUPS_Profile")) {
           if ($has_access != false) break;
           if (class_exists("\Groups_User_Group")) $has_access = false !== \Groups_User_Group::read($user_id, $group_id);
         }
-        if ($has_access) { return $has_access; }
+        if ($has_access) {
+          return $has_access;
+        }
       }
       if ($this->useLD && isset($notif->learn_dash) && !empty($notif->learn_dash)) {
         foreach ((array) explode(",", $notif->learn_dash) as $course_id) {
           if ($has_access != false) break;
           $has_access = false !== sfwd_lms_has_access($course_id, $user_id);
         }
-        if ($has_access) { return $has_access; }
+        if ($has_access) {
+          return $has_access;
+        }
       }
       if (isset($notif->user_roles) && !empty($notif->user_roles)) {
         $has_access = $this->is_user_in_desired_roles_list($user_id, explode(",", $notif->user_roles));
-        if ($has_access) { return $has_access; }
+        if ($has_access) {
+          return $has_access;
+        }
       }
       return $has_access;
     }
-
     public function get_user_announcements_count($user_id) {
       global $wpdb;
       $private_msgs = $wpdb->get_results("SELECT * FROM `{$this->tbl_notif}` WHERE users_list = 'all' and date_scheduled <= NOW()");
@@ -2397,7 +2319,9 @@ if (!class_exists("PeproDevUPS_Profile")) {
         $arrayIDs = [];
         foreach ($private_msgs as $key => $notif) {
           $has_access = $this->user_has_access_to_annoncment($user_id, $notif);
-          if (!$has_access) { continue; }
+          if (!$has_access) {
+            continue;
+          }
           $arrayIDs[] = $notif->id;
         }
         array_unique($arrayIDs);
@@ -2418,7 +2342,9 @@ if (!class_exists("PeproDevUPS_Profile")) {
         $arrayIDs = [];
         foreach ($private_msgs as $key => $notif) {
           $has_access = $this->user_has_access_to_annoncment($user_id, $notif);
-          if (!$has_access) { continue; }
+          if (!$has_access) {
+            continue;
+          }
           $arrayIDs[] = $notif->id;
         }
         array_unique($arrayIDs);
@@ -2437,7 +2363,9 @@ if (!class_exists("PeproDevUPS_Profile")) {
         $cur = 0;
         foreach ($private_msgs as $notif) {
           $has_access = $this->user_has_access_to_annoncment($user_id, $notif);
-          if (!$has_access) { continue; }
+          if (!$has_access) {
+            continue;
+          }
           if (!in_array($notif->id, $arrayIDsSeen) && $cur <= $limit) {
             $cur++;
             $notifs .= "<a href=\"$current_profile_url?section=announcements#view-$notif->id\" data-id=\"$notif->id\" class=\"notifi__item\">
@@ -2462,7 +2390,9 @@ if (!class_exists("PeproDevUPS_Profile")) {
         $arrayIDs = [];
         foreach ($private_msgs as $key => $notif) {
           $has_access = $this->user_has_access_to_annoncment($user_id, $notif);
-          if (!$has_access) { continue; }
+          if (!$has_access) {
+            continue;
+          }
           $arrayIDs[] = $notif->id;
         }
         array_unique($arrayIDs);
@@ -2481,7 +2411,9 @@ if (!class_exists("PeproDevUPS_Profile")) {
       if ($private_msgs !== null) {
         foreach ($private_msgs as $notif) {
           $has_access = $this->user_has_access_to_annoncment($user_id, $notif);
-          if (!$has_access) { continue; }
+          if (!$has_access) {
+            continue;
+          }
           if (!in_array($notif->id, $arrayIDsSeen)) {
             $notifhas_seen = false;
             $seen_first_date = "";
@@ -2542,7 +2474,9 @@ if (!class_exists("PeproDevUPS_Profile")) {
         }
         foreach ($private_msgs as $notif) {
           $has_access = $this->user_has_access_to_annoncment($user_id, $notif);
-          if (!$has_access) { continue; }
+          if (!$has_access) {
+            continue;
+          }
           if (in_array($notif->id, $arrayIDsSeen)) {
             $notifhas_seen = false;
             $seen_first_date = "";
@@ -2646,7 +2580,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
       if ((substr("$slug", 0, $len) === "peprofile-")) {
         // $post_states[] = __("Pepro Profile Template", "peprodev-ups");
       }
-      if (get_option("{$this->activation_status}-profile-dash-page", "") == $post->ID) {
+      if ($this->read("profile_page", false) == $post->ID) {
         $post_states[] = __("User Dashboard Page", "peprodev-ups");
       }
 
@@ -2666,15 +2600,18 @@ if (!class_exists("PeproDevUPS_Profile")) {
     /* Filters */
     public function peprofile_get_nav_items($arr) {
       global $wp;
-      $arr = array_merge($arr, array( "home" => array(
-          "title"       => "<i class='fa-fw fas fa-tachometer-alt'></i> " . _x("Dashboard","menu",$this->td),
+      $arr = array_merge($arr, array(
+        "home" => array(
+          "title"       => "<i class='fa-fw fas fa-tachometer-alt'></i> " . _x("Dashboard", "menu", $this->td),
           "url"         => $this->get_profile_page(["i" => current_time("timestamp")]),
           "priority"    => 10,
           "built_in"    => true,
         )
       ));
       if ($this->_wc_activated()) {
-        $arr = array_merge( $arr, array(
+        $arr = array_merge(
+          $arr,
+          array(
             "orders" =>  array(
               "title"      => '<i class="fa-fw fa fa-shopping-bag"></i> ' . __("Orders", "peprodev-ups"),
               "url"        => $this->get_profile_page(["section" => "orders"]),
@@ -2696,7 +2633,8 @@ if (!class_exists("PeproDevUPS_Profile")) {
           )
         );
         if (class_exists('Woo_Wallet_Wallet')) {
-          $arr = array_merge($arr, array( "wallet" => array(
+          $arr = array_merge($arr, array(
+            "wallet" => array(
               "title"      => '<i class="fa-fw fa fa-wallet"></i> ' . __("Wallet", "peprodev-ups"),
               "url"        => $this->get_profile_page(["section" => "wallet"]),
               "built_in"   => true,
@@ -2706,15 +2644,17 @@ if (!class_exists("PeproDevUPS_Profile")) {
         }
       }
 
-      $arr = array_merge( $arr, array(
+      $arr = array_merge(
+        $arr,
+        array(
           "notifications" =>  array(
-            "title"       => '<i class="fa-fw far fa-bell"></i> ' . _x("Notifications", "dashboard-menu" ,"peprodev-ups"),
+            "title"       => '<i class="fa-fw far fa-bell"></i> ' . _x("Notifications", "dashboard-menu", "peprodev-ups"),
             "url"         => $this->get_profile_page(["section" => "notifications"]),
             "built_in"    => true,
             "priority"    => 900,
           ),
           "announcements" =>  array(
-            "title"       => '<i class="fa-fw far fa-bullhorn"></i> ' . _x("Announcements", "dashboard-menu" ,"peprodev-ups"),
+            "title"       => '<i class="fa-fw far fa-bullhorn"></i> ' . _x("Announcements", "dashboard-menu", "peprodev-ups"),
             "url"         => $this->get_profile_page(["section" => "announcements"]),
             "built_in"    => true,
             "priority"    => 901,
@@ -2723,7 +2663,10 @@ if (!class_exists("PeproDevUPS_Profile")) {
       );
 
       if ($this->_ld_activated()) {
-        $arr = array_merge( $arr, array( "courses" => array(
+        $arr = array_merge(
+          $arr,
+          array(
+            "courses" => array(
               "title"       => '<i class="fa-fw fas fa-user-graduate"></i> ' . __("My Courses", "peprodev-ups"),
               "url"         => $this->get_profile_page(["section" => "courses"]),
               "built_in"    => true,
@@ -2732,24 +2675,25 @@ if (!class_exists("PeproDevUPS_Profile")) {
           )
         );
       }
-      $arr = array_merge( $arr,
-          array(
-            "edituser" => array(
-              "title"       => '<i class="fa-fw fas fa-edit"></i> ' . _x("Edit Profile","menu",$this->td),
-              "url"         => $this->get_profile_page(["section" => "edit"]),
-              "built_in"    => true,
-              "priority"    => 99998,
-            )
-          ),
-          array(
-            "logout" => array(
-              "title"       => '<i class="fa-fw fas fa-sign-out-alt"></i> ' . _x("Logout","menu",$this->td),
-              "url"         => wp_logout_url(home_url()),
-              "built_in"    => true,
-              "priority"    => 99999,
-            )
+      $arr = array_merge(
+        $arr,
+        array(
+          "edituser" => array(
+            "title"       => '<i class="fa-fw fas fa-edit"></i> ' . _x("Edit Profile", "menu", $this->td),
+            "url"         => $this->get_profile_page(["section" => "edit"]),
+            "built_in"    => true,
+            "priority"    => 99998,
           )
-        );
+        ),
+        array(
+          "logout" => array(
+            "title"       => '<i class="fa-fw fas fa-sign-out-alt"></i> ' . _x("Logout", "menu", $this->td),
+            "url"         => wp_logout_url(home_url()),
+            "built_in"    => true,
+            "priority"    => 99999,
+          )
+        )
+      );
       return $arr;
     }
     public function peprofile_get_custom_user_nav_items($arr) {
@@ -2790,8 +2734,11 @@ if (!class_exists("PeproDevUPS_Profile")) {
           if ($add_item) {
             $icon = $section->icon;
             if (isset($section->img) && !empty($section->img)) $icon = "fa fas fa-info fa-no-icon";
-            $arr = array_merge( $arr, array(sanitize_title($section->slug) => array(
-                  "title"    => "<i class=\"fa-fw ".esc_attr($icon)."\" style='background: url(\"".esc_attr(isset($section->img) ? $section->img : "")."\") no-repeat center/contain;'></i>&nbsp;$section->title",
+            $arr = array_merge(
+              $arr,
+              array(
+                sanitize_title($section->slug) => array(
+                  "title"    => "<i class=\"fa-fw " . esc_attr($icon) . "\" style='background: url(\"" . esc_attr(isset($section->img) ? $section->img : "") . "\") no-repeat center/contain;'></i>&nbsp;$section->title",
                   "url"      => $this->render_url_from_slug($section->slug),
                   "priority" => $section->priority,
                   "img"      => isset($section->img) ? $section->img : "",
@@ -2827,7 +2774,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
           // fix for zephyr theme!
           wp_dequeue_style("font-awesome");
           $this->change_dashboard_title($notifs->title);
-          ?>
+      ?>
           <script>
             jQuery.noConflict();
             (function($) {
@@ -2860,10 +2807,10 @@ if (!class_exists("PeproDevUPS_Profile")) {
       // sort navigation items based on priority
       foreach ($array as $notif_id => $notif) {
         if (isset($notif["built_in"]) && true == $notif["built_in"]) {
-          $priority = get_option("peprofile_builtin_{$notif_id}_priority", false);
+          $priority = $this->read("builtin_{$notif_id}_priority", false);
           $array[$notif_id]["priority"] = ($priority && !empty($priority)) ? $priority : $notif["priority"];
         }
-        if ("no" == get_option("peprofile_builtin_{$notif_id}_is_enabled", "yes")) unset($array[$notif_id]);
+        if ("no" == $this->read("builtin_{$notif_id}_is_enabled", "yes")) unset($array[$notif_id]);
       }
 
       $navs = array_column($array, "priority");
@@ -2912,7 +2859,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
       return count($customer_orders);
     }
     public function get_promotion_data() {
-      return $this->filter_content(get_option("{$this->activation_status}-customhtml"));
+      return $this->filter_content($this->read("customhtml"));
     }
     public function get_customer_get_credit_balance() {
       $wallet = 00;
@@ -2937,7 +2884,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
     /* front end functions
         */
     public function add_input($title = '', $id = '', $val = '', $extrahtml = '', $class = '', $type = 'text') {
-      if (false !== stripos( $extrahtml, "required" )) $class .= " required";
+      if (false !== stripos($extrahtml, "required")) $class .= " required";
       echo "<div class='form-group'>
                 <label for='$id' class='control-label mb-1 input-wrapper $class'>$title</label>
                 <input id='$id' name='$id' type='$type' class='form-control $class' $extrahtml value='" . esc_attr($val) . "' />
@@ -3160,40 +3107,46 @@ if (!class_exists("PeproDevUPS_Profile")) {
         echo "<tr data-notif-tr=\"empty\" style=\"display:none;\"><td colspan=\"5\" style=\"text-align: center;\">$otif404</td></tr>";
         echo '<tr><td colspan="5" style="text-align: center;" class="pagination">';
         $url = !$url ? $_SERVER['REQUEST_URI'] : $url;
-        echo paginate_links( array(
-            'base'               => add_query_arg(array('cpage' => '%#%'), $url),
-            'format'             => '',
-            'prev_text'          => __('&laquo;'),
-            'next_text'          => __('&raquo;'),
-            'before_page_number' => "<span class='btn btn-action no-ripple btn-sm'>",
-            'after_page_number'  => "</span>",
-            'total'              => ceil($total / $post_per_page),
-            'current'            => $page,
-            'prev_next'          => false,
-            'type'               => 'list'
+        echo paginate_links(array(
+          'base'               => add_query_arg(array('cpage' => '%#%'), $url),
+          'format'             => '',
+          'prev_text'          => __('&laquo;'),
+          'next_text'          => __('&raquo;'),
+          'before_page_number' => "<span class='btn btn-action no-ripple btn-sm'>",
+          'after_page_number'  => "</span>",
+          'total'              => ceil($total / $post_per_page),
+          'current'            => $page,
+          'prev_next'          => false,
+          'type'               => 'list'
         ));
         echo '</td></tr>';
-      }
-      else {
+      } else {
         $bi = $this->get_built_in_sections_trs();
-        if ($bi && !empty($bi)) { echo $bi; }
-        else { echo "<tr data-notif-tr=\"empty\"><td colspan=\"7\" style=\"text-align: center;\">$otif404</td></tr>"; }
+        if ($bi && !empty($bi)) {
+          echo $bi;
+        } else {
+          echo "<tr data-notif-tr=\"empty\"><td colspan=\"7\" style=\"text-align: center;\">$otif404</td></tr>";
+        }
       }
       $tcona = ob_get_contents();
       ob_end_clean();
       return $tcona;
     }
-    public function render_url_from_slug($slug=""){
+    public function render_url_from_slug($slug = "") {
       $url = home_url();
       if ($this->str_starts_with($slug, "@")) {
         $slug = mb_substr($slug, 1);
         $page = get_page_by_path($slug);
-        if ($page && isset($page->ID)) { return get_the_permalink($page->ID); }
-        return home_url("/".mb_substr($slug, 1));
+        if ($page && isset($page->ID)) {
+          return get_the_permalink($page->ID);
+        }
+        return home_url("/" . mb_substr($slug, 1));
       }
       if ($this->str_starts_with($slug, "#")) {
         $slug = mb_substr($slug, 1);
-        if (get_post(intval($slug))) { return get_the_permalink(intval($slug)); }
+        if (get_post(intval($slug))) {
+          return get_the_permalink(intval($slug));
+        }
         return home_url("?p=$slug");
       }
       if ($this->str_starts_with($slug, "https://") || $this->str_starts_with($slug, "http://")) {
@@ -3275,8 +3228,8 @@ if (!class_exists("PeproDevUPS_Profile")) {
       foreach ($built_in as $notif_id => $notif) {
         $notif["icon"] = str_replace(array(esc_html("<i class="), esc_html(">"), esc_html("'"), esc_html('"')), array("", "", "", ""), explode(esc_html("</i>"), esc_html($notif["title"]))[0]);
         $notif["title"] = trim(explode(esc_html("</i>"), esc_html($notif["title"]))[1]);
-        $notif["is_active"] = "yes" == get_option("peprofile_builtin_{$notif_id}_is_enabled", "yes");
-        $priority = get_option("peprofile_builtin_{$notif_id}_priority", false);
+        $notif["is_active"] = "yes" == $this->read("builtin_{$notif_id}_is_enabled", "yes");
+        $priority = $this->read("builtin_{$notif_id}_priority", false);
         $notif["priority"] = ($priority && !empty($priority)) ? $priority : $notif["priority"];
 
         if (!isset($notif["built_in"]) || true !== $notif["built_in"])
@@ -3393,81 +3346,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                   <tbody><tr><td>$html</td></tr></tbody>
                 </table>";
     }
-    /* database creation and destruction
-        */
-    public function CreateDatabase($force = false) {
-      global $wpdb;
-      $charset_collate = $wpdb->get_charset_collate();
-      if (!function_exists('dbDelta')) {
-        include_once ABSPATH . 'wp-admin/includes/upgrade.php';
-      }
-
-      $tbl = $this->tbl_notif;
-      if ($wpdb->get_var("SHOW TABLES LIKE '" . $tbl . "'") != $tbl || $force) {
-        $sql = "CREATE TABLE `$tbl` (
-              `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-              `date_created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-              `date_modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-              `date_scheduled` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-              `date_scheduledFA` TINYTEXT,
-              `title` TINYTEXT,
-              `content` TEXT,
-              `icon` TINYTEXT,
-              `color` TINYTEXT,
-              `priority` ENUM( '1', '2', '3', '4', '5' ) DEFAULT '5',
-              `action_title_1` TINYTEXT,
-              `action_title_2` TINYTEXT,
-              `action_url_1` TINYTEXT,
-              `action_url_2` TINYTEXT,
-              `users_list` LONGTEXT,
-              `learn_dash` LONGTEXT,
-              `access_groups` LONGTEXT,
-              `user_roles` TEXT,
-              PRIMARY KEY id (id) ) $charset_collate;";
-        dbDelta($sql);
-      }
-
-      $tbl = "{$this->tbl_notif}_list";
-      if ($wpdb->get_var("SHOW TABLES LIKE '" . $tbl . "'") != $tbl || $force) {
-        $sql = "CREATE TABLE `$tbl` (
-              `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-              `user_id` INT(10) UNSIGNED NOT NULL DEFAULT '0',
-              `notif_id` INT(10) UNSIGNED NOT NULL DEFAULT '0',
-              `has_seen` ENUM( '0', '1' ) DEFAULT '0',
-              `seen_first_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-              `seen_last_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-              PRIMARY KEY id (id) ) $charset_collate;";
-        dbDelta($sql);
-      }
-
-      $tbl = $this->tbl_sections;
-      if ($wpdb->get_var("SHOW TABLES LIKE '" . $tbl . "'") != $tbl || $force) {
-        $sql = "CREATE TABLE `$tbl` (
-              `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-              `date_created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-              `date_modified` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-              `title` TINYTEXT,
-              `slug` TINYTEXT,
-              `img` TINYTEXT,
-              `subject` TINYTEXT,
-              `content` LONGTEXT,
-              `js` LONGTEXT,
-              `css` LONGTEXT,
-              `icon` TINYTEXT,
-              `access` LONGTEXT,
-              `ld_lms` INT(10),
-              `is_active` VARCHAR(10) DEFAULT 'yes',
-              `priority` INT(10) UNSIGNED NOT NULL DEFAULT '1000',
-              PRIMARY KEY id (id) ) $charset_collate;";
-        dbDelta($sql);
-      }
-    }
-    public function DropDatabase() {
-      global $wpdb;
-      $wpdb->query("DROP TABLE IF EXISTS {$this->tbl_notif}");
-      $wpdb->query("DROP TABLE IF EXISTS {$this->tbl_notif}_list");
-      $wpdb->query("DROP TABLE IF EXISTS {$this->tbl_sections}");
-    }
+    /* database creation and destruction */
     public function integrate_With_VC() {
       if (!function_exists("vc_map")) return false;
       vc_map(
@@ -3496,7 +3375,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
       return $tcona;
     }
     public function add_special_post($force = false) {
-      if (false === $this->get_profile_page() || "yes" != get_option("{$this->activation_status}-profile-dash-page-created", "")) {
+      if (false === $this->get_profile_page() || "yes" != $this->read("page_created", "")) {
         $profile_template = array(
           'post_type'     => 'page',
           'post_title'    => __("User Dashboard", "peprodev-ups"),
@@ -3509,8 +3388,8 @@ if (!class_exists("PeproDevUPS_Profile")) {
         $post_id = wp_insert_post($profile_template);
         if (!is_wp_error($post_id)) {
           update_post_meta($post_id, '_wp_page_template', 'peprofile-template.php');
-          update_option("{$this->activation_status}-profile-dash-page", $post_id, "no");
-          update_option("{$this->activation_status}-profile-dash-page-created", "yes", "no");
+          $this->set("profile_page", $post_id);
+          $this->set("page_created", "yes");
         }
       }
     }
@@ -3553,85 +3432,6 @@ if (!class_exists("PeproDevUPS_Profile")) {
           }
         }
       );
-    }
-    public function _wc_activated() {
-      if (!function_exists('is_woocommerce') || !class_exists('woocommerce')) return false;
-      return true;
-    }
-    public function _ld_activated() {
-      return defined('LEARNDASH_LMS_PLUGIN_DIR') && function_exists("learndash_user_get_enrolled_courses");
-    }
-    public function _vc_activated() {
-      if (defined('WPB_VC_VERSION')) return true;
-      return false;
-    }
-    public function read_opt($mc, $def = "") {
-      return get_option($mc, $def);
-    }
-    public function print_setting_input($SLUG = "", $CAPTION = "", $extraHtml = "", $type = "text", $extraClass = "") {
-      $ON = sprintf(_x("Enter %s", "setting-page", "peprodev-ups"), $CAPTION);
-      echo "<tr><th scope='row'><label for='$SLUG'>$CAPTION</label></th>
-            <td><input name='$SLUG' $extraHtml type='$type' id='$SLUG' placeholder='$CAPTION' title='$ON' value='" . $this->read_opt($SLUG) . "' class='regular-text $extraClass' /></td></tr>";
-    }
-    public function print_setting_select($SLUG, $CAPTION, $dataArray = array()) {
-      $ON = sprintf(_x("Choose %s", "setting-page", "peprodev-ups"), $CAPTION);
-      $OPTS = "";
-      foreach ($dataArray as $key => $value) {
-        if ($key == "EMPTY") {
-          $key = "";
-        }
-        $OPTS .= "<option value='$key' " . selected($this->read_opt($SLUG), $key, false) . ">$value</option>";
-      }
-      echo "<tr>
-      			<th scope='row'>
-      				<label for='$SLUG'>$CAPTION</label>
-      			</th>
-      			<td><select name='$SLUG' id='$SLUG' title='$ON' class='regular-text'>
-            " . $OPTS . "
-            </select>
-            </td>
-      		</tr>";
-    }
-    public function print_setting_editor($SLUG, $CAPTION, $re = "") {
-      echo "<tr><th><label for='$SLUG'>$CAPTION</label></th><td>";
-      wp_editor(
-        $this->read_opt($SLUG, ''),
-        strtolower(str_replace(array('-', '_', ' ', '*'), '', $SLUG)),
-        array(
-          'textarea_name' => $SLUG
-        )
-      );
-      echo "<p class='$SLUG'>$re</p></td></tr>";
-    }
-    public function _callback($a) {
-      return $a;
-    }
-    public function getIP() {
-      // Get server IP address
-      $server_ip = (isset($_SERVER['SERVER_ADDR'])) ? $_SERVER['SERVER_ADDR'] : '';
-
-      // If website is hosted behind CloudFlare protection.
-      if (isset($_SERVER['HTTP_CF_CONNECTING_IP']) && filter_var($_SERVER['HTTP_CF_CONNECTING_IP'], FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
-        return $_SERVER['HTTP_CF_CONNECTING_IP'];
-      }
-
-      if (isset($_SERVER['X-Real-IP']) && filter_var($_SERVER['X-Real-IP'], FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
-        return $_SERVER['X-Real-IP'];
-      }
-
-      if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-        $ip = trim(current(explode(',', $_SERVER['HTTP_X_FORWARDED_FOR'])));
-
-        if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) && $ip != $server_ip) {
-          return $ip;
-        }
-      }
-
-      if (isset($_SERVER['DEV_MODE'])) {
-        return '175.138.84.5';
-      }
-
-      return $_SERVER['REMOTE_ADDR'];
     }
   }
 }

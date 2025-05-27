@@ -3,24 +3,27 @@
 >
 > **Available at** [WordPress.org/plugins/**peprodev-ups**](https://wordpress.org/plugins/peprodev-ups)
 >
-> **Version:** 7.5.1
+> **Version:** 8.0.0
 > **Contributors:** amirhpcom, peprodev, blackswanlab
 > **Tags:** profile-builder, user-dashboard, login-registration, pepro-dev
 > **Requires at least:** WordPress 5.0
-> **Tested up to:** WordPress 6.7
+> **Tested up to:** WordPress 6.8
 > **Requires PHP:** 7.2
-> **WC tested up to:** 9.6.1
+> **WC tested up to:** 9.8
 
 |![https://ps.w.org/peprodev-ups/assets/banner-772x250.png](https://ps.w.org/peprodev-ups/assets/banner-772x250.png)|![https://ps.w.org/peprodev-ups/assets/banner-772x250-rtl.png](https://ps.w.org/peprodev-ups/assets/banner-772x250-rtl.png)|
 |--|--|
 
-Developed by **[Pepro Development Group](https://pepro.dev/)** / Lead Developer: **[AmirhpCom](https://amirhp.com/)** / Current Version: **7.5.1**
+Developed by **[Pepro Development Group](https://pepro.dev/)** / Lead Developer: **[AmirhpCom](https://amirhp.com/)** / Current Version: **8.0.0**
 
 
 
 ## The Ultimate WordPress Profile Builder & User Management Plugin
 
 ### **PeproDev Ultimate Profile Solutions** is the most powerful and feature-rich profile builder and user management plugin for WordPress, designed to meet the needs of developers and users alike. This plugin offers an extensive range of features that allow you to create custom user profiles, manage user roles, and enhance the user experience with ease.
+
+
+> 🎉 Thank you for supporting PeproDev Ultimate Profile Solutions since its first private release in 2019! Your support and feedback have been key in shaping this plugin into a reliable and feature-rich solution for WordPress user profiles.
 
 ### 🌍 **Global Reach with Local Focus**
 
@@ -140,7 +143,7 @@ We are working on a new pro version of the plugin with refactored code and enhan
 ## 📝 **Tips & Tricks**
 
 - **View Changelog:** Access the changelog at `wp-admin/admin.php?page=peprodev-ups&section=home&welcome=true`.
-- **Database Regeneration:** Regenerate the plugin's database structure by visiting `wp-admin/?pepro_ups_force_db_create=1`.
+- **Database Regeneration:** Regenerate the plugin's database structure by visiting `wp-admin/?peprodevups_force_db_create=1`.
 
 ## ❓ **Frequently Asked Questions**
 

@@ -96,7 +96,7 @@ $ = jQuery;!function(e,t){"object"==typeof exports&&"object"==typeof module?modu
         reader.readAsDataURL(this.files[0]);
       }
     });
-    
+
     if ($("input#birthday").length) {
       $("#birthday").parent().find("label").append("  <span id='birthday_warp' style='font-size: smaller;'></span>");
       $("#birthday").persianDatepicker({
@@ -329,7 +329,7 @@ $ = jQuery;!function(e,t){"object"==typeof exports&&"object"==typeof module?modu
                 $(".account-item .image img, .account-dropdown .image img, #avatar_b").attr("src", e.data.e.avatar).trigger("load");
               }
               if (e.data.refresh == true){
-                setTimeout(function () { window.location.href = window.location.href; }, 500);
+                setTimeout(function () { window.location.reload(); }, 500);
               }
             }
           } else {

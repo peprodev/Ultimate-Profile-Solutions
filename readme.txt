@@ -1,13 +1,13 @@
 === PeproDev Ultimate Profile Solutions ===
 Contributors: amirhpcom, peprodev, blackswanlab
-Donate link: https://pepro.dev/donate/
-Tags: profile-builder, user-dashboard, login-registration, pepro-dev
-Version: 7.5.1
-Stable tag: 7.5.1
+Donate link: https://peprodev.com/donate/
+Tags: profile, dashboard, login-registration
+Version: 8.0.0
+Stable tag: 8.0.0
 Requires at least: 5.0
-Tested up to: 6.7
+Tested up to: 6.8
 Requires PHP: 7.2
-WC tested up to: 9.7.1
+WC tested up to: 9.8
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,7 +18,10 @@ The Ultimate WordPress Profile Builder & User Management Plugin
 The most powerful and feature-rich profile builder and user management solution for WordPress.
 -----------------------------------------------------------------------------
 
-* FREE OF ANY CHARGE! UNLIMITED! OPEN-SOURCE FOREVER!
+🎉 Thank you for supporting PeproDev Ultimate Profile Solutions since its first private release in 2019!
+Your support and feedback have been key in shaping this plugin into a reliable and feature-rich solution for WordPress user profiles.
+
+* FREE OF ANY CHARGE, UNLIMITED, and OPEN-SOURCE FOREVER!
 * Ajaxified Popup Login/Register form
 * Login by Username/Password | Email/Password | Mobile OTP | Email OTP | (social login soon)
 * Show Popup/Toast Notification after Login/Register
@@ -110,7 +113,7 @@ We are working on a new pro version of the plugin with refactored code and enhan
 
 == Tips & Tricks ==
 * View the changelog at `wp-admin/admin.php?page=peprodev-ups&section=home&welcome=true`.
-* Regenerate the plugin's database structure by visiting `wp-admin/?pepro_ups_force_db_create=1`.
+* Regenerate the plugin's database structure by visiting `wp-admin/?peprodevups_force_db_create=1`.
 
 == Frequently Asked Questions ==
 
@@ -130,20 +133,44 @@ The full changelog is available in our [GitHub repository](https://github.com/pe
 
 The full changelog is available in our [GitHub repository](https://github.com/peprodev/Ultimate-Profile-Solutions/blob/master/changelog.md).
 
-= Version 7.5.1 | 2025-04-06 | 1404-01-17 =
-- **Fixed** User mobile field not shown on Edit User Screen
-- **Added** Verify User Email and Mobile on Edit User Screen
+🎉 Thank you for supporting PeproDev Ultimate Profile Solutions since its first private release in 2019!
+Your support and feedback have been key in shaping this plugin into a reliable and feature-rich solution for WordPress user profiles.
 
-= Version 7.5.0 | 2025-02-18 | 1403-11-30 =
-- **Fixed** Learndash Integration > Course Section Enhanced
+🎂 Also, a big congratulations to WordPress on its 22nd birthday 🥳🍾!
+We're proud to be part of this amazing journey with the WordPress community 💙
+Here's to many more years of innovation, freedom, and open-source collaboration 😍!
+
+= Version 8.0.0 | 2025-05-27 | 1404-03-06 =
+- 🛡️ Resolved security vulnerabilities detected by Wordfence
+- 🔧 Major core update with enhanced architecture
+- 🚀 Improved performance and loading efficiency
+- 🗃️ Refactored and optimized database structure
+- ⚙️ Added unified settings panel for easier configuration
+- 🧹 Removed redundant database entries from wp-options
+- 🔄 Improved upgrade process with data migration and backward compatibility
+- 📝 Added option to edit and verify user email and SMS on Edit User screen
+- 🧩 Unified settings slug with consistent read/write functions and hooks
+- 🐞 Fixed LearnDash issue with incorrect date display
 
 == Upgrade Notice ==
 
-= Version 7.5.1 | 2025-04-06 | 1404-01-17 =
-- **Fixed** User mobile field not shown on Edit User Screen
-- **Added** Verify User Email and Mobile on Edit User Screen
+🎉 Thank you for supporting PeproDev Ultimate Profile Solutions since its first private release in 2019!
+Your support and feedback have been key in shaping this plugin into a reliable and feature-rich solution for WordPress user profiles.
 
-= Version 7.5.0 | 2025-02-18 | 1403-11-30 =
-- **Fixed** Learndash Integration > Course Section Enhanced
+🎂 Also, a big congratulations to WordPress on its 22nd birthday 🥳🍾!
+We're proud to be part of this amazing journey with the WordPress community 💙
+Here's to many more years of innovation, freedom, and open-source collaboration 😍!
+
+= Version 8.0.0 | 2025-05-27 | 1404-03-06 =
+- 🛡️ Resolved security vulnerabilities detected by Wordfence
+- 🔧 Major core update with enhanced architecture
+- 🚀 Improved performance and loading efficiency
+- 🗃️ Refactored and optimized database structure
+- ⚙️ Added unified settings panel for easier configuration
+- 🧹 Removed redundant database entries from wp-options
+- 🔄 Improved upgrade process with data migration and backward compatibility
+- 📝 Added option to edit and verify user email and SMS on Edit User screen
+- 🧩 Unified settings slug with consistent read/write functions and hooks
+- 🐞 Fixed LearnDash issue with incorrect date display
 
 Please also note that the full changelog for this version and previous versions can be found in the [GitHub repository](https://github.com/peprodev/Ultimate-Profile-Solutions/blob/master/changelog.md).

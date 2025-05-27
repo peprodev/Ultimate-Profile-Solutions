@@ -5,57 +5,80 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 
 ## Table of Contents
 <details open>
-<summary><strong>Version 7.x.x</strong></summary>
+<summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
-- [Version 7.5.1](#version-751)
-- [Version 7.5.0](#version-750)
-- [Version 7.4.9](#version-749)
-- [Version 7.4.8](#version-748)
-- [Version 7.4.7](#version-747)
-- [Version 7.4.6](#version-746)
-- [Version 7.4.5](#version-745)
-- [Version 7.4.4](#version-744)
-- [Version 7.4.3](#version-743)
-- [Version 7.4.0](#version-740)
-- [Version 7.3.3](#version-733)
-- [Version 7.3.0](#version-730)
-- [Version 7.2.4](#version-724)
-- [Version 7.1.9](#version-719)
-- [Version 7.1.8](#version-718)
-- [Version 7.1.7](#version-717)
-- [Version 7.1.6](#version-716)
-- [Version 7.1.5](#version-715)
-- [Version 7.1.2](#version-712)
-- [Version 7.0.6](#version-706)
+- [Version 8.0.0](#version-800)
+
+</details>
+
+<details>
+
+  <summary><strong>Version 7.x.x</strong></summary>
+  &nbsp;
+
+  - [Version 7.5.1](#version-751)
+  - [Version 7.5.0](#version-750)
+  - [Version 7.4.9](#version-749)
+  - [Version 7.4.8](#version-748)
+  - [Version 7.4.7](#version-747)
+  - [Version 7.4.6](#version-746)
+  - [Version 7.4.5](#version-745)
+  - [Version 7.4.4](#version-744)
+  - [Version 7.4.3](#version-743)
+  - [Version 7.4.0](#version-740)
+  - [Version 7.3.3](#version-733)
+  - [Version 7.3.0](#version-730)
+  - [Version 7.2.4](#version-724)
+  - [Version 7.1.9](#version-719)
+  - [Version 7.1.8](#version-718)
+  - [Version 7.1.7](#version-717)
+  - [Version 7.1.6](#version-716)
+  - [Version 7.1.5](#version-715)
+  - [Version 7.1.2](#version-712)
+  - [Version 7.0.6](#version-706)
+
 </details>
 
 
 <details>
-<summary>Older Versions</summary>
-&nbsp;
+  <summary>Older Versions</summary>
+  &nbsp;
 
-- [Notice](#notice)
-- [Version 2.5.0](#version-250)
-- [Version 2.4.4](#version-244)
-- [Version 2.4.0](#version-240)
-- [Version 2.3.6](#version-236)
-- [Version 2.3.5](#version-235)
-- [Version 2.3.4](#version-234)
-- [Version 2.3.3](#version-233)
-- [Version 2.3.0](#version-230)
-- [Version 1.9.2](#version-192)
-- [Version 1.9.1](#version-191)
-- [Version 1.8.9](#version-189)
-- [Version 1.8.7](#version-187)
-- [Version 1.8.6](#version-186)
-- [Version 1.8.5](#version-185)
-- [Version 1.8.2](#version-182)
-- [Version 1.0.0](#version-100)
-- [Version 0.0.1](#version-001)
+  - [Notice](#notice)
+  - [Version 2.5.0](#version-250)
+  - [Version 2.4.4](#version-244)
+  - [Version 2.4.0](#version-240)
+  - [Version 2.3.6](#version-236)
+  - [Version 2.3.5](#version-235)
+  - [Version 2.3.4](#version-234)
+  - [Version 2.3.3](#version-233)
+  - [Version 2.3.0](#version-230)
+  - [Version 1.9.2](#version-192)
+  - [Version 1.9.1](#version-191)
+  - [Version 1.8.9](#version-189)
+  - [Version 1.8.7](#version-187)
+  - [Version 1.8.6](#version-186)
+  - [Version 1.8.5](#version-185)
+  - [Version 1.8.2](#version-182)
+  - [Version 1.0.0](#version-100)
+  - [Version 0.0.1](#version-001)
 </details>
 
 ---
+
+## Version 8.0.0
+- Release date: 2025-05-27 | 1404-03-06  [&uarr;](#table-of-contents)
+- 🛡️ Resolved security vulnerabilities detected by Wordfence
+- 🔧 Major core update with enhanced architecture
+- 🚀 Improved performance and loading efficiency
+- 🗃️ Refactored and optimized database structure
+- ⚙️ Added unified settings panel for easier configuration
+- 🧹 Removed redundant database entries from wp-options
+- 🔄 Improved upgrade process with data migration and backward compatibility
+- 📝 Added option to edit and verify user email and SMS on Edit User screen
+- 🧩 Unified settings slug with consistent read/write functions and hooks
+- 🐞 Fixed LearnDash issue with incorrect date display
 
 ## Version 7.5.1
 - Release date: 2025-04-06 | 1404-01-17  [&uarr;](#table-of-contents)

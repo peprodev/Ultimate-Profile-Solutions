@@ -8,13 +8,13 @@
 
 namespace PeproDev\PeproCore\RegLogin;
 
+use PeproDevUPS;
+
 defined("ABSPATH") or die("PeproDev Ultimate Profile Solutions :: Unauthorized Access! (https://pepro.dev/)");
 
-class PeproSMS_SMSIR_Gateway {
-  protected $td;
-  protected $setting_slug;
-  protected $activation_status;
-  protected $save_prefix;
+class PeproSMS_SMSIR_Gateway extends PeproDevUPS{
+  public $td = "peprodev-ups";
+  public $db_slug = "peprodev-ups";
   protected $api_url;
   protected $api_key;
   protected $api2_key;
@@ -24,18 +24,14 @@ class PeproSMS_SMSIR_Gateway {
   protected $sms_text;
   protected $sms2_text;
   public function __construct() {
-    $this->td                = "peprodev-ups";
-    $this->setting_slug      = "loginregister";
-    $this->activation_status = "PeproDevUPS_Core___{$this->setting_slug}";
-    $this->save_prefix       = $this->activation_status;
     $this->api_url           = untrailingslashit("https://ws.sms.ir/");
-    $this->api_key           = get_option("{$this->save_prefix}-sms_api_key");
-    $this->api2_key          = get_option("{$this->save_prefix}-sms_api2_key");
-    $this->secret_key        = get_option("{$this->save_prefix}-sms_secret_key");
-    $this->line_number       = get_option("{$this->save_prefix}-sms_api_url");
-    $this->line2_number      = get_option("{$this->save_prefix}-sms_api2_url");
-    $this->sms_text          = get_option("{$this->save_prefix}-smsir_message");
-    $this->sms2_text         = get_option("{$this->save_prefix}-smsir2_message");
+    $this->api_key           = $this->read("sms_api_key");
+    $this->api2_key          = $this->read("sms_api2_key");
+    $this->secret_key        = $this->read("sms_secret_key");
+    $this->line_number       = $this->read("sms_api_url");
+    $this->line2_number      = $this->read("sms_api2_url");
+    $this->sms_text          = $this->read("smsir_message");
+    $this->sms2_text         = $this->read("smsir2_message");
     add_filter("pepro_reglogin_sms_verification_gateways", array($this, "sms_verification_gateways"), 10, 1);
   }
   public function sms_verification_gateways($gateways = array()){

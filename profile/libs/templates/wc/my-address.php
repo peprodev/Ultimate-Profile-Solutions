@@ -43,7 +43,7 @@ wp_enqueue_script("jquery");
 			$address = wc_get_account_formatted_address($name);
 		?>
 			<div data-tab="<?php echo  $name; ?>" class="tab-entry card <?php echo  $name == "billing" ? "active" : "hide"; ?>">
-				<div class="card-body" data-pepro-reglogin="false">
+				<div class="card-body" data-pepro-reglogin="editaddress">
 					<br>
 					<address> <?php echo $address ? wp_kses_post($address) : esc_html_e('You have not set up this type of address yet.', 'woocommerce'); ?> </address>
 					<form action="<?php echo esc_url($PeproDevUPS_Profile->get_profile_page(true)); ?>" method="get">

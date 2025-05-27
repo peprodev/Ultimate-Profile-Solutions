@@ -65,19 +65,19 @@
         if ($(elID).hasClass("tmce-active")){ contentHTML = tinymce.activeEditor.getContent(); }
       } catch (e) { }
       var datatosave = {
-        "css":               $("#css").val(),
-        "js":                $("#js").val(),
-        "logo":              $("#profile-section-logo").val(),
-        "logo-id":           $("#profile-section-logo").attr("data-id"),
-        "showwelcome":       $("#showwelcome").attr("data-checked"),
-        "headerhook":        $("#headerhook").attr("data-checked"),
-        "footerhook":        $("#footerhook").attr("data-checked"),
+        "css"              : $("#css").val(),
+        "js"               : $("#js").val(),
+        "logo"             : $("#profile-section-logo").val(),
+        "logo-id"          : $("#profile-section-logo").attr("data-id"),
+        "showwelcome"      : $("#showwelcome").attr("data-checked"),
+        "headerhook"       : $("#headerhook").attr("data-checked"),
+        "footerhook"       : $("#footerhook").attr("data-checked"),
         "woocommerceorders": $("#woocommerceorders").attr("data-checked"),
-        "woocommercestats":  $("#woocommercestats").attr("data-checked"),
-        "showcustomtext":    $("#showcustomtext").attr("data-checked"),
-        "customhtml":        contentHTML,
-        "customposition":    $("#customposition").val(),
-        "profile-dash-page": $("#profile_dash_page").val(),
+        "woocommercestats" : $("#woocommercestats").attr("data-checked"),
+        "showcustomtext"   : $("#showcustomtext").attr("data-checked"),
+        "customhtml"       : contentHTML,
+        "customposition"   : $("#customposition").val(),
+        "profile_page"     : $("#profile_dash_page").val(),
       };
       var me = $(this);
       let nonce = me.attr('integrity'),wparam = me.attr('wparam'),lparam = me.attr('lparam');

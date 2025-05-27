@@ -3,46 +3,42 @@
  * @Author: Amirhossein Hosseinpour <https://amirhp.com>
  * @Date Created: 2023/02/06 01:05:22
  * @Last modified by: amirhp-com <its@amirhp.com>
- * @Last modified time: 2024/08/24 02:40:33
+ * @Last modified time: 2025/05/27 22:38:46
  */
 
 namespace PeproDev\PeproCore\RegLogin;
 
+use PeproDevUPS;
+
 defined("ABSPATH") or die("PeproDev Ultimate Profile Solutions :: Unauthorized Access! (https://pepro.dev/)");
 
-final class PeproSMS_KavehNegar_Gateway {
-  protected $td;
-  protected $setting_slug;
-  protected $activation_status;
-  protected $save_prefix;
+final class PeproSMS_KavehNegar_Gateway extends PeproDevUPS {
+  public $td = "peprodev-ups";
+  public $db_slug = "peprodev-ups";
   protected $kavenegar_username;
   protected $kavenegar_message;
   protected $kavenegar_sendernumber;
   protected $kavenegarlookup_api_key;
   protected $kavenegarlookup_template_id;
   function __construct() {
-    $this->td                          = "peprodev-ups";
-    $this->setting_slug                = "loginregister";
-    $this->activation_status           = "PeproDevUPS_Core___{$this->setting_slug}";
-    $this->save_prefix                 = $this->activation_status;
-    $this->kavenegar_username          = get_option("{$this->save_prefix}-kavenegar_username");
-    $this->kavenegar_message           = get_option("{$this->save_prefix}-kavenegar_message");
-    $this->kavenegar_sendernumber      = get_option("{$this->save_prefix}-kavenegar_sendernumber");
-    $this->kavenegarlookup_api_key     = get_option("{$this->save_prefix}-kavenegarlookup_api_key");
-    $this->kavenegarlookup_template_id = get_option("{$this->save_prefix}-kavenegarlookup_template_id");
+    $this->kavenegar_username          = $this->read("kavenegar_username");
+    $this->kavenegar_message           = $this->read("kavenegar_message");
+    $this->kavenegar_sendernumber      = $this->read("kavenegar_sendernumber");
+    $this->kavenegarlookup_api_key     = $this->read("kavenegarlookup_api_key");
+    $this->kavenegarlookup_template_id = $this->read("kavenegarlookup_template_id");
     add_filter("pepro_reglogin_sms_verification_gateways", array($this, "sms_verification_gateways"));
-    add_filter("pepro_reglogin_save_text_fields",          array($this, "save_text_fields"));
-    add_filter("pepro_reglogin_save_raw_fields",           array($this, "save_textarea_fields"));
+    add_filter("pepro_reglogin_save_text_fields", array($this, "save_text_fields"));
+    add_filter("pepro_reglogin_save_raw_fields", array($this, "save_textarea_fields"));
   }
   public function sms_verification_gateways($gateways = array()) {
     $gateways["kavenegar"] = array(
-      "name"       => _x("Kavenegar", "gateway", $this->td),
-      "fn_send"    => array($this, "CLASS_KAVENEGAR"),
+      "name" => _x("Kavenegar", "gateway", $this->td),
+      "fn_send" => array($this, "CLASS_KAVENEGAR"),
       "fn_setting" => array($this, "setting_kavenegar"),
     );
     $gateways["kavenegarlookup"] = array(
-      "name"       => _x("Kavenegar (Lookup)", "gateway", $this->td),
-      "fn_send"    => array($this, "CLASS_KAVENEGAR_LOOKUP"),
+      "name" => _x("Kavenegar (Lookup)", "gateway", $this->td),
+      "fn_send" => array($this, "CLASS_KAVENEGAR_LOOKUP"),
       "fn_setting" => array($this, "setting_kavenegar_lookup"),
     );
     return $gateways;

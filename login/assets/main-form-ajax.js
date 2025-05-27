@@ -2,7 +2,7 @@
  * @Author: Amirhossein Hosseinpour <https://amirhp.com>
  * @Date Created: 2023/06/27 02:45:26
  * @Last modified by: amirhp-com <its@amirhp.com>
- * @Last modified time: 2024/11/14 20:04:38
+ * @Last modified time: 2025/04/29 19:19:16
  */
 
 jQuery.noConflict();
@@ -26,10 +26,14 @@ jQuery.noConflict();
 
 
     $("[data-pepro-reglogin]").each(function (index, val) {
-      instance = $(val).data("pepro-reglogin");
-      var _pepro_dev = window[instance];
-      // _pepro_dev.nonce = $(val).parents(".login-form-container").data("nonce");
+      let instance = $(val).data("pepro-reglogin");
+      let _pepro_dev = window[instance];
+      if (!_pepro_dev) {
+        console.warn("Skipping this instance as _pepro_dev is not defined.");
+        return;
+      }
       _pepro_dev._ajax_req = null;
+      // _pepro_dev.nonce = $(val).parents(".login-form-container").data("nonce");
       jconfirm.defaults = {
         title: '',
         titleClass: '',

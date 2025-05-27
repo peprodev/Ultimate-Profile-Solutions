@@ -49,7 +49,7 @@ foreach ($styleFiles as $style) {
   if (isset($styleExifDAta["original"]) && !empty($styleExifDAta["original"])  && strtolower($styleExifDAta["original"]) === "yes") {
     $badge = "data-verified='true'";
   }
-  $styles .= "<option " . selected(get_option("{$this->activation_status}-style", "default.css"), basename($style), false) . " $badge value='" . esc_attr(basename($style)) . "'>" . esc_html($theme) . "</option>";
+  $styles .= "<option " . selected($this->read("style", "default.css"), basename($style), false) . " $badge value='" . esc_attr(basename($style)) . "'>" . esc_html($theme) . "</option>";
 }
 ?>
 <div class="row">
@@ -508,7 +508,7 @@ foreach ($styleFiles as $style) {
                         <div class="col-lg-6">
                           <select autocomplete="off" class="form-input single-required sms_method" id="sms_method" name="sms_method">
                             <?php
-                            $method   = get_option("{$this->activation_status}-sms_method", "smsir");
+                            $method   = $this->read("sms_method", "smsir");
                             $gateways = (array) apply_filters("pepro_reglogin_sms_verification_gateways", array());
                             foreach ($gateways as $i => $g) {
                               echo "<option value=\"$i\" " . selected($method, $i, false) . ">{$g["name"]}</option>";
@@ -533,7 +533,7 @@ foreach ($styleFiles as $style) {
                 <div class="card login-authexpire save_sms_settings">
                   <div class='card-body'>
                     <p class="text-bold"><?php echo esc_html_x("Auth. Expiration", "login-section", "peprodev-ups"); ?></p>
-                    <input class="form-input single-required mb-3" name="auth_expire" type="number" min="-1" step="1" lang="en_US" dir="ltr" value="<?php echo esc_attr(get_option("{$this->activation_status}-auth_expire", "0")); ?>" placeholder="<?php echo esc_html_x("Auth. Expiration", "login-section", "peprodev-ups"); ?>" />
+                    <input class="form-input single-required mb-3" name="auth_expire" type="number" min="-1" step="1" lang="en_US" dir="ltr" value="<?php echo esc_attr($this->read("auth_expire", "0")); ?>" placeholder="<?php echo esc_html_x("Auth. Expiration", "login-section", "peprodev-ups"); ?>" />
                     <p><?php echo __("How long a user stay logged in? Enter time in hour format (<ltr>1</ltr>: one hour | <ltr>24</ltr>: one day | <ltr>168</ltr>: one week | <ltr>0</ltr>: Default | <ltr>-1</ltr>: Forevr)", "peprodev-ups"); ?></p>
                   </div>
                 </div>
@@ -642,21 +642,21 @@ foreach ($styleFiles as $style) {
                     <tr>
                       <td><?php echo esc_html_x("WordPress Style", "login-section", "peprodev-ups"); ?></td>
                       <td>
-                        <a class='btncheckbox' data-text-on='<?php echo esc_html_x("Overwite WordPress Style with Theme", "login-section", "peprodev-ups"); ?>' data-text-off='<?php echo esc_html_x("Load with WordPress Style with Theme", "login-section", "peprodev-ups"); ?>' data-on='invert_colors_off' data-off='invert_colors' data-checked='<?php echo esc_attr(get_option("{$this->activation_status}-wp", "false") === "true" ? "true" : "false"); ?>' id="login-section-style-force"></a>
+                        <a class='btncheckbox' data-text-on='<?php echo esc_html_x("Overwite WordPress Style with Theme", "login-section", "peprodev-ups"); ?>' data-text-off='<?php echo esc_html_x("Load with WordPress Style with Theme", "login-section", "peprodev-ups"); ?>' data-on='invert_colors_off' data-off='invert_colors' data-checked='<?php echo esc_attr($this->read("wp", "false") === "true" ? "true" : "false"); ?>' id="login-section-style-force"></a>
                       </td>
                     </tr>
                     <tr>
                       <td><?php echo esc_html_x("Show Logo", "login-section", "peprodev-ups"); ?></td>
                       <td>
-                        <a class='btncheckbox' data-text-on='<?php echo esc_html_x("Yes, Show it", "login-section", "peprodev-ups"); ?>' data-text-off='<?php echo esc_html_x("No, Hide it", "login-section", "peprodev-ups"); ?>' data-on='visibility' data-togglel='[showonlogoshow]' data-off='visibility_off' data-checked='<?php echo esc_attr(get_option("{$this->activation_status}-showlogo", "false") === "true" ? "true" : "false"); ?>' id="login-section-show-logo"></a>
+                        <a class='btncheckbox' data-text-on='<?php echo esc_html_x("Yes, Show it", "login-section", "peprodev-ups"); ?>' data-text-off='<?php echo esc_html_x("No, Hide it", "login-section", "peprodev-ups"); ?>' data-on='visibility' data-togglel='[showonlogoshow]' data-off='visibility_off' data-checked='<?php echo esc_attr($this->read("showlogo", "false") === "true" ? "true" : "false"); ?>' id="login-section-show-logo"></a>
                       </td>
                     </tr>
                     <tr showonlogoshow="true">
                       <td><?php echo esc_html_x("Logo Image", "login-section", "peprodev-ups"); ?></td>
                       <td>
-                        <input type="hidden" data-id="<?php echo esc_attr(get_option("{$this->activation_status}-logo-id", "")); ?>" id="login-section-logo" value="<?php echo esc_attr(get_option("{$this->activation_status}-logo", "")); ?>" class="form-control primary" placeholder="<?php echo esc_html_x("Logo URL", "login-section", "peprodev-ups"); ?>" />
+                        <input type="hidden" data-id="<?php echo esc_attr($this->read("logo-id", "")); ?>" id="login-section-logo" value="<?php echo esc_attr($this->read("logo", "")); ?>" class="form-control primary" placeholder="<?php echo esc_html_x("Logo URL", "login-section", "peprodev-ups"); ?>" />
                         <div class="flex">
-                          <img style="border-radius: 5px;" src="<?php echo esc_attr(get_option("{$this->activation_status}-logo", "")); ?>" id="profile-img" width="86px" />
+                          <img style="border-radius: 5px;" src="<?php echo esc_attr($this->read("logo", "")); ?>" id="profile-img" width="86px" />
                           <button type="button" style="padding: 12px; display: block;" class="btn btn-primary mediapicker icn-btn mr-4 ml-4" data-ref="#login-section-logo" data-ref4="#profile-img" data-title="<?php echo esc_html_x("Select Custom Image", "login-section", "peprodev-ups"); ?>"><i class='material-icons'>cloud_upload</i> <?php echo esc_html_x("Select or Upload Custom Image", "login-section", "peprodev-ups"); ?></button>
                         </div>
                       </td>
@@ -665,92 +665,92 @@ foreach ($styleFiles as $style) {
                       <td><?php echo esc_html_x("Logo Dimensions", "login-section", "peprodev-ups"); ?></td>
                       <td>
                         <div class="flex">
-                          <input type="text" id="login-section-logo-w" title="<?php echo esc_html_x("Logo Width (e.g. 84px)", "login-section", "peprodev-ups"); ?>" value="<?php echo esc_attr(get_option("{$this->activation_status}-logo-w", "84px")); ?>" class="text-center form-control primary" placeholder="<?php echo esc_html_x("Logo Width (e.g. 84px)", "login-section", "peprodev-ups"); ?>" />
+                          <input type="text" id="login-section-logo-w" title="<?php echo esc_html_x("Logo Width (e.g. 84px)", "login-section", "peprodev-ups"); ?>" value="<?php echo esc_attr($this->read("logo-w", "84px")); ?>" class="text-center form-control primary" placeholder="<?php echo esc_html_x("Logo Width (e.g. 84px)", "login-section", "peprodev-ups"); ?>" />
                           &times;
-                          <input type="text" id="login-section-logo-h" title="<?php echo esc_html_x("Logo Height (e.g. 84px)", "login-section", "peprodev-ups"); ?>" value="<?php echo esc_attr(get_option("{$this->activation_status}-logo-h", "84px")); ?>" class="text-center form-control primary" placeholder="<?php echo esc_html_x("Logo Height (e.g. 84px)", "login-section", "peprodev-ups"); ?>" />
+                          <input type="text" id="login-section-logo-h" title="<?php echo esc_html_x("Logo Height (e.g. 84px)", "login-section", "peprodev-ups"); ?>" value="<?php echo esc_attr($this->read("logo-h", "84px")); ?>" class="text-center form-control primary" placeholder="<?php echo esc_html_x("Logo Height (e.g. 84px)", "login-section", "peprodev-ups"); ?>" />
                         </div>
                       </td>
                     </tr>
                     <tr showonlogoshow="true">
                       <td><?php echo esc_html_x("Logo Href", "login-section", "peprodev-ups"); ?></td>
                       <td>
-                        <input type="text" id="login-section-logohref" value="<?php echo esc_attr(get_option("{$this->activation_status}-logo-href", home_url())); ?>" class="form-control primary" placeholder="<?php echo esc_html_x("Login slug", "login-section", "peprodev-ups"); ?>" />
+                        <input type="text" id="login-section-logohref" value="<?php echo esc_attr($this->read("logo-href", home_url())); ?>" class="form-control primary" placeholder="<?php echo esc_html_x("Login slug", "login-section", "peprodev-ups"); ?>" />
                       </td>
                     </tr>
                     <tr showonlogoshow="true">
                       <td><?php echo esc_html_x("Logo Title", "login-section", "peprodev-ups"); ?></td>
                       <td>
-                        <input type="text" id="login-section-logotitle" value="<?php echo esc_attr(get_option("{$this->activation_status}-logo-title", get_bloginfo('name'))); ?>" class="form-control primary" placeholder="<?php echo esc_html_x("Login slug", "login-section", "peprodev-ups"); ?>" />
+                        <input type="text" id="login-section-logotitle" value="<?php echo esc_attr($this->read("logo-title", get_bloginfo('name'))); ?>" class="form-control primary" placeholder="<?php echo esc_html_x("Login slug", "login-section", "peprodev-ups"); ?>" />
                       </td>
                     </tr>
                     <tr>
                       <td><?php echo esc_html_x("'Remeber Me' Checkbox", "login-section", "peprodev-ups"); ?></td>
                       <td>
-                        <a class='btncheckbox' data-text-on='<?php echo esc_html_x("Yes, Show it", "login-section", "peprodev-ups"); ?>' data-text-off='<?php echo esc_html_x("No, Hide it", "login-section", "peprodev-ups"); ?>' data-on='visibility' data-off='visibility_off' data-checked='<?php echo esc_attr(get_option("{$this->activation_status}-rmc", "true") === "true" ? "true" : "false"); ?>' id="login-section-rmc"></a>
+                        <a class='btncheckbox' data-text-on='<?php echo esc_html_x("Yes, Show it", "login-section", "peprodev-ups"); ?>' data-text-off='<?php echo esc_html_x("No, Hide it", "login-section", "peprodev-ups"); ?>' data-on='visibility' data-off='visibility_off' data-checked='<?php echo esc_attr($this->read("rmc", "true") === "true" ? "true" : "false"); ?>' id="login-section-rmc"></a>
                       </td>
                     </tr>
                     <tr>
                       <td><?php echo esc_html_x("Back to Blog Link", "login-section", "peprodev-ups"); ?></td>
                       <td>
-                        <a class='btncheckbox' data-text-on='<?php echo esc_html_x("Yes, Show it", "login-section", "peprodev-ups"); ?>' data-text-off='<?php echo esc_html_x("No, Hide it", "login-section", "peprodev-ups"); ?>' data-on='visibility' data-off='visibility_off' data-checked='<?php echo esc_attr(get_option("{$this->activation_status}-b2b", "true") === "true" ? "true" : "false"); ?>' id="login-section-b2b"></a>
+                        <a class='btncheckbox' data-text-on='<?php echo esc_html_x("Yes, Show it", "login-section", "peprodev-ups"); ?>' data-text-off='<?php echo esc_html_x("No, Hide it", "login-section", "peprodev-ups"); ?>' data-on='visibility' data-off='visibility_off' data-checked='<?php echo esc_attr($this->read("b2b", "true") === "true" ? "true" : "false"); ?>' id="login-section-b2b"></a>
                       </td>
                     </tr>
                     <tr>
                       <td><?php echo esc_html_x("Privacy Link", "login-section", "peprodev-ups"); ?></td>
                       <td>
-                        <a class='btncheckbox' data-text-on='<?php echo esc_html_x("Yes, Show it", "login-section", "peprodev-ups"); ?>' data-text-off='<?php echo esc_html_x("No, Hide it", "login-section", "peprodev-ups"); ?>' data-on='visibility' data-off='visibility_off' data-checked='<?php echo esc_attr(get_option("{$this->activation_status}-privacy", "true") === "true" ? "true" : "false"); ?>' id="login-section-privacy"></a>
+                        <a class='btncheckbox' data-text-on='<?php echo esc_html_x("Yes, Show it", "login-section", "peprodev-ups"); ?>' data-text-off='<?php echo esc_html_x("No, Hide it", "login-section", "peprodev-ups"); ?>' data-on='visibility' data-off='visibility_off' data-checked='<?php echo esc_attr($this->read("privacy", "true") === "true" ? "true" : "false"); ?>' id="login-section-privacy"></a>
                       </td>
                     </tr>
                     <tr>
                       <td><?php echo esc_html_x("Show Password Button", "login-section", "peprodev-ups"); ?></td>
                       <td>
-                        <a class='btncheckbox' data-text-on='<?php echo esc_html_x("Yes, Show it", "login-section", "peprodev-ups"); ?>' data-text-off='<?php echo esc_html_x("No, Hide it", "login-section", "peprodev-ups"); ?>' data-on='visibility' data-off='visibility_off' data-checked='<?php echo esc_attr(get_option("{$this->activation_status}-spb", "true") === "true" ? "true" : "false"); ?>' id="login-section-spb"></a>
+                        <a class='btncheckbox' data-text-on='<?php echo esc_html_x("Yes, Show it", "login-section", "peprodev-ups"); ?>' data-text-off='<?php echo esc_html_x("No, Hide it", "login-section", "peprodev-ups"); ?>' data-on='visibility' data-off='visibility_off' data-checked='<?php echo esc_attr($this->read("spb", "true") === "true" ? "true" : "false"); ?>' id="login-section-spb"></a>
                       </td>
                     </tr>
                     <tr>
                       <td><?php echo esc_html_x("Force Background?", "login-section", "peprodev-ups"); ?></td>
                       <td>
-                        <a class='btncheckbox' data-text-on='<?php echo esc_html_x("Yes, Apply My Setting for Background", "login-section", "peprodev-ups"); ?>' data-text-off='<?php echo esc_html_x("No, Use Default Login Theme's Background setting", "login-section", "peprodev-ups"); ?>' data-on='visibility' data-togglel='[onlyforcedbg]' data-off='visibility_off' data-checked='<?php echo esc_attr(get_option("{$this->activation_status}-forcebg", "false") === "true" ? "true" : "false"); ?>' id="login-section-forcebg"></a>
+                        <a class='btncheckbox' data-text-on='<?php echo esc_html_x("Yes, Apply My Setting for Background", "login-section", "peprodev-ups"); ?>' data-text-off='<?php echo esc_html_x("No, Use Default Login Theme's Background setting", "login-section", "peprodev-ups"); ?>' data-on='visibility' data-togglel='[onlyforcedbg]' data-off='visibility_off' data-checked='<?php echo esc_attr($this->read("forcebg", "false") === "true" ? "true" : "false"); ?>' id="login-section-forcebg"></a>
                       </td>
                     </tr>
                     <tr onlyforcedbg="true">
                       <td><?php echo esc_html_x("Background Type", "login-section", "peprodev-ups"); ?></td>
                       <td>
                         <select id="login-section-bgtype" class="filteritem" data-filter='showfilteredbybgtype'>
-                          <?php echo "<option filter-item='solid'" . selected(get_option("{$this->activation_status}-bgtype", "color"), "color", false) . " value='color'>" . esc_html_x("Solid Color", "login-section", "peprodev-ups") . "</option>"; ?>
-                          <?php echo "<option filter-item='gradient'" . selected(get_option("{$this->activation_status}-bgtype", "color"), "gradient", false) . " value='gradient'>" . esc_html_x("Gradient Color", "login-section", "peprodev-ups") . "</option>"; ?>
-                          <?php echo "<option filter-item='image'" . selected(get_option("{$this->activation_status}-bgtype", "color"), "image", false) . " value='image'>" . esc_html_x("Image", "login-section", "peprodev-ups") . "</option>"; ?>
-                          <?php echo "<option filter-item='video'" . selected(get_option("{$this->activation_status}-bgtype", "color"), "video", false) . " value='video'>" . esc_html_x("Video", "login-section", "peprodev-ups") . "</option>"; ?>
+                          <?php echo "<option filter-item='solid'" . selected($this->read("bgtype", "color"), "color", false) . " value='color'>" . esc_html_x("Solid Color", "login-section", "peprodev-ups") . "</option>"; ?>
+                          <?php echo "<option filter-item='gradient'" . selected($this->read("bgtype", "color"), "gradient", false) . " value='gradient'>" . esc_html_x("Gradient Color", "login-section", "peprodev-ups") . "</option>"; ?>
+                          <?php echo "<option filter-item='image'" . selected($this->read("bgtype", "color"), "image", false) . " value='image'>" . esc_html_x("Image", "login-section", "peprodev-ups") . "</option>"; ?>
+                          <?php echo "<option filter-item='video'" . selected($this->read("bgtype", "color"), "video", false) . " value='video'>" . esc_html_x("Video", "login-section", "peprodev-ups") . "</option>"; ?>
                         </select>
                         <div showfilteredbybgtype="solid">
-                          <input type="text" colorpicker="true" data-alpha="true" id="login-section-bg-solid" value="<?php echo esc_attr(get_option("{$this->activation_status}-bg-solid", "white")); ?>" class="form-control primary" placeholder="<?php echo esc_html_x("Background Solid Color", "login-section", "peprodev-ups"); ?>" />
+                          <input type="text" colorpicker="true" data-alpha="true" id="login-section-bg-solid" value="<?php echo esc_attr($this->read("bg-solid", "white")); ?>" class="form-control primary" placeholder="<?php echo esc_html_x("Background Solid Color", "login-section", "peprodev-ups"); ?>" />
                         </div>
                         <div showfilteredbybgtype="gradient">
-                          <input type="text" autocomplete="off" data-alpha="true" colorpicker="true" id="login-section-bg-gradient1" value="<?php echo esc_attr(get_option("{$this->activation_status}-bg-gradient1", "#6a11cb")); ?>" class="form-control primary" placeholder="<?php echo esc_html_x("Background Solid Color", "login-section", "peprodev-ups"); ?>" />
-                          <input type="text" autocomplete="off" data-alpha="true" colorpicker="true" id="login-section-bg-gradient2" value="<?php echo esc_attr(get_option("{$this->activation_status}-bg-gradient2", "#2575fc")); ?>" class="form-control primary float-right" placeholder="<?php echo esc_html_x("Background Solid Color", "login-section", "peprodev-ups"); ?>" />
+                          <input type="text" autocomplete="off" data-alpha="true" colorpicker="true" id="login-section-bg-gradient1" value="<?php echo esc_attr($this->read("bg-gradient1", "#6a11cb")); ?>" class="form-control primary" placeholder="<?php echo esc_html_x("Background Solid Color", "login-section", "peprodev-ups"); ?>" />
+                          <input type="text" autocomplete="off" data-alpha="true" colorpicker="true" id="login-section-bg-gradient2" value="<?php echo esc_attr($this->read("bg-gradient2", "#2575fc")); ?>" class="form-control primary float-right" placeholder="<?php echo esc_html_x("Background Solid Color", "login-section", "peprodev-ups"); ?>" />
                           <div style="margin: 1rem 0 0 0;" class="text-center">👇 <info><?php echo esc_html_x("Linear Gradient direction or Angels", "login-section", "peprodev-ups"); ?></info> 👇</div>
-                          <input type="text" id="login-section-bg-gradient3" value="<?php echo esc_attr(get_option("{$this->activation_status}-bg-gradient3", "to left")); ?>" class="form-control primary" title="<?php echo esc_attr(sprintf(_x("Linear Gradient direction or Angels (and extra color steps)%sExamples: to left | to top | 65deg | 90deg, blue, green, rgba(203, 24, 201, 0.86), #13c253", "login-section", "peprodev-ups"), PHP_EOL)); ?>" placeholder="<?php echo esc_html_x("e.g. to left | to top | 65deg | 90deg, blue, green, rgba(203, 24, 201, 0.86), #13c253", "login-section", "peprodev-ups"); ?>" />
+                          <input type="text" id="login-section-bg-gradient3" value="<?php echo esc_attr($this->read("bg-gradient3", "to left")); ?>" class="form-control primary" title="<?php echo esc_attr(sprintf(_x("Linear Gradient direction or Angels (and extra color steps)%sExamples: to left | to top | 65deg | 90deg, blue, green, rgba(203, 24, 201, 0.86), #13c253", "login-section", "peprodev-ups"), PHP_EOL)); ?>" placeholder="<?php echo esc_html_x("e.g. to left | to top | 65deg | 90deg, blue, green, rgba(203, 24, 201, 0.86), #13c253", "login-section", "peprodev-ups"); ?>" />
                         </div>
                         <div showfilteredbybgtype="image">
-                          <input type="hidden" data-id="<?php echo esc_attr(get_option("{$this->activation_status}-bg-img-id", "")); ?>" id="login-section-bg-img" value="<?php echo esc_attr(get_option("{$this->activation_status}-bg-img", "")); ?>" class="form-control primary" />
+                          <input type="hidden" data-id="<?php echo esc_attr($this->read("bg-img-id", "")); ?>" id="login-section-bg-img" value="<?php echo esc_attr($this->read("bg-img", "")); ?>" class="form-control primary" />
                           <div class="flex">
-                            <img style="border-radius: 5px;" src="<?php echo esc_attr(get_option("{$this->activation_status}-bg-img", "")); ?>" id="login-section-bg-img-preview" width="86px" />
+                            <img style="border-radius: 5px;" src="<?php echo esc_attr($this->read("bg-img", "")); ?>" id="login-section-bg-img-preview" width="86px" />
                             <button type="button" style="padding: 12px; display: block;" class="btn btn-primary mediapicker icn-btn mr-4 ml-4" data-ref="#login-section-bg-img" data-ref4="#login-section-bg-img-preview" data-title="<?php echo esc_html_x("Select Custom Background Image", "login-section", "peprodev-ups"); ?>"><i class='material-icons'>cloud_upload</i> <?php echo esc_html_x("Select or Upload Background Image", "login-section", "peprodev-ups"); ?></button>
                           </div>
                         </div>
                         <div showfilteredbybgtype="video">
-                          <input type="hidden" data-id="<?php echo esc_attr(get_option("{$this->activation_status}-bg-video-id", "")); ?>" id="login-section-bg-video" value="<?php echo esc_attr(get_option("{$this->activation_status}-bg-video", "")); ?>" class="form-control primary" />
+                          <input type="hidden" data-id="<?php echo esc_attr($this->read("bg-video-id", "")); ?>" id="login-section-bg-video" value="<?php echo esc_attr($this->read("bg-video", "")); ?>" class="form-control primary" />
                           <div class="flex">
                             <video width="200" controls>
-                              <source style="border-radius: 5px;" id="login-section-bg-video-preview" src="<?php echo esc_attr(get_option("{$this->activation_status}-bg-video", "")); ?>" type="video/mp4" />
+                              <source style="border-radius: 5px;" id="login-section-bg-video-preview" src="<?php echo esc_attr($this->read("bg-video", "")); ?>" type="video/mp4" />
                               Your browser does not support HTML5 video.
                             </video>
                             <button type="button" style="padding: 12px; display: block;" class="btn btn-primary mediapicker icn-btn mr-4 ml-4" data-picktype="video/mp4" data-ref="#login-section-bg-video" data-ref4="#login-section-bg-video-preview" data-title="<?php echo esc_html_x("Select Custom Background Video", "login-section", "peprodev-ups"); ?>"><i class='material-icons'>cloud_upload</i> <?php echo esc_html_x("Upload Video", "login-section", "peprodev-ups"); ?></button>
                           </div>
                           <div class="flex margin-top">
-                            <a class='mr-2 ml-2 btncheckbox' data-text-on='<?php echo esc_html_x("Autoplay: ON", "login-section", "peprodev-ups"); ?>' data-text-off='<?php echo esc_html_x("Autoplay: OFF", "login-section", "peprodev-ups"); ?>' data-on='play_circle_outline' data-off='pause_circle_outline' data-checked='<?php echo esc_attr(get_option("{$this->activation_status}-bg-video-autoplay", "true") === "true" ? "true" : "false"); ?>' id="login-section-bg-video-autoplay"></a>
-                            <a class='mr-2 ml-2 btncheckbox' data-text-on='<?php echo esc_html_x("Muted", "login-section", "peprodev-ups"); ?>' data-text-off='<?php echo esc_html_x("Sound", "login-section", "peprodev-ups"); ?>' data-on='volume_off' data-off='volume_up' data-checked='<?php echo esc_attr(get_option("{$this->activation_status}-bg-video-muted", "true") === "true" ? "true" : "false"); ?>' id="login-section-bg-video-muted"></a>
-                            <a class='mr-2 ml-2 btncheckbox' data-text-on='<?php echo esc_html_x("Loop: ON", "login-section", "peprodev-ups"); ?>' data-text-off='<?php echo esc_html_x("Loop: OFF", "login-section", "peprodev-ups"); ?>' data-on='sync' data-off='sync_disabled' data-checked='<?php echo esc_attr(get_option("{$this->activation_status}-bg-video-loop", "true") === "true" ? "true" : "false"); ?>' id="login-section-bg-video-loop"></a>
+                            <a class='mr-2 ml-2 btncheckbox' data-text-on='<?php echo esc_html_x("Autoplay: ON", "login-section", "peprodev-ups"); ?>' data-text-off='<?php echo esc_html_x("Autoplay: OFF", "login-section", "peprodev-ups"); ?>' data-on='play_circle_outline' data-off='pause_circle_outline' data-checked='<?php echo esc_attr($this->read("bg-video-autoplay", "true") === "true" ? "true" : "false"); ?>' id="login-section-bg-video-autoplay"></a>
+                            <a class='mr-2 ml-2 btncheckbox' data-text-on='<?php echo esc_html_x("Muted", "login-section", "peprodev-ups"); ?>' data-text-off='<?php echo esc_html_x("Sound", "login-section", "peprodev-ups"); ?>' data-on='volume_off' data-off='volume_up' data-checked='<?php echo esc_attr($this->read("bg-video-muted", "true") === "true" ? "true" : "false"); ?>' id="login-section-bg-video-muted"></a>
+                            <a class='mr-2 ml-2 btncheckbox' data-text-on='<?php echo esc_html_x("Loop: ON", "login-section", "peprodev-ups"); ?>' data-text-off='<?php echo esc_html_x("Loop: OFF", "login-section", "peprodev-ups"); ?>' data-on='sync' data-off='sync_disabled' data-checked='<?php echo esc_attr($this->read("bg-video-loop", "true") === "true" ? "true" : "false"); ?>' id="login-section-bg-video-loop"></a>
                           </div>
                         </div>
                       </td>
@@ -773,7 +773,7 @@ foreach ($styleFiles as $style) {
               <div class="card-body table-responsive">
                 <div class="mt-2 mb-4">
                   <label class="row w-100 align-items-center m-0 mb-2" for="login-section-active">
-                    <input autocomplete="off" type="checkbox" <?php checked(get_option("{$this->activation_status}-activesecurity", ""), "yes", true); ?> class="form-checkbox iostoggle single-required mr-2 login-section-active" id="login-section-active" name="login-section-active" value="yes">
+                    <input autocomplete="off" type="checkbox" <?php checked($this->read("activesecurity", ""), "yes", true); ?> class="form-checkbox iostoggle single-required mr-2 login-section-active" id="login-section-active" name="login-section-active" value="yes">
                     <?php echo esc_html_x("Activate Permalink section?", "login-section", "peprodev-ups"); ?>
                   </label>
                 </div>
@@ -797,19 +797,19 @@ foreach ($styleFiles as $style) {
                     <tr>
                       <td><?php echo esc_html_x("Shake Effect", "login-section", "peprodev-ups"); ?></td>
                       <td>
-                        <a class='btncheckbox' data-text-on='<?php echo esc_html_x("Yes, Keep it", "login-section", "peprodev-ups"); ?>' data-text-off='<?php echo esc_html_x("No, Remove it", "login-section", "peprodev-ups"); ?>' data-on='visibility' data-off='visibility_off' data-checked='<?php echo esc_attr(get_option("{$this->activation_status}-shake", "true") === "true" ? "true" : "false"); ?>' id="login-section-shake"></a>
+                        <a class='btncheckbox' data-text-on='<?php echo esc_html_x("Yes, Keep it", "login-section", "peprodev-ups"); ?>' data-text-off='<?php echo esc_html_x("No, Remove it", "login-section", "peprodev-ups"); ?>' data-on='visibility' data-off='visibility_off' data-checked='<?php echo esc_attr($this->read("shake", "true") === "true" ? "true" : "false"); ?>' id="login-section-shake"></a>
                       </td>
                     </tr>
                     <tr>
                       <td><?php echo esc_html_x("Login Errors", "login-section", "peprodev-ups"); ?></td>
                       <td>
-                        <a class='btncheckbox' data-text-on='<?php echo esc_html_x("Yes, Show them", "login-section", "peprodev-ups"); ?>' data-text-off='<?php echo esc_html_x("No, Hide them", "login-section", "peprodev-ups"); ?>' data-on='visibility' data-off='visibility_off' data-checked='<?php echo esc_attr(get_option("{$this->activation_status}-error", "true") === "true" ? "true" : "false"); ?>' id="login-section-error"></a>
+                        <a class='btncheckbox' data-text-on='<?php echo esc_html_x("Yes, Show them", "login-section", "peprodev-ups"); ?>' data-text-off='<?php echo esc_html_x("No, Hide them", "login-section", "peprodev-ups"); ?>' data-on='visibility' data-off='visibility_off' data-checked='<?php echo esc_attr($this->read("error", "true") === "true" ? "true" : "false"); ?>' id="login-section-error"></a>
                       </td>
                     </tr>
                     <tr>
                       <td><?php echo esc_html_x("Login Messages", "login-section", "peprodev-ups"); ?></td>
                       <td>
-                        <a class='btncheckbox' data-text-on='<?php echo esc_html_x("Yes, Show them", "login-section", "peprodev-ups"); ?>' data-text-off='<?php echo esc_html_x("No, Hide them", "login-section", "peprodev-ups"); ?>' data-on='visibility' data-off='visibility_off' data-checked='<?php echo esc_attr(get_option("{$this->activation_status}-msg", "true") === "true" ? "true" : "false"); ?>' id="login-section-msg"></a>
+                        <a class='btncheckbox' data-text-on='<?php echo esc_html_x("Yes, Show them", "login-section", "peprodev-ups"); ?>' data-text-off='<?php echo esc_html_x("No, Hide them", "login-section", "peprodev-ups"); ?>' data-on='visibility' data-off='visibility_off' data-checked='<?php echo esc_attr($this->read("msg", "true") === "true" ? "true" : "false"); ?>' id="login-section-msg"></a>
                       </td>
                     </tr>
                   </tbody>
@@ -830,18 +830,18 @@ foreach ($styleFiles as $style) {
             <div class="row">
               <div class="col-lg-6">
                 <p class="text-bold"><?php echo esc_html_x("Login/Register Heading Content (html, shortcode)", "login-section", "peprodev-ups"); ?></p>
-                <textarea autocomplete="off" name="headerhtml" spellcheck="false" dir="ltr" rows="8" cols="80" style="display:none !important;" id="headerhtml"><?php echo stripslashes(get_option("{$this->activation_status}-headerhtml", "")); ?></textarea>
-                <textarea autocomplete="off" spellcheck="false" dir="ltr" rows="8" cols="80" id="headerhtml_editor"><?php echo stripslashes(get_option("{$this->activation_status}-headerhtml", "")); ?></textarea>
+                <textarea autocomplete="off" name="headerhtml" spellcheck="false" dir="ltr" rows="8" cols="80" style="display:none !important;" id="headerhtml"><?php echo stripslashes($this->read("headerhtml", "")); ?></textarea>
+                <textarea autocomplete="off" spellcheck="false" dir="ltr" rows="8" cols="80" id="headerhtml_editor"><?php echo stripslashes($this->read("headerhtml", "")); ?></textarea>
               </div>
               <div class="col-lg-6">
                 <p class="text-bold"><?php echo esc_html_x("Login/Register Footer Content (html, shortcode)", "login-section", "peprodev-ups"); ?></p>
-                <textarea autocomplete="off" name="footerhtml" spellcheck="false" dir="ltr" rows="8" cols="80" style="display:none !important;" id="footerhtml"><?php echo stripslashes(get_option("{$this->activation_status}-footerhtml", "")); ?></textarea>
-                <textarea autocomplete="off" spellcheck="false" dir="ltr" rows="8" cols="80" id="footerhtml_editor"><?php echo stripslashes(get_option("{$this->activation_status}-footerhtml", "")); ?></textarea>
+                <textarea autocomplete="off" name="footerhtml" spellcheck="false" dir="ltr" rows="8" cols="80" style="display:none !important;" id="footerhtml"><?php echo stripslashes($this->read("footerhtml", "")); ?></textarea>
+                <textarea autocomplete="off" spellcheck="false" dir="ltr" rows="8" cols="80" id="footerhtml_editor"><?php echo stripslashes($this->read("footerhtml", "")); ?></textarea>
               </div>
               <div class="col-12">
                 <p class="text-bold"><?php echo esc_html_x("Login/Register Custom CSS Codes", "login-section", "peprodev-ups"); ?></p>
-                <textarea autocomplete="off" name="customcss" spellcheck="false" dir="ltr" rows="8" cols="80" id="customcss" style="display:none !important;"><?php echo stripslashes(get_option("{$this->activation_status}-customcss", "")); ?></textarea>
-                <textarea autocomplete="off" spellcheck="false" dir="ltr" rows="8" cols="80" id="customcss_editor"><?php echo stripslashes(get_option("{$this->activation_status}-customcss", "")); ?></textarea>
+                <textarea autocomplete="off" name="customcss" spellcheck="false" dir="ltr" rows="8" cols="80" id="customcss" style="display:none !important;"><?php echo stripslashes($this->read("customcss", "")); ?></textarea>
+                <textarea autocomplete="off" spellcheck="false" dir="ltr" rows="8" cols="80" id="customcss_editor"><?php echo stripslashes($this->read("customcss", "")); ?></textarea>
               </div>
             </div>
 
@@ -863,12 +863,12 @@ foreach ($styleFiles as $style) {
               <div class="col-lg-6 register-fields-import-export">
                 <p class="text-bold"><?php esc_html_e("Import/Export Registeration-Additional fields as JSON data", "peprodev-ups"); ?></p>
                 <textarea class="codeditor" id="register_fileds_editor" autocomplete="off" spellcheck="false" dir="ltr" rows="8" cols="80"></textarea>
-                <textarea class="codeditor" id="register_fileds" autocomplete="off" spellcheck="false" dir="ltr" rows="8" cols="80" style="display:none !important;"><?php echo wp_unslash(get_option("pepro-profile-register-fileds")); ?></textarea>
+                <textarea class="codeditor" id="register_fileds" autocomplete="off" spellcheck="false" dir="ltr" rows="8" cols="80" style="display:none !important;"><?php echo wp_unslash($this->read("fileds_register")); ?></textarea>
               </div>
               <div class="col-lg-6 redirection-fields-import-export">
                 <p class="text-bold"><?php esc_html_e("Import/Export Redirection-rules as JSON data", "peprodev-ups"); ?></p>
                 <textarea class="codeditor" id="redirection_fileds_editor" autocomplete="off" spellcheck="false" dir="ltr" rows="8" cols="80"></textarea>
-                <textarea class="codeditor" id="redirection_fileds" autocomplete="off" spellcheck="false" dir="ltr" rows="8" cols="80" style="display:none !important;"><?php echo wp_unslash(get_option("pepro-profile-redirection-fileds")); ?></textarea>
+                <textarea class="codeditor" id="redirection_fileds" autocomplete="off" spellcheck="false" dir="ltr" rows="8" cols="80" style="display:none !important;"><?php echo wp_unslash($this->read("fileds_redirect")); ?></textarea>
               </div>
             </div>
 

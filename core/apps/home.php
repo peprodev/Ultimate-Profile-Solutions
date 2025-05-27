@@ -4,11 +4,11 @@
 
 global $PeproDevUPS_Profile;
 $assets      = plugins_url("/assets/", dirname(__FILE__));
-$colorScheme = $this->read_opt($this->ns."___theme-color","purple");
-$assetsImg   = $this->read_opt($this->ns."___theme-sidebar-image","{$assets}img/one.jpg");
-$dashttle    = $this->read_opt($this->ns."___dashboard-title",_x("PeproDev Ultimate Profile Solutions","peprocore-appearance-setting","peprodev-ups"));
+$colorScheme = $this->read("theme_color","purple");
+$assetsImg   = $this->read("theme_img","{$assets}img/one.jpg");
+$dashttle    = $this->read("dashboard_title",_x("PeproDev Ultimate Profile Solutions","peprocore-appearance-setting","peprodev-ups"));
 if($assetsImg === "custom"){
-  $assetsImg = $this->read_opt($this->ns."___theme-sidebar-image-custom","{$assets}img/one.jpg");
+  $assetsImg = $this->read("theme_img_url","{$assets}img/one.jpg");
 }
 $default = array();
 $navs = "";
@@ -77,8 +77,10 @@ if (!isset($ssection) || empty($ssection)  || !in_array($ssection,$allowedAdds))
       <div class="container-fluid">
         <nav class="float-left">
           <ul>
-            <li><a href="https://pepro.dev/"><?php esc_html_e("Pepro Dev","peprodev-ups");?></a></li>
-            <li><a href="https://pepro.dev/support"><?php esc_html_e("Support","peprodev-ups");?></a></li>
+            <li><a href="https://pepro.dev/"><?php esc_html_e("Pepro.Dev","peprodev-ups");?></a></li>
+            <li><a href="support@peprodev.com"><?php esc_html_e("Support","peprodev-ups");?></a></li>
+            <li><a href="https://github.com/peprodev/Ultimate-Profile-Solutions/blob/master/changelog.md"><?php esc_html_e("Changelog","peprodev-ups");?></a></li>
+            <li><a href="https://github.com/peprodev/Ultimate-Profile-Solutions/"><?php esc_html_e("Github","peprodev-ups");?></a></li>
           </ul>
         </nav>
         <div class="copyright float-right">

@@ -20,11 +20,11 @@
               <tr>
                 <td><?php echo esc_html_x("Profile Logo Image","profile-section", "peprodev-ups");?></td>
                 <td>
-                  <input type="hidden" data-id="<?php echo esc_attr( get_option("{$this->activation_status}-logo-id","") );?>" id="profile-section-logo"
-                  value="<?php echo esc_attr( get_option("{$this->activation_status}-logo", $this->icon) );?>"
+                  <input type="hidden" data-id="<?php echo esc_attr( $this->read("logo-id","") );?>" id="profile-section-logo"
+                  value="<?php echo esc_attr( $this->read("logo", $this->icon) );?>"
                   class="form-control primary" placeholder="<?php echo esc_html_x("Logo URL","profile-section","peprodev-ups");?>" />
                   <div class="flex flex-sb">
-                    <img style="border-radius: 5px;" src="<?php echo esc_attr( get_option("{$this->activation_status}-logo","") );?>" id="profile-img" width="86px"/>
+                    <img style="border-radius: 5px;" src="<?php echo esc_attr( $this->read("logo","") );?>" id="profile-img" width="86px"/>
                     <button type="button" id="selectlogoimg" style="padding: 12px; display: block;" class="btn btn-primary mediapicker icn-btn"
                     data-ref="#profile-section-logo"
                     data-ref4="#profile-img"
@@ -38,7 +38,7 @@
                 <td><?php echo esc_html_x("Dashboard page","profile-section", "peprodev-ups");?></td>
                 <td>
                   <?php
-                    $dashpage = get_option("{$this->activation_status}-profile-dash-page","");
+                    $dashpage = $this->read("profile_page", "profile");
                     $dropdown_args = array(
                       'selected'         => $dashpage,
                       'name'             => 'profile_dash_page',
@@ -90,7 +90,7 @@
                   data-text-off='<?php echo esc_html_x("No, Hide it","profile-section", "peprodev-ups");?>'
                   data-on='check_box'
                   data-off='check_box_outline_blank'
-                  data-checked='<?php echo esc_attr( get_option("{$this->activation_status}-showwelcome","true") === "true" ? "true" : "false" );?>' id="showwelcome"></a>
+                  data-checked='<?php echo esc_attr( $this->read("showwelcome","true") === "true" ? "true" : "false" );?>' id="showwelcome"></a>
                 </td>
               </tr>
               <?php if ($this->_wc_activated()){ ?>
@@ -103,7 +103,7 @@
                     data-text-off='<?php echo esc_html_x("No, Hide it","profile-section", "peprodev-ups");?>'
                     data-on='check_box'
                     data-off='check_box_outline_blank'
-                    data-checked='<?php echo esc_attr( get_option("{$this->activation_status}-woocommercestats","true") === "true" ? "true" : "false" );?>' id="woocommercestats"></a>
+                    data-checked='<?php echo esc_attr( $this->read("woocommercestats","true") === "true" ? "true" : "false" );?>' id="woocommercestats"></a>
                   </td>
                 </tr>
                 <!-- Show WooCommerce Orders -->
@@ -115,7 +115,7 @@
                     data-text-off='<?php echo esc_html_x("No, Hide it","profile-section", "peprodev-ups");?>'
                     data-on='check_box'
                     data-off='check_box_outline_blank'
-                    data-checked='<?php echo esc_attr( get_option("{$this->activation_status}-woocommerceorders","true") === "true" ? "true" : "false" );?>' id="woocommerceorders"></a>
+                    data-checked='<?php echo esc_attr( $this->read("woocommerceorders","true") === "true" ? "true" : "false" );?>' id="woocommerceorders"></a>
                   </td>
                 </tr>
               <?php } ?>
@@ -129,17 +129,17 @@
                   data-on='check_box'
                   data-off='check_box_outline_blank'
                   data-togglel='[showoncustomcontent]'
-                  data-checked='<?php echo esc_attr( get_option("{$this->activation_status}-showcustomtext","true") === "true" ? "true" : "false" );?>' id="showcustomtext"></a>
+                  data-checked='<?php echo esc_attr( $this->read("showcustomtext","true") === "true" ? "true" : "false" );?>' id="showcustomtext"></a>
                 </td>
               </tr>
               <tr showoncustomcontent>
                 <td><?php echo esc_html_x("Content Position","profile-section", "peprodev-ups");?></td>
                 <td>
                   <select id="customposition">
-                    <?php echo "<option " . selected(get_option("{$this->activation_status}-customposition","p2"),"p1",false)." value='p1'>" . esc_html_x("Before Welcome message","profile-section","peprodev-ups") . "</option>";?>
-                    <?php echo "<option " . selected(get_option("{$this->activation_status}-customposition","p2"),"p2",false)." value='p2'>" . esc_html_x("After Welcome message","profile-section","peprodev-ups") . "</option>";?>
-                    <?php echo "<option " . selected(get_option("{$this->activation_status}-customposition","p2"),"p3",false)." value='p3'>" . esc_html_x("After WooCommerce Stats","profile-section","peprodev-ups") . "</option>";?>
-                    <?php echo "<option " . selected(get_option("{$this->activation_status}-customposition","p2"),"p4",false)." value='p4'>" . esc_html_x("After WooCommerce Orders","profile-section","peprodev-ups") . "</option>";?>
+                    <?php echo "<option " . selected($this->read("customposition","p2"),"p1",false)." value='p1'>" . esc_html_x("Before Welcome message","profile-section","peprodev-ups") . "</option>";?>
+                    <?php echo "<option " . selected($this->read("customposition","p2"),"p2",false)." value='p2'>" . esc_html_x("After Welcome message","profile-section","peprodev-ups") . "</option>";?>
+                    <?php echo "<option " . selected($this->read("customposition","p2"),"p3",false)." value='p3'>" . esc_html_x("After WooCommerce Stats","profile-section","peprodev-ups") . "</option>";?>
+                    <?php echo "<option " . selected($this->read("customposition","p2"),"p4",false)." value='p4'>" . esc_html_x("After WooCommerce Orders","profile-section","peprodev-ups") . "</option>";?>
                   </select>
                 </td>
               </tr>
@@ -147,10 +147,10 @@
                   <td colspan="2">
                     <?php
                       wp_editor(
-                          stripslashes(get_option("{$this->activation_status}-customhtml")),
-                          "{$this->activation_status}-customhtml",
+                          stripslashes($this->read("customhtml")),
+                          "peprodev-ups-customhtml",
                           array(
-                          'textarea_name'    => "{$this->activation_status}-customhtml",
+                          'textarea_name'    => "customhtml",
                           'editor_height'    => 350,
                           'editor_css'       => '',     // Additional CSS styling applied for both visual and HTML editors buttons, needs to include <style> tags, can use "scoped"
                           'editor_class'     => '',     // Any extra CSS Classes to append to the Editor textarea
@@ -192,15 +192,15 @@
               <tr>
                 <td colspan="2">
                   <?php echo esc_html_x("Global CSS","profile-section", "peprodev-ups");?>
-                  <textarea name="<?php echo "{$this->activation_status}-css";?>" class="codeditor" id="csseditor" spellcheck="false" dir="ltr" rows="8" cols="80"><?php echo html_entity_decode(stripslashes(get_option("{$this->activation_status}-css")));?></textarea>
-                  <textarea name="<?php echo "{$this->activation_status}-css";?>" style="display:none !important;" class="codeditor" id="css" spellcheck="false" dir="ltr" rows="8" cols="80"><?php echo html_entity_decode(stripslashes(get_option("{$this->activation_status}-css")));?></textarea>
+                  <textarea name="css" class="codeditor" id="csseditor" spellcheck="false" dir="ltr" rows="8" cols="80"><?php echo html_entity_decode(stripslashes($this->read("css")));?></textarea>
+                  <textarea name="css" style="display:none !important;" class="codeditor" id="css" spellcheck="false" dir="ltr" rows="8" cols="80"><?php echo html_entity_decode(stripslashes($this->read("css")));?></textarea>
                 </td>
               </tr>
               <tr>
                 <td colspan="2">
                   <?php echo esc_html_x("Global JS","profile-section", "peprodev-ups");?>
-                  <textarea name="<?php echo "{$this->activation_status}-css";?>" class="codeditor" id="jseditor" spellcheck="false" dir="ltr" rows="8" cols="80"><?php echo html_entity_decode(stripslashes(get_option("{$this->activation_status}-js")));?></textarea>
-                  <textarea name="<?php echo "{$this->activation_status}-js";?>" style="display:none !important;" class="codeditor" id="js" spellcheck="false" dir="ltr" rows="8" cols="80"><?php echo html_entity_decode(stripslashes(get_option("{$this->activation_status}-js")));?></textarea>
+                  <textarea name="js" class="codeditor" id="jseditor" spellcheck="false" dir="ltr" rows="8" cols="80"><?php echo html_entity_decode(stripslashes($this->read("js")));?></textarea>
+                  <textarea name="js" style="display:none !important;" class="codeditor" id="js" spellcheck="false" dir="ltr" rows="8" cols="80"><?php echo html_entity_decode(stripslashes($this->read("js")));?></textarea>
                 </td>
               </tr>
           </tbody>
