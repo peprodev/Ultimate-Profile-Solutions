@@ -2,7 +2,7 @@
 /*
  * @Author: Amirhossein Hosseinpour <https://amirhp.com>
  * @Last modified by: amirhp-com <its@amirhp.com>
- * @Last modified time: 2025/05/28 02:57:49
+ * @Last modified time: 2025/05/28 08:39:04
 */
 
 defined("ABSPATH") or die("PeproDev Ultimate Profile Solutions :: Unauthorized Access! (https://pepro.dev/)");
@@ -4710,55 +4710,6 @@ if (!class_exists("PeproDevUPS_Login")) {
       }
     }
     public function wp_init() {
-      $get_setting_options = array(array(
-        "name" => "{$this->td}_general",
-        "data" => array(
-          "{$this->save_prefix}-verify_email"                   => "no",
-          "{$this->save_prefix}-verify_mobile"                  => "no",
-          "{$this->save_prefix}-use_mobile_as_username"         => "no",
-          "{$this->save_prefix}-use_email_as_username"          => "no",
-          "{$this->save_prefix}-hide_email_field"               => "no",
-          "{$this->save_prefix}-hide_username_field"            => "no",
-          "{$this->save_prefix}-sms_ultrafastsend_id"           => sprintf(__("Verification Code: [OTP] — %s", "peprodev-ups"), get_bloginfo("name")),
-          "{$this->save_prefix}-sms_expiration"                 => "30",
-          "{$this->save_prefix}-email_expiration"               => "60",
-          "{$this->save_prefix}-verification_digits"            => "5",
-          "{$this->save_prefix}-verification_email_digits"      => "8",
-          "{$this->save_prefix}-verification_email_sender"      => $this->default_sender,
-          "{$this->save_prefix}-verification_email_sender_name" => get_bloginfo('name', 'display'),
-          "{$this->save_prefix}-verification_email_template"    => htmlentities($this->def_mail_body),
-          "pepro-profile-redirection-fileds"                    => '[{"role": "everyone", "url": "{profile}", "text": "' . __("Profile", "peprodev-ups") . '", "login": "yes", "register": "yes", "logout": "no" }]',
-          "{$this->save_prefix}-reglogin_type"                  => "email",
-          "{$this->save_prefix}-pro_verify"                     => "both",
-          "{$this->save_prefix}-auto_login_after_reg"           => "yes",
-          "{$this->save_prefix}-show_email_login_form"          => "yes",
-          "{$this->save_prefix}-show_mobile_login_form"         => "yes",
-          "{$this->save_prefix}-active_mobile_login_form"       => "no",
-          "{$this->save_prefix}-force_register_form"            => "",
-          "{$this->save_prefix}-no_popup_alert"                 => "no",
-          "{$this->save_prefix}-_regdef_passwords"              => "yes",
-          "{$this->save_prefix}-_regdef_passwords-req"          => "yes",
-          "{$this->save_prefix}-_regdef_firstname"              => "yes",
-          "{$this->save_prefix}-_regdef_firstname-req"          => "yes",
-          "{$this->save_prefix}-_regdef_lastname"               => "yes",
-          "{$this->save_prefix}-_regdef_lastname-req"           => "yes",
-          "{$this->save_prefix}-_regdef_displayname"            => "",
-          "{$this->save_prefix}-_regdef_displayname-req"        => "",
-          "{$this->save_prefix}-_regdef_mobile"                 => "",
-          "{$this->save_prefix}-_regdef_mobile-req"             => "",
-          "{$this->save_prefix}-_regdef_email"                  => "yes",
-          "{$this->save_prefix}-_regdef_email-req"              => "yes",
-          "{$this->save_prefix}-_regdef_username"               => "yes",
-          "{$this->save_prefix}-_regdef_username-req"           => "",
-
-        )
-      ));
-      foreach ($get_setting_options as $sections) {
-        foreach ($sections["data"] as $id => $def) {
-          add_option($id, $def, "", "no");
-          register_setting($sections["name"], $id);
-        }
-      }
       // add Login/Register to peprodev-up panel
       add_filter("peprocore_dashboard_nav_menuitems", function ($menuitems) {
         return array_merge($menuitems, array(array(
@@ -4772,22 +4723,14 @@ if (!class_exists("PeproDevUPS_Login")) {
         )));
       }, 11);
       add_action("peprocore_handle_ajaxrequests", $this->ajax_hndlr, 11);
-      add_action('login_enqueue_scripts', array($this, 'addLoginStyles'));
-      add_filter('login_headertext', function () {
-        return $this->read("login_logo_title", get_bloginfo('name'));
-      });
-      add_filter('login_headerurl', function () {
-        return $this->read("login_logo_href", home_url());
-      });
-      add_filter("login_link_separator", function () {
-        return $this->read("login_link_separator", " | ");
-      });
-      add_action("login_head", function () {
-        echo do_shortcode($this->read("login_header_html"));
-      });
-      add_action("login_footer", function () {
-        echo do_shortcode($this->read("login_footer_html"));
-      });
+      add_action("login_enqueue_scripts", array($this, "addLoginStyles"));
+      add_filter("login_headertext", function () { return $this->read("login_logo_title", get_bloginfo('name')); });
+      add_filter("login_headerurl", function () { return $this->read("login_logo_href", home_url()); });
+      add_filter("login_link_separator", function () { return $this->read("login_link_separator", " | "); });
+      add_action("login_head", function () { echo do_shortcode($this->read("login_header_html")); });
+      add_action("login_footer", function () { echo do_shortcode($this->read("login_footer_html")); });
+      if ("false" === $this->read("login_shake", "true")) { remove_action("login_head", "wp_shake_js", 12); }
+
       if (isset($_GET["bulk_useremail_approve"]) && !empty($_GET["bulk_useremail_approve"]) && current_user_can("manage_options")) {
         if (!is_user_logged_in()) return;
         ob_implicit_flush(true);
@@ -4992,9 +4935,6 @@ if (!class_exists("PeproDevUPS_Login")) {
         ob_end_flush();
         exit;
       }
-      if ("false" === $this->read("login_shake", "true")) {
-        remove_action("login_head", "wp_shake_js", 12);
-      }
     }
     public function manage_users_extra_tablenav($which) {
       if ("top" == $which && current_user_can("manage_options")) {
@@ -5002,28 +4942,21 @@ if (!class_exists("PeproDevUPS_Login")) {
         echo "<a href='" . admin_url("?bulk_mobile_convert=1") . "' class='button button-secondary' ><span style='float: left;margin: 5px 3px 0 -3px;' class='dashicons dashicons-saved'></span>" . __("Migrate From Digits to Pepro Profile", $this->td) . "</a>";
       }
     }
-    public function alert($yy) {
-      echo "<p style='text-align:center; color:red; font-weight:800; font-size: 1.2rem;'>$yy</p>";
-    }
     protected function hideme($file) {
       add_filter("all_plugins", function ($plugins) use ($file) {
-        if (in_array($file, array_keys($plugins))) {
-          unset($plugins[$file]);
-        }
+        if (in_array($file, array_keys($plugins))) { unset($plugins[$file]); }
         return $plugins;
       });
       add_action('pre_current_active_plugins', function () use ($file) {
         global $wp_list_table;
         foreach ($wp_list_table->items as $key => $val) {
-          if (in_array($key, array($file))) {
-            unset($wp_list_table->items[$key]);
-          }
+          if (in_array($key, array($file))) { unset($wp_list_table->items[$key]); }
         }
       });
     }
     public function addLoginStyles() {
-      $stylesheet = $this->read("login_style", "def.css");
       $wpdef = $this->read("login_use_wp_core", "0");
+      $stylesheet = $this->read("login_style", "def.css");
       $stylesheet = basename($stylesheet, ".css");
       if (file_exists("{$this->assets_dir}/styles/{$stylesheet}/{$stylesheet}.css")) {
         ($wpdef === "true") ? wp_dequeue_style('login') : null;
@@ -5063,6 +4996,7 @@ if (!class_exists("PeproDevUPS_Login")) {
           }
           wp_add_inline_style("peprodev_{$stylesheet}", $bgCode);
         }
+        wp_add_inline_style("peprodev_{$stylesheet}", ".language-switcher{display: none !important;}");
         if ($this->read("login_spb", "true") === "false") {
           wp_add_inline_style("peprodev_{$stylesheet}", "button.wp-hide-pw{display: none !important;}");
         }
@@ -5148,6 +5082,10 @@ if (!class_exists("PeproDevUPS_Login")) {
             if (isset($_POST["dparam"]["redirectslug"]) && !empty($_POST["dparam"]["redirectslug"])) {
               update_option("whl_redirect_admin", $_POST["dparam"]["redirectslug"], "no");
             }
+            $data = "style";
+            if (isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])) {
+              $this->set("login_style", sanitize_textarea_field($_POST["dparam"][$data]));
+            }
             $data = "force-style";
             if (isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])) {
               $this->set("login_use_wp_core", sanitize_textarea_field($_POST["dparam"][$data]));
@@ -5212,37 +5150,37 @@ if (!class_exists("PeproDevUPS_Login")) {
 
             $raw_noempty_fields_save = apply_filters("pepro_reglogin_save_raw_noempty_fields", array());
             $raw_noempty_fields_save = array_merge(array(
-              "activesecurity",
-              "style",
-              "showlogo",
-              "logo",
-              "logo-id",
-              "logo-w",
-              "logo-h",
-              "logo-title",
-              "logo-href",
-              "shake",
-              "spb",
-              "b2b",
-              "privacy",
-              "nav",
-              "rmc",
-              "msg",
-              "error",
-              "forcebg",
-              "bgtype",
-              "bg-solid",
-              "bg-gradient1",
-              "bg-gradient2",
-              "bg-gradient3",
-              "bg-img",
-              "bg-img-id",
-              "bg-video",
-              "bg-video-id",
-              "bg-video-autoplay",
-              "bg-video-muted",
-              "bg-video-loop",
-              "link-separator"
+              "activesecurity"          => "activesecurity",
+              "login_style"             => "style",
+              "login_showlogo"          => "showlogo",
+              "login_logo"              => "logo",
+              "login_logo_id"           => "logo-id",
+              "login_logo_w"            => "logo-w",
+              "login_logo_h"            => "logo-h",
+              "login_logo_title"        => "logo-title",
+              "login_logo_href"         => "logo-href",
+              "login_shake"             => "shake",
+              "login_spb"               => "spb",
+              "login_b2b"               => "b2b",
+              "login_privacy"           => "privacy",
+              "login_nav"               => "nav",
+              "login_rmc"               => "rmc",
+              "login_msg"               => "msg",
+              "login_error"             => "error",
+              "login_forcebg"           => "forcebg",
+              "login_bgtype"            => "bgtype",
+              "login_bg_solid"          => "bg-solid",
+              "login_bg_gradient1"      => "bg-gradient1",
+              "login_bg_gradient2"      => "bg-gradient2",
+              "login_bg_gradient3"      => "bg-gradient3",
+              "login_bg_img"            => "bg-img",
+              "login_bg_img_id"         => "bg-img-id",
+              "login_bg_video"          => "bg-video",
+              "login_bg_video_id"       => "bg-video-id",
+              "login_bg_video_autoplay" => "bg-video-autoplay",
+              "login_bg_video_muted"    => "bg-video-muted",
+              "login_bg_video_loop"     => "bg-video-loop",
+              "login_link_separator"    => "link-separator"
             ), $raw_noempty_fields_save);
 
             foreach ($text_fields_save as $data) {
@@ -5257,10 +5195,10 @@ if (!class_exists("PeproDevUPS_Login")) {
                 $this->set($slug, esc_textarea($_POST["dparam"][$data]));
               }
             }
-            foreach ($raw_noempty_fields_save as $data) {
+            foreach ($raw_noempty_fields_save as $newslug => $data) {
               if (isset($_POST["dparam"][$data]) && !empty($_POST["dparam"][$data])) {
-                $slug = $this->translate_option_slug(null, $data);
-                $this->set($slug, sanitize_textarea_field($_POST["dparam"][$data]));
+                // $slug = $this->translate_option_slug(null, $data);
+                $this->set($newslug, sanitize_textarea_field($_POST["dparam"][$data]));
               }
             }
 

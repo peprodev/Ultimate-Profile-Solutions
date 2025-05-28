@@ -3,7 +3,7 @@
  * @Author: Amirhossein Hosseinpour <https://amirhp.com>
  * @Date Created: 2023/02/06 01:05:22
  * @Last modified by: amirhp-com <its@amirhp.com>
- * @Last modified time: 2025/05/28 03:00:34
+ * @Last modified time: 2025/05/28 08:08:12
  * @Based on: PeproDev Ultimate Profile Solutions - 1.9.17.2
  * @Based on: https://wordpress.org/plugins/peprodev-ups/
 */
@@ -168,38 +168,37 @@ if (defined('ABSPATH') && ! class_exists('WPS_Hide_Login')) {
 
 		public function admin_init() {
 			global $pagenow;
-			?>
-			<style>
-			.peprodev-profile-edit {
-				padding: 1rem;
-				background: #fbf6f2;
-				border-radius: 0.5rem;
-				margin: 1rem 0;
-				border: 2px solid orange;
-				position: relative;
-			}
-			.peprodev-profile-edit h3 {
-				margin: 0 auto 1rem auto;
-				font-weight: 800;
-				font-size: large;
-			}
-			.peprodev-profile-edit::after {
-				position: absolute;
-				left: 0;
-				top: 0;
-				width: 100%;
-				height: 100%;
-				content: "";
-				background: url('<?php echo plugins_url("/core/assets/", dirname(dirname(__FILE__))) . "img/peprodev.svg";?>') no-repeat 100% center / 41%;
-				pointer-events: none;
-				z-index: 0;
-				filter: opacity(0.1);
-			}
-			</style>
-			<?php
 			add_settings_section(
 				'peprodev-ups-section',
-				"<h2 style='margin-bottom: 0.5rem;'>" . __('PeproDev Ultimate Profile Solutions', 'peprodev-ups') . "</h2><i>" . sprintf(__("This setting is provieded by %s.", "peprodev-ups"), "<a target='_blank' href='".admin_url("admin.php?page=peprodev-ups&section=loginregister#tab_wp_login")."'>".__("PeproDev Ultimate Profile Solutions", "peprodev-ups")."</a>") . "</i>",
+				"
+				<style>
+					.peprodev-profile-edit {
+						padding: 1rem;
+						background: #fbf6f2;
+						border-radius: 0.5rem;
+						margin: 1rem 0;
+						border: 2px solid orange;
+						position: relative;
+					}
+					.peprodev-profile-edit h3 {
+						margin: 0 auto 1rem auto;
+						font-weight: 800;
+						font-size: large;
+					}
+					.peprodev-profile-edit::after {
+						position: absolute;
+						left: 0;
+						top: 0;
+						width: 100%;
+						height: 100%;
+						content: '';
+						background: url('".plugins_url("/core/assets/", dirname(dirname(__FILE__)))."img/peprodev.svg') no-repeat 100% center / 41%;
+						pointer-events: none;
+						z-index: 0;
+						filter: opacity(0.1);
+					}
+				</style>
+				<h2 style='margin-bottom: 0.5rem;'>" . __('PeproDev Ultimate Profile Solutions', 'peprodev-ups') . "</h2><i>" . sprintf(__("This setting is provieded by %s.", "peprodev-ups"), "<a target='_blank' href='".admin_url("admin.php?page=peprodev-ups&section=loginregister#tab_wp_login")."'>".__("PeproDev Ultimate Profile Solutions", "peprodev-ups")."</a>") . "</i>",
 				array($this, 'whl_section_desc'),
 				'general',
 				[
