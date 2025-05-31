@@ -2,8 +2,8 @@
 Contributors: amirhpcom, peprodev, blackswanlab
 Donate link: https://peprodev.com/donate/
 Tags: profile, dashboard, login-registration
-Version: 8.0.2
-Stable tag: 8.0.2
+Version: 8.0.3
+Stable tag: 8.0.3
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.2
@@ -139,6 +139,10 @@ Your support and feedback have been key in shaping this plugin into a reliable a
 🎂 Also, a big congratulations to WordPress on its 22nd birthday 🥳🍾!
 We're proud to be part of this amazing journey with the WordPress community 💙
 Here's to many more years of innovation, freedom, and open-source collaboration 😍!
+
+= Version 8.0.3 | 2025-05-31 | 1404-03-10 =
+- Fixed some Backend Setting UI issues
+- Fixed Custom text on dashboard not rendered properly
 
 = Version 8.0.2 | 2025-05-28 | 1404-03-07 =
 - Fixed issue with login slug not functioning correctly

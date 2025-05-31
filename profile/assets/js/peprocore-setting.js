@@ -62,22 +62,22 @@
       var contentHTML = $(elID).val();
       try {
         if (tinymce.activeEditor){ tinymce.activeEditor.save(); }
-        if ($(elID).hasClass("tmce-active")){ contentHTML = tinymce.activeEditor.getContent(); }
+        if (tinymce.get("peprodev-ups-customhtml")){ contentHTML = tinymce.get("peprodev-ups-customhtml").getContent(); }
       } catch (e) { }
       var datatosave = {
-        "css"              : $("#css").val(),
-        "js"               : $("#js").val(),
-        "logo"             : $("#profile-section-logo").val(),
-        "logo-id"          : $("#profile-section-logo").attr("data-id"),
-        "showwelcome"      : $("#showwelcome").attr("data-checked"),
-        "headerhook"       : $("#headerhook").attr("data-checked"),
-        "footerhook"       : $("#footerhook").attr("data-checked"),
-        "woocommerceorders": $("#woocommerceorders").attr("data-checked"),
-        "woocommercestats" : $("#woocommercestats").attr("data-checked"),
-        "showcustomtext"   : $("#showcustomtext").attr("data-checked"),
-        "customhtml"       : contentHTML,
-        "customposition"   : $("#customposition").val(),
-        "profile_page"     : $("#profile_dash_page").val(),
+        "custom_css"        : $("#css").val(),
+        "custom_js"         : $("#js").val(),
+        "custom_logo"       : $("#profile-section-logo").val(),
+        "custom_logo_id"    : $("#profile-section-logo").attr("data-id"),
+        "show_welcome"      : $("#show_welcome").attr("data-checked"),
+        "header_hook"       : $("#headerhook").attr("data-checked"),
+        "footer_hook"       : $("#footerhook").attr("data-checked"),
+        "woocommerce_orders": $("#woocommerceorders").attr("data-checked"),
+        "woocommerce_stats" : $("#woocommercestats").attr("data-checked"),
+        "show_custom_text"  : $("#showcustomtext").attr("data-checked"),
+        "custom_html"       : contentHTML,
+        "custom_position"   : $("#customposition").val(),
+        "profile_page"      : $("#profile_dash_page").val(),
       };
       var me = $(this);
       let nonce = me.attr('integrity'),wparam = me.attr('wparam'),lparam = me.attr('lparam');

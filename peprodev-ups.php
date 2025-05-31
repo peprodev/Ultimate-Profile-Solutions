@@ -7,7 +7,7 @@ Tags: profile, dashboard, login-registration
 Author: Pepro Dev. Group
 Author URI: https://peprodev.com/pepro-ultimate-profile-solution/
 Plugin URI: https://wordpress.org/plugins/peprodev-ups/
-Version: 8.0.2
+Version: 8.0.3
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.2
@@ -18,7 +18,7 @@ Copyright: (c) Pepro Dev. Group, All rights reserved.
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * @Last modified by: amirhp-com <its@amirhp.com>
- * @Last modified time: 2025/05/28 08:48:20
+ * @Last modified time: 2025/05/31 16:42:09
 */
 
 defined("ABSPATH") or die("PeproDev Ultimate Profile Solutions :: Unauthorized Access!");
@@ -27,8 +27,8 @@ if (!class_exists("PeproDevUPS")) {
   class PeproDevUPS {
     public $td          = "peprodev-ups";
     public $db_slug     = "peprodev-ups";
-    public $version     = "8.0.2";
-    public $db_version  = "8.0.2";
+    public $version     = "8.0.3";
+    public $db_version  = "8.0.3";
     public $setting_key = "peprodev_ups_profile";
     public $title = "PeproDev Profile";
     public $title_w = "PeproDev Ultimate Profile Solutions";
@@ -223,14 +223,23 @@ if (!class_exists("PeproDevUPS")) {
     }
     public function setting_defaults(){
       $def_mail_body = [
-        '<!DOCTYPE html>', '<html>', '  <head>', '    <meta charset="utf-8">', '  </head>', '  <body>',
+        '<!DOCTYPE html>', '<html>',
+        '  <head>',
+        '    <meta charset="utf-8">',
+        '  </head>',
+        '  <body>',
         '    <div style="display:block; width:450px; border-radius:0.5rem; margin: 1rem auto; text-align: center; color: #2b2b2b; padding: 1rem; box-shadow: 0 2px 5px 1px #0003; border: 1px solid #ccc;">',
         '      <h2>Verify your account</h2>',
         '      <h3>Use code below to verify your account:</h3>',
-        '      <h1>', '        <strong>[OTP]</strong>', '      </h1>',
+        '      <h1>',
+        '        <strong>[OTP]</strong>',
+        '      </h1>',
         '      <br>',
         '    </div>',
-        '    <p style="text-align: center;">', '       <small style="color: #717171;">Copyright &copy; ' . date("Y") . ', all rights reserved.</small>', '    </p>', '  </body>', '</html>'
+        '    <p style="text-align: center;">',
+        '       <small style="color: #717171;">Copyright &copy; ' . date("Y") . ', all rights reserved.</small>', '    </p>',
+        '  </body>',
+        '</html>'
       ];
       $array = [
         "new_setting"                    => "1.0.0",

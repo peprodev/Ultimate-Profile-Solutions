@@ -3,7 +3,7 @@
 >
 > **Available at** [WordPress.org/plugins/**peprodev-ups**](https://wordpress.org/plugins/peprodev-ups)
 >
-> **Version:** 8.0.2
+> **Version:** 8.0.3
 > **Contributors:** amirhpcom, peprodev, blackswanlab
 > **Tags:** profile-builder, user-dashboard, login-registration, pepro-dev
 > **Requires at least:** WordPress 5.0

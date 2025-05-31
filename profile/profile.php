@@ -2,7 +2,7 @@
 /*
  * @Author: Amirhossein Hosseinpour <https://amirhp.com>
  * @Last modified by: amirhp-com <its@amirhp.com>
- * @Last modified time: 2025/05/28 00:06:44
+ * @Last modified time: 2025/05/31 16:37:32
  */
 defined("ABSPATH") or die("PeproDev Ultimate Profile Solutions :: Unauthorized Access! (https://pepro.dev/)");
 
@@ -235,16 +235,15 @@ if (!class_exists("PeproDevUPS_Profile")) {
       }
     }
     public function get_profile_page($queryVar = null) {
-      $profile_page = $this->read("profile_page", false);
-      if (!get_post($profile_page)) $profile_page = false;
-      if (true === $queryVar) return get_permalink($profile_page);
+      $profile_page = $this->read("profile_page", "");
+      $url = get_post($profile_page) ? get_permalink($profile_page) : home_url();
+      if (true === $queryVar) return $url;
       if ($queryVar && null !== $queryVar && is_array($queryVar)) {
-        $url = $profile_page ? get_permalink($profile_page) : home_url();
         $lang = defined('ICL_LANGUAGE_CODE') ? ICL_LANGUAGE_CODE : "en";
         $url = apply_filters('wpml_permalink', $url, $lang);
-        $profile_page = add_query_arg($queryVar, $url);
+        $url = add_query_arg($queryVar, $url);
       }
-      return apply_filters("peprofile_get_profile_page", $profile_page, $queryVar);
+      return apply_filters("peprofile_get_profile_page", $url, $queryVar);
     }
     public function admin_bar_menu_items($wp_admin_bar) {
       echo "<style>#wpadminbar #wp-admin-bar-peprocoreprofile .ab-icon::before {content: \"\\f110\";top: 2px;}</style>";
@@ -1394,14 +1393,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
       return $located;
     }
     public function change_dashboard_title($title = "") {
-      $title = apply_filters(
-        "peprofile_default_title",
-        sprintf(
-          ("%s — %s"),
-          (!empty(trim($title)) ? trim($title) : _x("Dashboard", "user-dashboard", "peprodev-ups")),
-          get_bloginfo("name")
-        )
-      );
+      $title = apply_filters( "peprofile_default_title", sprintf( ("%s — %s"), (!empty(trim($title)) ? trim($title) : _x("Dashboard", "user-dashboard", "peprodev-ups")), get_bloginfo("name") ) );
       echo "<script>document.title = '" . html_entity_decode(esc_html($title)) . "';</script>";
     }
     /* Woocommerce tempalate overwrite hooks
@@ -1427,7 +1419,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
       echo "<link href=\"$src\" rel=\"stylesheet\" media=\"all\">";
     }
     public function dashboard_add_css_inline($src) {
-      echo "<style>$src</style>";
+      echo "<style>{$src}</style>";
     }
     /* WordPress Hooks */
     public function htmlwrapper() {
@@ -1846,13 +1838,33 @@ if (!class_exists("PeproDevUPS_Profile")) {
           case 'save_setting':
 
             $options = apply_filters("peprodev-ups/save-settings/fields", [
-              "logo", "logo-id", "showwelcome", "headerhook", "footerhook", "profile_page",
-              "woocommercestats", "showcustomtext", "woocommerceorders", "customposition",
+              "custom_logo",
+              "custom_logo_id",
+              "show_welcome",
+              "show_custom_text",
+              "header_hook",
+              "footer_hook",
+              "profile_page",
+              "custom_position",
+              "woocommerce_stats",
+              "woocommerce_orders",
             ]);
-            foreach ($options as $slug) { if (isset($_POST["dparam"][$slug])) { $this->set($slug, htmlentities($_POST["dparam"][$slug])); } }
+            foreach ($options as $slug) {
+              if (isset($_POST["dparam"][$slug])) {
+                $this->set($slug, htmlentities($_POST["dparam"][$slug]));
+              }
+            }
 
-            $options = apply_filters("peprodev-ups/save-settings/fields/raw", [ "css", "js", "customhtml", ]);
-            foreach ($options as $slug) { if (isset($_POST["dparam"][$slug])) { $this->set($slug, htmlentities($_POST["dparam"][$slug])); } }
+            $options = apply_filters("peprodev-ups/save-settings/fields/raw", [
+              "custom_css",
+              "custom_js",
+              "custom_html",
+            ]);
+            foreach ($options as $slug) {
+              if (isset($_POST["dparam"][$slug])) {
+                $this->set($slug, wp_unslash($_POST["dparam"][$slug]));
+              }
+            }
 
             wp_send_json_success(["notice" => false, "notice_html" => "", "msg" => __("Settings Successfully Saved.", "peprodev-ups")]);
 
@@ -2778,15 +2790,10 @@ if (!class_exists("PeproDevUPS_Profile")) {
           <script>
             jQuery.noConflict();
             (function($) {
-              $(function() {
-                <?php echo stripslashes($notifs->js); ?>
-              });
+              $(function() {<?php echo PHP_EOL . stripslashes($notifs->js) . PHP_EOL; ?>});
             })(jQuery);
           </script>
-          <style media="screen">
-            /* Inline CSS @ Pepro Profile // https://pepro.dev/ */
-            <?php echo stripslashes($notifs->css); ?>
-          </style>
+          <style media="screen">/* Inline CSS @ Pepro Profile // https://pepro.dev/ */<?php echo stripslashes($notifs->css); ?></style>
           <div class="container-fluid">
             <div class="row">
               <div class="col-md-12">
@@ -2859,7 +2866,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
       return count($customer_orders);
     }
     public function get_promotion_data() {
-      return $this->filter_content($this->read("customhtml"));
+      return $this->filter_content($this->read("custom_html"));
     }
     public function get_customer_get_credit_balance() {
       $wallet = 00;

@@ -2,7 +2,7 @@
 /*
  * @Author: Amirhossein Hosseinpour <https://amirhp.com>
  * @Last modified by: amirhp-com <its@amirhp.com>
- * @Last modified time: 2025/04/07 19:37:24
+ * @Last modified time: 2025/05/31 16:16:10
  */
 
 global $PeproDevUPS_Profile;
@@ -132,10 +132,14 @@ $loadingRing = '<div class="lds-ring2"><div></div><div></div><div></div><div></d
 
                       $sfws_posts = '<option value="0" selected>'.__("— None","peprodev-ups").'</option>';
                       $posts = get_posts(array('post_type'=> 'sfwd-courses', 'post_status'=> 'publish', 'suppress_filters' => false, 'posts_per_page' => -1 ) );
-                      foreach ($posts as $post) { $sfws_posts .= "<option value='$post->ID'>$post->post_title (#$post->ID)</option>"; }
+                      if ($posts) {
+                        foreach ((array) $posts as $post) {
+                          $sfws_posts .= "<option value='{$post->ID}'>{$post->post_title} (#{$post->ID})</option>";
+                        }
+                      }
                       $title = _x("Restrict Access to Ld-Course", "notif-panel", "peprodev-ups");
                       echo "<tr showadvanced>
-                              <td ><label class=\"text-primary\" for=\"notifaddedit-ld_lms\">$title</label></td><td>".'
+                              <td ><label class=\"text-primary\" for=\"notifaddedit-ld_lms\">{$title}</label></td><td>".'
                                 <select id="notifaddedit-ld_lms" name="notifaddedit-ld_lms" class="form-control primary select2 mt-3">'.$sfws_posts.'</select>';
                       echo "<br><small>".__("Restrict Access to Ld-Course enrolled users in addition to User Roles","peprodev-ups")."</small></td></tr>";
 
@@ -237,19 +241,16 @@ $loadingRing = '<div class="lds-ring2"><div></div><div></div><div></div><div></d
           $title = _x("Priority (number)", "section-panel", "peprodev-ups");
           $toltip = sprintf(_x("Enter %s", "section-panel", "peprodev-ups"), $title);
           $PeproDevUPS_Profile->add_notif_input("","section_builtin_priority",$title,$toltip,"number","",1000,"min='0'");
-
-          $titke = _x("Section is active?", "section-panel", "peprodev-ups");
-          $title = _x("Check to activate section and show it on front-end", "section-panel", "peprodev-ups");
           echo " <tr>
               <td>
-                <label class=\"text-primary\" for=\"section_builtin_active_check\">$titke</label>
+                <label class=\"text-primary\" for=\"section_builtin_active_check\">"._x("Section is active?", "section-panel", "peprodev-ups")."</label>
               </td>
               <td>
                 <div class='form-check'>
                   <label class='form-check-label'>
                     <input class='form-check-input' type='checkbox'checked id='section_builtin_active_check'>
                     <span class='form-check-sign'>
-                      <span class='check'></span></span> $title
+                      <span class='check'></span></span> "._x("Check to activate section and show it on front-end", "section-panel", "peprodev-ups")."
                   </label>
                 </div>
               </td>

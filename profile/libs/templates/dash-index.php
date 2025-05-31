@@ -3,7 +3,7 @@
  * @Author: Amirhossein Hosseinpour <https://amirhp.com>
  * @Date Created: 2023/06/27 02:45:26
  * @Last modified by: amirhp-com <its@amirhp.com>
- * @Last modified time: 2025/05/27 22:53:37
+ * @Last modified time: 2025/05/31 16:28:56
  */
 class dash_index extends PeproDevUPS {
   public function __construct() {
@@ -166,7 +166,6 @@ class dash_index extends PeproDevUPS {
           if (empty($current_requested_slug) || !in_array($current_requested_slug, $allowed_slugs_whitelist)) {
             $PeproDevUPS_Profile->peprofile_get_template_part("dash", "home");
           } else {
-
             add_filter("body_class", function ($classes) use ($current_requested_slug) {
               $classes[] = "pepro-profile-page";
               $classes[] = "section-{$current_requested_slug}";

@@ -260,34 +260,34 @@ jQuery.noConflict();
     $(document).on("change keyup refesh", "[name='reglogin_type']", function(e, mute){
       switch ($("[name='reglogin_type']:checked").val()) {
         case "mobile":
-          $('._regdef_mobile [name="_regdef_mobile"]').prop("checked", true).trigger("change").prop("disabled", true);
-          $('._regdef_mobile .is_required').prop("checked", true).trigger("change").prop("disabled", true);
+          $('.regdef_mobile [name="regdef_mobile"]').prop("checked", true).trigger("change").prop("disabled", true);
+          $('.regdef_mobile .is_required').prop("checked", true).trigger("change").prop("disabled", true);
           if (!mute){
-            $('._regdef_email [name="_regdef_email"]').prop("checked", false).trigger("change").prop("disabled", false);
-            $('._regdef_email .is_required').prop("checked", false).trigger("change").prop("disabled", false);
-            $('._regdef_passwords [name="_regdef_passwords"]').prop("checked", false).trigger("change").prop("disabled", false);
-            $('._regdef_passwords .is_required').prop("checked", false).trigger("change").prop("disabled", false);
+            $('.regdef_email [name="regdef_email"]').prop("checked", false).trigger("change").prop("disabled", false);
+            $('.regdef_email .is_required').prop("checked", false).trigger("change").prop("disabled", false);
+            $('.regdef_passwords [name="regdef_passwords"]').prop("checked", false).trigger("change").prop("disabled", false);
+            $('.regdef_passwords .is_required').prop("checked", false).trigger("change").prop("disabled", false);
           }
           break;
         case "email":
           if (!mute){
-            $('._regdef_mobile [name="_regdef_mobile"]').prop("checked", false).trigger("change").prop("disabled", false);
-            $('._regdef_mobile .is_required').prop("checked", false).trigger("change").prop("disabled", false);
+            $('.regdef_mobile [name="regdef_mobile"]').prop("checked", false).trigger("change").prop("disabled", false);
+            $('.regdef_mobile .is_required').prop("checked", false).trigger("change").prop("disabled", false);
           }
-          $('._regdef_email [name="_regdef_email"]').prop("checked", true).trigger("change").prop("disabled", true);
-          $('._regdef_email .is_required').prop("checked", true).trigger("change").prop("disabled", true);
-          $('._regdef_passwords [name="_regdef_passwords"]').prop("checked", true).trigger("change").prop("disabled", true);
-          $('._regdef_passwords .is_required').prop("checked", true).trigger("change").prop("disabled", true);
+          $('.regdef_email [name="regdef_email"]').prop("checked", true).trigger("change").prop("disabled", true);
+          $('.regdef_email .is_required').prop("checked", true).trigger("change").prop("disabled", true);
+          $('.regdef_passwords [name="regdef_passwords"]').prop("checked", true).trigger("change").prop("disabled", true);
+          $('.regdef_passwords .is_required').prop("checked", true).trigger("change").prop("disabled", true);
           break;
         case "mailotp":
           if (!mute){
-            $('._regdef_mobile [name="_regdef_mobile"]').prop("checked", false).trigger("change").prop("disabled", false);
-            $('._regdef_mobile .is_required').prop("checked", false).trigger("change").prop("disabled", false);
+            $('.regdef_mobile [name="regdef_mobile"]').prop("checked", false).trigger("change").prop("disabled", false);
+            $('.regdef_mobile .is_required').prop("checked", false).trigger("change").prop("disabled", false);
           }
-          $('._regdef_email [name="_regdef_email"]').prop("checked", true).trigger("change").prop("disabled", true);
-          $('._regdef_email .is_required').prop("checked", true).trigger("change").prop("disabled", true);
-          $('._regdef_passwords [name="_regdef_passwords"]').prop("checked", false).trigger("change").prop("disabled", false);
-          $('._regdef_passwords .is_required').prop("checked", false).trigger("change").prop("disabled", false);
+          $('.regdef_email [name="regdef_email"]').prop("checked", true).trigger("change").prop("disabled", true);
+          $('.regdef_email .is_required').prop("checked", true).trigger("change").prop("disabled", true);
+          $('.regdef_passwords [name="regdef_passwords"]').prop("checked", false).trigger("change").prop("disabled", false);
+          $('.regdef_passwords .is_required').prop("checked", false).trigger("change").prop("disabled", false);
           break;
         default:
       }
