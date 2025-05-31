@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.0.4](#version-804)
 - [Version 8.0.3](#version-803)
 - [Version 8.0.2](#version-802)
 - [Version 8.0.1](#version-801)
@@ -69,6 +70,10 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.0.4
+- Release date: 2025-05-31 | 1404-03-10  [&uarr;](#table-of-contents)
+- **Fixed** Removed setting upon upgrade
 
 ## Version 8.0.3
 - Release date: 2025-05-31 | 1404-03-10  [&uarr;](#table-of-contents)

@@ -7,7 +7,7 @@ Tags: profile, dashboard, login-registration
 Author: Pepro Dev. Group
 Author URI: https://peprodev.com/pepro-ultimate-profile-solution/
 Plugin URI: https://wordpress.org/plugins/peprodev-ups/
-Version: 8.0.3
+Version: 8.0.4
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.2
@@ -18,7 +18,7 @@ Copyright: (c) Pepro Dev. Group, All rights reserved.
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * @Last modified by: amirhp-com <its@amirhp.com>
- * @Last modified time: 2025/05/31 16:42:09
+ * @Last modified time: 2025/05/31 17:01:28
 */
 
 defined("ABSPATH") or die("PeproDev Ultimate Profile Solutions :: Unauthorized Access!");
@@ -27,8 +27,8 @@ if (!class_exists("PeproDevUPS")) {
   class PeproDevUPS {
     public $td          = "peprodev-ups";
     public $db_slug     = "peprodev-ups";
-    public $version     = "8.0.3";
-    public $db_version  = "8.0.3";
+    public $version     = "8.0.4";
+    public $db_version  = "8.0.4";
     public $setting_key = "peprodev_ups_profile";
     public $title = "PeproDev Profile";
     public $title_w = "PeproDev Ultimate Profile Solutions";
@@ -463,8 +463,10 @@ if (!class_exists("PeproDevUPS")) {
       if ($this->read("new_setting") != $this->version) {
         $this->set("new_setting", $this->version);
         foreach ($prev_settings as $new => $prev) {
-          $this->set($new, get_option($prev, ""));
-          delete_option($prev);
+          if (get_option($prev, NULL) !== NULL && $this->read($new, NULL) === NULL) {
+            $this->set($new, get_option($prev, ""));
+            delete_option($prev);
+          }
         }
       }
       $this->set("profile_db_version", $this->version);
