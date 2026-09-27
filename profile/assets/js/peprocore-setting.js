@@ -56,19 +56,40 @@
     }
 
 
+    // Return the current content of a wp_editor() field regardless of the active tab:
+    // Visual tab -> TinyMCE content, Text tab (TinyMCE hidden) -> the textarea value.
+    function get_wp_editor_content(editor_id) {
+      var $textarea = $(`#${editor_id}`);
+      try {
+        var ed = (typeof tinymce !== "undefined") ? tinymce.get(editor_id) : null;
+        if (ed && !ed.isHidden()) {
+          ed.save();
+          return ed.getContent();
+        }
+      } catch (err) { }
+      return $textarea.val();
+    }
+    // Sync every visible TinyMCE instance to its textarea; hidden (Text tab) ones are skipped
+    // so the textarea keeps what the admin typed in the Text tab.
+    function sync_wp_editors() {
+      try {
+        if (typeof tinymce === "undefined") { return; }
+        $.each(tinymce.editors || [], function(i, ed) {
+          if (ed && !ed.isHidden()) { ed.save(); }
+        });
+      } catch (err) { }
+    }
+
     $(document).on("click tap", "#profile-section-save", function(e) {
       e.preventDefault();
-      var elID = `#${pepc.customhtml_tad}`;
-      var contentHTML = $(elID).val();
-      try {
-        if (tinymce.activeEditor){ tinymce.activeEditor.save(); }
-        if (tinymce.get("peprodev-ups-customhtml")){ contentHTML = tinymce.get("peprodev-ups-customhtml").getContent(); }
-      } catch (e) { }
+      sync_wp_editors();
+      // editor id as registered by wp_editor() in profile/libs/general/activated.php
+      var contentHTML = get_wp_editor_content("peprodev-ups-customhtml");
       var datatosave = {
         "custom_css"        : $("#css").val(),
         "custom_js"         : $("#js").val(),
         "custom_logo"       : $("#profile-section-logo").val(),
-        "custom_logo_id"    : $("#profile-section-logo").attr("data-id"),
+        "custom_logo_id"    : $("#profile-section-logo").attr("data-id") || "",
         "show_welcome"      : $("#show_welcome").attr("data-checked"),
         "header_hook"       : $("#headerhook").attr("data-checked"),
         "footer_hook"       : $("#footerhook").attr("data-checked"),

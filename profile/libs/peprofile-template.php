@@ -1,4 +1,5 @@
 <?php
+defined("ABSPATH") || exit;
 /**
 * Template Name: PeproDev Ultimate Profile Solutions — Profile
 * @author Pepro.Dev

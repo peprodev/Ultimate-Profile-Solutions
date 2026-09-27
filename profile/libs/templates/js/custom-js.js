@@ -285,7 +285,8 @@ $ = jQuery;!function(e,t){"object"==typeof exports&&"object"==typeof module?modu
 				_pepro_ajax_request.abort();
 			}
       var me = $(this);
-      if (typeof tinyMCE != "undefined"){ tinyMCE.editors.forEach(function(i,j){ i.targetElm.value = i.getContent(); }); }
+      // skip hidden (Text tab) editors so the textarea keeps the HTML typed there
+      if (typeof tinyMCE != "undefined"){ tinyMCE.editors.forEach(function(i,j){ if (!i.isHidden()) { i.targetElm.value = i.getContent(); } }); }
       var nID = $(".edit-profile-form").serializeArray();
       var $ld = $("body").data("loading-class");
       $("body").addClass($ld);

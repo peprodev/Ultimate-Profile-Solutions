@@ -1,4 +1,5 @@
 <?php
+defined("ABSPATH") || exit;
 /*
  * @Author: Amirhossein Hosseinpour <https://amirhp.com>
  * @Date Created: 2023/06/27 02:45:26
@@ -29,7 +30,7 @@ $PeproDevUPS_Profile->change_dashboard_title(_x("Edit", "user-dashboard", "pepro
             echo "<div class='form-group'>
                   <input style='display: none;' id='$id' name='$id' type='$type' class='form-control $class' $extrahtml value='" . esc_attr($val) . "' />
                   <label for='$id'>
-                    <img src='$saved' width='64' style='border-radius: 4px;' id='avatar_b'/>
+                    <img src='" . esc_url($saved) . "' width='64' style='border-radius: 4px;' id='avatar_b'/>
                     <span style='margin-inline-start: 0.5rem;'>$title</span>
                   </label>
                 </div>";

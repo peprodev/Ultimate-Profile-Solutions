@@ -1,0 +1,82 @@
+/* Split OTP boxes (assets/js/mj-otp.js). Box sizing overrides form-wide input rules. */
+
+.mj-otp-source {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  opacity: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  pointer-events: none !important;
+}
+
+.mj-otp {
+  display: flex;
+  justify-content: center;
+  gap: clamp(6px, 2vw, 12px);
+  width: 100%;
+  direction: ltr;
+}
+
+.mj-otp .mj-otp__box {
+  flex: 1 1 0;
+  min-width: 0 !important;
+  width: auto !important;
+  max-width: 64px !important;
+  height: 60px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 1px solid var(--mj-line, #e8e1d6) !important;
+  border-radius: var(--mj-radius, 14px) !important;
+  background: var(--mj-surface, #fff) !important;
+  box-shadow: none;
+  color: var(--mj-ink, #231f1a) !important;
+  caret-color: var(--mj-primary, #28504f);
+  font-family: inherit;
+  font-size: 1.6rem !important;
+  font-weight: 700;
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
+  text-align: center !important;
+  text-indent: 0 !important;
+  direction: ltr;
+  transition: border-color .15s ease, box-shadow .15s ease, background-color .15s ease, transform .15s ease;
+}
+
+.mj-otp .mj-otp__box:focus {
+  outline: 0;
+  border-color: var(--mj-primary, #28504f) !important;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--mj-primary, #28504f) 14%, transparent);
+  transform: translateY(-1px);
+}
+
+.mj-otp .mj-otp__box.is-filled {
+  border-color: color-mix(in srgb, var(--mj-primary, #28504f) 45%, transparent) !important;
+  background: color-mix(in srgb, var(--mj-primary-soft, #e7efee) 55%, #fff) !important;
+}
+
+.mj-otp.is-complete .mj-otp__box {
+  border-color: var(--mj-primary, #28504f) !important;
+}
+
+.woocommerce-invalid .mj-otp .mj-otp__box,
+.mj-otp.is-error .mj-otp__box {
+  border-color: var(--mj-danger, #a4282a) !important;
+}
+
+@media (max-width: 360px) {
+  .mj-otp .mj-otp__box {
+    height: 52px !important;
+    font-size: 1.35rem !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mj-otp .mj-otp__box {
+    transition: none;
+  }
+}

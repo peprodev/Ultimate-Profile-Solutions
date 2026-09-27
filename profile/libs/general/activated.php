@@ -1,4 +1,5 @@
 <?php
+defined("ABSPATH") || exit;
 # @Last modified by:   Amirhosseinhpv
 # @Last modified time: 2021/09/19 08:49:03
 ?>
@@ -20,16 +21,26 @@
               <tr>
                 <td><?php echo esc_html_x("Profile Logo Image","profile-section", "peprodev-ups");?></td>
                 <td>
+                  <?php
+                    // stored value may be entity-encoded by older versions; no default fallback so an empty value stays empty
+                    $profile_logo_url = esc_url( html_entity_decode( (string) $this->read("custom_logo", ""), ENT_QUOTES ) );
+                    // older versions saved the (non-existent) bundled placeholder icon as the logo; show it as empty
+                    if ( $profile_logo_url === esc_url( $this->icon ) ) { $profile_logo_url = ""; }
+                  ?>
                   <input type="hidden" data-id="<?php echo esc_attr( $this->read("custom_logo_id","") );?>" id="profile-section-logo"
-                  value="<?php echo esc_attr( $this->read("custom_logo", $this->icon) );?>"
+                  value="<?php echo esc_attr( $profile_logo_url );?>"
                   class="form-control primary" placeholder="<?php echo esc_html_x("Logo URL","profile-section","peprodev-ups");?>" />
                   <div class="flex flex-sb">
-                    <img style="border-radius: 5px;" src="<?php echo esc_attr( $this->read("custom_logo","") );?>" id="profile-img" width="86px"/>
+                    <img style="border-radius: 5px;<?php echo empty($profile_logo_url) ? " display:none;" : "";?>" src="<?php echo esc_attr( $profile_logo_url );?>" id="profile-img" width="86px"/>
                     <button type="button" id="selectlogoimg" style="padding: 12px; display: block;" class="btn btn-primary mediapicker icn-btn"
                     data-ref="#profile-section-logo"
                     data-ref4="#profile-img"
                     data-title="<?php echo esc_html_x("Select Custom Image","profile-section", "peprodev-ups");?>"
                     ><i class='material-icons'>cloud_upload</i> <?php echo esc_html_x("Select or Upload Custom Image","profile-section", "peprodev-ups");?></button>
+                    <button type="button" id="removelogoimg" style="padding: 12px; display: block;" class="btn btn-danger mediaremover icn-btn"
+                    data-ref="#profile-section-logo"
+                    data-ref4="#profile-img"
+                    ><i class='material-icons'>delete</i> <?php echo esc_html_x("Remove","profile-section", "peprodev-ups");?></button>
                   </div>
                 </td>
               </tr>
@@ -174,6 +185,7 @@
           <button type="button" style="padding: 12px; display: inline-block; width: 49%;" id="profile-section-logo-del" class="btn btn-primary icn-btn"><i class='material-icons'>delete_forever</i> <?php echo esc_html_x("Delete Style","profile-section", "peprodev-ups")?></button>
         </div>
         <button type="button" id="profile-section-save" class="login-section-save btn btn-primary icn-btn btn-wide" integrity="<?php echo esc_attr(wp_create_nonce('peprocorenounce'));?>" wparam="profile" lparam="save_setting" dparam="" fn=""><i class='material-icons'>save</i> <?php echo esc_html_x("Save Settings","profile-section", "peprodev-ups");?></button>
+        <?php echo PeproDevUPS_WPML::admin_link_html(); ?>
 
       </div>
     </div>

@@ -1,4 +1,5 @@
 <?php
+defined("ABSPATH") || exit;
   $fas = array("fas fa-alicorn",
     "fas fa-align-center",
     "fas fa-align-justify",

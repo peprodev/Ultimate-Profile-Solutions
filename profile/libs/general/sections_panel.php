@@ -1,4 +1,5 @@
 <?php
+defined("ABSPATH") || exit;
 /*
  * @Author: Amirhossein Hosseinpour <https://amirhp.com>
  * @Last modified by: amirhp-com <its@amirhp.com>
@@ -170,6 +171,7 @@ $loadingRing = '<div class="lds-ring2"><div></div><div></div><div></div><div></d
                     integrity="<?php echo esc_attr( $integrity );?>"
                     wparam="<?php echo esc_attr( $PeproDevUPS_Profile->setting_slug );?>"
                     lparam="add_new_section"><?php echo $loadingRing . _x("Save Edits", "section-panel", "peprodev-ups");?></button>
+                  <?php echo PeproDevUPS_WPML::admin_link_html("btn btn-action"); ?>
                   <button type="button" id="clear_notif_form" class="btn btn-action"><?php echo esc_html_x("Clear form", "section-panel", "peprodev-ups");?></button>
                   <button type="button" id='close_add_new_notifications' class="btn btn-action" data-dismiss="modal"><?php echo esc_html_x("Close", "section-panel", "peprodev-ups");?></button>
                 </div>

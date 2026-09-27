@@ -1,4 +1,5 @@
 <?php
+defined("ABSPATH") || exit;
   $fab = array(
     "fab fa-adobe",
     "fab fa-adversal",

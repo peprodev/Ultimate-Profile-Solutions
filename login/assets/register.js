@@ -653,6 +653,55 @@ jQuery.noConflict();
         },
       });
     });
+    /* Verification email template: reset editor content to the default template (not saved until Save Settings) */
+    $(document).on("click tap", "#verification_email_template_reset", function(e){
+      e.preventDefault();
+      if (typeof _register_fields.mail_default !== "string" || !_register_fields.mail_default.length) return;
+      if (!window.confirm(_register_fields.mail_reset_conf)) return;
+      if (verification_email_template) {
+        verification_email_template.setValue(_register_fields.mail_default, -1);
+      } else {
+        $("#verification_email_template_editor").val(_register_fields.mail_default);
+      }
+      $("#verification_email_template").val(_register_fields.mail_default);
+      // an empty subject means "use the built-in default" (shown as the field placeholder)
+      $("#verification_email_subject").val("").trigger("change");
+      $("#verification_email_test_result").css("color", "").text(_register_fields.mail_reset_done);
+    });
+    /* Verification email template: send a test email using the current (unsaved) editor content */
+    $(document).on("click tap", "#verification_email_test_send", function(e){
+      e.preventDefault();
+      var me = $(this), result = $("#verification_email_test_result"), to = $.trim($("#verification_email_test_to").val());
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(to)) {
+        result.css("color", "#dd3333").text(_register_fields.mail_test_invalid);
+        return;
+      }
+      var template = verification_email_template ? verification_email_template.getSession().getValue() : $("#verification_email_template").val();
+      me.prop("disabled", true);
+      result.css("color", "").text(_register_fields.mail_test_sending);
+      $.ajax({
+        url: pepc.ajax,
+        type: "POST",
+        data: {
+          action: "pepro_reglogin_test_mail",
+          nonce: _register_fields.mail_test_nonce,
+          email: to,
+          template: template,
+          subject: $.trim($("#verification_email_subject").val() || ""),
+        },
+        success: function(e) {
+          var msg = (e && e.data && e.data.msg) ? e.data.msg : _register_fields.error;
+          result.css("color", (e && e.success === true) ? "#158b02" : "#dd3333").text(msg);
+        },
+        error: function(e) {
+          console.error(e);
+          result.css("color", "#dd3333").text(_register_fields.error);
+        },
+        complete: function() {
+          me.prop("disabled", false);
+        },
+      });
+    });
     $(document).on("change", "[name=sms_method]", function(e){
       e.preventDefault();
       var me = $(this);

@@ -1,4 +1,5 @@
 <?php
+defined("ABSPATH") || exit;
 # @Last modified by:   Amirhosseinhpv
 # @Last modified time: 2022/02/20 01:22:20
 add_thickbox();
@@ -11,7 +12,7 @@ wp_enqueue_script("pepro-register-jqconfirm",      "{$this->assets_url}assets/jq
 wp_enqueue_script("color-picker-alpha",            "{$this->assets_url}assets/wp-color-picker-alpha.min.js", array("jquery"), "1.6.0");
 wp_enqueue_script("pepro-register-fields-hotkeys", "{$this->assets_url}assets/hotkeys.min.js", array('jquery'), "1.6.0");
 wp_enqueue_script("pepro-register-fields-ide",     "{$this->assets_url}assets/ide/ace.js", array('jquery'), "1.6.0");
-wp_enqueue_script("pepro-register-fields",         "{$this->assets_url}assets/register.js", array("jquery"), "1.6.0");
+wp_enqueue_script("pepro-register-fields",         "{$this->assets_url}assets/register.js", array("jquery"), "1.6.3");
 wp_localize_script("pepro-register-fields",        "_register_fields", array(
   "_added"     => __("New Field Successfully Added", "peprodev-ups"),
   "_removed"   => __("Field Successfully Removed",   "peprodev-ups"),
@@ -33,6 +34,13 @@ wp_localize_script("pepro-register-fields",        "_register_fields", array(
   "txtYes"     => _x("Yes", "js-translate", "peprodev-ups"),
   "txtNop"     => _x("No", "js-translate", "peprodev-ups"),
   "cancelbTn"  => _x("Cancel", "js-translate", "peprodev-ups"),
+  "mail_default"      => $this->def_mail_body,
+  "mail_default_subj" => $this->get_default_mail_subject(),
+  "mail_test_nonce"   => wp_create_nonce("pepro_reglogin_test_mail"),
+  "mail_reset_conf"   => __("Replace the current email subject and template in the editor with the defaults? (Nothing is saved until you click Save Settings.)", "peprodev-ups"),
+  "mail_reset_done"   => __("Default subject and template loaded into the editor. Click Save Settings to keep them.", "peprodev-ups"),
+  "mail_test_sending" => __("Sending test email ...", "peprodev-ups"),
+  "mail_test_invalid" => __("Please enter a valid email address.", "peprodev-ups"),
 ));
 
 $styles = "";
@@ -354,6 +362,7 @@ foreach ($styleFiles as $style) {
               <button class="login-section-save btn btn-success btn-primary icn-btn btn-wide" integrity="<?php echo esc_attr(wp_create_nonce('peprocorenounce')); ?>" wparam="loginregister" lparam="savelogin" dparam="" fn="">
                 <i class='material-icons'>save</i> <?php echo esc_html_x("Save Settings", "login-section", "peprodev-ups"); ?>
               </button>
+              <?php echo PeproDevUPS_WPML::admin_link_html(); ?>
             </div>
           </div>
         </div>
@@ -467,6 +476,7 @@ foreach ($styleFiles as $style) {
                 <button class="login-section-save btn btn-success btn-primary icn-btn btn-wide" integrity="<?php echo esc_attr(wp_create_nonce('peprocorenounce')); ?>" wparam="loginregister" lparam="savelogin" dparam="" fn="">
                   <i class='material-icons'>save</i> <?php echo esc_html_x("Save Settings", "login-section", "peprodev-ups"); ?>
                 </button>
+                <?php echo PeproDevUPS_WPML::admin_link_html(); ?>
               </div>
             </div>
           </div>
@@ -586,11 +596,18 @@ foreach ($styleFiles as $style) {
                           <input autocomplete="off" type="text" id="verification_email_sender" title="<?php echo "e.g. Enter noreply to send mail from noreply@" . wp_parse_url(get_bloginfo('url'), PHP_URL_HOST); ?>" placeholder="<?php echo "e.g. Enter noreply to send mail from noreply@" . wp_parse_url(get_bloginfo('url'), PHP_URL_HOST); ?>" dir="ltr" class='form-input single-required mr-2' name="verification_email_sender" value="<?php echo esc_attr($this->verification_email_sender); ?>" />
                         </div>
                       </div>
+                      <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-verification_email_subject '>
+                        <div class="col-lg-12">
+                          <p class="text-bold"><?php esc_html_e("Verification Email Subject", "peprodev-ups"); ?></p>
+                          <input autocomplete="off" type="text" id="verification_email_subject" placeholder="<?php echo esc_attr($this->get_default_mail_subject()); ?>" dir="auto" class='form-input mr-2' name="verification_email_subject" value="<?php echo esc_attr($this->verification_email_subject); ?>" />
+                          <p class="mt-1 mb-0"><small><?php esc_html_e("Subject tags:", "peprodev-ups"); ?> <?php foreach (array("[OTP]", "[site_name]", "[request_email]", "[first_name]", "[last_name]", "[display_name]", "[username]") as $subject_tag) echo "<copy>" . esc_html($subject_tag) . "</copy> "; ?> &mdash; <?php esc_html_e("keep [OTP] near the start for better code detection in mail apps; leave empty to use the default.", "peprodev-ups"); ?></small></p>
+                        </div>
+                      </div>
                       <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-verification_email_template '>
                         <div class="col-lg-12">
                           <p class="text-bold"><?php esc_html_e("Verification Email Template", "peprodev-ups"); ?></p>
-                          <textarea class="codeditor" id="verification_email_template_editor" autocomplete="off" spellcheck="false" dir="ltr" rows="8" cols="80"><?php echo $this->verification_email_template; ?></textarea>
-                          <textarea class="codeditor" id="verification_email_template" autocomplete="off" name="verification_email_template" spellcheck="false" dir="ltr" rows="8" cols="80" style="display:none !important;"><?php echo $this->verification_email_template; ?></textarea>
+                          <textarea class="codeditor" id="verification_email_template_editor" autocomplete="off" spellcheck="false" dir="ltr" rows="8" cols="80"><?php echo esc_textarea($this->verification_email_template); ?></textarea>
+                          <textarea class="codeditor" id="verification_email_template" autocomplete="off" name="verification_email_template" spellcheck="false" dir="ltr" rows="8" cols="80" style="display:none !important;"><?php echo esc_textarea($this->verification_email_template); ?></textarea>
                           <p class="text-bold"><?php esc_html_e("Available tags: ", "peprodev-ups"); ?></p>
                           <?php
                           $tags = (array) apply_filters("pepro_reglogin_verification_email_replacements", array(
@@ -600,7 +617,11 @@ foreach ($styleFiles as $style) {
                             "[first_name]",
                             "[last_name]",
                             "[display_name]",
-                            "[user_email]"
+                            "[user_email]",
+                            "[site_name]",
+                            "[site_logo]",
+                            "[expire_minutes]",
+                            "[year]"
                           ));
                           foreach ($tags as $key) {
                             echo "<copy>$key</copy> ";
@@ -608,6 +629,18 @@ foreach ($styleFiles as $style) {
                           ?>
                         </div>
                       </div>
+                    </div>
+                    <?php /* kept outside .save_email_settings so these controls are not collected by Save Settings */ ?>
+                    <div class="verification-email-tools">
+                      <p class="mb-2">
+                        <button type="button" id="verification_email_template_reset" class="btn btn-secondary icn-btn"><i class="material-icons">restart_alt</i> <?php esc_html_e("Reset to default", "peprodev-ups"); ?></button>
+                      </p>
+                      <p class="pt-2 mb-2"><strong><?php esc_html_e("Send test email", "peprodev-ups"); ?></strong> <span>(<?php esc_html_e("uses the current editor content with a sample code, unsaved changes included", "peprodev-ups"); ?>)</span></p>
+                      <div class="row justify-content-between align-items-center">
+                        <div class="col-8"><input id="verification_email_test_to" type="email" dir="ltr" autocomplete="off" class="form-input" placeholder="<?php esc_attr_e("Test email address", "peprodev-ups"); ?>" value="<?php echo esc_attr(wp_get_current_user()->user_email); ?>" /></div>
+                        <div class="col-4"><button type="button" id="verification_email_test_send" class="btn btn-success btn-primary icn-btn btn-wide"><i class="material-icons">send</i> <?php esc_html_e("Send test email", "peprodev-ups"); ?></button></div>
+                      </div>
+                      <div id="verification_email_test_result" class="mt-2" role="status" aria-live="polite"></div>
                     </div>
                   </div>
                 </div>
@@ -617,6 +650,7 @@ foreach ($styleFiles as $style) {
             <button class="login-section-save btn btn-success btn-primary icn-btn btn-wide" integrity="<?php echo esc_attr(wp_create_nonce('peprocorenounce')); ?>" wparam="loginregister" lparam="savelogin" dparam="" fn="">
               <i class='material-icons'>save</i> <?php echo esc_html_x("Save Settings", "login-section", "peprodev-ups"); ?>
             </button>
+            <?php echo PeproDevUPS_WPML::admin_link_html(); ?>
           </div>
         </div>
       </div>
@@ -656,8 +690,9 @@ foreach ($styleFiles as $style) {
                       <td>
                         <input type="hidden" data-id="<?php echo esc_attr($this->read("login_logo_id", "")); ?>" id="login-section-logo" value="<?php echo esc_attr($this->read("login_logo", "")); ?>" class="form-control primary" placeholder="<?php echo esc_html_x("Logo URL", "login-section", "peprodev-ups"); ?>" />
                         <div class="flex">
-                          <img style="border-radius: 5px;" src="<?php echo esc_attr($this->read("login_logo", "")); ?>" id="profile-img" width="86px" />
+                          <img style="border-radius: 5px;<?php echo "" === $this->read("login_logo", "") ? " display:none;" : ""; ?>" src="<?php echo esc_attr($this->read("login_logo", "")); ?>" id="profile-img" width="86px" />
                           <button type="button" style="padding: 12px; display: block;" class="btn btn-primary mediapicker icn-btn mr-4 ml-4" data-ref="#login-section-logo" data-ref4="#profile-img" data-title="<?php echo esc_html_x("Select Custom Image", "login-section", "peprodev-ups"); ?>"><i class='material-icons'>cloud_upload</i> <?php echo esc_html_x("Select or Upload Custom Image", "login-section", "peprodev-ups"); ?></button>
+                          <button type="button" style="padding: 12px; display: block;" class="btn btn-danger mediaremover icn-btn" data-ref="#login-section-logo" data-ref4="#profile-img"><i class='material-icons'>delete</i> <?php echo esc_html_x("Remove", "login-section", "peprodev-ups"); ?></button>
                         </div>
                       </td>
                     </tr>
@@ -761,6 +796,7 @@ foreach ($styleFiles as $style) {
                 <button class="login-section-save btn btn-success btn-primary icn-btn btn-wide" integrity="<?php echo esc_attr(wp_create_nonce('peprocorenounce')); ?>" wparam="loginregister" lparam="savelogin" dparam="" fn="">
                   <i class='material-icons'>save</i> <?php echo esc_html_x("Save Settings", "login-section", "peprodev-ups"); ?>
                 </button>
+                <?php echo PeproDevUPS_WPML::admin_link_html(); ?>
               </div>
             </div>
           </div>
@@ -849,6 +885,7 @@ foreach ($styleFiles as $style) {
             <button class="login-section-save btn btn-success btn-primary icn-btn btn-wide" integrity="<?php echo esc_attr(wp_create_nonce('peprocorenounce')); ?>" wparam="loginregister" lparam="savelogin" dparam="" fn="">
               <i class='material-icons'>save</i> <?php echo esc_html_x("Save Settings", "login-section", "peprodev-ups"); ?>
             </button>
+            <?php echo PeproDevUPS_WPML::admin_link_html(); ?>
           </div>
         </div>
       </div>

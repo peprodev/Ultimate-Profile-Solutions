@@ -1,4 +1,5 @@
 <?php
+defined("ABSPATH") || exit;
 # @Last modified by:   Amirhosseinhpv
 # @Last modified time: 2021/09/15 14:45:03
 
@@ -6,7 +7,7 @@ global $PeproDevUPS_Profile;
 $assets      = plugins_url("/assets/", dirname(__FILE__));
 $colorScheme = $this->read("theme_color","purple");
 $assetsImg   = $this->read("theme_img","{$assets}img/one.jpg");
-$dashttle    = $this->read("dashboard_title",_x("PeproDev Ultimate Profile Solutions","peprocore-appearance-setting","peprodev-ups"));
+$dashttle    = PeproDevUPS_WPML::translate("dashboard: title", $this->read("dashboard_title",_x("PeproDev Ultimate Profile Solutions","peprocore-appearance-setting","peprodev-ups")));
 if($assetsImg === "custom"){
   $assetsImg = $this->read("theme_img_url","{$assets}img/one.jpg");
 }

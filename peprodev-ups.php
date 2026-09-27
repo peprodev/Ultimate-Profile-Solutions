@@ -7,9 +7,9 @@ Tags: profile, dashboard, login-registration
 Author: Pepro Dev. Group
 Author URI: https://peprodev.com/pepro-ultimate-profile-solution/
 Plugin URI: https://wordpress.org/plugins/peprodev-ups/
-Version: 8.0.4
+Version: 8.1.0
 Requires at least: 5.0
-Tested up to: 6.8
+Tested up to: 7.1
 Requires PHP: 7.2
 WC tested up to: 9.8
 Text Domain: peprodev-ups
@@ -23,12 +23,17 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 defined("ABSPATH") or die("PeproDev Ultimate Profile Solutions :: Unauthorized Access!");
 
+// WPML String Translation / Polylang support for admin-configurable texts
+require_once plugin_dir_path(__FILE__) . "core/include/class-wpml.php";
+require_once plugin_dir_path(__FILE__) . "ui/ui.php";
+PeproDevUPS_WPML::init(__FILE__);
+
 if (!class_exists("PeproDevUPS")) {
   class PeproDevUPS {
     public $td          = "peprodev-ups";
     public $db_slug     = "peprodev-ups";
-    public $version     = "8.0.4";
-    public $db_version  = "8.0.4";
+    public $version     = "8.1.0";
+    public $db_version  = "8.0.4"; // database schema version: tables unchanged since 8.0.4, so no dbDelta run on update
     public $setting_key = "peprodev_ups_profile";
     public $title = "PeproDev Profile";
     public $title_w = "PeproDev Ultimate Profile Solutions";
@@ -101,7 +106,8 @@ if (!class_exists("PeproDevUPS")) {
 
         if (current_user_can("manage_options") && isset($_GET["peprodevups_force_db_create"]) && !empty($_GET["peprodevups_force_db_create"])) {
           $this->create_database(true);
-          wp_redirect(admin_url("admin.php?page=peprodev-ups&section=home"));
+          wp_safe_redirect(admin_url("admin.php?page=peprodev-ups&section=home"));
+          exit;
         }
       }
     }
@@ -469,7 +475,7 @@ if (!class_exists("PeproDevUPS")) {
           }
         }
       }
-      $this->set("profile_db_version", $this->version);
+      if ($this->read("profile_db_version") !== $this->version) $this->set("profile_db_version", $this->version);
     }
     #endregion
     #region global fns

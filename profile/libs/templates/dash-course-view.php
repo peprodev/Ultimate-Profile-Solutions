@@ -1,4 +1,5 @@
 <?php
+defined("ABSPATH") || exit;
 /*
  * @Author: Amirhossein Hosseinpour <https://amirhp.com>
  * @Date Created: 2023/03/19 14:19:50

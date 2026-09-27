@@ -1,4 +1,5 @@
 <?php
+defined("ABSPATH") || exit;
   $fal = array(
     "fal fa-address-card",
     "fal fa-adjust",

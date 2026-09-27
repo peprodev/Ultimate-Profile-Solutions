@@ -1,4 +1,5 @@
 <?php
+defined("ABSPATH") || exit;
 /*
  * @Author: Amirhossein Hosseinpour <https://amirhp.com>
  * @Last modified by: amirhp-com <its@amirhp.com>
@@ -14,7 +15,7 @@ if (!class_exists("PeproDevUPS_Core")) {
       $this->assets_url = plugins_url("/assets/", __FILE__);
       $this->db_table   = $wpdb->prefix . $this->db_slug;
 
-      if (isset($_GET['page']) && $this->db_slug == sanitize_text_field($_GET['page'])) {
+      if (is_admin() && isset($_GET['page']) && $this->db_slug == sanitize_text_field($_GET['page']) && current_user_can("manage_options")) {
         $this->set("alert_viewed_yet", $this->version);
         do_action("peprodevups_admin_panel_very_first_action");
         if (NULL === $this->read("builtin_announcements_is_enabled", NULL)) $this->set("builtin_announcements_is_enabled", "no");
@@ -165,7 +166,7 @@ if (!class_exists("PeproDevUPS_Core")) {
 
       wp_enqueue_script("material-dashboard", "{$this->assets_url}js/material-dashboard.js", array('jquery'), "1.6.0", true); //'2.1.0'
 
-      wp_enqueue_script("dashboard-back", "{$this->assets_url}js/dashboard-back.js", array('jquery'), '1.0.2', true);
+      wp_enqueue_script("dashboard-back", "{$this->assets_url}js/dashboard-back.js", array('jquery'), '1.0.3', true);
       wp_localize_script("dashboard-back", "pepc", apply_filters("peprocore_dashboard_localize", array(
         "ajax"    => admin_url('admin-ajax.php'),
         "_copy"   => __("Copied!", "peprodev-ups"),
@@ -194,6 +195,10 @@ if (!class_exists("PeproDevUPS_Core")) {
     }
     public function handel_ajax_req() {
       check_ajax_referer('peprocorenounce', 'integrity');
+      // every handler behind this endpoint is an admin-panel action
+      if (!current_user_can("manage_options")) {
+        wp_send_json_error(["msg" => __("Unauthorized access is prohibited.", "peprodev-ups"),]);
+      }
       if (wp_doing_ajax() && $_POST['action'] == $this->td) {
         do_action("peprocore_handle_ajaxrequests", $_POST);
 
@@ -227,6 +232,9 @@ if (!class_exists("PeproDevUPS_Core")) {
               if (isset($_POST["dparam"]["dashboard-title"]) && !empty($_POST["dparam"]["dashboard-title"])) {
                 $this->set("dashboard_title", sanitize_text_field($_POST["dparam"]["dashboard-title"]));
               }
+
+              // (re-)register translatable texts with WPML/Polylang string translation
+              PeproDevUPS_WPML::register_all();
 
               wp_send_json_success(
                 array(
@@ -557,6 +565,7 @@ if (!class_exists("PeproDevUPS_Core")) {
               ?>
 
               <button type="button" id="pepc-settings-save" class="btn btn-primary icn-btn btn-wide" integrity="<?php echo esc_attr(wp_create_nonce('peprocorenounce')); ?>" wparam="peprocore" lparam="savesettings" style="text-align: start; max-width: 450px;" dparam="" fn=""><i class='material-icons'>save</i> <?php echo esc_html_x("Save Settings", "peprocore-appearance-setting", "peprodev-ups"); ?></button>
+              <?php echo PeproDevUPS_WPML::admin_link_html(); ?>
 
               <?php
               do_action("peprocore_after_save_setting");

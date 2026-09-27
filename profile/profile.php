@@ -395,7 +395,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
       add_action("peprofile_get_template_part_nav-bar", array($this, "peprofile_get_template_part_nav"));
       $this->peprofile_custom_user_nav_items_hndlr();
 
-      if (is_blog_admin() && isset($_GET["manually_updated_ld_course_history"]) && !empty($_GET["manually_updated_ld_course_history"])) {
+      if (is_blog_admin() && current_user_can("manage_options") && isset($_GET["manually_updated_ld_course_history"]) && !empty($_GET["manually_updated_ld_course_history"])) {
 
         $user_id = get_current_user_id();
         $orders_per_page = -1;
@@ -490,7 +490,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
         die("<br>/*################################################## all done ##################################################*/");
       }
 
-      if (is_blog_admin() && isset($_GET["manually_updated_ld_course_history_active"]) && !empty($_GET["manually_updated_ld_course_history_active"])) {
+      if (is_blog_admin() && current_user_can("manage_options") && isset($_GET["manually_updated_ld_course_history_active"]) && !empty($_GET["manually_updated_ld_course_history_active"])) {
 
         $users = get_users();
         // Initialize a variable to keep track of the current item number
@@ -1312,8 +1312,9 @@ if (!class_exists("PeproDevUPS_Profile")) {
       if (empty($meta)) {
         $meta = "first_name";
       }
-
-      return get_the_author_meta($meta, get_current_user_id());
+      if (in_array($meta, array("user_pass", "user_activation_key", "session_tokens"), true)) return "";
+      $value = get_the_author_meta($meta, get_current_user_id());
+      return is_scalar($value) ? esc_html($value) : "";
     }
     public function peprofile_shortcode_profile_url($atts = array(), $content = "") {
       $atts = extract(shortcode_atts(array(
@@ -1532,6 +1533,9 @@ if (!class_exists("PeproDevUPS_Profile")) {
         if ("profile" == $_POST['wparam']) {
           switch ($_POST['lparam']) {
             case 'read-notif':
+              if (!is_user_logged_in()) {
+                wp_send_json_error(array("msg" => __("There was a problem with your request. Error 0x00010", "peprodev-ups")));
+              }
 
               (int) $id = (isset($_POST["dparam"]) && !empty(trim($_POST["dparam"])) && is_numeric(trim($_POST["dparam"]))) ? trim($_POST["dparam"]) : "-1";
               global $wpdb;
@@ -1569,7 +1573,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
               }
 
               global $current_profile_url;
-              $current_profile_url = (isset($_POST["cprl"]) && !empty(trim($_POST["cprl"]))) ? trim($_POST["cprl"]) : "/";
+              $current_profile_url = (isset($_POST["cprl"]) && is_string($_POST["cprl"]) && !empty(trim($_POST["cprl"]))) ? esc_url(wp_validate_redirect(esc_url_raw(trim(wp_unslash($_POST["cprl"]))), "/")) : "/";
 
               $shorts = "";
               $notif = __("You have no new notification.", "peprodev-ups");
@@ -1638,7 +1642,10 @@ if (!class_exists("PeproDevUPS_Profile")) {
 
                   add_filter("upload_dir",             array($this, "user_avatar_upload_dir"));
                   add_filter("sanitize_file_name",     array($this, "user_avatar_hash_filename"), 10);
-                  $movefile = wp_handle_upload($_FILES['file'], array('test_form' => false));
+                  $movefile = wp_handle_upload($_FILES['file'], array(
+                    'test_form' => false,
+                    'mimes'     => array('jpg|jpeg|jpe' => 'image/jpeg', 'png' => 'image/png'),
+                  ));
                   remove_filter("sanitize_file_name",  array($this, "user_avatar_hash_filename"), 10);
                   remove_filter("upload_dir",          array($this, "user_avatar_upload_dir"));
 
@@ -1680,8 +1687,8 @@ if (!class_exists("PeproDevUPS_Profile")) {
                 unset($required_fields["email"]);
               }
 
-              foreach (json_decode(stripslashes($_POST["dparam"]), true) as $index) {
-
+              foreach ((array) json_decode(stripslashes($_POST["dparam"]), true) as $index) {
+                if (!is_array($index) || !isset($index["name"], $index["value"]) || !is_scalar($index["name"]) || !is_scalar($index["value"])) continue;
                 $index["name"]  = sanitize_key($index["name"]);
                 $index["value"] = sanitize_textarea_field($index["value"]);
 
@@ -1695,9 +1702,10 @@ if (!class_exists("PeproDevUPS_Profile")) {
                 if (class_exists("PeproDevUPS_Login")) {
                   global $PeproDevUPS_Login;
                   if (current_user_can("edit_user", $user_id)) {
+                    // only admin-defined, editable registration fields may be written; never arbitrary meta keys
                     foreach ($PeproDevUPS_Login->get_register_fields() as $field) {
-                      if ("yes" == $field["is-editable"]) {
-                        update_user_meta($user_id, $index["name"], sanitize_text_field(trim($index['value'])));
+                      if (isset($field["meta_name"], $field["is-editable"]) && "yes" == $field["is-editable"] && $field["meta_name"] === $index["name"]) {
+                        update_user_meta($user_id, $field["meta_name"], sanitize_text_field(trim($index['value'])));
                       }
                     }
                   }
@@ -1808,6 +1816,18 @@ if (!class_exists("PeproDevUPS_Profile")) {
       }
     }
     public function make_thumb($src, $dest, $desired_width, $degrees = false) {
+      // WP image editor handles both JPEG and PNG (GD imagecreatefromjpeg() fatals on PNG) and re-encodes the file
+      if (function_exists("wp_get_image_editor")) {
+        $editor = wp_get_image_editor($src);
+        if (!is_wp_error($editor)) {
+          $size = $editor->get_size();
+          if (!empty($size["width"]) && $size["width"] > $desired_width) $editor->resize($desired_width, null, false);
+          if ($degrees) $editor->rotate($degrees);
+          $saved = $editor->save($dest);
+          return !is_wp_error($saved);
+        }
+        return false;
+      }
 
       /* read the source image */
       $source_image = imagecreatefromjpeg($src);
@@ -1851,8 +1871,22 @@ if (!class_exists("PeproDevUPS_Profile")) {
             ]);
             foreach ($options as $slug) {
               if (isset($_POST["dparam"][$slug])) {
+                if ("custom_logo" === $slug) {
+                  // store a clean URL (htmlentities broke URLs with query strings); empty value clears the logo
+                  $this->set($slug, esc_url_raw(trim(wp_unslash($_POST["dparam"][$slug]))));
+                  continue;
+                }
+                if ("custom_logo_id" === $slug) {
+                  $logo_id = absint($_POST["dparam"][$slug]);
+                  $this->set($slug, $logo_id ? $logo_id : "");
+                  continue;
+                }
                 $this->set($slug, htmlentities($_POST["dparam"][$slug]));
               }
+            }
+            // keep attachment id in sync when the logo URL was cleared
+            if (isset($_POST["dparam"]["custom_logo"]) && "" === $this->read("custom_logo", "")) {
+              $this->set("custom_logo_id", "");
             }
 
             $options = apply_filters("peprodev-ups/save-settings/fields/raw", [
@@ -1865,6 +1899,9 @@ if (!class_exists("PeproDevUPS_Profile")) {
                 $this->set($slug, wp_unslash($_POST["dparam"][$slug]));
               }
             }
+
+            // (re-)register translatable texts with WPML/Polylang string translation
+            PeproDevUPS_WPML::register_all();
 
             wp_send_json_success(["notice" => false, "notice_html" => "", "msg" => __("Settings Successfully Saved.", "peprodev-ups")]);
 
@@ -1928,6 +1965,10 @@ if (!class_exists("PeproDevUPS_Profile")) {
               $update = $wpdb->update($this->tbl_sections, $dataArray, array("id" => sanitize_text_field($id)), "%s", "%d");
             } else {
               $add = $wpdb->insert($this->tbl_sections, $dataArray, "%s");
+            }
+            // register this section's texts with WPML/Polylang string translation
+            if (false !== $update || false !== $add) {
+              foreach (PeproDevUPS_WPML::section_strings($dataArray) as $wpml_name => $wpml_value) PeproDevUPS_WPML::register($wpml_name, $wpml_value);
             }
 
             $pageNum = 1;
@@ -2324,9 +2365,18 @@ if (!class_exists("PeproDevUPS_Profile")) {
       }
       return $has_access;
     }
+    public function get_public_announcements() {
+      // same list is needed several times while rendering one dashboard page
+      static $announcements = null;
+      if (null === $announcements) {
+        global $wpdb;
+        $announcements = $wpdb->get_results("SELECT * FROM `{$this->tbl_notif}` WHERE users_list = 'all' and date_scheduled <= NOW() ORDER BY date_scheduled DESC");
+      }
+      return $announcements;
+    }
     public function get_user_announcements_count($user_id) {
       global $wpdb;
-      $private_msgs = $wpdb->get_results("SELECT * FROM `{$this->tbl_notif}` WHERE users_list = 'all' and date_scheduled <= NOW()");
+      $private_msgs = $this->get_public_announcements();
       if ($private_msgs !== null && count($private_msgs) > 0) {
         $arrayIDs = [];
         foreach ($private_msgs as $key => $notif) {
@@ -2349,7 +2399,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
     public function get_user_announcements_short($user_id, $limit = 4) {
       global $wpdb, $current_profile_url;
       $notifs = "";
-      $private_msgs = $wpdb->get_results("SELECT * FROM `{$this->tbl_notif}` WHERE users_list = 'all' and date_scheduled <= NOW() ORDER BY date_scheduled DESC");
+      $private_msgs = $this->get_public_announcements();
       if ($private_msgs !== null) {
         $arrayIDs = [];
         foreach ($private_msgs as $key => $notif) {
@@ -2397,7 +2447,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
     public function get_user_announcements($user_id) {
       global $wpdb, $current_profile_url;
 
-      $private_msgs = $wpdb->get_results("SELECT * FROM `{$this->tbl_notif}` WHERE users_list = 'all' and date_scheduled <= NOW() ORDER BY date_scheduled DESC");
+      $private_msgs = $this->get_public_announcements();
       if ($private_msgs !== null) {
         $arrayIDs = [];
         foreach ($private_msgs as $key => $notif) {
@@ -2571,7 +2621,8 @@ if (!class_exists("PeproDevUPS_Profile")) {
         return $ar;
       });
       wp_enqueue_script(__CLASS__ . "s", plugins_url("/assets/js/wp-color-picker-alpha.min.js", __FILE__), array("jquery"), $this->current_version);
-      wp_enqueue_script(__CLASS__, plugins_url("/assets/js/peprocore-setting.js", __FILE__), array("jquery"), $this->current_version);
+      // file-based version so browsers pick up settings-script fixes without a plugin version bump
+      wp_enqueue_script(__CLASS__, plugins_url("/assets/js/peprocore-setting.js", __FILE__), array("jquery"), $this->current_version . "." . (int) @filemtime(plugin_dir_path(__FILE__) . "assets/js/peprocore-setting.js"));
 
 
       wp_enqueue_script(__CLASS__ . "-ide",     plugins_url("/assets/ide/ace.js", __FILE__),        array('jquery'), $this->current_version, true);
@@ -2711,7 +2762,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
     public function peprofile_get_custom_user_nav_items($arr) {
       global $wp, $wpdb;
       $profile_url = $this->get_profile_page(["i" => current_time("timestamp")]);
-      $sections = $wpdb->get_results("SELECT * FROM `$this->tbl_sections` ORDER BY `date_created` DESC");
+      $sections = $wpdb->get_results("SELECT `title`, `slug`, `icon`, `img`, `access`, `ld_lms`, `is_active`, `priority` FROM `$this->tbl_sections` ORDER BY `date_created` DESC");
       if ($sections && !empty($sections)) {
         foreach ($sections as $section) {
           if (empty($section->title) || empty($section->slug) || "yes" != $section->is_active) continue;
@@ -2744,6 +2795,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
             }
           }
           if ($add_item) {
+            $section->title = PeproDevUPS_WPML::translate("section: {$section->slug} title", $section->title);
             $icon = $section->icon;
             if (isset($section->img) && !empty($section->img)) $icon = "fa fas fa-info fa-no-icon";
             $arr = array_merge(
@@ -2765,7 +2817,9 @@ if (!class_exists("PeproDevUPS_Profile")) {
     }
     public function peprofile_custom_user_nav_items_hndlr() {
       global $wp, $wpdb;
-      $sections = $wpdb->get_results("SELECT * FROM `$this->tbl_sections` ORDER BY `date_created` DESC");
+      if (wp_doing_cron()) return;
+      // runs on every init: fetch only the light columns, not content/js/css LONGTEXTs
+      $sections = $wpdb->get_results("SELECT `title`, `slug`, `icon`, `is_active` FROM `$this->tbl_sections` ORDER BY `date_created` DESC");
       if ($sections && !empty($sections)) {
         foreach ($sections as $section) {
           if (empty($section->title) || empty($section->slug) || empty($section->icon) || "yes" != $section->is_active)
@@ -2785,6 +2839,9 @@ if (!class_exists("PeproDevUPS_Profile")) {
         if ($notifs && !empty($notifs)) {
           // fix for zephyr theme!
           wp_dequeue_style("font-awesome");
+          $notifs->title   = PeproDevUPS_WPML::translate("section: {$notifs->slug} title", $notifs->title);
+          $notifs->subject = PeproDevUPS_WPML::translate("section: {$notifs->slug} heading", $notifs->subject);
+          $notifs->content = PeproDevUPS_WPML::translate("section: {$notifs->slug} content", $notifs->content);
           $this->change_dashboard_title($notifs->title);
       ?>
           <script>
@@ -2866,7 +2923,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
       return count($customer_orders);
     }
     public function get_promotion_data() {
-      return $this->filter_content($this->read("custom_html"));
+      return $this->filter_content(PeproDevUPS_WPML::translate("profile: dashboard custom html", $this->read("custom_html")));
     }
     public function get_customer_get_credit_balance() {
       $wallet = 00;

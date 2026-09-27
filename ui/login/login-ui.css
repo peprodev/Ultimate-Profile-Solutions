@@ -1,0 +1,410 @@
+/*
+ * login-ui: modern RTL styling for the PeproDev UPS login/register form.
+ * Scoped to body.mj-login-ui-on (added by login-ui.php) so it can be removed
+ * by defining PEPRODEV_UPS_UI_LOGIN as false. Structure selectors work without JS;
+ * tab-dependent rules require .mj-login-ui (added by login-ui.js).
+ */
+
+/* Card */
+.mj-login-ui-on #pepro-profile {
+  padding: 3rem 1rem;
+}
+
+.mj-login-ui-on #pepro-profile .pepro-login-reg-container.inline-form {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 2.25rem 2.25rem 2rem;
+  background: var(--mj-surface);
+  border: 1px solid var(--mj-line);
+  border-radius: var(--mj-radius-lg);
+  box-shadow: var(--mj-shadow);
+  font-family: var(--mj-font);
+  color: var(--mj-ink);
+}
+
+.mj-login-ui-on #pepro-profile .pepro-login-reg-container .switcher {
+  display: none !important;
+}
+
+/* Optional logo printed by the plugin */
+.mj-login-ui-on #pepro-profile .pepro-login-logo {
+  display: flex;
+  justify-content: center;
+  margin: 0 0 22px;
+}
+
+.mj-login-ui-on #pepro-profile .pepro-login-logo img {
+  display: block;
+  width: auto;
+  max-width: 180px;
+  max-height: 72px;
+  object-fit: contain;
+}
+
+/* Forms: strip the old boxed look, keep plugin visibility logic */
+.mj-login-ui-on #pepro-profile .pepro-login-reg-container.inline-form > form.inline {
+  display: flex !important;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  gap: 1.1rem .75rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+  animation: mj-fade-in .28s var(--mj-ease);
+}
+
+.mj-login-ui-on #pepro-profile .pepro-login-reg-container > form > * {
+  flex: 1 1 100%;
+  min-width: 0;
+  margin: 0;
+}
+
+.mj-login-ui-on #pepro-profile .pepro-login-reg-container > form > .first_name-wrap,
+.mj-login-ui-on #pepro-profile .pepro-login-reg-container > form > .last_name-wrap {
+  flex: 1 1 calc(50% - .75rem);
+}
+
+.mj-login-ui-on #pepro-profile .pepro-login-reg-container > form > input[type="hidden"],
+.mj-login-ui-on #pepro-profile .pepro-login-reg-container > form > .hidden {
+  display: none !important;
+}
+
+@keyframes mj-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Header (injected) */
+.mj-login-ui-on #pepro-profile .mj-head {
+  margin: 1.75rem 0 1.5rem;
+  text-align: start;
+}
+
+.mj-login-ui-on #pepro-profile .mj-head__title {
+  margin: 0 0 .4rem;
+  font-family: var(--mj-font-title);
+  font-size: 1.75rem;
+  font-weight: 800;
+  line-height: 1.3;
+  color: var(--mj-ink);
+}
+
+.mj-login-ui-on #pepro-profile .mj-head__subtitle {
+  margin: 0;
+  font-size: .95rem;
+  line-height: 1.8;
+  color: var(--mj-muted);
+}
+
+/* Tabs (injected) */
+.mj-login-ui-on #pepro-profile .mj-tabs {
+  position: relative;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  padding: 5px;
+  background: var(--mj-sand);
+  border-radius: var(--mj-radius);
+  isolation: isolate;
+}
+
+.mj-login-ui-on #pepro-profile .mj-tabs--single {
+  display: none;
+}
+
+.mj-login-ui-on #pepro-profile .mj-tabs__indicator {
+  position: absolute;
+  z-index: -1;
+  inset-block: 5px;
+  inset-inline-start: 5px;
+  width: calc(50% - 5px);
+  background: var(--mj-surface);
+  border-radius: calc(var(--mj-radius) - 4px);
+  box-shadow: 0 1px 3px rgba(35, 31, 26, .1), 0 4px 10px -4px rgba(35, 31, 26, .12);
+  transition: transform .3s var(--mj-ease);
+}
+
+[dir="rtl"] .mj-login-ui-on #pepro-profile .mj-tabs[data-active="register"] .mj-tabs__indicator,
+.mj-login-ui-on.rtl #pepro-profile .mj-tabs[data-active="register"] .mj-tabs__indicator {
+  transform: translateX(-100%);
+}
+
+.mj-login-ui-on:not(.rtl) #pepro-profile .mj-tabs[data-active="register"] .mj-tabs__indicator {
+  transform: translateX(100%);
+}
+
+.mj-login-ui-on #pepro-profile .mj-tabs__tab {
+  appearance: none;
+  min-height: 46px;
+  margin: 0;
+  padding: .5rem 1rem;
+  border: 0;
+  border-radius: calc(var(--mj-radius) - 4px);
+  background: transparent;
+  box-shadow: none;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--mj-muted);
+  text-transform: none;
+  letter-spacing: 0;
+  cursor: pointer;
+  transition: color .2s ease;
+}
+
+.mj-login-ui-on #pepro-profile .mj-tabs__tab:hover {
+  color: var(--mj-ink);
+  background: transparent;
+}
+
+.mj-login-ui-on #pepro-profile .mj-tabs__tab.is-active {
+  color: var(--mj-ink);
+  font-weight: 700;
+}
+
+.mj-login-ui-on #pepro-profile .mj-tabs__tab:focus-visible {
+  outline: 2px solid var(--mj-primary);
+  outline-offset: 2px;
+}
+
+.mj-login-ui-on #pepro-profile .mj-tabs__tab[aria-disabled="true"] {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+/* Fields */
+.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .pepro-login-reg-field label {
+  position: static;
+  display: block;
+  margin: 0 0 .5rem;
+  padding: 0;
+  background: none;
+  font-size: .9rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--mj-muted);
+}
+
+.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .form-required label::after {
+  content: none;
+}
+
+.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .pepro-login-reg-field :is(input[type="text"], input[type="tel"], input[type="email"], input[type="password"], input[type="number"], select) {
+  box-sizing: border-box;
+  width: 100%;
+  height: 54px;
+  margin: 0;
+  padding: 0 1.1rem;
+  border: 1px solid var(--mj-line);
+  border-radius: var(--mj-radius);
+  background: var(--mj-surface);
+  box-shadow: none;
+  font-family: var(--mj-font);
+  font-size: 1.05rem;
+  color: var(--mj-ink);
+  transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+}
+
+.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .pepro-login-reg-field :is(input, select)::placeholder {
+  color: #c4bbb0;
+  opacity: 1;
+}
+
+.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .pepro-login-reg-field :is(input, select):hover {
+  border-color: #d8cfc2;
+}
+
+.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .pepro-login-reg-field :is(input, select):focus {
+  outline: 0;
+  border-color: var(--mj-primary);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--mj-primary) 14%, transparent);
+}
+
+.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .pepro-login-reg-field input.force-ltr {
+  direction: ltr;
+  text-align: left;
+  letter-spacing: .04em;
+}
+
+.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .pepro-login-reg-field input.force-ltr::placeholder {
+  text-align: left;
+}
+
+.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .pepro-login-reg-field :is(input.disabled, input[readonly]) {
+  background: var(--mj-sand);
+  color: var(--mj-muted) !important;
+}
+
+/* OTP input: big, centered digits */
+.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .optverify-wrap input.otp-verification {
+  height: 60px;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: .6em;
+  text-align: center;
+  text-indent: .6em;
+}
+
+.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .optverify-wrap input.otp-verification::placeholder {
+  text-align: center;
+  letter-spacing: .3em;
+}
+
+/* Submit */
+.mj-login-ui-on #pepro-profile .pepro-login-reg-field.submit-wrap {
+  margin-top: .35rem;
+}
+
+.mj-login-ui-on #pepro-profile .pepro-login-reg-container .pepro-login-reg-field.submit-wrap #submit {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 54px;
+  margin: 0;
+  padding: .75rem 1.25rem;
+  border: 0;
+  border-radius: var(--mj-radius);
+  background: var(--mj-primary);
+  box-shadow: 0 8px 18px -10px color-mix(in srgb, var(--mj-primary) 80%, transparent);
+  font-family: var(--mj-font);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--mj-on-primary);
+  text-transform: none;
+  letter-spacing: 0;
+  cursor: pointer;
+  transition: background-color .2s ease, transform .15s ease, box-shadow .2s ease;
+}
+
+.mj-login-ui-on #pepro-profile .pepro-login-reg-container .pepro-login-reg-field.submit-wrap #submit:hover {
+  background: var(--mj-primary-hover);
+}
+
+.mj-login-ui-on #pepro-profile .pepro-login-reg-container .pepro-login-reg-field.submit-wrap #submit:active {
+  transform: translateY(1px);
+}
+
+.mj-login-ui-on #pepro-profile .pepro-login-reg-container .pepro-login-reg-field.submit-wrap #submit:focus-visible {
+  outline: 2px solid var(--mj-primary);
+  outline-offset: 3px;
+}
+
+.mj-login-ui-on #pepro-profile .pepro-login-reg-container form.loading .pepro-login-reg-field.submit-wrap #submit {
+  color: transparent !important;
+  pointer-events: none;
+}
+
+.mj-login-ui-on #pepro-profile .pepro-login-reg-container form.loading .pepro-login-reg-field.submit-wrap #submit::after {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border: 2.5px solid rgba(255, 255, 255, .35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: mj-spin .7s linear infinite;
+}
+
+@keyframes mj-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Messages */
+.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form #login_error:not(:empty) {
+  box-sizing: border-box;
+  margin: 0;
+  padding: .85rem 1rem;
+  border: 0;
+  border-radius: var(--mj-radius-sm);
+  background: var(--mj-info-soft);
+  font-size: .92rem;
+  line-height: 1.8;
+  color: var(--mj-ink);
+  text-align: start;
+}
+
+.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form #login_error.success {
+  background: var(--mj-success-soft);
+  color: var(--mj-success);
+}
+
+.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form #login_error.error {
+  background: var(--mj-danger-soft);
+  color: var(--mj-danger);
+}
+
+/* Footer links */
+.mj-login-ui-on #pepro-profile .pepro-form-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: .75rem 1.5rem;
+  font-size: .9rem;
+  color: var(--mj-muted);
+}
+
+.mj-login-ui-on #pepro-profile .pepro-form-links a[href] {
+  color: var(--mj-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.mj-login-ui-on #pepro-profile .pepro-form-links a[href]:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.mj-login-ui-on #pepro-profile .pepro-form-links .otp-resend,
+.mj-login-ui-on #pepro-profile .pepro-form-links .otp-changenum {
+  float: none;
+  margin: 0 !important;
+}
+
+/* Tabs replace the "no account? / back to login" links */
+.mj-login-ui-on #pepro-profile .mj-login-ui.mj-has-tabs .pepro-form-links .switch-form-register,
+.mj-login-ui-on #pepro-profile .mj-login-ui.mj-has-tabs .pepro-form-links .switch-form-login {
+  display: none !important;
+}
+
+.mj-login-ui-on #pepro-profile .mj-login-ui .pepro-form-links:not(:has(> :not([style*="display: none"]):not(.switch-form-register):not(.switch-form-login))) {
+  display: none;
+}
+
+/* Popup mode */
+.mj-login-ui-on .popup-active #pepro-profile .pepro-login-reg-container {
+  max-width: min(480px, calc(100vw - 2rem));
+  padding: 1.75rem 1.5rem 1.5rem !important;
+  border-radius: var(--mj-radius-lg) !important;
+}
+
+@media (max-width: 520px) {
+  .mj-login-ui-on #pepro-profile {
+    padding: 1.5rem .75rem;
+  }
+
+  .mj-login-ui-on #pepro-profile .pepro-login-reg-container.inline-form {
+    padding: 1.5rem 1.25rem 1.25rem;
+    border-radius: var(--mj-radius);
+  }
+
+  .mj-login-ui-on #pepro-profile .mj-head__title {
+    font-size: 1.45rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mj-login-ui-on #pepro-profile .pepro-login-reg-container > form.inline,
+  .mj-login-ui-on #pepro-profile .mj-tabs__indicator {
+    animation: none;
+    transition: none;
+  }
+}

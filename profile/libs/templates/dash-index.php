@@ -1,4 +1,5 @@
 <?php
+defined("ABSPATH") || exit;
 /*
  * @Author: Amirhossein Hosseinpour <https://amirhp.com>
  * @Date Created: 2023/06/27 02:45:26
@@ -10,8 +11,13 @@ class dash_index extends PeproDevUPS {
     parent::__construct(false);
     global $PeproDevUPS_Profile, $current_profile_url, $PeproDevUPS_Login, $wp;
     $current_profile_url = home_url($wp->request);
-    echo "<style>" . @file_get_contents(plugin_dir_path(__FILE__) . "/css/style.css") . "</style>";
-    wp_enqueue_style("peprofile_theme", plugins_url("/css/style.css", __FILE__), array(), time());
+    // theme CSS is printed inline (the shortcode runs after wp_head); the handle only carries the custom CSS, so the same file is not downloaded twice
+    // relative url() references (nav icons) must point at the css folder once the file is inlined
+    $theme_css = (string) @file_get_contents(plugin_dir_path(__FILE__) . "/css/style.css");
+    $theme_css = preg_replace('#url\(\s*(["\']?)(?![a-z]+:|/|\#)([^"\')]+)\1\s*\)#i', 'url("' . esc_url(plugins_url("css/", __FILE__)) . '$2")', $theme_css);
+    echo "<style id='peprofile_theme-css'>" . $theme_css . "</style>";
+    wp_register_style("peprofile_theme", false, array(), PEPRODEVUPS);
+    wp_enqueue_style("peprofile_theme");
     wp_add_inline_style("peprofile_theme", '/*' . PHP_EOL . '* Global CSS @ PeproDev Ultimate Profile Solutions (https://pepro.dev/ups)' . PHP_EOL . '*/' . PHP_EOL . $this->read("custom_css"));
     wp_enqueue_style("pepro-font-awesome", PEPRODEVUPS_ASSETS_URL . "fa-pro/css/all.min.css", [], $this->version);
     $avatar = "";
@@ -199,8 +205,8 @@ class dash_index extends PeproDevUPS {
     </div>
     <?php
     wp_enqueue_script("jquery");
-    wp_enqueue_script("peprodev-main", plugins_url("/js/main.js", __FILE__), array("jquery"));
-    wp_register_script("peprodev--custom", plugins_url("/js/custom-js.js", __FILE__), array("jquery"), time(), true);
+    wp_enqueue_script("peprodev-main", plugins_url("/js/main.js", __FILE__), array("jquery"), PEPRODEVUPS, true);
+    wp_register_script("peprodev--custom", plugins_url("/js/custom-js.js", __FILE__), array("jquery"), PEPRODEVUPS, true);
     wp_localize_script("peprodev--custom", "_i18n", array(
       "td"                  => "peprocoreprofile",
       "ajax"                => admin_url("admin-ajax.php"),

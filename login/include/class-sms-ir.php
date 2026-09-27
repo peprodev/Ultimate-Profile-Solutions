@@ -94,7 +94,7 @@ class PeproSMS_SMSIR_Gateway extends PeproDevUPS{
     return $htmloutput;
   }
   public function send_sms_ir($numbers = "", $message = "", $otp_code = 0) {
-    $message = str_replace("[OTP]", $otp_code, $this->sms_text);
+    $message = str_replace("[OTP]", $otp_code, PeproDevUPS_WPML::translate("sms: sms.ir message", $this->sms_text));
     if (is_numeric(trim($message))) {
       $ParameterArray = array(array("Parameter" => "OTP", "ParameterValue" => $otp_code));
       return $this->ultraFastSend(array("ParameterArray" => $ParameterArray, "Mobile" => $numbers, "TemplateId" => trim($message)));
@@ -103,13 +103,13 @@ class PeproSMS_SMSIR_Gateway extends PeproDevUPS{
     }
   }
   public function send_sms_ir_v2($numbers = "", $message = "", $otp_code = 0) {
-    $message = str_replace("[OTP]", $otp_code, $this->sms2_text);
+    $message = str_replace("[OTP]", $otp_code, PeproDevUPS_WPML::translate("sms: sms.ir v2 message", $this->sms2_text));
     if (is_numeric(trim($message))) {
       $params = array(
         ["name" => "OTP", "value" => $otp_code],
         ["name" => "VerificationCode", "value" => $otp_code],
       );
-      return $this->ultraFastSend_v2($numbers, $params);
+      return $this->ultraFastSend_v2($numbers, $params, trim($message));
     } else {
       return $this->send_normal_sms_v2($numbers, $message);
     }
@@ -228,12 +228,12 @@ class PeproSMS_SMSIR_Gateway extends PeproDevUPS{
   protected function getApiTokenUrl() {
     return "{$this->api_url}/api/Token";
   }
-  public function ultraFastSend_v2($MobileNumbers, $params) {
+  public function ultraFastSend_v2($MobileNumbers, $params, $template_id = null) {
     $args = array(
       "method"      => 'POST',
       "body"        => json_encode(array(
         "mobile"     => $MobileNumbers,
-        "templateId" => $this->sms2_text,
+        "templateId" => null !== $template_id ? $template_id : $this->sms2_text,
         "parameters" => $params
       )),
       "httpversion" => '1.0',

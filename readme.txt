@@ -2,16 +2,16 @@
 Contributors: amirhpcom, peprodev, blackswanlab
 Donate link: https://peprodev.com/donate/
 Tags: profile, dashboard, login-registration
-Version: 8.0.4
-Stable tag: 8.0.4
+Version: 8.1.0
+Stable tag: 8.1.0
 Requires at least: 5.0
-Tested up to: 6.8
+Tested up to: 7.1
 Requires PHP: 7.2
 WC tested up to: 9.8
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-The Ultimate WordPress Profile Builder & User Management Plugin
+Profile builder, user dashboard and OTP/SMS login and registration for WordPress, with WooCommerce, LearnDash and WPML support.
 
 == Description ==
 
@@ -51,6 +51,8 @@ Your support and feedback have been key in shaping this plugin into a reliable a
 * Easily Integrate your SMS Provider with OTP System
 * Newsletter Mobile-based Subscription (Export to Excel CSV)
 * Compatible with WooCommerce, LearnDash, WooWallet, Wishlist, YITH Plugins
+* Optional Modern UI (off by default): modern login/register form with OTP code boxes and a modern user dashboard
+* WPML String Translation and Polylang support for all admin-defined front-end texts
 * Made by Developers for the Developers! [Source code in GitHub](https://github.com/peprodev/Ultimate-Profile-Solutions)
 
 == Plugin Features ==
@@ -74,16 +76,14 @@ Your support and feedback have been key in shaping this plugin into a reliable a
 
 == Installation ==
 
-1. Upload the plugin files to the `/wp-content/plugins/plugin-name` directory, or install the plugin through the WordPress plugins screen directly.
+1. Upload the plugin files to the `/wp-content/plugins/peprodev-ups` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress
-3. Use the Settings->Plugin Name screen to configure the plugin
+3. Use the "PeproDev Profile" admin menu to configure the plugin
 4. Navigate to `/wp-admin/?page=peprodev-ups&section=loginregister#tab_samrt_button` and copy Magical Button shortcode
 5. Add this shortcode to your header or next to your menu bar, so users could use popup login/register
 6. Also, check shortcodes panel from your sidebar while you're in Plugin's custom setting page
 7. This Plugin has 100% compatibility with Zephyr theme and could be used with any other themes
-
-== Upgrade Notice ==
-After updating to version 7.4.0, it is recommended to check the login section in the plugin settings via `wp-admin/?page=peprodev-ups&section=loginregister#tab_registration` and double-check everything to ensure all configurations are intact.
+8. Optional: enable the Modern UI under PeproDev Profile > Dashboard Texts > Modern UI
 
 == How to Use ==
 Place the shortcode `[pepro-smart-btn]` in your page header or view `wp-admin/?page=peprodev-ups&section=loginregister` for more advanced shortcodes. Explore `wp-admin/?page=peprodev-ups&section=shortcodes` to browse all available shortcodes provided by the plugin.
@@ -123,6 +123,12 @@ You can help us improve our works by committing your changes to [GitHub/Ultimate
 = How can I Order a Customized version of this plugin? =
 Our professional development team is here to offer you a fully Customized-Pro version of this plugin to fulfill your request. Contact us at [support@peprodev.com](mailto:support@pepro.dev)
 
+= Will updating to 8.1.0 change the look of my site? =
+No. The new Modern UI is off by default. Enable it under PeproDev Profile > Dashboard Texts > Modern UI, or with the `PEPRODEV_UPS_UI_LOGIN` / `PEPRODEV_UPS_UI_DASHBOARD` constants in wp-config.php.
+
+= Can I translate texts I entered in the plugin settings? =
+Yes. With WPML String Translation or Polylang active, registration fields, redirect rules, login header/footer HTML, email and SMS templates, dashboard texts and custom dashboard sections can be translated (context: peprodev-ups).
+
 = Where can I find the full changelog? =
 The full changelog is available in our [GitHub repository](https://github.com/peprodev/Ultimate-Profile-Solutions/blob/master/changelog.md).
 
@@ -139,6 +145,24 @@ Your support and feedback have been key in shaping this plugin into a reliable a
 🎂 Also, a big congratulations to WordPress on its 22nd birthday 🥳🍾!
 We're proud to be part of this amazing journey with the WordPress community 💙
 Here's to many more years of innovation, freedom, and open-source collaboration 😍!
+
+= 8.1.0 =
+Release date: 2026-09-27
+
+* New: optional Modern UI, off by default. A modern login/register form (Login/Register tabs, OTP code boxes with paste and autofill) and a modern user dashboard (edit profile with inline address editing and avatar removal, redesigned order and course views). Enable it under PeproDev Profile > Dashboard Texts > Modern UI.
+* New: [peprodev_learning_button] and [peprodev_my_courses] shortcodes for LearnDash sites, with editable texts and links on the Dashboard Texts page.
+* New: WPML String Translation and Polylang support for admin-defined front-end texts (registration fields, redirect rules, login header/footer HTML, email and SMS templates, dashboard texts, custom dashboard sections), including wpml-config.xml.
+* New: configurable verification email subject and new email placeholders [site_name], [site_logo], [expire_minutes] and [year].
+* New: modern default verification email template (English and Persian) with "Reset to default" and "Send test email" buttons. Existing templates are kept unchanged.
+* Improved: verification emails include a plain-text part and start with the code, for better code detection in mail apps.
+* Changed: after login or registration, visitors go to the explicit redirect target, then to a matching redirection rule, otherwise to the profile dashboard (instead of the previous page). Login and registration rules are now evaluated separately.
+* Fixed: OTP registration when automatic login after registration is disabled.
+* Fixed: profile custom content not saved while the editor was on the Text tab.
+* Fixed: PNG avatar uploads.
+* Fixed: profile logo preview and removal; the logo is now shown above the front-end login/register form.
+* Security: hardened AJAX actions and admin tools, stricter validation of user profile updates and redirects, OTP rate limiting and stronger code generation, more output escaping.
+* Performance: moment.js is no longer loaded with the login form, no duplicate stylesheet downloads, lighter database queries.
+* Compatibility: tested with WordPress 7.1; PHP 7.2+.
 
 = Version 8.0.4 | 2025-05-31 | 1404-03-10 =
 - Fixed some Backend Setting UI issues
@@ -163,23 +187,8 @@ Here's to many more years of innovation, freedom, and open-source collaboration 
 
 == Upgrade Notice ==
 
-🎉 Thank you for supporting PeproDev Ultimate Profile Solutions since its first private release in 2019!
-Your support and feedback have been key in shaping this plugin into a reliable and feature-rich solution for WordPress user profiles.
+= 8.1.0 =
+Security and stability release. The new Modern UI is off by default. After login, visitors without a redirect rule now land on the profile dashboard instead of the previous page; review your redirection rules after updating.
 
-🎂 Also, a big congratulations to WordPress on its 22nd birthday 🥳🍾!
-We're proud to be part of this amazing journey with the WordPress community 💙
-Here's to many more years of innovation, freedom, and open-source collaboration 😍!
-
-= Version 8.0.0 | 2025-05-27 | 1404-03-06 =
-- 🛡️ Resolved security vulnerabilities detected by Wordfence
-- 🔧 Major core update with enhanced architecture
-- 🚀 Improved performance and loading efficiency
-- 🗃️ Refactored and optimized database structure
-- ⚙️ Added unified settings panel for easier configuration
-- 🧹 Removed redundant database entries from wp-options
-- 🔄 Improved upgrade process with data migration and backward compatibility
-- 📝 Added option to edit and verify user email and SMS on Edit User screen
-- 🧩 Unified settings slug with consistent read/write functions and hooks
-- 🐞 Fixed LearnDash issue with incorrect date display
-
-Please also note that the full changelog for this version and previous versions can be found in the [GitHub repository](https://github.com/peprodev/Ultimate-Profile-Solutions/blob/master/changelog.md).
+= 7.4.0 =
+After updating to version 7.4.0, check the login section in the plugin settings and double-check that all configurations are intact.

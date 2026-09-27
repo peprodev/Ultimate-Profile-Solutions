@@ -1,0 +1,19 @@
+<wpml-config>
+  <!-- Visitor-facing texts stored in the "peprodev_ups_profile" option (see core/include/class-wpml.php for the single-string registration) -->
+  <admin-texts>
+    <key name="peprodev_ups_profile">
+      <key name="custom_html" />
+      <key name="dashboard_title" />
+      <key name="login_header_html" />
+      <key name="login_footer_html" />
+      <key name="login_logo_title" />
+      <key name="login_logo_href" />
+      <key name="verify_mail_template" />
+      <key name="verify_mail_subject" />
+      <key name="verify_mail_sender_name" />
+      <key name="smsir_message" />
+      <key name="smsir2_message" />
+      <key name="kavenegar_message" />
+    </key>
+  </admin-texts>
+</wpml-config>

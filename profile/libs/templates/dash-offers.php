@@ -1,4 +1,5 @@
 <?php
+defined("ABSPATH") || exit;
 # @Author: Amirhosseinhpv
 # @Date:   2021/08/28 00:07:32
 # @Email:  its@hpv.im

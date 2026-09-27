@@ -1,4 +1,5 @@
 <?php
+defined("ABSPATH") || exit;
 /**
 * @Author: amirhp-com <its@amirhp.com>
 * @Last modified by:   amirhp-com <its@amirhp.com>

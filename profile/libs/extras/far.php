@@ -1,4 +1,5 @@
 <?php
+defined("ABSPATH") || exit;
   $far = array(
     "far fa-address-book",
     "far fa-address-card",

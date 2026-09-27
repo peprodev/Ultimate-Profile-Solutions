@@ -32,6 +32,10 @@ jQuery.noConflict();
         console.warn("Skipping this instance as _pepro_dev is not defined.");
         return;
       }
+      if (window.pepro_reglogin_shared) {
+        if (undefined === _pepro_dev.countries) { _pepro_dev.countries = window.pepro_reglogin_shared.countries; }
+        if (undefined === _pepro_dev.iran_cities) { _pepro_dev.iran_cities = window.pepro_reglogin_shared.iran_cities; }
+      }
       _pepro_dev._ajax_req = null;
       // _pepro_dev.nonce = $(val).parents(".login-form-container").data("nonce");
       jconfirm.defaults = {
@@ -223,7 +227,7 @@ jQuery.noConflict();
                       text: _pepro_dev.closeTxt,
                       keys: ["esc"],
                       action: function (res) {
-                        window.location.reload();
+                        do_redirect(e);
                         jc.close();
                       }
                     },
@@ -232,12 +236,7 @@ jQuery.noConflict();
                       text: e.data.redirect_text,
                       keys: ["enter"],
                       action: function (res) {
-                        if (true === e.data.redirect) {
-                          window.location.reload();
-                        }
-                        else if (false !== e.data.redirect) {
-                          window.location.href = e.data.redirect;
-                        }
+                        do_redirect(e);
                         $(".popup-active").removeClass("popup-active");
                         jc.close();
                       }
@@ -253,15 +252,7 @@ jQuery.noConflict();
                       text: _pepro_dev.closeTxt,
                       keys: ["enter", "esc"],
                       action: function (res) {
-                        if (true === e.data.redirect) {
-                          window.location.reload();
-                        }
-                        else if (false !== e.data.redirect) {
-                          window.location.href = e.data.redirect;
-                          if (window.location.href == e.data.redirect) {
-                            window.location.reload();
-                          }
-                        }
+                        do_redirect(e);
                         $(".popup-active").removeClass("popup-active");
                         jc.close();
                       }
@@ -271,15 +262,7 @@ jQuery.noConflict();
                 if ($(login_form).is(".no_popup_alert")) {
                   show_toast(e.data.msg, $success_color);
                   setTimeout(function () {
-                    if (true === e.data.redirect) {
-                      window.location.reload();
-                    }
-                    else if (false !== e.data.redirect) {
-                      window.location.href = e.data.redirect;
-                      if (window.location.href == e.data.redirect) {
-                        window.location.reload();
-                      }
-                    }
+                    do_redirect(e);
                   }, 2000);
                 }
                 else {
@@ -291,6 +274,7 @@ jQuery.noConflict();
                     boxWidth: "500px",
                     buttons: obj_buttons,
                   });
+                  setTimeout(function () { do_redirect(e); }, 3000);
                 }
               }
             }
@@ -849,7 +833,7 @@ jQuery.noConflict();
                       keys: ["esc"],
                       action: function (res) {
                         $(".popup-active").removeClass("popup-active");
-                        window.location.reload();
+                        do_redirect(e);
                         jc.close();
                       }
                     },
@@ -858,15 +842,7 @@ jQuery.noConflict();
                       text: e.data.redirect_text,
                       keys: ["enter"],
                       action: function (res) {
-                        if (true === e.data.redirect) {
-                          window.location.reload();
-                        }
-                        else if (false !== e.data.redirect) {
-                          window.location.href = e.data.redirect;
-                          if (window.location.href == e.data.redirect) {
-                            window.location.reload();
-                          }
-                        }
+                        do_redirect(e);
                         $(".popup-active").removeClass("popup-active");
                         jc.close();
                       }
@@ -882,15 +858,7 @@ jQuery.noConflict();
                       text: _pepro_dev.closeTxt,
                       keys: ["enter", "esc"],
                       action: function (res) {
-                        if (true === e.data.redirect) {
-                          window.location.reload();
-                        }
-                        else if (false !== e.data.redirect) {
-                          window.location.href = e.data.redirect;
-                          if (window.location.href == e.data.redirect) {
-                            window.location.reload();
-                          }
-                        }
+                        do_redirect(e);
                         $(".popup-active").removeClass("popup-active");
                         jc.close();
                       }
@@ -900,15 +868,7 @@ jQuery.noConflict();
                 if ($(login_form).is(".no_popup_alert")) {
                   show_toast(e.data.msg, $success_color);
                   setTimeout(function () {
-                    if (true === e.data.redirect) {
-                      window.location.reload();
-                    }
-                    else if (false !== e.data.redirect) {
-                      window.location.href = e.data.redirect;
-                      if (window.location.href == e.data.redirect) {
-                        window.location.reload();
-                      }
-                    }
+                    do_redirect(e);
                   }, 2000);
                 }
                 else {
@@ -921,6 +881,7 @@ jQuery.noConflict();
                     buttons: obj_buttons,
                   }
                   );
+                  setTimeout(function () { do_redirect(e); }, 3000);
                 }
               }
             }
@@ -1148,11 +1109,7 @@ jQuery.noConflict();
       }
     });
 
-    setTimeout(function () {
-      $("[name=redirect_to]").each(function(i,x){
-        if("0" == $(x).val()){ $(x).val(document.referrer).trigger("change"); }
-      });
-    }, 1000);
+    // no document.referrer fallback for redirect_to: an empty value lets the server use the redirection rules, then the profile dashboard
 
     $(".pepro-login-reg-container").find(".form-register").find("#billing_country,#billing_state,#billing_city").attr("required", "required").trigger("change");
     $(".pepro-login-reg-container").find(".form-register").find("#billing_country").trigger("change");
@@ -1297,11 +1254,10 @@ jQuery.noConflict();
           ----------------------------
           Now in Istanbul: ${v3}
           TimerDown in Istanbul: ${v4}`); */
-          let timeObject = moment.tz(e.data.timerdown, _pepro_dev.timezone);
           $(login_form).find(".otp-resend")
             .prop("disabled", true)
             .addClass("disabled")
-            .countdown(timeObject.toDate())
+            .countdown(resend_target_date(e))
             .on('update.countdown', function (qd) {
               // console.log(qd.strftime('%H:%M:%S'));
               $(this).html(_pepro_dev.resendtime.replace('%s', qd.strftime('%M:%S')));
@@ -1320,6 +1276,30 @@ jQuery.noConflict();
             });
         }
       }
+    }
+    function do_redirect(e) {
+      if (!e || !e.data || e._redirected) { return; }
+      if (true === e.data.redirect) {
+        e._redirected = true;
+        window.location.reload();
+      }
+      else if (e.data.redirect && "string" === typeof e.data.redirect) {
+        e._redirected = true;
+        if (window.location.href == e.data.redirect) { window.location.reload(); }
+        else { window.location.href = e.data.redirect; }
+      }
+    }
+    function parse_wp_datetime(str) {
+      var m = String(str || "").match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2}):(\d{2})/);
+      if (!m) { return null; }
+      return new Date(+m[1], +m[2] - 1, +m[3], +m[4], +m[5], +m[6]);
+    }
+    function resend_target_date(e) {
+      // server sends both times in the site timezone; only their difference matters on the client
+      var until = parse_wp_datetime(e.data.timerdown), now = parse_wp_datetime(e.data.cur_time);
+      if (until && now) { return new Date(Date.now() + Math.max(0, until.getTime() - now.getTime())); }
+      if (until) { return until; }
+      return new Date();
     }
     function scroll_element() {
       // console.trace();

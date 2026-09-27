@@ -247,17 +247,28 @@
           $(`${me.attr("data-ref")}`).attr("data-id",selection.id);
           $(`${me.attr("data-ref2")}`).attr("data-image",`${selection.url}`);
           $(`${me.attr("data-ref3")}`).css("background-image",`url("${selection.url}")`);
-          $(`${me.attr("data-ref4")}`).attr("src",`${selection.url}`);
+          $(`${me.attr("data-ref4")}`).attr("src",`${selection.url}`).show();
         }
       });
       image_frame.on('open', function() {
         var selection = image_frame.state().get('selection');
         var id = $(`${me.attr("data-ref")}`).attr("data-id");
+        // nothing to preselect when the field is empty/cleared
+        if (!id || isNaN(parseInt(id, 10))) { return; }
         var attachment = wp.media.attachment(id);
         attachment.fetch();
         selection.add(attachment ? [attachment] : []);
       });
       image_frame.open();
+    });
+    // Clear a media field picked via .mediapicker (value, attachment id and preview)
+    $(document).on("click tap", ".mediaremover", function(e) {
+      e.preventDefault();
+      var me = $(this);
+      $(`${me.attr("data-ref")}`).val("").attr("data-id", "");
+      if (me.attr("data-ref2")) { $(`${me.attr("data-ref2")}`).attr("data-image", ""); }
+      if (me.attr("data-ref3")) { $(`${me.attr("data-ref3")}`).css("background-image", "none"); }
+      if (me.attr("data-ref4")) { $(`${me.attr("data-ref4")}`).attr("src", "").hide(); }
     });
   });
 })(jQuery);

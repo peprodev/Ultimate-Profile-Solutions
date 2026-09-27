@@ -95,7 +95,7 @@ final class PeproSMS_KavehNegar_Gateway extends PeproDevUPS {
   public function CLASS_KAVENEGAR($numbers = "", $message = "", $otp_code = 0) {
     $response = false;
     $username = $this->kavenegar_username;
-    $message  = $this->kavenegar_message;
+    $message  = PeproDevUPS_WPML::translate("sms: kavenegar message", $this->kavenegar_message);
     $from     = $this->kavenegar_sendernumber;
     $message  = str_replace("[OTP]", $otp_code, $message);
     $message  = str_replace("{OTP}", $otp_code, $message);

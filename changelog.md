@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.1.0](#version-810)
 - [Version 8.0.4](#version-804)
 - [Version 8.0.3](#version-803)
 - [Version 8.0.2](#version-802)
@@ -70,6 +71,26 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.1.0
+- Release date: 2026-09-27 | 1405-07-05  [&uarr;](#table-of-contents)
+- Includes all changes of the unreleased 8.0.5 development version.
+- **New** Optional Modern UI, **off by default** (PeproDev Profile > Dashboard Texts > Modern UI, or the `PEPRODEV_UPS_UI_LOGIN` / `PEPRODEV_UPS_UI_DASHBOARD` constants): modern login/register form with Login/Register tabs and OTP code boxes (paste, autofill, auto-submit); modern user dashboard with a new Edit profile view (inline AJAX WooCommerce addresses, avatar removal, password strength), redesigned order and course views
+- **New** `[peprodev_learning_button]` and `[peprodev_my_courses layout="home|full"]` shortcodes (LearnDash), `mj-has-courses` / `mj-no-courses` body classes, and a "Dashboard Texts" settings page for their texts and links (placeholders `{my_courses}`, `{courses_page}`, `{profile}`, `{shop}`, `{home}`, and `{continue_learning}` which requires PeproDev WP Tweaker)
+- **New** WPML String Translation and Polylang support for admin-defined front-end texts: registration field labels/placeholders/error texts/options, redirection URLs and popup button texts, login header/footer HTML, wp-login logo title/link, verification email template/subject/sender name, SMS templates, dashboard title and custom HTML, custom dashboard sections; `wpml-config.xml` and "Translate texts with WPML" links
+- **New** Configurable verification email subject (`[OTP]`, `[site_name]`, `[request_email]`, `[first_name]`, `[last_name]`, `[display_name]`, `[username]`); empty = translatable built-in default
+- **New** Modern default verification email templates (`login/assets/mail-template-default.html`, Persian: `mail-template-default-fa_IR.html`) with `[site_name]`, `[site_logo]`, `[expire_minutes]`, `[year]` tags, plus "Reset to default" and "Send test email" buttons. Stored templates are kept unchanged (opt in to upgrading an untouched pre-8.1 default with the `pepro_reglogin_upgrade_legacy_mail_template` filter)
+- **Improved** OTP emails: plain-text alternative part, code at the start of the subject and body, auto-generated headers, sanitized From header (a bare local part such as `noreply` is completed with the site host)
+- **Changed** Redirect after login/register: validated explicit `redirect_to` first, then the matching redirection rule (login and register rules are evaluated separately), otherwise the profile dashboard; filter `pepro_reglogin_default_login_redirect` to change the fallback
+- **Fixed** OTP registration when auto-login after registration is disabled
+- **Fixed** Login/register success popup now always performs the redirect
+- **Fixed** PNG avatar uploads
+- **Fixed** Profile settings custom content (wp_editor) not saved while on the Text tab
+- **Fixed** Profile logo setting (preview, remove button); logo shown at the top of the front-end login/register form; wp-login logo can be removed
+- **Security** Hardened AJAX actions and admin tools (capability and nonce checks), stricter validation of profile and user-meta updates, redirect validation, OTP send/verify rate limiting and stronger code generation, more output escaping, direct-access guards on PHP files
+- **Performance** moment.js/moment-timezone no longer loaded with the login form, no duplicate stylesheet downloads, country/city data printed once per page, stable asset versions instead of `time()`, lighter queries on `init`
+- **Compatibility** Fallbacks for WordPress versions before 5.3 (`wp_date`, `wp_timezone_string`); tested with WordPress 7.1; PHP 7.2+
+- **Developers** New filters: `peprodev_ui_module_enabled`, `peprodev_ui_load_global_css`, `peprodev_ui_texts_fields`, `peprodev_ui_text`, `peprodev_ui_text_url`, `peprodev_ui_courses_page_url`, `peprodev_ui_course_url`, `peprodev_ui_continue_url`, `peprodev_ui_login_strings`, `peprodev_ui_dashboard_strings`, `peprodev_ui_dashboard_template_map`, `peprodev_ui_dashboard_is_profile_page`, `peprodev_ui_dashboard_dequeue_font_awesome`, `pepro_reglogin_form_redirect_to`, `pepro_reglogin_default_login_redirect`, `pepro_reglogin_otp_send_limits`, `pepro_reglogin_otp_max_verify_attempts`, `pepro_reglogin_verification_email_subject`, `pepro_reglogin_default_mail_template`, `pepro_reglogin_upgrade_legacy_mail_template`, `peprodev-ups/wpml/strings`
 
 ## Version 8.0.4
 - Release date: 2025-05-31 | 1404-03-10  [&uarr;](#table-of-contents)
