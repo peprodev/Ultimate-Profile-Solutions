@@ -17,7 +17,8 @@ defined( 'ABSPATH' ) || exit;
  */
 function peprodev_ui_login_strings() {
 	global $PeproDevUPS_Login;
-	$digits = is_object( $PeproDevUPS_Login ) && ! empty( $PeproDevUPS_Login->verification_digits ) ? absint( $PeproDevUPS_Login->verification_digits ) : 5;
+	$digits       = is_object( $PeproDevUPS_Login ) && ! empty( $PeproDevUPS_Login->verification_digits ) ? absint( $PeproDevUPS_Login->verification_digits ) : 5;
+	$email_digits = is_object( $PeproDevUPS_Login ) && ! empty( $PeproDevUPS_Login->verification_email_digits ) ? absint( $PeproDevUPS_Login->verification_email_digits ) : 8;
 	return apply_filters(
 		'peprodev_ui_login_strings',
 		array(
@@ -30,6 +31,16 @@ function peprodev_ui_login_strings() {
 			'otpTitle'          => __( 'Verify your mobile number', 'peprodev-ups' ),
 			/* translators: %s: number of digits of the verification code. */
 			'otpSubtitle'       => sprintf( __( 'Enter the %s-digit code sent to you by SMS.', 'peprodev-ups' ), number_format_i18n( $digits ) ),
+			// Email variants, used while the email forms are shown.
+			'registerSubtitleEmail' => __( 'Sign up with your email address in less than a minute.', 'peprodev-ups' ),
+			'otpTitleEmail'         => __( 'Verify your email address', 'peprodev-ups' ),
+			/* translators: %s: number of digits of the verification code. */
+			'otpSubtitleEmail'      => sprintf( __( 'Enter the %s-digit code sent to your email address.', 'peprodev-ups' ), number_format_i18n( $email_digits ) ),
+			'resetTitle'            => __( 'Reset your password', 'peprodev-ups' ),
+			'resetSubtitle'         => __( 'Enter your username or email address to receive a password reset link.', 'peprodev-ups' ),
+			// Link under the form that switches between the mobile and the email forms (shown when both are enabled).
+			'switchToEmail'         => __( 'Login/Register with email', 'peprodev-ups' ),
+			'switchToMobile'        => __( 'Login/Register with mobile', 'peprodev-ups' ),
 			'mobileLabel'       => __( 'Mobile number', 'peprodev-ups' ),
 			'mobilePlaceholder' => _x( '09123456789', 'mobile number placeholder', 'peprodev-ups' ),
 			'otpLabel'          => __( 'Verification code', 'peprodev-ups' ),

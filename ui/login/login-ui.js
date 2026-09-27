@@ -5,6 +5,12 @@
  * `form.form-login` / `form.form-register`. Tabs drive the plugin's own
  * (hidden) switch links so its handlers keep doing the real work, and a
  * MutationObserver keeps the tabs in sync with whatever the plugin does.
+ *
+ * When both the mobile and the email forms are enabled, the plugin prints a
+ * `.switcher` (hidden here) and marks the container `via-sms-active` or
+ * `via-email-active` following the admin's default. A link under the forms
+ * clicks that switcher, so the whole widget (Login and Register tabs) moves
+ * between the mobile (`form.via-sms`) and email (`form.via-email`) forms.
  */
 (function ($) {
   "use strict";
@@ -20,15 +26,27 @@
       .replace(/[٠-٩]/g, function (d) { return d.charCodeAt(0) - 0x0660; });
   }
 
+  /** "email" or "sms": the login method the plugin currently shows. */
+  function currentVia($c) {
+    return $c.hasClass("via-email-active") ? "email" : "sms";
+  }
+
+  function pick($c, type, via) {
+    var $f = $c.children("form." + type + ".via-" + via).first();
+    return $f.length ? $f : $c.children("form." + type).first();
+  }
+
   function forms($c) {
-    return {
-      login: $c.children("form.form-login.via-sms").first().length ? $c.children("form.form-login.via-sms").first() : $c.children("form.form-login").first(),
-      register: $c.children("form.form-register.via-sms").first().length ? $c.children("form.form-register.via-sms").first() : $c.children("form.form-register").first()
-    };
+    var via = currentVia($c);
+    return { login: pick($c, "form-login", via), register: pick($c, "form-register", via) };
   }
 
   function currentMode($c) {
-    return $c.children("form.form-register.inline").length ? "register" : "login";
+    var via = currentVia($c);
+    if ($c.children("form.form-register.via-" + via + ".inline").length) { return "register"; }
+    // "Lost password" form of the email login (no form-login / form-register class)
+    if ($c.children("form.inline").not(".form-login, .form-register").filter(".via-" + via).length) { return "reset"; }
+    return "login";
   }
 
   function isOtpStep($form) {
@@ -37,7 +55,14 @@
   }
 
   function switchTo($c, mode) {
-    if (mode === currentMode($c)) { return; }
+    var current = currentMode($c);
+    if (mode === current) { return; }
+    if (current === "reset") {
+      // back to the login form first, like the plugin's own "Back to Login" link
+      var $back = $c.children("form.inline").not(".form-login, .form-register").find(".switch-form-login").first();
+      if ($back.length) { $back.trigger("click"); } else { $c.children("form").removeClass("inline"); forms($c).login.addClass("inline"); }
+      if (mode === "login") { return; }
+    }
     var f = forms($c);
     var $trigger = mode === "register"
       ? f.login.find(".switch-form-register").first()
@@ -83,25 +108,18 @@
     var f = forms($c);
     if (!f.login.length) { return; }
 
-    var $switchMobile = $c.find(".switcher .switch-mobile");
-    if ($switchMobile.length && !$c.hasClass("via-sms-active")) {
-      $switchMobile.trigger("click");
-    }
-
     var id = "mj-login-ui-" + (++uid);
     var hasRegister = f.register.length > 0;
-    f.login.attr("id") || f.login.attr("id", id + "-login");
-    if (hasRegister) { f.register.attr("id") || f.register.attr("id", id + "-register"); }
 
     var $tabs = $('<div class="mj-tabs" role="tablist"></div>');
     var $indicator = $('<span class="mj-tabs__indicator" aria-hidden="true"></span>');
     var $login = $('<button type="button" class="mj-tabs__tab" role="tab" data-mode="login"></button>')
-      .text(t.tabLogin || "Login").attr({ id: id + "-tab-login", "aria-controls": f.login.attr("id") });
+      .text(t.tabLogin || "Login").attr({ id: id + "-tab-login" });
     $tabs.append($indicator, $login);
 
     if (hasRegister) {
       var $register = $('<button type="button" class="mj-tabs__tab" role="tab" data-mode="register"></button>')
-        .text(t.tabRegister || "Register").attr({ id: id + "-tab-register", "aria-controls": f.register.attr("id") });
+        .text(t.tabRegister || "Register").attr({ id: id + "-tab-register" });
       $tabs.append($register);
     } else {
       $tabs.addClass("mj-tabs--single");
@@ -111,7 +129,27 @@
     var $anchor = $c.children(".switcher").length ? $c.children(".switcher") : $c.children(".pepro-login-logo");
     if ($anchor.length) { $anchor.last().after($tabs, $head); } else { $c.prepend($tabs, $head); }
 
-    $c.addClass("mj-login-ui" + (hasRegister ? " mj-has-tabs" : ""));
+    // Mobile <-> email switch link: only when the admin enabled both methods.
+    var $switcher = $c.children(".switcher");
+    var $method = $();
+    if ($switcher.find(".switch-mobile").length && $switcher.find(".switch-email").length) {
+      $method = $('<div class="mj-method"><button type="button" class="mj-method__link"></button></div>');
+      $c.children("form").last().after($method);
+      $method.on("click", ".mj-method__link", function (e) {
+        e.preventDefault();
+        if ($(this).is("[aria-disabled=true]")) { return; }
+        var mode = currentMode($c) === "register" ? "register" : "login";
+        var target = currentVia($c) === "sms" ? "email" : "mobile";
+        // The plugin's own switcher handler moves the container to the other method (login form).
+        $switcher.find(".switch-" + target).first().trigger("click");
+        if (mode === "register") { switchTo($c, "register"); }
+        schedule();
+        var $first = forms($c)[mode].find("input:visible, select:visible").first();
+        if ($first.length) { $first.trigger("focus"); }
+      });
+    }
+
+    $c.addClass("mj-login-ui" + (hasRegister ? " mj-has-tabs" : "") + ($method.length ? " mj-has-method" : ""));
     enhanceFields($c);
 
     $tabs.on("click", ".mj-tabs__tab", function () {
@@ -136,18 +174,21 @@
     function sync() {
       pending = false;
       var mode = currentMode($c);
-      var $active = forms($c)[mode];
+      var via = currentVia($c);
+      var tab = mode === "register" ? "register" : "login";
+      var $active = mode === "reset" ? $c.children("form.inline").first() : forms($c)[mode];
       var otp = $active.length ? isOtpStep($active) : false;
       var loading = $active.hasClass("loading");
-      if (state.mode === mode && state.otp === otp && state.loading === loading) { return; }
-      state = { mode: mode, otp: otp, loading: loading };
+      if (state.mode === mode && state.via === via && state.otp === otp && state.loading === loading) { return; }
+      state = { mode: mode, via: via, otp: otp, loading: loading };
 
-      $tabs.attr("data-active", mode).toggleClass("is-locked", otp || loading);
+      $tabs.attr("data-active", tab).toggleClass("is-locked", otp || loading);
       $tabs.find(".mj-tabs__tab").each(function () {
         var $b = $(this);
-        var on = $b.data("mode") === mode;
+        var on = $b.data("mode") === tab;
+        var $panel = forms($c)[$b.data("mode")];
         $b.toggleClass("is-active", on)
-          .attr({ "aria-selected": on ? "true" : "false", tabindex: on ? "0" : "-1" })
+          .attr({ "aria-selected": on ? "true" : "false", tabindex: on ? "0" : "-1", "aria-controls": $panel && $panel.length ? $panel.attr("id") : null })
           .attr("aria-disabled", !on && (otp || loading) ? "true" : "false");
       });
       $c.children("form").each(function () {
@@ -155,10 +196,19 @@
         $f.attr({ role: "tabpanel", "aria-labelledby": id + "-tab-" + ($f.hasClass("form-register") ? "register" : "login") });
       });
 
+      if ($method.length) {
+        $method.toggleClass("is-hidden", otp || loading)
+          .find(".mj-method__link")
+          .text(via === "sms" ? (t.switchToEmail || "Login/Register with email") : (t.switchToMobile || "Login/Register with mobile"))
+          .attr("aria-disabled", otp || loading ? "true" : "false");
+      }
+
+      // Email variants have their own subtitle / OTP texts, falling back to the generic ones.
       var key = otp ? "otp" : mode;
-      $head.find(".mj-head__title").text(t[key + "Title"] || "");
-      $head.find(".mj-head__subtitle").text(t[key + "Subtitle"] || "");
-      $c.toggleClass("mj-is-otp", otp).attr("data-mj-mode", mode);
+      var suffix = via === "email" ? "Email" : "";
+      $head.find(".mj-head__title").text(t[key + "Title" + suffix] || t[key + "Title"] || "");
+      $head.find(".mj-head__subtitle").text(t[key + "Subtitle" + suffix] || t[key + "Subtitle"] || "");
+      $c.toggleClass("mj-is-otp", otp).attr({ "data-mj-mode": mode, "data-mj-via": via });
     }
 
     function schedule() {

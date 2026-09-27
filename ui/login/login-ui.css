@@ -43,8 +43,14 @@
   object-fit: contain;
 }
 
-/* Forms: strip the old boxed look, keep plugin visibility logic */
+/* Forms: strip the old boxed look, keep plugin visibility logic
+   (only the forms of the active method: mobile = via-sms, email = via-email) */
 .mj-login-ui-on #pepro-profile .pepro-login-reg-container.inline-form > form.inline {
+  display: none !important;
+}
+
+.mj-login-ui-on #pepro-profile .pepro-login-reg-container.inline-form.via-sms-active > form.via-sms.inline,
+.mj-login-ui-on #pepro-profile .pepro-login-reg-container.inline-form.via-email-active > form.via-email.inline {
   display: flex !important;
   flex-flow: row wrap;
   align-items: flex-start;
@@ -377,6 +383,49 @@
 
 .mj-login-ui-on #pepro-profile .mj-login-ui .pepro-form-links:not(:has(> :not([style*="display: none"]):not(.switch-form-register):not(.switch-form-login))) {
   display: none;
+}
+
+/* Mobile <-> email switch link (injected when both methods are enabled) */
+.mj-login-ui-on #pepro-profile .mj-method {
+  display: flex;
+  justify-content: center;
+  margin: 1.25rem 0 0;
+  padding: 1rem 0 0;
+  border-top: 1px solid var(--mj-line);
+}
+
+.mj-login-ui-on #pepro-profile .mj-method.is-hidden {
+  display: none;
+}
+
+.mj-login-ui-on #pepro-profile .mj-method__link {
+  appearance: none;
+  margin: 0;
+  padding: .35rem .5rem;
+  border: 0;
+  border-radius: var(--mj-radius-sm);
+  background: transparent;
+  box-shadow: none;
+  font: inherit;
+  font-size: .95rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--mj-primary);
+  text-transform: none;
+  letter-spacing: 0;
+  cursor: pointer;
+}
+
+.mj-login-ui-on #pepro-profile .mj-method__link:hover {
+  background: transparent;
+  color: var(--mj-primary-hover);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.mj-login-ui-on #pepro-profile .mj-method__link:focus-visible {
+  outline: 2px solid var(--mj-primary);
+  outline-offset: 2px;
 }
 
 /* Popup mode */
