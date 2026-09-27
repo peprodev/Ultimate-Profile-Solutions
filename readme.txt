@@ -2,8 +2,8 @@
 Contributors: amirhpcom, peprodev, blackswanlab
 Donate link: https://peprodev.com/donate/
 Tags: profile, dashboard, login-registration
-Version: 8.2.4
-Stable tag: 8.2.4
+Version: 8.2.5
+Stable tag: 8.2.5
 Requires at least: 5.0
 Tested up to: 7.1
 Requires PHP: 7.2
@@ -11,7 +11,7 @@ WC tested up to: 9.8
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Profile builder, user dashboard and OTP/SMS login and registration for WordPress, with WooCommerce, LearnDash and WPML support.
+Profile builder, user dashboard and OTP/SMS/Google login and registration for WordPress, with WooCommerce, LearnDash and WPML support.
 
 == Description ==
 
@@ -23,7 +23,7 @@ Your support and feedback have been key in shaping this plugin into a reliable a
 
 * FREE OF ANY CHARGE, UNLIMITED, and OPEN-SOURCE FOREVER!
 * Ajaxified Popup Login/Register form
-* Login by Username/Password | Email/Password | Mobile OTP | Email OTP | (social login soon)
+* Login by Username/Password | Email/Password | Mobile OTP | Email OTP | Sign in with Google
 * Show Popup/Toast Notification after Login/Register
 * Unlimited User Customized Registration Fields:
     * Text Field
@@ -51,7 +51,7 @@ Your support and feedback have been key in shaping this plugin into a reliable a
 * Easily Integrate your SMS Provider with OTP System
 * Newsletter Mobile-based Subscription (Export to Excel CSV)
 * Compatible with WooCommerce, LearnDash, WooWallet, Wishlist, YITH Plugins
-* Optional Modern UI (off by default): modern login/register form with OTP code boxes and a modern user dashboard
+* Modern UI (on by default, can be turned off): modern login/register form with Login/Register tabs, OTP code boxes and a mobile/email switch, and a modern user dashboard
 * WPML String Translation and Polylang support for all admin-defined front-end texts
 * Made by Developers for the Developers! [Source code in GitHub](https://github.com/peprodev/Ultimate-Profile-Solutions)
 
@@ -71,7 +71,8 @@ Your support and feedback have been key in shaping this plugin into a reliable a
 * Add reCAPTCHA for enhanced security
 * Mobile OTP-based subscription list for users
 * Modify default WordPress login design and behavior
-* SMS Providers: SMS.ir (v1, v2), FarazSMS, IPPanel (Normal, Pattern), Kavehnegar (Normal, Pattern), ParsGreen, with options to add more using hooks
+* SMS Providers: SMS.ir (v1, v2), FarazSMS / IranPayamak (Normal, Pattern), IPPanel (Normal, Pattern), Kavehnegar (Normal, Pattern), ParsGreen, and any provider of the WP SMS or Persian WooCommerce SMS plugins, with options to add more using hooks
+* Sign in with Google (OAuth 2.0 / OpenID Connect) with optional account creation
 * Fully compatible with Elementor, Zephyr theme, Woodmart theme, Visual Composer, LearnDash, WooWallet, PeproDev Ticketing, WooCommerce, and more
 
 == Installation ==
@@ -83,7 +84,8 @@ Your support and feedback have been key in shaping this plugin into a reliable a
 5. Add this shortcode to your header or next to your menu bar, so users could use popup login/register
 6. Also, check shortcodes panel from your sidebar while you're in Plugin's custom setting page
 7. This Plugin has 100% compatibility with Zephyr theme and could be used with any other themes
-8. Optional: enable the Modern UI under PeproDev Profile > Dashboard Texts > Modern UI
+8. The Modern UI is on by default. Turn the modern login form off under PeproDev Profile > Login/Register > Login & Registration, and the modern dashboard under PeproDev Profile > Profile
+9. Optional: set up Sign in with Google under PeproDev Profile > Login/Register > Social Login
 
 == How to Use ==
 Place the shortcode `[pepro-smart-btn]` in your page header or view `wp-admin/?page=peprodev-ups&section=loginregister` for more advanced shortcodes. Explore `wp-admin/?page=peprodev-ups&section=shortcodes` to browse all available shortcodes provided by the plugin.
@@ -123,8 +125,17 @@ You can help us improve our works by committing your changes to [GitHub/Ultimate
 = How can I Order a Customized version of this plugin? =
 Our professional development team is here to offer you a fully Customized-Pro version of this plugin to fulfill your request. Contact us at [support@peprodev.com](mailto:support@pepro.dev)
 
-= Will updating to 8.1.0 change the look of my site? =
-No. The new Modern UI is off by default. Enable it under PeproDev Profile > Dashboard Texts > Modern UI, or with the `PEPRODEV_UPS_UI_LOGIN` / `PEPRODEV_UPS_UI_DASHBOARD` constants in wp-config.php.
+= Will updating to 8.2 change the look of my site? =
+Yes, unless you turned it off before. Since 8.2.0 the Modern UI (login/register form and user dashboard) is on by default, also for existing sites that never saved the setting. Sites that saved "off" on the 8.1 Dashboard Texts page keep it off. Turn it off under PeproDev Profile > Login/Register > Login & Registration (login form) and PeproDev Profile > Profile (dashboard), or with `define( 'PEPRODEV_UPS_UI_LOGIN', false );` / `define( 'PEPRODEV_UPS_UI_DASHBOARD', false );` in wp-config.php.
+
+= Where did the "Dashboard Texts" page go? =
+Its settings moved: the modern login form switch is in PeproDev Profile > Login/Register > Login & Registration, the modern dashboard switch, learning button and "My courses" texts are in PeproDev Profile > Profile. Saved values are migrated automatically.
+
+= How do I set up Sign in with Google? =
+Create an OAuth client ID (Web application) in the Google Cloud Console, add the Authorized redirect URI shown in PeproDev Profile > Login/Register > Social Login, then paste the Client ID and Client Secret there and enable the option. New Google users get an account only when registration is open and "Create new users" is enabled. Use `[pepro-google-login]` to place the button anywhere.
+
+= Can I send the OTP through the WP SMS or Persian WooCommerce SMS plugins? =
+Yes. Choose "WP SMS plugin" or "Persian WooCommerce SMS plugin" as SMS Provider in Login/Register > Verification. The code is sent through the provider configured in that plugin; the gateway shows a notice and sends nothing while the plugin is not active.
 
 = Can I translate texts I entered in the plugin settings? =
 Yes. With WPML String Translation or Polylang active, registration fields, redirect rules, login header/footer HTML, email and SMS templates, dashboard texts and custom dashboard sections can be translated (context: peprodev-ups).
@@ -145,6 +156,21 @@ Your support and feedback have been key in shaping this plugin into a reliable a
 🎂 Also, a big congratulations to WordPress on its 22nd birthday 🥳🍾!
 We're proud to be part of this amazing journey with the WordPress community 💙
 Here's to many more years of innovation, freedom, and open-source collaboration 😍!
+
+= 8.2.5 =
+Release date: 2026-09-27 (includes 8.2.0 to 8.2.4)
+
+* Changed: the Modern UI (login/register form and user dashboard) is now on by default, also on existing sites that never saved the setting; a saved "off" or the PEPRODEV_UPS_UI_LOGIN / PEPRODEV_UPS_UI_DASHBOARD constants still turn it off.
+* Changed: the "Dashboard Texts" page was merged into the existing screens: the modern login switch is in Login/Register > Login & Registration, the modern dashboard switch, learning button and "My courses" texts are in Profile. Saved values are migrated automatically and the old page link redirects.
+* New: modern login form switch between mobile and email. When both forms are enabled, a "Login/Register with email / with mobile" link moves the Login and Register tabs between the two methods; the first method follows your "Make Mobile Login/Registration Activated by Default" setting.
+* New: Sign in with Google (Login/Register > Social Login): log in existing users by their Google email, optionally create new users when registration is open, button under the login/register forms, on wp-login.php and via [pepro-google-login].
+* New: SMS gateways FarazSMS / IranPayamak (pattern and normal SMS, pattern list, balance and pattern creation helpers), WP SMS plugin and Persian WooCommerce SMS plugin integrations.
+* Improved: every registration field type (text, number, email, date, select, checkbox, textarea, editor, WooCommerce address, reCAPTCHA) is styled in the modern register forms, with required markers and error messages under the fields.
+* Improved: "Send a Test SMS" shows why sending failed. The older ippanel.com gateways are labelled "IPPanel / FarazSMS (legacy API)"; their settings are unchanged.
+* Fixed: the email login form was visible under the mobile form in the modern UI.
+* Fixed: registration was blocked by a reCAPTCHA field whose script was not loaded when "Use in Login form" was off.
+* Fixed: WooCommerce country/state/city were always required and not saved to new users.
+* Developers: new hooks pepro_reglogin_form_top, pepro_reglogin_form_bottom, pepro_reglogin_settings_tabs_nav, pepro_reglogin_settings_tabs_content, pepro_reglogin_save_settings, pepro_reglogin_social_login and pepro_reglogin_sms_last_error.
 
 = 8.1.0 =
 Release date: 2026-09-27
@@ -186,6 +212,9 @@ Release date: 2026-09-27
 - 🐞 Fixed LearnDash issue with incorrect date display
 
 == Upgrade Notice ==
+
+= 8.2.5 =
+The Modern UI is now on by default, also on existing sites that did not turn it off before. Its settings moved from "Dashboard Texts" to the Login/Register and Profile screens (values are migrated). New: Sign in with Google, FarazSMS / WP SMS / Persian WooCommerce SMS gateways.
 
 = 8.1.0 =
 Security and stability release. The new Modern UI is off by default. After login, visitors without a redirect rule now land on the profile dashboard instead of the previous page; review your redirection rules after updating.

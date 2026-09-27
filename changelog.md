@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.2.5](#version-825)
 - [Version 8.1.0](#version-810)
 - [Version 8.0.4](#version-804)
 - [Version 8.0.3](#version-803)
@@ -71,6 +72,22 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.2.5
+- Release date: 2026-09-27 | 1405-07-05  [&uarr;](#table-of-contents)
+- Includes the development versions 8.2.0 to 8.2.4 (one commit each in the repository).
+- **Changed** (8.2.0) Modern UI **on by default**, also on existing sites that never saved the setting; a saved "off" or the `PEPRODEV_UPS_UI_LOGIN` / `PEPRODEV_UPS_UI_DASHBOARD` constants still turn it off
+- **Changed** (8.2.0) The "Dashboard Texts" page was merged into the existing screens: modern login switch in Login/Register > Login & Registration, modern dashboard switch, learning button and "My courses" texts in Profile. Values are stored in the `modern_ui` key of `peprodev_ups_profile`; the 8.1 option `peprodev_ups_ui_texts` is migrated once (and left in place); the old page URL redirects to the Profile screen. `peprodev_ui_text()`, `peprodev_ui_text_on()` and `peprodev_ui_text_url()` keep working
+- **New** (8.2.1) Modern login: "Login/Register with email / with mobile" link switches the Login and Register tabs between the mobile and email forms when both are enabled (reusing the plugin's switcher); the first method follows "Make Mobile Login/Registration Activated by Default"; email-specific heading and OTP texts; the Lost password view works with the tabs
+- **Fixed** (8.2.1) Modern UI showed the email login form under the mobile one
+- **Improved** (8.2.2) Registration fields in the modern register forms: textarea, number, email, date, select, checkbox, TinyMCE editor, WooCommerce country/state/city and reCAPTCHA styled; first/last name side by side; required markers; error messages under the invalid fields
+- **Fixed** (8.2.2) reCAPTCHA script not loaded for the register forms when "Use in Login form" was off (registration was blocked); WooCommerce country/state/city always required and not saved to new users; extra builder "mobile" fields relabelled as the main mobile field
+- **New** (8.2.3) SMS gateway FarazSMS / IranPayamak (`farazsms`): pattern OTP or message template, pattern list, balance and "Create pattern" helpers
+- **New** (8.2.3) SMS gateways for the WP SMS plugin (`wpsms`, `wp_sms_send()`, optional template id) and the Persian WooCommerce SMS plugin (`pwsms`, `PWSMS()->send_sms()`, pattern blocks); both show a notice and never send while the host plugin is inactive
+- **Improved** (8.2.3) "Send a Test SMS" reports why a send failed; legacy ippanel.com gateways labelled "IPPanel / FarazSMS (legacy API)" (ids and settings unchanged)
+- **New** (8.2.4) Sign in with Google (Login/Register > Social Login): OAuth 2.0 / OpenID Connect via `wp_remote_*`, state in a transient bound to a cookie, OIDC nonce, ID token and verified-email checks; existing users log in, new users are created only when registration is open and allowed; plugin redirect rules; button under the login/register forms (classic and modern), on wp-login.php and `[pepro-google-login]`
+- **Developers** New hooks: `pepro_reglogin_form_top`, `pepro_reglogin_form_bottom`, `pepro_reglogin_settings_tabs_nav`, `pepro_reglogin_settings_tabs_content`, `pepro_reglogin_save_settings`, `pepro_reglogin_social_login`, `pepro_reglogin_sms_last_error`
+- **Translations** Persian (fa_IR) strings for all new texts
 
 ## Version 8.1.0
 - Release date: 2026-09-27 | 1405-07-05  [&uarr;](#table-of-contents)
