@@ -1900,6 +1900,11 @@ if (!class_exists("PeproDevUPS_Profile")) {
               }
             }
 
+            // Modern UI: dashboard switch, learning button and "My courses" texts (ui/ui.php)
+            if (isset($_POST["dparam"]["modern_ui"]) && is_array($_POST["dparam"]["modern_ui"]) && function_exists("peprodev_ui_texts_save_input")) {
+              peprodev_ui_texts_save_input(wp_unslash($_POST["dparam"]["modern_ui"]));
+            }
+
             // (re-)register translatable texts with WPML/Polylang string translation
             PeproDevUPS_WPML::register_all();
 

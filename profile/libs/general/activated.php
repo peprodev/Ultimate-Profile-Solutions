@@ -221,3 +221,20 @@ defined("ABSPATH") || exit;
     </div>
   </div>
 </div>
+<?php if (function_exists("peprodev_ui_render_profile_settings")) { ?>
+<div class="row">
+  <div class="col-lg-12 col-md-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title"><?php esc_html_e("Modern UI, learning button and My courses", "peprodev-ups");?></h4>
+        <p class="card-category"><?php esc_html_e("Modern user dashboard switch and the texts and links of the learning button and the My courses views.", "peprodev-ups");?></p>
+      </div>
+      <div class="card-body table-responsive">
+        <?php peprodev_ui_render_profile_settings(); ?>
+        <button type="button" class="profile-section-save btn btn-primary icn-btn btn-wide" integrity="<?php echo esc_attr(wp_create_nonce('peprocorenounce'));?>" wparam="profile" lparam="save_setting" dparam="" fn=""><i class='material-icons'>save</i> <?php echo esc_html_x("Save Settings","profile-section", "peprodev-ups");?></button>
+        <?php echo PeproDevUPS_WPML::admin_link_html(); ?>
+      </div>
+    </div>
+  </div>
+</div>
+<?php } ?>

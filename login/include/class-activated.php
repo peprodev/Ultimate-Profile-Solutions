@@ -12,7 +12,7 @@ wp_enqueue_script("pepro-register-jqconfirm",      "{$this->assets_url}assets/jq
 wp_enqueue_script("color-picker-alpha",            "{$this->assets_url}assets/wp-color-picker-alpha.min.js", array("jquery"), "1.6.0");
 wp_enqueue_script("pepro-register-fields-hotkeys", "{$this->assets_url}assets/hotkeys.min.js", array('jquery'), "1.6.0");
 wp_enqueue_script("pepro-register-fields-ide",     "{$this->assets_url}assets/ide/ace.js", array('jquery'), "1.6.0");
-wp_enqueue_script("pepro-register-fields",         "{$this->assets_url}assets/register.js", array("jquery"), "1.6.3");
+wp_enqueue_script("pepro-register-fields",         "{$this->assets_url}assets/register.js", array("jquery"), "1.6.3." . $this->version);
 wp_localize_script("pepro-register-fields",        "_register_fields", array(
   "_added"     => __("New Field Successfully Added", "peprodev-ups"),
   "_removed"   => __("Field Successfully Removed",   "peprodev-ups"),
@@ -327,6 +327,7 @@ foreach ($styleFiles as $style) {
                             <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required mr-2 no_popup_alert' <?php checked($this->no_popup_alert, true); ?> name="no_popup_alert" /> <?php esc_html_e("Don't use Popup after Login/Register", "peprodev-ups"); ?>
                           </label>
                         </div>
+                        <?php if (function_exists("peprodev_ui_render_login_settings")) peprodev_ui_render_login_settings(); ?>
                       </div>
                     </div>
                   </div>

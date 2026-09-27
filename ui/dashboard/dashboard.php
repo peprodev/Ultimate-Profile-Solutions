@@ -4,7 +4,7 @@
  *
  * Restyles the logged-in PeproDev UPS dashboard (sidebar, cards, stats,
  * orders, courses) and replaces its "Edit profile" section template.
- * Loaded only when enabled (Dashboard Texts > Modern UI, or the
+ * Loaded when enabled (on by default; Profile settings > Modern UI, or the
  * PEPRODEV_UPS_UI_DASHBOARD constant).
  */
 

@@ -4,11 +4,12 @@
  * dashboard, OTP code boxes, enrolled-courses views and a configurable
  * "continue / start learning" button.
  *
- * Both modules are OPT-IN and off by default. Enable them on
- * PeproDev Profile > Dashboard Texts > "Modern UI", or force them in
- * wp-config.php (a defined constant always wins over the setting):
- *   define( 'PEPRODEV_UPS_UI_LOGIN', true );      // modern login/register form
- *   define( 'PEPRODEV_UPS_UI_DASHBOARD', true );  // modern user dashboard
+ * Both modules are ON by default (since 8.2.0). Turn them off on
+ * PeproDev Profile > Login/Register > Login & Registration (login form) and
+ * PeproDev Profile > Profile (dashboard), or force them in wp-config.php
+ * (a defined constant always wins over the setting):
+ *   define( 'PEPRODEV_UPS_UI_LOGIN', false );      // classic login/register form
+ *   define( 'PEPRODEV_UPS_UI_DASHBOARD', false );  // classic user dashboard
  *
  * The [peprodev_learning_button] and [peprodev_my_courses] shortcodes are
  * always available; their styles are only loaded when a module is enabled
@@ -19,14 +20,17 @@ defined( 'ABSPATH' ) || exit;
 
 define( 'PEPRODEV_UPS_UI_DIR', __DIR__ . '/' );
 define( 'PEPRODEV_UPS_UI_URL', plugins_url( '/', __FILE__ ) );
-define( 'PEPRODEV_UPS_UI_TEXTS', 'peprodev_ups_ui_texts' );
+define( 'PEPRODEV_UPS_UI_TEXTS', 'peprodev_ups_ui_texts' ); // legacy 8.1.0 option, migrated once
+define( 'PEPRODEV_UPS_UI_OPTION', 'peprodev_ups_profile' ); // main plugin option
+define( 'PEPRODEV_UPS_UI_KEY', 'modern_ui' ); // key of the settings inside the main option
 
 /**
  * Whether a modern UI module is enabled.
  *
  * A PEPRODEV_UPS_UI_LOGIN / PEPRODEV_UPS_UI_DASHBOARD constant, when defined,
- * wins; otherwise the "Modern UI" setting is used (default: off). Reads the
- * option directly (no gettext) so it is safe to call before "init".
+ * wins; otherwise the "Modern UI" setting is used (default: on, an explicitly
+ * saved "0" turns a module off). Reads the option directly (no gettext) so it
+ * is safe to call before "init".
  *
  * @param string $module "login" or "dashboard".
  * @return bool
@@ -36,8 +40,8 @@ function peprodev_ui_module_enabled( $module ) {
 	if ( defined( $constant ) ) {
 		$on = (bool) constant( $constant );
 	} else {
-		$saved = get_option( PEPRODEV_UPS_UI_TEXTS, array() );
-		$on    = is_array( $saved ) && isset( $saved[ 'ui_' . $module ] ) && '1' === (string) $saved[ 'ui_' . $module ];
+		$saved = peprodev_ui_texts_saved();
+		$on    = ! isset( $saved[ 'ui_' . $module ] ) || '1' === (string) $saved[ 'ui_' . $module ];
 	}
 	return (bool) apply_filters( 'peprodev_ui_module_enabled', $on, $module );
 }
@@ -131,7 +135,14 @@ function peprodev_ui_has_any_course( $user_id ) {
 }
 
 /* ---------------------------------------------------------------------
- * Settings + editable texts (PeproDev Profile > "Dashboard Texts"), WPML aware.
+ * Settings + editable texts, WPML aware.
+ *
+ * Since 8.2.0 the values live in the main "peprodev_ups_profile" option
+ * (key "modern_ui") and are edited on the plugin's own settings screens:
+ *   - Login/Register > Login & Registration: modern login/register form;
+ *   - Profile: modern dashboard, learning button and "My courses" texts.
+ * The 8.1.0 option "peprodev_ups_ui_texts" is migrated once and left in
+ * place (untouched) so a downgrade keeps working.
  * ------------------------------------------------------------------- */
 
 /**
@@ -146,8 +157,8 @@ function peprodev_ui_texts_fields() {
 	return apply_filters(
 		'peprodev_ui_texts_fields',
 		array(
-			'ui_login'          => array( 'modern', __( 'Modern login/register form', 'peprodev-ups' ), '0', 'checkbox' ),
-			'ui_dashboard'      => array( 'modern', __( 'Modern user dashboard', 'peprodev-ups' ), '0', 'checkbox' ),
+			'ui_login'          => array( 'modern', __( 'Modern login/register form', 'peprodev-ups' ), '1', 'checkbox' ),
+			'ui_dashboard'      => array( 'modern', __( 'Modern user dashboard', 'peprodev-ups' ), '1', 'checkbox' ),
 			'learn_enabled'     => array( 'learn', __( 'Show the learning button', 'peprodev-ups' ), '1', 'checkbox' ),
 			'learn_has_label'   => array( 'learn', __( 'Button text for users who have access to a course', 'peprodev-ups' ), __( 'Continue learning', 'peprodev-ups' ), 'text' ),
 			'learn_has_url'     => array( 'learn', __( 'Button link for users who have access to a course', 'peprodev-ups' ), '{my_courses}', 'url' ),
@@ -166,7 +177,7 @@ function peprodev_ui_texts_fields() {
 }
 
 /**
- * Groups shown on the admin page.
+ * Groups shown on the Profile settings screen.
  *
  * @return array<string,string>
  */
@@ -190,13 +201,48 @@ function peprodev_ui_texts_wpml_name( $key ) {
 }
 
 /**
+ * Main plugin option as an array (reads the option directly, safe before "init").
+ *
+ * @return array
+ */
+function peprodev_ui_main_option() {
+	$opt = get_option( PEPRODEV_UPS_UI_OPTION, array() );
+	return is_array( $opt ) ? $opt : array();
+}
+
+/**
  * Saved settings array.
+ *
+ * Reads the "modern_ui" key of the main option. On the first call after
+ * updating from 8.1.x the values of the legacy "peprodev_ups_ui_texts"
+ * option are copied there once (a saved "0" keeps a module off).
  *
  * @return array
  */
 function peprodev_ui_texts_saved() {
-	$saved = get_option( PEPRODEV_UPS_UI_TEXTS, array() );
-	return is_array( $saved ) ? $saved : array();
+	$opt = peprodev_ui_main_option();
+	if ( isset( $opt[ PEPRODEV_UPS_UI_KEY ] ) && is_array( $opt[ PEPRODEV_UPS_UI_KEY ] ) ) {
+		return $opt[ PEPRODEV_UPS_UI_KEY ];
+	}
+	$legacy = get_option( PEPRODEV_UPS_UI_TEXTS, array() );
+	$legacy = is_array( $legacy ) ? array_map( 'strval', array_filter( $legacy, 'is_scalar' ) ) : array();
+	// Migrate only into an existing main option: creating it here would skip the plugin's defaults (add_option).
+	if ( $legacy && $opt ) {
+		$opt[ PEPRODEV_UPS_UI_KEY ] = $legacy;
+		update_option( PEPRODEV_UPS_UI_OPTION, $opt, 'no' );
+	}
+	return $legacy;
+}
+
+/**
+ * Store the settings array in the main option.
+ *
+ * @param array $data Sanitized key => value pairs.
+ */
+function peprodev_ui_texts_update( $data ) {
+	$opt                        = peprodev_ui_main_option();
+	$opt[ PEPRODEV_UPS_UI_KEY ] = (array) $data;
+	update_option( PEPRODEV_UPS_UI_OPTION, $opt, 'no' );
 }
 
 /**
@@ -300,82 +346,116 @@ function peprodev_ui_texts_maybe_register() {
 add_action( 'admin_init', 'peprodev_ui_texts_maybe_register' );
 
 /**
- * Admin page under the plugin menu.
+ * The 8.1.0 "Dashboard Texts" page was merged into the Profile settings
+ * screen: send old bookmarks there.
  */
-function peprodev_ui_texts_menu() {
-	$parent = isset( $GLOBALS['admin_page_hooks']['peprodev-ups'] ) ? 'peprodev-ups' : 'options-general.php';
-	add_submenu_page( $parent, __( 'Dashboard Texts', 'peprodev-ups' ), __( 'Dashboard Texts', 'peprodev-ups' ), 'manage_options', 'peprodev-ups-ui-texts', 'peprodev_ui_texts_page' );
+function peprodev_ui_texts_legacy_page_redirect() {
+	if ( isset( $_GET['page'] ) && 'peprodev-ups-ui-texts' === $_GET['page'] && current_user_can( 'manage_options' ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		wp_safe_redirect( admin_url( 'admin.php?page=peprodev-ups&section=profile#peprodev-ui-settings' ) );
+		exit;
+	}
 }
-add_action( 'admin_menu', 'peprodev_ui_texts_menu', 99 );
+add_action( 'admin_menu', 'peprodev_ui_texts_legacy_page_redirect', 1 );
 
 /**
- * Save / reset handler.
+ * Save the fields posted by a settings screen (only the keys present in
+ * $input are changed). Capability and nonce are checked by the caller
+ * (the plugin's admin AJAX endpoint).
+ *
+ * @param array $input Unslashed key => value pairs.
+ * @return array Saved settings.
  */
-function peprodev_ui_texts_save() {
-	if ( ! current_user_can( 'manage_options' ) ) {
-		wp_die( esc_html__( 'Sorry, you are not allowed to do that.', 'peprodev-ups' ), 403 );
-	}
-	check_admin_referer( 'peprodev_ui_texts_save' );
-	$input  = isset( $_POST['peprodev_ui_texts'] ) && is_array( $_POST['peprodev_ui_texts'] ) ? wp_unslash( $_POST['peprodev_ui_texts'] ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- sanitized per field below.
-	$reset  = ! empty( $_POST['peprodev_ui_texts_reset'] );
-	$old    = peprodev_ui_texts_saved();
+function peprodev_ui_texts_save_input( $input ) {
+	$data   = peprodev_ui_texts_saved();
 	$fields = peprodev_ui_texts_fields();
-	$data   = array();
 	foreach ( $fields as $key => $field ) {
-		// "Reset" restores texts and links only; the Modern UI switches keep their state.
-		if ( $reset && 'modern' !== $field[0] ) {
+		if ( ! isset( $input[ $key ] ) || ! is_scalar( $input[ $key ] ) ) {
 			continue;
 		}
-		// A switch forced by a wp-config.php constant is shown disabled: keep the stored value.
+		// A switch forced by a wp-config.php constant is shown read-only: keep the stored value.
 		if ( 'modern' === $field[0] && peprodev_ui_module_constant( substr( $key, 3 ) ) ) {
-			if ( isset( $old[ $key ] ) ) {
-				$data[ $key ] = '1' === (string) $old[ $key ] ? '1' : '0';
-			}
 			continue;
 		}
-		$raw = isset( $input[ $key ] ) && is_scalar( $input[ $key ] ) ? (string) $input[ $key ] : '';
+		$raw = (string) $input[ $key ];
 		if ( 'checkbox' === $field[3] ) {
-			$data[ $key ] = '' !== $raw ? '1' : '0';
-		} elseif ( 'url' === $field[3] ) {
-			$data[ $key ] = preg_match( '/^\{[a-z_]+\}$/', trim( $raw ) ) ? trim( $raw ) : esc_url_raw( $raw );
+			$data[ $key ] = in_array( $raw, array( '1', 'yes', 'true', 'on' ), true ) ? '1' : '0';
+			continue;
+		}
+		if ( 'url' === $field[3] ) {
+			$value = preg_match( '/^\{[a-z_]+\}$/', trim( $raw ) ) ? trim( $raw ) : esc_url_raw( $raw );
 		} elseif ( 'textarea' === $field[3] ) {
-			$data[ $key ] = sanitize_textarea_field( $raw );
+			$value = sanitize_textarea_field( $raw );
 		} else {
-			$data[ $key ] = sanitize_text_field( $raw );
+			$value = sanitize_text_field( $raw );
 		}
 		// An unchanged default text is not stored, so it stays translatable with the language files.
-		if ( 'checkbox' !== $field[3] && $data[ $key ] === (string) $field[2] ) {
+		if ( $value === (string) $field[2] ) {
 			unset( $data[ $key ] );
+		} else {
+			$data[ $key ] = $value;
 		}
 	}
-	update_option( PEPRODEV_UPS_UI_TEXTS, $data, false );
+	peprodev_ui_texts_update( $data );
 	peprodev_ui_texts_register();
-	// admin.php?page= resolves the page under either parent menu (menus are not registered on admin-post.php).
-	wp_safe_redirect(
-		add_query_arg(
-			array(
-				'page'    => 'peprodev-ups-ui-texts',
-				'updated' => $reset ? 'reset' : '1',
-			),
-			admin_url( 'admin.php' )
-		)
-	);
-	exit;
+	return $data;
 }
-add_action( 'admin_post_peprodev_ui_texts_save', 'peprodev_ui_texts_save' );
 
 /**
- * Admin page markup.
+ * Descriptions shown under some settings.
+ *
+ * @return array<string,string>
  */
-function peprodev_ui_texts_page() {
-	if ( ! current_user_can( 'manage_options' ) ) {
-		return;
-	}
-	$updated      = isset( $_GET['updated'] ) ? sanitize_key( wp_unslash( $_GET['updated'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-	$descriptions = array(
-		'ui_login'     => __( 'Restyled mobile/OTP login and register form with Login/Register tabs and OTP code boxes.', 'peprodev-ups' ),
+function peprodev_ui_texts_descriptions() {
+	return array(
+		'ui_login'     => __( 'Restyled login and register form with Login/Register tabs and OTP code boxes.', 'peprodev-ups' ),
 		'ui_dashboard' => __( 'Restyled user dashboard with new Edit profile, order, course and address views.', 'peprodev-ups' ),
 	);
+}
+
+/**
+ * Note shown under a module switch forced by a wp-config.php constant.
+ *
+ * @param string $key Field key.
+ * @return string Empty when not forced.
+ */
+function peprodev_ui_texts_constant_note( $key ) {
+	$constant = 0 === strpos( $key, 'ui_' ) ? peprodev_ui_module_constant( substr( $key, 3 ) ) : '';
+	if ( ! $constant ) {
+		return '';
+	}
+	/* translators: %s: PHP constant name. */
+	return sprintf( __( 'Controlled by the %s constant in wp-config.php.', 'peprodev-ups' ), $constant );
+}
+
+/**
+ * "Modern login/register form" switch on Login/Register > Login & Registration.
+ * Collected by login/assets/register.js ([data-ui-key]) and saved by the
+ * "savelogin" admin AJAX handler.
+ */
+function peprodev_ui_render_login_settings() {
+	$fields = peprodev_ui_texts_fields();
+	$desc   = peprodev_ui_texts_descriptions();
+	$note   = peprodev_ui_texts_constant_note( 'ui_login' );
+	$on     = peprodev_ui_module_enabled( 'login' );
+	?>
+	<div class="peprodev-ui-settings" id="peprodev-ui-login-settings">
+		<p class="text-bold mt-4 mb-2"><?php esc_html_e( 'Modern UI', 'peprodev-ups' ); ?></p>
+		<label class="w-100 row align-items-center m-0 mb-1">
+			<input autocomplete="off" type="checkbox" class="form-checkbox iostoggle mr-2" <?php echo $note ? 'disabled' : 'data-ui-key="ui_login"'; ?> value="1" <?php checked( $on ); ?> />
+			<?php echo esc_html( $fields['ui_login'][1] ); ?>
+		</label>
+		<p class="small text-muted mb-2"><?php echo esc_html( $note ? $note : $desc['ui_login'] ); ?></p>
+	</div>
+	<?php
+}
+
+/**
+ * Modern dashboard, learning button and "My courses" settings on the
+ * Profile screen. Collected by profile/assets/js/peprocore-setting.js
+ * ([data-ui-key]) and saved by the "save_setting" admin AJAX handler.
+ */
+function peprodev_ui_render_profile_settings() {
+	$desc         = peprodev_ui_texts_descriptions();
 	$placeholders = array(
 		'{my_courses}'        => __( 'the "My courses" section of the user dashboard', 'peprodev-ups' ),
 		'{courses_page}'      => __( 'the page with the "course-list" slug, or the shop page', 'peprodev-ups' ),
@@ -384,83 +464,88 @@ function peprodev_ui_texts_page() {
 		'{home}'              => __( 'the home page', 'peprodev-ups' ),
 		'{continue_learning}' => __( 'resume the last lesson; requires the PeproDev WP Tweaker plugin', 'peprodev-ups' ),
 	);
+	$login_url    = admin_url( 'admin.php?page=peprodev-ups&section=loginregister#tab_registration' );
 	?>
-	<div class="wrap">
-		<h1><?php esc_html_e( 'Dashboard texts and buttons', 'peprodev-ups' ); ?></h1>
-		<?php if ( $updated ) : ?>
-			<div class="notice notice-success is-dismissible"><p><?php echo esc_html( 'reset' === $updated ? __( 'Settings were reset to their defaults.', 'peprodev-ups' ) : __( 'Settings saved.', 'peprodev-ups' ) ); ?></p></div>
-		<?php endif; ?>
-		<p><?php esc_html_e( 'You can use these placeholders in the links, or a full URL:', 'peprodev-ups' ); ?></p>
-		<ul style="list-style:disc;padding-inline-start:20px;">
-			<?php foreach ( $placeholders as $placeholder => $help ) : ?>
-				<li><code><?php echo esc_html( $placeholder ); ?></code> &ndash; <?php echo esc_html( $help ); ?></li>
-			<?php endforeach; ?>
-		</ul>
-		<p><?php esc_html_e( 'Shortcodes:', 'peprodev-ups' ); ?> <code>[peprodev_learning_button]</code> <code>[peprodev_my_courses layout="home|full"]</code></p>
-		<?php if ( defined( 'WPML_ST_VERSION' ) ) : ?>
-			<p><a class="button" href="<?php echo esc_url( admin_url( 'admin.php?page=wpml-string-translation/menu/string-translation.php&context=peprodev-ups' ) ); ?>"><?php esc_html_e( 'Translate these texts with WPML', 'peprodev-ups' ); ?></a></p>
-		<?php endif; ?>
-		<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
-			<input type="hidden" name="action" value="peprodev_ui_texts_save" />
-			<?php wp_nonce_field( 'peprodev_ui_texts_save' ); ?>
-			<?php foreach ( peprodev_ui_texts_groups() as $group => $title ) : ?>
-				<h2><?php echo esc_html( $title ); ?></h2>
-				<?php if ( 'modern' === $group ) : ?>
-					<p class="description"><?php esc_html_e( 'Off by default: nothing changes on your site until you enable a module here.', 'peprodev-ups' ); ?></p>
-				<?php endif; ?>
-				<table class="form-table" role="presentation">
+	<table class="table pepcappearance table-striped peprodev-ui-settings" id="peprodev-ui-settings">
+		<tbody>
+			<?php
+			foreach ( peprodev_ui_texts_groups() as $group => $title ) :
+				?>
+				<tr><th colspan="2"><strong><?php echo esc_html( $title ); ?></strong></th></tr>
+				<?php
+				if ( 'learn' === $group ) :
+					?>
+					<tr>
+						<td colspan="2">
+							<small>
+								<?php esc_html_e( 'You can use these placeholders in the links, or a full URL:', 'peprodev-ups' ); ?>
+								<?php foreach ( $placeholders as $placeholder => $help ) : ?>
+									<br><code dir="ltr"><?php echo esc_html( $placeholder ); ?></code> &ndash; <?php echo esc_html( $help ); ?>
+								<?php endforeach; ?>
+								<br><?php esc_html_e( 'Shortcodes:', 'peprodev-ups' ); ?> <code dir="ltr">[peprodev_learning_button]</code> <code dir="ltr">[peprodev_my_courses layout="home|full"]</code>
+							</small>
+						</td>
+					</tr>
 					<?php
-					foreach ( peprodev_ui_texts_fields() as $key => $field ) :
-						if ( $field[0] !== $group ) {
-							continue;
-						}
-						$id       = 'peprodev_ui_texts_' . $key;
-						$name     = 'peprodev_ui_texts[' . $key . ']';
-						$value    = peprodev_ui_text_raw( $key );
-						$constant = 'modern' === $group ? peprodev_ui_module_constant( substr( $key, 3 ) ) : '';
-						if ( $constant ) {
-							$value = peprodev_ui_module_enabled( substr( $key, 3 ) ) ? '1' : '0';
-						}
+				endif;
+				foreach ( peprodev_ui_texts_fields() as $key => $field ) :
+					if ( $field[0] !== $group ) {
+						continue;
+					}
+					if ( 'ui_login' === $key ) :
 						?>
 						<tr>
-							<th scope="row"><label for="<?php echo esc_attr( $id ); ?>"><?php echo esc_html( $field[1] ); ?></label></th>
+							<td><?php echo esc_html( $field[1] ); ?></td>
 							<td>
-								<?php if ( 'checkbox' === $field[3] ) : ?>
-									<label><input type="checkbox" id="<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $name ); ?>" value="1" <?php checked( '1', $value ); ?> <?php disabled( '' !== $constant ); ?> /> <?php esc_html_e( 'Enabled', 'peprodev-ups' ); ?></label>
-								<?php elseif ( 'textarea' === $field[3] ) : ?>
-									<textarea class="large-text" rows="3" id="<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $name ); ?>"><?php echo esc_textarea( $value ); ?></textarea>
-								<?php else : ?>
-									<input type="text" class="regular-text<?php echo 'url' === $field[3] ? ' code' : ''; ?>" dir="<?php echo 'url' === $field[3] ? 'ltr' : 'auto'; ?>" id="<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $name ); ?>" value="<?php echo esc_attr( $value ); ?>" />
-								<?php endif; ?>
-								<?php if ( isset( $descriptions[ $key ] ) ) : ?>
-									<p class="description"><?php echo esc_html( $descriptions[ $key ] ); ?></p>
-								<?php endif; ?>
-								<?php if ( $constant ) : ?>
-									<p class="description">
-										<?php
-										/* translators: %s: PHP constant name. */
-										echo esc_html( sprintf( __( 'Controlled by the %s constant in wp-config.php.', 'peprodev-ups' ), $constant ) );
-										?>
-									</p>
-								<?php endif; ?>
-								<p class="description">
-									<?php
-									$default_text = 'checkbox' === $field[3] ? ( '1' === $field[2] ? __( 'Enabled', 'peprodev-ups' ) : __( 'Disabled', 'peprodev-ups' ) ) : $field[2];
-									/* translators: %s: default value of the setting. */
-									echo esc_html( sprintf( __( 'Default: %s', 'peprodev-ups' ), $default_text ) );
-									?>
-								</p>
+								<?php echo esc_html( peprodev_ui_module_enabled( 'login' ) ? __( 'Enabled', 'peprodev-ups' ) : __( 'Disabled', 'peprodev-ups' ) ); ?>
+								&mdash; <a href="<?php echo esc_url( $login_url ); ?>"><?php esc_html_e( 'Change it in Login/Register settings', 'peprodev-ups' ); ?></a>
 							</td>
 						</tr>
-					<?php endforeach; ?>
-				</table>
-			<?php endforeach; ?>
-			<p class="submit">
-				<?php submit_button( __( 'Save Settings', 'peprodev-ups' ), 'primary', 'submit', false ); ?>
-				<button type="submit" name="peprodev_ui_texts_reset" value="1" class="button" onclick="return confirm('<?php echo esc_js( __( 'Reset all texts and links to their defaults?', 'peprodev-ups' ) ); ?>');"><?php esc_html_e( 'Reset to defaults', 'peprodev-ups' ); ?></button>
-			</p>
-		</form>
-	</div>
+						<?php
+						continue;
+					endif;
+					$id    = 'peprodev_ui_' . $key;
+					$value = peprodev_ui_text_raw( $key );
+					$note  = peprodev_ui_texts_constant_note( $key );
+					if ( 'ui_dashboard' === $key ) {
+						$value = peprodev_ui_module_enabled( 'dashboard' ) ? '1' : '0';
+					}
+					?>
+					<tr>
+						<td><label class="m-0" style="color:inherit" for="<?php echo esc_attr( $id ); ?>"><?php echo esc_html( $field[1] ); ?></label></td>
+						<td>
+							<?php if ( 'checkbox' === $field[3] && $note ) : ?>
+								<?php echo esc_html( '1' === $value ? __( 'Enabled', 'peprodev-ups' ) : __( 'Disabled', 'peprodev-ups' ) ); ?>
+							<?php elseif ( 'checkbox' === $field[3] ) : ?>
+								<a class="btncheckbox" id="<?php echo esc_attr( $id ); ?>" href="#" data-ui-key="<?php echo esc_attr( $key ); ?>"
+									data-text-on="<?php esc_attr_e( 'Enabled', 'peprodev-ups' ); ?>"
+									data-text-off="<?php esc_attr_e( 'Disabled', 'peprodev-ups' ); ?>"
+									data-on="check_box" data-off="check_box_outline_blank"
+									data-checked="<?php echo esc_attr( '1' === $value ? 'true' : 'false' ); ?>"></a>
+							<?php elseif ( 'textarea' === $field[3] ) : ?>
+								<textarea class="form-control" rows="3" id="<?php echo esc_attr( $id ); ?>" data-ui-key="<?php echo esc_attr( $key ); ?>" data-default="<?php echo esc_attr( $field[2] ); ?>"><?php echo esc_textarea( $value ); ?></textarea>
+							<?php else : ?>
+								<input type="text" class="form-control" dir="<?php echo 'url' === $field[3] ? 'ltr' : 'auto'; ?>" id="<?php echo esc_attr( $id ); ?>" data-ui-key="<?php echo esc_attr( $key ); ?>" data-default="<?php echo esc_attr( $field[2] ); ?>" value="<?php echo esc_attr( $value ); ?>" />
+							<?php endif; ?>
+							<?php if ( $note || isset( $desc[ $key ] ) ) : ?>
+								<br><small class="text-muted"><?php echo esc_html( $note ? $note : $desc[ $key ] ); ?></small>
+							<?php endif; ?>
+							<?php if ( 'checkbox' !== $field[3] ) : ?>
+								<br><small class="text-muted">
+									<?php
+									/* translators: %s: default value of the setting. */
+									echo esc_html( sprintf( __( 'Default: %s', 'peprodev-ups' ), $field[2] ) );
+									?>
+								</small>
+							<?php endif; ?>
+						</td>
+					</tr>
+					<?php
+				endforeach;
+			endforeach;
+			?>
+		</tbody>
+	</table>
 	<?php
 }
 

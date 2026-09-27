@@ -80,7 +80,7 @@
       } catch (err) { }
     }
 
-    $(document).on("click tap", "#profile-section-save", function(e) {
+    $(document).on("click tap", "#profile-section-save, .profile-section-save", function(e) {
       e.preventDefault();
       sync_wp_editors();
       // editor id as registered by wp_editor() in profile/libs/general/activated.php
@@ -100,6 +100,15 @@
         "custom_position"   : $("#customposition").val(),
         "profile_page"      : $("#profile_dash_page").val(),
       };
+      // Modern UI settings (ui/ui.php), saved into the "modern_ui" settings group
+      if ($(".peprodev-ui-settings [data-ui-key]").length) {
+        var modern_ui = {};
+        $(".peprodev-ui-settings [data-ui-key]").each(function(index, val) {
+          var el = $(val);
+          modern_ui[el.attr("data-ui-key")] = el.is(".btncheckbox") ? (el.attr("data-checked") === "true" ? "1" : "0") : el.val();
+        });
+        datatosave["modern_ui"] = modern_ui;
+      }
       var me = $(this);
       let nonce = me.attr('integrity'),wparam = me.attr('wparam'),lparam = me.attr('lparam');
       notify = $.notify({icon: "hourglass_empty", message: pepc.loading}, {type: 'info',timer: 3000, placement: {from: "top",align: "right", allow_dismiss: false, showProgressbar: true}});

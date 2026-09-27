@@ -4,7 +4,7 @@
  *
  * Restyles the PeproDev UPS login/register form (mobile/OTP flow) and
  * replaces the "no account? register" footer links with Login/Register tabs.
- * Loaded only when enabled (Dashboard Texts > Modern UI, or the
+ * Loaded when enabled (on by default; Login/Register settings > Login & Registration, or the
  * PEPRODEV_UPS_UI_LOGIN constant).
  */
 

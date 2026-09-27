@@ -571,6 +571,15 @@ jQuery.noConflict();
           datatosave[name] = value;
         });
       }
+      // Modern UI settings (ui/ui.php), saved into the "modern_ui" settings group
+      if($(".peprodev-ui-settings [data-ui-key]").length){
+        var modern_ui = {};
+        $(".peprodev-ui-settings [data-ui-key]").each(function(index, val) {
+          var el = $(val);
+          modern_ui[el.attr("data-ui-key")] = el.is(":checkbox") ? (el.prop("checked") ? "1" : "0") : el.val();
+        });
+        datatosave["modern_ui"] = modern_ui;
+      }
       if($(".save_sms_settings").length){
         $(".save_sms_settings :input").each(function(index, val) {
           name = $(val).attr("name");
