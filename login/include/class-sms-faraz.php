@@ -42,12 +42,12 @@ final class PeproSMS_Faraz_Gateway extends PeproDevUPS {
   }
   public function sms_verification_gateways($gateways = array()) {
     $gateways["FarazSMS"] = array(
-      "name"       => _x("FarazSMS", "gateway", $this->td),
+      "name"       => _x("IPPanel / FarazSMS (legacy API)", "gateway", $this->td),
       "fn_send"    => array($this, "class_faraz"),
       "fn_setting" => array($this, "setting_faraz"),
     );
     $gateways["FarazSMSPattern"] = array(
-      "name"       => _x("FarazSMS Pattern", "gateway", $this->td),
+      "name"       => _x("IPPanel / FarazSMS Pattern (legacy API)", "gateway", $this->td),
       "fn_send"    => array($this, "class_pattern"),
       "fn_setting" => array($this, "setting_pattern"),
     );

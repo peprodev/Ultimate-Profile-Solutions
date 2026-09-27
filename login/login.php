@@ -454,6 +454,10 @@ if (!class_exists("PeproDevUPS_Login")) {
       require_once plugin_dir_path(__FILE__) . "include/class-sms-faraz.php";
       require_once plugin_dir_path(__FILE__) . "include/class-sms-kavenegar.php";
       require_once plugin_dir_path(__FILE__) . "include/class-sms-green.php";
+      require_once plugin_dir_path(__FILE__) . "include/abstract-sms-gateway.php";
+      require_once plugin_dir_path(__FILE__) . "include/class-sms-farazsms.php";
+      require_once plugin_dir_path(__FILE__) . "include/class-sms-wpsms.php";
+      require_once plugin_dir_path(__FILE__) . "include/class-sms-pwsms.php";
 
       add_action("admin_init", array($this, "check_database"));
     }
@@ -5811,8 +5815,13 @@ HTML_PREV;
             $mobile = $this->clean_mobile_number($_POST["dparam"]);
             if ($mobile) {
               $sms = $this->send_dummyuser_verification_sms($mobile);
+              if (false === $sms || is_wp_error($sms)) {
+                $reason = is_wp_error($sms) ? $sms->get_error_message() : (string) apply_filters("pepro_reglogin_sms_last_error", "");
+                wp_send_json_error(array("msg" => esc_html(sprintf(__("Sending the OTP SMS failed. %s", "peprodev-ups"), $reason))));
+              }
+              if (!is_scalar($sms)) $sms = wp_json_encode($sms);
               wp_send_json_success(array(
-                "msg" => sprintf(__("OTP SMS sent to %s.<br>Response: %s", $this->td), $mobile, $sms),
+                "msg" => sprintf(__("OTP SMS sent to %s.<br>Response: %s", $this->td), esc_html($mobile), esc_html($sms)),
                 "sms" => $sms,
               ));
             }
