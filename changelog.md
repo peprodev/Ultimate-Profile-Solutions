@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.2.7](#version-827)
 - [Version 8.2.6](#version-826)
 - [Version 8.2.5](#version-825)
 - [Version 8.1.0](#version-810)
@@ -73,6 +74,10 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.2.7
+- Release date: 2026-09-27 | 1405-07-05  [&uarr;](#table-of-contents)
+- **Fixed** Persian translations lost in 8.1/8.2 (strings using the `menu` context and `$this->td`, e.g. dashboard menu Dashboard / Edit Profile / Logout, WooCommerce order texts, pagination) restored from 8.0.4
 
 ## Version 8.2.6
 - Release date: 2026-09-27 | 1405-07-05  [&uarr;](#table-of-contents)

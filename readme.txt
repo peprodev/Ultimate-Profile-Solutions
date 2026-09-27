@@ -2,8 +2,8 @@
 Contributors: amirhpcom, peprodev, blackswanlab
 Donate link: https://peprodev.com/donate/
 Tags: profile, dashboard, login-registration
-Version: 8.2.6
-Stable tag: 8.2.6
+Version: 8.2.7
+Stable tag: 8.2.7
 Requires at least: 5.0
 Tested up to: 7.1
 Requires PHP: 7.2
@@ -157,6 +157,11 @@ Your support and feedback have been key in shaping this plugin into a reliable a
 We're proud to be part of this amazing journey with the WordPress community 💙
 Here's to many more years of innovation, freedom, and open-source collaboration 😍!
 
+= 8.2.7 =
+Release date: 2026-09-27
+
+* Fixed: Persian translations that went missing in 8.1/8.2 (dashboard menu items such as Dashboard, Edit Profile and Logout, WooCommerce order texts, pagination and several admin labels) are restored.
+
 = 8.2.6 =
 Release date: 2026-09-27
 
@@ -218,7 +223,7 @@ Release date: 2026-09-27
 
 == Upgrade Notice ==
 
-= 8.2.6 =
+= 8.2.7 =
 Modern UI on by default (existing sites too), settings moved to the Login/Register and Profile screens. New: Sign in with Google, FarazSMS / WP SMS / Persian WooCommerce SMS gateways, mobile/email switch.
 
 = 8.2.5 =

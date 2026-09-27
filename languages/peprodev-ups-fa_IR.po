@@ -5094,356 +5094,371 @@ msgstr "تغییر در تنظیمات ورود/ثبت‌نام"
 msgid "Default: %s"
 msgstr "پیش‌فرض: %s"
 
-#~ msgid "Hi {display_name}"
-#~ msgstr "سلام {display_name}"
+#: core/main.php:450 core/main.php:456 core/main.php:565 core/main.php:571
+#: login/include/class-activated.php:104 login/include/class-activated.php:110
+msgid "Hi {display_name}"
+msgstr "سلام {display_name}"
 
-#~ msgid "Site Health Info"
-#~ msgstr "اطلاعات سلامت سایت"
+#: core/main.php:468
+msgid "Site Health Info"
+msgstr "اطلاعات سلامت سایت"
 
-#~ msgid "Select Custom Image"
-#~ msgstr "انتخاب عکس دیگر"
+#: core/main.php:666
+msgid "Select Custom Image"
+msgstr "انتخاب عکس دیگر"
 
-#~ msgid "Test mobile number"
-#~ msgstr "شماره موبایل برای تست را وارد کنید"
+#: login/include/class-activated.php:545
+msgid "Test mobile number"
+msgstr "شماره موبایل برای تست را وارد کنید"
 
-#~ msgid "Send a Test SMS"
-#~ msgstr "ارسال یک پیامک تست"
+#: login/include/class-activated.php:546
+msgid "Send a Test SMS"
+msgstr "ارسال یک پیامک تست"
 
-#~ msgctxt "gateway"
-#~ msgid "FarazSMS"
-#~ msgstr "فراز اس ام اس"
+#: login/include/class-login-permalink.php:81
+msgid ""
+"This option allows you to set a networkwide default, which can be overridden "
+"by individual sites. Simply go to to the site’s permalink settings to change "
+"the url."
+msgstr ""
+"This option allows you to set a networkwide default, which can be overridden "
+"by individual sites. Simply go to to the site’s permalink settings to change "
+"the url."
 
-#~ msgctxt "gateway"
-#~ msgid "FarazSMS Pattern"
-#~ msgstr "فراز اس ام اس - الگو"
+#: login/include/class-login-permalink.php:84
+msgid "Networkwide default"
+msgstr "Networkwide default"
 
-#~ msgctxt "sms-error"
-#~ msgid "SMS Provider credentials is not filled completely."
-#~ msgstr "اطلاعات ورود سامانه پیامکی کامل وارد نشده است."
+#: login/include/class-login-permalink.php:198
+msgid "Please upgrade to the latest version of WordPress to activate"
+msgstr "برای فعالسازی لطفا به آخرین نسخه وردپرس آپدیت کنید"
 
-#~ msgctxt "gateway"
-#~ msgid "Pars Green"
-#~ msgstr "پارس گرین"
+#: login/include/class-login-permalink.php:199
+msgid ""
+"PeproDev Ultimate Profile Solutions could not be activated because you "
+"already have Rename wp-login.php active. Please uninstall rename wp-"
+"login.php to use PeproDev Ultimate Profile Solutions."
+msgstr ""
+"افزونه PeproDev Ultimate Profile Solutions نمی‌تواند فعال شود زیرا افزونه "
+"Rename wp-login.php هم‌اکنون فعال است. لطفاً برای استفاده از PeproDev Ultimate "
+"Profile Solutions، ابتدا افزونه Rename wp-login.php را حذف کنید."
 
-#~ msgid "(Enter 0-6 for OTP Send, Text for WhiteList Send)"
-#~ msgstr ""
-#~ "(برای ارسال OTP عدد 0-6 و برای ارسال پیامک وایت لیست متن پترن را وارد "
-#~ "کنید)"
+#: login/include/class-sms-faraz.php:51
+msgctxt "gateway"
+msgid "FarazSMS"
+msgstr "فراز اس ام اس"
 
-#~ msgctxt "gateway"
-#~ msgid "SMS.ir"
-#~ msgstr "SMS.ir"
+#: login/include/class-sms-faraz.php:56
+msgctxt "gateway"
+msgid "FarazSMS Pattern"
+msgstr "فراز اس ام اس - الگو"
 
-#~ msgctxt "gateway"
-#~ msgid "SMS.ir API.v2"
-#~ msgstr "SMS.ir API.v2"
+#: login/include/class-sms-faraz.php:194
+msgctxt "sms-error"
+msgid "SMS Provider credentials is not filled completely."
+msgstr "اطلاعات ورود سامانه پیامکی کامل وارد نشده است."
 
-#~ msgctxt "gateway"
-#~ msgid "Kavenegar"
-#~ msgstr "کاوه نگار"
+#: login/include/class-sms-green.php:40
+msgctxt "gateway"
+msgid "Pars Green"
+msgstr "پارس گرین"
 
-#~ msgctxt "gateway"
-#~ msgid "Kavenegar (Lookup)"
-#~ msgstr "کاوه نگار (اعتبارسنجی)"
+#: login/include/class-sms-green.php:120
+msgid "(Enter 0-6 for OTP Send, Text for WhiteList Send)"
+msgstr ""
+"(برای ارسال OTP عدد 0-6 و برای ارسال پیامک وایت لیست متن پترن را وارد کنید)"
 
-#~ msgid "Subscribe"
-#~ msgstr "عضویت"
+#: login/include/class-sms-ir.php:43
+msgctxt "gateway"
+msgid "SMS.ir"
+msgstr "SMS.ir"
 
-#~ msgid "Not Registered before?"
-#~ msgstr "حساب کاربری ندارید؟"
+#: login/include/class-sms-ir.php:48
+msgctxt "gateway"
+msgid "SMS.ir API.v2"
+msgstr "SMS.ir API.v2"
 
-#~ msgid "Recover Email Password"
-#~ msgstr "بازیابی رمز ایمیل"
+#: login/include/class-sms-kavenegar.php:39
+msgctxt "gateway"
+msgid "Kavenegar"
+msgstr "کاوه نگار"
 
+#: login/include/class-sms-kavenegar.php:44
+msgctxt "gateway"
+msgid "Kavenegar (Lookup)"
+msgstr "کاوه نگار (اعتبارسنجی)"
+
+#: login/login.php:124
+msgid "PeproDev Ultimate Profile Solutions — Login"
+msgstr "پروفایل ساز پپرو — لاگین"
+
+#: login/login.php:501
+msgid "Subscribe"
+msgstr "عضویت"
+
+#: login/login.php:1275 login/login.php:1328
+msgid "Not Registered before?"
+msgstr "حساب کاربری ندارید؟"
+
+#: login/login.php:1362
+msgid "Recover Email Password"
+msgstr "بازیابی رمز ایمیل"
+
+#: login/login.php:2817
 #, php-format
-#~ msgid "Submition ID %s Successfully Deleted."
-#~ msgstr "مورد آی دی %s با موفقیت حذف شد."
+msgid "Submition ID %s Successfully Deleted."
+msgstr "مورد آی دی %s با موفقیت حذف شد."
 
+#: login/login.php:2819
 #, php-format
-#~ msgid "Error Deleting Submition ID %s."
-#~ msgstr "خطا در حذف مورد با ای دی %s."
+msgid "Error Deleting Submition ID %s."
+msgstr "خطا در حذف مورد با ای دی %s."
 
-#~ msgid "Database Successfully Cleared."
-#~ msgstr "دیتابیس با موفقیت پاک شد."
+#: login/login.php:2830 profile/profile.php:1989
+msgid "Database Successfully Cleared."
+msgstr "دیتابیس با موفقیت پاک شد."
 
-#~ msgid "Error Clearing Database."
-#~ msgstr "خطایی در پاکسازی دیتابیس رخ داد."
+#: login/login.php:2832 profile/profile.php:1991
+msgid "Error Clearing Database."
+msgstr "خطایی در پاکسازی دیتابیس رخ داد."
 
+#: login/login.php:3550 login/login.php:4226
+msgid "SMS Verified"
+msgstr "موبایل تایید شده"
+
+#: login/login.php:4139
+msgctxt "metabox"
+msgid "Email Verified"
+msgstr "ایمیل تایید شده"
+
+#: login/login.php:4140
+msgctxt "metabox"
+msgid "SMS Verified"
+msgstr "موبایل تایید شده"
+
+#: login/login.php:4949
+msgid "Bulk Approve all users Email"
+msgstr "تایید ایمیل همه کاربران بصورت دستی"
+
+#: login/login.php:4950
+msgid "Migrate From Digits to Pepro Profile"
+msgstr "مهاجرت از دیجیتس به پروفایل پپرو"
+
+#: login/login.php:5275
 #, php-format
-#~ msgid "This setting is Provieded by %s v.%s"
-#~ msgstr "این تنظیم توسط %s نسخه‌ی %s ارائه شده است"
+msgid "OTP SMS sent to %s.<br>Response: %s"
+msgstr "پیامک تست ارسال شد به %s. <br>نتیجه بازگشتی: %s"
 
-#~ msgid "Bulk Approve all users Email"
-#~ msgstr "تایید ایمیل همه کاربران بصورت دستی"
+#: profile/libs/general/activated.php:56
+msgid "View Page"
+msgstr "مشاهده صفحه"
 
-#~ msgid "Migrate From Digits to Pepro Profile"
-#~ msgstr "مهاجرت از دیجیتس به پروفایل پپرو"
+#: profile/libs/general/activated.php:56
+msgid "Edit Page"
+msgstr "ویرایش صفحه"
 
+#: profile/libs/general/activated.php:56
+msgid "Edit via Elementor"
+msgstr "ویرایش با المنتور"
+
+#: profile/libs/general/newsletter_panel.php:43
 #, php-format
-#~ msgid "OTP SMS sent to %s.<br>Response: %s"
-#~ msgstr "پیامک تست ارسال شد به %s. <br>نتیجه بازگشتی: %s"
+msgid "Total Records: %s"
+msgstr "تعداد اعضا: %s"
 
-#~ msgid "View Page"
-#~ msgstr "مشاهده صفحه"
+#: profile/libs/general/notifs_panel.php:218
+#: profile/libs/general/notifs_panel.php:232
+#: profile/libs/general/notifs_panel.php:239 profile/profile.php:1508
+msgid "-- None --"
+msgstr "-- هیچ کدام --"
 
-#~ msgid "Edit Page"
-#~ msgstr "ویرایش صفحه"
-
-#~ msgid "Edit via Elementor"
-#~ msgstr "ویرایش با المنتور"
-
+#. translators: placeholder: Course.
+#: profile/libs/templates/dash-course-view.php:40
 #, php-format
-#~ msgid "Total Records: %s"
-#~ msgstr "تعداد اعضا: %s"
+msgctxt "placeholder: Course"
+msgid "Your access to this %s has expired."
+msgstr "دسترسی شما به این %s منقضی شده است."
 
-#~ msgid "-- None --"
-#~ msgstr "-- هیچ کدام --"
+#: profile/libs/templates/dash-downloads.php:45 profile/profile.php:1034
+msgid "No downloads available yet."
+msgstr "متاسفانه هیچ دانلودی در دسترس نیست."
 
+#: profile/libs/templates/dash-downloads.php:47
+#: profile/libs/templates/wc/orders.php:139 profile/profile.php:1036
+msgid "Browse products"
+msgstr "مشاهده محصولات"
+
+#: profile/libs/templates/dash-wallet.php:55
+msgid "Enter amount"
+msgstr "مقدار را وارد کنید"
+
+#: profile/libs/templates/dash-wallet.php:62
+#: profile/libs/templates/wc/my-address.php:52
+msgid "Add"
+msgstr "افزودن"
+
+#: profile/libs/templates/dash-wallet.php:80
+msgid "Balance"
+msgstr "موجودی کیف پول شما"
+
+#: profile/libs/templates/wc/my-address.php:48
+msgid "You have not set up this type of address yet."
+msgstr "شما هنوز این نوع آدرس را ایجاد نکردید."
+
+#: profile/libs/templates/wc/my-address.php:52
+msgid "Edit"
+msgstr "ویرایش"
+
+#: profile/libs/templates/wc/order-downloads.php:55 profile/profile.php:1002
+msgid "&infin;"
+msgstr "&infin;"
+
+#: profile/libs/templates/wc/orders.php:66
+#: profile/libs/templates/wc/orders.php:68
+msgctxt "hash before order number"
+msgid "#"
+msgstr "#"
+
+#. translators: 1: formatted order total 2: total order items
+#: profile/libs/templates/wc/orders.php:79
 #, php-format
-#~ msgctxt "placeholder: Course"
-#~ msgid "Your access to this %s has expired."
-#~ msgstr "دسترسی شما به این %s منقضی شده است."
+msgid "%1$s for %2$s item"
+msgid_plural "%1$s for %2$s items"
+msgstr[0] "ارسال توسط %1$s در %2$s"
+msgstr[1] "ارسال توسط %1$s در %2$s"
 
-#~ msgid "No downloads available yet."
-#~ msgstr "متاسفانه هیچ دانلودی در دسترس نیست."
+#: profile/libs/templates/wc/orders.php:119
+msgid "Previous"
+msgstr "قبلی"
 
-#~ msgid "Browse products"
-#~ msgstr "مشاهده محصولات"
+#: profile/libs/templates/wc/orders.php:123
+msgid "Next"
+msgstr "بعدی"
 
-#~ msgid "Enter amount"
-#~ msgstr "مقدار را وارد کنید"
+#: profile/libs/templates/wc/orders.php:137
+msgid "No order has been made yet."
+msgstr "هنوز سفارشی ایجاد نشده است."
 
-#~ msgid "Add"
-#~ msgstr "افزودن"
-
-#~ msgid "Balance"
-#~ msgstr "موجودی کیف پول شما"
-
-#~ msgid "You have not set up this type of address yet."
-#~ msgstr "شما هنوز این نوع آدرس را ایجاد نکردید."
-
-#~ msgid "Edit"
-#~ msgstr "ویرایش"
-
-#~ msgid "&infin;"
-#~ msgstr "&infin;"
-
-#~ msgctxt "hash before order number"
-#~ msgid "#"
-#~ msgstr "#"
-
+#. translators: 1: order number 2: order date 3: order status
+#: profile/libs/templates/wc/view-order.php:63
 #, php-format
-#~ msgid "%1$s for %2$s item"
-#~ msgid_plural "%1$s for %2$s items"
-#~ msgstr[0] "ارسال توسط %1$s در %2$s"
-#~ msgstr[1] "ارسال توسط %1$s در %2$s"
+msgid "Order #%1$s was placed on %2$s and is currently %3$s."
+msgstr "سفارش #%1$s در تاریخ %2$s ثبت و هم اکنون در وضعیت %3$s میباشد."
 
-#~ msgid "Previous"
-#~ msgstr "قبلی"
+#: profile/libs/templates/wc/view-order.php:78
+msgid "l jS \\o\\f F Y, h:ia"
+msgstr "l jS \\o\\f F Y, h:ia"
 
-#~ msgid "Next"
-#~ msgstr "بعدی"
+#: profile/profile.php:132 profile/profile.php:3170
+msgid "No subscriber found!"
+msgstr "هیچ عضوی یافت نشد!"
 
-#~ msgid "No order has been made yet."
-#~ msgstr "هنوز سفارشی ایجاد نشده است."
+#: profile/profile.php:496
+msgid "&laquo; Previous"
+msgstr "&laquo; قبلی"
 
+#: profile/profile.php:497
+msgid "Next &raquo;"
+msgstr "بعدی &raquo;"
+
+#: profile/profile.php:742
+msgid "A form for Mobile Newsletter subscription (SMS Verified Memebers)"
+msgstr "یک فرم برای ثبت نام کاربران در خبرنامه پیامکی (با تایید شماره موبایل)"
+
+#: profile/profile.php:1996
+msgid "File is loaded to your pc!"
+msgstr "فایل در سیستم شما بارگیری شد!"
+
+#: profile/profile.php:2611
+msgctxt "menu"
+msgid "Dashboard"
+msgstr "پیشخوان"
+
+#: profile/profile.php:2688
+msgctxt "menu"
+msgid "Edit Profile"
+msgstr "ویرایش پروفایل"
+
+#: profile/profile.php:2696
+msgctxt "menu"
+msgid "Logout"
+msgstr "خروج"
+
+#: profile/profile.php:2935
 #, php-format
-#~ msgid "Order #%1$s was placed on %2$s and is currently %3$s."
-#~ msgstr "سفارش #%1$s در تاریخ %2$s ثبت و هم اکنون در وضعیت %3$s میباشد."
+msgctxt "notifications-priority"
+msgid "No notification found! please consider %s."
+msgstr ""
+"هیچ اطلاعیه یافت نشد! شما میتوانید با کلیک روی \"%s\"، یک اطلاعیه جدید اضافه "
+"کنید."
 
-#~ msgid "l jS \\o\\f F Y, h:ia"
-#~ msgstr "l jS \\o\\f F Y, h:ia"
+#: profile/profile.php:2936
+msgctxt "notifications-section"
+msgid "adding new one"
+msgstr "افزودن اطلاع رسانی"
 
-#~ msgid "No subscriber found!"
-#~ msgstr "هیچ عضوی یافت نشد!"
-
-#~ msgid "&laquo; Previous"
-#~ msgstr "&laquo; قبلی"
-
-#~ msgid "Next &raquo;"
-#~ msgstr "بعدی &raquo;"
-
-#~ msgid "File is loaded to your pc!"
-#~ msgstr "فایل در سیستم شما بارگیری شد!"
-
-#~ msgctxt "menu"
-#~ msgid "Dashboard"
-#~ msgstr "پیشخوان"
-
-#~ msgctxt "menu"
-#~ msgid "Edit Profile"
-#~ msgstr "ویرایش پروفایل"
-
-#~ msgctxt "menu"
-#~ msgid "Logout"
-#~ msgstr "خروج"
-
+#: profile/profile.php:2944 profile/profile.php:3048
 #, php-format
-#~ msgctxt "notifications-priority"
-#~ msgid "No notification found! please consider %s."
-#~ msgstr ""
-#~ "هیچ اطلاعیه یافت نشد! شما میتوانید با کلیک روی \"%s\"، یک اطلاعیه جدید "
-#~ "اضافه کنید."
+msgctxt "notifications-priority"
+msgid "Sorry, your search for \"%s\" didn't match any notification!"
+msgstr "متاسفیم! نتیجه ای برای جستجوی شما با عنوان \"%s\" یافت نشد!"
 
-#~ msgctxt "notifications-section"
-#~ msgid "adding new one"
-#~ msgstr "افزودن اطلاع رسانی"
-
+#: profile/profile.php:2956
 #, php-format
-#~ msgctxt "notifications-priority"
-#~ msgid "Sorry, your search for \"%s\" didn't match any notification!"
-#~ msgstr "متاسفیم! نتیجه ای برای جستجوی شما با عنوان \"%s\" یافت نشد!"
+msgctxt "notification-list-publishdate"
+msgid "Published at %s"
+msgstr "منتشر شده در %s"
 
+#: profile/profile.php:2959
 #, php-format
-#~ msgctxt "notification-list-publishdate"
-#~ msgid "Published at %s"
-#~ msgstr "منتشر شده در %s"
+msgctxt "notification-list-publishdate"
+msgid "Scheduled for %s"
+msgstr "زمانبندی شده برای %s"
 
+#: profile/profile.php:2962
+msgctxt "notification-list-publishdate"
+msgid "Current and Future users"
+msgstr "تمامی کاربران فعلی و آینده وبسایت"
+
+#: profile/profile.php:2965
 #, php-format
-#~ msgctxt "notification-list-publishdate"
-#~ msgid "Scheduled for %s"
-#~ msgstr "زمانبندی شده برای %s"
+msgctxt "notification-list-publishdate"
+msgid "For %s users"
+msgstr "برای تعداد %s کاربر"
 
-#~ msgctxt "notification-list-publishdate"
-#~ msgid "Current and Future users"
-#~ msgstr "تمامی کاربران فعلی و آینده وبسایت"
+#: profile/profile.php:3016 profile/profile.php:3119 profile/profile.php:3215
+msgid "&laquo;"
+msgstr "&laquo;"
 
+#: profile/profile.php:3017 profile/profile.php:3120 profile/profile.php:3216
+msgid "&raquo;"
+msgstr "&raquo;"
+
+#: profile/profile.php:3042
 #, php-format
-#~ msgctxt "notification-list-publishdate"
-#~ msgid "For %s users"
-#~ msgstr "برای تعداد %s کاربر"
+msgctxt "notifications-priority"
+msgid "No section found! please consider %s."
+msgstr ""
+"هیچ بخش یافت نشد! شما میتوانید با کلیک روی \"%s\"، یک بخش جدید به پروفایل "
+"اضافه کنید."
 
-#~ msgid "&laquo;"
-#~ msgstr "&laquo;"
+#: profile/profile.php:3042
+msgctxt "notifications-section"
+msgid "adding new section"
+msgstr "افزودن بخش"
 
-#~ msgid "&raquo;"
-#~ msgstr "&raquo;"
+#. Plugin URI of the plugin/theme
+msgid "https://pepro.dev/ups"
+msgstr "https://pepro.dev/ups"
 
-#, php-format
-#~ msgctxt "notifications-priority"
-#~ msgid "No section found! please consider %s."
-#~ msgstr ""
-#~ "هیچ بخش یافت نشد! شما میتوانید با کلیک روی \"%s\"، یک بخش جدید به پروفایل "
-#~ "اضافه کنید."
+#. Description of the plugin/theme
+msgid ""
+"One of the most Advanced and *The Ultimate Profile Solutions* for WordPress. "
+"FREE OF ANY CHARGE, UNLIMITED and OPEN-SOURCE FOREVER!"
+msgstr ""
+"افزونه پیشرفته ساخت پروفایل (پاپ آپ ورود / فرم ثبت نام و فیلد های شخصی سازی "
+"شده / تغییر آدرس ورود و ...) کاملا رایگان، متن باز و نامحدود!"
 
-#~ msgctxt "notifications-section"
-#~ msgid "adding new section"
-#~ msgstr "افزودن بخش"
-
-#~ msgid "Dashboard Texts"
-#~ msgstr "متن‌های پیشخوان"
-
-#~ msgid "Sorry, you are not allowed to do that."
-#~ msgstr "متأسفانه شما اجازه‌ی انجام این کار را ندارید."
-
-#~ msgid ""
-#~ "Restyled mobile/OTP login and register form with Login/Register tabs and "
-#~ "OTP code boxes."
-#~ msgstr ""
-#~ "فرم ورود و ثبت‌نام موبایلی/کد یک‌بارمصرف با ظاهر جدید، زبانه‌های ورود/ثبت‌نام "
-#~ "و خانه‌های جداگانه‌ی کد."
-
-#~ msgid "Dashboard texts and buttons"
-#~ msgstr "متن‌ها و دکمه‌های پیشخوان"
-
-#~ msgid "Settings were reset to their defaults."
-#~ msgstr "تنظیمات به حالت پیش‌فرض برگشت."
-
-#~ msgid "Settings saved."
-#~ msgstr "تنظیمات ذخیره شد."
-
-#~ msgid "Translate these texts with WPML"
-#~ msgstr "ترجمه‌ی این متن‌ها در WPML"
-
-#~ msgid ""
-#~ "Off by default: nothing changes on your site until you enable a module "
-#~ "here."
-#~ msgstr ""
-#~ "به‌صورت پیش‌فرض غیرفعال است: تا وقتی یکی از بخش‌ها را اینجا فعال نکنید، چیزی "
-#~ "در سایت شما تغییر نمی‌کند."
-
-#~ msgid "Save Settings"
-#~ msgstr "ذخیره تنظیمات"
-
-#~ msgid "Reset all texts and links to their defaults?"
-#~ msgstr "همه‌ی متن‌ها و لینک‌ها به حالت پیش‌فرض برگردند؟"
-
-#~ msgid "Reset to defaults"
-#~ msgstr "بازگشت به پیش‌فرض"
-
-#~ msgid ""
-#~ "This option allows you to set a networkwide default, which can be "
-#~ "overridden by individual sites. Simply go to to the site’s permalink "
-#~ "settings to change the url."
-#~ msgstr ""
-#~ "This option allows you to set a networkwide default, which can be "
-#~ "overridden by individual sites. Simply go to to the site’s permalink "
-#~ "settings to change the url."
-
-#~ msgid "Networkwide default"
-#~ msgstr "Networkwide default"
-
-#~ msgid "Please upgrade to the latest version of WordPress to activate"
-#~ msgstr "برای فعالسازی لطفا به آخرین نسخه وردپرس آپدیت کنید"
-
-#~ msgid ""
-#~ "PeproDev Ultimate Profile Solutions could not be activated because you "
-#~ "already have Rename wp-login.php active. Please uninstall rename wp-"
-#~ "login.php to use PeproDev Ultimate Profile Solutions."
-#~ msgstr ""
-#~ "افزونه PeproDev Ultimate Profile Solutions نمی‌تواند فعال شود زیرا افزونه "
-#~ "Rename wp-login.php هم‌اکنون فعال است. لطفاً برای استفاده از PeproDev "
-#~ "Ultimate Profile Solutions، ابتدا افزونه Rename wp-login.php را حذف کنید."
-
-#~ msgid "PeproDev Ultimate Profile Solutions — Login"
-#~ msgstr "پروفایل ساز پپرو — لاگین"
-
-#~ msgid "SMS Verified"
-#~ msgstr "موبایل تایید شده"
-
-#~ msgctxt "metabox"
-#~ msgid "Email Verified"
-#~ msgstr "ایمیل تایید شده"
-
-#~ msgctxt "metabox"
-#~ msgid "SMS Verified"
-#~ msgstr "موبایل تایید شده"
-
-#~ msgid "A form for Mobile Newsletter subscription (SMS Verified Memebers)"
-#~ msgstr ""
-#~ "یک فرم برای ثبت نام کاربران در خبرنامه پیامکی (با تایید شماره موبایل)"
-
-#~ msgid "https://pepro.dev/ups"
-#~ msgstr "https://pepro.dev/ups"
-
-#~ msgid ""
-#~ "One of the most Advanced and *The Ultimate Profile Solutions* for "
-#~ "WordPress. FREE OF ANY CHARGE, UNLIMITED and OPEN-SOURCE FOREVER!"
-#~ msgstr ""
-#~ "افزونه پیشرفته ساخت پروفایل (پاپ آپ ورود / فرم ثبت نام و فیلد های شخصی "
-#~ "سازی شده / تغییر آدرس ورود و ...) کاملا رایگان، متن باز و نامحدود!"
-
-#~ msgid "https://pepro.dev/"
-#~ msgstr "https://pepro.dev/"
-
-#~ msgid "WPS Hide Login"
-#~ msgstr "Hide Login"
-
-#~ msgid "Redirection url default"
-#~ msgstr "آدرس ریدایرکت"
-
-#, php-format
-#~ msgid "Verification SMS sent to %s, Enter the code in the field."
-#~ msgstr "کد یکبارمصرف پیامک شده به %s را وارد کنید."
-
-#, php-format
-#~ msgid "Verification SMS sent to %s."
-#~ msgstr "کد یکبارمصرف به %s ارسال شد."
-
-#, php-format
-#~ msgid "%s Successfully Activated."
-#~ msgstr "%s با موفقیت فعال شد."
-
-#, php-format
-#~ msgid "%s Successfully Deactivated."
-#~ msgstr "%s با موفقیت غیر فعال شد."
+#. Author URI of the plugin/theme
+msgid "https://pepro.dev/"
+msgstr "https://pepro.dev/"
