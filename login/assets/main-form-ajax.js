@@ -676,7 +676,9 @@ jQuery.noConflict();
       });
       $(document).on("change keyup", `#${_pepro_dev.instance} form.form-register [name=billing_country]`, function (e) {
         e.preventDefault();
-        var login_form = $(`#${_pepro_dev.instance} form.form-register`);
+        // only the register form of this select (mobile and email register forms both print the field)
+        var login_form = $(this).closest("form");
+        var state_required = $(login_form).find(".billing_state-wrap").hasClass("form-required");
         var states = JSON.parse(_pepro_dev.countries.replace(/&quot;/g, '"'));
         var country = $(this).val();
         var cur_state = $(login_form).find("[name=billing_state]").val();
@@ -686,7 +688,7 @@ jQuery.noConflict();
           $newstate = $("<select></select>")
             .prop("id", "billing_state")
             .prop("name", "billing_state")
-            .attr("required", "")
+            .prop("required", state_required)
             .addClass("js_field-state")
             .append($defaultOption);
 
@@ -704,7 +706,7 @@ jQuery.noConflict();
           $newstate = $('<input type="text" />')
             .prop('id', "billing_state")
             .prop('name', "billing_state")
-            .attr('required', "")
+            .prop('required', state_required)
             .prop('placeholder', _pepro_dev.placeholder_state)
             .addClass('form-text')
             .val("");
@@ -1111,7 +1113,8 @@ jQuery.noConflict();
 
     // no document.referrer fallback for redirect_to: an empty value lets the server use the redirection rules, then the profile dashboard
 
-    $(".pepro-login-reg-container").find(".form-register").find("#billing_country,#billing_state,#billing_city").attr("required", "required").trigger("change");
+    // WooCommerce address fields are required only when marked "Required?" in the registration settings
+    $(".pepro-login-reg-container").find(".form-register").find(".billing_country-wrap.form-required #billing_country, .billing_state-wrap.form-required #billing_state, .billing_city-wrap.form-required #billing_city").attr("required", "required").trigger("change");
     $(".pepro-login-reg-container").find(".form-register").find("#billing_country").trigger("change");
 
     $(document).on("click tap", "[data-pepro-reglogin] > form .pepro-login-reg-field label", function(e){

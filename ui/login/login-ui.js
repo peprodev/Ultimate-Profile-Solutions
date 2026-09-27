@@ -77,7 +77,8 @@
   }
 
   function enhanceFields($c) {
-    $c.find("input.mobile-verification").each(function () {
+    // Only the main mobile inputs (login username / register user_mobile), not extra "mobile" fields of the builder.
+    $c.find("input.mobile-verification#username, input.mobile-verification#user_mobile").each(function () {
       var $i = $(this);
       $i.attr({ placeholder: t.mobilePlaceholder || $i.attr("placeholder"), inputmode: "numeric", autocomplete: "tel", dir: "ltr" });
       $i.siblings("label").first().text(t.mobileLabel || $i.siblings("label").first().text());
@@ -89,6 +90,15 @@
     });
     $c.find("input#first_name").attr("autocomplete", "given-name");
     $c.find("input#last_name").attr("autocomplete", "family-name");
+    $c.find("input[type=email]").attr("autocomplete", "email");
+
+    // Editing a field clears its validation message.
+    $c.on("input.mjLoginUi change.mjLoginUi", ".pepro-login-reg-field :input", function () {
+      var $row = $(this).closest(".pepro-login-reg-field");
+      if ($row.find("error, .mj-field-error").length) {
+        $row.removeClass("mj-has-error").find("error, .mj-field-error").remove();
+      }
+    });
 
     $c.on("input.mjLoginUi", "input.mobile-verification, input.otp-verification", function () {
       var latin = toLatinDigits(this.value);
@@ -98,6 +108,28 @@
         try { this.setSelectionRange(pos, pos); } catch (e) { /* tel inputs may not support selection */ }
         $(this).trigger("change");
       }
+    });
+  }
+
+  /**
+   * The plugin marks invalid fields with an <error data-tippy-content> badge
+   * (tooltip on hover); show that message as text under the field instead.
+   */
+  function syncErrors($c) {
+    $c.find(".pepro-login-reg-field").each(function () {
+      var $row = $(this);
+      var $err = $row.find("error[data-tippy-content]").first();
+      var $msg = $row.children(".mj-field-error");
+      if (!$err.length) {
+        if ($msg.length) { $msg.remove(); $row.removeClass("mj-has-error"); }
+        return;
+      }
+      var text = $err.attr("data-tippy-content") || "";
+      if ($msg.length && $msg.attr("data-text") === text) { return; }
+      $msg.remove();
+      // Same (admin-defined) content the plugin shows in its tooltip, rendered as HTML there too.
+      $('<div class="mj-field-error" role="alert"></div>').attr("data-text", text).html(text).appendTo($row);
+      $row.addClass("mj-has-error");
     });
   }
 
@@ -173,6 +205,7 @@
 
     function sync() {
       pending = false;
+      syncErrors($c);
       var mode = currentMode($c);
       var via = currentVia($c);
       var tab = mode === "register" ? "register" : "login";
@@ -218,7 +251,7 @@
     }
 
     if ("MutationObserver" in window) {
-      new MutationObserver(schedule).observe($c[0], { subtree: true, attributes: true, attributeFilter: ["class", "style"] });
+      new MutationObserver(schedule).observe($c[0], { subtree: true, childList: true, attributes: true, attributeFilter: ["class", "style"] });
     }
     sync();
   }

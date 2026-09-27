@@ -198,11 +198,20 @@
   color: var(--mj-muted);
 }
 
-.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .form-required label::after {
+.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .form-required > label::after {
+  content: " *";
+  position: static;
+  margin: 0;
+  color: var(--mj-danger);
+  font-weight: 700;
+}
+
+.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .form-required label:not(:first-child)::after,
+.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .pepro-login-reg-field :is(p, span) label::after {
   content: none;
 }
 
-.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .pepro-login-reg-field :is(input[type="text"], input[type="tel"], input[type="email"], input[type="password"], input[type="number"], select) {
+.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .pepro-login-reg-field :is(input[type="text"], input[type="tel"], input[type="email"], input[type="password"], input[type="number"], input[type="url"], input[type="date"], input[type="time"], input[type="datetime-local"], select, textarea) {
   box-sizing: border-box;
   width: 100%;
   height: 54px;
@@ -246,6 +255,112 @@
 .mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .pepro-login-reg-field :is(input.disabled, input[readonly]) {
   background: var(--mj-sand);
   color: var(--mj-muted) !important;
+}
+
+.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .pepro-login-reg-field textarea {
+  height: auto;
+  min-height: 110px;
+  padding: .85rem 1.1rem;
+  line-height: 1.7;
+  resize: vertical;
+}
+
+.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .pepro-login-reg-field textarea:focus {
+  outline: 0;
+  border-color: var(--mj-primary);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--mj-primary) 14%, transparent);
+}
+
+/* WooCommerce address fields print their own <p class="form-row"> wrapper */
+.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .pepro-login-reg-field :is(p.form-row, .woocommerce-input-wrapper) {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  float: none;
+}
+
+.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .pepro-login-reg-field p.form-row > label {
+  display: none;
+}
+
+.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .pepro-login-reg-field .select2-container {
+  width: 100% !important;
+}
+
+.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .pepro-login-reg-field .select2-container .select2-selection--single {
+  height: 54px;
+  border: 1px solid var(--mj-line);
+  border-radius: var(--mj-radius);
+}
+
+.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .pepro-login-reg-field .select2-container .select2-selection__rendered {
+  padding: 0 1.1rem;
+  line-height: 52px;
+}
+
+.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .pepro-login-reg-field .select2-container .select2-selection__arrow {
+  height: 52px;
+}
+
+/* Checkbox / radio fields: control and label on one line */
+.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .pepro-login-reg-field:is(.checkbox, .radio) {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  align-items: center;
+  gap: .6rem;
+}
+
+.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .pepro-login-reg-field:is(.checkbox, .radio) > label {
+  margin: 0;
+  color: var(--mj-ink);
+  cursor: pointer;
+}
+
+.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .pepro-login-reg-field input:is([type="checkbox"], [type="radio"]) {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--mj-primary);
+  cursor: pointer;
+}
+
+/* TinyMCE editor field */
+.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .pepro-login-reg-field .wp-editor-wrap {
+  overflow: hidden;
+  border: 1px solid var(--mj-line);
+  border-radius: var(--mj-radius);
+}
+
+.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .pepro-login-reg-field .wp-editor-wrap textarea {
+  border: 0;
+  border-radius: 0;
+}
+
+/* reCAPTCHA */
+.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .pepro-login-reg-field.recaptcha {
+  display: flex;
+  justify-content: center;
+  direction: ltr;
+}
+
+/* Validation: red border + message under the field (login-ui.js turns the plugin's badge into text) */
+.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .pepro-login-reg-field error {
+  display: none !important;
+}
+
+.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .pepro-login-reg-field.mj-has-error :is(input, select, textarea, .wp-editor-wrap) {
+  border-color: var(--mj-danger);
+}
+
+.mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .mj-field-error {
+  flex: 1 1 100%;
+  margin: .4rem 0 0;
+  font-size: .85rem;
+  line-height: 1.6;
+  color: var(--mj-danger);
 }
 
 /* OTP input: big, centered digits */

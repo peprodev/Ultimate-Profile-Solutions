@@ -3039,8 +3039,9 @@ if (!class_exists("PeproDevUPS_Login")) {
 
       // the account was just created by this request, so only the admin-defined registration fields are written to it
       if ($user_id) {
-        foreach ($this->form_register_fields as $field) {
-          if (in_array($field["meta_name"], ["username", "email", "password1", "password2", "checkmobile", "checkemail"])) continue;
+        // fresh list: the cached one is built before the default (first/last name, WooCommerce address) fields are hooked in
+        foreach ($this->get_form_register_fields("sms") as $field) {
+          if (in_array($field["meta_name"], ["username", "email", "password1", "password2", "checkmobile", "checkemail", "optverify"])) continue;
           switch ($field["type"]) {
             case 'recaptcha':
             case 'button':
@@ -3048,7 +3049,9 @@ if (!class_exists("PeproDevUPS_Login")) {
               break;
             case 'textarea':
             case 'editor':
-              update_user_meta($user_id, $field["meta_name"], sanitize_textarea_field($params[$field["meta_name"]]));
+              if (isset($params[$field["meta_name"]])) {
+                update_user_meta($user_id, $field["meta_name"], sanitize_textarea_field($params[$field["meta_name"]]));
+              }
               break;
             case 'tel':
             case 'mobile':
@@ -5586,8 +5589,9 @@ HTML_PREV;
       }
     }
     public function add_recaptcha_js(){
+      // the register forms always print a reCAPTCHA field (login forms only when "Use in Login form" is on), so load the API for any
       foreach ($this->register_fields as $field) {
-        if ("recaptcha" == $field["type"] && "yes" == $field["login"]) {
+        if ("recaptcha" == $field["type"]) {
           wp_enqueue_script("pepro_reglogin_recaptcha", "https://www.google.com/recaptcha/api.js", array(), null);
         }
       }
