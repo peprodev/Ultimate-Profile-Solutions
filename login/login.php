@@ -458,6 +458,7 @@ if (!class_exists("PeproDevUPS_Login")) {
       require_once plugin_dir_path(__FILE__) . "include/class-sms-farazsms.php";
       require_once plugin_dir_path(__FILE__) . "include/class-sms-wpsms.php";
       require_once plugin_dir_path(__FILE__) . "include/class-sms-pwsms.php";
+      require_once plugin_dir_path(__FILE__) . "include/class-social-google.php";
 
       add_action("admin_init", array($this, "check_database"));
     }
@@ -1283,6 +1284,8 @@ if (!class_exists("PeproDevUPS_Login")) {
           // optional profile logo, must stay the first child of the container
           echo $this->get_login_form_logo_html();
           echo do_shortcode(PeproDevUPS_WPML::translate("login: header html", (string) $this->read("login_header_html", "")));
+          // e.g. Social Login error notice
+          do_action("pepro_reglogin_form_top", array("redirect_to" => $def_redirect_to, "active" => $active));
           if ($condition) {
             if ($this->show_email_login_form && $this->show_mobile_login_form) {
               ?>
@@ -1423,6 +1426,8 @@ if (!class_exists("PeproDevUPS_Login")) {
               <?php
             }
             echo $after;
+            // e.g. "Sign in with Google" button under the forms
+            do_action("pepro_reglogin_form_bottom", array("redirect_to" => $def_redirect_to, "active" => $active));
           }
           echo do_shortcode(PeproDevUPS_WPML::translate("login: footer html", (string) $this->read("login_footer_html", "")));
           echo "<span class='return-back-home'><a href='" . esc_url(home_url()) . "'>" . esc_html__("Back to home", "peprodev-ups") . "</a></span>";
@@ -5783,6 +5788,9 @@ HTML_PREV;
                 }
               }
             }
+
+            // settings of add-ons (e.g. Social Login) rendered through the settings tab hooks
+            do_action("pepro_reglogin_save_settings", $_POST["dparam"]);
 
             // Modern UI: login/register form switch (ui/ui.php)
             if (isset($_POST["dparam"]["modern_ui"]) && is_array($_POST["dparam"]["modern_ui"]) && function_exists("peprodev_ui_texts_save_input")) {

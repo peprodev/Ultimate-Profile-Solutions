@@ -81,6 +81,7 @@ foreach ($styleFiles as $style) {
             <li class="nav-item tab_wp_login">
               <a class="nav-link" href="#tab_wp_login"><i class="material-icons">login</i> <?php echo esc_html_x("WordPress Built-in Login", "login-section", "peprodev-ups"); ?></a>
             </li>
+            <?php do_action("pepro_reglogin_settings_tabs_nav"); ?>
             <li class="nav-item tab_advanced">
               <a class="nav-link" href="#tab_advanced"><i class="material-icons">developer_board</i> <?php echo esc_html_x("Advanced", "login-section", "peprodev-ups"); ?></a>
             </li>
@@ -856,6 +857,7 @@ foreach ($styleFiles as $style) {
           </div>
         </div>
       </div>
+      <?php do_action("pepro_reglogin_settings_tabs_content"); ?>
       <div class="tab-pane" id="tab_advanced">
         <div class="card">
           <div class="card-header card-header-primary">
