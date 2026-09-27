@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.2.6](#version-826)
 - [Version 8.2.5](#version-825)
 - [Version 8.1.0](#version-810)
 - [Version 8.0.4](#version-804)
@@ -72,6 +73,10 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.2.6
+- Release date: 2026-09-27 | 1405-07-05  [&uarr;](#table-of-contents)
+- **Fixed** Modern login: headings and the mobile/email switch link follow the fields the active form really has. With "Force Mobile/Email Registration form" both register forms use the same method, so the switch link is hidden on the Register tab and the heading matches the form
 
 ## Version 8.2.5
 - Release date: 2026-09-27 | 1405-07-05  [&uarr;](#table-of-contents)

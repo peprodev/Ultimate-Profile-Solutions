@@ -2,8 +2,8 @@
 Contributors: amirhpcom, peprodev, blackswanlab
 Donate link: https://peprodev.com/donate/
 Tags: profile, dashboard, login-registration
-Version: 8.2.5
-Stable tag: 8.2.5
+Version: 8.2.6
+Stable tag: 8.2.6
 Requires at least: 5.0
 Tested up to: 7.1
 Requires PHP: 7.2
@@ -157,6 +157,11 @@ Your support and feedback have been key in shaping this plugin into a reliable a
 We're proud to be part of this amazing journey with the WordPress community 💙
 Here's to many more years of innovation, freedom, and open-source collaboration 😍!
 
+= 8.2.6 =
+Release date: 2026-09-27
+
+* Fixed: modern login form headings and the mobile/email switch link now follow the fields the form really shows. With "Force Mobile Registration form" (or "Force Email") both register forms use the same method, so the switch link is hidden on the Register tab and the heading no longer says "email" above a mobile form.
+
 = 8.2.5 =
 Release date: 2026-09-27 (includes 8.2.0 to 8.2.4)
 
@@ -212,6 +217,9 @@ Release date: 2026-09-27
 - 🐞 Fixed LearnDash issue with incorrect date display
 
 == Upgrade Notice ==
+
+= 8.2.6 =
+Modern UI on by default (existing sites too), settings moved to the Login/Register and Profile screens. New: Sign in with Google, FarazSMS / WP SMS / Persian WooCommerce SMS gateways, mobile/email switch.
 
 = 8.2.5 =
 The Modern UI is now on by default, also on existing sites that did not turn it off before. Its settings moved from "Dashboard Texts" to the Login/Register and Profile screens (values are migrated). New: Sign in with Google, FarazSMS / WP SMS / Persian WooCommerce SMS gateways.

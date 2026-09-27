@@ -41,6 +41,18 @@
     return { login: pick($c, "form-login", via), register: pick($c, "form-register", via) };
   }
 
+  /**
+   * Method a given form really uses, from its fields. The admin can force the
+   * register form to one method ("Force Mobile/Email Registration form"), so the
+   * via-email register form may contain the mobile fields and vice versa.
+   */
+  function formMethod($form, fallback) {
+    if (!$form || !$form.length) { return fallback; }
+    if ($form.find("input[name=checkemail], input.email-verification").length) { return "email"; }
+    if ($form.find("input[name=checkmobile], input.mobile-verification").length) { return "sms"; }
+    return fallback;
+  }
+
   function currentMode($c) {
     var via = currentVia($c);
     if ($c.children("form.form-register.via-" + via + ".inline").length) { return "register"; }
@@ -229,8 +241,15 @@
         $f.attr({ role: "tabpanel", "aria-labelledby": id + "-tab-" + ($f.hasClass("form-register") ? "register" : "login") });
       });
 
+      // Heading texts follow the fields the active form really has.
+      var shownVia = formMethod($active, via);
+      // When registration is forced to one method both register forms are the same,
+      // so the switch link would change nothing on the Register tab.
+      var sameRegister = tab === "register" &&
+        formMethod($c.children("form.form-register.via-sms").first(), "sms") === formMethod($c.children("form.form-register.via-email").first(), "email");
+
       if ($method.length) {
-        $method.toggleClass("is-hidden", otp || loading)
+        $method.toggleClass("is-hidden", otp || loading || sameRegister)
           .find(".mj-method__link")
           .text(via === "sms" ? (t.switchToEmail || "Login/Register with email") : (t.switchToMobile || "Login/Register with mobile"))
           .attr("aria-disabled", otp || loading ? "true" : "false");
@@ -238,7 +257,7 @@
 
       // Email variants have their own subtitle / OTP texts, falling back to the generic ones.
       var key = otp ? "otp" : mode;
-      var suffix = via === "email" ? "Email" : "";
+      var suffix = shownVia === "email" ? "Email" : "";
       $head.find(".mj-head__title").text(t[key + "Title" + suffix] || t[key + "Title"] || "");
       $head.find(".mj-head__subtitle").text(t[key + "Subtitle" + suffix] || t[key + "Subtitle"] || "");
       $c.toggleClass("mj-is-otp", otp).attr({ "data-mj-mode": mode, "data-mj-via": via });
