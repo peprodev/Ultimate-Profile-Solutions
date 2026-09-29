@@ -5486,3 +5486,8 @@ msgstr "ارائه‌دهنده پیامک را انتخاب کنید، کد ت�
 msgctxt "login-section"
 msgid "Set the sender, subject and template of the email that carries the verification code."
 msgstr "فرستنده، موضوع و قالب ایمیل حاوی کد تایید را از اینجا تنظیم کنید."
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "You can control WordPress Built-in Login screen permalinks from here"
+msgstr "تنظیمات پیوند یکتای صفحه پیش‌فرض ورود وردپرس را از اینجا مدیریت کنید."

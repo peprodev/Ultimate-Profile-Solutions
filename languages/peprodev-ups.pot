@@ -5145,3 +5145,8 @@ msgstr ""
 msgctxt "login-section"
 msgid "Set the sender, subject and template of the email that carries the verification code."
 msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "You can control WordPress Built-in Login screen permalinks from here"
+msgstr ""

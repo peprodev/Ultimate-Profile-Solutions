@@ -331,6 +331,11 @@ foreach ($styleFiles as $style) {
                             <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required mr-2 no_popup_alert' <?php checked($this->no_popup_alert, true); ?> name="no_popup_alert" /> <?php esc_html_e("Don't use Popup after Login/Register", "peprodev-ups"); ?>
                           </label>
                         </div>
+                        <div class="login-authexpire save_sms_settings">
+                          <p class="text-bold mt-4 mb-2"><?php echo esc_html_x("Auth. Expiration", "login-section", "peprodev-ups"); ?></p>
+                          <input class="form-input single-required mb-2" name="auth_expire" type="number" min="-1" step="1" lang="en_US" dir="ltr" value="<?php echo esc_attr($this->read("auth_expire", "0")); ?>" placeholder="<?php echo esc_html_x("Auth. Expiration", "login-section", "peprodev-ups"); ?>" />
+                          <p class="small"><?php echo __("How long a user stay logged in? Enter time in hour format (<ltr>1</ltr>: one hour | <ltr>24</ltr>: one day | <ltr>168</ltr>: one week | <ltr>0</ltr>: Default | <ltr>-1</ltr>: Forevr)", "peprodev-ups"); ?></p>
+                        </div>
                         <?php if (function_exists("peprodev_ui_render_login_settings")) peprodev_ui_render_login_settings(); ?>
                       </div>
                     </div>
@@ -533,13 +538,6 @@ foreach ($styleFiles as $style) {
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-                <div class="card login-authexpire save_sms_settings">
-                  <div class='card-body'>
-                    <p class="text-bold"><?php echo esc_html_x("Auth. Expiration", "login-section", "peprodev-ups"); ?></p>
-                    <input class="form-input single-required mb-3" name="auth_expire" type="number" min="-1" step="1" lang="en_US" dir="ltr" value="<?php echo esc_attr($this->read("auth_expire", "0")); ?>" placeholder="<?php echo esc_html_x("Auth. Expiration", "login-section", "peprodev-ups"); ?>" />
-                    <p><?php echo __("How long a user stay logged in? Enter time in hour format (<ltr>1</ltr>: one hour | <ltr>24</ltr>: one day | <ltr>168</ltr>: one week | <ltr>0</ltr>: Default | <ltr>-1</ltr>: Forevr)", "peprodev-ups"); ?></p>
                   </div>
                 </div>
                 <div class="card login-test-sms testotp">
@@ -836,7 +834,7 @@ foreach ($styleFiles as $style) {
             <div class="card">
               <div class="card-header card-header-primary">
                 <h4 class="card-title"><?php echo esc_html_x("Security & Permalinks", "login-section", "peprodev-ups"); ?></h4>
-                <p class="card-category"><?php echo esc_html_x("You can control WordPress Built-in Login screen permalinks and Auth. Expiration from here", "login-section", "peprodev-ups"); ?></p>
+                <p class="card-category"><?php echo esc_html_x("You can control WordPress Built-in Login screen permalinks from here", "login-section", "peprodev-ups"); ?></p>
               </div>
               <div class="card-body table-responsive">
                 <div class="mt-2 mb-4">
