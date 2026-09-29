@@ -5412,3 +5412,11 @@ msgstr ""
 #: login/include/class-activated.php
 msgid "Sent as a normal SMS from the sender number; [OTP] is replaced with the code."
 msgstr ""
+
+#: login/include/class-activated.php
+msgid "[site_name] | Verify Email"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Restore default"
+msgstr ""

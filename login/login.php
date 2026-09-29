@@ -3490,8 +3490,8 @@ HTML_PREV;
      * @return string
      */
     public function get_default_mail_subject() {
-      /* translators: keep [OTP] and [site_name] untouched; keep the code near the start for mail-app code detection. */
-      return __("[OTP] is your verification code | [site_name]", "peprodev-ups");
+      /* translators: keep [site_name] untouched. */
+      return __("[site_name] | Verify Email", "peprodev-ups");
     }
     /**
      * Build the verification e-mail subject from a subject template and the placeholder replacements.

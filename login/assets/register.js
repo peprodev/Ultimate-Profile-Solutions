@@ -663,6 +663,10 @@ jQuery.noConflict();
       });
     });
     /* Verification email template: reset editor content to the default template (not saved until Save Settings) */
+    $(document).on("click tap", "#verification_email_subject_reset", function(e){
+      e.preventDefault();
+      $("#verification_email_subject").val($(this).attr("data-default")).trigger("change").focus();
+    });
     $(document).on("click tap", "#verification_email_template_reset", function(e){
       e.preventDefault();
       if (typeof _register_fields.mail_default !== "string" || !_register_fields.mail_default.length) return;
@@ -673,8 +677,7 @@ jQuery.noConflict();
         $("#verification_email_template_editor").val(_register_fields.mail_default);
       }
       $("#verification_email_template").val(_register_fields.mail_default);
-      // an empty subject means "use the built-in default" (shown as the field placeholder)
-      $("#verification_email_subject").val("").trigger("change");
+      $("#verification_email_subject").val(_register_fields.mail_default_subj).trigger("change");
       $("#verification_email_test_result").css("color", "").text(_register_fields.mail_reset_done);
     });
     /* Verification email template: send a test email using the current (unsaved) editor content */

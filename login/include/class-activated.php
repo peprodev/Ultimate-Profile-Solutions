@@ -745,8 +745,11 @@ foreach ($styleFiles as $style) {
                       <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-verification_email_subject '>
                         <div class="col-lg-12">
                           <p class="text-bold"><?php esc_html_e("Verification Email Subject", "peprodev-ups"); ?></p>
-                          <input autocomplete="off" type="text" id="verification_email_subject" placeholder="<?php echo esc_attr($this->get_default_mail_subject()); ?>" dir="auto" class='form-input mr-2' name="verification_email_subject" value="<?php echo esc_attr($this->verification_email_subject); ?>" />
-                          <p class="mt-1 mb-0"><small><?php esc_html_e("Subject tags:", "peprodev-ups"); ?> <?php foreach (array("[OTP]", "[site_name]", "[request_email]", "[first_name]", "[last_name]", "[display_name]", "[username]") as $subject_tag) echo "<copy>" . esc_html($subject_tag) . "</copy> "; ?> &mdash; <?php esc_html_e("keep [OTP] near the start for better code detection in mail apps; leave empty to use the default.", "peprodev-ups"); ?></small></p>
+                          <div class="pd-test-row">
+                            <input autocomplete="off" type="text" id="verification_email_subject" placeholder="<?php echo esc_attr($this->get_default_mail_subject()); ?>" dir="auto" class='form-input' name="verification_email_subject" value="<?php echo esc_attr("" !== $this->verification_email_subject ? $this->verification_email_subject : $this->get_default_mail_subject()); ?>" />
+                            <button type="button" id="verification_email_subject_reset" class="btn btn-secondary icn-btn" data-default="<?php echo esc_attr($this->get_default_mail_subject()); ?>"><i class="material-icons">restart_alt</i> <?php esc_html_e("Restore default", "peprodev-ups"); ?></button>
+                          </div>
+                          <p class="mt-1 mb-0"><small><?php esc_html_e("Subject tags:", "peprodev-ups"); ?> <?php foreach (array("[site_name]", "[OTP]", "[request_email]", "[first_name]", "[last_name]", "[display_name]", "[username]") as $subject_tag) echo "<copy>" . esc_html($subject_tag) . "</copy> "; ?></small></p>
                         </div>
                       </div>
                       <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-verification_email_template '>
