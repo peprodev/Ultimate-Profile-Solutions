@@ -5590,7 +5590,7 @@ HTML_PREV;
         }
       }
 
-      wp_enqueue_style("pepro-login-reg-admin-custom", "{$this->assets_url}assets/main-form.css");
+      wp_enqueue_style("pepro-login-reg-admin-custom", "{$this->assets_url}assets/main-form.css", array(), defined("PEPRODEVUPS") ? PEPRODEVUPS : $this->current_version);
       wp_add_inline_style("pepro-login-reg-admin-custom", $this->read("login_custom_css"));
 
       if ($this->hide_username_field) {
@@ -5600,7 +5600,7 @@ HTML_PREV;
         wp_add_inline_style("pepro-login-reg-admin-custom", 'form#registerform input#user_email, form#registerform label[for="user_email"]{display: none;}');
       }
 
-      wp_enqueue_script("pepro-login-reg-admin-custom", "{$this->assets_url}assets/main-form.js", array("jquery"), $this->current_version, true);
+      wp_enqueue_script("pepro-login-reg-admin-custom", "{$this->assets_url}assets/main-form.js", array("jquery"), defined("PEPRODEVUPS") ? PEPRODEVUPS : $this->current_version, true);
       wp_localize_script("pepro-login-reg-admin-custom", "_i18nj", array(
         "ajaxurl"   => admin_url('admin-ajax.php'),
         "login"     => untrailingslashit(wp_login_url()),

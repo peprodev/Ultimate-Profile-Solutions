@@ -2,17 +2,19 @@
 defined("ABSPATH") || exit;
 # @Last modified by:   Amirhosseinhpv
 # @Last modified time: 2022/02/20 01:22:20
+// cache-busting by the plugin version: $this->version of the login module is a fixed "8.0.0"
+$pd_asset_ver = defined("PEPRODEVUPS") ? PEPRODEVUPS : $this->version;
 add_thickbox();
 wp_enqueue_style("wp-color-picker");
 wp_enqueue_script("wp-color-picker");
 wp_enqueue_style("pepro-register-fields-ide",      "{$this->assets_url}assets/ide/ace.css", array(), "1.6.0");
-wp_enqueue_style("pepro-register-fields",          "{$this->assets_url}assets/register.css", array(), "1.6.0." . $this->version);
+wp_enqueue_style("pepro-register-fields",          "{$this->assets_url}assets/register.css", array(), "1.6.0." . $pd_asset_ver);
 wp_enqueue_style("pepro-register-jqconfirm",       "{$this->assets_url}assets/jquery-confirm.css", array(), "1.6.0");
 wp_enqueue_script("pepro-register-jqconfirm",      "{$this->assets_url}assets/jquery-confirm.js", array('jquery'), "1.6.0");
 wp_enqueue_script("color-picker-alpha",            "{$this->assets_url}assets/wp-color-picker-alpha.min.js", array("jquery"), "1.6.0");
 wp_enqueue_script("pepro-register-fields-hotkeys", "{$this->assets_url}assets/hotkeys.min.js", array('jquery'), "1.6.0");
 wp_enqueue_script("pepro-register-fields-ide",     "{$this->assets_url}assets/ide/ace.js", array('jquery'), "1.6.0");
-wp_enqueue_script("pepro-register-fields",         "{$this->assets_url}assets/register.js", array("jquery"), "1.6.3." . $this->version);
+wp_enqueue_script("pepro-register-fields",         "{$this->assets_url}assets/register.js", array("jquery"), "1.6.3." . $pd_asset_ver);
 wp_localize_script("pepro-register-fields",        "_register_fields", array(
   "_added"     => __("New Field Successfully Added", "peprodev-ups"),
   "_removed"   => __("Field Successfully Removed",   "peprodev-ups"),
@@ -748,7 +750,7 @@ foreach ($styleFiles as $style) {
                           <p class="text-bold"><?php esc_html_e("Verification Email Subject", "peprodev-ups"); ?></p>
                           <div class="pd-test-row">
                             <input autocomplete="off" type="text" id="verification_email_subject" placeholder="<?php echo esc_attr($this->get_default_mail_subject()); ?>" dir="auto" class='form-input' name="verification_email_subject" value="<?php echo esc_attr("" !== $this->verification_email_subject ? $this->verification_email_subject : $this->get_default_mail_subject()); ?>" />
-                            <button type="button" id="verification_email_subject_reset" class="btn btn-secondary icn-btn" data-default="<?php echo esc_attr($this->get_default_mail_subject()); ?>"><i class="material-icons">restart_alt</i> <?php esc_html_e("Restore default", "peprodev-ups"); ?></button>
+                            <button type="button" id="verification_email_subject_reset" class="btn btn-info icn-btn" data-default="<?php echo esc_attr($this->get_default_mail_subject()); ?>"><i class="material-icons">restart_alt</i> <?php esc_html_e("Restore default", "peprodev-ups"); ?></button>
                           </div>
                           <p class="mt-1 mb-0"><small><?php esc_html_e("Subject tags:", "peprodev-ups"); ?> <?php foreach (array("[site_name]", "[OTP]", "[request_email]", "[first_name]", "[last_name]", "[display_name]", "[username]") as $subject_tag) echo "<copy>" . esc_html($subject_tag) . "</copy> "; ?></small></p>
                         </div>

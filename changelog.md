@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.2.22](#version-8222)
 - [Version 8.2.21](#version-8221)
 - [Version 8.2.20](#version-8220)
 - [Version 8.2.19](#version-8219)
@@ -88,6 +89,10 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.2.22
+- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- **Fixed** Login/Register settings loaded an old cached register.css / register.js after updates (their version used the login module's fixed 8.0.0 instead of the plugin version), so the new layouts, Code/Preview tabs, macro chips and buttons appeared unstyled or did not work. Assets now use the plugin version; the subject "Restore default" button uses the info style
 
 ## Version 8.2.21
 - Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
