@@ -5808,3 +5808,27 @@ msgstr ""
 #: login/include/class-activated.php
 msgid "Colors and font sizes of the modern login form and user dashboard. Leave a field empty to keep the built-in design (or the colors of your theme)."
 msgstr ""
+
+#: login/include/class-activated.php
+msgid "LearnDash"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "LearnDash settings"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Learning button and My courses"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Texts and links of the learning button and the My courses views of the user dashboard."
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "LearnDash is not active. These settings are used when LearnDash is installed and active."
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Modern user dashboard switch. Colors and font sizes are on the Modern UI Design screen, the learning button and My courses texts on the LearnDash screen."
+msgstr ""

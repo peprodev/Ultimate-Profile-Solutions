@@ -6149,3 +6149,27 @@ msgstr "اندازه‌ها به پیکسل، برای فرم ورود و پیش
 #: login/include/class-activated.php
 msgid "Colors and font sizes of the modern login form and user dashboard. Leave a field empty to keep the built-in design (or the colors of your theme)."
 msgstr "رنگ‌ها و اندازه فونت‌های فرم ورود و پیشخوان جدید. هر فیلدی را خالی بگذارید تا طراحی پیش‌فرض (یا رنگ‌های قالب شما) حفظ شود."
+
+#: login/include/class-activated.php
+msgid "LearnDash"
+msgstr "لرن‌دش"
+
+#: login/include/class-activated.php
+msgid "LearnDash settings"
+msgstr "تنظیمات لرن‌دش"
+
+#: login/include/class-activated.php
+msgid "Learning button and My courses"
+msgstr "دکمه یادگیری و دوره‌های من"
+
+#: login/include/class-activated.php
+msgid "Texts and links of the learning button and the My courses views of the user dashboard."
+msgstr "متن‌ها و لینک‌های دکمه یادگیری و بخش «دوره‌های من» در پیشخوان کاربر."
+
+#: login/include/class-activated.php
+msgid "LearnDash is not active. These settings are used when LearnDash is installed and active."
+msgstr "لرن‌دش فعال نیست. این تنظیمات زمانی استفاده می‌شوند که لرن‌دش نصب و فعال باشد."
+
+#: login/include/class-activated.php
+msgid "Modern user dashboard switch. Colors and font sizes are on the Modern UI Design screen, the learning button and My courses texts on the LearnDash screen."
+msgstr "روشن یا خاموش کردن پیشخوان جدید. رنگ‌ها و اندازه فونت‌ها در صفحه «طراحی ظاهر جدید» و متن‌های دکمه یادگیری و دوره‌های من در صفحه «لرن‌دش» قرار دارند."

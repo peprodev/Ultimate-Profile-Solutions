@@ -238,8 +238,8 @@ defined("ABSPATH") || exit;
   <div class="col-lg-12 col-md-12">
     <div class="card">
       <div class="card-header card-header-primary">
-        <h4 class="card-title"><?php esc_html_e("Modern UI, learning button and My courses", "peprodev-ups");?></h4>
-        <p class="card-category"><?php esc_html_e("Modern user dashboard switch and the texts and links of the learning button and the My courses views.", "peprodev-ups");?></p>
+        <h4 class="card-title"><?php esc_html_e("Modern UI", "peprodev-ups");?></h4>
+        <p class="card-category"><?php esc_html_e("Modern user dashboard switch. Colors and font sizes are on the Modern UI Design screen, the learning button and My courses texts on the LearnDash screen.", "peprodev-ups");?></p>
       </div>
       <div class="card-body table-responsive">
         <?php peprodev_ui_render_profile_settings(); ?>

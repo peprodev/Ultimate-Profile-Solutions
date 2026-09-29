@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.2.34](#version-8234)
 - [Version 8.2.33](#version-8233)
 - [Version 8.2.32](#version-8232)
 - [Version 8.2.31](#version-8231)
@@ -100,6 +101,10 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.2.34
+- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- **Changed** The learning button and "My courses" settings moved from the Profile screen to a new "LearnDash" item of the admin panel; the Profile screen keeps the Modern UI switch
 
 ## Version 8.2.33
 - Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)

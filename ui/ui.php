@@ -551,11 +551,15 @@ function peprodev_ui_enqueue_color_picker() {
 }
 
 /**
- * Modern dashboard, learning button and "My courses" settings on the
- * Profile screen. Collected by profile/assets/js/peprocore-setting.js
- * ([data-ui-key]) and saved by the "save_setting" admin AJAX handler.
+ * Settings table of the modern UI groups. On the Profile screen ("modern" group) it is
+ * collected by profile/assets/js/peprocore-setting.js ([data-ui-key]) and saved by the
+ * "save_setting" admin AJAX handler; the LearnDash screen (ui/learndash.php) shows the
+ * "learn" and "courses" groups.
+ *
+ * @param string[]|null $only Groups to show, null = the Profile screen groups.
  */
-function peprodev_ui_render_profile_settings() {
+function peprodev_ui_render_profile_settings( $only = null ) {
+	$only         = null === $only ? array( 'modern' ) : (array) $only;
 	$desc         = peprodev_ui_texts_descriptions();
 	$placeholders = array(
 		'{my_courses}'        => __( 'the "My courses" section of the user dashboard', 'peprodev-ups' ),
@@ -571,6 +575,9 @@ function peprodev_ui_render_profile_settings() {
 		<tbody>
 			<?php
 			foreach ( peprodev_ui_texts_groups() as $group => $title ) :
+				if ( ! in_array( $group, $only, true ) ) {
+					continue;
+				}
 				?>
 				<tr><th colspan="2"><strong><?php echo esc_html( $title ); ?></strong></th></tr>
 				<?php
@@ -761,3 +768,5 @@ add_action( 'after_setup_theme', 'peprodev_ui_load_modules', 20 );
 require_once PEPRODEV_UPS_UI_DIR . 'dashboard/courses.php';
 // "Modern UI Design" screen: colors of the modern login form and dashboard.
 require_once PEPRODEV_UPS_UI_DIR . 'design.php';
+// "LearnDash" screen: learning button and "My courses" settings.
+require_once PEPRODEV_UPS_UI_DIR . 'learndash.php';
