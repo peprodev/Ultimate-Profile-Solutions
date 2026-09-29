@@ -604,3 +604,50 @@ input[type="checkbox"].iostoggle[disabled]:checked {
   -webkit-margin-start: auto !important;
           margin-inline-start: auto !important;
 }
+
+/* additional fields / redirect rules: title with compact icon actions inside the box */
+.pd-item-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 8px;
+}
+.pd-item-head .live-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 1rem;
+}
+.pd-item-actions {
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 2px;
+}
+.pd-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  color: #777 !important;
+  text-decoration: none !important;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.pd-icon-btn .material-icons {
+  font-size: 19px;
+}
+.pd-icon-btn:hover,
+.pd-icon-btn:focus-visible {
+  background: rgba(0, 0, 0, 0.06);
+  color: #333 !important;
+  outline: none;
+}
+.pd-icon-btn.pd-icon-danger:hover,
+.pd-icon-btn.pd-icon-danger:focus-visible {
+  background: rgba(221, 51, 51, 0.1);
+  color: #dd3333 !important;
+}

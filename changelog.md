@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.2.23](#version-8223)
 - [Version 8.2.22](#version-8222)
 - [Version 8.2.21](#version-8221)
 - [Version 8.2.20](#version-8220)
@@ -89,6 +90,10 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.2.23
+- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- **Fixed** Additional registration fields and redirect rules: the duplicate / move / delete buttons overflowed out of the box; they are now compact icon buttons inside the title bar (with tooltips, delete highlighted in red) and long titles are truncated
 
 ## Version 8.2.22
 - Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)

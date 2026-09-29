@@ -325,17 +325,13 @@ foreach ($styleFiles as $style) {
             <div class="register-fields">
               <template id="raw_field">
                 <div class="register-field-single p-2 mb-2 border">
-                  <div class="register-field-single-title row justify-content-between align-items-center">
-                    <div class="col-lg-9 ">
-                      <h5 class='live-title m-0 p-2 text-primary text-bold' data-default="<?php esc_html_e("New Field", "peprodev-ups"); ?>"><?php esc_html_e("New Field", "peprodev-ups"); ?></h5>
-                    </div>
-                    <div class="col-lg-3 <?php echo esc_attr(is_rtl() ? "text-left" : "text-right"); ?>">
-                      <div class="btn-group m-0 p-0 ">
-                        <a href="javascript:;" class='btn btn-sm btn-primary register--duplicate-field'><span class="material-icons">content_copy</span></a>
-                        <a href="javascript:;" class='btn btn-sm btn-primary register--clear-field'><span class="material-icons">delete</span></a>
-                        <a href="javascript:;" class='btn btn-sm btn-primary register--arrow-down-field'><span class="material-icons">arrow_downward</span></a>
-                        <a href="javascript:;" class='btn btn-sm btn-primary register--arrow-up-field'><span class="material-icons">arrow_upward</span></a>
-                      </div>
+                  <div class="register-field-single-title pd-item-head">
+                    <h5 class='live-title m-0 text-primary text-bold' data-default="<?php esc_html_e("New Field", "peprodev-ups"); ?>"><?php esc_html_e("New Field", "peprodev-ups"); ?></h5>
+                    <div class="pd-item-actions">
+                      <a href="javascript:;" class='pd-icon-btn register--duplicate-field' title="<?php echo esc_attr_x("Duplicate", "field-actions", "peprodev-ups"); ?>"><span class="material-icons">content_copy</span></a>
+                      <a href="javascript:;" class='pd-icon-btn register--arrow-up-field' title="<?php echo esc_attr_x("Move up", "field-actions", "peprodev-ups"); ?>"><span class="material-icons">arrow_upward</span></a>
+                      <a href="javascript:;" class='pd-icon-btn register--arrow-down-field' title="<?php echo esc_attr_x("Move down", "field-actions", "peprodev-ups"); ?>"><span class="material-icons">arrow_downward</span></a>
+                      <a href="javascript:;" class='pd-icon-btn pd-icon-danger register--clear-field' title="<?php echo esc_attr_x("Delete", "field-actions", "peprodev-ups"); ?>"><span class="material-icons">delete</span></a>
                     </div>
                   </div>
                   <div class="register-field-single-content slide-up">
@@ -511,17 +507,13 @@ foreach ($styleFiles as $style) {
                 <div class="redirection-fields">
                   <template id="redirection_raw_field">
                     <div class="redirection-field-single p-2 mb-2 border">
-                      <div class="redirection-field-single-title row justify-content-between align-items-center">
-                        <div class="col-lg-9 ">
-                          <h5 class='live-title m-0 p-2 text-primary text-bold' data-default="<?php esc_html_e("Redirection for: ", "peprodev-ups"); ?>"><?php esc_html_e("New Redirection", "peprodev-ups"); ?></h5>
-                        </div>
-                        <div class="col-lg-3 <?php echo esc_attr(is_rtl() ? "text-left" : "text-right"); ?>">
-                          <div class="btn-group m-0 p-0 ">
-                            <a href="javascript:;" class='btn btn-sm btn-primary redirection--duplicate-field'><span class="material-icons">content_copy</span></a>
-                            <a href="javascript:;" class='btn btn-sm btn-primary redirection--clear-field'><span class="material-icons">delete</span></a>
-                            <a href="javascript:;" class='btn btn-sm btn-primary redirection--arrow-down-field'><span class="material-icons">arrow_downward</span></a>
-                            <a href="javascript:;" class='btn btn-sm btn-primary redirection--arrow-up-field'><span class="material-icons">arrow_upward</span></a>
-                          </div>
+                      <div class="redirection-field-single-title pd-item-head">
+                        <h5 class='live-title m-0 text-primary text-bold' data-default="<?php esc_html_e("Redirection for: ", "peprodev-ups"); ?>"><?php esc_html_e("New Redirection", "peprodev-ups"); ?></h5>
+                        <div class="pd-item-actions">
+                          <a href="javascript:;" class='pd-icon-btn redirection--duplicate-field' title="<?php echo esc_attr_x("Duplicate", "field-actions", "peprodev-ups"); ?>"><span class="material-icons">content_copy</span></a>
+                          <a href="javascript:;" class='pd-icon-btn redirection--arrow-up-field' title="<?php echo esc_attr_x("Move up", "field-actions", "peprodev-ups"); ?>"><span class="material-icons">arrow_upward</span></a>
+                          <a href="javascript:;" class='pd-icon-btn redirection--arrow-down-field' title="<?php echo esc_attr_x("Move down", "field-actions", "peprodev-ups"); ?>"><span class="material-icons">arrow_downward</span></a>
+                          <a href="javascript:;" class='pd-icon-btn pd-icon-danger redirection--clear-field' title="<?php echo esc_attr_x("Delete", "field-actions", "peprodev-ups"); ?>"><span class="material-icons">delete</span></a>
                         </div>
                       </div>
                       <div class="redirection-field-single-content">

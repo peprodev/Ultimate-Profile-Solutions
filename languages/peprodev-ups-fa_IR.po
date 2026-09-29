@@ -5856,3 +5856,23 @@ msgstr "فیلد را روشن کنید تا در فرم ثبت‌نام نما�
 msgctxt "login-section"
 msgid "Field"
 msgstr "فیلد"
+
+#: login/include/class-activated.php
+msgctxt "field-actions"
+msgid "Duplicate"
+msgstr "تکثیر"
+
+#: login/include/class-activated.php
+msgctxt "field-actions"
+msgid "Move up"
+msgstr "انتقال به بالا"
+
+#: login/include/class-activated.php
+msgctxt "field-actions"
+msgid "Move down"
+msgstr "انتقال به پایین"
+
+#: login/include/class-activated.php
+msgctxt "field-actions"
+msgid "Delete"
+msgstr "حذف"

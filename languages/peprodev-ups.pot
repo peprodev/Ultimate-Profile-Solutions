@@ -5515,3 +5515,23 @@ msgstr ""
 msgctxt "login-section"
 msgid "Field"
 msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "field-actions"
+msgid "Duplicate"
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "field-actions"
+msgid "Move up"
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "field-actions"
+msgid "Move down"
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "field-actions"
+msgid "Delete"
+msgstr ""
