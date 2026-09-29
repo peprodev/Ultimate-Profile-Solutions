@@ -152,7 +152,7 @@ Existing users (matched by their verified Google email) are logged in; new email
 3. Configure it from the **PeproDev Profile** admin menu.
 4. Put `[pepro-smart-btn]` in your header or menu for the popup login/register.
 5. The Modern UI is on by default; turn it off in **Login/Register > Login & Registration** (form) or **Profile** (dashboard).
-6. Optional: set up **Login/Register > Social Login** (Google) and pick an SMS provider in **Login/Register > Verification**.
+6. Optional: set up **Login/Register > Social Login** (Google) and pick an SMS provider in **Login/Register > SMS Verification**.
 
 ### Building a release zip
 

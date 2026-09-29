@@ -5706,3 +5706,18 @@ msgstr "برای باز کردن پاپ‌آپ از چند جای صفحه، ب�
 msgctxt "smart-btn"
 msgid "The popup uses the forms, fields and verification set in the other tabs of this page."
 msgstr "پاپ‌آپ از فرم‌ها، فیلدها و روش تاییدی استفاده می‌کند که در تب‌های دیگر همین صفحه تنظیم کرده‌اید."
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Registration Fields"
+msgstr "فیلدهای ثبت‌نام"
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Turn the default fields of the registration form on or off and add your own fields."
+msgstr "فیلدهای پیش‌فرض فرم ثبت‌نام را فعال یا غیرفعال کنید و فیلدهای دلخواه خود را اضافه کنید."
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "You can control the Popup/Inline login and registration form configuration from this section. Registration form fields have their own tab."
+msgstr "تنظیمات فرم ورود و ثبت‌نام پاپ‌آپ و خطی را از اینجا مدیریت کنید. فیلدهای فرم ثبت‌نام در تب جداگانه‌ای قرار دارند."

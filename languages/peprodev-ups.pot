@@ -5365,3 +5365,18 @@ msgstr ""
 msgctxt "smart-btn"
 msgid "The popup uses the forms, fields and verification set in the other tabs of this page."
 msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Registration Fields"
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Turn the default fields of the registration form on or off and add your own fields."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "You can control the Popup/Inline login and registration form configuration from this section. Registration form fields have their own tab."
+msgstr ""

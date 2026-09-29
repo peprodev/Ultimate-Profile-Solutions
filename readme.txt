@@ -2,8 +2,8 @@
 Contributors: amirhpcom, peprodev, blackswanlab
 Donate link: https://peprodev.com/donate/
 Tags: profile, dashboard, login-registration
-Version: 8.2.12
-Stable tag: 8.2.12
+Version: 8.2.13
+Stable tag: 8.2.13
 Requires at least: 5.0
 Tested up to: 7.1
 Requires PHP: 7.2
@@ -135,7 +135,7 @@ Its settings moved: the modern login form switch is in PeproDev Profile > Login/
 Create an OAuth client ID (Web application) in the Google Cloud Console, add the Authorized redirect URI shown in PeproDev Profile > Login/Register > Social Login, then paste the Client ID and Client Secret there and enable the option. New Google users get an account only when registration is open and "Create new users" is enabled. Use `[pepro-google-login]` to place the button anywhere.
 
 = Can I send the OTP through the WP SMS or Persian WooCommerce SMS plugins? =
-Yes. Choose "WP SMS plugin" or "Persian WooCommerce SMS plugin" as SMS Provider in Login/Register > Verification. The code is sent through the provider configured in that plugin; the gateway shows a notice and sends nothing while the plugin is not active.
+Yes. Choose "WP SMS plugin" or "Persian WooCommerce SMS plugin" as SMS Provider in Login/Register > SMS Verification. The code is sent through the provider configured in that plugin; the gateway shows a notice and sends nothing while the plugin is not active.
 
 = Can I translate texts I entered in the plugin settings? =
 Yes. With WPML String Translation or Polylang active, registration fields, redirect rules, login header/footer HTML, email and SMS templates, dashboard texts and custom dashboard sections can be translated (context: peprodev-ups).
@@ -156,6 +156,11 @@ Your support and feedback have been key in shaping this plugin into a reliable a
 🎂 Also, a big congratulations to WordPress on its 22nd birthday 🥳🍾!
 We're proud to be part of this amazing journey with the WordPress community 💙
 Here's to many more years of innovation, freedom, and open-source collaboration 😍!
+
+= 8.2.13 =
+Release date: 2026-09-29
+
+* Changed: Login & Registration settings are shown in two columns, and the registration fields (default and additional) have their own full-width "Registration Fields" tab.
 
 = 8.2.12 =
 Release date: 2026-09-29
@@ -248,7 +253,7 @@ Release date: 2026-09-27
 
 == Upgrade Notice ==
 
-= 8.2.12 =
+= 8.2.13 =
 Modern UI on by default (existing sites too), settings moved to the Login/Register and Profile screens. New: Sign in with Google, FarazSMS / WP SMS / Persian WooCommerce SMS gateways, mobile/email switch.
 
 = 8.2.5 =

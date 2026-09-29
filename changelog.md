@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.2.13](#version-8213)
 - [Version 8.2.12](#version-8212)
 - [Version 8.2.11](#version-8211)
 - [Version 8.2.10](#version-8210)
@@ -79,6 +80,10 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.2.13
+- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- **Changed** Login & Registration tab shows its settings in two columns (registration type / verification form / register form, and login form options / extras / Auth. Expiration / Modern UI); registration fields (default and additional) moved to a new full-width "Registration Fields" tab
 
 ## Version 8.2.12
 - Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)

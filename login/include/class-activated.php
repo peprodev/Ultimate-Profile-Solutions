@@ -72,6 +72,9 @@ foreach ($styleFiles as $style) {
             <li class="nav-item tab_registration">
               <a class="nav-link" href="#tab_registration"><i class="material-icons">app_registration</i> <?php echo esc_html_x("Login & Registration", "login-section", "peprodev-ups"); ?></a>
             </li>
+            <li class="nav-item tab_register_fields">
+              <a class="nav-link" href="#tab_register_fields"><i class="material-icons">list_alt</i> <?php echo esc_html_x("Registration Fields", "login-section", "peprodev-ups"); ?></a>
+            </li>
             <li class="nav-item tab_verification">
               <a class="nav-link" href="#tab_verification"><i class="material-icons">sms</i> <?php echo esc_html_x("SMS Verification", "login-section", "peprodev-ups"); ?></a>
             </li>
@@ -224,7 +227,96 @@ foreach ($styleFiles as $style) {
         <div class="card">
           <div class="card-header card-header-primary">
             <h4 class="card-title"><?php echo esc_html_x("Popup or Inline Login/Registration Configuration", "login-section", "peprodev-ups"); ?></h4>
-            <p class="card-category"><?php echo esc_html_x("You can control our Popup/Inline registeration form fields and configurations from this section.", "login-section", "peprodev-ups"); ?></p>
+            <p class="card-category"><?php echo esc_html_x("You can control the Popup/Inline login and registration form configuration from this section. Registration form fields have their own tab.", "login-section", "peprodev-ups"); ?></p>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-6 mb-3">
+                <div class="card m mb-0 h-100">
+                  <div class="card-body">
+                    <p class="text-bold"><?php esc_html_e("Registeration Type", "peprodev-ups"); ?></p>
+                    <div class="save_checkboxes">
+                          <label class="w-100 row align-items-center m-0 mb-2">
+                            <input autocomplete="off" type="radio" class='form-checkbox iostoggle single-required mr-2 reglogin_type' <?php checked($this->reglogin_type === "mobile", true); ?> name="reglogin_type" value="mobile" /><?php esc_html_e("Using Mobile OTP", "peprodev-ups"); ?>
+                          </label>
+                          <label class="w-100 row align-items-center m-0 mb-2">
+                            <input autocomplete="off" type="radio" class='form-checkbox iostoggle single-required mr-2 reglogin_type' <?php checked($this->reglogin_type === "mailotp", true); ?> name="reglogin_type" value="mailotp" /><?php esc_html_e("Using Email OTP", "peprodev-ups"); ?>
+                          </label>
+                          <label class="w-100 row align-items-center m-0 mb-2">
+                            <input autocomplete="off" type="radio" class='form-checkbox iostoggle single-required mr-2 reglogin_type' <?php checked($this->reglogin_type === "email", true); ?> name="reglogin_type" value="email" /><?php esc_html_e("Using Email/Username & Password", "peprodev-ups"); ?>
+                          </label>
+                          <p class="text-bold mt-4 mb-2"><?php esc_html_e("Profile Verification Form", "peprodev-ups"); ?></p>
+                          <label class="w-100 row align-items-center m-0 mb-2">
+                            <input autocomplete="off" type="radio" class='form-checkbox iostoggle single-required mr-2 pro_verify' <?php checked($this->pro_verify === "none", true); ?> name="pro_verify" value="none" /><?php esc_html_e("None of Email & Mobile forms", "peprodev-ups"); ?>
+                          </label>
+                          <label class="w-100 row align-items-center m-0 mb-2">
+                            <input autocomplete="off" type="radio" class='form-checkbox iostoggle single-required mr-2 pro_verify' <?php checked($this->pro_verify === "both", true); ?> name="pro_verify" value="both" /><?php esc_html_e("Both Email & Mobile forms", "peprodev-ups"); ?>
+                          </label>
+                          <label class="w-100 row align-items-center m-0 mb-2">
+                            <input autocomplete="off" type="radio" class='form-checkbox iostoggle single-required mr-2 pro_verify' <?php checked($this->pro_verify === "sms", true); ?> name="pro_verify" value="sms" /><?php esc_html_e("Only SMS form", "peprodev-ups"); ?>
+                          </label>
+                          <label class="w-100 row align-items-center m-0 mb-2">
+                            <input autocomplete="off" type="radio" class='form-checkbox iostoggle single-required mr-2 pro_verify' <?php checked($this->pro_verify === "email", true); ?> name="pro_verify" value="email" /><?php esc_html_e("Only Email form", "peprodev-ups"); ?>
+                          </label>
+                          <p class="text-bold mt-4 mb-2"><?php esc_html_e("Registeration Form", "peprodev-ups"); ?></p>
+                          <label class="w-100 row align-items-center m-0 mb-2">
+                            <input autocomplete="off" type="radio" class='form-checkbox iostoggle single-required mr-2 force_register_form' <?php checked($this->force_register_form === "none", true); ?> name="force_register_form" value="none" /><?php esc_html_e("Auto based on Active Form", "peprodev-ups"); ?>
+                          </label>
+                          <label class="w-100 row align-items-center m-0 mb-2">
+                            <input autocomplete="off" type="radio" class='form-checkbox iostoggle single-required mr-2 force_register_form' <?php checked($this->force_register_form === "sms", true); ?> name="force_register_form" value="sms" /><?php esc_html_e("Force Mobile Registration form", "peprodev-ups"); ?>
+                          </label>
+                          <label class="w-100 row align-items-center m-0 mb-2">
+                            <input autocomplete="off" type="radio" class='form-checkbox iostoggle single-required mr-2 force_register_form' <?php checked($this->force_register_form === "email", true); ?> name="force_register_form" value="email" /><?php esc_html_e("Force Email Registration form", "peprodev-ups"); ?>
+                          </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 mb-3">
+                <div class="card m mb-0 h-100">
+                  <div class="card-body">
+                    <div class="save_checkboxes">
+                          <p class="text-bold mb-2"><?php esc_html_e("Login/Register Form", "peprodev-ups"); ?></p>
+                          <label class="w-100 row align-items-center m-0 mb-2">
+                            <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required mr-2 show_mobile_login_form' <?php checked($this->show_mobile_login_form, true); ?> name="show_mobile_login_form" /> <?php esc_html_e("Show Mobile Login/Registration form", "peprodev-ups"); ?>
+                          </label>
+                          <label class="w-100 row align-items-center m-0 mb-2 mt-0">
+                            <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required mr-2 show_email_login_form' <?php checked($this->show_email_login_form, true); ?> name="show_email_login_form" /> <?php esc_html_e("Show Email Login/Registration form", "peprodev-ups"); ?>
+                          </label>
+                          <label class="w-100 row align-items-center m-0 mb-2">
+                            <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required mr-2 active_mobile_login_form' <?php checked($this->active_mobile_login_form, true); ?> name="active_mobile_login_form" /> <?php esc_html_e("Make Mobile Login/Registration Activated by Default", "peprodev-ups"); ?>
+                          </label>
+                          <p class="text-bold mt-4 mb-2"><?php esc_html_e("Extras", "peprodev-ups"); ?></p>
+                          <label class="w-100 row align-items-center m-0 mb-2 mt-2">
+                            <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required mr-2 auto_login_after_reg' <?php checked($this->auto_login_after_reg, true); ?> name="auto_login_after_reg" /> <?php esc_html_e("Auto-login After Registeration", "peprodev-ups"); ?>
+                          </label>
+                          <label class="w-100 row align-items-center m-0 mb-2">
+                            <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required mr-2 no_popup_alert' <?php checked($this->no_popup_alert, true); ?> name="no_popup_alert" /> <?php esc_html_e("Don't use Popup after Login/Register", "peprodev-ups"); ?>
+                          </label>
+                    </div>
+                        <div class="login-authexpire save_sms_settings">
+                          <p class="text-bold mt-4 mb-2"><?php echo esc_html_x("Auth. Expiration", "login-section", "peprodev-ups"); ?></p>
+                          <input class="form-input single-required mb-2" name="auth_expire" type="number" min="-1" step="1" lang="en_US" dir="ltr" value="<?php echo esc_attr($this->read("auth_expire", "0")); ?>" placeholder="<?php echo esc_html_x("Auth. Expiration", "login-section", "peprodev-ups"); ?>" />
+                          <p class="small"><?php echo __("How long a user stay logged in? Enter time in hour format (<ltr>1</ltr>: one hour | <ltr>24</ltr>: one day | <ltr>168</ltr>: one week | <ltr>0</ltr>: Default | <ltr>-1</ltr>: Forevr)", "peprodev-ups"); ?></p>
+                        </div>
+                    <?php if (function_exists("peprodev_ui_render_login_settings")) peprodev_ui_render_login_settings(); ?>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br>
+              <button class="login-section-save btn btn-success btn-primary icn-btn btn-wide" integrity="<?php echo esc_attr(wp_create_nonce('peprocorenounce')); ?>" wparam="loginregister" lparam="savelogin" dparam="" fn="">
+                <i class='material-icons'>save</i> <?php echo esc_html_x("Save Settings", "login-section", "peprodev-ups"); ?>
+              </button>
+              <?php echo PeproDevUPS_WPML::admin_link_html(); ?>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="tab_register_fields">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title"><?php echo esc_html_x("Registration Fields", "login-section", "peprodev-ups"); ?></h4>
+            <p class="card-category"><?php echo esc_html_x("Turn the default fields of the registration form on or off and add your own fields.", "login-section", "peprodev-ups"); ?></p>
           </div>
           <div class="card-body">
             <div class="register-fields">
@@ -365,74 +457,8 @@ foreach ($styleFiles as $style) {
                 </div>
               </template>
               <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                  <div class="card m mb-0">
-                    <div class="card-body">
-                      <div class="fields--tools">
-                        <p class="text-bold"><?php esc_html_e("Registeration Type", "peprodev-ups"); ?></p>
-                        <div class="save_checkboxes">
-                          <label class="w-100 row align-items-center m-0 mb-2">
-                            <input autocomplete="off" type="radio" class='form-checkbox iostoggle single-required mr-2 reglogin_type' <?php checked($this->reglogin_type === "mobile", true); ?> name="reglogin_type" value="mobile" /><?php esc_html_e("Using Mobile OTP", "peprodev-ups"); ?>
-                          </label>
-                          <label class="w-100 row align-items-center m-0 mb-2">
-                            <input autocomplete="off" type="radio" class='form-checkbox iostoggle single-required mr-2 reglogin_type' <?php checked($this->reglogin_type === "mailotp", true); ?> name="reglogin_type" value="mailotp" /><?php esc_html_e("Using Email OTP", "peprodev-ups"); ?>
-                          </label>
-                          <label class="w-100 row align-items-center m-0 mb-2">
-                            <input autocomplete="off" type="radio" class='form-checkbox iostoggle single-required mr-2 reglogin_type' <?php checked($this->reglogin_type === "email", true); ?> name="reglogin_type" value="email" /><?php esc_html_e("Using Email/Username & Password", "peprodev-ups"); ?>
-                          </label>
-                          <p class="text-bold mt-4 mb-2"><?php esc_html_e("Profile Verification Form", "peprodev-ups"); ?></p>
-                          <label class="w-100 row align-items-center m-0 mb-2">
-                            <input autocomplete="off" type="radio" class='form-checkbox iostoggle single-required mr-2 pro_verify' <?php checked($this->pro_verify === "none", true); ?> name="pro_verify" value="none" /><?php esc_html_e("None of Email & Mobile forms", "peprodev-ups"); ?>
-                          </label>
-                          <label class="w-100 row align-items-center m-0 mb-2">
-                            <input autocomplete="off" type="radio" class='form-checkbox iostoggle single-required mr-2 pro_verify' <?php checked($this->pro_verify === "both", true); ?> name="pro_verify" value="both" /><?php esc_html_e("Both Email & Mobile forms", "peprodev-ups"); ?>
-                          </label>
-                          <label class="w-100 row align-items-center m-0 mb-2">
-                            <input autocomplete="off" type="radio" class='form-checkbox iostoggle single-required mr-2 pro_verify' <?php checked($this->pro_verify === "sms", true); ?> name="pro_verify" value="sms" /><?php esc_html_e("Only SMS form", "peprodev-ups"); ?>
-                          </label>
-                          <label class="w-100 row align-items-center m-0 mb-2">
-                            <input autocomplete="off" type="radio" class='form-checkbox iostoggle single-required mr-2 pro_verify' <?php checked($this->pro_verify === "email", true); ?> name="pro_verify" value="email" /><?php esc_html_e("Only Email form", "peprodev-ups"); ?>
-                          </label>
-                          <p class="text-bold mt-4 mb-2"><?php esc_html_e("Registeration Form", "peprodev-ups"); ?></p>
-                          <label class="w-100 row align-items-center m-0 mb-2">
-                            <input autocomplete="off" type="radio" class='form-checkbox iostoggle single-required mr-2 force_register_form' <?php checked($this->force_register_form === "none", true); ?> name="force_register_form" value="none" /><?php esc_html_e("Auto based on Active Form", "peprodev-ups"); ?>
-                          </label>
-                          <label class="w-100 row align-items-center m-0 mb-2">
-                            <input autocomplete="off" type="radio" class='form-checkbox iostoggle single-required mr-2 force_register_form' <?php checked($this->force_register_form === "sms", true); ?> name="force_register_form" value="sms" /><?php esc_html_e("Force Mobile Registration form", "peprodev-ups"); ?>
-                          </label>
-                          <label class="w-100 row align-items-center m-0 mb-2">
-                            <input autocomplete="off" type="radio" class='form-checkbox iostoggle single-required mr-2 force_register_form' <?php checked($this->force_register_form === "email", true); ?> name="force_register_form" value="email" /><?php esc_html_e("Force Email Registration form", "peprodev-ups"); ?>
-                          </label>
-                          <p class="text-bold mt-4 mb-2"><?php esc_html_e("Login/Register Form", "peprodev-ups"); ?></p>
-                          <label class="w-100 row align-items-center m-0 mb-2">
-                            <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required mr-2 show_mobile_login_form' <?php checked($this->show_mobile_login_form, true); ?> name="show_mobile_login_form" /> <?php esc_html_e("Show Mobile Login/Registration form", "peprodev-ups"); ?>
-                          </label>
-                          <label class="w-100 row align-items-center m-0 mb-2 mt-0">
-                            <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required mr-2 show_email_login_form' <?php checked($this->show_email_login_form, true); ?> name="show_email_login_form" /> <?php esc_html_e("Show Email Login/Registration form", "peprodev-ups"); ?>
-                          </label>
-                          <label class="w-100 row align-items-center m-0 mb-2">
-                            <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required mr-2 active_mobile_login_form' <?php checked($this->active_mobile_login_form, true); ?> name="active_mobile_login_form" /> <?php esc_html_e("Make Mobile Login/Registration Activated by Default", "peprodev-ups"); ?>
-                          </label>
-                          <p class="text-bold mt-4 mb-2"><?php esc_html_e("Extras", "peprodev-ups"); ?></p>
-                          <label class="w-100 row align-items-center m-0 mb-2 mt-2">
-                            <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required mr-2 auto_login_after_reg' <?php checked($this->auto_login_after_reg, true); ?> name="auto_login_after_reg" /> <?php esc_html_e("Auto-login After Registeration", "peprodev-ups"); ?>
-                          </label>
-                          <label class="w-100 row align-items-center m-0 mb-2">
-                            <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required mr-2 no_popup_alert' <?php checked($this->no_popup_alert, true); ?> name="no_popup_alert" /> <?php esc_html_e("Don't use Popup after Login/Register", "peprodev-ups"); ?>
-                          </label>
-                        </div>
-                        <div class="login-authexpire save_sms_settings">
-                          <p class="text-bold mt-4 mb-2"><?php echo esc_html_x("Auth. Expiration", "login-section", "peprodev-ups"); ?></p>
-                          <input class="form-input single-required mb-2" name="auth_expire" type="number" min="-1" step="1" lang="en_US" dir="ltr" value="<?php echo esc_attr($this->read("auth_expire", "0")); ?>" placeholder="<?php echo esc_html_x("Auth. Expiration", "login-section", "peprodev-ups"); ?>" />
-                          <p class="small"><?php echo __("How long a user stay logged in? Enter time in hour format (<ltr>1</ltr>: one hour | <ltr>24</ltr>: one day | <ltr>168</ltr>: one week | <ltr>0</ltr>: Default | <ltr>-1</ltr>: Forevr)", "peprodev-ups"); ?></p>
-                        </div>
-                        <?php if (function_exists("peprodev_ui_render_login_settings")) peprodev_ui_render_login_settings(); ?>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                  <div class="card m mb-0">
+                <div class="col-xl-4 col-lg-5 mb-3">
+                  <div class="card m mb-0 h-100">
                     <div class="card-body">
                       <div class="workspace">
                         <p class="text-bold"><?php esc_html_e("Registeration Default Fields", "peprodev-ups"); ?></p>
@@ -444,8 +470,8 @@ foreach ($styleFiles as $style) {
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                  <div class="card m mb-0">
+                <div class="col-xl-8 col-lg-7 mb-3">
+                  <div class="card m mb-0 h-100">
                     <div class="card-body">
                       <div class="fields--tools">
                         <p class="text-bold"><?php esc_html_e("Registeration Additional Fields", "peprodev-ups"); ?></p>
