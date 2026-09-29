@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.2.11](#version-8211)
 - [Version 8.2.10](#version-8210)
 - [Version 8.2.9](#version-829)
 - [Version 8.2.8](#version-828)
@@ -77,6 +78,10 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.2.11
+- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- **Changed** Redirection settings tab uses the full page width
 
 ## Version 8.2.10
 - Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)

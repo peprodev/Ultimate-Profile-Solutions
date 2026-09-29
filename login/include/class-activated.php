@@ -379,7 +379,7 @@ foreach ($styleFiles as $style) {
       </div>
       <div class="tab-pane" id="tab_redirection">
         <div class="row">
-          <div class="col-lg-6">
+          <div class="col-lg-12">
             <div class="card">
               <div class="card-header card-header-primary">
                 <h4 class="card-title"><?php echo esc_html_x("Redirection", "login-section", "peprodev-ups"); ?></h4>
