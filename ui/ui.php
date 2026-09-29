@@ -104,26 +104,20 @@ function peprodev_ui_accent_color() {
  * @return string CSS, empty when no accent is set.
  */
 function peprodev_ui_accent_css() {
+	$decl  = array();
 	$color = peprodev_ui_accent_color();
-	if ( '' === $color ) {
-		return '';
+	if ( '' !== $color ) {
+		$on     = function_exists( 'peprodev_ui_contrast_color' ) ? peprodev_ui_contrast_color( $color ) : '#ffffff';
+		$decl[] = "--mj-primary:{$color}";
+		$decl[] = "--mj-primary-hover:color-mix(in srgb,{$color} 82%,#000)";
+		$decl[] = "--mj-primary-soft:color-mix(in srgb,{$color} 12%,#fff)";
+		$decl[] = "--mj-on-primary:{$on}";
 	}
-	$hex = ltrim( $color, '#' );
-	if ( 3 === strlen( $hex ) ) {
-		$hex = $hex[0] . $hex[0] . $hex[1] . $hex[1] . $hex[2] . $hex[2];
+	// colors of the "Modern UI Design" screen (ui/design.php)
+	if ( function_exists( 'peprodev_ui_design_declarations' ) ) {
+		$decl = array_merge( $decl, peprodev_ui_design_declarations() );
 	}
-	$rgb = array_map( 'hexdec', str_split( $hex, 2 ) );
-	// relative luminance (WCAG): dark text on light accents, white text on dark ones
-	$lum = array_map(
-		function ( $c ) {
-			$c /= 255;
-			return $c <= 0.03928 ? $c / 12.92 : pow( ( $c + 0.055 ) / 1.055, 2.4 );
-		},
-		$rgb
-	);
-	$l  = 0.2126 * $lum[0] + 0.7152 * $lum[1] + 0.0722 * $lum[2];
-	$on = $l > 0.179 ? '#1f1b16' : '#ffffff';
-	return "html:root{--mj-primary:{$color};--mj-primary-hover:color-mix(in srgb,{$color} 82%,#000);--mj-primary-soft:color-mix(in srgb,{$color} 12%,#fff);--mj-on-primary:{$on};}";
+	return $decl ? 'html:root{' . implode( ';', $decl ) . ';}' : '';
 }
 
 /**
@@ -493,7 +487,6 @@ function peprodev_ui_render_login_settings() {
 			<?php echo esc_html( $fields['ui_login'][1] ); ?>
 		</label>
 		<p class="small text-muted mb-2"><?php echo esc_html( $note ? $note : $desc['ui_login'] ); ?></p>
-		<?php peprodev_ui_render_color_field( 'ui_accent', 'peprodev_ui_login_accent' ); ?>
 	</div>
 	<?php
 }
@@ -502,21 +495,22 @@ function peprodev_ui_render_login_settings() {
  * Color setting of the modern UI: the text input stays the value store (empty = theme colors),
  * the swatch next to it opens the Alwan picker (ui/assets/js/pd-alwan.js).
  *
- * @param string $key   Field key.
- * @param string $id    Input id.
- * @param bool   $label Print the title and description (off inside the settings table, which has its own).
+ * @param string $key         Field key.
+ * @param string $id          Input id.
+ * @param bool   $label       Print the title and description (off inside the settings tables, which have their own).
+ * @param string $placeholder Built-in color shown while the field is empty.
  */
-function peprodev_ui_render_color_field( $key, $id, $label = true ) {
+function peprodev_ui_render_color_field( $key, $id, $label = true, $placeholder = '#28504f' ) {
 	$fields = peprodev_ui_texts_fields();
 	$desc   = peprodev_ui_texts_descriptions();
-	$value  = peprodev_ui_accent_color();
+	$value  = function_exists( 'peprodev_ui_color_value' ) ? peprodev_ui_color_value( $key ) : peprodev_ui_accent_color();
 	peprodev_ui_enqueue_color_picker();
 	?>
 	<?php if ( $label ) : ?>
 		<p class="text-bold mt-3 mb-2"><label class="m-0" style="color:inherit" for="<?php echo esc_attr( $id ); ?>"><?php echo esc_html( $fields[ $key ][1] ); ?></label></p>
 	<?php endif; ?>
 	<div class="pd-color-field">
-		<input type="text" class="form-input pd-color-picker" dir="ltr" maxlength="7" id="<?php echo esc_attr( $id ); ?>" data-ui-key="<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr( $value ); ?>" placeholder="#28504f" autocomplete="off" />
+		<input type="text" class="form-input pd-color-picker" dir="ltr" maxlength="7" id="<?php echo esc_attr( $id ); ?>" data-ui-key="<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr( $value ); ?>" placeholder="<?php echo esc_attr( $placeholder ); ?>" autocomplete="off" />
 		<button type="button" class="btn btn-sm btn-secondary m-0 pd-color-reset" data-target="#<?php echo esc_attr( $id ); ?>"><?php esc_html_e( 'Theme colors', 'peprodev-ups' ); ?></button>
 	</div>
 	<?php if ( $label && isset( $desc[ $key ] ) ) : ?>
@@ -762,3 +756,5 @@ add_action( 'after_setup_theme', 'peprodev_ui_load_modules', 20 );
 
 // The [peprodev_my_courses] shortcode is available even when the modern dashboard is off.
 require_once PEPRODEV_UPS_UI_DIR . 'dashboard/courses.php';
+// "Modern UI Design" screen: colors of the modern login form and dashboard.
+require_once PEPRODEV_UPS_UI_DIR . 'design.php';

@@ -16,8 +16,8 @@
   max-width: 480px;
   margin: 0 auto;
   padding: 2.25rem 2.25rem 2rem;
-  background: var(--mj-surface);
-  border: 1px solid var(--mj-line);
+  background: var(--mj-card-bg, var(--mj-surface));
+  border: 1px solid var(--mj-card-border, var(--mj-line));
   border-radius: var(--mj-radius-lg);
   box-shadow: var(--mj-shadow);
   font-family: var(--mj-font);
@@ -98,7 +98,7 @@
   font-size: 1.75rem;
   font-weight: 800;
   line-height: 1.3;
-  color: var(--mj-ink);
+  color: var(--mj-heading, var(--mj-ink));
 }
 
 .mj-login-ui-on #pepro-profile .mj-head__subtitle {
@@ -115,7 +115,7 @@
   grid-auto-flow: column;
   grid-auto-columns: 1fr;
   padding: 5px;
-  background: var(--mj-sand);
+  background: var(--mj-tab-track, var(--mj-sand));
   border-radius: var(--mj-radius);
   isolation: isolate;
 }
@@ -130,7 +130,7 @@
   inset-block: 5px;
   inset-inline-start: 5px;
   width: calc(50% - 5px);
-  background: var(--mj-surface);
+  background: var(--mj-tab-active-bg, var(--mj-surface));
   border-radius: calc(var(--mj-radius) - 4px);
   box-shadow: 0 1px 3px rgba(35, 31, 26, .1), 0 4px 10px -4px rgba(35, 31, 26, .12);
   transition: transform .3s var(--mj-ease);
@@ -158,7 +158,7 @@
   font-size: 1rem;
   font-weight: 600;
   line-height: 1.4;
-  color: var(--mj-muted);
+  color: var(--mj-tab-text, var(--mj-muted));
   text-transform: none;
   letter-spacing: 0;
   cursor: pointer;
@@ -166,12 +166,12 @@
 }
 
 .mj-login-ui-on #pepro-profile .mj-tabs__tab:hover {
-  color: var(--mj-ink);
+  color: var(--mj-tab-active-text, var(--mj-ink));
   background: transparent;
 }
 
 .mj-login-ui-on #pepro-profile .mj-tabs__tab.is-active {
-  color: var(--mj-ink);
+  color: var(--mj-tab-active-text, var(--mj-ink));
   font-weight: 700;
 }
 
@@ -195,7 +195,7 @@
   font-size: .9rem;
   font-weight: 500;
   line-height: 1.5;
-  color: var(--mj-muted);
+  color: var(--mj-label, var(--mj-muted));
 }
 
 .mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .form-required > label::after {
@@ -217,9 +217,9 @@
   height: 54px;
   margin: 0;
   padding: 0 1.1rem;
-  border: 1px solid var(--mj-line);
+  border: 1px solid var(--mj-input-border, var(--mj-line));
   border-radius: var(--mj-radius);
-  background: var(--mj-surface);
+  background: var(--mj-input-bg, var(--mj-surface));
   box-shadow: none;
   font-family: var(--mj-font);
   font-size: 1.05rem;
@@ -238,7 +238,7 @@
 
 .mj-login-ui-on #pepro-profile [data-pepro-reglogin] > form .pepro-login-reg-field :is(input, select):focus {
   outline: 0;
-  border-color: var(--mj-primary);
+  border-color: var(--mj-input-focus, var(--mj-primary));
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--mj-primary) 14%, transparent);
 }
 
@@ -394,12 +394,12 @@
   padding: .75rem 1.25rem;
   border: 0;
   border-radius: var(--mj-radius);
-  background: var(--mj-primary);
+  background: var(--mj-btn-bg, var(--mj-primary));
   box-shadow: 0 8px 18px -10px color-mix(in srgb, var(--mj-primary) 80%, transparent);
   font-family: var(--mj-font);
   font-size: 1.05rem;
   font-weight: 700;
-  color: var(--mj-on-primary);
+  color: var(--mj-btn-text, var(--mj-on-primary));
   text-transform: none;
   letter-spacing: 0;
   cursor: pointer;
@@ -407,7 +407,8 @@
 }
 
 .mj-login-ui-on #pepro-profile .pepro-login-reg-container .pepro-login-reg-field.submit-wrap #submit:hover {
-  background: var(--mj-primary-hover);
+  background: var(--mj-btn-hover-bg, var(--mj-primary-hover));
+  color: var(--mj-btn-hover-text, var(--mj-btn-text, var(--mj-on-primary)));
 }
 
 .mj-login-ui-on #pepro-profile .pepro-login-reg-container .pepro-login-reg-field.submit-wrap #submit:active {
@@ -474,7 +475,7 @@
 }
 
 .mj-login-ui-on #pepro-profile .pepro-form-links a[href] {
-  color: var(--mj-primary);
+  color: var(--mj-link, var(--mj-primary));
   font-weight: 600;
   text-decoration: none;
 }
@@ -482,6 +483,7 @@
 .mj-login-ui-on #pepro-profile .pepro-form-links a[href]:hover {
   text-decoration: underline;
   text-underline-offset: 4px;
+  color: var(--mj-link-hover, var(--mj-link, var(--mj-primary)));
 }
 
 .mj-login-ui-on #pepro-profile .pepro-form-links .otp-resend,
@@ -525,7 +527,7 @@
   font-size: .95rem;
   font-weight: 600;
   line-height: 1.5;
-  color: var(--mj-primary);
+  color: var(--mj-link, var(--mj-primary));
   text-transform: none;
   letter-spacing: 0;
   cursor: pointer;
@@ -533,7 +535,7 @@
 
 .mj-login-ui-on #pepro-profile .mj-method__link:hover {
   background: transparent;
-  color: var(--mj-primary-hover);
+  color: var(--mj-link-hover, var(--mj-primary-hover));
   text-decoration: underline;
   text-underline-offset: 4px;
 }

@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.2.32](#version-8232)
 - [Version 8.2.31](#version-8231)
 - [Version 8.2.30](#version-8230)
 - [Version 8.2.29](#version-8229)
@@ -98,6 +99,10 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.2.32
+- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- **New** "Modern UI Design" admin screen: colors of the modern login form and dashboard in one place (accent, titles, cards; button background/text and hover; tab background, text and active tab; links and hover; sidebar background, items, hover, active item and marker; table header, text, borders and row hover; field labels, background, border and focus). Empty fields keep the built-in design or the theme's tokens; the stylesheets read the new `--mj-*` custom properties with fallbacks. The accent color moved here from Login/Register settings
 
 ## Version 8.2.31
 - Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)

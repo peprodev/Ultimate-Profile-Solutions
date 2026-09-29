@@ -48,8 +48,8 @@
   padding: 10px;
   overflow: visible;
   align-self: start;
-  background: var(--mj-surface);
-  border: 1px solid var(--mj-line);
+  background: var(--mj-nav-bg, var(--mj-surface));
+  border: 1px solid var(--mj-card-border, var(--mj-line));
   border-radius: var(--mj-radius-lg);
   box-shadow: var(--mj-shadow-sm);
 }
@@ -110,14 +110,14 @@
   border-radius: 12px;
   font-size: 1rem;
   font-weight: 600;
-  color: var(--mj-muted);
+  color: var(--mj-nav-text, var(--mj-muted));
   text-decoration: none;
   transition: background-color .2s ease, color .2s ease;
 }
 
 .mj-profile-ui-on .profile-page-wrapper .navbar__list > li > a:hover {
-  background: var(--mj-sand);
-  color: var(--mj-ink);
+  background: var(--mj-nav-hover-bg, var(--mj-sand));
+  color: var(--mj-nav-hover-text, var(--mj-ink));
 }
 
 .mj-profile-ui-on .profile-page-wrapper .navbar__list > li.active {
@@ -126,8 +126,8 @@
 
 .mj-profile-ui-on .profile-page-wrapper .navbar__list > li.active > a {
   position: relative;
-  background: var(--mj-primary-soft);
-  color: var(--mj-primary);
+  background: var(--mj-nav-active-bg, var(--mj-primary-soft));
+  color: var(--mj-nav-active-text, var(--mj-primary));
 }
 
 .mj-profile-ui-on .profile-page-wrapper .navbar__list > li.active > a::before {
@@ -137,7 +137,7 @@
   inset-inline-start: -10px;
   width: 4px;
   border-radius: 0 4px 4px 0;
-  background: var(--mj-primary);
+  background: var(--mj-nav-indicator, var(--mj-primary));
 }
 
 [dir="rtl"] .mj-profile-ui-on .profile-page-wrapper .navbar__list > li.active > a::before {
@@ -169,7 +169,7 @@
   font-size: 1.35rem;
   font-weight: 800;
   line-height: 1.5;
-  color: var(--mj-ink);
+  color: var(--mj-heading, var(--mj-ink));
 }
 
 .mj-profile-ui-on .profile-page-wrapper .overview-wrap {
@@ -187,8 +187,8 @@
 /* Cards */
 .mj-profile-ui-on .profile-page-wrapper :is(.au-card, .mj-card, .card.tab-entry.active) {
   padding: clamp(18px, 2.4vw, 26px);
-  background: var(--mj-surface);
-  border: 1px solid var(--mj-line);
+  background: var(--mj-card-bg, var(--mj-surface));
+  border: 1px solid var(--mj-card-border, var(--mj-line));
   border-radius: var(--mj-radius-lg);
   box-shadow: var(--mj-shadow-sm);
 }
@@ -203,7 +203,11 @@
 }
 
 .mj-profile-ui-on .profile-page-wrapper a:not(.btn):not(.button):not(.elementor-button) {
-  color: var(--mj-primary);
+  color: var(--mj-link, var(--mj-primary));
+}
+
+.mj-profile-ui-on .profile-page-wrapper a:not(.btn):not(.button):not(.elementor-button):hover {
+  color: var(--mj-link-hover, var(--mj-link, var(--mj-primary)));
 }
 
 /* Section rhythm */
@@ -371,7 +375,7 @@
 .mj-profile-ui-on .profile-page-wrapper table {
   width: 100%;
   margin: 0;
-  border: 1px solid var(--mj-line);
+  border: 1px solid var(--mj-table-border, var(--mj-line));
   border-collapse: separate;
   border-spacing: 0;
   border-radius: var(--mj-radius);
@@ -382,16 +386,21 @@
 .mj-profile-ui-on .profile-page-wrapper table :is(th, td) {
   padding: 14px 16px;
   border: 0;
-  border-bottom: 1px solid var(--mj-line);
+  border-bottom: 1px solid var(--mj-table-border, var(--mj-line));
   text-align: start;
   vertical-align: middle;
   font-size: .93rem;
+  color: var(--mj-table-text);
 }
 
 .mj-profile-ui-on .profile-page-wrapper table th {
-  background: var(--mj-sand);
-  color: var(--mj-muted);
+  background: var(--mj-table-head-bg, var(--mj-sand));
+  color: var(--mj-table-head-text, var(--mj-muted));
   font-weight: 700;
+}
+
+.mj-profile-ui-on .profile-page-wrapper table tbody tr:hover > td {
+  background: var(--mj-table-row-hover);
 }
 
 .mj-profile-ui-on .profile-page-wrapper table tr:last-child td {
@@ -442,9 +451,9 @@
   padding: 10px 22px;
   border: 0;
   border-radius: var(--mj-radius);
-  background: var(--mj-primary);
+  background: var(--mj-btn-bg, var(--mj-primary));
   box-shadow: 0 8px 18px -12px color-mix(in srgb, var(--mj-primary) 85%, transparent);
-  color: var(--mj-on-primary);
+  color: var(--mj-btn-text, var(--mj-on-primary));
   font-size: 1rem;
   font-weight: 700;
   line-height: 1.4;
@@ -455,8 +464,8 @@
 }
 
 .mj-profile-ui-on .profile-page-wrapper :is(a.btn, button.btn, button[type="submit"], .mj-btn-primary, #submit-profile-changes, #submit):hover {
-  background: var(--mj-primary-hover);
-  color: var(--mj-on-primary);
+  background: var(--mj-btn-hover-bg, var(--mj-primary-hover));
+  color: var(--mj-btn-hover-text, var(--mj-on-primary));
 }
 
 .mj-profile-ui-on .profile-page-wrapper :is(a.btn, button.btn, button[type="submit"], #submit-profile-changes, #submit):active {
@@ -486,7 +495,7 @@
   margin: 0 0 8px;
   font-size: .9rem;
   font-weight: 600;
-  color: var(--mj-muted);
+  color: var(--mj-label, var(--mj-muted));
 }
 
 .mj-profile-ui-on .profile-page-wrapper .control-label.input-wrapper.required::after {
@@ -500,9 +509,9 @@
   height: 50px;
   margin: 0;
   padding: 0 16px;
-  border: 1px solid var(--mj-line);
+  border: 1px solid var(--mj-input-border, var(--mj-line));
   border-radius: var(--mj-radius);
-  background: var(--mj-surface);
+  background: var(--mj-input-bg, var(--mj-surface));
   box-shadow: none;
   font-size: 1rem;
   color: var(--mj-ink);
@@ -517,7 +526,7 @@
 
 .mj-profile-ui-on .profile-page-wrapper :is(input, select, textarea):focus {
   outline: 0;
-  border-color: var(--mj-primary);
+  border-color: var(--mj-input-focus, var(--mj-primary));
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--mj-primary) 14%, transparent);
 }
 
@@ -556,7 +565,7 @@
   font-size: 1.1rem;
   font-weight: 800;
   line-height: 1.6;
-  color: var(--mj-ink);
+  color: var(--mj-heading, var(--mj-ink));
 }
 
 .mj-profile-ui-on .mj-card__desc {
@@ -1754,7 +1763,7 @@ a.mj-continue__cta {
   margin: 0 0 18px;
   padding: 4px;
   border-radius: var(--mj-radius);
-  background: var(--mj-sand);
+  background: var(--mj-tab-track, var(--mj-sand));
 }
 
 .mj-profile-ui-on .profile-page-wrapper .mj-verify .tabbed-wrapper .tab-names a.change-tab {
@@ -1766,15 +1775,15 @@ a.mj-continue__cta {
   border-radius: 10px;
   background: transparent;
   box-shadow: none;
-  color: var(--mj-muted);
+  color: var(--mj-tab-text, var(--mj-muted));
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
 }
 
 .mj-profile-ui-on .profile-page-wrapper .mj-verify .tabbed-wrapper .tab-names a.change-tab.active {
-  background: var(--mj-surface);
-  color: var(--mj-ink);
+  background: var(--mj-tab-active-bg, var(--mj-surface));
+  color: var(--mj-tab-active-text, var(--mj-ink));
   box-shadow: var(--mj-shadow-sm);
 }
 
@@ -1802,13 +1811,14 @@ a.mj-continue__cta {
   padding: 10px 22px;
   border: 0;
   border-radius: var(--mj-radius);
-  background: var(--mj-primary);
-  color: var(--mj-on-primary);
+  background: var(--mj-btn-bg, var(--mj-primary));
+  color: var(--mj-btn-text, var(--mj-on-primary));
   font-weight: 700;
 }
 
 .mj-profile-ui-on .profile-page-wrapper [data-pepro-reglogin] > form button#submit:hover {
-  background: var(--mj-primary-hover);
+  background: var(--mj-btn-hover-bg, var(--mj-primary-hover));
+  color: var(--mj-btn-hover-text, var(--mj-btn-text, var(--mj-on-primary)));
 }
 
 /* Addresses (inline AJAX forms) */
@@ -1818,7 +1828,7 @@ a.mj-continue__cta {
   margin: 0 0 18px;
   padding: 4px;
   border-radius: var(--mj-radius);
-  background: var(--mj-sand);
+  background: var(--mj-tab-track, var(--mj-sand));
 }
 
 .mj-profile-ui-on .profile-page-wrapper .mj-segment__btn {
@@ -1828,15 +1838,15 @@ a.mj-continue__cta {
   border-radius: 10px;
   background: transparent;
   box-shadow: none;
-  color: var(--mj-muted);
+  color: var(--mj-tab-text, var(--mj-muted));
   font: inherit;
   font-weight: 600;
   cursor: pointer;
 }
 
 .mj-profile-ui-on .profile-page-wrapper .mj-segment__btn.is-active {
-  background: var(--mj-surface);
-  color: var(--mj-ink);
+  background: var(--mj-tab-active-bg, var(--mj-surface));
+  color: var(--mj-tab-active-text, var(--mj-ink));
   box-shadow: var(--mj-shadow-sm);
 }
 

@@ -5580,3 +5580,187 @@ msgstr ""
 #: login/include/class-activated.php
 msgid "Verified contact details receive session reminders and account recovery messages."
 msgstr ""
+
+#: login/include/class-activated.php
+msgid "Titles"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Card background"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Card border"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Button background"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Button background on hover"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Button text on hover"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Tabs background"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Tab text"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Active tab background"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Active tab text"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Links"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Links on hover"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Sidebar background"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Menu items"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Menu item background on hover"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Menu item text on hover"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Active menu item background"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Active menu item text"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Active menu item marker"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Table header background"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Table header text"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Table text"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Table borders"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Table row on hover"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Field labels"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Field background"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Field border"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Field border on focus"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "General"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Main accent color, titles and cards. The accent is the base of the buttons, links and active items below."
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Buttons"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Login/register button, save buttons and the other main buttons of the dashboard."
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Tabs"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Login / Register tabs, address tabs and verification tabs."
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Text links of the forms and the dashboard."
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Sidebar menu"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Menu of the user dashboard."
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Tables"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Orders, downloads and the other lists of the dashboard."
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Form fields"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Labels and inputs of the login form and the dashboard forms."
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Modern UI Design"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Colors of the modern login form and user dashboard"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Colors of the modern login form and user dashboard. Leave a field empty to keep the built-in design (or the colors of your theme)."
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Settings saved."
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Clear all (built-in design)"
+msgstr ""

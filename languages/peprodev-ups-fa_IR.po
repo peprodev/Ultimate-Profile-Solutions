@@ -5921,3 +5921,187 @@ msgstr "تأیید ایمیل و شماره موبایل"
 #: login/include/class-activated.php
 msgid "Verified contact details receive session reminders and account recovery messages."
 msgstr "پیام‌های یادآوری جلسات و بازیابی حساب به ایمیل و شماره تأییدشده ارسال می‌شود."
+
+#: login/include/class-activated.php
+msgid "Titles"
+msgstr "عنوان‌ها"
+
+#: login/include/class-activated.php
+msgid "Card background"
+msgstr "پس‌زمینه کارت‌ها"
+
+#: login/include/class-activated.php
+msgid "Card border"
+msgstr "حاشیه کارت‌ها"
+
+#: login/include/class-activated.php
+msgid "Button background"
+msgstr "پس‌زمینه دکمه"
+
+#: login/include/class-activated.php
+msgid "Button background on hover"
+msgstr "پس‌زمینه دکمه هنگام هاور"
+
+#: login/include/class-activated.php
+msgid "Button text on hover"
+msgstr "متن دکمه هنگام هاور"
+
+#: login/include/class-activated.php
+msgid "Tabs background"
+msgstr "پس‌زمینه تب‌ها"
+
+#: login/include/class-activated.php
+msgid "Tab text"
+msgstr "متن تب"
+
+#: login/include/class-activated.php
+msgid "Active tab background"
+msgstr "پس‌زمینه تب فعال"
+
+#: login/include/class-activated.php
+msgid "Active tab text"
+msgstr "متن تب فعال"
+
+#: login/include/class-activated.php
+msgid "Links"
+msgstr "لینک‌ها"
+
+#: login/include/class-activated.php
+msgid "Links on hover"
+msgstr "لینک‌ها هنگام هاور"
+
+#: login/include/class-activated.php
+msgid "Sidebar background"
+msgstr "پس‌زمینه منوی کناری"
+
+#: login/include/class-activated.php
+msgid "Menu items"
+msgstr "آیتم‌های منو"
+
+#: login/include/class-activated.php
+msgid "Menu item background on hover"
+msgstr "پس‌زمینه آیتم منو هنگام هاور"
+
+#: login/include/class-activated.php
+msgid "Menu item text on hover"
+msgstr "متن آیتم منو هنگام هاور"
+
+#: login/include/class-activated.php
+msgid "Active menu item background"
+msgstr "پس‌زمینه آیتم فعال منو"
+
+#: login/include/class-activated.php
+msgid "Active menu item text"
+msgstr "متن آیتم فعال منو"
+
+#: login/include/class-activated.php
+msgid "Active menu item marker"
+msgstr "نشانگر آیتم فعال منو"
+
+#: login/include/class-activated.php
+msgid "Table header background"
+msgstr "پس‌زمینه سرستون جدول"
+
+#: login/include/class-activated.php
+msgid "Table header text"
+msgstr "متن سرستون جدول"
+
+#: login/include/class-activated.php
+msgid "Table text"
+msgstr "متن جدول"
+
+#: login/include/class-activated.php
+msgid "Table borders"
+msgstr "خطوط جدول"
+
+#: login/include/class-activated.php
+msgid "Table row on hover"
+msgstr "ردیف جدول هنگام هاور"
+
+#: login/include/class-activated.php
+msgid "Field labels"
+msgstr "برچسب فیلدها"
+
+#: login/include/class-activated.php
+msgid "Field background"
+msgstr "پس‌زمینه فیلد"
+
+#: login/include/class-activated.php
+msgid "Field border"
+msgstr "حاشیه فیلد"
+
+#: login/include/class-activated.php
+msgid "Field border on focus"
+msgstr "حاشیه فیلد هنگام فوکوس"
+
+#: login/include/class-activated.php
+msgid "General"
+msgstr "عمومی"
+
+#: login/include/class-activated.php
+msgid "Main accent color, titles and cards. The accent is the base of the buttons, links and active items below."
+msgstr "رنگ اصلی، عنوان‌ها و کارت‌ها. رنگ اصلی مبنای دکمه‌ها، لینک‌ها و آیتم‌های فعال بخش‌های پایین است."
+
+#: login/include/class-activated.php
+msgid "Buttons"
+msgstr "دکمه‌ها"
+
+#: login/include/class-activated.php
+msgid "Login/register button, save buttons and the other main buttons of the dashboard."
+msgstr "دکمه ورود/ثبت‌نام، دکمه‌های ذخیره و دیگر دکمه‌های اصلی پیشخوان."
+
+#: login/include/class-activated.php
+msgid "Tabs"
+msgstr "تب‌ها"
+
+#: login/include/class-activated.php
+msgid "Login / Register tabs, address tabs and verification tabs."
+msgstr "تب‌های ورود / ثبت‌نام، تب‌های آدرس و تب‌های تأیید حساب."
+
+#: login/include/class-activated.php
+msgid "Text links of the forms and the dashboard."
+msgstr "لینک‌های متنی فرم‌ها و پیشخوان."
+
+#: login/include/class-activated.php
+msgid "Sidebar menu"
+msgstr "منوی کناری"
+
+#: login/include/class-activated.php
+msgid "Menu of the user dashboard."
+msgstr "منوی پیشخوان کاربر."
+
+#: login/include/class-activated.php
+msgid "Tables"
+msgstr "جدول‌ها"
+
+#: login/include/class-activated.php
+msgid "Orders, downloads and the other lists of the dashboard."
+msgstr "سفارش‌ها، دانلودها و دیگر فهرست‌های پیشخوان."
+
+#: login/include/class-activated.php
+msgid "Form fields"
+msgstr "فیلدهای فرم"
+
+#: login/include/class-activated.php
+msgid "Labels and inputs of the login form and the dashboard forms."
+msgstr "برچسب‌ها و ورودی‌های فرم ورود و فرم‌های پیشخوان."
+
+#: login/include/class-activated.php
+msgid "Modern UI Design"
+msgstr "طراحی ظاهر جدید"
+
+#: login/include/class-activated.php
+msgid "Colors of the modern login form and user dashboard"
+msgstr "رنگ‌های فرم ورود و پیشخوان جدید"
+
+#: login/include/class-activated.php
+msgid "Colors of the modern login form and user dashboard. Leave a field empty to keep the built-in design (or the colors of your theme)."
+msgstr "رنگ‌های فرم ورود و پیشخوان جدید. هر فیلدی را خالی بگذارید تا طراحی پیش‌فرض (یا رنگ‌های قالب شما) حفظ شود."
+
+#: login/include/class-activated.php
+msgid "Settings saved."
+msgstr "تنظیمات ذخیره شد."
+
+#: login/include/class-activated.php
+msgid "Clear all (built-in design)"
+msgstr "پاک کردن همه (طراحی پیش‌فرض)"
