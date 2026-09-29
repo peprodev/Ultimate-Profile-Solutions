@@ -31,7 +31,7 @@ final class PeproSMS_FarazSMS_Gateway extends PeproSMS_Gateway_Base {
     return $gateways;
   }
   public function save_text_fields($prev = array()) {
-    return array_merge((array) $prev, array("farazsms_api_key", "farazsms_line_number", "farazsms_pattern_code", "farazsms_pattern_var"));
+    return array_merge((array) $prev, array("farazsms_api_key", "farazsms_line_number", "farazsms_send_mode", "farazsms_pattern_code", "farazsms_pattern_var"));
   }
   public function save_textarea_fields($prev = array()) {
     $prev[] = "farazsms_message";
@@ -89,6 +89,15 @@ final class PeproSMS_FarazSMS_Gateway extends PeproSMS_Gateway_Base {
     return implode(" ", array_unique($parts));
   }
   /**
+   * OTP sending method: "pattern" (template) or "simple" (normal SMS with the message text).
+   * Sites saved before this setting existed keep their behaviour: pattern when a pattern code is set.
+   */
+  protected function send_mode() {
+    $mode = (string) $this->read("farazsms_send_mode", "");
+    if (in_array($mode, array("pattern", "simple"), true)) return $mode;
+    return "" !== trim((string) $this->read("farazsms_pattern_code")) ? "pattern" : "simple";
+  }
+  /**
    * Sender line as the digits-only string the API expects (Persian/Arabic digits converted).
    */
   protected function line_number() {
@@ -108,7 +117,8 @@ final class PeproSMS_FarazSMS_Gateway extends PeproSMS_Gateway_Base {
     $pattern = trim((string) $this->read("farazsms_pattern_code"));
     $is_otp  = !empty($otp_code);
 
-    if ($is_otp && "" !== $pattern) {
+    if ($is_otp && "pattern" === $this->send_mode()) {
+      if ("" === $pattern) return $this->fail(__("FarazSMS pattern code is not set. Choose a pattern or switch the sending method to normal SMS.", "peprodev-ups"));
       $var = trim((string) $this->read("farazsms_pattern_var", "OTP"));
       $var = "" !== $var ? $var : "OTP";
       $result = false;
@@ -206,6 +216,7 @@ final class PeproSMS_FarazSMS_Gateway extends PeproSMS_Gateway_Base {
   public function setting() {
     $api_key  = (string) $this->read("farazsms_api_key");
     $line     = (string) $this->read("farazsms_line_number");
+    $mode     = $this->send_mode();
     $pattern  = (string) $this->read("farazsms_pattern_code");
     $var      = (string) $this->read("farazsms_pattern_var", "OTP");
     $message  = $this->read_text("farazsms_message");
@@ -213,7 +224,7 @@ final class PeproSMS_FarazSMS_Gateway extends PeproSMS_Gateway_Base {
     $i18n     = array(
       "loading"  => __("Please wait ...", "peprodev-ups"),
       "fallback" => __("Could not load the patterns, enter the pattern code manually.", "peprodev-ups"),
-      "none"     => __("- No pattern (send the message template) -", "peprodev-ups"),
+      "none"     => __("- Select a pattern -", "peprodev-ups"),
     );
     ob_start();
     ?>
@@ -231,23 +242,36 @@ final class PeproSMS_FarazSMS_Gateway extends PeproSMS_Gateway_Base {
         <div class="col-lg-6 label"><span><?php esc_html_e("Account Balance", "peprodev-ups"); ?></span></div>
         <div class="col-lg-6"><span id="farazsms-balance">&mdash;</span> <button id="farazsms-reload" class="btn btn-sm btn-info m-0" type="button"><?php esc_html_e("Reload", "peprodev-ups"); ?></button></div>
       </div>
-      <div class='col-lg-12 row justify-content-between mb-3 field-opt-farazsms_pattern_code'>
-        <div class="col-lg-6 label"><span><?php esc_html_e("OTP pattern (template) code", "peprodev-ups"); ?></span><br><small class="text-muted"><?php esc_html_e("Leave empty to send the message template below as a normal SMS.", "peprodev-ups"); ?></small></div>
-        <div class="col-lg-6" id="farazsms-pattern-wrap"><input name="farazsms_pattern_code" id="farazsms_pattern_code" value="<?php echo esc_attr($pattern); ?>" dir="ltr" class='form-input single-required mr-2' autocomplete="off" type="text" /></div>
-      </div>
-      <div class='col-lg-12 row justify-content-between mb-3 field-opt-farazsms_pattern_var'>
-        <div class="col-lg-6 label"><span><?php esc_html_e("Pattern variable of the code", "peprodev-ups"); ?></span></div>
-        <div class="col-lg-6" id="farazsms-var-wrap"><input name="farazsms_pattern_var" id="farazsms_pattern_var" value="<?php echo esc_attr($var ? $var : "OTP"); ?>" dir="ltr" class='form-input single-required mr-2' autocomplete="off" type="text" /></div>
-      </div>
-      <div class='col-lg-12 row justify-content-between mb-3 field-opt-farazsms_message'>
-        <div class="col-lg-6 label"><span><?php esc_html_e("Message containing [OTP]", "peprodev-ups"); ?></span><br><small class="text-muted"><?php esc_html_e("Used when no pattern is set.", "peprodev-ups"); ?></small></div>
-        <div class="col-lg-6"><textarea name="farazsms_message" autocomplete="off" class='form-input single-required mr-2' rows="3" placeholder="<?php echo esc_attr__("e.g: Your Code: [OTP]", "peprodev-ups"); ?>"><?php echo esc_textarea($message); ?></textarea></div>
-      </div>
-      <div class='col-lg-12 row justify-content-between mb-3'>
-        <div class="col-lg-6 label"><span><?php esc_html_e("Create an OTP pattern", "peprodev-ups"); ?></span><br><small class="text-muted"><?php esc_html_e("Use %OTP% for the code. New patterns are reviewed by FarazSMS before they can be used.", "peprodev-ups"); ?></small></div>
+      <div class='col-lg-12 row justify-content-between mb-3 field-opt-farazsms_send_mode'>
+        <div class="col-lg-6 label"><span><?php esc_html_e("Sending method of the code", "peprodev-ups"); ?></span><br><small class="text-muted"><?php esc_html_e("Pattern: a template approved in your FarazSMS panel. Normal SMS: the message text below, sent from the sender number.", "peprodev-ups"); ?></small></div>
         <div class="col-lg-6">
-          <textarea id="farazsms-newpattern" class="form-input mb-2" rows="3"><?php echo esc_textarea($template); ?></textarea>
-          <button id="farazsms-create" class="btn btn-sm btn-success m-0" type="button"><?php esc_html_e("Create Pattern", "peprodev-ups"); ?></button>
+          <select name="farazsms_send_mode" id="farazsms_send_mode" class='form-input single-required mr-2' autocomplete="off">
+            <option value="pattern" <?php selected($mode, "pattern"); ?>><?php esc_html_e("Pattern (template)", "peprodev-ups"); ?></option>
+            <option value="simple" <?php selected($mode, "simple"); ?>><?php esc_html_e("Normal SMS (message text)", "peprodev-ups"); ?></option>
+          </select>
+        </div>
+      </div>
+      <div class="farazsms-mode" data-mode="pattern">
+        <div class='col-lg-12 row justify-content-between mb-3 field-opt-farazsms_pattern_code'>
+          <div class="col-lg-6 label"><span><?php esc_html_e("OTP pattern (template) code", "peprodev-ups"); ?></span><br><small class="text-muted"><?php esc_html_e("Enter the Api-Key and click Reload to choose from your approved patterns.", "peprodev-ups"); ?></small></div>
+          <div class="col-lg-6" id="farazsms-pattern-wrap"><input name="farazsms_pattern_code" id="farazsms_pattern_code" value="<?php echo esc_attr($pattern); ?>" dir="ltr" class='form-input single-required mr-2' autocomplete="off" type="text" /></div>
+        </div>
+        <div class='col-lg-12 row justify-content-between mb-3 field-opt-farazsms_pattern_var'>
+          <div class="col-lg-6 label"><span><?php esc_html_e("Pattern variable of the code", "peprodev-ups"); ?></span></div>
+          <div class="col-lg-6" id="farazsms-var-wrap"><input name="farazsms_pattern_var" id="farazsms_pattern_var" value="<?php echo esc_attr($var ? $var : "OTP"); ?>" dir="ltr" class='form-input single-required mr-2' autocomplete="off" type="text" /></div>
+        </div>
+        <div class='col-lg-12 row justify-content-between mb-3'>
+          <div class="col-lg-6 label"><span><?php esc_html_e("Create an OTP pattern", "peprodev-ups"); ?></span><br><small class="text-muted"><?php esc_html_e("Use %OTP% for the code. New patterns are reviewed by FarazSMS before they can be used.", "peprodev-ups"); ?></small></div>
+          <div class="col-lg-6">
+            <textarea id="farazsms-newpattern" class="form-input mb-2" rows="3"><?php echo esc_textarea($template); ?></textarea>
+            <button id="farazsms-create" class="btn btn-sm btn-success m-0" type="button"><?php esc_html_e("Create Pattern", "peprodev-ups"); ?></button>
+          </div>
+        </div>
+      </div>
+      <div class="farazsms-mode" data-mode="simple">
+        <div class='col-lg-12 row justify-content-between mb-3 field-opt-farazsms_message'>
+          <div class="col-lg-6 label"><span><?php esc_html_e("Message containing [OTP]", "peprodev-ups"); ?></span><br><small class="text-muted"><?php esc_html_e("Sent as a normal SMS from the sender number; [OTP] is replaced with the code.", "peprodev-ups"); ?></small></div>
+          <div class="col-lg-6"><textarea name="farazsms_message" autocomplete="off" class='form-input single-required mr-2' rows="3" placeholder="<?php echo esc_attr__("e.g: Your Code: [OTP]", "peprodev-ups"); ?>"><?php echo esc_textarea($message); ?></textarea></div>
         </div>
       </div>
     </div>
@@ -265,6 +289,10 @@ final class PeproSMS_FarazSMS_Gateway extends PeproSMS_Gateway_Base {
               if (r && r.success) { done(r.data || {}); } else { fail(r && r.data && r.data.msg ? r.data.msg : "error"); }
             }).fail(function () { fail("network error"); });
           }
+          function showMode() {
+            var mode = $("#farazsms_send_mode").val();
+            $sec.find(".farazsms-mode").each(function () { $(this).toggle($(this).data("mode") === mode); });
+          }
           function renderVars(code) {
             var cur = $("[name=farazsms_pattern_var]").val() || "OTP";
             var p = patterns.filter(function (x) { return x.code === code; })[0];
@@ -280,7 +308,8 @@ final class PeproSMS_FarazSMS_Gateway extends PeproSMS_Gateway_Base {
               if (!patterns.length) { return; }
               var $s = $("<select class='form-input' dir='ltr' name='farazsms_pattern_code' id='farazsms_pattern_code'></select>");
               $("<option value=''>").text(i18n.none || "-").appendTo($s);
-              patterns.forEach(function (p) { $("<option>").val(p.code).text((p.description ? p.description + " - " : "") + p.code).prop("selected", p.code === cur).appendTo($s); });
+              // code first, description isolated so mixed Persian/Latin text keeps its order
+              patterns.forEach(function (p) { $("<option>").val(p.code).text(p.code + (p.description ? "  ·  ⁨" + p.description + "⁩" : "")).prop("selected", p.code === cur).appendTo($s); });
               if (cur && !$s.find("option").filter(function () { return this.value === cur; }).length) { $("<option>").val(cur).text(cur).prop("selected", true).appendTo($s); }
               $("#farazsms-pattern-wrap").empty().append($s);
               renderVars(cur);
@@ -293,6 +322,7 @@ final class PeproSMS_FarazSMS_Gateway extends PeproSMS_Gateway_Base {
             $("#farazsms-balance").text(i18n.loading || "...");
             post({ "do": "balance" }, function (d) { $("#farazsms-balance").html(esc(d.amount) + " &middot; " + esc(d.count)); }, function (msg) { $("#farazsms-balance").text(msg); });
           }
+          $sec.on("change", "#farazsms_send_mode", showMode);
           $sec.on("change", "#farazsms_pattern_code", function () { renderVars($(this).val()); });
           $sec.on("click", "#farazsms-reload", function (e) { e.preventDefault(); loadPatterns(); loadBalance(); });
           $sec.on("click", "#farazsms-create", function (e) {
@@ -302,6 +332,7 @@ final class PeproSMS_FarazSMS_Gateway extends PeproSMS_Gateway_Base {
               $b.prop("disabled", false); window.alert(d.msg || ""); loadPatterns(d.code || undefined);
             }, function (msg) { $b.prop("disabled", false); window.alert(msg); });
           });
+          showMode();
           // only call the API when this gateway is the selected one and a key exists
           function autoload() { if ($("#sms_method").val() === "farazsms" && $("#farazsms_api_key").val()) { loadPatterns(); loadBalance(); } }
           $(document).on("change", "#sms_method", autoload);

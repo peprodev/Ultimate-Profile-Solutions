@@ -5380,3 +5380,35 @@ msgstr ""
 msgctxt "login-section"
 msgid "You can control the Popup/Inline login and registration form configuration from this section. Registration form fields have their own tab."
 msgstr ""
+
+#: login/include/class-activated.php
+msgid "FarazSMS pattern code is not set. Choose a pattern or switch the sending method to normal SMS."
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "- Select a pattern -"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Sending method of the code"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Pattern: a template approved in your FarazSMS panel. Normal SMS: the message text below, sent from the sender number."
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Pattern (template)"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Normal SMS (message text)"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Enter the Api-Key and click Reload to choose from your approved patterns."
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Sent as a normal SMS from the sender number; [OTP] is replaced with the code."
+msgstr ""

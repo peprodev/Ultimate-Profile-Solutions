@@ -5721,3 +5721,35 @@ msgstr "فیلدهای پیش‌فرض فرم ثبت‌نام را فعال یا
 msgctxt "login-section"
 msgid "You can control the Popup/Inline login and registration form configuration from this section. Registration form fields have their own tab."
 msgstr "تنظیمات فرم ورود و ثبت‌نام پاپ‌آپ و خطی را از اینجا مدیریت کنید. فیلدهای فرم ثبت‌نام در تب جداگانه‌ای قرار دارند."
+
+#: login/include/class-activated.php
+msgid "FarazSMS pattern code is not set. Choose a pattern or switch the sending method to normal SMS."
+msgstr "کد پترن فراز اس‌ام‌اس تنظیم نشده است. یک پترن انتخاب کنید یا روش ارسال را روی پیامک عادی بگذارید."
+
+#: login/include/class-activated.php
+msgid "- Select a pattern -"
+msgstr "- یک پترن انتخاب کنید -"
+
+#: login/include/class-activated.php
+msgid "Sending method of the code"
+msgstr "روش ارسال کد"
+
+#: login/include/class-activated.php
+msgid "Pattern: a template approved in your FarazSMS panel. Normal SMS: the message text below, sent from the sender number."
+msgstr "پترن: قالبی که در پنل فراز اس‌ام‌اس تایید شده است. پیامک عادی: متن پیام پایین که از سرشماره ارسال فرستاده می‌شود."
+
+#: login/include/class-activated.php
+msgid "Pattern (template)"
+msgstr "پترن (قالب)"
+
+#: login/include/class-activated.php
+msgid "Normal SMS (message text)"
+msgstr "پیامک عادی (متن پیام)"
+
+#: login/include/class-activated.php
+msgid "Enter the Api-Key and click Reload to choose from your approved patterns."
+msgstr "کلید API را وارد کنید و «بارگذاری دوباره» را بزنید تا از پترن‌های تاییدشده انتخاب کنید."
+
+#: login/include/class-activated.php
+msgid "Sent as a normal SMS from the sender number; [OTP] is replaced with the code."
+msgstr "به‌صورت پیامک عادی از سرشماره ارسال فرستاده می‌شود و به‌جای [OTP] کد قرار می‌گیرد."

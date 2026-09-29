@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.2.15](#version-8215)
 - [Version 8.2.14](#version-8214)
 - [Version 8.2.13](#version-8213)
 - [Version 8.2.12](#version-8212)
@@ -81,6 +82,10 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.2.15
+- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- **Improved** FarazSMS (IranPayamak): new "Sending method of the code" setting, Pattern (template) or Normal SMS (message text); only the fields of the chosen method are shown. Existing sites keep their behaviour (pattern when a pattern code is saved). Pattern list shows the code first with the description kept in order, and LTR select values no longer run under the RTL arrow
 
 ## Version 8.2.14
 - Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)

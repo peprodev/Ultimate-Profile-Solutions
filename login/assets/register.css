@@ -400,3 +400,8 @@ input[type="checkbox"].iostoggle[disabled]:checked {
   white-space: nowrap;
   margin: 0;
 }
+
+/* LTR values in RTL selects must not run under the arrow on the left */
+[dir="rtl"] select[dir="ltr"] {
+  padding-left: 45px !important;
+}
