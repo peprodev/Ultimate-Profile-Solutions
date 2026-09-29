@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.2.24](#version-8224)
 - [Version 8.2.23](#version-8223)
 - [Version 8.2.22](#version-8222)
 - [Version 8.2.21](#version-8221)
@@ -90,6 +91,10 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.2.24
+- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- **Improved** FarazSMS settings: grouped into "Account" and "Sending the code"; the Api-Key has a plain "Get the Api-Key from your FarazSMS panel" link instead of a pill button, and the balance is a status box with an inline reload icon
 
 ## Version 8.2.23
 - Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)

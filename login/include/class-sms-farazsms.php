@@ -230,8 +230,9 @@ final class PeproSMS_FarazSMS_Gateway extends PeproSMS_Gateway_Base {
     ?>
     <p class="font-weight-bold p-3"><?php esc_html_e("FarazSMS (IranPayamak) Setting", "peprodev-ups"); ?></p>
     <div id="farazsms-section" class="col-lg-12 p-0" data-ajax="<?php echo esc_url(admin_url("admin-ajax.php")); ?>" data-nonce="<?php echo esc_attr(wp_create_nonce("pepro_farazsms")); ?>" data-i18n="<?php echo esc_attr(wp_json_encode($i18n)); ?>">
+      <p class="pd-gw-section"><?php esc_html_e("Account", "peprodev-ups"); ?></p>
       <div class='col-lg-12 row justify-content-between mb-3 field-opt-farazsms_api_key'>
-        <div class="col-lg-6 label"><span><?php esc_html_e("Api-Key", "peprodev-ups"); ?></span><?php echo $this->external_link("https://iranpayamak.com/"); ?></div>
+        <div class="col-lg-6 label"><span><?php esc_html_e("Api-Key", "peprodev-ups"); ?></span><br><small><a href="https://iranpayamak.com/" target="_blank" rel="noopener noreferrer"><?php esc_html_e("Get the Api-Key from your FarazSMS panel", "peprodev-ups"); ?> &#8599;</a></small></div>
         <div class="col-lg-6"><input name="farazsms_api_key" id="farazsms_api_key" value="<?php echo esc_attr($api_key); ?>" dir="ltr" class='form-input single-required mr-2' autocomplete="new-password" type="password" /></div>
       </div>
       <div class='col-lg-12 row justify-content-between mb-3 field-opt-farazsms_line_number'>
@@ -240,8 +241,14 @@ final class PeproSMS_FarazSMS_Gateway extends PeproSMS_Gateway_Base {
       </div>
       <div class='col-lg-12 row justify-content-between align-items-center mb-3'>
         <div class="col-lg-6 label"><span><?php esc_html_e("Account Balance", "peprodev-ups"); ?></span></div>
-        <div class="col-lg-6"><span id="farazsms-balance">&mdash;</span> <button id="farazsms-reload" class="btn btn-sm btn-info m-0" type="button"><?php esc_html_e("Reload", "peprodev-ups"); ?></button></div>
+        <div class="col-lg-6">
+          <div class="pd-balance">
+            <span id="farazsms-balance" dir="auto">&mdash;</span>
+            <button id="farazsms-reload" class="pd-icon-btn" type="button" title="<?php esc_attr_e("Reload", "peprodev-ups"); ?>" aria-label="<?php esc_attr_e("Reload", "peprodev-ups"); ?>"><span class="material-icons">refresh</span></button>
+          </div>
+        </div>
       </div>
+      <p class="pd-gw-section"><?php esc_html_e("Sending the code", "peprodev-ups"); ?></p>
       <div class='col-lg-12 row justify-content-between mb-3 field-opt-farazsms_send_mode'>
         <div class="col-lg-6 label"><span><?php esc_html_e("Sending method of the code", "peprodev-ups"); ?></span><br><small class="text-muted"><?php esc_html_e("Pattern: a template approved in your FarazSMS panel. Normal SMS: the message text below, sent from the sender number.", "peprodev-ups"); ?></small></div>
         <div class="col-lg-6">

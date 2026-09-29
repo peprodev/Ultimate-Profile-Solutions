@@ -5876,3 +5876,15 @@ msgstr "انتقال به پایین"
 msgctxt "field-actions"
 msgid "Delete"
 msgstr "حذف"
+
+#: login/include/class-activated.php
+msgid "Account"
+msgstr "حساب کاربری"
+
+#: login/include/class-activated.php
+msgid "Get the Api-Key from your FarazSMS panel"
+msgstr "دریافت کلید API از پنل فراز اس‌ام‌اس"
+
+#: login/include/class-activated.php
+msgid "Sending the code"
+msgstr "ارسال کد"

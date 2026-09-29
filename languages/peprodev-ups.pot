@@ -5535,3 +5535,15 @@ msgstr ""
 msgctxt "field-actions"
 msgid "Delete"
 msgstr ""
+
+#: login/include/class-activated.php
+msgid "Account"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Get the Api-Key from your FarazSMS panel"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Sending the code"
+msgstr ""
