@@ -53,6 +53,19 @@ function peprodev_ui_design_fields() {
 			'd_input_bg'         => array( 'fields', __( 'Field background', 'peprodev-ups' ), '--mj-input-bg', 'color', '#ffffff' ),
 			'd_input_border'     => array( 'fields', __( 'Field border', 'peprodev-ups' ), '--mj-input-border', 'color', '#e8e1d6' ),
 			'd_input_focus'      => array( 'fields', __( 'Field border on focus', 'peprodev-ups' ), '--mj-input-focus', 'color', '#28504f' ),
+			'f_base'             => array( 'fonts', __( 'Dashboard text', 'peprodev-ups' ), '--mj-fs-base', 'size', '16' ),
+			'f_title'            => array( 'fonts', __( 'Page titles', 'peprodev-ups' ), '--mj-fs-title', 'size', '22' ),
+			'f_login_title'      => array( 'fonts', __( 'Login form title', 'peprodev-ups' ), '--mj-fs-login-title', 'size', '28' ),
+			'f_card_title'       => array( 'fonts', __( 'Card titles', 'peprodev-ups' ), '--mj-fs-card-title', 'size', '18' ),
+			'f_desc'             => array( 'fonts', __( 'Descriptions under titles', 'peprodev-ups' ), '--mj-fs-desc', 'size', '14' ),
+			'f_btn'              => array( 'fonts', __( 'Buttons', 'peprodev-ups' ), '--mj-fs-btn', 'size', '16' ),
+			'f_tab'              => array( 'fonts', __( 'Tabs', 'peprodev-ups' ), '--mj-fs-tab', 'size', '16' ),
+			'f_nav'              => array( 'fonts', __( 'Sidebar menu', 'peprodev-ups' ), '--mj-fs-nav', 'size', '16' ),
+			'f_table'            => array( 'fonts', __( 'Table text', 'peprodev-ups' ), '--mj-fs-table', 'size', '15' ),
+			'f_table_head'       => array( 'fonts', __( 'Table header', 'peprodev-ups' ), '--mj-fs-table-head', 'size', '15' ),
+			'f_label'            => array( 'fonts', __( 'Field labels', 'peprodev-ups' ), '--mj-fs-label', 'size', '14' ),
+			'f_input'            => array( 'fonts', __( 'Field text', 'peprodev-ups' ), '--mj-fs-input', 'size', '16' ),
+			'f_link'             => array( 'fonts', __( 'Login form links', 'peprodev-ups' ), '--mj-fs-link', 'size', '14' ),
 		)
 	);
 }
@@ -73,6 +86,7 @@ function peprodev_ui_design_sections() {
 			'sidebar' => array( __( 'Sidebar menu', 'peprodev-ups' ), __( 'Menu of the user dashboard.', 'peprodev-ups' ) ),
 			'table'   => array( __( 'Tables', 'peprodev-ups' ), __( 'Orders, downloads and the other lists of the dashboard.', 'peprodev-ups' ) ),
 			'fields'  => array( __( 'Form fields', 'peprodev-ups' ), __( 'Labels and inputs of the login form and the dashboard forms.', 'peprodev-ups' ) ),
+			'fonts'   => array( __( 'Font sizes', 'peprodev-ups' ), __( 'Sizes in pixels for the modern login form and dashboard. Empty keeps the built-in size shown in the field.', 'peprodev-ups' ) ),
 		)
 	);
 }
@@ -105,6 +119,18 @@ function peprodev_ui_color_value( $key ) {
 	$saved = peprodev_ui_texts_saved();
 	$color = isset( $saved[ $key ] ) ? sanitize_hex_color( (string) $saved[ $key ] ) : '';
 	return $color ? strtolower( $color ) : '';
+}
+
+/**
+ * Saved font size of a setting in pixels, 0 when not set.
+ *
+ * @param string $key Field key.
+ * @return int
+ */
+function peprodev_ui_size_value( $key ) {
+	$saved = peprodev_ui_texts_saved();
+	$size  = isset( $saved[ $key ] ) ? absint( $saved[ $key ] ) : 0;
+	return $size >= 8 && $size <= 72 ? $size : 0;
 }
 
 /**
@@ -144,6 +170,7 @@ function peprodev_ui_design_declarations() {
 			$values[ $key ] = peprodev_ui_color_value( $key );
 		}
 	}
+	$values += array( 'd_btn_bg' => '', 'd_btn_hover_bg' => '', 'd_btn_text' => '', 'd_btn_hover_text' => '' );
 	// a button background without its own hover / text colors gets matching ones
 	if ( '' !== $values['d_btn_bg'] ) {
 		if ( '' === $values['d_btn_hover_bg'] ) {
@@ -160,6 +187,14 @@ function peprodev_ui_design_declarations() {
 	foreach ( $values as $key => $value ) {
 		if ( '' !== $value ) {
 			$out[] = $fields[ $key ][2] . ':' . $value;
+		}
+	}
+	foreach ( $fields as $key => $field ) {
+		if ( 'size' === $field[3] && '' !== $field[2] ) {
+			$size = peprodev_ui_size_value( $key );
+			if ( $size ) {
+				$out[] = $field[2] . ':' . $size . 'px';
+			}
 		}
 	}
 	return (array) apply_filters( 'peprodev_ui_design_declarations', $out );
@@ -216,7 +251,7 @@ function peprodev_ui_render_design_screen() {
 			<div class="card">
 				<div class="card-header card-header-primary">
 					<h4 class="card-title"><?php esc_html_e( 'Modern UI Design', 'peprodev-ups' ); ?></h4>
-					<p class="card-category"><?php esc_html_e( 'Colors of the modern login form and user dashboard. Leave a field empty to keep the built-in design (or the colors of your theme).', 'peprodev-ups' ); ?></p>
+					<p class="card-category"><?php esc_html_e( 'Colors and font sizes of the modern login form and user dashboard. Leave a field empty to keep the built-in design (or the colors of your theme).', 'peprodev-ups' ); ?></p>
 				</div>
 				<div class="card-body">
 					<div class="row">
@@ -239,7 +274,15 @@ function peprodev_ui_render_design_screen() {
 									<?php foreach ( $rows as $key => $field ) : ?>
 										<div class="pd-design-row">
 											<label for="pd_design_<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $field[1] ); ?></label>
-											<div><?php peprodev_ui_render_color_field( $key, 'pd_design_' . $key, false, $field[4] ); ?></div>
+											<div>
+												<?php if ( 'size' === $field[3] ) : ?>
+													<div class="pd-size-field">
+														<input type="number" min="8" max="72" step="1" class="form-input" dir="ltr" id="pd_design_<?php echo esc_attr( $key ); ?>" data-ui-key="<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr( peprodev_ui_size_value( $key ) ? peprodev_ui_size_value( $key ) : '' ); ?>" placeholder="<?php echo esc_attr( $field[4] ); ?>" /> <span>px</span>
+													</div>
+												<?php else : ?>
+													<?php peprodev_ui_render_color_field( $key, 'pd_design_' . $key, false, $field[4] ); ?>
+												<?php endif; ?>
+											</div>
 										</div>
 									<?php endforeach; ?>
 								</div>
@@ -263,6 +306,8 @@ function peprodev_ui_render_design_screen() {
 		#pd-design .pd-design-row>label{margin:0;color:inherit;font-weight:500}
 		#pd-design .pd-design-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 		#pd-design .pd-color-field .form-input{flex-basis:110px}
+		#pd-design .pd-size-field{display:flex;align-items:center;gap:6px}
+		#pd-design .pd-size-field .form-input{width:90px;margin:0}
 	</style>
 	<script type="text/javascript">
 		(function ($) {

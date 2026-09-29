@@ -95,7 +95,7 @@
 .mj-login-ui-on #pepro-profile .mj-head__title {
   margin: 0 0 .4rem;
   font-family: var(--mj-font-title);
-  font-size: 1.75rem;
+  font-size: var(--mj-fs-login-title, 1.75rem);
   font-weight: 800;
   line-height: 1.3;
   color: var(--mj-heading, var(--mj-ink));
@@ -103,7 +103,7 @@
 
 .mj-login-ui-on #pepro-profile .mj-head__subtitle {
   margin: 0;
-  font-size: .95rem;
+  font-size: var(--mj-fs-desc, .95rem);
   line-height: 1.8;
   color: var(--mj-muted);
 }
@@ -155,7 +155,7 @@
   background: transparent;
   box-shadow: none;
   font: inherit;
-  font-size: 1rem;
+  font-size: var(--mj-fs-tab, 1rem);
   font-weight: 600;
   line-height: 1.4;
   color: var(--mj-tab-text, var(--mj-muted));
@@ -192,7 +192,7 @@
   margin: 0 0 .5rem;
   padding: 0;
   background: none;
-  font-size: .9rem;
+  font-size: var(--mj-fs-label, .9rem);
   font-weight: 500;
   line-height: 1.5;
   color: var(--mj-label, var(--mj-muted));
@@ -222,7 +222,7 @@
   background: var(--mj-input-bg, var(--mj-surface));
   box-shadow: none;
   font-family: var(--mj-font);
-  font-size: 1.05rem;
+  font-size: var(--mj-fs-input, 1.05rem);
   color: var(--mj-ink);
   transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
 }
@@ -397,7 +397,7 @@
   background: var(--mj-btn-bg, var(--mj-primary));
   box-shadow: 0 8px 18px -10px color-mix(in srgb, var(--mj-primary) 80%, transparent);
   font-family: var(--mj-font);
-  font-size: 1.05rem;
+  font-size: var(--mj-fs-btn, 1.05rem);
   font-weight: 700;
   color: var(--mj-btn-text, var(--mj-on-primary));
   text-transform: none;
@@ -470,7 +470,7 @@
   justify-content: space-between;
   align-items: center;
   gap: .75rem 1.5rem;
-  font-size: .9rem;
+  font-size: var(--mj-fs-link, .9rem);
   color: var(--mj-muted);
 }
 
@@ -524,7 +524,7 @@
   background: transparent;
   box-shadow: none;
   font: inherit;
-  font-size: .95rem;
+  font-size: var(--mj-fs-link, .95rem);
   font-weight: 600;
   line-height: 1.5;
   color: var(--mj-link, var(--mj-primary));

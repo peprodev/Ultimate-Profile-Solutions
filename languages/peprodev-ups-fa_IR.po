@@ -6105,3 +6105,47 @@ msgstr "تنظیمات ذخیره شد."
 #: login/include/class-activated.php
 msgid "Clear all (built-in design)"
 msgstr "پاک کردن همه (طراحی پیش‌فرض)"
+
+#: login/include/class-activated.php
+msgid "Dashboard text"
+msgstr "متن پیشخوان"
+
+#: login/include/class-activated.php
+msgid "Page titles"
+msgstr "عنوان صفحه‌ها"
+
+#: login/include/class-activated.php
+msgid "Login form title"
+msgstr "عنوان فرم ورود"
+
+#: login/include/class-activated.php
+msgid "Card titles"
+msgstr "عنوان کارت‌ها"
+
+#: login/include/class-activated.php
+msgid "Descriptions under titles"
+msgstr "توضیح زیر عنوان‌ها"
+
+#: login/include/class-activated.php
+msgid "Table header"
+msgstr "سرستون جدول"
+
+#: login/include/class-activated.php
+msgid "Field text"
+msgstr "متن فیلدها"
+
+#: login/include/class-activated.php
+msgid "Login form links"
+msgstr "لینک‌های فرم ورود"
+
+#: login/include/class-activated.php
+msgid "Font sizes"
+msgstr "اندازه فونت‌ها"
+
+#: login/include/class-activated.php
+msgid "Sizes in pixels for the modern login form and dashboard. Empty keeps the built-in size shown in the field."
+msgstr "اندازه‌ها به پیکسل، برای فرم ورود و پیشخوان جدید. خالی بماند، اندازه پیش‌فرضی که در فیلد نوشته شده استفاده می‌شود."
+
+#: login/include/class-activated.php
+msgid "Colors and font sizes of the modern login form and user dashboard. Leave a field empty to keep the built-in design (or the colors of your theme)."
+msgstr "رنگ‌ها و اندازه فونت‌های فرم ورود و پیشخوان جدید. هر فیلدی را خالی بگذارید تا طراحی پیش‌فرض (یا رنگ‌های قالب شما) حفظ شود."

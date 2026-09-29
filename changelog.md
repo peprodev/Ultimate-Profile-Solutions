@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.2.33](#version-8233)
 - [Version 8.2.32](#version-8232)
 - [Version 8.2.31](#version-8231)
 - [Version 8.2.30](#version-8230)
@@ -99,6 +100,10 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.2.33
+- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- **New** Font sizes on the "Modern UI Design" screen (in px): dashboard text, page titles, login form title, card titles, descriptions, buttons, tabs, sidebar menu, table text and header, field labels, field text and login form links; the stylesheets read them as `--mj-fs-*` custom properties with the built-in sizes as fallback
 
 ## Version 8.2.32
 - Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)

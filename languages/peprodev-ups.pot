@@ -5764,3 +5764,47 @@ msgstr ""
 #: login/include/class-activated.php
 msgid "Clear all (built-in design)"
 msgstr ""
+
+#: login/include/class-activated.php
+msgid "Dashboard text"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Page titles"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Login form title"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Card titles"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Descriptions under titles"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Table header"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Field text"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Login form links"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Font sizes"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Sizes in pixels for the modern login form and dashboard. Empty keeps the built-in size shown in the field."
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Colors and font sizes of the modern login form and user dashboard. Leave a field empty to keep the built-in design (or the colors of your theme)."
+msgstr ""

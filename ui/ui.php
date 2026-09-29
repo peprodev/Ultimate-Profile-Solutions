@@ -358,7 +358,7 @@ function peprodev_ui_text_url( $key ) {
 function peprodev_ui_texts_register() {
 	$saved = peprodev_ui_texts_saved();
 	foreach ( peprodev_ui_texts_fields() as $key => $field ) {
-		if ( in_array( $field[3], array( 'checkbox', 'color' ), true ) || ! isset( $saved[ $key ] ) || '' === trim( (string) $saved[ $key ] ) ) {
+		if ( in_array( $field[3], array( 'checkbox', 'color', 'size' ), true ) || ! isset( $saved[ $key ] ) || '' === trim( (string) $saved[ $key ] ) ) {
 			continue;
 		}
 		do_action( 'wpml_register_single_string', 'peprodev-ups', peprodev_ui_texts_wpml_name( $key ), (string) $saved[ $key ] );
@@ -420,7 +420,10 @@ function peprodev_ui_texts_save_input( $input ) {
 			$data[ $key ] = in_array( $raw, array( '1', 'yes', 'true', 'on' ), true ) ? '1' : '0';
 			continue;
 		}
-		if ( 'color' === $field[3] ) {
+		if ( 'size' === $field[3] ) {
+			$size  = absint( $raw );
+			$value = $size >= 8 && $size <= 72 ? (string) $size : '';
+		} elseif ( 'color' === $field[3] ) {
 			$value = (string) sanitize_hex_color( trim( $raw ) );
 		} elseif ( 'url' === $field[3] ) {
 			$value = preg_match( '/^\{[a-z_]+\}$/', trim( $raw ) ) ? trim( $raw ) : esc_url_raw( $raw );
