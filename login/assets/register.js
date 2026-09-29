@@ -723,6 +723,8 @@ jQuery.noConflict();
       $(this).addClass("active show");
       $(".tab-pane.active.show").removeClass("active show");
       $($(this).attr("href")).addClass("active show")
+      // code editors created inside a hidden tab need a resize once shown
+      if (window.ace) $($(this).attr("href")).find(".ace_editor").each(function(){ ace.edit(this).resize(); });
       history.replaceState(undefined, undefined, $(this).attr("href"))
     });
     $(document).on("click tap", "#copyshortcode", function(e){

@@ -5466,3 +5466,23 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "https://pepro.dev/"
 msgstr "https://pepro.dev/"
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "SMS Verification"
+msgstr "تایید پیامکی"
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Email Verification"
+msgstr "تایید ایمیلی"
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Choose the SMS provider, set up the verification code and send a test SMS from here."
+msgstr "ارائه‌دهنده پیامک را انتخاب کنید، کد تایید را تنظیم کنید و از همین‌جا پیامک آزمایشی بفرستید."
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Set the sender, subject and template of the email that carries the verification code."
+msgstr "فرستنده، موضوع و قالب ایمیل حاوی کد تایید را از اینجا تنظیم کنید."

@@ -73,7 +73,10 @@ foreach ($styleFiles as $style) {
               <a class="nav-link" href="#tab_registration"><i class="material-icons">app_registration</i> <?php echo esc_html_x("Login & Registration", "login-section", "peprodev-ups"); ?></a>
             </li>
             <li class="nav-item tab_verification">
-              <a class="nav-link" href="#tab_verification"><i class="material-icons">how_to_reg</i> <?php echo esc_html_x("Verification", "login-section", "peprodev-ups"); ?></a>
+              <a class="nav-link" href="#tab_verification"><i class="material-icons">sms</i> <?php echo esc_html_x("SMS Verification", "login-section", "peprodev-ups"); ?></a>
+            </li>
+            <li class="nav-item tab_email_verification">
+              <a class="nav-link" href="#tab_email_verification"><i class="material-icons">mark_email_read</i> <?php echo esc_html_x("Email Verification", "login-section", "peprodev-ups"); ?></a>
             </li>
             <li class="nav-item tab_redirection">
               <a class="nav-link" href="#tab_redirection"><i class="material-icons">call_split</i> <?php echo esc_html_x("Redirection", "login-section", "peprodev-ups"); ?></a>
@@ -487,8 +490,8 @@ foreach ($styleFiles as $style) {
       <div class="tab-pane" id="tab_verification">
         <div class="card">
           <div class="card-header card-header-primary">
-            <h4 class="card-title"><?php echo esc_html_x("Verification & Extras", "login-section", "peprodev-ups"); ?></h4>
-            <p class="card-category"><?php echo esc_html_x("You can control how verification and some extra feature works from here", "login-section", "peprodev-ups"); ?></p>
+            <h4 class="card-title"><?php echo esc_html_x("SMS Verification", "login-section", "peprodev-ups"); ?></h4>
+            <p class="card-category"><?php echo esc_html_x("Choose the SMS provider, set up the verification code and send a test SMS from here.", "login-section", "peprodev-ups"); ?></p>
           </div>
           <div class="card-body">
             <div class="row">
@@ -532,16 +535,6 @@ foreach ($styleFiles as $style) {
                     </div>
                   </div>
                 </div>
-                <div class="card sms-gateways-settings gatewayssettings">
-                  <?php
-                  foreach ($gateways as $i => $g) {
-                    if (is_callable($g["fn_setting"])) {
-                      $setting = call_user_func($g["fn_setting"]);
-                      echo "<div class='card-body $i hide'><div class='row justify-content-between save_sms_settings $i'>$setting</div></div>";
-                    }
-                  }
-                  ?>
-                </div>
                 <div class="card login-authexpire save_sms_settings">
                   <div class='card-body'>
                     <p class="text-bold"><?php echo esc_html_x("Auth. Expiration", "login-section", "peprodev-ups"); ?></p>
@@ -562,6 +555,35 @@ foreach ($styleFiles as $style) {
                 </div>
               </div>
               <div class="col-lg-6">
+                <div class="card sms-gateways-settings gatewayssettings">
+                  <?php
+                  foreach ($gateways as $i => $g) {
+                    if (is_callable($g["fn_setting"])) {
+                      $setting = call_user_func($g["fn_setting"]);
+                      echo "<div class='card-body $i hide'><div class='row justify-content-between save_sms_settings $i'>$setting</div></div>";
+                    }
+                  }
+                  ?>
+                </div>
+              </div>
+            </div>
+            <br>
+            <button class="login-section-save btn btn-success btn-primary icn-btn btn-wide" integrity="<?php echo esc_attr(wp_create_nonce('peprocorenounce')); ?>" wparam="loginregister" lparam="savelogin" dparam="" fn="">
+              <i class='material-icons'>save</i> <?php echo esc_html_x("Save Settings", "login-section", "peprodev-ups"); ?>
+            </button>
+            <?php echo PeproDevUPS_WPML::admin_link_html(); ?>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="tab_email_verification">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title"><?php echo esc_html_x("Email Verification", "login-section", "peprodev-ups"); ?></h4>
+            <p class="card-category"><?php echo esc_html_x("Set the sender, subject and template of the email that carries the verification code.", "login-section", "peprodev-ups"); ?></p>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-5">
                 <div class="card">
                   <div class="card-body">
                     <div class="row justify-content-between save_email_settings ">
@@ -598,6 +620,14 @@ foreach ($styleFiles as $style) {
                           <input autocomplete="off" type="text" id="verification_email_sender" title="<?php echo "e.g. Enter noreply to send mail from noreply@" . wp_parse_url(get_bloginfo('url'), PHP_URL_HOST); ?>" placeholder="<?php echo "e.g. Enter noreply to send mail from noreply@" . wp_parse_url(get_bloginfo('url'), PHP_URL_HOST); ?>" dir="ltr" class='form-input single-required mr-2' name="verification_email_sender" value="<?php echo esc_attr($this->verification_email_sender); ?>" />
                         </div>
                       </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-7">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row justify-content-between save_email_settings ">
                       <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-verification_email_subject '>
                         <div class="col-lg-12">
                           <p class="text-bold"><?php esc_html_e("Verification Email Subject", "peprodev-ups"); ?></p>

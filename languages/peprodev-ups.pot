@@ -5125,3 +5125,23 @@ msgstr ""
 #, php-format
 msgid "Default: %s"
 msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "SMS Verification"
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Email Verification"
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Choose the SMS provider, set up the verification code and send a test SMS from here."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Set the sender, subject and template of the email that carries the verification code."
+msgstr ""
