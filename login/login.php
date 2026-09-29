@@ -472,7 +472,15 @@ if (!class_exists("PeproDevUPS_Login")) {
       }
     }
     public function shortcode__current_url() {
-      return get_the_permalink();
+      return esc_url((string) get_the_permalink());
+    }
+    /**
+     * Shortcode "trigger" attribute: a comma separated CSS selector list. Markup characters are
+     * removed, so jQuery can never read it as HTML ( $("<img onerror=...>") ).
+     */
+    public function sanitize_trigger_selector($trigger = "") {
+      $trigger = wp_strip_all_tags(html_entity_decode((string) $trigger, ENT_QUOTES, "UTF-8"));
+      return trim((string) preg_replace('/[<>`\\\\]/', "", $trigger));
     }
     public function checkout_validate_mobile($fields, $errors) {
       if (isset($fields["billing_phone"])) {
@@ -529,20 +537,20 @@ if (!class_exists("PeproDevUPS_Login")) {
         <div class="pss-subcontainer">
           <div class="pss-input-container pssname">
             <input type="text" id="pssname" onchange="this.setAttribute('value', this.value.trim());" required autocomplete="off" name="pssname" value="<?php echo (get_current_user_id() ? esc_attr(get_the_author_meta("display_name", get_current_user_id())) : ""); ?>" />
-            <label for="pssname"><?php echo $name; ?></label>
+            <label for="pssname"><?php echo esc_html($name); ?></label>
           </div>
           <div class="pss-input-container pssmobile">
             <input type="text" id="pssmobile" onchange="this.setAttribute('value', this.value.trim());" required autocomplete="off" name="pssmobile" value="<?php echo (get_current_user_id() ? esc_attr(get_the_author_meta("user_mobile", get_current_user_id())) : ""); ?>" />
-            <label for="pssmobile"><?php echo $mobile; ?></label>
+            <label for="pssmobile"><?php echo esc_html($mobile); ?></label>
           </div>
           <div class="pss-input-container pssverify hide">
             <input type="text" id="pssverify" class="otp-verification" onchange="this.setAttribute('value', this.value.trim());" autocomplete="off" name="pssverify" value="" />
-            <label for="pssverify"><?php echo $verify; ?></label>
+            <label for="pssverify"><?php echo esc_html($verify); ?></label>
           </div>
           <div class="pss-submit-container">
             <a href="javascript:;" style="display: none;" class="otp-changenum"><?php echo $this->change_number_text; ?></a>
             <a href="javascript:;" style="display: none;" class="otp-resend"><?php printf(__("Resend Code in (%s)", "peprodev-ups"), 60); ?></a>
-            <button type="submit" class="<?php echo $btnclass; ?>" id="pssverifysms"><?php echo $subscribe; ?></button>
+            <button type="submit" class="<?php echo esc_attr($btnclass); ?>" id="pssverifysms"><?php echo esc_html($subscribe); ?></button>
           </div>
         </div>
       </form>
@@ -601,10 +609,12 @@ if (!class_exists("PeproDevUPS_Login")) {
           $avatar = get_avatar($cur_user, $loggedin_avatar_size);
         }
         $matches = array();
+        // author input: safe HTML only; user fields are escaped below
+        $loggedin_text = wp_kses_post($loggedin_text);
         if (!empty($loggedin_text)) {
           preg_match('#\{(.*?)\}#', $loggedin_text, $matches);
           foreach ($matches as $match) {
-            $user_meta = in_array($match, array("user_pass", "user_activation_key", "session_tokens"), true) ? "" : get_the_author_meta($match, $cur_user);
+            $user_meta = $this->is_private_user_field($match) ? "" : get_the_author_meta($match, $cur_user);
             $loggedin_text = str_replace("{{$match}}", esc_html(is_scalar($user_meta) ? $user_meta : ""), $loggedin_text);
           }
         }
@@ -627,13 +637,24 @@ if (!class_exists("PeproDevUPS_Login")) {
         }</style>";
         echo "<a id='" . esc_attr($uniqid) . "' href='" . esc_url($loggedin_href) . "' class='peprodev-ultimate-profile-solution peprodev-smart-btn logged-in " . esc_attr($loggedin_class) . "'>{$avatar}$loggedin_text</a>";
       } else {
+        $trigger = $this->sanitize_trigger_selector($trigger);
         $trigger = !empty($trigger) ? ",$trigger" : "";
+        $loggedout_text = wp_kses_post($loggedout_text);
         echo "[pepro-login-popup trigger='#".esc_attr($uniqid . $trigger)."' title='".esc_attr($login_popup_title)."' reg_title='".esc_attr($register_popup_title)."' reset_title='".esc_attr($resetpass_popup_title)."' active='".esc_attr($loggedout_form)."'] <a id='".esc_attr($uniqid)."' href='".esc_attr($profile_url)."' class='peprodev-ultimate-profile-solution peprodev-smart-btn logged-out ".esc_attr($loggedout_class)."'>$loggedout_text</a>";
       }
 
       $htmloutput = ob_get_contents();
       ob_end_clean();
       return do_shortcode($htmloutput);
+    }
+    /**
+     * User fields the Smart Button text may print ({display_name} ...). Anything else (password hash, keys,
+     * OTP codes, contact data) could be placed by a post author inside an image URL and leak from every viewer.
+     * Extend with the "peprodev_ups_public_user_fields" filter.
+     */
+    public function is_private_user_field($key = "") {
+      $public = (array) apply_filters("peprodev_ups_public_user_fields", array("first_name", "last_name", "display_name", "nickname", "description", "user_firstname", "user_lastname", "user_nicename", "user_url"));
+      return !in_array(strtolower(trim((string) $key)), $public, true);
     }
     public function shortcode__check_loggedin($params, $content = null) {
       if (is_user_logged_in()) {
@@ -1102,15 +1123,16 @@ if (!class_exists("PeproDevUPS_Login")) {
         'class'    => '',
         'extras'   => '',
       ), $atts));
-      $link = is_user_logged_in() ? esc_url(wp_logout_url($redirect)) : "#";
+      // CVE-2026-4791: button/extras are author input, only safe HTML is kept
+      $link = is_user_logged_in() ? esc_url(wp_logout_url(esc_url_raw((string) $redirect))) : "#";
       if (!empty($button)) {
-        return "<a href='$link' class='" . esc_attr($class) . "' >$button</a>";
+        return "<a href='$link' class='" . esc_attr($class) . "' >" . wp_kses_post($button) . "</a>";
       }
       if (!empty($extras)) {
-        return str_replace("{url}", $link, $extras);
+        return str_replace("{url}", $link, wp_kses_post($extras));
       }
       if (!empty($content)) {
-        return str_replace("{url}", $link, $content);
+        return str_replace("{url}", $link, wp_kses_post($content));
       }
       return $link;
     }
@@ -1249,6 +1271,8 @@ if (!class_exists("PeproDevUPS_Login")) {
           'loggedout'   => 'yes',
         ), $atts)
       );
+      // shortcode attributes are author input: a CSS selector for trigger, HTML only through wp_kses_post
+      $trigger = $this->sanitize_trigger_selector($trigger);
       ob_start();
       $uniqd = uniqid("pepro_reg_login_");
       $condition = !is_user_logged_in();
@@ -1292,7 +1316,7 @@ if (!class_exists("PeproDevUPS_Login")) {
               </div>
               <?php
             }
-            echo $before;
+            echo wp_kses_post($before);
             if ($this->show_mobile_login_form) {
               ?>
               <!-- PeproDev Ultimate Profile Solutions SMS Login Form -->
@@ -1422,7 +1446,7 @@ if (!class_exists("PeproDevUPS_Login")) {
               </form>
               <?php
             }
-            echo $after;
+            echo wp_kses_post($after);
             // e.g. "Sign in with Google" button under the forms
             do_action("pepro_reglogin_form_bottom", array("redirect_to" => $def_redirect_to, "active" => $active));
           }
@@ -1453,8 +1477,12 @@ if (!class_exists("PeproDevUPS_Login")) {
         'after_popup'  => '',
         'extras'       => '',
       ), $atts));
+      $trigger      = $this->sanitize_trigger_selector($trigger);
+      $extras       = wp_kses_post($extras);
+      $before_popup = wp_kses_post($before_popup);
+      $after_popup  = wp_kses_post($after_popup);
       ob_start();
-      if (!empty($button)) { $extras = "<a href='javascript:;' data-trigger='" . esc_attr($trigger) . "' class='" . esc_attr($class) . "'>$button</a>$extras"; }
+      if (!empty($button)) { $extras = "<a href='javascript:;' data-trigger='" . esc_attr($trigger) . "' class='" . esc_attr($class) . "'>" . wp_kses_post($button) . "</a>$extras"; }
       echo "<div style='display: none;' data-trigger-ref='" . esc_attr($trigger) . "' class='pepro-regpepro-login-popup-wrapper'>{$before_popup}" . $this->shortcode__pepro_login_form(array(
           "before"    => $before,
           "class"     => "popup-from",

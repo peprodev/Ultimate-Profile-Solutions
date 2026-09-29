@@ -184,6 +184,25 @@ See [changelog.md](changelog.md) for the full history.
 
 Fork the [GitHub repository](https://github.com/peprodev/Ultimate-Profile-Solutions) and open a pull request. Please report security issues privately through Patchstack or [support@pepro.dev](mailto:support@pepro.dev) rather than in public issues.
 
+### Security fixes
+
+**8.2.29: CVE-2026-4791 (CVSS 6.4, stored XSS, Contributor+)** and a review of every shortcode for the same class of issue. Shortcode attributes are written by any post author, and WordPress unescapes `\x3c`-style sequences in them after kses has cleaned the post, so every attribute is now escaped or filtered where it is printed:
+
+| Shortcode | Fixed |
+|--|--|
+| `[logout-url]` | `button`, `extras` and the enclosed content are filtered with `wp_kses_post` (the reported issue), `redirect` is URL-sanitized |
+| `[pepro-login-popup]` / `[pepro-login-form]` | `button`, `extras`, `before`, `after`, `before_popup`, `after_popup` filtered with `wp_kses_post`; `trigger` is reduced to a CSS selector and queried as a selector only in the front-end script |
+| `[pepro-smart-btn]` | `loggedin_text` / `loggedout_text` filtered with `wp_kses_post`; `trigger` as above; `{field}` placeholders only for public profile fields |
+| `[pepro-profile-url]` | `button`, `extras`, content filtered; `section` sanitized; the link is escaped |
+| `[user]` | `default` escaped; `meta` only prints public profile fields (first/last/display name, nickname, description, URL). Before, `meta="pass"`, OTP codes or contact data of the viewer could be printed, e.g. inside an image URL of a post |
+| `[profile-card-1]` … `[profile-card-4]` | `style`, `padding`, `bg_color` pass through `safecss_filter_attr` and are escaped; the enclosed content is filtered and no longer unescaped with `stripcslashes` |
+| `[profile-ld-enrolled]` | `user_id` of another user only for users who can list users |
+| `[profile-wc-orders]` | `limit` is an integer and its query filter is removed after use |
+| `[pepro-sms-subscription]` | labels and button class escaped |
+| `[current_url]` | escaped URL |
+
+Sites that need more user fields in `[user meta=""]` or the Smart Button text can add them with the `peprodev_ups_public_user_fields` filter (array of field names).
+
 ## Privacy
 
 The plugin does not collect or transmit any data to its authors. SMS and email are sent only through the gateways you configure.

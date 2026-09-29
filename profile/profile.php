@@ -930,7 +930,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
             <div class="row">
               <div class="col-md-12">
                 <div class="overview-wrap">
-                  <h2 class="title-2"><?php echo $catName ?></h2>
+                  <h2 class="title-2"><?php echo esc_html($catName); ?></h2>
                 </div>
               </div>
             </div>
@@ -1039,8 +1039,10 @@ if (!class_exists("PeproDevUPS_Profile")) {
         "user_id" => "",
         "category" => "",
       ), $atts));
-      if (empty($user_id)) $user_id = get_current_user_id();
-      if (empty($user_id)) return array();
+      // another user's courses only for those who may list users
+      if (empty($user_id) || !current_user_can("list_users")) $user_id = get_current_user_id();
+      $user_id = absint($user_id);
+      if (empty($user_id)) return "";
       $courses = learndash_user_get_enrolled_courses($user_id, array(), true);
       $printesomething = false;
       $array_categories = array();
@@ -1069,7 +1071,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
             <div class="row">
               <div class="col-md-12">
                 <div class="overview-wrap">
-                  <h2 class="title-2"><?php echo $catName ?></h2>
+                  <h2 class="title-2"><?php echo esc_html($catName); ?></h2>
                 </div>
               </div>
             </div>
@@ -1155,7 +1157,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
     }
     public function peprofile_shortcode_card_1($atts = array(), $content = "") {
       $atts = extract(shortcode_atts(array('class' => '', 'style' => ""), $atts));
-      return "<div class=\"row " . esc_attr($class) . "\"><div class=\"col-12 alert-primary-top\"><div class=\"au-card recent-report\" style='$style'><div class=\"au-card-inner\">" . $this->filter_content($content) . "</div></div></div></div>";
+      return "<div class=\"row " . esc_attr($class) . "\"><div class=\"col-12 alert-primary-top\"><div class=\"au-card recent-report\" style='" . esc_attr(safecss_filter_attr($style)) . "'><div class=\"au-card-inner\">" . $this->filter_shortcode_content($content) . "</div></div></div></div>";
     }
     public function peprofile_shortcode_card_2($atts = array(), $content = "") {
       $atts = extract(shortcode_atts(array('title' => '', 'class' => ''), $atts));
@@ -1163,7 +1165,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                             <div class="col-12">
                               <div class="card">
                                 <div class="card-header">' . esc_html($title) . '</div>
-                                <div class="card-body">' . $this->filter_content($content) . '</div>
+                                <div class="card-body">' . $this->filter_shortcode_content($content) . '</div>
                               </div>
                             </div>
                           </div>';
@@ -1173,13 +1175,13 @@ if (!class_exists("PeproDevUPS_Profile")) {
       return '<div class="row ' . esc_attr($class) . '">
             <div class="col-lg-12">
               <div class="au-card au-card--no-shadow au-card--no-pad m-b-40">
-                <div class="au-card-title" style="padding: ' . $padding . ';">
-                  <div class="bg-overlay bg-overlay--blue" style="background: ' . $bg_color . ';"></div>
+                <div class="au-card-title" style="' . esc_attr(safecss_filter_attr("padding: {$padding}")) . '">
+                  <div class="bg-overlay bg-overlay--blue" style="' . esc_attr(safecss_filter_attr("background: {$bg_color}")) . '"></div>
                   <h3 style="margin: 0 !important;padding: 0 !important;"><i class="' . esc_attr($icon) . '"></i>' . esc_html($title) . '</h3>
                 </div>
                 <div class="au-inbox-wrap js-inbox-wrap">
                   <div class="au-message js-list-load">
-                    <div class="au-message-list" style="height: auto;padding: 2rem 1rem;">' . $this->filter_content($content) . '</div>
+                    <div class="au-message-list" style="height: auto;padding: 2rem 1rem;">' . $this->filter_shortcode_content($content) . '</div>
                   </div>
                 </div>
               </div>
@@ -1195,7 +1197,7 @@ if (!class_exists("PeproDevUPS_Profile")) {
                   <thead>
                     <tr><th><span class="nobr">' . esc_html($title) . '</span></th></tr>
                   </thead>
-                  <tbody><tr><td style="white-space: normal;">' . $this->filter_content($content) . '</td></tr></tbody>
+                  <tbody><tr><td style="white-space: normal;">' . $this->filter_shortcode_content($content) . '</td></tr></tbody>
                 </table>
               </div>
             </div>
@@ -1291,12 +1293,15 @@ if (!class_exists("PeproDevUPS_Profile")) {
     public function peprofile_shortcode_wc_orders($atts = array(), $content = "") {
       if (!$this->_wc_activated()) return "";
       $atts = extract(shortcode_atts(array('limit' => '10'), $atts));
+      $limit = max(1, absint($limit));
       ob_start();
-      add_filter('woocommerce_my_account_my_orders_query', function ($a) use ($limit) {
+      $set_limit = function ($a) use ($limit) {
         $a["limit"] = $limit;
         return $a;
-      }, 10, 1);
+      };
+      add_filter('woocommerce_my_account_my_orders_query', $set_limit, 10, 1);
       $this->peprofile_get_template_part("wc/orders");
+      remove_filter('woocommerce_my_account_my_orders_query', $set_limit, 10);
       $tcona = ob_get_contents();
       ob_end_clean();
       return $tcona;
@@ -1305,14 +1310,16 @@ if (!class_exists("PeproDevUPS_Profile")) {
       $atts = extract(shortcode_atts(array('meta' => '', 'default' => ''), $atts));
       if (!get_current_user_id()) {
         if (!empty($default)) {
-          return $default;
+          return esc_html($default);
         }
         return do_shortcode($content);
       }
       if (empty($meta)) {
         $meta = "first_name";
       }
-      if (in_array($meta, array("user_pass", "user_activation_key", "session_tokens"), true)) return "";
+      // only public profile fields: anything else (password hash, keys, OTP codes, contact data) could be
+      // placed by a post author inside an image URL and leak from every viewer
+      if (!in_array($meta, $this->public_user_fields(), true)) return "";
       $value = get_the_author_meta($meta, get_current_user_id());
       return is_scalar($value) ? esc_html($value) : "";
     }
@@ -1323,18 +1330,20 @@ if (!class_exists("PeproDevUPS_Profile")) {
         'section' => '',
         'extras'  => '',
       ), $atts));
+      $section = sanitize_key($section);
       $link = $this->get_profile_page(["i" => current_time("timestamp")]);
       if (!empty($section)) {
         $link = $this->get_profile_page(["section" => $section]);
       }
+      $link = esc_url($link);
       if (!empty($button)) {
-        return "<a href='$link' class='" . esc_attr($class) . "' >$button</a>";
+        return "<a href='$link' class='" . esc_attr($class) . "' >" . wp_kses_post($button) . "</a>";
       }
       if (!empty($extras)) {
-        return str_replace("{url}", $link, $extras);
+        return str_replace("{url}", $link, wp_kses_post($extras));
       }
       if (!empty($content)) {
-        return str_replace("{url}", $link, $content);
+        return str_replace("{url}", $link, wp_kses_post($content));
       }
       return $link;
     }
@@ -2610,6 +2619,20 @@ if (!class_exists("PeproDevUPS_Profile")) {
       );
     }
 
+    /**
+     * User fields the [user meta=""] shortcode may print. Extend with the "peprodev_ups_public_user_fields" filter.
+     * @return string[]
+     */
+    public function public_user_fields() {
+      return (array) apply_filters("peprodev_ups_public_user_fields", array("first_name", "last_name", "display_name", "nickname", "description", "user_firstname", "user_lastname", "user_nicename", "user_url"));
+    }
+    /**
+     * Content of the card shortcodes written by post authors: safe HTML only (no stripcslashes, which would
+     * turn escape sequences like \x3c into markup after kses already cleaned the post).
+     */
+    public function filter_shortcode_content($content = "", $obj = null) {
+      return apply_filters("peprofile_get_notifications_content", do_shortcode(wpautop(wp_kses_post((string) $content))), $content, $obj);
+    }
     public function filter_content($content = "", $obj = null) {
       // $content = apply_filters("the_content", $content );
       return apply_filters("peprofile_get_notifications_content", do_shortcode(wpautop(stripcslashes($content))), $content, $obj);

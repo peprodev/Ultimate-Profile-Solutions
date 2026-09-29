@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.2.29](#version-8229)
 - [Version 8.2.28](#version-8228)
 - [Version 8.2.27](#version-8227)
 - [Version 8.2.26](#version-8226)
@@ -95,6 +96,10 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.2.29
+- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- **Security** CVE-2026-4791 (CVSS 6.4): stored XSS by Contributor+ through `[logout-url button=""]`; fixed, plus a review of every shortcode for the same issue: `[pepro-login-popup]` / `[pepro-login-form]` (`button`, `extras`, `before`, `after`, `before_popup`, `after_popup`, `trigger`), `[pepro-smart-btn]` (texts, `trigger`, `{field}` placeholders), `[pepro-profile-url]` (`button`, `extras`, `section`, content), `[user]` (`default`; `meta` limited to public profile fields, it could print the viewer's password hash, OTP codes or contact data), `[profile-card-1..4]` (`style`, `padding`, `bg_color`, content no longer unescaped with stripcslashes), `[profile-ld-enrolled]` (`user_id` of others only for users who can list users), `[profile-wc-orders]` (`limit`), `[pepro-sms-subscription]`, `[current_url]`. The front-end script queries `trigger` as a selector only. New filter `peprodev_ups_public_user_fields`
 
 ## Version 8.2.28
 - Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)

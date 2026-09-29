@@ -5563,3 +5563,8 @@ msgstr ""
 #: login/include/class-activated.php
 msgid "Theme colors"
 msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "loggedin_text replaces one public user field written in braces: {first_name}, {last_name}, {display_name} or {nickname}."
+msgstr ""

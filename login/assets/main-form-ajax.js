@@ -112,11 +112,14 @@ jQuery.noConflict();
       var $error_color = "rgba(139, 2, 2, 0.8)";
       var $info_color = "rgba(2, 133, 139, 0.8)";
       if ("" !== _pepro_dev.trigger) {
-        if ($(_pepro_dev.trigger).length) {
-          $(_pepro_dev.trigger).attr("data-trigger", _pepro_dev.instance);
-          $(_pepro_dev.trigger).data("trigger", _pepro_dev.instance);
-          $(`[data-trigger-ref='${_pepro_dev.trigger}']`).attr("data-trigger-ref", _pepro_dev.instance);
-          $(`[data-trigger-ref='${_pepro_dev.trigger}']`).data("trigger-ref", _pepro_dev.instance);
+        // the trigger is a CSS selector from a shortcode attribute: query it as a selector only
+        // ($(string) would build HTML from "<img ...>"), and skip it when it is not a valid selector
+        var $triggers = $();
+        try { $triggers = $(document).find(String(_pepro_dev.trigger)); } catch (err) { $triggers = $(); }
+        if ($triggers.length) {
+          $triggers.attr("data-trigger", _pepro_dev.instance).data("trigger", _pepro_dev.instance);
+          $("[data-trigger-ref]").filter(function () { return $(this).attr("data-trigger-ref") === String(_pepro_dev.trigger); })
+            .attr("data-trigger-ref", _pepro_dev.instance).data("trigger-ref", _pepro_dev.instance);
         }
       }
 

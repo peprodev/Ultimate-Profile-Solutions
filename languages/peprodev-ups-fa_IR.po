@@ -5904,3 +5904,8 @@ msgstr "رنگ دکمه‌ها، حاشیه فوکوس و لینک‌های فر
 #: login/include/class-activated.php
 msgid "Theme colors"
 msgstr "رنگ‌های قالب"
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "loggedin_text replaces one public user field written in braces: {first_name}, {last_name}, {display_name} or {nickname}."
+msgstr "در loggedin_text یک فیلد عمومی کاربر داخل آکولاد جایگزین می‌شود: {first_name}، {last_name}، {display_name} یا {nickname}."

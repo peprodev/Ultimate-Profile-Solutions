@@ -132,7 +132,7 @@ foreach ($styleFiles as $style) {
           ),
           array(
             "title" => _x("First name only, without avatar", "smart-btn", "peprodev-ups"),
-            "desc"  => _x("loggedin_text replaces one user field written in braces, e.g. {first_name}, {display_name} or {user_email}.", "smart-btn", "peprodev-ups"),
+            "desc"  => _x("loggedin_text replaces one public user field written in braces: {first_name}, {last_name}, {display_name} or {nickname}.", "smart-btn", "peprodev-ups"),
             "code"  => "[pepro-smart-btn loggedin_avatar=\"no\"\nloggedin_text=\"{first_name}\" loggedin_href=\"/my-account\"]",
           ),
           array(
