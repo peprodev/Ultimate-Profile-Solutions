@@ -2,8 +2,8 @@
 Contributors: amirhpcom, peprodev, blackswanlab
 Donate link: https://peprodev.com/donate/
 Tags: profile, dashboard, login-registration
-Version: 8.2.35
-Stable tag: 8.2.35
+Version: 8.2.36
+Stable tag: 8.2.36
 Requires at least: 5.0
 Tested up to: 7.1
 Requires PHP: 7.2
@@ -158,6 +158,11 @@ Your support and feedback have been key in shaping this plugin into a reliable a
 🎂 Also, a big congratulations to WordPress on its 22nd birthday 🥳🍾!
 We're proud to be part of this amazing journey with the WordPress community 💙
 Here's to many more years of innovation, freedom, and open-source collaboration 😍!
+
+= 8.2.36 =
+Release date: 2026-09-29
+
+* Fixed: a horizontal scrollbar under some settings cards of the admin panel.
 
 = 8.2.35 =
 Release date: 2026-09-29
@@ -365,7 +370,7 @@ Release date: 2026-09-27
 
 == Upgrade Notice ==
 
-= 8.2.35 =
+= 8.2.36 =
 Security release: fixes CVE-2026-4791 (stored XSS through shortcode attributes) and hardens all shortcodes. Update as soon as possible.
 
 = 8.2.5 =

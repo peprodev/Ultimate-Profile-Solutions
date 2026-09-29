@@ -559,6 +559,13 @@ a.btncheckbox {
   width: 100%;
 }
 
+/* full-width buttons: the theme's 1px side margins made them 2px wider than their box,
+   which showed a horizontal scrollbar in .table-responsive cards */
+.btn.btn-wide {
+  margin-left: 0;
+  margin-right: 0;
+}
+
 a {
   cursor: pointer;
 }

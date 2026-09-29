@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.2.36](#version-8236)
 - [Version 8.2.35](#version-8235)
 - [Version 8.2.34](#version-8234)
 - [Version 8.2.33](#version-8233)
@@ -102,6 +103,10 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.2.36
+- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- **Fixed** Admin panel: cards with a full-width Save button (e.g. Profile > Modern UI) showed a horizontal scrollbar; the button's 1px side margins made it 2px wider than the card
 
 ## Version 8.2.35
 - Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
