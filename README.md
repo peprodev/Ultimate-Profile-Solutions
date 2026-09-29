@@ -32,7 +32,9 @@ Developed by **[Pepro Development Group](https://pepro.dev/)** / Lead Developer:
 - **Notifications and announcements** from admin to selected or all users.
 - **SMS gateways** for OTP: SMS.ir (v1, v2), FarazSMS / IranPayamak (new in 8.2), IPPanel (legacy FarazSMS API), Kavenegar, ParsGreen, the WP SMS and Persian WooCommerce SMS plugins (new in 8.2), and more through hooks.
 - **Mobile newsletter** subscription with CSV export.
-- **Verification emails** with a configurable subject, HTML template, placeholders, "Reset to default" and "Send test email".
+- **Verification emails** with a configurable subject (default `[site_name] | Verify Email`, "Restore default"), HTML template with **Code / Preview** tabs, placeholders, "Reset to default" and "Send test email".
+- **Modern UI Design** screen (new in 8.2.32): colors and font sizes of the modern login form and dashboard (buttons, tabs, links, sidebar menu, tables, cards, fields) with the Alwan color picker.
+- **Translate & Replace** (new in 8.2.35): change any translatable text of WordPress, LearnDash, WooCommerce or other plugins (gettext), and replace text in the HTML of post content, whole pages or WooCommerce emails; import/export as JSON.
 - **Modern UI** (new in 8.1.0, on by default since 8.2.0), see below.
 - **WPML / Polylang** translation of every admin-defined front-end text (new in 8.1.0), see below.
 - Works with Elementor, WPBakery, Zephyr and Woodmart themes, LearnDash, WooWallet, YITH plugins, PeproDev Ticketing and WooCommerce (HPOS compatible).
@@ -44,7 +46,9 @@ Version 8.1.0 added a modern presentation layer; since **8.2.0 it is on by defau
 | Setting | Where | What it changes |
 |--|--|--|
 | Modern login/register form | **PeproDev Profile > Login/Register > Login & Registration** (`admin.php?page=peprodev-ups&section=loginregister#tab_registration`) | Login/Register tabs, OTP code boxes (paste, autofill, auto-submit), a "Login/Register with email / with mobile" switch when both methods are enabled, styled registration fields |
-| Modern user dashboard, learning button and "My courses" texts | **PeproDev Profile > Profile** (`admin.php?page=peprodev-ups&section=profile`) | Restyled dashboard, new Edit profile view (inline WooCommerce address editing, avatar removal, password strength), redesigned order and course views |
+| Modern user dashboard | **PeproDev Profile > Profile** (`admin.php?page=peprodev-ups&section=profile`) | Restyled dashboard, new Edit profile view (inline WooCommerce address editing, avatar removal, password strength), redesigned order and course views |
+| Colors and font sizes | **PeproDev Profile > Modern UI Design** (`admin.php?page=peprodev-ups&section=uidesign`) | Accent, titles, cards, buttons, tabs, links, sidebar menu, tables and fields; font sizes in px. Empty = built-in design |
+| Learning button and "My courses" texts | **PeproDev Profile > LearnDash** (`admin.php?page=peprodev-ups&section=learndash`) | Texts and links of `[peprodev_learning_button]` and the My courses views |
 
 These settings are stored in the `modern_ui` key of the `peprodev_ups_profile` option; values from the 8.1 `peprodev_ups_ui_texts` option are copied there once (the old option is left untouched for downgrades).
 
@@ -55,7 +59,19 @@ define( 'PEPRODEV_UPS_UI_LOGIN', true );      // or false to force the classic f
 define( 'PEPRODEV_UPS_UI_DASHBOARD', true );  // or false to force the classic dashboard
 ```
 
-The modern dashboard templates live in `profile/libs/templates/modern/`. The design tokens (`ui/assets/css/tokens.css`) are CSS custom properties (`--mj-primary`, `--mj-radius`, ...) that a theme can override.
+The modern dashboard templates live in `profile/libs/templates/modern/`. The design tokens (`ui/assets/css/tokens.css`) are CSS custom properties (`--mj-primary`, `--mj-radius`, ...) that a theme can override. Since 8.2.32 the components read their own properties with fallbacks, e.g. `var(--mj-btn-bg, var(--mj-primary))`: `--mj-btn-*`, `--mj-tab-*`, `--mj-link*`, `--mj-nav-*`, `--mj-table-*`, `--mj-card-*`, `--mj-input-*`, `--mj-label`, `--mj-heading` and the font sizes `--mj-fs-*`. The Modern UI Design screen prints the saved values on `html:root`.
+
+## Translate & Replace
+
+**PeproDev Profile > Translate & Replace** (`admin.php?page=peprodev-ups&section=translate`), off until enabled:
+
+| Tab | What it does |
+|--|--|
+| Text translation | gettext rules for any text domain (`learndash`, `woocommerce`, `default`, ... or all): **whole text** (equal to the original or the shown translation) or **part of text**, optional WPML/Polylang language, per-rule Active switch, drag to reorder |
+| Page text replace | For texts that are not translatable: replace in **post content** (`the_content`), the **whole page** (front-end output buffer) or **WooCommerce emails** (`woocommerce_mail_content`) |
+| Import / Export | All rules and switches as JSON to move them between sites |
+
+Rules are stored in the `peprodev_ups_text_replace` option and are not applied on the plugin's own admin screens.
 
 ## Shortcodes
 
@@ -76,7 +92,7 @@ The modern dashboard templates live in `profile/libs/templates/modern/`. The des
 | `[profile-card-1]` ... `[profile-card-4]` | Profile summary cards |
 | `[profile-wc-stats]`, `[profile-wc-orders]`, `[profile-wc-downloads]` | WooCommerce statistics, orders and downloads of the current user |
 | `[profile-ld-enrolled]` | LearnDash courses of the current user |
-| `[peprodev_learning_button class=""]` | "Continue / Start learning" button (LearnDash); texts and links are set in PeproDev Profile > Profile. New in 8.1.0 |
+| `[peprodev_learning_button class=""]` | "Continue / Start learning" button (LearnDash); texts and links are set in PeproDev Profile > LearnDash. New in 8.1.0 |
 | `[pepro-google-login text="" redirect_to=""]` | "Sign in with Google" button. New in 8.2 |
 | `[peprodev_my_courses layout="home\|full"]` | "Continue learning" card and the user's LearnDash courses (`full` also lists expired courses). New in 8.1.0 |
 
@@ -120,6 +136,10 @@ Existing users (matched by their verified Google email) are logged in; new email
 | `pepro_reglogin_save_settings` | action | `(array $dparam)` save handler of that screen (nonce and capability already checked) |
 | `pepro_reglogin_social_login` | action | `(int $user_id, string $provider, bool $new_user)` after a social login |
 | `pepro_reglogin_sms_last_error` | filter | Reason of the last failed SMS send, shown by "Send a Test SMS" |
+| `peprodev_ups_public_user_fields` | filter | User fields that `[user meta=""]` and the Smart Button text may print (8.2.29) |
+| `peprodev_ui_accent_color` / `peprodev_ui_design_fields` / `peprodev_ui_design_sections` / `peprodev_ui_design_declarations` | filter | Accent color, fields, sections and CSS custom properties of the Modern UI Design screen (8.2.28+) |
+| `peprodev_ui_learndash_screen` / `peprodev_ui_learndash_save` | action | Add boxes to the LearnDash screen and save their data (8.2.34) |
+| `peprofile_find_profile_shortcode_page` | filter | Page reused as the dashboard page instead of creating a new one (8.2.30) |
 
 ## Hooks added in 8.1.0
 

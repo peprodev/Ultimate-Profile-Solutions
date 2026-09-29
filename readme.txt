@@ -73,6 +73,9 @@ Your support and feedback have been key in shaping this plugin into a reliable a
 * Modify default WordPress login design and behavior
 * SMS Providers: SMS.ir (v1, v2), FarazSMS / IranPayamak (Normal, Pattern), IPPanel (Normal, Pattern), Kavehnegar (Normal, Pattern), ParsGreen, and any provider of the WP SMS or Persian WooCommerce SMS plugins, with options to add more using hooks
 * Sign in with Google (OAuth 2.0 / OpenID Connect) with optional account creation
+* Modern UI Design screen: colors and font sizes of the modern login form and user dashboard
+* Translate & Replace: change any text of WordPress, LearnDash, WooCommerce or other plugins, and replace text in page HTML or WooCommerce emails
+* Verification email editor with Code / Preview tabs
 * Fully compatible with Elementor, Zephyr theme, Woodmart theme, Visual Composer, LearnDash, WooWallet, PeproDev Ticketing, WooCommerce, and more
 
 == Installation ==
@@ -131,7 +134,7 @@ Our professional development team is here to offer you a fully Customized-Pro ve
 Yes, unless you turned it off before. Since 8.2.0 the Modern UI (login/register form and user dashboard) is on by default, also for existing sites that never saved the setting. Sites that saved "off" on the 8.1 Dashboard Texts page keep it off. Turn it off under PeproDev Profile > Login/Register > Login & Registration (login form) and PeproDev Profile > Profile (dashboard), or with `define( 'PEPRODEV_UPS_UI_LOGIN', false );` / `define( 'PEPRODEV_UPS_UI_DASHBOARD', false );` in wp-config.php.
 
 = Where did the "Dashboard Texts" page go? =
-Its settings moved: the modern login form switch is in PeproDev Profile > Login/Register > Login & Registration, the modern dashboard switch, learning button and "My courses" texts are in PeproDev Profile > Profile. Saved values are migrated automatically.
+Its settings moved: the modern login form switch is in PeproDev Profile > Login/Register > Login & Registration, the modern dashboard switch in PeproDev Profile > Profile, and the learning button and "My courses" texts in PeproDev Profile > LearnDash. Colors and font sizes are in PeproDev Profile > Modern UI Design. Saved values are migrated automatically.
 
 = How do I set up Sign in with Google? =
 Create an OAuth client ID (Web application) in the Google Cloud Console, add the Authorized redirect URI shown in PeproDev Profile > Login/Register > Social Login, then paste the Client ID and Client Secret there and enable the option. New Google users get an account only when registration is open and "Create new users" is enabled. Use `[pepro-google-login]` to place the button anywhere.
@@ -141,6 +144,9 @@ Yes. Choose "WP SMS plugin" or "Persian WooCommerce SMS plugin" as SMS Provider 
 
 = Can I translate texts I entered in the plugin settings? =
 Yes. With WPML String Translation or Polylang active, registration fields, redirect rules, login header/footer HTML, email and SMS templates, dashboard texts and custom dashboard sections can be translated (context: peprodev-ups).
+
+= How do I change a text like "Course" to "Class"? =
+Open PeproDev Profile > Translate & Replace, enable "Text translation" and add a rule: Text to find "Course", Replace with "Class", Match "Whole text" (or "Part of text" to replace it inside longer texts), Text domain "learndash" (or empty for all plugins). For texts that are not translatable (written in content, printed by a theme or in email templates) use the "Page text replace" tab.
 
 = Where can I find the full changelog? =
 The full changelog is available in our [GitHub repository](https://github.com/peprodev/Ultimate-Profile-Solutions/blob/master/changelog.md).
