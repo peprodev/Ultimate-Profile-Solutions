@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.2.30](#version-8230)
 - [Version 8.2.29](#version-8229)
 - [Version 8.2.28](#version-8228)
 - [Version 8.2.27](#version-8227)
@@ -96,6 +97,10 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.2.30
+- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- **Improved** Profile settings: the address of the selected dashboard page is shown under the page select and follows the selection. **Fixed** the dashboard page is no longer created again when the plugin setting was lost: the saved page, or an existing page with the `[pepro-profile]` shortcode, is reused before a new "User Dashboard" page is made
 
 ## Version 8.2.29
 - Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)

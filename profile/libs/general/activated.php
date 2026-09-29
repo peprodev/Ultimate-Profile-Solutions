@@ -63,6 +63,14 @@ defined("ABSPATH") || exit;
                       $show_alert = true;
                     }
                    ?>
+                   <?php
+                    // page address shown under the select (all pages, so it follows the selection without a reload)
+                    $dash_links = array();
+                    foreach (get_pages(array("post_status" => "publish,private,draft")) as $dash_p) {
+                      $dash_links[$dash_p->ID] = urldecode((string) get_permalink($dash_p->ID));
+                    }
+                   ?>
+                   <div class="pd-page-slug small mt-2" dir="ltr" data-links="<?php echo esc_attr(wp_json_encode($dash_links)); ?>"><code><?php echo esc_html(isset($dash_links[$dashpage]) ? $dash_links[$dashpage] : ""); ?></code></div>
                    <small>
                    <a href="#" class="open-page"><?php echo __("View Page", $this->td);?></a> / <a href="#" class="edit-page"><?php echo __("Edit Page", $this->td);?></a> / <a href="#" class="edit-elementor"><?php echo __("Edit via Elementor", $this->td);?></a>
                    </small>
@@ -88,6 +96,10 @@ defined("ABSPATH") || exit;
                       var me = $(this);
                       var page_id = $("[name=profile_dash_page]").val();
                       window.open("<?php echo admin_url("post.php?action=elementor&post=");?>"+page_id);
+                    });
+                    $(document).on("change", "[name=profile_dash_page]", function(){
+                      var box = $(".pd-page-slug"), links = box.data("links") || {};
+                      box.find("code").text(links[$(this).val()] || "");
                     });
                     $(".dashpagetemplatenotice").<?php echo esc_html( $show_alert ? "show" : "hide" );?>();
                   })(jQuery);

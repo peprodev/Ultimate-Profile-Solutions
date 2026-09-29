@@ -3467,23 +3467,38 @@ if (!class_exists("PeproDevUPS_Profile")) {
       return $tcona;
     }
     public function add_special_post($force = false) {
-      if (false === $this->get_profile_page() || "yes" != $this->read("page_created", "")) {
-        $profile_template = array(
-          'post_type'     => 'page',
-          'post_title'    => __("User Dashboard", "peprodev-ups"),
-          'post_content'  => '[pepro-profile]',
-          'post_name'     => 'profile',
-          'post_status'   => 'publish',
-          'page_template' => 'peprofile-template.php',
+      $saved = (int) $this->read("profile_page", 0);
+      if ("yes" === $this->read("page_created", "") && $saved && get_post($saved)) return;
+      // reuse the saved page, or any page that already shows the dashboard, before creating one
+      $page_id = $saved && get_post($saved) && "trash" !== get_post_status($saved) ? $saved : $this->find_profile_shortcode_page();
+      if (!$page_id) {
+        $page_id = wp_insert_post(array(
+          'post_type'      => 'page',
+          'post_title'     => __("User Dashboard", "peprodev-ups"),
+          'post_content'   => '[pepro-profile]',
+          'post_name'      => 'profile',
+          'post_status'    => 'publish',
+          'page_template'  => 'peprofile-template.php',
           'comment_status' => 'closed',
-        );
-        $post_id = wp_insert_post($profile_template);
-        if (!is_wp_error($post_id)) {
-          update_post_meta($post_id, '_wp_page_template', 'peprofile-template.php');
-          $this->set("profile_page", $post_id);
-          $this->set("page_created", "yes");
-        }
+        ));
+        if (is_wp_error($page_id) || !$page_id) return;
+        update_post_meta($page_id, '_wp_page_template', 'peprofile-template.php');
       }
+      if ((int) $page_id !== $saved) $this->set("profile_page", (int) $page_id);
+      $this->set("page_created", "yes");
+    }
+    /**
+     * First published (else private/draft) page whose content has the [pepro-profile] shortcode.
+     * @return int page id, 0 when there is none
+     */
+    public function find_profile_shortcode_page() {
+      global $wpdb;
+      $like = "%" . $wpdb->esc_like("[pepro-profile") . "%";
+      $id = $wpdb->get_var($wpdb->prepare(
+        "SELECT ID FROM {$wpdb->posts} WHERE post_type = 'page' AND post_status IN ('publish','private','draft') AND post_content LIKE %s ORDER BY FIELD(post_status,'publish','private','draft'), ID ASC LIMIT 1",
+        $like
+      ));
+      return (int) apply_filters("peprofile_find_profile_shortcode_page", (int) $id);
     }
     /* common functions
         */
