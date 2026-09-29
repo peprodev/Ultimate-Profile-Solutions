@@ -234,7 +234,7 @@ jQuery.noConflict();
       var $writers = [];
       $(".redirection-workspace .redirection-field-single").each(function(index, val){
         details = {};
-        $(val).find(":input").each(function(index, val) {
+        $(val).find(":input[name]").each(function(index, val) {
           $id         = $(val).attr("name");
           $value      = $(val).val();
           is_checkbox = "checkbox" == $(val).attr("type");
@@ -696,6 +696,13 @@ jQuery.noConflict();
           subject.css("color", "#dd3333").text(_register_fields.error);
         },
       });
+    });
+    // redirect rules: a macro chip puts its value into the "Redirect to" field of the same rule
+    $(document).on("click tap", ".pd-macro", function(e){
+      e.preventDefault();
+      var input = $(this).closest(".field-opt-url").find("input[name=url]"), val = String($(this).attr("data-insert") || "");
+      input.val(val).trigger("input").trigger("change").focus();
+      if (input[0] && input[0].setSelectionRange) { try { input[0].setSelectionRange(val.length, val.length); } catch (err) {} }
     });
     $(document).on("click tap", "#verification_email_subject_reset", function(e){
       e.preventDefault();

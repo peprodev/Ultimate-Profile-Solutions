@@ -444,3 +444,55 @@ input[type="checkbox"].iostoggle[disabled]:checked {
   border-radius: 6px;
   background: #fff;
 }
+
+/* redirect rules: macros as chips, description shown as tooltip */
+.pd-macros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.pd-macro {
+  position: relative;
+  direction: ltr;
+  unicode-bidi: isolate;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-size: 0.8rem;
+  font-family: SFMono-Regular, Menlo, Consolas, monospace;
+  cursor: pointer;
+  color: inherit;
+}
+.pd-macro:hover,
+.pd-macro:focus-visible {
+  background: rgba(0, 0, 0, 0.09);
+  outline: none;
+}
+.pd-macro[data-tip]:hover::after,
+.pd-macro[data-tip]:focus-visible::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 260px;
+  white-space: normal;
+  direction: rtl;
+  text-align: start;
+  unicode-bidi: plaintext;
+  font-family: inherit;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: #333;
+  color: #fff;
+  z-index: 20;
+  pointer-events: none;
+}
+[dir="ltr"] .pd-macro[data-tip]:hover::after,
+[dir="ltr"] .pd-macro[data-tip]:focus-visible::after {
+  direction: ltr;
+}

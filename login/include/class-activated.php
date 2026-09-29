@@ -534,26 +534,23 @@ foreach ($styleFiles as $style) {
                         </div>
                         <div class='fields-wrapper-inner row justify-content-between align-items-center mb-3 field-opt-url' data-show="all">
                           <?php
-                          $special_pages = $this->special_pages();
-                          $newarray = $newarray2 = array();
-                          foreach ($special_pages as $key => $value) {
-                            $newarray[] = "{{$key}}: {$value["name"]}";
-                            $newarray2[] = "<div class='mt-2 " . esc_attr(is_rtl() ? "text-right" : "text-left") . " small'><strong><copy>{{$key}}</copy></strong> : {$value["name"]}</div>";
+                          $redirect_macros = array();
+                          foreach ($this->special_pages() as $key => $value) {
+                            $redirect_macros[] = array("{" . $key . "}", "{" . $key . "}", $value["name"]);
                           }
+                          $redirect_macros[] = array("{profile}?section=courses", "{profile}?section=courses", __("You can use page sections too, e.g. for LearnDash Courses page in profile", "peprodev-ups"));
+                          $redirect_macros[] = array("#page_id", "#", wp_strip_all_tags(__("You can use page ID as <b>#page_id</b>, e.g. for ID 275 use <b>#275</b>", "peprodev-ups")));
+                          $redirect_macros[] = array("@page_slug", "@", wp_strip_all_tags(__("You can use page slug as <b>@page_slug</b>, e.g. for slug about-us use <b>@about-us</b>", "peprodev-ups")));
+                          $redirect_macros[] = array("https://", "https://", __("You can also enter full URL for external addresses, e.g. https://google.com", "peprodev-ups"));
                           ?>
-                          <div id="speciallinks" class="hide">
-                            <div class="mt-2 <?php echo esc_attr(is_rtl() ? "text-right" : "text-left"); ?> small"><?php _e("You can use page ID as <b>#page_id</b>, e.g. for ID 275 use <b>#275</b>", "peprodev-ups"); ?></div>
-                            <div class="mt-2 <?php echo esc_attr(is_rtl() ? "text-right" : "text-left"); ?> small"><?php _e("You can use page slug as <b>@page_slug</b>, e.g. for slug about-us use <b>@about-us</b>", "peprodev-ups"); ?></div>
-                            <div class="mt-2 <?php echo esc_attr(is_rtl() ? "text-right" : "text-left"); ?> small"><?php esc_html_e("You can also enter full URL for external addresses, e.g. https://google.com", "peprodev-ups"); ?></div>
-                            <div class="mt-2 mb-2 <?php echo esc_attr(is_rtl() ? "text-right" : "text-left"); ?> small"><?php esc_html_e("And use following macros too:", "peprodev-ups"); ?></div>
-                            <?php echo implode("", $newarray2); ?>
-                            <div class='mt-2 <?php echo  esc_attr(is_rtl() ? "text-right" : "text-left"); ?> small'><strong>
-                                <copy>{profile}?section=courses</copy>
-                              </strong> : <?php _e("You can use page sections too, e.g. for LearnDash Courses page in profile", "peprodev-ups"); ?></div>
-                          </div>
-                          <div class="col-lg-4"><?php esc_html_e("Redirect to", "peprodev-ups"); ?> <a href="#TB_inline?width=800&height=500&inlineId=speciallinks" class="thickbox btn btn-sm btn-round btn-group btn-info float-left m-0"><i class="fas fa-exclamation-circle"></i></a></div>
+                          <div class="col-lg-4"><?php esc_html_e("Redirect to", "peprodev-ups"); ?></div>
                           <div class="col-lg-8">
-                            <input autocomplete="off" title="<?php echo implode("\n", $newarray); ?>" type="url" dir="ltr" required placeholder="<?php esc_html_e('#page_id / @page_slug / {special_pages} / Full URL', "peprodev-ups"); ?>" class='form-input redirect-url' name="url" />
+                            <input autocomplete="off" type="url" dir="ltr" required placeholder="<?php esc_html_e('#page_id / @page_slug / {special_pages} / Full URL', "peprodev-ups"); ?>" class='form-input redirect-url' name="url" />
+                            <div class="pd-macros mt-2">
+                              <?php foreach ($redirect_macros as $macro) : ?>
+                                <button type="button" class="pd-macro" data-insert="<?php echo esc_attr($macro[1]); ?>" data-tip="<?php echo esc_attr($macro[2]); ?>" aria-label="<?php echo esc_attr($macro[0] . " - " . $macro[2]); ?>"><?php echo esc_html($macro[0]); ?></button>
+                              <?php endforeach; ?>
+                            </div>
                           </div>
                         </div>
                         <div class='fields-wrapper-inner row justify-content-between align-items-center mb-3 field-opt-text' data-show="all">

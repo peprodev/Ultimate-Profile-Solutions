@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.2.18](#version-8218)
 - [Version 8.2.17](#version-8217)
 - [Version 8.2.16](#version-8216)
 - [Version 8.2.15](#version-8215)
@@ -84,6 +85,10 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.2.18
+- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- **Improved** Redirection rules: the macros ({home}, {profile}, {profile_edit}, {admin}, {profile}?section=courses, #page_id, @page_slug, https://) are shown as chips under "Redirect to" with their description as tooltip; clicking a chip fills the field. The help popup is removed
 
 ## Version 8.2.17
 - Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
