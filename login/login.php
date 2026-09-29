@@ -705,22 +705,18 @@ if (!class_exists("PeproDevUPS_Login")) {
       $form_default_fields = $this->get_registeration_form_defaul_fields();
       foreach ($form_default_fields as $key => $value) {
       ?>
-        <div class="register-field-single p-2 mb-2 border _no_opt_fields <?php echo esc_attr($key); ?> ">
+        <div class="register-field-single pd-deffield _no_opt_fields <?php echo esc_attr($key); ?> ">
           <div class="register-field-single-title">
-            <div class="field-opt-<?php echo esc_attr($key); ?> checkbox-wrapper">
-              <div class="row justify-content-between align-items-center">
-                <div class="col-8">
-                  <label class="row w-100 align-items-center m-0">
-                    <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required mr-2 main_checkbox <?php echo esc_attr($key); ?>' <?php echo checked($this->read($key) === "yes", true); ?> name="<?php echo esc_attr($key); ?>" /> <?php echo esc_html($value); ?>
-                    <input name="type" value="<?php echo esc_attr($key); ?>" autocomplete="off" type="hidden" class="form-input meta-name" />
-                  </label>
-                </div>
-                <div class="col-4">
-                  <label class="row w-100 align-items-center m-0">
-                    <input autocomplete="off" type="checkbox" class='form-checkbox single-required mr-2 is_required' <?php echo checked($this->read("{$key}_req") === "yes", true); ?> name="<?php echo esc_attr($key); ?>-req" /> <?php esc_html_e("Required?", "peprodev-ups"); ?>
-                  </label>
-                </div>
-              </div>
+            <div class="field-opt-<?php echo esc_attr($key); ?> checkbox-wrapper pd-deffield-row">
+              <label class="pd-deffield-main">
+                <input autocomplete="off" type="checkbox" class='form-checkbox iostoggle single-required main_checkbox <?php echo esc_attr($key); ?>' <?php echo checked($this->read($key) === "yes", true); ?> name="<?php echo esc_attr($key); ?>" />
+                <span><?php echo esc_html($value); ?></span>
+                <input name="type" value="<?php echo esc_attr($key); ?>" autocomplete="off" type="hidden" class="form-input meta-name" />
+              </label>
+              <label class="pd-deffield-req" title="<?php esc_attr_e("Required?", "peprodev-ups"); ?>">
+                <input autocomplete="off" type="checkbox" class='form-checkbox single-required is_required' <?php echo checked($this->read("{$key}_req") === "yes", true); ?> name="<?php echo esc_attr($key); ?>-req" />
+                <span><?php esc_html_e("Required?", "peprodev-ups"); ?></span>
+              </label>
             </div>
           </div>
         </div>

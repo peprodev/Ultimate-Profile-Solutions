@@ -535,3 +535,72 @@ input[type="checkbox"].iostoggle[disabled]:checked {
   gap: 0.5rem;
   flex-wrap: wrap;
 }
+
+/* registration default fields: one clean row per field (toggle + name, required checkbox) */
+.pd-deffields-head {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 14px 6px;
+  font-size: 0.75rem;
+  color: #999;
+}
+.register-field-single.pd-deffield {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  margin-bottom: 8px;
+  padding: 0;
+  background: #fff;
+  transition: background 0.15s ease;
+}
+.register-field-single.pd-deffield:nth-of-type(2n) {
+  background: #fff;
+}
+.register-field-single.pd-deffield:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+.pd-deffield-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+}
+.pd-deffield-row label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.pd-deffield-main {
+  flex: 1 1 auto;
+  min-width: 0;
+  color: #333;
+}
+.pd-deffield-main > span {
+  white-space: normal;
+}
+.pd-deffield-req {
+  flex: 0 0 auto;
+  font-size: 0.8rem;
+  color: #777;
+}
+.pd-deffield-req > span {
+  display: none;
+}
+.pd-deffield-row input[disabled] + span,
+.pd-deffield-row input[disabled] ~ span {
+  opacity: 0.6;
+}
+
+.pd-fields-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.pd-fields-tools .pd-push-end {
+  -webkit-margin-start: auto !important;
+          margin-inline-start: auto !important;
+}

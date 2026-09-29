@@ -5846,3 +5846,13 @@ msgstr "پس‌زمینه قالب را با رنگ، گرادیان، تصوی�
 msgctxt "login-section"
 msgid "Off: the background of the login theme is used."
 msgstr "خاموش: پس‌زمینه خود قالب ورود استفاده می‌شود."
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Turn a field on to show it in the registration form, and tick Required to make it mandatory. Locked fields depend on the registration type."
+msgstr "فیلد را روشن کنید تا در فرم ثبت‌نام نمایش داده شود و با تیک «ضروری» پر کردن آن را اجباری کنید. فیلدهای قفل‌شده به نوع ثبت‌نام بستگی دارند."
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Field"
+msgstr "فیلد"

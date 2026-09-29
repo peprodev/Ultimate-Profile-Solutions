@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.2.21](#version-8221)
 - [Version 8.2.20](#version-8220)
 - [Version 8.2.19](#version-8219)
 - [Version 8.2.18](#version-8218)
@@ -87,6 +88,10 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.2.21
+- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- **Improved** Registration Fields tab: the default fields panel is wider and shows one clean row per field (toggle and name, Required checkbox under a column header, no inner scrollbar, short help); the additional fields toolbar keeps its buttons on one line
 
 ## Version 8.2.20
 - Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)

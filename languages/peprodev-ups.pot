@@ -5505,3 +5505,13 @@ msgstr ""
 msgctxt "login-section"
 msgid "Off: the background of the login theme is used."
 msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Turn a field on to show it in the registration form, and tick Required to make it mandatory. Locked fields depend on the registration type."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Field"
+msgstr ""

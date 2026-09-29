@@ -2,8 +2,8 @@
 Contributors: amirhpcom, peprodev, blackswanlab
 Donate link: https://peprodev.com/donate/
 Tags: profile, dashboard, login-registration
-Version: 8.2.20
-Stable tag: 8.2.20
+Version: 8.2.21
+Stable tag: 8.2.21
 Requires at least: 5.0
 Tested up to: 7.1
 Requires PHP: 7.2
@@ -157,6 +157,11 @@ Your support and feedback have been key in shaping this plugin into a reliable a
 We're proud to be part of this amazing journey with the WordPress community 💙
 Here's to many more years of innovation, freedom, and open-source collaboration 😍!
 
+= 8.2.21 =
+Release date: 2026-09-29
+
+* Improved: the default registration fields panel is wider and cleaner (one row per field with toggle and Required checkbox).
+
 = 8.2.20 =
 Release date: 2026-09-29
 
@@ -288,7 +293,7 @@ Release date: 2026-09-27
 
 == Upgrade Notice ==
 
-= 8.2.20 =
+= 8.2.21 =
 Modern UI on by default (existing sites too), settings moved to the Login/Register and Profile screens. New: Sign in with Google, FarazSMS / WP SMS / Persian WooCommerce SMS gateways, mobile/email switch.
 
 = 8.2.5 =

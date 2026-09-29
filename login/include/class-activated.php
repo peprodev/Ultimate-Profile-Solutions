@@ -458,12 +458,13 @@ foreach ($styleFiles as $style) {
                 </div>
               </template>
               <div class="row">
-                <div class="col-xl-4 col-lg-5 mb-3">
+                <div class="col-xl-5 col-lg-6 mb-3">
                   <div class="card m mb-0 h-100">
                     <div class="card-body">
-                      <div class="workspace">
-                        <p class="text-bold"><?php esc_html_e("Registeration Default Fields", "peprodev-ups"); ?></p>
-                        <p><?php esc_html_e("To activate and show a field, click on its name and check it.", "peprodev-ups"); ?></p>
+                      <div class="pd-deffields">
+                        <p class="text-bold mb-1"><?php esc_html_e("Registeration Default Fields", "peprodev-ups"); ?></p>
+                        <p class="small text-muted"><?php echo esc_html_x("Turn a field on to show it in the registration form, and tick Required to make it mandatory. Locked fields depend on the registration type.", "login-section", "peprodev-ups"); ?></p>
+                        <div class="pd-deffields-head"><span><?php echo esc_html_x("Field", "login-section", "peprodev-ups"); ?></span><span><?php esc_html_e("Required?", "peprodev-ups"); ?></span></div>
                         <div class="save_checkboxes">
                           <?php do_action("pepro_reglogin_show_hide_defaul_registeration_fields"); ?>
                         </div>
@@ -471,14 +472,16 @@ foreach ($styleFiles as $style) {
                     </div>
                   </div>
                 </div>
-                <div class="col-xl-8 col-lg-7 mb-3">
+                <div class="col-xl-7 col-lg-6 mb-3">
                   <div class="card m mb-0 h-100">
                     <div class="card-body">
                       <div class="fields--tools">
                         <p class="text-bold"><?php esc_html_e("Registeration Additional Fields", "peprodev-ups"); ?></p>
-                        <a href="javascript:;" class='btn btn-sm btn-primary register--add-field'><span class="material-icons">add_circle</span> <?php esc_html_e("Add Field", "peprodev-ups"); ?></a>
-                        <a href="javascript:;" class='btn btn-sm btn-primary register--toggle-fields'><span class="material-icons">expand</span> <?php esc_html_e("Collapse / Expand", "peprodev-ups"); ?></a>
-                        <a href="javascript:;" class='btn btn-sm btn-danger ml-4 mr-4 register--clear-fields'><span class="material-icons">delete_sweep</span> <?php esc_html_e("Clear Fields", "peprodev-ups"); ?></a>
+                        <div class="pd-fields-tools mb-3">
+                          <a href="javascript:;" class='btn btn-sm btn-primary m-0 register--add-field'><span class="material-icons">add_circle</span> <?php esc_html_e("Add Field", "peprodev-ups"); ?></a>
+                          <a href="javascript:;" class='btn btn-sm btn-primary m-0 register--toggle-fields'><span class="material-icons">expand</span> <?php esc_html_e("Collapse / Expand", "peprodev-ups"); ?></a>
+                          <a href="javascript:;" class='btn btn-sm btn-danger m-0 pd-push-end register--clear-fields'><span class="material-icons">delete_sweep</span> <?php esc_html_e("Clear Fields", "peprodev-ups"); ?></a>
+                        </div>
                       </div>
                       <div class="register-workspace workspace" data-empty="<?php esc_html_e("No registerations field found.", "peprodev-ups"); ?>"></div>
                     </div>
