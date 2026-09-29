@@ -245,8 +245,9 @@ function peprodev_ui_render_design_screen() {
 	$fields   = peprodev_ui_design_fields();
 	$sections = peprodev_ui_design_sections();
 	peprodev_ui_enqueue_color_picker();
+	peprodev_ui_enqueue_admin_screen_css();
 	?>
-	<div class="row" id="pd-design">
+	<div class="row pd-screen" id="pd-design">
 		<div class="col-lg-12 col-md-12">
 			<div class="card">
 				<div class="card-header card-header-primary">

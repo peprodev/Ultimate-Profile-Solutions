@@ -6233,3 +6233,103 @@ msgstr "همه"
 #: login/include/class-activated.php
 msgid "Add rule"
 msgstr "افزودن قانون"
+
+#: login/include/class-activated.php
+msgid "Translate & Replace"
+msgstr "ترجمه و جایگزینی"
+
+#: login/include/class-activated.php
+msgid "Text translation and replacement"
+msgstr "ترجمه و جایگزینی متن‌ها"
+
+#: login/include/class-activated.php
+msgid "The imported data is not valid JSON."
+msgstr "داده واردشده JSON معتبر نیست."
+
+#: login/include/class-activated.php
+msgid "Saved: %1$s translation rules, %2$s page text rules."
+msgstr "ذخیره شد: %1$s قانون ترجمه، %2$s قانون جایگزینی متن صفحه."
+
+#: login/include/class-activated.php
+msgid "Drag to reorder"
+msgstr "برای تغییر ترتیب بکشید"
+
+#: login/include/class-activated.php
+msgid "Post content"
+msgstr "محتوای نوشته"
+
+#: login/include/class-activated.php
+msgid "Whole page"
+msgstr "کل صفحه"
+
+#: login/include/class-activated.php
+msgid "WooCommerce emails"
+msgstr "ایمیل‌های ووکامرس"
+
+#: login/include/class-activated.php
+msgid "Active"
+msgstr "فعال"
+
+#: login/include/class-activated.php
+msgid "Search rules ..."
+msgstr "جستجو در قانون‌ها ..."
+
+#: login/include/class-activated.php
+msgid "Where"
+msgstr "محل اعمال"
+
+#: login/include/class-activated.php
+msgid "No rules yet. Click \"Add rule\" to create one."
+msgstr "هنوز قانونی ندارید. برای ساخت قانون «افزودن قانون» را بزنید."
+
+#: login/include/class-activated.php
+msgid "Text translation"
+msgstr "ترجمه متن‌ها"
+
+#: login/include/class-activated.php
+msgid "Page text replace"
+msgstr "جایگزینی متن صفحه"
+
+#: login/include/class-activated.php
+msgid "Import / Export"
+msgstr "درون‌ریزی / برون‌بری"
+
+#: login/include/class-activated.php
+msgid "View site"
+msgstr "مشاهده سایت"
+
+#: login/include/class-activated.php
+msgid "Enable text translation"
+msgstr "فعال‌سازی ترجمه متن‌ها"
+
+#: login/include/class-activated.php
+msgid "Works on translatable texts (the gettext filter): menus, buttons, labels and messages of WordPress, plugins and themes."
+msgstr "روی متن‌های ترجمه‌پذیر کار می‌کند (فیلتر gettext): منوها، دکمه‌ها، برچسب‌ها و پیام‌های وردپرس، افزونه‌ها و قالب‌ها."
+
+#: login/include/class-activated.php
+msgid "Enable page text replace"
+msgstr "فعال‌سازی جایگزینی متن صفحه"
+
+#: login/include/class-activated.php
+msgid "For texts that are not translatable: written in the content, printed by a theme or builder, or in email templates. The text is matched in the HTML exactly as it is (case-sensitive)."
+msgstr "برای متن‌هایی که ترجمه‌پذیر نیستند: نوشته‌شده در محتوا، چاپ‌شده توسط قالب یا صفحه‌ساز، یا در قالب ایمیل‌ها. متن دقیقاً همان‌طور که در HTML هست جستجو می‌شود (حساس به حروف بزرگ و کوچک)."
+
+#: login/include/class-activated.php
+msgid "Post content: only the content of posts and pages. Whole page: the full HTML of front-end pages (header, footer, widgets). WooCommerce emails: the HTML of WooCommerce emails."
+msgstr "محتوای نوشته: فقط محتوای نوشته‌ها و برگه‌ها. کل صفحه: کل HTML صفحه‌های سایت (سربرگ، پابرگ، ابزارک‌ها). ایمیل‌های ووکامرس: HTML ایمیل‌های ووکامرس."
+
+#: login/include/class-activated.php
+msgid "Whole page reads the full page in memory; use it only when the other options cannot reach the text."
+msgstr "«کل صفحه» کل صفحه را در حافظه پردازش می‌کند؛ فقط وقتی از آن استفاده کنید که دو گزینه دیگر به متن نمی‌رسند."
+
+#: login/include/class-activated.php
+msgid "Copy this JSON to move all rules to another site, or paste a copy here and click Import. Import replaces the current rules and settings of both tables."
+msgstr "این JSON را کپی کنید تا همه قانون‌ها را به سایت دیگری منتقل کنید، یا نسخه‌ای را اینجا بچسبانید و «درون‌ریزی» را بزنید. درون‌ریزی جای قانون‌ها و تنظیمات فعلی هر دو جدول را می‌گیرد."
+
+#: login/include/class-activated.php
+msgid "Import (replace current rules)"
+msgstr "درون‌ریزی (جایگزینی قانون‌های فعلی)"
+
+#: login/include/class-activated.php
+msgid "Replace all current rules with the imported data?"
+msgstr "همه قانون‌های فعلی با داده واردشده جایگزین شوند؟"

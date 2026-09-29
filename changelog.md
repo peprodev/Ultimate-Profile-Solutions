@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.2.37](#version-8237)
 - [Version 8.2.36](#version-8236)
 - [Version 8.2.35](#version-8235)
 - [Version 8.2.34](#version-8234)
@@ -103,6 +104,10 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.2.37
+- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- **Changed** Text replacement moved to its own "Translate & Replace" item of the admin panel with a new editor (like the Pigment Toolkit one): tabs for **Text translation** (gettext rules) and the new **Page text replace** (HTML of post content, the whole front-end page through an output buffer, or WooCommerce emails, for texts that are not translatable), per-rule Active switch, drag to reorder, duplicate, search, rule counters, and **Import / Export** of all rules as JSON. **Fixed** the fields and switches of the Modern UI Design, LearnDash and Translate & Replace screens had no styles (shared admin-screens.css)
 
 ## Version 8.2.36
 - Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)

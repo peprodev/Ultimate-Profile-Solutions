@@ -523,6 +523,14 @@ function peprodev_ui_render_color_field( $key, $id, $label = true, $placeholder 
 }
 
 /**
+ * Field and toggle styles of the modern UI admin screens (wrappers with the .pd-screen class).
+ */
+function peprodev_ui_enqueue_admin_screen_css() {
+	list( $css, $ver ) = peprodev_ui_asset( 'assets/css/admin-screens.css' );
+	wp_enqueue_style( 'peprodev-ui-admin-screens', $css, array(), $ver );
+}
+
+/**
  * Self-hosted Alwan color picker for the admin color settings.
  */
 function peprodev_ui_enqueue_color_picker() {

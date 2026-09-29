@@ -5892,3 +5892,103 @@ msgstr ""
 #: login/include/class-activated.php
 msgid "Add rule"
 msgstr ""
+
+#: login/include/class-activated.php
+msgid "Translate & Replace"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Text translation and replacement"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "The imported data is not valid JSON."
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Saved: %1$s translation rules, %2$s page text rules."
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Drag to reorder"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Post content"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Whole page"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "WooCommerce emails"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Active"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Search rules ..."
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Where"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "No rules yet. Click \"Add rule\" to create one."
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Text translation"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Page text replace"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Import / Export"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "View site"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Enable text translation"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Works on translatable texts (the gettext filter): menus, buttons, labels and messages of WordPress, plugins and themes."
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Enable page text replace"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "For texts that are not translatable: written in the content, printed by a theme or builder, or in email templates. The text is matched in the HTML exactly as it is (case-sensitive)."
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Post content: only the content of posts and pages. Whole page: the full HTML of front-end pages (header, footer, widgets). WooCommerce emails: the HTML of WooCommerce emails."
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Whole page reads the full page in memory; use it only when the other options cannot reach the text."
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Copy this JSON to move all rules to another site, or paste a copy here and click Import. Import replaces the current rules and settings of both tables."
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Import (replace current rules)"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Replace all current rules with the imported data?"
+msgstr ""

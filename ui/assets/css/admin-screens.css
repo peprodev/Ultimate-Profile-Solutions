@@ -1,0 +1,139 @@
+/* PeproDev UPS admin screens of the modern UI (Design, LearnDash, Translate & Replace):
+   field and toggle styles of the Login/Register screen (login/assets/register.css), scoped. */
+
+.pd-screen .form-input::-moz-placeholder {
+  line-height: 1.6 !important;
+}
+
+.pd-screen .form-input:-ms-input-placeholder {
+  line-height: 1.6 !important;
+}
+
+.pd-screen .form-input::-webkit-input-placeholder {
+  line-height: 1.6 !important;
+}
+
+.pd-screen .form-input::-ms-input-placeholder {
+  line-height: 1.6 !important;
+}
+
+.pd-screen .form-input::placeholder {
+  line-height: 1.6 !important;
+}
+
+.pd-screen .form-input {
+  width: 100%;
+  border: none;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  border-radius: 3px;
+  box-shadow: 0 0 2px 0 #00000024, 0 5px 8px -5px rgba(var(--accent-primary4-rgb), 0.4);
+}
+
+.pd-screen select {
+  background: white url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAA50lEQVRIie3UPUoDQRjG8Z8WwUKwEbTfA1hZauUVUtp6Ba/gHSztBQtLtYmQFJ4hjY2BlCEgkrVwkGXc7I5mGmH+8DbD+zzPfFMoFAqZeMQLqoyeVfB86GqqQ81xliH0FLOGb29wjQ9cbhB6gffIcy3jqLHGNQa/CBwETewz7hLt4rZF9IzDhNB9PLXo77HXJ97ytcWrSPyK4w7dEaaRZoUrbCdM+pshFpHREucb9ibRt4q/7k4SBxj5eW53oeLxUdBkYd1NjesGO7lCm7S9zRxvPokTvDVCc/1ySVSYhMr5rxcKhX/EJz8gazIttX7QAAAAAElFTkSuQmCC") no-repeat calc(100% - 15px) center/18px;
+}
+
+[dir="rtl"] .pd-screen select {
+  background: white url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAA50lEQVRIie3UPUoDQRjG8Z8WwUKwEbTfA1hZauUVUtp6Ba/gHSztBQtLtYmQFJ4hjY2BlCEgkrVwkGXc7I5mGmH+8DbD+zzPfFMoFAqZeMQLqoyeVfB86GqqQ81xliH0FLOGb29wjQ9cbhB6gffIcy3jqLHGNQa/CBwETewz7hLt4rZF9IzDhNB9PLXo77HXJ97ytcWrSPyK4w7dEaaRZoUrbCdM+pshFpHREucb9ibRt4q/7k4SBxj5eW53oeLxUdBkYd1NjesGO7lCm7S9zRxvPokTvDVCc/1ySVSYhMr5rxcKhX/EJz8gazIttX7QAAAAAElFTkSuQmCC") no-repeat calc(15px) center/18px;
+}
+
+.pd-screen input[type=checkbox].iostoggle, .pd-screen input[type=radio].iostoggle {
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  cursor: pointer !important;
+}
+
+.pd-screen input[type=checkbox].iostoggle:focus, .pd-screen input[type=radio].iostoggle:focus {
+  outline: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.pd-screen input[type=checkbox].iostoggle, .pd-screen input[type=radio].iostoggle {
+  height: 26px !important;
+  width: 62px !important;
+  min-width: 62px !important;
+  max-width: 62px !important;
+  border-radius: 16px !important;
+  display: inline-block !important;
+  position: relative !important;
+  margin: 0 !important;
+  border: none !important;
+  background: #ec4f4f !important;
+}
+
+.pd-screen input[type=checkbox].iostoggle:after, .pd-screen input[type=radio].iostoggle:after {
+  content: "" !important;
+  position: absolute !important;
+  top: 4px !important;
+  left: 4px !important;
+  width: 18px !important;
+  height: 18px !important;
+  border-radius: 50% !important;
+  background: white !important;
+  box-shadow: 0 1px 2px rgba(44, 44, 44, 0.2) !important;
+  transition: all 0.2s cubic-bezier(0.5, 0.1, 0.75, 1.35) !important;
+}
+
+.pd-screen input[type=checkbox].iostoggle:checked, .pd-screen input[type=radio].iostoggle:checked {
+  background: #22be15 !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.pd-screen input[type=checkbox].iostoggle:checked:before, .pd-screen input[type=radio].iostoggle:checked:before {
+  content: "" !important;
+}
+
+.pd-screen input[type=checkbox].iostoggle:checked:after, .pd-screen input[type=radio].iostoggle:checked:after {
+  transform: translatex(36px) !important;
+}
+
+.pd-screen input[type="checkbox"].iostoggle[disabled] {
+  background: #ea9292 !important;
+}
+
+.pd-screen input[type="checkbox"].iostoggle[disabled]:checked {
+  background: #afea99 !important;
+}
+
+.pd-screen .iostoggle {
+  transform: translateY(-1px) scale(0.7);
+}
+
+.pd-screen .iostoggle+label {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.pd-screen select.form-input {
+  -webkit-appearance: none;
+  appearance: none;
+  padding-inline-end: 40px;
+}
+.pd-screen .pd-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  color: #777 !important;
+  text-decoration: none !important;
+}
+.pd-screen .pd-icon-btn .material-icons {
+  font-size: 19px;
+}
+.pd-screen .pd-icon-btn:hover {
+  background: rgba(0, 0, 0, 0.06);
+  color: #333 !important;
+}
+.pd-screen .pd-icon-btn.pd-icon-danger:hover {
+  background: rgba(221, 51, 51, 0.1);
+  color: #dd3333 !important;
+}

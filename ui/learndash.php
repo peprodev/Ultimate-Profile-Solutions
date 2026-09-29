@@ -69,8 +69,9 @@ add_action( 'peprocore_handle_ajaxrequests', 'peprodev_ui_learndash_ajax', 20 );
  */
 function peprodev_ui_render_learndash_screen() {
 	$ld_active = defined( 'LEARNDASH_LMS_PLUGIN_DIR' ) || function_exists( 'learndash_user_get_enrolled_courses' );
+	peprodev_ui_enqueue_admin_screen_css();
 	?>
-	<div id="pd-learndash">
+	<div id="pd-learndash" class="pd-screen">
 		<div class="row">
 			<div class="col-lg-12 col-md-12">
 				<div class="card">
