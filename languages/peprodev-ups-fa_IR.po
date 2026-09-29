@@ -5892,3 +5892,15 @@ msgstr "ارسال کد"
 #: login/include/class-activated.php
 msgid "No pattern yet? Write the text here and send it to FarazSMS. Use %OTP% for the code. New patterns are reviewed by FarazSMS before they can be used; then choose it above."
 msgstr "هنوز پترنی ندارید؟ متن را اینجا بنویسید و برای فراز اس‌ام‌اس بفرستید. به‌جای کد از %OTP% استفاده کنید. پترن‌های جدید پیش از استفاده توسط فراز اس‌ام‌اس بررسی می‌شوند؛ بعد از تایید، آن را در بالا انتخاب کنید."
+
+#: login/include/class-activated.php
+msgid "Button accent color"
+msgstr "رنگ اصلی دکمه‌ها"
+
+#: login/include/class-activated.php
+msgid "Color of the buttons, focus rings and links of the modern login form and dashboard. Leave empty to use the theme colors."
+msgstr "رنگ دکمه‌ها، حاشیه فوکوس و لینک‌های فرم ورود و پیشخوان جدید. برای استفاده از رنگ‌های قالب خالی بگذارید."
+
+#: login/include/class-activated.php
+msgid "Theme colors"
+msgstr "رنگ‌های قالب"

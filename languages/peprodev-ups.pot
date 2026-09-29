@@ -5551,3 +5551,15 @@ msgstr ""
 #: login/include/class-activated.php
 msgid "No pattern yet? Write the text here and send it to FarazSMS. Use %OTP% for the code. New patterns are reviewed by FarazSMS before they can be used; then choose it above."
 msgstr ""
+
+#: login/include/class-activated.php
+msgid "Button accent color"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Color of the buttons, focus rings and links of the modern login form and dashboard. Leave empty to use the theme colors."
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Theme colors"
+msgstr ""

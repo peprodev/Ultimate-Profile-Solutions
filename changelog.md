@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.2.28](#version-8228)
 - [Version 8.2.27](#version-8227)
 - [Version 8.2.26](#version-8226)
 - [Version 8.2.25](#version-8225)
@@ -94,6 +95,10 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.2.28
+- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- **New** Modern UI "Button accent color" setting (Login/Register > Login & Registration and Profile > Modern UI) with the Alwan color picker; sets the buttons, focus rings and links of the modern login form and dashboard (text color on the buttons is chosen for contrast). Empty keeps the theme colors
 
 ## Version 8.2.27
 - Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)

@@ -77,10 +77,54 @@ function peprodev_ui_register_assets() {
 	list( $otpc, $ocv )  = peprodev_ui_asset( 'assets/css/otp.css' );
 	list( $otpj, $ojv )  = peprodev_ui_asset( 'assets/js/otp.js' );
 	wp_register_style( 'peprodev-ui-tokens', $tokens, array(), $tv );
+	$accent = peprodev_ui_accent_css();
+	if ( '' !== $accent ) {
+		wp_add_inline_style( 'peprodev-ui-tokens', $accent );
+	}
 	wp_register_style( 'peprodev-ui-otp', $otpc, array( 'peprodev-ui-tokens' ), $ocv );
 	wp_register_script( 'peprodev-ui-otp', $otpj, array( 'jquery' ), $ojv, true );
 }
 add_action( 'wp_enqueue_scripts', 'peprodev_ui_register_assets', 5 );
+
+/**
+ * Saved button accent color of the modern UI as #rrggbb, empty when not set.
+ *
+ * @return string
+ */
+function peprodev_ui_accent_color() {
+	$saved = peprodev_ui_texts_saved();
+	$color = isset( $saved['ui_accent'] ) ? sanitize_hex_color( (string) $saved['ui_accent'] ) : '';
+	return (string) apply_filters( 'peprodev_ui_accent_color', $color ? strtolower( $color ) : '' );
+}
+
+/**
+ * Design token overrides for the saved accent color (buttons, focus rings, links of the
+ * modern login form and dashboard). "html:root" wins over a theme's plain ":root" tokens.
+ *
+ * @return string CSS, empty when no accent is set.
+ */
+function peprodev_ui_accent_css() {
+	$color = peprodev_ui_accent_color();
+	if ( '' === $color ) {
+		return '';
+	}
+	$hex = ltrim( $color, '#' );
+	if ( 3 === strlen( $hex ) ) {
+		$hex = $hex[0] . $hex[0] . $hex[1] . $hex[1] . $hex[2] . $hex[2];
+	}
+	$rgb = array_map( 'hexdec', str_split( $hex, 2 ) );
+	// relative luminance (WCAG): dark text on light accents, white text on dark ones
+	$lum = array_map(
+		function ( $c ) {
+			$c /= 255;
+			return $c <= 0.03928 ? $c / 12.92 : pow( ( $c + 0.055 ) / 1.055, 2.4 );
+		},
+		$rgb
+	);
+	$l  = 0.2126 * $lum[0] + 0.7152 * $lum[1] + 0.0722 * $lum[2];
+	$on = $l > 0.179 ? '#1f1b16' : '#ffffff';
+	return "html:root{--mj-primary:{$color};--mj-primary-hover:color-mix(in srgb,{$color} 82%,#000);--mj-primary-soft:color-mix(in srgb,{$color} 12%,#fff);--mj-on-primary:{$on};}";
+}
 
 /**
  * Published LearnDash courses linked to a WooCommerce product (learndash-woocommerce).
@@ -159,6 +203,7 @@ function peprodev_ui_texts_fields() {
 		array(
 			'ui_login'          => array( 'modern', __( 'Modern login/register form', 'peprodev-ups' ), '1', 'checkbox' ),
 			'ui_dashboard'      => array( 'modern', __( 'Modern user dashboard', 'peprodev-ups' ), '1', 'checkbox' ),
+			'ui_accent'         => array( 'modern', __( 'Button accent color', 'peprodev-ups' ), '', 'color' ),
 			'learn_enabled'     => array( 'learn', __( 'Show the learning button', 'peprodev-ups' ), '1', 'checkbox' ),
 			'learn_has_label'   => array( 'learn', __( 'Button text for users who have access to a course', 'peprodev-ups' ), __( 'Continue learning', 'peprodev-ups' ), 'text' ),
 			'learn_has_url'     => array( 'learn', __( 'Button link for users who have access to a course', 'peprodev-ups' ), '{my_courses}', 'url' ),
@@ -319,7 +364,7 @@ function peprodev_ui_text_url( $key ) {
 function peprodev_ui_texts_register() {
 	$saved = peprodev_ui_texts_saved();
 	foreach ( peprodev_ui_texts_fields() as $key => $field ) {
-		if ( 'checkbox' === $field[3] || ! isset( $saved[ $key ] ) || '' === trim( (string) $saved[ $key ] ) ) {
+		if ( in_array( $field[3], array( 'checkbox', 'color' ), true ) || ! isset( $saved[ $key ] ) || '' === trim( (string) $saved[ $key ] ) ) {
 			continue;
 		}
 		do_action( 'wpml_register_single_string', 'peprodev-ups', peprodev_ui_texts_wpml_name( $key ), (string) $saved[ $key ] );
@@ -381,7 +426,9 @@ function peprodev_ui_texts_save_input( $input ) {
 			$data[ $key ] = in_array( $raw, array( '1', 'yes', 'true', 'on' ), true ) ? '1' : '0';
 			continue;
 		}
-		if ( 'url' === $field[3] ) {
+		if ( 'color' === $field[3] ) {
+			$value = (string) sanitize_hex_color( trim( $raw ) );
+		} elseif ( 'url' === $field[3] ) {
 			$value = preg_match( '/^\{[a-z_]+\}$/', trim( $raw ) ) ? trim( $raw ) : esc_url_raw( $raw );
 		} elseif ( 'textarea' === $field[3] ) {
 			$value = sanitize_textarea_field( $raw );
@@ -409,6 +456,7 @@ function peprodev_ui_texts_descriptions() {
 	return array(
 		'ui_login'     => __( 'Restyled login and register form with Login/Register tabs and OTP code boxes.', 'peprodev-ups' ),
 		'ui_dashboard' => __( 'Restyled user dashboard with new Edit profile, order, course and address views.', 'peprodev-ups' ),
+		'ui_accent'    => __( 'Color of the buttons, focus rings and links of the modern login form and dashboard. Leave empty to use the theme colors.', 'peprodev-ups' ),
 	);
 }
 
@@ -445,8 +493,64 @@ function peprodev_ui_render_login_settings() {
 			<?php echo esc_html( $fields['ui_login'][1] ); ?>
 		</label>
 		<p class="small text-muted mb-2"><?php echo esc_html( $note ? $note : $desc['ui_login'] ); ?></p>
+		<?php peprodev_ui_render_color_field( 'ui_accent', 'peprodev_ui_login_accent' ); ?>
 	</div>
 	<?php
+}
+
+/**
+ * Color setting of the modern UI: the text input stays the value store (empty = theme colors),
+ * the swatch next to it opens the Alwan picker (ui/assets/js/pd-alwan.js).
+ *
+ * @param string $key   Field key.
+ * @param string $id    Input id.
+ * @param bool   $label Print the title and description (off inside the settings table, which has its own).
+ */
+function peprodev_ui_render_color_field( $key, $id, $label = true ) {
+	$fields = peprodev_ui_texts_fields();
+	$desc   = peprodev_ui_texts_descriptions();
+	$value  = peprodev_ui_accent_color();
+	peprodev_ui_enqueue_color_picker();
+	?>
+	<?php if ( $label ) : ?>
+		<p class="text-bold mt-3 mb-2"><label class="m-0" style="color:inherit" for="<?php echo esc_attr( $id ); ?>"><?php echo esc_html( $fields[ $key ][1] ); ?></label></p>
+	<?php endif; ?>
+	<div class="pd-color-field">
+		<input type="text" class="form-input pd-color-picker" dir="ltr" maxlength="7" id="<?php echo esc_attr( $id ); ?>" data-ui-key="<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr( $value ); ?>" placeholder="#28504f" autocomplete="off" />
+		<button type="button" class="btn btn-sm btn-secondary m-0 pd-color-reset" data-target="#<?php echo esc_attr( $id ); ?>"><?php esc_html_e( 'Theme colors', 'peprodev-ups' ); ?></button>
+	</div>
+	<?php if ( $label && isset( $desc[ $key ] ) ) : ?>
+		<p class="small text-muted mt-1 mb-2"><?php echo esc_html( $desc[ $key ] ); ?></p>
+	<?php endif; ?>
+	<?php
+}
+
+/**
+ * Self-hosted Alwan color picker for the admin color settings.
+ */
+function peprodev_ui_enqueue_color_picker() {
+	static $done = false;
+	if ( $done ) {
+		return;
+	}
+	$done = true;
+	list( $lib_css, $lcv ) = peprodev_ui_asset( 'assets/vendor/alwan/alwan.min.css' );
+	list( $lib_js, $ljv )  = peprodev_ui_asset( 'assets/vendor/alwan/alwan.min.js' );
+	list( $boot, $bv )     = peprodev_ui_asset( 'assets/js/pd-alwan.js' );
+	wp_enqueue_style( 'peprodev-alwan', $lib_css, array(), $lcv );
+	wp_enqueue_script( 'peprodev-alwan-lib', $lib_js, array(), $ljv, true );
+	wp_enqueue_script( 'peprodev-alwan', $boot, array( 'peprodev-alwan-lib' ), $bv, true );
+	wp_add_inline_style(
+		'peprodev-alwan',
+		'.pd-color-field{display:flex;align-items:center;gap:8px;flex-wrap:wrap}'
+		. '.pd-color-field .form-input{flex:0 1 150px;margin:0}'
+		. 'button.pd-alwan-swatch,button.pd-alwan-swatch.alwan__ref{width:40px !important;height:40px !important;padding:0 !important;border:1px solid rgba(0,0,0,.2) !important;border-radius:10px !important;cursor:pointer;box-shadow:inset 0 0 0 3px rgba(255,255,255,.6);flex:0 0 auto}'
+		. 'button.pd-alwan-swatch.is-empty{background:repeating-linear-gradient(45deg,#eee 0 6px,#fff 6px 12px) !important}'
+		. '.alwan{border-radius:12px;overflow:hidden;}'
+		. '.alwan__container>button,'
+		. '.alwan__input+span{display:none;}'
+		. '.alwan__input{padding:5px !important;min-height:fit-content !important;border:none !important;margin:0 !important;}'
+	);
 }
 
 /**
@@ -522,6 +626,8 @@ function peprodev_ui_render_profile_settings() {
 									data-text-off="<?php esc_attr_e( 'Disabled', 'peprodev-ups' ); ?>"
 									data-on="check_box" data-off="check_box_outline_blank"
 									data-checked="<?php echo esc_attr( '1' === $value ? 'true' : 'false' ); ?>"></a>
+							<?php elseif ( 'color' === $field[3] ) : ?>
+								<?php peprodev_ui_render_color_field( $key, $id, false ); ?>
 							<?php elseif ( 'textarea' === $field[3] ) : ?>
 								<textarea class="form-control" rows="3" id="<?php echo esc_attr( $id ); ?>" data-ui-key="<?php echo esc_attr( $key ); ?>" data-default="<?php echo esc_attr( $field[2] ); ?>"><?php echo esc_textarea( $value ); ?></textarea>
 							<?php else : ?>
@@ -530,7 +636,7 @@ function peprodev_ui_render_profile_settings() {
 							<?php if ( $note || isset( $desc[ $key ] ) ) : ?>
 								<br><small class="text-muted"><?php echo esc_html( $note ? $note : $desc[ $key ] ); ?></small>
 							<?php endif; ?>
-							<?php if ( 'checkbox' !== $field[3] ) : ?>
+							<?php if ( ! in_array( $field[3], array( 'checkbox', 'color' ), true ) ) : ?>
 								<br><small class="text-muted">
 									<?php
 									/* translators: %s: default value of the setting. */
