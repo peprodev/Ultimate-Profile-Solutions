@@ -3,7 +3,7 @@
 Profile builder, user dashboard and OTP/SMS/Google login and registration for WordPress, with WooCommerce, LearnDash and WPML support. Free and open source (GPLv2 or later).
 
 [![WordPress.org](https://img.shields.io/badge/WordPress.org-peprodev--ups-21759b)](https://wordpress.org/plugins/peprodev-ups/)
-![Version](https://img.shields.io/badge/version-8.2.5-blue)
+![Version](https://img.shields.io/badge/version-8.2.37-blue)
 ![WordPress](https://img.shields.io/badge/WordPress-5.0%2B%20%7C%20tested%207.1-21759b)
 ![PHP](https://img.shields.io/badge/PHP-7.2%2B-777bb4)
 ![License](https://img.shields.io/badge/license-GPLv2%2B-green)
@@ -15,7 +15,7 @@ Developed by **[Pepro Development Group](https://pepro.dev/)** / Lead Developer:
 
 | | |
 |--|--|
-| **Stable version** | 8.2.5 |
+| **Stable version** | 8.2.37 |
 | **Requires WordPress** | 5.0 or later (tested up to 7.1) |
 | **Requires PHP** | 7.2 or later |
 | **WooCommerce** | optional, tested up to 9.8 |
@@ -186,7 +186,7 @@ creates `dist/peprodev-ups-<version>.zip` without development files.
 
 ### Release process (maintainers)
 
-1. **One commit per change**, each with a patch version bump. The version is written in three places: the plugin header `Version:` and `$version` in `peprodev-ups.php`, and `Version:` / `Stable tag:` in `readme.txt`. Every bump also adds a `readme.txt` changelog entry, an Upgrade Notice heading and a `changelog.md` section dated in both calendars (`2026-09-30 | 1405-07-08`). New strings get their Persian translation in `languages/peprodev-ups-fa_IR.po` / `.pot`, and the `.mo` is recompiled (`msgfmt -c -o languages/peprodev-ups-fa_IR.mo languages/peprodev-ups-fa_IR.po`).
+1. **One commit per change**, each with a patch version bump. The version is written in the plugin header `Version:` and `$version` in `peprodev-ups.php`, `Version:` / `Stable tag:` in `readme.txt`, and the version badge and "Stable version" row at the top of this README. Every bump also adds a `readme.txt` changelog entry, an Upgrade Notice heading and a `changelog.md` section dated in both calendars (`2026-09-30 | 1405-07-08`). New strings get their Persian translation in `languages/peprodev-ups-fa_IR.po` / `.pot`, and the `.mo` is recompiled (`msgfmt -c -o languages/peprodev-ups-fa_IR.mo languages/peprodev-ups-fa_IR.po`).
 2. **Update the docs with every commit and every release**: this README (features, settings locations, hooks) and `readme.txt` (changelog entry of the version, feature list, FAQ, Upgrade Notice). The `readme.txt` entry of a released version starts with a summary of everything since the previous public release, followed by the per-version entries.
 3. **Build**: `bin/build-release.sh` → `dist/peprodev-ups-<version>.zip`. The script stops when the header version and the `Stable tag` differ.
 4. **GitHub**: push `master`, then tag the release with the bare version and push the tag:
