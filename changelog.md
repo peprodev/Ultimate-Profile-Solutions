@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.2.27](#version-8227)
 - [Version 8.2.26](#version-8226)
 - [Version 8.2.25](#version-8225)
 - [Version 8.2.24](#version-8224)
@@ -93,6 +94,10 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.2.27
+- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- **Fixed** OTP "Resend code" timer: it only started for one exact response shape, never for the "one code every N seconds" reply, and a 0 timer left the "(60)" label forever. The timer now starts for every response that shows the resend link, shows the remaining time right away, restarts cleanly on each send, shows "Resend OTP Code" when the code can be requested again, and ignores clicks while counting down
 
 ## Version 8.2.26
 - Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)

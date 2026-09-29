@@ -7,7 +7,7 @@ Tags: profile, dashboard, login-registration
 Author: Pepro Dev. Group
 Author URI: https://peprodev.com/pepro-ultimate-profile-solution/
 Plugin URI: https://wordpress.org/plugins/peprodev-ups/
-Version: 8.2.26
+Version: 8.2.27
 Requires at least: 5.0
 Tested up to: 7.1
 Requires PHP: 7.2
@@ -32,7 +32,7 @@ if (!class_exists("PeproDevUPS")) {
   class PeproDevUPS {
     public $td          = "peprodev-ups";
     public $db_slug     = "peprodev-ups";
-    public $version     = "8.2.26";
+    public $version     = "8.2.27";
     public $db_version  = "8.0.4"; // database schema version: tables unchanged since 8.0.4, so no dbDelta run on update
     public $setting_key = "peprodev_ups_profile";
     public $title = "PeproDev Profile";

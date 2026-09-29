@@ -1200,6 +1200,8 @@ jQuery.noConflict();
     $(document).on("click tap", ".otp-resend", function (e) {
       e.preventDefault();
       var me = $(this);
+      // still counting down: the server would refuse a new code anyway
+      if (me.hasClass("disabled")) { return; }
       me.parents("form").find(".otp-verification, .code-verification").val("").trigger("change");
       me.parents("form").find(":input").prop("disabled", false);
       me.parents("form").find("#submit").trigger("click");
@@ -1234,51 +1236,36 @@ jQuery.noConflict();
       }
     });
 
+    function resend_clock(target) {
+      var secs = Math.max(0, Math.ceil((target.getTime() - Date.now()) / 1000));
+      var mm = Math.floor(secs / 60), ss = secs % 60;
+      return (mm < 10 ? "0" : "") + mm + ":" + (ss < 10 ? "0" : "") + ss;
+    }
     function resend_counndown(e, login_form, _pepro_dev) {
-      if (".otp-resend,.otp-changenum" == e.data.show) {
-        $submitBtn = $(login_form).find(".submit-wrap #submit[type=submit]");
-        $submitBtn.text($submitBtn.data("verify"));
+      // any response that shows the resend link carries the time it becomes available ("timerdown", 0 = now)
+      var shows_resend = !!(e && e.data && String(e.data.show || "").indexOf(".otp-resend") !== -1);
+      if (!shows_resend) { return; }
+      $submitBtn = $(login_form).find(".submit-wrap #submit[type=submit]");
+      $submitBtn.text($submitBtn.data("verify"));
+      var $resend = $(login_form).find(".otp-resend");
+      function resend_ready() {
+        $resend.html(_pepro_dev.resendnow).prop("disabled", false).removeClass("disabled").removeAttr("aria-disabled");
+        $(login_form).find("#mobile").prop("disabled", false).prop("readonly", false).removeClass("disabled");
+        $(login_form).find("#user_mobile").prop("disabled", false).prop("readonly", false).removeClass("disabled");
       }
-      if (".otp-resend,.otp-changenum" == e.data.show && e.data.timerdown) {
-        if (0 == e.data.timerdown) {
-          $(login_form).find(".otp-resend").countdown("stop");
-          $(login_form).find(".otp-resend").html(_pepro_dev.resendnow);
-          $(login_form).find("#mobile").prop("disabled", false).prop("readonly", false).removeClass("disabled");
-          $(login_form).find("#user_mobile").prop("disabled", false).prop("readonly", false).removeClass("disabled");
-        }
-        else {
-          /* var v1 = moment.tz(e.data.cur_time, "Asia/Tehran").toDate(),
-          v2 = moment.tz(e.data.timerdown, "Asia/Tehran").toDate(),
-          v3 = moment.tz(e.data.cur_time, "Asia/Istanbul").toDate(),
-          v4 = moment.tz(e.data.timerdown, "Asia/Istanbul").toDate();
-          console.log(`---= DEBUG =----
-          Now in Tehran: ${v1}
-          TimerDown in Tehran: ${v2}
-          ----------------------------
-          Now in Istanbul: ${v3}
-          TimerDown in Istanbul: ${v4}`); */
-          $(login_form).find(".otp-resend")
-            .prop("disabled", true)
-            .addClass("disabled")
-            .countdown(resend_target_date(e))
-            .on('update.countdown', function (qd) {
-              // console.log(qd.strftime('%H:%M:%S'));
-              $(this).html(_pepro_dev.resendtime.replace('%s', qd.strftime('%M:%S')));
-            })
-            .on('finish.countdown', function (qd) {
-              // console.log("finish.countdown");
-              $(this).html(_pepro_dev.resendnow).prop("disabled", false).removeClass("disabled");
-              $(login_form).find("#mobile").prop("disabled", false).prop("readonly", false).removeClass("disabled");
-              $(login_form).find("#user_mobile").prop("disabled", false).prop("readonly", false).removeClass("disabled");
-            })
-            .on('stoped.countdown', function (qd) {
-              // console.log("stoped.countdown");
-              $(this).html(_pepro_dev.resendnow).prop("disabled", false).removeClass("disabled");
-              $(login_form).find("#mobile").prop("disabled", false).prop("readonly", false).removeClass("disabled");
-              $(login_form).find("#user_mobile").prop("disabled", false).prop("readonly", false).removeClass("disabled");
-            });
-        }
-      }
+      if ($resend.data("countdown-instance") !== undefined) { $resend.off(".countdown").countdown("remove"); }
+      var target = e.data.timerdown ? resend_target_date(e) : null;
+      if (!target || target.getTime() <= Date.now() + 500) { resend_ready(); return; }
+      $resend
+        .prop("disabled", true)
+        .addClass("disabled")
+        .attr("aria-disabled", "true")
+        .html(_pepro_dev.resendtime.replace("%s", resend_clock(target)))
+        .countdown(target)
+        .on("update.countdown", function (qd) {
+          $(this).html(_pepro_dev.resendtime.replace("%s", qd.strftime("%M:%S")));
+        })
+        .on("finish.countdown stoped.countdown", resend_ready);
     }
     function do_redirect(e) {
       if (!e || !e.data || e._redirected) { return; }
