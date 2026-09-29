@@ -5909,3 +5909,15 @@ msgstr "رنگ‌های قالب"
 msgctxt "smart-btn"
 msgid "loggedin_text replaces one public user field written in braces: {first_name}, {last_name}, {display_name} or {nickname}."
 msgstr "در loggedin_text یک فیلد عمومی کاربر داخل آکولاد جایگزین می‌شود: {first_name}، {last_name}، {display_name} یا {nickname}."
+
+#: login/include/class-activated.php
+msgid "Once verified, account messages and password recovery links are sent to this address."
+msgstr "با تأیید ایمیل، پیام‌های حساب و لینک بازیابی رمز عبور به همین آدرس ارسال می‌شود."
+
+#: login/include/class-activated.php
+msgid "Verify your email and mobile"
+msgstr "تأیید ایمیل و شماره موبایل"
+
+#: login/include/class-activated.php
+msgid "Verified contact details receive session reminders and account recovery messages."
+msgstr "پیام‌های یادآوری جلسات و بازیابی حساب به ایمیل و شماره تأییدشده ارسال می‌شود."

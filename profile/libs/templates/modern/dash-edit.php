@@ -126,7 +126,19 @@ $mj_input = static function ( $label, $id, $value = '', $args = array() ) use ( 
 	if ( class_exists( 'PeproDevUPS_Login' ) && $PeproDevUPS_Login ) {
 		$mj_verify = $PeproDevUPS_Login->verify_user_mobile_email_inline();
 		if ( '' !== trim( (string) $mj_verify ) ) {
-			echo '<section class="mj-card mj-verify"><header class="mj-card__head"><h4 class="mj-card__title">' . esc_html__( 'Verify your mobile number', 'peprodev-ups' ) . '</h4><p class="mj-card__desc">' . esc_html__( 'Once verified, session reminders and account recovery messages are sent to this number.', 'peprodev-ups' ) . '</p></header>';
+			// title follows the verification forms shown (Login/Register > Profile Verification Form)
+			$mj_verify_mode = isset( $PeproDevUPS_Login->pro_verify ) ? (string) $PeproDevUPS_Login->pro_verify : 'sms';
+			if ( 'email' === $mj_verify_mode ) {
+				$mj_verify_title = __( 'Verify your email address', 'peprodev-ups' );
+				$mj_verify_desc  = __( 'Once verified, account messages and password recovery links are sent to this address.', 'peprodev-ups' );
+			} elseif ( 'both' === $mj_verify_mode ) {
+				$mj_verify_title = __( 'Verify your email and mobile', 'peprodev-ups' );
+				$mj_verify_desc  = __( 'Verified contact details receive session reminders and account recovery messages.', 'peprodev-ups' );
+			} else {
+				$mj_verify_title = __( 'Verify your mobile number', 'peprodev-ups' );
+				$mj_verify_desc  = __( 'Once verified, session reminders and account recovery messages are sent to this number.', 'peprodev-ups' );
+			}
+			echo '<section class="mj-card mj-verify"><header class="mj-card__head"><h4 class="mj-card__title">' . esc_html( $mj_verify_title ) . '</h4><p class="mj-card__desc">' . esc_html( $mj_verify_desc ) . '</p></header>';
 			do_action( 'peprofile_user_details_before_verify_mobile' );
 			echo $mj_verify; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			do_action( 'peprofile_user_details_after_verify_mobile' );

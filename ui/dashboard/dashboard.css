@@ -1746,6 +1746,43 @@ a.mj-continue__cta {
   display: none;
 }
 
+/* verification tabs (Verify Email / Verify Mobile): same segmented control as the address tabs */
+.mj-profile-ui-on .profile-page-wrapper .mj-verify .tabbed-wrapper .tab-names {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0 0 18px;
+  padding: 4px;
+  border-radius: var(--mj-radius);
+  background: var(--mj-sand);
+}
+
+.mj-profile-ui-on .profile-page-wrapper .mj-verify .tabbed-wrapper .tab-names a.change-tab {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 6px 16px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  box-shadow: none;
+  color: var(--mj-muted);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.mj-profile-ui-on .profile-page-wrapper .mj-verify .tabbed-wrapper .tab-names a.change-tab.active {
+  background: var(--mj-surface);
+  color: var(--mj-ink);
+  box-shadow: var(--mj-shadow-sm);
+}
+
+.mj-profile-ui-on .profile-page-wrapper .mj-verify .tabbed-wrapper .tab-names a.change-tab:focus-visible {
+  outline: 2px solid var(--mj-primary);
+  outline-offset: 1px;
+}
+
 .mj-profile-ui-on .mj-verify .tabbed-wrapper {
   padding: 0;
   background: none;

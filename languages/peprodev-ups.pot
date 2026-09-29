@@ -5568,3 +5568,15 @@ msgstr ""
 msgctxt "smart-btn"
 msgid "loggedin_text replaces one public user field written in braces: {first_name}, {last_name}, {display_name} or {nickname}."
 msgstr ""
+
+#: login/include/class-activated.php
+msgid "Once verified, account messages and password recovery links are sent to this address."
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Verify your email and mobile"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Verified contact details receive session reminders and account recovery messages."
+msgstr ""

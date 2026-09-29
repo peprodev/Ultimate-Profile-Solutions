@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.2.31](#version-8231)
 - [Version 8.2.30](#version-8230)
 - [Version 8.2.29](#version-8229)
 - [Version 8.2.28](#version-8228)
@@ -97,6 +98,10 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.2.31
+- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- **Fixed** Modern dashboard: the Verify Email / Verify Mobile tabs use the same segmented style as the address tabs, and the verification card title follows the forms shown (email, mobile or both) instead of always saying "Verify your mobile number"
 
 ## Version 8.2.30
 - Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
