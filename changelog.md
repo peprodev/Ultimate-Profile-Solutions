@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.2.8](#version-828)
 - [Version 8.2.7](#version-827)
 - [Version 8.2.6](#version-826)
 - [Version 8.2.5](#version-825)
@@ -74,6 +75,10 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.2.8
+- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- **Fixed** FarazSMS (IranPayamak): API errors show the reason sent in the `messages` field (e.g. HTTP 422 validation errors) instead of a generic "request failed (HTTP 422)"; sender number is normalized to digits and required before sending
 
 ## Version 8.2.7
 - Release date: 2026-09-27 | 1405-07-05  [&uarr;](#table-of-contents)

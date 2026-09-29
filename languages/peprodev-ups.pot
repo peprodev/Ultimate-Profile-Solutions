@@ -1436,6 +1436,10 @@ msgstr ""
 msgid "FarazSMS Api-Key is not configured."
 msgstr ""
 
+#: login/include/class-sms-farazsms.php
+msgid "FarazSMS sender number is not configured."
+msgstr ""
+
 #: login/include/class-sms-farazsms.php:80
 #: login/include/class-sms-pwsms.php:45
 #: login/include/class-sms-wpsms.php:45

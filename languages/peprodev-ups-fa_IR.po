@@ -1459,6 +1459,10 @@ msgstr "درخواست به فراز اس‌ام‌اس ناموفق بود (HTT
 msgid "FarazSMS Api-Key is not configured."
 msgstr "کلید API فراز اس‌ام‌اس تنظیم نشده است."
 
+#: login/include/class-sms-farazsms.php
+msgid "FarazSMS sender number is not configured."
+msgstr "شماره فرستنده فراز اس‌ام‌اس تنظیم نشده است."
+
 #: login/include/class-sms-farazsms.php:80 login/include/class-sms-pwsms.php:45
 #: login/include/class-sms-wpsms.php:45
 msgid "No valid mobile number."

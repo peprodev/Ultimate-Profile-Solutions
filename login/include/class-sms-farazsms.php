@@ -65,10 +65,35 @@ final class PeproSMS_FarazSMS_Gateway extends PeproSMS_Gateway_Base {
       return new \WP_Error("farazsms_bad_response", sprintf(__("Invalid response from FarazSMS (HTTP %s).", "peprodev-ups"), $code));
     }
     if ($code >= 400 || (isset($data["status"]) && "success" !== $data["status"])) {
-      $msg = isset($data["message"]) && is_scalar($data["message"]) ? (string) $data["message"] : sprintf(__("FarazSMS request failed (HTTP %s).", "peprodev-ups"), $code);
+      $msg = $this->error_text($data);
+      /* translators: %s: HTTP status code. */
+      $msg = "" !== $msg ? $msg : sprintf(__("FarazSMS request failed (HTTP %s).", "peprodev-ups"), $code);
       return new \WP_Error("farazsms_failed", $msg);
     }
     return $data;
+  }
+  /**
+   * Error reason of an API response. IranPayamak puts it in "messages" (string, list or
+   * field => errors object, e.g. HTTP 422 validation errors), older replies in "message".
+   */
+  protected function error_text($data) {
+    $parts = array();
+    foreach (array("messages", "message", "errors") as $key) {
+      if (empty($data[$key])) continue;
+      if (is_array($data[$key])) {
+        array_walk_recursive($data[$key], function ($v) use (&$parts) { if (is_scalar($v) && "" !== trim((string) $v)) $parts[] = trim((string) $v); });
+      } elseif (is_scalar($data[$key])) {
+        $parts[] = trim((string) $data[$key]);
+      }
+    }
+    return implode(" ", array_unique($parts));
+  }
+  /**
+   * Sender line as the digits-only string the API expects (Persian/Arabic digits converted).
+   */
+  protected function line_number() {
+    $line = str_replace(array("۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹", "٠", "١", "٢", "٣", "٤", "٥", "٦", "٧", "٨", "٩"), array("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"), (string) $this->read("farazsms_line_number"));
+    return preg_replace('/\D+/', '', $line);
   }
   /**
    * Send an OTP (pattern when a pattern code is set, otherwise the message template) or a free text.
@@ -78,7 +103,8 @@ final class PeproSMS_FarazSMS_Gateway extends PeproSMS_Gateway_Base {
     if ("" === $api_key) return $this->fail(__("FarazSMS Api-Key is not configured.", "peprodev-ups"));
     $recipients = $this->recipients($numbers);
     if (empty($recipients)) return $this->fail(__("No valid mobile number.", "peprodev-ups"));
-    $line    = trim((string) $this->read("farazsms_line_number"));
+    $line    = $this->line_number();
+    if ("" === $line) return $this->fail(__("FarazSMS sender number is not configured.", "peprodev-ups"));
     $pattern = trim((string) $this->read("farazsms_pattern_code"));
     $is_otp  = !empty($otp_code);
 
