@@ -187,7 +187,7 @@ creates `dist/peprodev-ups-<version>.zip` without development files.
 ### Release process (maintainers)
 
 1. **One commit per change**, each with a patch version bump. The version is written in three places: the plugin header `Version:` and `$version` in `peprodev-ups.php`, and `Version:` / `Stable tag:` in `readme.txt`. Every bump also adds a `readme.txt` changelog entry, an Upgrade Notice heading and a `changelog.md` section dated in both calendars (`2026-09-30 | 1405-07-08`). New strings get their Persian translation in `languages/peprodev-ups-fa_IR.po` / `.pot`, and the `.mo` is recompiled (`msgfmt -c -o languages/peprodev-ups-fa_IR.mo languages/peprodev-ups-fa_IR.po`).
-2. **Update the docs**: this README (features, settings locations, hooks) and the `readme.txt` feature list / FAQ.
+2. **Update the docs with every commit and every release**: this README (features, settings locations, hooks) and `readme.txt` (changelog entry of the version, feature list, FAQ, Upgrade Notice). The `readme.txt` entry of a released version starts with a summary of everything since the previous public release, followed by the per-version entries.
 3. **Build**: `bin/build-release.sh` → `dist/peprodev-ups-<version>.zip`. The script stops when the header version and the `Stable tag` differ.
 4. **GitHub**: push `master`, then tag the release with the bare version and push the tag:
 

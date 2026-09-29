@@ -166,62 +166,72 @@ We're proud to be part of this amazing journey with the WordPress community 💙
 Here's to many more years of innovation, freedom, and open-source collaboration 😍!
 
 = 8.2.37 =
-Release date: 2026-09-29
+Release date: 2026-09-30
 
-* Changed: "Translate & Replace" has its own menu item with text translation (gettext), page text replace (HTML) and import/export.
+Release summary of 8.2.8 to 8.2.37 (the per-version details follow below):
+
+* Security: fixes CVE-2026-4791 (stored XSS by Contributor+ through [logout-url] attributes) and the same kind of issue in the other shortcodes; [user meta=""] prints only public profile fields (8.2.29).
+* New: "Modern UI Design" screen with colors and font sizes of the modern login form and dashboard (8.2.32, 8.2.33).
+* New: "LearnDash" screen for the learning button and My courses settings (8.2.34).
+* New: "Translate & Replace" screen: text translation (gettext) rules, page text replace in post content, whole pages or WooCommerce emails, and JSON import/export (8.2.35, 8.2.37).
+* New: FarazSMS sending method setting, Pattern or Normal SMS (8.2.15), clearer account and pattern sections (8.2.24, 8.2.25).
+* New: Code / Preview tabs for the verification email template (8.2.17), default subject "[site_name] | Verify Email" with Restore default (8.2.16), button accent color (8.2.28).
+* Improved: Login/Register settings reorganized (separate SMS and Email verification tabs, two-column settings, full-width Registration Fields tab, Smart Button guide, redirect macro chips, grouped WordPress login settings) and toggle switches instead of eye icons on every admin page (8.2.9 to 8.2.21).
+* Fixed: FarazSMS errors show the real reason (8.2.8) and sent codes are no longer reported as "not sent" (8.2.26); the OTP resend timer works (8.2.27); old cached admin assets after updates (8.2.22); dashboard page is reused instead of created again (8.2.30); layout fixes (8.2.14, 8.2.23, 8.2.31, 8.2.36).
+* Changed: "Translate & Replace" has its own menu item with text translation (gettext), page text replace (HTML) and import/export (8.2.37).
 
 = 8.2.36 =
-Release date: 2026-09-29
+Release date: 2026-09-30
 
 * Fixed: a horizontal scrollbar under some settings cards of the admin panel.
 
 = 8.2.35 =
-Release date: 2026-09-29
+Release date: 2026-09-30
 
 * New: text replacement rules (gettext) on the LearnDash screen, e.g. change "Course" to "Class".
 
 = 8.2.34 =
-Release date: 2026-09-29
+Release date: 2026-09-30
 
 * Changed: learning button and My courses settings moved to a new "LearnDash" screen.
 
 = 8.2.33 =
-Release date: 2026-09-29
+Release date: 2026-09-30
 
 * New: font size settings for the modern login form and dashboard.
 
 = 8.2.32 =
-Release date: 2026-09-29
+Release date: 2026-09-30
 
 * New: "Modern UI Design" screen with colors for buttons, tabs, links, sidebar menu, tables, cards and fields of the modern login form and dashboard.
 
 = 8.2.31 =
-Release date: 2026-09-29
+Release date: 2026-09-30
 
 * Fixed: the verification tabs of the modern dashboard match the address tabs, and the card title follows the forms shown.
 
 = 8.2.30 =
-Release date: 2026-09-29
+Release date: 2026-09-30
 
 * Improved: the dashboard page address is shown under its select. Fixed: an existing page with [pepro-profile] is reused instead of creating a new dashboard page.
 
 = 8.2.29 =
-Release date: 2026-09-29
+Release date: 2026-09-30
 
 * Security: fixes CVE-2026-4791 (stored XSS through [logout-url] shortcode attributes, Contributor+) and the same kind of issue in the other shortcodes. [user meta=""] now prints only public profile fields. Please update.
 
 = 8.2.28 =
-Release date: 2026-09-29
+Release date: 2026-09-30
 
 * New: "Button accent color" setting for the modern login form and dashboard.
 
 = 8.2.27 =
-Release date: 2026-09-29
+Release date: 2026-09-30
 
 * Fixed: the "Resend code" timer of the OTP forms counts down and becomes clickable when a new code can be requested.
 
 = 8.2.26 =
-Release date: 2026-09-29
+Release date: 2026-09-30
 
 * Fixed: FarazSMS codes that were sent could be reported as "not sent" on the login form.
 

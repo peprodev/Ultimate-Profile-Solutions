@@ -106,51 +106,51 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 ---
 
 ## Version 8.2.37
-- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- Release date: 2026-09-30 | 1405-07-08  [&uarr;](#table-of-contents)
 - **Changed** Text replacement moved to its own "Translate & Replace" item of the admin panel with a new editor (like the Pigment Toolkit one): tabs for **Text translation** (gettext rules) and the new **Page text replace** (HTML of post content, the whole front-end page through an output buffer, or WooCommerce emails, for texts that are not translatable), per-rule Active switch, drag to reorder, duplicate, search, rule counters, and **Import / Export** of all rules as JSON. **Fixed** the fields and switches of the Modern UI Design, LearnDash and Translate & Replace screens had no styles (shared admin-screens.css)
 
 ## Version 8.2.36
-- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- Release date: 2026-09-30 | 1405-07-08  [&uarr;](#table-of-contents)
 - **Fixed** Admin panel: cards with a full-width Save button (e.g. Profile > Modern UI) showed a horizontal scrollbar; the button's 1px side margins made it 2px wider than the card
 
 ## Version 8.2.35
-- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- Release date: 2026-09-30 | 1405-07-08  [&uarr;](#table-of-contents)
 - **New** Text replacement on the LearnDash screen: rules that change any translatable text of LearnDash, WooCommerce, WordPress, this plugin or other plugins/themes (whole text or part of text, optional text domain and WPML/Polylang language). Works through the gettext filters with pre-grouped rules, off until enabled
 
 ## Version 8.2.34
-- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- Release date: 2026-09-30 | 1405-07-08  [&uarr;](#table-of-contents)
 - **Changed** The learning button and "My courses" settings moved from the Profile screen to a new "LearnDash" item of the admin panel; the Profile screen keeps the Modern UI switch
 
 ## Version 8.2.33
-- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- Release date: 2026-09-30 | 1405-07-08  [&uarr;](#table-of-contents)
 - **New** Font sizes on the "Modern UI Design" screen (in px): dashboard text, page titles, login form title, card titles, descriptions, buttons, tabs, sidebar menu, table text and header, field labels, field text and login form links; the stylesheets read them as `--mj-fs-*` custom properties with the built-in sizes as fallback
 
 ## Version 8.2.32
-- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- Release date: 2026-09-30 | 1405-07-08  [&uarr;](#table-of-contents)
 - **New** "Modern UI Design" admin screen: colors of the modern login form and dashboard in one place (accent, titles, cards; button background/text and hover; tab background, text and active tab; links and hover; sidebar background, items, hover, active item and marker; table header, text, borders and row hover; field labels, background, border and focus). Empty fields keep the built-in design or the theme's tokens; the stylesheets read the new `--mj-*` custom properties with fallbacks. The accent color moved here from Login/Register settings
 
 ## Version 8.2.31
-- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- Release date: 2026-09-30 | 1405-07-08  [&uarr;](#table-of-contents)
 - **Fixed** Modern dashboard: the Verify Email / Verify Mobile tabs use the same segmented style as the address tabs, and the verification card title follows the forms shown (email, mobile or both) instead of always saying "Verify your mobile number"
 
 ## Version 8.2.30
-- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- Release date: 2026-09-30 | 1405-07-08  [&uarr;](#table-of-contents)
 - **Improved** Profile settings: the address of the selected dashboard page is shown under the page select and follows the selection. **Fixed** the dashboard page is no longer created again when the plugin setting was lost: the saved page, or an existing page with the `[pepro-profile]` shortcode, is reused before a new "User Dashboard" page is made
 
 ## Version 8.2.29
-- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- Release date: 2026-09-30 | 1405-07-08  [&uarr;](#table-of-contents)
 - **Security** CVE-2026-4791 (CVSS 6.4): stored XSS by Contributor+ through `[logout-url button=""]`; fixed, plus a review of every shortcode for the same issue: `[pepro-login-popup]` / `[pepro-login-form]` (`button`, `extras`, `before`, `after`, `before_popup`, `after_popup`, `trigger`), `[pepro-smart-btn]` (texts, `trigger`, `{field}` placeholders), `[pepro-profile-url]` (`button`, `extras`, `section`, content), `[user]` (`default`; `meta` limited to public profile fields, it could print the viewer's password hash, OTP codes or contact data), `[profile-card-1..4]` (`style`, `padding`, `bg_color`, content no longer unescaped with stripcslashes), `[profile-ld-enrolled]` (`user_id` of others only for users who can list users), `[profile-wc-orders]` (`limit`), `[pepro-sms-subscription]`, `[current_url]`. The front-end script queries `trigger` as a selector only. New filter `peprodev_ups_public_user_fields`
 
 ## Version 8.2.28
-- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- Release date: 2026-09-30 | 1405-07-08  [&uarr;](#table-of-contents)
 - **New** Modern UI "Button accent color" setting (Login/Register > Login & Registration and Profile > Modern UI) with the Alwan color picker; sets the buttons, focus rings and links of the modern login form and dashboard (text color on the buttons is chosen for contrast). Empty keeps the theme colors
 
 ## Version 8.2.27
-- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- Release date: 2026-09-30 | 1405-07-08  [&uarr;](#table-of-contents)
 - **Fixed** OTP "Resend code" timer: it only started for one exact response shape, never for the "one code every N seconds" reply, and a 0 timer left the "(60)" label forever. The timer now starts for every response that shows the resend link, shows the remaining time right away, restarts cleanly on each send, shows "Resend OTP Code" when the code can be requested again, and ignores clicks while counting down
 
 ## Version 8.2.26
-- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- Release date: 2026-09-30 | 1405-07-08  [&uarr;](#table-of-contents)
 - **Fixed** FarazSMS: a sent code could be reported as "not sent" (the API success reply carries an empty message, which the forms read as a failure, so the error and no resend timer were shown). A sent message now always returns a success value; status is compared case-insensitively and a 2xx reply without JSON counts as sent
 
 ## Version 8.2.25
