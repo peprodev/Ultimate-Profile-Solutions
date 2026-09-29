@@ -680,3 +680,10 @@ button.pd-icon-btn {
   cursor: pointer;
   padding: 0;
 }
+
+.pd-gw-tool {
+  margin: 0 15px 1rem;
+  padding: 12px 14px;
+  border: 1px dashed rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+}

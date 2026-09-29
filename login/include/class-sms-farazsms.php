@@ -267,12 +267,13 @@ final class PeproSMS_FarazSMS_Gateway extends PeproSMS_Gateway_Base {
           <div class="col-lg-6 label"><span><?php esc_html_e("Pattern variable of the code", "peprodev-ups"); ?></span></div>
           <div class="col-lg-6" id="farazsms-var-wrap"><input name="farazsms_pattern_var" id="farazsms_pattern_var" value="<?php echo esc_attr($var ? $var : "OTP"); ?>" dir="ltr" class='form-input single-required mr-2' autocomplete="off" type="text" /></div>
         </div>
-        <div class='col-lg-12 row justify-content-between mb-3'>
-          <div class="col-lg-6 label"><span><?php esc_html_e("Create an OTP pattern", "peprodev-ups"); ?></span><br><small class="text-muted"><?php esc_html_e("Use %OTP% for the code. New patterns are reviewed by FarazSMS before they can be used.", "peprodev-ups"); ?></small></div>
-          <div class="col-lg-6">
-            <textarea id="farazsms-newpattern" class="form-input mb-2" rows="3"><?php echo esc_textarea($template); ?></textarea>
-            <button id="farazsms-create" class="btn btn-sm btn-success m-0" type="button"><?php esc_html_e("Create Pattern", "peprodev-ups"); ?></button>
-          </div>
+      </div>
+      <div class="farazsms-mode" data-mode="pattern">
+        <p class="pd-gw-section mt-4"><?php esc_html_e("Create an OTP pattern", "peprodev-ups"); ?></p>
+        <div class="pd-gw-tool">
+          <p class="small text-muted mb-2"><?php esc_html_e("No pattern yet? Write the text here and send it to FarazSMS. Use %OTP% for the code. New patterns are reviewed by FarazSMS before they can be used; then choose it above.", "peprodev-ups"); ?></p>
+          <textarea id="farazsms-newpattern" class="form-input mb-2" rows="3" aria-label="<?php esc_attr_e("Create an OTP pattern", "peprodev-ups"); ?>"><?php echo esc_textarea($template); ?></textarea>
+          <button id="farazsms-create" class="btn btn-sm btn-success m-0" type="button"><?php esc_html_e("Create Pattern", "peprodev-ups"); ?></button>
         </div>
       </div>
       <div class="farazsms-mode" data-mode="simple">

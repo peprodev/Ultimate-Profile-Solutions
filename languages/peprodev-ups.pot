@@ -5547,3 +5547,7 @@ msgstr ""
 #: login/include/class-activated.php
 msgid "Sending the code"
 msgstr ""
+
+#: login/include/class-activated.php
+msgid "No pattern yet? Write the text here and send it to FarazSMS. Use %OTP% for the code. New patterns are reviewed by FarazSMS before they can be used; then choose it above."
+msgstr ""

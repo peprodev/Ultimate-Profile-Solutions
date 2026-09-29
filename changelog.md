@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.2.25](#version-8225)
 - [Version 8.2.24](#version-8224)
 - [Version 8.2.23](#version-8223)
 - [Version 8.2.22](#version-8222)
@@ -91,6 +92,10 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.2.25
+- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- **Changed** FarazSMS "Create an OTP pattern" moved out of the settings rows into its own section below them, with a short explanation of the review step
 
 ## Version 8.2.24
 - Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)

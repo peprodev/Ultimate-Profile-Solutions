@@ -5888,3 +5888,7 @@ msgstr "دریافت کلید API از پنل فراز اس‌ام‌اس"
 #: login/include/class-activated.php
 msgid "Sending the code"
 msgstr "ارسال کد"
+
+#: login/include/class-activated.php
+msgid "No pattern yet? Write the text here and send it to FarazSMS. Use %OTP% for the code. New patterns are reviewed by FarazSMS before they can be used; then choose it above."
+msgstr "هنوز پترنی ندارید؟ متن را اینجا بنویسید و برای فراز اس‌ام‌اس بفرستید. به‌جای کد از %OTP% استفاده کنید. پترن‌های جدید پیش از استفاده توسط فراز اس‌ام‌اس بررسی می‌شوند؛ بعد از تایید، آن را در بالا انتخاب کنید."
