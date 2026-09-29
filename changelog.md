@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.2.12](#version-8212)
 - [Version 8.2.11](#version-8211)
 - [Version 8.2.10](#version-8210)
 - [Version 8.2.9](#version-829)
@@ -78,6 +79,10 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.2.12
+- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- **Improved** Smart Button tab: six ready-to-copy samples in two columns (each with its own Copy button and a short explanation), a full attribute reference with defaults, related shortcodes ([loggedin], [guest], [current_url], [logout-url], [pepro-login-popup], [pepro-login-form], [verified-mobile], [verified-email]) and tips
 
 ## Version 8.2.11
 - Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)

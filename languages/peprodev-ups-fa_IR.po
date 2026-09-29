@@ -5491,3 +5491,218 @@ msgstr "فرستنده، موضوع و قالب ایمیل حاوی کد تای�
 msgctxt "login-section"
 msgid "You can control WordPress Built-in Login screen permalinks from here"
 msgstr "تنظیمات پیوند یکتای صفحه پیش‌فرض ورود وردپرس را از اینجا مدیریت کنید."
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Basic button"
+msgstr "دکمه ساده"
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Guests see a Login/Register button that opens the login popup. Logged-in users see their avatar and name, linked to the profile page."
+msgstr "مهمان‌ها دکمه ورود / ثبت‌نام را می‌بینند که پاپ‌آپ ورود را باز می‌کند. کاربرانِ واردشده تصویر و نام خود را می‌بینند که به صفحه پروفایل لینک شده است."
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Header button with your theme style"
+msgstr "دکمه سربرگ با استایل قالب شما"
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Custom texts and popup titles; loggedout_class takes your theme's button classes so the button matches the header."
+msgstr "متن‌ها و عنوان پاپ‌آپ دلخواه؛ در loggedout_class کلاس‌های دکمه قالب را بنویسید تا دکمه با سربرگ هماهنگ شود."
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Open the Register form first"
+msgstr "باز شدن فرم ثبت‌نام در ابتدا"
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "loggedout_form chooses the form the popup opens with: login, register or resetpass."
+msgstr "با loggedout_form مشخص می‌کنید پاپ‌آپ با کدام فرم باز شود: login (ورود)، register (ثبت‌نام) یا resetpass (فراموشی رمز)."
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Open the popup from menu items and other links"
+msgstr "باز کردن پاپ‌آپ از آیتم‌های منو و لینک‌های دیگر"
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Add the openlogin class to any link or menu item (Appearance > Menus > CSS Classes); clicking it opens the same popup. WooCommerce's \"Click here to login\" link on checkout works too."
+msgstr "کلاس openlogin را به هر لینک یا آیتم منو اضافه کنید (نمایش > فهرست‌ها > کلاس‌های CSS)؛ با کلیک روی آن همین پاپ‌آپ باز می‌شود. لینک «برای ورود کلیک کنید» ووکامرس در صفحه تسویه‌حساب هم همین‌طور کار می‌کند."
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "First name only, without avatar"
+msgstr "فقط نام، بدون تصویر پروفایل"
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "loggedin_text replaces one user field written in braces, e.g. {first_name}, {display_name} or {user_email}."
+msgstr "در loggedin_text یک فیلد کاربر داخل آکولاد جایگزین می‌شود، مثل {first_name}، {display_name} یا {user_email}."
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Different content for guests and members"
+msgstr "محتوای متفاوت برای مهمان‌ها و کاربران"
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "[loggedin] and [guest] show their content only to logged-in users or only to guests. [current_url] sends the user back to this page after login."
+msgstr "محتوای [loggedin] فقط به کاربرانِ واردشده و محتوای [guest] فقط به مهمان‌ها نمایش داده می‌شود. [current_url] کاربر را بعد از ورود به همین صفحه برمی‌گرداند."
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Button text for guests."
+msgstr "متن دکمه برای مهمان‌ها."
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "CSS classes of the guest button, e.g. your theme's button classes."
+msgstr "کلاس‌های CSS دکمه مهمان، مثلاً کلاس‌های دکمه قالب."
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Form the popup opens with: login, register or resetpass."
+msgstr "فرمی که پاپ‌آپ با آن باز می‌شود: login، register یا resetpass."
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "More CSS selectors, comma separated, that also open the popup, e.g. .openlogin"
+msgstr "سلکتورهای CSS دیگری که پاپ‌آپ را باز می‌کنند، جداشده با ویرگول انگلیسی، مثلاً ⁦.openlogin⁩"
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Popup title on the login form."
+msgstr "عنوان پاپ‌آپ در فرم ورود."
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Popup title on the register form."
+msgstr "عنوان پاپ‌آپ در فرم ثبت‌نام."
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Popup title on the password recovery form."
+msgstr "عنوان پاپ‌آپ در فرم فراموشی رمز عبور."
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Text for logged-in users. One user field in braces is replaced, e.g. {first_name}."
+msgstr "متن برای کاربرانِ واردشده. یک فیلد کاربر داخل آکولاد جایگزین می‌شود، مثل {first_name}."
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Profile page"
+msgstr "صفحه پروفایل"
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Link of the button for logged-in users."
+msgstr "لینک دکمه برای کاربرانِ واردشده."
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "CSS classes of the logged-in button."
+msgstr "کلاس‌های CSS دکمه کاربرِ واردشده."
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Show the user avatar: yes or no."
+msgstr "نمایش تصویر پروفایل کاربر: yes یا no."
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Avatar size in pixels."
+msgstr "اندازه تصویر پروفایل به پیکسل."
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Shows the content only to logged-in users."
+msgstr "محتوا را فقط به کاربرانِ واردشده نشان می‌دهد."
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Shows the content only to guests ([loggedout] works too)."
+msgstr "محتوا را فقط به مهمان‌ها نشان می‌دهد ([loggedout] هم کار می‌کند)."
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Address of the current page, useful in redirect_to."
+msgstr "آدرس صفحه فعلی؛ برای redirect_to کاربرد دارد."
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Logout link; without button it prints only the URL."
+msgstr "لینک خروج؛ بدون button فقط آدرس را چاپ می‌کند."
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Login popup with its own button, without the logged-in part."
+msgstr "پاپ‌آپ ورود با دکمه مخصوص خودش، بدون بخش کاربرِ واردشده."
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Inline login/register form inside the page."
+msgstr "فرم ورود / ثبت‌نام داخل خود صفحه."
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Content for users with a verified mobile; add reverse=\"yes\" to show it to unverified users."
+msgstr "محتوا برای کاربرانی که موبایلشان تایید شده است؛ با ⁦reverse=\"yes\"⁩ به کاربرانِ تاییدنشده نمایش داده می‌شود."
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Same as above for a verified email address."
+msgstr "مثل مورد بالا، برای ایمیل تاییدشده."
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Smart Button attributes"
+msgstr "ویژگی‌های دکمه هوشمند"
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Attribute"
+msgstr "ویژگی"
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Default"
+msgstr "پیش‌فرض"
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Description"
+msgstr "توضیح"
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Related shortcodes"
+msgstr "شورتکدهای مرتبط"
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Tips"
+msgstr "نکته‌ها"
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Click any shortcode or attribute name to copy it."
+msgstr "برای کپی، روی هر شورتکد یا نام ویژگی کلیک کنید."
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "In page builders, put the shortcode in a Shortcode widget (Elementor) or a Shortcode block (Gutenberg)."
+msgstr "در صفحه‌سازها شورتکد را در ابزارک «کد کوتاه» المنتور یا بلوک «کد کوتاه» گوتنبرگ قرار دهید."
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "To open the popup from several places, add their selectors to trigger instead of repeating the button."
+msgstr "برای باز کردن پاپ‌آپ از چند جای صفحه، به‌جای تکرار دکمه، سلکتور آن‌ها را در trigger بنویسید."
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "The popup uses the forms, fields and verification set in the other tabs of this page."
+msgstr "پاپ‌آپ از فرم‌ها، فیلدها و روش تاییدی استفاده می‌کند که در تب‌های دیگر همین صفحه تنظیم کرده‌اید."

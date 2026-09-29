@@ -375,3 +375,10 @@ input[type="checkbox"].iostoggle[disabled]:checked {
 .main-panel > .content {
 	margin-top: 25px !important;
 }
+
+.smart-btn-guide copy {
+  direction: ltr;
+  unicode-bidi: isolate;
+  display: inline-block;
+  cursor: copy;
+}

@@ -5150,3 +5150,218 @@ msgstr ""
 msgctxt "login-section"
 msgid "You can control WordPress Built-in Login screen permalinks from here"
 msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Basic button"
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Guests see a Login/Register button that opens the login popup. Logged-in users see their avatar and name, linked to the profile page."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Header button with your theme style"
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Custom texts and popup titles; loggedout_class takes your theme's button classes so the button matches the header."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Open the Register form first"
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "loggedout_form chooses the form the popup opens with: login, register or resetpass."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Open the popup from menu items and other links"
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Add the openlogin class to any link or menu item (Appearance > Menus > CSS Classes); clicking it opens the same popup. WooCommerce's \"Click here to login\" link on checkout works too."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "First name only, without avatar"
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "loggedin_text replaces one user field written in braces, e.g. {first_name}, {display_name} or {user_email}."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Different content for guests and members"
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "[loggedin] and [guest] show their content only to logged-in users or only to guests. [current_url] sends the user back to this page after login."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Button text for guests."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "CSS classes of the guest button, e.g. your theme's button classes."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Form the popup opens with: login, register or resetpass."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "More CSS selectors, comma separated, that also open the popup, e.g. .openlogin"
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Popup title on the login form."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Popup title on the register form."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Popup title on the password recovery form."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Text for logged-in users. One user field in braces is replaced, e.g. {first_name}."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Profile page"
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Link of the button for logged-in users."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "CSS classes of the logged-in button."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Show the user avatar: yes or no."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Avatar size in pixels."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Shows the content only to logged-in users."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Shows the content only to guests ([loggedout] works too)."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Address of the current page, useful in redirect_to."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Logout link; without button it prints only the URL."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Login popup with its own button, without the logged-in part."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Inline login/register form inside the page."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Content for users with a verified mobile; add reverse=\"yes\" to show it to unverified users."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Same as above for a verified email address."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Smart Button attributes"
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Attribute"
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Default"
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Description"
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Related shortcodes"
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Tips"
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "Click any shortcode or attribute name to copy it."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "In page builders, put the shortcode in a Shortcode widget (Elementor) or a Shortcode block (Gutenberg)."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "To open the popup from several places, add their selectors to trigger instead of repeating the button."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "smart-btn"
+msgid "The popup uses the forms, fields and verification set in the other tabs of this page."
+msgstr ""

@@ -6,7 +6,7 @@ add_thickbox();
 wp_enqueue_style("wp-color-picker");
 wp_enqueue_script("wp-color-picker");
 wp_enqueue_style("pepro-register-fields-ide",      "{$this->assets_url}assets/ide/ace.css", array(), "1.6.0");
-wp_enqueue_style("pepro-register-fields",          "{$this->assets_url}assets/register.css", array(), "1.6.0");
+wp_enqueue_style("pepro-register-fields",          "{$this->assets_url}assets/register.css", array(), "1.6.0." . $this->version);
 wp_enqueue_style("pepro-register-jqconfirm",       "{$this->assets_url}assets/jquery-confirm.css", array(), "1.6.0");
 wp_enqueue_script("pepro-register-jqconfirm",      "{$this->assets_url}assets/jquery-confirm.js", array('jquery'), "1.6.0");
 wp_enqueue_script("color-picker-alpha",            "{$this->assets_url}assets/wp-color-picker-alpha.min.js", array("jquery"), "1.6.0");
@@ -98,32 +98,122 @@ foreach ($styleFiles as $style) {
     <br>
     <div class="tab-content">
       <div class="tab-pane active show" id="tab_smart_button">
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="card">
-              <div class="card-header card-header-primary">
-                <h4 class="card-title"><?php echo esc_html_x("Samrt Button", "login-section", "peprodev-ups"); ?></h4>
-                <p class="card-category"><?php echo esc_html_x("Use this button to show login/register popup to guests and welcome logged in users", "login-section", "peprodev-ups"); ?></p>
+        <?php
+        $smart_login    = __("Login", $this->td);
+        $smart_register = __("Register", $this->td);
+        $smart_guest    = __("Login/Register", $this->td);
+        $smart_hi       = __("Hi {display_name}", $this->td);
+        $smart_samples  = array(
+          array(
+            "title" => _x("Basic button", "smart-btn", "peprodev-ups"),
+            "desc"  => _x("Guests see a Login/Register button that opens the login popup. Logged-in users see their avatar and name, linked to the profile page.", "smart-btn", "peprodev-ups"),
+            "code"  => "[pepro-smart-btn]",
+          ),
+          array(
+            "title" => _x("Header button with your theme style", "smart-btn", "peprodev-ups"),
+            "desc"  => _x("Custom texts and popup titles; loggedout_class takes your theme's button classes so the button matches the header.", "smart-btn", "peprodev-ups"),
+            "code"  => "[pepro-smart-btn\nloggedin_href=\"/profile\" trigger=\".openlogin, .openregister\"\nloggedin_class=\"\" loggedout_class=\"w-btn us-btn-style_1 ush_btn_1\"\nloggedin_text=\"$smart_hi\" loggedout_text=\"$smart_guest\"\nlogin_popup_title=\"$smart_login\" register_popup_title=\"$smart_register\"]",
+          ),
+          array(
+            "title" => _x("Open the Register form first", "smart-btn", "peprodev-ups"),
+            "desc"  => _x("loggedout_form chooses the form the popup opens with: login, register or resetpass.", "smart-btn", "peprodev-ups"),
+            "code"  => "[pepro-smart-btn loggedout_form=\"register\"\nloggedout_text=\"$smart_register\" register_popup_title=\"$smart_register\"]",
+          ),
+          array(
+            "title" => _x("Open the popup from menu items and other links", "smart-btn", "peprodev-ups"),
+            "desc"  => _x("Add the openlogin class to any link or menu item (Appearance > Menus > CSS Classes); clicking it opens the same popup. WooCommerce's \"Click here to login\" link on checkout works too.", "smart-btn", "peprodev-ups"),
+            "code"  => "[pepro-smart-btn trigger=\".openlogin, .woocommerce-info a.showlogin\"]\n\n<a href=\"#\" class=\"openlogin\">$smart_login</a>",
+          ),
+          array(
+            "title" => _x("First name only, without avatar", "smart-btn", "peprodev-ups"),
+            "desc"  => _x("loggedin_text replaces one user field written in braces, e.g. {first_name}, {display_name} or {user_email}.", "smart-btn", "peprodev-ups"),
+            "code"  => "[pepro-smart-btn loggedin_avatar=\"no\"\nloggedin_text=\"{first_name}\" loggedin_href=\"/my-account\"]",
+          ),
+          array(
+            "title" => _x("Different content for guests and members", "smart-btn", "peprodev-ups"),
+            "desc"  => _x("[loggedin] and [guest] show their content only to logged-in users or only to guests. [current_url] sends the user back to this page after login.", "smart-btn", "peprodev-ups"),
+            "code"  => "[loggedin]\n[pepro-smart-btn loggedin_text=\"$smart_hi\"] [logout-url button=\"" . __("Logout", $this->td) . "\"]\n[/loggedin]\n[guest]<a href=\"" . home_url("/profile?redirect_to=[current_url]") . "\">$smart_guest</a>[/guest]",
+          ),
+        );
+        $smart_attrs = array(
+          array("loggedout_text", "Login/Register", _x("Button text for guests.", "smart-btn", "peprodev-ups")),
+          array("loggedout_class", "", _x("CSS classes of the guest button, e.g. your theme's button classes.", "smart-btn", "peprodev-ups")),
+          array("loggedout_form", "login", _x("Form the popup opens with: login, register or resetpass.", "smart-btn", "peprodev-ups")),
+          array("trigger", "", _x("More CSS selectors, comma separated, that also open the popup, e.g. .openlogin", "smart-btn", "peprodev-ups")),
+          array("login_popup_title", $smart_login, _x("Popup title on the login form.", "smart-btn", "peprodev-ups")),
+          array("register_popup_title", $smart_register, _x("Popup title on the register form.", "smart-btn", "peprodev-ups")),
+          array("resetpass_popup_title", __("Recover Password", $this->td), _x("Popup title on the password recovery form.", "smart-btn", "peprodev-ups")),
+          array("loggedin_text", "Hi {display_name}", _x("Text for logged-in users. One user field in braces is replaced, e.g. {first_name}.", "smart-btn", "peprodev-ups")),
+          array("loggedin_href", _x("Profile page", "smart-btn", "peprodev-ups"), _x("Link of the button for logged-in users.", "smart-btn", "peprodev-ups")),
+          array("loggedin_class", "", _x("CSS classes of the logged-in button.", "smart-btn", "peprodev-ups")),
+          array("loggedin_avatar", "yes", _x("Show the user avatar: yes or no.", "smart-btn", "peprodev-ups")),
+          array("loggedin_avatar_size", "32", _x("Avatar size in pixels.", "smart-btn", "peprodev-ups")),
+        );
+        $smart_related = array(
+          array("[loggedin]...[/loggedin]", _x("Shows the content only to logged-in users.", "smart-btn", "peprodev-ups")),
+          array("[guest]...[/guest]", _x("Shows the content only to guests ([loggedout] works too).", "smart-btn", "peprodev-ups")),
+          array("[current_url]", _x("Address of the current page, useful in redirect_to.", "smart-btn", "peprodev-ups")),
+          array("[logout-url button=\"" . __("Logout", $this->td) . "\"]", _x("Logout link; without button it prints only the URL.", "smart-btn", "peprodev-ups")),
+          array("[pepro-login-popup button=\"$smart_login\"]", _x("Login popup with its own button, without the logged-in part.", "smart-btn", "peprodev-ups")),
+          array("[pepro-login-form]", _x("Inline login/register form inside the page.", "smart-btn", "peprodev-ups")),
+          array("[verified-mobile]...[/verified-mobile]", _x("Content for users with a verified mobile; add reverse=\"yes\" to show it to unverified users.", "smart-btn", "peprodev-ups")),
+          array("[verified-email]...[/verified-email]", _x("Same as above for a verified email address.", "smart-btn", "peprodev-ups")),
+        );
+        ?>
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title"><?php echo esc_html_x("Samrt Button", "login-section", "peprodev-ups"); ?></h4>
+            <p class="card-category"><?php echo esc_html_x("Use this button to show login/register popup to guests and welcome logged in users", "login-section", "peprodev-ups"); ?></p>
+          </div>
+          <div class="card-body">
+            <p class="text-bold"><?php echo esc_html_x("To set-up you just need to copy shortcode below and use it in everywhere you want e.g. header.", "login-section", "peprodev-ups"); ?></p>
+            <div class="row smart_btn_workspace">
+              <?php foreach ($smart_samples as $n => $sample) : ?>
+                <div class="col-lg-6 mb-4">
+                  <div class="border p-3 h-100 smart-btn-sample">
+                    <p class="text-bold mb-1"><?php echo esc_html($sample["title"]); ?></p>
+                    <p class="small text-muted mb-2"><?php echo esc_html($sample["desc"]); ?></p>
+                    <pre id="smart-btn-sample-<?php echo esc_attr($n); ?>" class="border p-3 mb-2 text-left copymedata" style="direction: ltr; white-space: pre-wrap; word-break: break-word;"><?php echo esc_html($sample["code"]); ?></pre>
+                    <button type="button" class="btn btn-sm btn-primary copyhwnd m-0" data-copy="#smart-btn-sample-<?php echo esc_attr($n); ?>"><span class="material-icons">content_copy</span> <?php echo __("Copy", "peprodev-ups"); ?></button>
+                  </div>
+                </div>
+              <?php endforeach; ?>
+            </div>
+            <div class="row smart-btn-guide">
+              <div class="col-lg-6 mb-4">
+                <div class="border p-3 h-100">
+                  <p class="text-bold"><?php echo esc_html_x("Smart Button attributes", "smart-btn", "peprodev-ups"); ?></p>
+                  <div class="table-responsive">
+                    <table class="table table-sm mb-0">
+                      <thead><tr><th><?php echo esc_html_x("Attribute", "smart-btn", "peprodev-ups"); ?></th><th><?php echo esc_html_x("Default", "smart-btn", "peprodev-ups"); ?></th><th><?php echo esc_html_x("Description", "smart-btn", "peprodev-ups"); ?></th></tr></thead>
+                      <tbody>
+                        <?php foreach ($smart_attrs as $attr) : ?>
+                          <tr><td><copy dir="ltr"><?php echo esc_html($attr[0]); ?></copy></td><td><?php echo "" === $attr[1] ? "&mdash;" : "<bdi>" . esc_html($attr[1]) . "</bdi>"; ?></td><td><?php echo esc_html($attr[2]); ?></td></tr>
+                        <?php endforeach; ?>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
-              <div class="card-body table-responsive">
-                <div class="smart_btn_workspace">
-                  <p class="text-bold">
-                    <?php echo esc_html_x("To set-up you just need to copy shortcode below and use it in everywhere you want e.g. header.", "login-section", "peprodev-ups"); ?>
-                  </p>
-                  <pre class="border p-3 text-left copymedata" style="direction: ltr"><?php echo str_replace("  ", "", '[pepro-smart-btn
-                    loggedin_href="/profile" trigger=".openlogin, .openregister"
-                    loggedin_class="" loggedout_class="w-btn us-btn-style_1 ush_btn_1"
-                    loggedin_text="' . __("Hi {display_name}", $this->td) . '" loggedout_text="' . __("Login/Register",   $this->td) . '"
-                    login_popup_title="' . __("Login",         $this->td) . '" register_popup_title="' . __("Register",   $this->td) . '"]'); ?></pre>
-                  <pre class="border p-3 text-left copymedata" style="direction: ltr"><?php echo esc_html(str_replace("  ", "", '[loggedin]
-                  [pepro-smart-btn
-                    loggedin_href="/profile" trigger=".openlogin, .openregister, .woocommerce-info a.showlogin"
-                    loggedin_class="" loggedout_class="w-btn us-btn-style_1 ush_btn_1"
-                    loggedin_text="' . __("Hi {display_name}", $this->td) . '" loggedout_text="' . __("Login/Register",   $this->td) . '"
-                    login_popup_title="' . __("Login",         $this->td) . '" register_popup_title="' . __("Register",   $this->td) . '"]
-                  [/loggedin]
-                  [guest]<a href="' . home_url("/profile?redirect_to=[current_url]") . '">ورود/ثبت نام</a>[/guest]')); ?></pre>
-                  <button type="button" id="copyshortcode" class="btn btn-primary copyhwnd" data-copy=".copymedata"><span class="material-icons">content_copy</span> <?php echo __("Copy", "peprodev-ups"); ?></button>
+              <div class="col-lg-6 mb-4">
+                <div class="border p-3 h-100">
+                  <p class="text-bold"><?php echo esc_html_x("Related shortcodes", "smart-btn", "peprodev-ups"); ?></p>
+                  <div class="table-responsive">
+                    <table class="table table-sm">
+                      <tbody>
+                        <?php foreach ($smart_related as $rel) : ?>
+                          <tr><td><copy dir="ltr"><?php echo esc_html($rel[0]); ?></copy></td><td><?php echo esc_html($rel[1]); ?></td></tr>
+                        <?php endforeach; ?>
+                      </tbody>
+                    </table>
+                  </div>
+                  <p class="text-bold mt-3 mb-2"><?php echo esc_html_x("Tips", "smart-btn", "peprodev-ups"); ?></p>
+                  <ul class="small pl-3 pr-3 mb-0">
+                    <li><?php echo esc_html_x("Click any shortcode or attribute name to copy it.", "smart-btn", "peprodev-ups"); ?></li>
+                    <li><?php echo esc_html_x("In page builders, put the shortcode in a Shortcode widget (Elementor) or a Shortcode block (Gutenberg).", "smart-btn", "peprodev-ups"); ?></li>
+                    <li><?php echo esc_html_x("To open the popup from several places, add their selectors to trigger instead of repeating the button.", "smart-btn", "peprodev-ups"); ?></li>
+                    <li><?php echo esc_html_x("The popup uses the forms, fields and verification set in the other tabs of this page.", "smart-btn", "peprodev-ups"); ?></li>
+                  </ul>
                 </div>
               </div>
             </div>
