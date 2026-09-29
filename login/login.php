@@ -243,6 +243,7 @@ if (!class_exists("PeproDevUPS_Login")) {
       add_action("wp_ajax_pepro_reglogin", array($this, "handel_ajax_req"));
       add_action("wp_ajax_nopriv_pepro_reglogin", array($this, "handel_ajax_req"));
       add_action("wp_ajax_pepro_reglogin_test_mail", array($this, "ajax_test_verification_email"));
+      add_action("wp_ajax_pepro_reglogin_preview_mail", array($this, "ajax_preview_verification_email"));
       add_action("admin_init", array($this, "maybe_upgrade_mail_template"));
 
       if (isset($_GET["bulk_mobile_convert"]) && !empty($_GET["bulk_mobile_convert"]) && current_user_can("manage_options") && wp_verify_nonce($_GET["_wpnonce"] ?? "", "peprodev_bulk_mobile_convert")) {
@@ -3559,17 +3560,13 @@ HTML_PREV;
       return $mail;
     }
     /**
-     * Admin AJAX: send a test verification e-mail using the (possibly unsaved) template from the settings editor.
+     * Sample verification e-mail from the (possibly unsaved) template and subject posted by the settings editor,
+     * filled with a random code and the current admin's data.
+     *
+     * @param  string $email recipient shown for [request_email]
+     * @return array  [otp code, replacements, html body, subject template]
      */
-    public function ajax_test_verification_email() {
-      check_ajax_referer("pepro_reglogin_test_mail", "nonce");
-      if (!current_user_can("manage_options")) {
-        wp_send_json_error(array("msg" => __("You do not have sufficient permissions to perform this action.", "peprodev-ups")));
-      }
-      $email = sanitize_email(wp_unslash((string) ($_POST["email"] ?? "")));
-      if (!is_email($email)) {
-        wp_send_json_error(array("msg" => __("Please enter a valid email address.", "peprodev-ups")));
-      }
+    protected function sample_verification_email($email) {
       // full html is allowed here, admins can already save the same template
       $template = isset($_POST["template"]) ? wp_unslash((string) $_POST["template"]) : "";
       if ("" === trim($template)) $template = $this->verification_email_template;
@@ -3593,6 +3590,37 @@ HTML_PREV;
         $email_content = str_replace($key, $value, $email_content);
       }
       $email_content = apply_filters("pepro_reglogin_send_verification_email_content", $email_content);
+      return array($otp_code, $replace, $email_content, $subject_tpl);
+    }
+    /**
+     * Admin AJAX: preview of the verification e-mail (unsaved editor content included), shown in the settings editor.
+     */
+    public function ajax_preview_verification_email() {
+      check_ajax_referer("pepro_reglogin_test_mail", "nonce");
+      if (!current_user_can("manage_options")) {
+        wp_send_json_error(array("msg" => __("You do not have sufficient permissions to perform this action.", "peprodev-ups")));
+      }
+      $email = wp_get_current_user()->user_email;
+      list($otp_code, $replace, $email_content, $subject_tpl) = $this->sample_verification_email($email);
+      if ("" === trim($subject_tpl)) $subject_tpl = $this->get_default_mail_subject();
+      wp_send_json_success(array(
+        "html"    => $email_content,
+        "subject" => $this->build_otp_mail_subject($subject_tpl, $replace, $otp_code),
+      ));
+    }
+    /**
+     * Admin AJAX: send a test verification e-mail using the (possibly unsaved) template from the settings editor.
+     */
+    public function ajax_test_verification_email() {
+      check_ajax_referer("pepro_reglogin_test_mail", "nonce");
+      if (!current_user_can("manage_options")) {
+        wp_send_json_error(array("msg" => __("You do not have sufficient permissions to perform this action.", "peprodev-ups")));
+      }
+      $email = sanitize_email(wp_unslash((string) ($_POST["email"] ?? "")));
+      if (!is_email($email)) {
+        wp_send_json_error(array("msg" => __("Please enter a valid email address.", "peprodev-ups")));
+      }
+      list($otp_code, $replace, $email_content, $subject_tpl) = $this->sample_verification_email($email);
       $mail_error = "";
       $catch_error = function ($error) use (&$mail_error) {
         if (is_wp_error($error)) $mail_error = $error->get_error_message();

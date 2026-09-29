@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.2.17](#version-8217)
 - [Version 8.2.16](#version-8216)
 - [Version 8.2.15](#version-8215)
 - [Version 8.2.14](#version-8214)
@@ -83,6 +84,10 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.2.17
+- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- **New** Verification email template editor has Code / Preview tabs; the preview is rendered by the server like the real email (sample code, your account data, unsaved changes included) and shows the resulting subject
 
 ## Version 8.2.16
 - Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)

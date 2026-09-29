@@ -5761,3 +5761,23 @@ msgstr "[site_name] | تایید ایمیل"
 #: login/include/class-activated.php
 msgid "Restore default"
 msgstr "بازگردانی پیش‌فرض"
+
+#: login/include/class-activated.php
+msgctxt "email-editor"
+msgid "Code"
+msgstr "کد"
+
+#: login/include/class-activated.php
+msgctxt "email-editor"
+msgid "Preview"
+msgstr "پیش‌نمایش"
+
+#: login/include/class-activated.php
+msgctxt "email-editor"
+msgid "Preview with a sample code and your own account data, unsaved changes included."
+msgstr "پیش‌نمایش با یک کد نمونه و اطلاعات حساب خودتان ساخته می‌شود و تغییرات ذخیره‌نشده را هم نشان می‌دهد."
+
+#: login/include/class-activated.php
+msgctxt "email-editor"
+msgid "Subject:"
+msgstr "موضوع:"

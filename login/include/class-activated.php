@@ -41,6 +41,7 @@ wp_localize_script("pepro-register-fields",        "_register_fields", array(
   "mail_reset_done"   => __("Default subject and template loaded into the editor. Click Save Settings to keep them.", "peprodev-ups"),
   "mail_test_sending" => __("Sending test email ...", "peprodev-ups"),
   "mail_test_invalid" => __("Please enter a valid email address.", "peprodev-ups"),
+  "mail_subject_label" => _x("Subject:", "email-editor", "peprodev-ups"),
 ));
 
 $styles = "";
@@ -754,8 +755,21 @@ foreach ($styleFiles as $style) {
                       </div>
                       <div class='col-lg-12 row justify-content-between align-items-center mb-3 field-opt-verification_email_template '>
                         <div class="col-lg-12">
-                          <p class="text-bold"><?php esc_html_e("Verification Email Template", "peprodev-ups"); ?></p>
-                          <textarea class="codeditor" id="verification_email_template_editor" autocomplete="off" spellcheck="false" dir="ltr" rows="8" cols="80"><?php echo esc_textarea($this->verification_email_template); ?></textarea>
+                          <div class="pd-editor-head">
+                            <p class="text-bold m-0"><?php esc_html_e("Verification Email Template", "peprodev-ups"); ?></p>
+                            <div class="pd-editor-tabs" role="tablist">
+                              <button type="button" role="tab" class="active" aria-selected="true" data-view="code"><?php echo esc_html_x("Code", "email-editor", "peprodev-ups"); ?></button>
+                              <button type="button" role="tab" aria-selected="false" data-view="preview"><?php echo esc_html_x("Preview", "email-editor", "peprodev-ups"); ?></button>
+                            </div>
+                          </div>
+                          <div class="pd-editor-view" data-view="code">
+                            <textarea class="codeditor" id="verification_email_template_editor" autocomplete="off" spellcheck="false" dir="ltr" rows="8" cols="80"><?php echo esc_textarea($this->verification_email_template); ?></textarea>
+                          </div>
+                          <div class="pd-editor-view hide" data-view="preview">
+                            <p class="small mb-2 pd-preview-subject" dir="auto"></p>
+                            <iframe id="verification_email_preview" sandbox="" title="<?php echo esc_attr_x("Preview", "email-editor", "peprodev-ups"); ?>"></iframe>
+                            <p class="small text-muted mt-2 mb-0"><?php echo esc_html_x("Preview with a sample code and your own account data, unsaved changes included.", "email-editor", "peprodev-ups"); ?></p>
+                          </div>
                           <textarea class="codeditor" id="verification_email_template" autocomplete="off" name="verification_email_template" spellcheck="false" dir="ltr" rows="8" cols="80" style="display:none !important;"><?php echo esc_textarea($this->verification_email_template); ?></textarea>
                           <p class="text-bold"><?php esc_html_e("Available tags: ", "peprodev-ups"); ?></p>
                           <?php

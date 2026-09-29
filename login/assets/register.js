@@ -663,6 +663,40 @@ jQuery.noConflict();
       });
     });
     /* Verification email template: reset editor content to the default template (not saved until Save Settings) */
+    // email template editor: Code / Preview tabs, the preview is rendered by the server like the real email
+    $(document).on("click tap", ".pd-editor-tabs button", function(e){
+      e.preventDefault();
+      var me = $(this), view = me.data("view"), box = me.closest(".col-lg-12");
+      me.addClass("active").attr("aria-selected", "true").siblings().removeClass("active").attr("aria-selected", "false");
+      box.find(".pd-editor-view").addClass("hide").filter("[data-view='" + view + "']").removeClass("hide");
+      if ("code" === view) {
+        if (verification_email_template) verification_email_template.resize();
+        return;
+      }
+      var frame = $("#verification_email_preview"), subject = box.find(".pd-preview-subject");
+      subject.css("color", "").text(_register_fields.loading);
+      $.ajax({
+        url: pepc.ajax,
+        type: "POST",
+        data: {
+          action: "pepro_reglogin_preview_mail",
+          nonce: _register_fields.mail_test_nonce,
+          template: verification_email_template ? verification_email_template.getSession().getValue() : $("#verification_email_template").val(),
+          subject: $.trim($("#verification_email_subject").val() || ""),
+        },
+        success: function(r) {
+          if (r && r.success === true) {
+            subject.text(_register_fields.mail_subject_label + " " + r.data.subject);
+            frame.attr("srcdoc", r.data.html);
+          } else {
+            subject.css("color", "#dd3333").text((r && r.data && r.data.msg) ? r.data.msg : _register_fields.error);
+          }
+        },
+        error: function() {
+          subject.css("color", "#dd3333").text(_register_fields.error);
+        },
+      });
+    });
     $(document).on("click tap", "#verification_email_subject_reset", function(e){
       e.preventDefault();
       $("#verification_email_subject").val($(this).attr("data-default")).trigger("change").focus();

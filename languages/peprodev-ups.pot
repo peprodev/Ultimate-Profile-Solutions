@@ -5420,3 +5420,23 @@ msgstr ""
 #: login/include/class-activated.php
 msgid "Restore default"
 msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "email-editor"
+msgid "Code"
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "email-editor"
+msgid "Preview"
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "email-editor"
+msgid "Preview with a sample code and your own account data, unsaved changes included."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "email-editor"
+msgid "Subject:"
+msgstr ""

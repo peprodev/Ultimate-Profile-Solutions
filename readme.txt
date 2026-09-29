@@ -2,8 +2,8 @@
 Contributors: amirhpcom, peprodev, blackswanlab
 Donate link: https://peprodev.com/donate/
 Tags: profile, dashboard, login-registration
-Version: 8.2.16
-Stable tag: 8.2.16
+Version: 8.2.17
+Stable tag: 8.2.17
 Requires at least: 5.0
 Tested up to: 7.1
 Requires PHP: 7.2
@@ -157,6 +157,11 @@ Your support and feedback have been key in shaping this plugin into a reliable a
 We're proud to be part of this amazing journey with the WordPress community 💙
 Here's to many more years of innovation, freedom, and open-source collaboration 😍!
 
+= 8.2.17 =
+Release date: 2026-09-29
+
+* New: Code / Preview tabs on the verification email template editor.
+
 = 8.2.16 =
 Release date: 2026-09-29
 
@@ -268,7 +273,7 @@ Release date: 2026-09-27
 
 == Upgrade Notice ==
 
-= 8.2.16 =
+= 8.2.17 =
 Modern UI on by default (existing sites too), settings moved to the Login/Register and Profile screens. New: Sign in with Google, FarazSMS / WP SMS / Persian WooCommerce SMS gateways, mobile/email switch.
 
 = 8.2.5 =

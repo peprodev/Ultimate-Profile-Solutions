@@ -405,3 +405,42 @@ input[type="checkbox"].iostoggle[disabled]:checked {
 [dir="rtl"] select[dir="ltr"] {
   padding-left: 45px !important;
 }
+
+/* email template editor: Code / Preview tabs */
+.pd-editor-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+.pd-editor-tabs {
+  display: inline-flex;
+  padding: 3px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.06);
+}
+.pd-editor-tabs button {
+  border: 0;
+  background: transparent;
+  padding: 4px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.85rem;
+  color: inherit;
+}
+.pd-editor-tabs button.active {
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  font-weight: 600;
+}
+#verification_email_preview {
+  display: block;
+  width: 100%;
+  height: 520px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 6px;
+  background: #fff;
+}
