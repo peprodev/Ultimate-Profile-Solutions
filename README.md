@@ -184,6 +184,43 @@ bin/build-release.sh
 
 creates `dist/peprodev-ups-<version>.zip` without development files.
 
+### Release process (maintainers)
+
+1. **One commit per change**, each with a patch version bump. The version is written in three places: the plugin header `Version:` and `$version` in `peprodev-ups.php`, and `Version:` / `Stable tag:` in `readme.txt`. Every bump also adds a `readme.txt` changelog entry, an Upgrade Notice heading and a `changelog.md` section dated in both calendars (`2026-09-30 | 1405-07-08`). New strings get their Persian translation in `languages/peprodev-ups-fa_IR.po` / `.pot`, and the `.mo` is recompiled (`msgfmt -c -o languages/peprodev-ups-fa_IR.mo languages/peprodev-ups-fa_IR.po`).
+2. **Update the docs**: this README (features, settings locations, hooks) and the `readme.txt` feature list / FAQ.
+3. **Build**: `bin/build-release.sh` → `dist/peprodev-ups-<version>.zip`. The script stops when the header version and the `Stable tag` differ.
+4. **GitHub**: push `master`, then tag the release with the bare version and push the tag:
+
+   ```sh
+   git push origin master
+   git tag <version> && git push origin <version>
+   ```
+
+   Create the release with the **bare version as its title** (no date). Start the notes with the release date in both calendars, then the changes as emoji bullets, and attach the clean zip as `peprodev-ups-v<version>.zip`:
+
+   ```sh
+   cp dist/peprodev-ups-<version>.zip /tmp/peprodev-ups-v<version>.zip
+   gh release create <version> --title "<version>" --notes-file notes.md --latest /tmp/peprodev-ups-v<version>.zip
+   ```
+
+   `notes.md` begins with a line like `📅 **2026-09-30 | 1405-07-08**`.
+5. **WordPress.org SVN** (`https://plugins.svn.wordpress.org/peprodev-ups`, working copy with `trunk/`, `tags/`, `assets/`):
+
+   ```sh
+   cd <svn working copy>/peprodev-ups
+   svn up
+   unzip -q <repo>/dist/peprodev-ups-<version>.zip -d /tmp/pdups-build
+   rsync -a --delete --exclude .svn /tmp/pdups-build/peprodev-ups/ trunk/
+   svn status trunk | grep '^!' | awk '{print $2}' | xargs -r svn rm -q
+   svn status trunk | grep '^?' | awk '{print $2}' | xargs -r svn add -q
+   diff -rq -x .svn trunk /tmp/pdups-build/peprodev-ups   # must print nothing
+   svn cp trunk tags/<version>
+   svn commit -m "v<version>"
+   ```
+
+   Check afterwards that `tags/<version>/` exists and that trunk `readme.txt` shows the new `Stable tag`.
+6. Commit messages carry no co-author trailers.
+
 ## Upgrading to 8.2
 
 - The Modern UI is now **on by default**. Sites that never saved the 8.1 "Dashboard Texts" page (or saved it with the modules on) get the modern login form and dashboard after updating; sites that saved a module as off keep it off. Constants in `wp-config.php` still win.
