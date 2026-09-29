@@ -660,9 +660,9 @@ foreach ($styleFiles as $style) {
                   <div class='card-body'>
                     <div class='checkotp-test'>
                       <p class="pt-3"><strong><?php esc_html_e("TEST Sending OTP SMS", "peprodev-ups"); ?></strong> <span>(<?php echo __("First Save changes (Ctrl+S), then test SMS Sending", "peprodev-ups"); ?>)</span></p>
-                      <div class="row justify-content-between align-items-center">
-                        <div class="col-8"><input id="sms_test" placeholder="<?php echo __("Test mobile number", $this->td); ?>" value="<?php echo esc_attr(get_the_author_meta("user_mobile", get_current_user_id())); ?>" autocomplete="off" type="text" dir="ltr" class='form-input single-required' /></div>
-                        <div class="col-4"><button integrity="<?php echo esc_attr(wp_create_nonce('peprocorenounce')); ?>" class="btn btn-success btn-primary icn-btn btn-wide testotp"><i class="material-icons">send</i> <?php echo __("Send a Test SMS", $this->td); ?></button></div>
+                      <div class="pd-test-row">
+                        <input id="sms_test" placeholder="<?php echo __("Test mobile number", $this->td); ?>" value="<?php echo esc_attr(get_the_author_meta("user_mobile", get_current_user_id())); ?>" autocomplete="off" type="text" dir="ltr" class='form-input single-required' />
+                        <button integrity="<?php echo esc_attr(wp_create_nonce('peprocorenounce')); ?>" class="btn btn-success btn-primary icn-btn testotp"><i class="material-icons">send</i> <?php echo __("Send a Test SMS", $this->td); ?></button>
                       </div>
                     </div>
                   </div>
@@ -782,9 +782,9 @@ foreach ($styleFiles as $style) {
                         <button type="button" id="verification_email_template_reset" class="btn btn-secondary icn-btn"><i class="material-icons">restart_alt</i> <?php esc_html_e("Reset to default", "peprodev-ups"); ?></button>
                       </p>
                       <p class="pt-2 mb-2"><strong><?php esc_html_e("Send test email", "peprodev-ups"); ?></strong> <span>(<?php esc_html_e("uses the current editor content with a sample code, unsaved changes included", "peprodev-ups"); ?>)</span></p>
-                      <div class="row justify-content-between align-items-center">
-                        <div class="col-8"><input id="verification_email_test_to" type="email" dir="ltr" autocomplete="off" class="form-input" placeholder="<?php esc_attr_e("Test email address", "peprodev-ups"); ?>" value="<?php echo esc_attr(wp_get_current_user()->user_email); ?>" /></div>
-                        <div class="col-4"><button type="button" id="verification_email_test_send" class="btn btn-success btn-primary icn-btn btn-wide"><i class="material-icons">send</i> <?php esc_html_e("Send test email", "peprodev-ups"); ?></button></div>
+                      <div class="pd-test-row">
+                        <input id="verification_email_test_to" type="email" dir="ltr" autocomplete="off" class="form-input" placeholder="<?php esc_attr_e("Test email address", "peprodev-ups"); ?>" value="<?php echo esc_attr(wp_get_current_user()->user_email); ?>" />
+                        <button type="button" id="verification_email_test_send" class="btn btn-success btn-primary icn-btn"><i class="material-icons">send</i> <?php esc_html_e("Send test email", "peprodev-ups"); ?></button>
                       </div>
                       <div id="verification_email_test_result" class="mt-2" role="status" aria-live="polite"></div>
                     </div>

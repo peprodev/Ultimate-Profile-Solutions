@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.2.14](#version-8214)
 - [Version 8.2.13](#version-8213)
 - [Version 8.2.12](#version-8212)
 - [Version 8.2.11](#version-8211)
@@ -80,6 +81,10 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.2.14
+- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- **Fixed** "Send a Test SMS" / "Send test email" buttons cut their label; the address field now grows and the button keeps its full text
 
 ## Version 8.2.13
 - Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
