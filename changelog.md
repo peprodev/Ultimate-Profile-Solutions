@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.2.35](#version-8235)
 - [Version 8.2.34](#version-8234)
 - [Version 8.2.33](#version-8233)
 - [Version 8.2.32](#version-8232)
@@ -101,6 +102,10 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.2.35
+- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- **New** Text replacement on the LearnDash screen: rules that change any translatable text of LearnDash, WooCommerce, WordPress, this plugin or other plugins/themes (whole text or part of text, optional text domain and WPML/Polylang language). Works through the gettext filters with pre-grouped rules, off until enabled
 
 ## Version 8.2.34
 - Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)

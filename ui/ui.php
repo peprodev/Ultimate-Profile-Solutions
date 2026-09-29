@@ -770,3 +770,5 @@ require_once PEPRODEV_UPS_UI_DIR . 'dashboard/courses.php';
 require_once PEPRODEV_UPS_UI_DIR . 'design.php';
 // "LearnDash" screen: learning button and "My courses" settings.
 require_once PEPRODEV_UPS_UI_DIR . 'learndash.php';
+// Text replacement (gettext) rules, edited on the LearnDash screen.
+require_once PEPRODEV_UPS_UI_DIR . 'text-replace.php';

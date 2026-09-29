@@ -5832,3 +5832,63 @@ msgstr ""
 #: login/include/class-activated.php
 msgid "Modern user dashboard switch. Colors and font sizes are on the Modern UI Design screen, the learning button and My courses texts on the LearnDash screen."
 msgstr ""
+
+#: login/include/class-activated.php
+msgid "Text replacement"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Change texts of LearnDash, WooCommerce, WordPress or any plugin and theme without editing translation files, e.g. \"Course\" to \"Class\"."
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Enable text replacement"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Whole text: the text must be exactly equal to \"Text to find\", in English (original) or as it is shown on the site (translated)."
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Part of text: every occurrence of \"Text to find\" inside the shown text is replaced."
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Text domain limits the rule to one plugin or theme: learndash, woocommerce, peprodev-ups, default (WordPress). Empty = all."
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Text to find"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Replace with"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Match"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Text domain"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Language"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Whole text"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Part of text"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "all"
+msgstr ""
+
+#: login/include/class-activated.php
+msgid "Add rule"
+msgstr ""
