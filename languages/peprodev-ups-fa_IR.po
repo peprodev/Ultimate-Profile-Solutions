@@ -5781,3 +5781,68 @@ msgstr "پیش‌نمایش با یک کد نمونه و اطلاعات حساب
 msgctxt "email-editor"
 msgid "Subject:"
 msgstr "موضوع:"
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Appearance"
+msgstr "ظاهر"
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Theme of the wp-login.php screen."
+msgstr "قالب صفحه ورود وردپرس (wp-login.php)."
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Use only the theme styles"
+msgstr "فقط استایل قالب"
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "On: WordPress' own login styles are removed and only the theme is used. Off: the theme is loaded on top of them."
+msgstr "روشن: استایل‌های پیش‌فرض صفحه ورود وردپرس حذف می‌شوند و فقط قالب اعمال می‌شود. خاموش: قالب روی استایل‌های وردپرس بارگذاری می‌شود."
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Only the theme"
+msgstr "فقط قالب"
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Theme + WordPress styles"
+msgstr "قالب + استایل وردپرس"
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Logo"
+msgstr "لوگو"
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Logo above the login form, its size, link and hover text."
+msgstr "لوگوی بالای فرم ورود، اندازه، لینک و متن هاور آن."
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Form elements"
+msgstr "اجزای فرم"
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Links and options shown with the login form."
+msgstr "لینک‌ها و گزینه‌هایی که کنار فرم ورود نمایش داده می‌شوند."
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Background"
+msgstr "پس‌زمینه"
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Replace the theme background with a color, gradient, image or video."
+msgstr "پس‌زمینه قالب را با رنگ، گرادیان، تصویر یا ویدیو جایگزین کنید."
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Off: the background of the login theme is used."
+msgstr "خاموش: پس‌زمینه خود قالب ورود استفاده می‌شود."

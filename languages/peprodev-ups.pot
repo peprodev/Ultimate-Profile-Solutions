@@ -5440,3 +5440,68 @@ msgstr ""
 msgctxt "email-editor"
 msgid "Subject:"
 msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Appearance"
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Theme of the wp-login.php screen."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Use only the theme styles"
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "On: WordPress' own login styles are removed and only the theme is used. Off: the theme is loaded on top of them."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Only the theme"
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Theme + WordPress styles"
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Logo"
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Logo above the login form, its size, link and hover text."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Form elements"
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Links and options shown with the login form."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Background"
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Replace the theme background with a color, gradient, image or video."
+msgstr ""
+
+#: login/include/class-activated.php
+msgctxt "login-section"
+msgid "Off: the background of the login theme is used."
+msgstr ""

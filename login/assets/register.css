@@ -496,3 +496,42 @@ input[type="checkbox"].iostoggle[disabled]:checked {
 [dir="ltr"] .pd-macro[data-tip]:focus-visible::after {
   direction: ltr;
 }
+
+/* settings tables (WordPress built-in login, security): grouped rows with short help */
+.pd-settings-table > tbody > tr > td {
+  vertical-align: middle;
+  padding-top: 0.85rem;
+  padding-bottom: 0.85rem;
+}
+.pd-settings-table > tbody > tr > td:first-child {
+  width: 40%;
+  font-weight: 500;
+}
+.pd-settings-table tr.pd-section > th {
+  padding: 1.5rem 0 0.5rem;
+  border-top: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.pd-settings-table tr.pd-section:first-child > th {
+  padding-top: 0.25rem;
+}
+.pd-settings-table tr.pd-section > th > span {
+  display: block;
+  font-weight: 700;
+  font-size: 1rem;
+}
+.pd-settings-table tr.pd-section > th > small,
+.pd-settings-table .pd-help {
+  display: block;
+  font-weight: 400;
+  font-size: 0.78rem;
+  color: #888;
+  margin-top: 2px;
+  line-height: 1.7;
+}
+.pd-settings-table .flex {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}

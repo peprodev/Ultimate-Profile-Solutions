@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.2.19](#version-8219)
 - [Version 8.2.18](#version-8218)
 - [Version 8.2.17](#version-8217)
 - [Version 8.2.16](#version-8216)
@@ -85,6 +86,10 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.2.19
+- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- **Improved** WordPress Built-in Login settings grouped into Appearance, Logo, Form elements and Background with short explanations; "WordPress Style" renamed to "Use only the theme styles" with a clear on/off description; logo inputs use the same style as the other fields
 
 ## Version 8.2.18
 - Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)

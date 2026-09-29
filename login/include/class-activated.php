@@ -823,8 +823,9 @@ foreach ($styleFiles as $style) {
                 <p class="card-category"><?php echo esc_html_x("You can control WordPress Built-in login screen appearance from here.", "login-section", "peprodev-ups"); ?></p>
               </div>
               <div class="card-body table-responsive">
-                <table class="table pepcappearance">
+                <table class="table pepcappearance pd-settings-table">
                   <tbody>
+                    <tr class="pd-section"><th colspan="2"><span><?php echo esc_html_x("Appearance", "login-section", "peprodev-ups"); ?></span><small><?php echo esc_html_x("Theme of the wp-login.php screen.", "login-section", "peprodev-ups"); ?></small></th></tr>
                     <tr>
                       <td><?php echo esc_html_x("Login Theme", "login-section", "peprodev-ups"); ?></td>
                       <td>
@@ -834,11 +835,12 @@ foreach ($styleFiles as $style) {
                       </td>
                     </tr>
                     <tr>
-                      <td><?php echo esc_html_x("WordPress Style", "login-section", "peprodev-ups"); ?></td>
+                      <td><?php echo esc_html_x("Use only the theme styles", "login-section", "peprodev-ups"); ?><small class="pd-help"><?php echo esc_html_x("On: WordPress' own login styles are removed and only the theme is used. Off: the theme is loaded on top of them.", "login-section", "peprodev-ups"); ?></small></td>
                       <td>
-                        <a class='btncheckbox' data-text-on='<?php echo esc_html_x("Overwite WordPress Style with Theme", "login-section", "peprodev-ups"); ?>' data-text-off='<?php echo esc_html_x("Load with WordPress Style with Theme", "login-section", "peprodev-ups"); ?>' data-on='invert_colors_off' data-off='invert_colors' data-checked='<?php echo esc_attr($this->read("login_use_wp_core", "false") === "true" ? "true" : "false"); ?>' id="login-section-style-force"></a>
+                        <a class='btncheckbox' data-text-on='<?php echo esc_html_x("Only the theme", "login-section", "peprodev-ups"); ?>' data-text-off='<?php echo esc_html_x("Theme + WordPress styles", "login-section", "peprodev-ups"); ?>' data-on='invert_colors_off' data-off='invert_colors' data-checked='<?php echo esc_attr($this->read("login_use_wp_core", "false") === "true" ? "true" : "false"); ?>' id="login-section-style-force"></a>
                       </td>
                     </tr>
+                    <tr class="pd-section"><th colspan="2"><span><?php echo esc_html_x("Logo", "login-section", "peprodev-ups"); ?></span><small><?php echo esc_html_x("Logo above the login form, its size, link and hover text.", "login-section", "peprodev-ups"); ?></small></th></tr>
                     <tr>
                       <td><?php echo esc_html_x("Show Logo", "login-section", "peprodev-ups"); ?></td>
                       <td>
@@ -860,24 +862,25 @@ foreach ($styleFiles as $style) {
                       <td><?php echo esc_html_x("Logo Dimensions", "login-section", "peprodev-ups"); ?></td>
                       <td>
                         <div class="flex">
-                          <input type="text" id="login-section-logo-w" title="<?php echo esc_html_x("Logo Width (e.g. 84px)", "login-section", "peprodev-ups"); ?>" value="<?php echo esc_attr($this->read("login_logo_w", "84px")); ?>" class="text-center form-control primary" placeholder="<?php echo esc_html_x("Logo Width (e.g. 84px)", "login-section", "peprodev-ups"); ?>" />
+                          <input type="text" id="login-section-logo-w" title="<?php echo esc_html_x("Logo Width (e.g. 84px)", "login-section", "peprodev-ups"); ?>" value="<?php echo esc_attr($this->read("login_logo_w", "84px")); ?>" class="text-center form-input" placeholder="<?php echo esc_html_x("Logo Width (e.g. 84px)", "login-section", "peprodev-ups"); ?>" />
                           &times;
-                          <input type="text" id="login-section-logo-h" title="<?php echo esc_html_x("Logo Height (e.g. 84px)", "login-section", "peprodev-ups"); ?>" value="<?php echo esc_attr($this->read("login_logo_h", "84px")); ?>" class="text-center form-control primary" placeholder="<?php echo esc_html_x("Logo Height (e.g. 84px)", "login-section", "peprodev-ups"); ?>" />
+                          <input type="text" id="login-section-logo-h" title="<?php echo esc_html_x("Logo Height (e.g. 84px)", "login-section", "peprodev-ups"); ?>" value="<?php echo esc_attr($this->read("login_logo_h", "84px")); ?>" class="text-center form-input" placeholder="<?php echo esc_html_x("Logo Height (e.g. 84px)", "login-section", "peprodev-ups"); ?>" />
                         </div>
                       </td>
                     </tr>
                     <tr showonlogoshow="true">
                       <td><?php echo esc_html_x("Logo Href", "login-section", "peprodev-ups"); ?></td>
                       <td>
-                        <input type="text" id="login-section-logohref" value="<?php echo esc_attr($this->read("login_logo_href", home_url())); ?>" class="form-control primary" placeholder="<?php echo esc_html_x("Login slug", "login-section", "peprodev-ups"); ?>" />
+                        <input type="text" id="login-section-logohref" value="<?php echo esc_attr($this->read("login_logo_href", home_url())); ?>" class="form-input" placeholder="<?php echo esc_html_x("Login slug", "login-section", "peprodev-ups"); ?>" />
                       </td>
                     </tr>
                     <tr showonlogoshow="true">
                       <td><?php echo esc_html_x("Logo Title", "login-section", "peprodev-ups"); ?></td>
                       <td>
-                        <input type="text" id="login-section-logotitle" value="<?php echo esc_attr($this->read("login_logo_title", get_bloginfo('name'))); ?>" class="form-control primary" placeholder="<?php echo esc_html_x("Login slug", "login-section", "peprodev-ups"); ?>" />
+                        <input type="text" id="login-section-logotitle" value="<?php echo esc_attr($this->read("login_logo_title", get_bloginfo('name'))); ?>" class="form-input" placeholder="<?php echo esc_html_x("Login slug", "login-section", "peprodev-ups"); ?>" />
                       </td>
                     </tr>
+                    <tr class="pd-section"><th colspan="2"><span><?php echo esc_html_x("Form elements", "login-section", "peprodev-ups"); ?></span><small><?php echo esc_html_x("Links and options shown with the login form.", "login-section", "peprodev-ups"); ?></small></th></tr>
                     <tr>
                       <td><?php echo esc_html_x("'Remeber Me' Checkbox", "login-section", "peprodev-ups"); ?></td>
                       <td>
@@ -902,8 +905,9 @@ foreach ($styleFiles as $style) {
                         <a class='btncheckbox' data-text-on='<?php echo esc_html_x("Yes, Show it", "login-section", "peprodev-ups"); ?>' data-text-off='<?php echo esc_html_x("No, Hide it", "login-section", "peprodev-ups"); ?>' data-on='visibility' data-off='visibility_off' data-checked='<?php echo esc_attr($this->read("login_spb", "true") === "true" ? "true" : "false"); ?>' id="login-section-spb"></a>
                       </td>
                     </tr>
+                    <tr class="pd-section"><th colspan="2"><span><?php echo esc_html_x("Background", "login-section", "peprodev-ups"); ?></span><small><?php echo esc_html_x("Replace the theme background with a color, gradient, image or video.", "login-section", "peprodev-ups"); ?></small></th></tr>
                     <tr>
-                      <td><?php echo esc_html_x("Force Background?", "login-section", "peprodev-ups"); ?></td>
+                      <td><?php echo esc_html_x("Force Background?", "login-section", "peprodev-ups"); ?><small class="pd-help"><?php echo esc_html_x("Off: the background of the login theme is used.", "login-section", "peprodev-ups"); ?></small></td>
                       <td>
                         <a class='btncheckbox' data-text-on='<?php echo esc_html_x("Yes, Apply My Setting for Background", "login-section", "peprodev-ups"); ?>' data-text-off='<?php echo esc_html_x("No, Use Default Login Theme's Background setting", "login-section", "peprodev-ups"); ?>' data-on='visibility' data-togglel='[onlyforcedbg]' data-off='visibility_off' data-checked='<?php echo esc_attr($this->read("login_forcebg", "false") === "true" ? "true" : "false"); ?>' id="login-section-forcebg"></a>
                       </td>
@@ -976,7 +980,7 @@ foreach ($styleFiles as $style) {
                 <div id="alert-primary">
                   <div class="alert alert-success alert-dismissible fade show" role="alert"> <?php printf(_x('%1$s Your login page is: %2$s. Bookmark this page!', "login-section", "peprodev-ups"), "<strong>" . _x("Attention!", "login-section", "peprodev-ups") . "</strong>", "<strong><u><a href='" . wp_login_url() . "' target='_blank'>" . untrailingslashit(wp_login_url()) . "</a></u></strong>"); ?></div>
                 </div>
-                <table class="table pepcappearance activesecurity-table">
+                <table class="table pepcappearance pd-settings-table activesecurity-table">
                   <tbody>
                     <tr>
                       <td><?php echo esc_html_x("Login Base Slug", "login-section", "peprodev-ups"); ?></td>
