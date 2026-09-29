@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.2.26](#version-8226)
 - [Version 8.2.25](#version-8225)
 - [Version 8.2.24](#version-8224)
 - [Version 8.2.23](#version-8223)
@@ -92,6 +93,10 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.2.26
+- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- **Fixed** FarazSMS: a sent code could be reported as "not sent" (the API success reply carries an empty message, which the forms read as a failure, so the error and no resend timer were shown). A sent message now always returns a success value; status is compared case-insensitively and a 2xx reply without JSON counts as sent
 
 ## Version 8.2.25
 - Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)

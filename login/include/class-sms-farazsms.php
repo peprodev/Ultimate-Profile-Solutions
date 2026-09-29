@@ -60,11 +60,13 @@ final class PeproSMS_FarazSMS_Gateway extends PeproSMS_Gateway_Base {
     if (is_wp_error($response)) return $response;
     $code = (int) wp_remote_retrieve_response_code($response);
     $data = json_decode(wp_remote_retrieve_body($response), true);
+    // a 2xx reply the API accepted is a success even when its body is not JSON
+    if (!is_array($data) && $code >= 200 && $code < 300) return array("status" => "success");
     if (!is_array($data)) {
       /* translators: %s: HTTP status code. */
       return new \WP_Error("farazsms_bad_response", sprintf(__("Invalid response from FarazSMS (HTTP %s).", "peprodev-ups"), $code));
     }
-    if ($code >= 400 || (isset($data["status"]) && "success" !== $data["status"])) {
+    if ($code >= 400 || (isset($data["status"]) && "success" !== strtolower(trim((string) $data["status"])))) {
       $msg = $this->error_text($data);
       /* translators: %s: HTTP status code. */
       $msg = "" !== $msg ? $msg : sprintf(__("FarazSMS request failed (HTTP %s).", "peprodev-ups"), $code);
@@ -132,7 +134,7 @@ final class PeproSMS_FarazSMS_Gateway extends PeproSMS_Gateway_Base {
         ), $api_key);
         if (is_wp_error($result)) return $this->fail($result->get_error_message());
       }
-      return isset($result["message"]) && is_scalar($result["message"]) ? (string) $result["message"] : true;
+      return $this->sent_result($result);
     }
 
     $text = $is_otp ? $this->otp_message(\PeproDevUPS_WPML::translate("sms: farazsms message", $this->read_text("farazsms_message")), $otp_code) : (string) $message;
@@ -143,7 +145,16 @@ final class PeproSMS_FarazSMS_Gateway extends PeproSMS_Gateway_Base {
       "number_format" => "english",
     ), $api_key);
     if (is_wp_error($result)) return $this->fail($result->get_error_message());
-    return isset($result["message"]) && is_scalar($result["message"]) ? (string) $result["message"] : true;
+    return $this->sent_result($result);
+  }
+  /**
+   * Value returned for a sent message: the API text when it has one, otherwise true.
+   * Never an empty string, which the login forms would read as "not sent".
+   */
+  protected function sent_result($result) {
+    $msg = is_array($result) ? $this->error_text($result) : "";
+    if ("" === $msg && is_array($result) && isset($result["data"]) && is_scalar($result["data"])) $msg = (string) $result["data"];
+    return "" !== trim($msg) ? $msg : true;
   }
   /**
    * Admin helpers: pattern list, balance, create an OTP pattern.
