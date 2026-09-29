@@ -48,20 +48,18 @@
     });
     $(document).on("click tap", "textarea", function (e) {
     });
-    $("a.btncheckbox[data-checked]").each(function(i, x) {
-      let me = $(this),
-        icnoff = me.data("off"),
-        icnon = me.data("on"),
+    // on/off buttons (a.btncheckbox, value in data-checked) are drawn as a toggle switch with the state text beside it
+    function pd_render_btncheckbox(me) {
+      let checked = me.attr("data-checked") === "true",
         togglel = me.data("togglel"),
-        txton = me.data("text-on"),
-        txtoff = me.data("text-off");
-      if (me.attr("data-checked") === "true") {
-        $(`${togglel}`).show();
-        me.html(`<i class='material-icons'>${icnon}</i> ${txton}`);
-      } else if (me.attr("data-checked") !== "true") {
-        $(`${togglel}`).hide();
-        me.html(`<i class='material-icons'>${icnoff}</i> ${txtoff}`);
-      }
+        text = checked ? me.data("text-on") : me.data("text-off");
+      if (togglel) { checked ? $(`${togglel}`).show() : $(`${togglel}`).hide(); }
+      me.addClass("pd-switch-btn").toggleClass("is-on", checked).attr({ "role": "switch", "tabindex": "0", "aria-checked": checked ? "true" : "false" });
+      me.html(`<span class="pd-switch" aria-hidden="true"></span><span class="pd-switch-text"></span>`);
+      me.find(".pd-switch-text").text(text == null ? "" : String(text));
+    }
+    $("a.btncheckbox[data-checked]").each(function(i, x) {
+      pd_render_btncheckbox($(this));
     });
     $(".wrapper select").each(function(i, x) {
       let ff = $(this);
@@ -132,21 +130,12 @@
     });
     $(document).on("click tap", ".btncheckbox", function(e) {
       e.preventDefault();
-      let me = $(this),
-        togglel = me.data("togglel"),
-        icnoff = me.data("off"),
-        icnon = me.data("on"),
-        txton = me.data("text-on"),
-        txtoff = me.data("text-off");
-      if (me.attr("data-checked") === "true") {
-        $(`${togglel}`).hide();
-        me.html(`<i class='material-icons'>${icnoff}</i> ${txtoff}`);
-        me.attr("data-checked", "false");
-      } else {
-        $(`${togglel}`).show();
-        me.html(`<i class='material-icons'>${icnon}</i> ${txton}`);
-        me.attr("data-checked", "true");
-      }
+      let me = $(this);
+      me.attr("data-checked", me.attr("data-checked") === "true" ? "false" : "true");
+      pd_render_btncheckbox(me);
+    });
+    $(document).on("keydown", ".btncheckbox", function(e) {
+      if (" " === e.key || "Enter" === e.key) { e.preventDefault(); $(this).trigger("click"); }
     });
     $(document).on("click tap change", "#pepc-settings-theme-scheme", function(e) {
       e.preventDefault();

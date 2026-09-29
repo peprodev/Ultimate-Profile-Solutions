@@ -119,7 +119,7 @@ if (!class_exists("PeproDevUPS_Core")) {
       wp_enqueue_style("RobotoSlabMaterialIcons", "//fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons", array(), '1.0', 'all');
       wp_enqueue_style("pepro-font-awesome", "{$this->assets_url}fa-pro/css/all.min.css", [], $this->version);
       wp_enqueue_style("material-dashboard", "{$this->assets_url}css/material-dashboard.min.css", array(), '2.1.0', 'all');
-      wp_enqueue_style("dashboard-back", "{$this->assets_url}css/dashboard-backend.css", array(), '1.0', 'all');
+      wp_enqueue_style("dashboard-back", "{$this->assets_url}css/dashboard-backend.css", array(), '1.0.' . $this->version, 'all');
       wp_enqueue_style("bootstrap-select", "{$this->assets_url}js/plugins/bootstrap-select.min.css", array(), '1.0', 'all');
       is_rtl() and wp_enqueue_style("dashboard-back-rtl", "{$this->assets_url}css/rtl.css", array(), '1.0', 'all');
       add_filter("peprocore_dashboard_nav_menuitems", array($this, "alter_nav_items"));
@@ -166,7 +166,7 @@ if (!class_exists("PeproDevUPS_Core")) {
 
       wp_enqueue_script("material-dashboard", "{$this->assets_url}js/material-dashboard.js", array('jquery'), "1.6.0", true); //'2.1.0'
 
-      wp_enqueue_script("dashboard-back", "{$this->assets_url}js/dashboard-back.js", array('jquery'), '1.0.3', true);
+      wp_enqueue_script("dashboard-back", "{$this->assets_url}js/dashboard-back.js", array('jquery'), '1.0.3.' . $this->version, true);
       wp_localize_script("dashboard-back", "pepc", apply_filters("peprocore_dashboard_localize", array(
         "ajax"    => admin_url('admin-ajax.php'),
         "_copy"   => __("Copied!", "peprodev-ups"),

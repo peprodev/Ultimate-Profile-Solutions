@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.2.20](#version-8220)
 - [Version 8.2.19](#version-8219)
 - [Version 8.2.18](#version-8218)
 - [Version 8.2.17](#version-8217)
@@ -86,6 +87,10 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.2.20
+- Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
+- **Changed** All on/off settings that used an eye (show/hide) icon are drawn as toggle switches with the state text beside them, on every plugin admin page (same colors as the other toggles, keyboard accessible). Saved values are unchanged
 
 ## Version 8.2.19
 - Release date: 2026-09-29 | 1405-07-07  [&uarr;](#table-of-contents)
