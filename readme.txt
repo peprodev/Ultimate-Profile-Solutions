@@ -168,6 +168,12 @@ Here's to many more years of innovation, freedom, and open-source collaboration 
 = 8.2.39 =
 Release date: 2026-10-01
 
+Release summary of 8.2.38 to 8.2.39 (the per-version details follow below):
+
+* Fixed: fatal error "Class PeproDevUPS_WPML not found" when sending the OTP through SMS.ir (v1, v2) or Kavenegar, present since 8.1.0 (8.2.38).
+* Fixed: fatal error when the dashboard Wallet section is opened without the WooWallet plugin (8.2.39).
+* All plugin code was checked for undefined functions, classes and methods; the release build now refuses unqualified global classes in namespaced files.
+
 * Fixed: opening the dashboard Wallet section without the WooWallet plugin no longer causes a fatal error.
 
 = 8.2.38 =
@@ -402,7 +408,7 @@ Release date: 2026-09-27
 == Upgrade Notice ==
 
 = 8.2.39 =
-Security release: fixes CVE-2026-4791 (stored XSS through shortcode attributes) and hardens all shortcodes. Update as soon as possible.
+Fixes a fatal error when sending the login code through SMS.ir or Kavenegar (since 8.1.0). Update as soon as possible if you use one of these gateways.
 
 = 8.2.5 =
 The Modern UI is now on by default, also on existing sites that did not turn it off before. Its settings moved from "Dashboard Texts" to the Login/Register and Profile screens (values are migrated). New: Sign in with Google, FarazSMS / WP SMS / Persian WooCommerce SMS gateways.
