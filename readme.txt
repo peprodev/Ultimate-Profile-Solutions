@@ -2,8 +2,8 @@
 Contributors: amirhpcom, peprodev, blackswanlab
 Donate link: https://peprodev.com/donate/
 Tags: profile, dashboard, login-registration
-Version: 8.2.41
-Stable tag: 8.2.41
+Version: 8.3.0
+Stable tag: 8.3.0
 Requires at least: 5.0
 Tested up to: 7.1
 Requires PHP: 7.2
@@ -76,6 +76,7 @@ Your support and feedback have been key in shaping this plugin into a reliable a
 * Modern UI Design screen: colors and font sizes of the modern login form and user dashboard
 * Translate & Replace: change any text of WordPress, LearnDash, WooCommerce or other plugins, and replace text in page HTML or WooCommerce emails
 * Verification email editor with Code / Preview tabs
+* Modern order view with WooCommerce order hooks for other plugins, and order cards on phones
 * Fully compatible with Elementor, Zephyr theme, Woodmart theme, Visual Composer, LearnDash, WooWallet, PeproDev Ticketing, WooCommerce, and more
 
 == Installation ==
@@ -164,6 +165,15 @@ Your support and feedback have been key in shaping this plugin into a reliable a
 🎂 Also, a big congratulations to WordPress on its 22nd birthday 🥳🍾!
 We're proud to be part of this amazing journey with the WordPress community 💙
 Here's to many more years of innovation, freedom, and open-source collaboration 😍!
+
+= 8.3.0 =
+Release date: 2026-10-01
+
+Release summary of 8.2.40 to 8.3.0 (the per-version details follow below):
+
+* New: the modern dashboard order view runs the WooCommerce order hooks, so other plugins (licenses, download keys, video players such as SpotPlayer, tracking) show their data there, as on the WooCommerce order page (8.2.40).
+* New: the billing address of the order view shows the billing email (8.2.40).
+* Improved: on phones the dashboard orders table becomes one card per order with the status, date, total, the first products and a "view the order" link for the rest (8.2.41).
 
 = 8.2.41 =
 Release date: 2026-10-01
@@ -417,8 +427,8 @@ Release date: 2026-09-27
 
 == Upgrade Notice ==
 
-= 8.2.41 =
-Fixes a fatal error when sending the login code through SMS.ir or Kavenegar (since 8.1.0). Update as soon as possible if you use one of these gateways.
+= 8.3.0 =
+The modern order view now shows content of other plugins through the WooCommerce order hooks, and the orders list becomes cards on phones. Includes the 8.2.38/8.2.39 fixes for SMS.ir and Kavenegar.
 
 = 8.2.5 =
 The Modern UI is now on by default, also on existing sites that did not turn it off before. Its settings moved from "Dashboard Texts" to the Login/Register and Profile screens (values are migrated). New: Sign in with Google, FarazSMS / WP SMS / Persian WooCommerce SMS gateways.

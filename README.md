@@ -3,7 +3,7 @@
 Profile builder, user dashboard and OTP/SMS/Google login and registration for WordPress, with WooCommerce, LearnDash and WPML support. Free and open source (GPLv2 or later).
 
 [![WordPress.org](https://img.shields.io/badge/WordPress.org-peprodev--ups-21759b)](https://wordpress.org/plugins/peprodev-ups/)
-![Version](https://img.shields.io/badge/version-8.2.41-blue)
+![Version](https://img.shields.io/badge/version-8.3.0-blue)
 ![WordPress](https://img.shields.io/badge/WordPress-5.0%2B%20%7C%20tested%207.1-21759b)
 ![PHP](https://img.shields.io/badge/PHP-7.2%2B-777bb4)
 ![License](https://img.shields.io/badge/license-GPLv2%2B-green)
@@ -15,7 +15,7 @@ Developed by **[Pepro Development Group](https://pepro.dev/)** / Lead Developer:
 
 | | |
 |--|--|
-| **Stable version** | 8.2.41 |
+| **Stable version** | 8.3.0 |
 | **Requires WordPress** | 5.0 or later (tested up to 7.1) |
 | **Requires PHP** | 7.2 or later |
 | **WooCommerce** | optional, tested up to 9.8 |
@@ -35,7 +35,7 @@ Developed by **[Pepro Development Group](https://pepro.dev/)** / Lead Developer:
 - **Verification emails** with a configurable subject (default `[site_name] | Verify Email`, "Restore default"), HTML template with **Code / Preview** tabs, placeholders, "Reset to default" and "Send test email".
 - **Modern UI Design** screen (new in 8.2.32): colors and font sizes of the modern login form and dashboard (buttons, tabs, links, sidebar menu, tables, cards, fields) with the Alwan color picker.
 - **Translate & Replace** (new in 8.2.35): change any translatable text of WordPress, LearnDash, WooCommerce or other plugins (gettext), and replace text in the HTML of post content, whole pages or WooCommerce emails; import/export as JSON.
-- **Modern UI** (new in 8.1.0, on by default since 8.2.0), see below.
+- **Modern UI** (new in 8.1.0, on by default since 8.2.0), see below. Since 8.3.0 the modern order view runs the WooCommerce order hooks (other plugins' licenses, players, tracking show there) and the orders list becomes cards on phones.
 - **WPML / Polylang** translation of every admin-defined front-end text (new in 8.1.0), see below.
 - Works with Elementor, WPBakery, Zephyr and Woodmart themes, LearnDash, WooWallet, YITH plugins, PeproDev Ticketing and WooCommerce (HPOS compatible).
 
@@ -140,7 +140,7 @@ Existing users (matched by their verified Google email) are logged in; new email
 | `peprodev_ui_accent_color` / `peprodev_ui_design_fields` / `peprodev_ui_design_sections` / `peprodev_ui_design_declarations` | filter | Accent color, fields, sections and CSS custom properties of the Modern UI Design screen (8.2.28+) |
 | `peprodev_ui_learndash_screen` / `peprodev_ui_learndash_save` | action | Add boxes to the LearnDash screen and save their data (8.2.34) |
 | `peprofile_find_profile_shortcode_page` | filter | Page reused as the dashboard page instead of creating a new one (8.2.30) |
-| WooCommerce order hooks | action | The modern order view (8.2.40) runs `woocommerce_view_order` (without WooCommerce's own table), `woocommerce_order_details_before_order_table`, `woocommerce_order_item_meta_start` / `_end`, `woocommerce_order_details_after_order_table`, `woocommerce_after_order_details`, `woocommerce_order_details_after_customer_address` and `woocommerce_order_details_after_customer_details`, so plugins can add their data (licenses, keys, players, tracking) as on the WooCommerce order page |
+| WooCommerce order hooks | action | The modern order view (8.3.0) runs `woocommerce_view_order` (without WooCommerce's own table), `woocommerce_order_details_before_order_table`, `woocommerce_order_item_meta_start` / `_end`, `woocommerce_order_details_after_order_table`, `woocommerce_after_order_details`, `woocommerce_order_details_after_customer_address` and `woocommerce_order_details_after_customer_details`, so plugins can add their data (licenses, keys, players, tracking) as on the WooCommerce order page |
 
 ## Hooks added in 8.1.0
 

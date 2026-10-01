@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.3.0](#version-830)
 - [Version 8.2.41](#version-8241)
 - [Version 8.2.40](#version-8240)
 - [Version 8.2.39](#version-8239)
@@ -108,6 +109,10 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.3.0
+- Release date: 2026-10-01 | 1405-07-09  [&uarr;](#table-of-contents)
+- **Release** 8.3.0: everything since 8.2.39 (8.2.40 WooCommerce order hooks in the modern order view, 8.2.41 order cards on phones); new minor version for the modern dashboard order features
 
 ## Version 8.2.41
 - Release date: 2026-10-01 | 1405-07-09  [&uarr;](#table-of-contents)
