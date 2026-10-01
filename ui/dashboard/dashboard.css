@@ -2087,3 +2087,23 @@ a.mj-continue__cta {
 .mj-profile-ui-on .mj-course__content .learndash-wrapper .ld-table-list::before {
   display: none !important;
 }
+
+/* Order view: content added by other plugins through the WooCommerce order hooks */
+.mj-profile-ui-on .mj-order__hooks > :first-child {
+  margin-top: 0;
+}
+
+.mj-profile-ui-on .mj-order__hooks > :last-child {
+  margin-bottom: 0;
+}
+
+.mj-profile-ui-on .mj-order__hooks--after {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px dashed var(--mj-table-border, var(--mj-line));
+}
+
+.mj-profile-ui-on .mj-order__hooks :is(img, video, iframe) {
+  max-width: 100%;
+}
+

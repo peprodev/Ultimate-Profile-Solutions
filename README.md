@@ -3,7 +3,7 @@
 Profile builder, user dashboard and OTP/SMS/Google login and registration for WordPress, with WooCommerce, LearnDash and WPML support. Free and open source (GPLv2 or later).
 
 [![WordPress.org](https://img.shields.io/badge/WordPress.org-peprodev--ups-21759b)](https://wordpress.org/plugins/peprodev-ups/)
-![Version](https://img.shields.io/badge/version-8.2.39-blue)
+![Version](https://img.shields.io/badge/version-8.2.40-blue)
 ![WordPress](https://img.shields.io/badge/WordPress-5.0%2B%20%7C%20tested%207.1-21759b)
 ![PHP](https://img.shields.io/badge/PHP-7.2%2B-777bb4)
 ![License](https://img.shields.io/badge/license-GPLv2%2B-green)
@@ -15,7 +15,7 @@ Developed by **[Pepro Development Group](https://pepro.dev/)** / Lead Developer:
 
 | | |
 |--|--|
-| **Stable version** | 8.2.39 |
+| **Stable version** | 8.2.40 |
 | **Requires WordPress** | 5.0 or later (tested up to 7.1) |
 | **Requires PHP** | 7.2 or later |
 | **WooCommerce** | optional, tested up to 9.8 |
@@ -140,6 +140,7 @@ Existing users (matched by their verified Google email) are logged in; new email
 | `peprodev_ui_accent_color` / `peprodev_ui_design_fields` / `peprodev_ui_design_sections` / `peprodev_ui_design_declarations` | filter | Accent color, fields, sections and CSS custom properties of the Modern UI Design screen (8.2.28+) |
 | `peprodev_ui_learndash_screen` / `peprodev_ui_learndash_save` | action | Add boxes to the LearnDash screen and save their data (8.2.34) |
 | `peprofile_find_profile_shortcode_page` | filter | Page reused as the dashboard page instead of creating a new one (8.2.30) |
+| WooCommerce order hooks | action | The modern order view (8.2.40) runs `woocommerce_view_order` (without WooCommerce's own table), `woocommerce_order_details_before_order_table`, `woocommerce_order_item_meta_start` / `_end`, `woocommerce_order_details_after_order_table`, `woocommerce_after_order_details`, `woocommerce_order_details_after_customer_address` and `woocommerce_order_details_after_customer_details`, so plugins can add their data (licenses, keys, players, tracking) as on the WooCommerce order page |
 
 ## Hooks added in 8.1.0
 

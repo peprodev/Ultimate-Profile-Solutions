@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.2.40](#version-8240)
 - [Version 8.2.39](#version-8239)
 - [Version 8.2.38](#version-8238)
 - [Version 8.2.37](#version-8237)
@@ -106,6 +107,10 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.2.40
+- Release date: 2026-10-01 | 1405-07-09  [&uarr;](#table-of-contents)
+- **New** Modern dashboard order view runs the WooCommerce order hooks (`woocommerce_view_order` without WooCommerce's own table, `woocommerce_order_details_before_order_table`, item meta start/end, `woocommerce_order_details_after_order_table`, `woocommerce_after_order_details`, customer address/details hooks), so other plugins (licenses, download keys, players such as SpotPlayer, tracking) show their data there as on the WooCommerce order page. The billing address also shows the billing email
 
 ## Version 8.2.39
 - Release date: 2026-10-01 | 1405-07-09  [&uarr;](#table-of-contents)

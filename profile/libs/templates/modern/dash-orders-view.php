@@ -38,6 +38,32 @@ $mj_actions = wc_get_account_orders_actions( $mj_order );
 unset( $mj_actions['view'] );
 $mj_billing = $mj_order->get_formatted_billing_address();
 $mj_ship    = $mj_order->needs_shipping_address() ? $mj_order->get_formatted_shipping_address() : '';
+
+/**
+ * Output of WooCommerce order hooks, so plugins that add content to the order view
+ * (licenses, download keys, players, tracking, ...) show it here too. WooCommerce's own
+ * order table is left out of "woocommerce_view_order" because this view draws its own.
+ *
+ * @param string $hook Action name.
+ * @param array  $args Arguments.
+ * @return string
+ */
+$mj_hook_html = function ( $hook, array $args ) {
+	$table = 'woocommerce_view_order' === $hook ? has_action( $hook, 'woocommerce_order_details_table' ) : false;
+	if ( false !== $table ) {
+		remove_action( $hook, 'woocommerce_order_details_table', $table );
+	}
+	ob_start();
+	do_action_ref_array( $hook, $args );
+	$html = (string) ob_get_clean();
+	if ( false !== $table ) {
+		add_action( $hook, 'woocommerce_order_details_table', $table );
+	}
+	return trim( $html );
+};
+$mj_before = $mj_hook_html( 'woocommerce_view_order', array( $mj_order->get_id() ) ) . $mj_hook_html( 'woocommerce_order_details_before_order_table', array( $mj_order ) );
+$mj_after  = $mj_hook_html( 'woocommerce_order_details_after_order_table', array( $mj_order ) ) . $mj_hook_html( 'woocommerce_after_order_details', array( $mj_order ) );
+$mj_cust   = $mj_hook_html( 'woocommerce_order_details_after_customer_details', array( $mj_order ) );
 ?>
 <div class="mj-order">
 	<a class="mj-back" href="<?php echo esc_url( $mj_back ); ?>">
@@ -75,6 +101,10 @@ $mj_ship    = $mj_order->needs_shipping_address() ? $mj_order->get_formatted_shi
 		<?php endif; ?>
 	</section>
 
+	<?php if ( '' !== $mj_before ) : ?>
+		<section class="mj-card mj-order__hooks mj-order__hooks--before woocommerce"><?php echo $mj_before; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- output of other plugins' order hooks ?></section>
+	<?php endif; ?>
+
 	<section class="mj-card">
 		<header class="mj-card__head">
 			<h4 class="mj-card__title"><?php esc_html_e( 'Order details', 'peprodev-ups' ); ?></h4>
@@ -93,6 +123,7 @@ $mj_ship    = $mj_order->needs_shipping_address() ? $mj_order->get_formatted_shi
 				}
 				?>
 				<li class="mj-order__item">
+					<?php $mj_item_id = $mj_item->get_id(); ?>
 					<span class="mj-order__thumb">
 						<?php echo $mj_product ? wp_kses_post( $mj_product->get_image( 'full' ) ) : wp_kses_post( wc_placeholder_img( 'full' ) ); ?>
 					</span>
@@ -103,7 +134,11 @@ $mj_ship    = $mj_order->needs_shipping_address() ? $mj_order->get_formatted_shi
 							<span class="mj-order__name"><?php echo esc_html( $mj_item->get_name() ); ?></span>
 						<?php endif; ?>
 						<span class="mj-order__qty"><?php /* translators: %s: item quantity. */ echo esc_html( sprintf( __( 'Quantity: %s', 'peprodev-ups' ), number_format_i18n( $mj_item->get_quantity() ) ) ); ?></span>
-						<?php wc_display_item_meta( $mj_item, array( 'before' => '<div class="mj-order__item-meta">', 'after' => '</div>' ) ); ?>
+						<?php
+						do_action( 'woocommerce_order_item_meta_start', $mj_item_id, $mj_item, $mj_order, false );
+						wc_display_item_meta( $mj_item, array( 'before' => '<div class="mj-order__item-meta">', 'after' => '</div>' ) );
+						do_action( 'woocommerce_order_item_meta_end', $mj_item_id, $mj_item, $mj_order, false );
+						?>
 					</span>
 					<span class="mj-order__line"><?php echo wp_kses_post( $mj_order->get_formatted_line_subtotal( $mj_item ) ); ?></span>
 					<?php foreach ( $mj_courses as $mj_course ) : ?>
@@ -123,6 +158,9 @@ $mj_ship    = $mj_order->needs_shipping_address() ? $mj_order->get_formatted_shi
 		<?php if ( $mj_order->get_customer_note() ) : ?>
 			<p class="mj-order__note"><strong><?php esc_html_e( 'Note:', 'peprodev-ups' ); ?></strong> <?php echo wp_kses_post( nl2br( wptexturize( $mj_order->get_customer_note() ) ) ); ?></p>
 		<?php endif; ?>
+		<?php if ( '' !== $mj_after ) : ?>
+			<div class="mj-order__hooks mj-order__hooks--after woocommerce"><?php echo $mj_after; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- output of other plugins' order hooks ?></div>
+		<?php endif; ?>
 	</section>
 
 	<?php if ( $mj_billing || $mj_ship ) : ?>
@@ -135,17 +173,26 @@ $mj_ship    = $mj_order->needs_shipping_address() ? $mj_order->get_formatted_shi
 							<?php if ( $mj_order->get_billing_phone() ) : ?>
 								<br><span dir="ltr"><?php echo esc_html( $mj_order->get_billing_phone() ); ?></span>
 							<?php endif; ?>
+							<?php if ( $mj_order->get_billing_email() ) : ?>
+								<br><span dir="ltr"><?php echo esc_html( $mj_order->get_billing_email() ); ?></span>
+							<?php endif; ?>
 						</address>
+						<?php do_action( 'woocommerce_order_details_after_customer_address', 'billing', $mj_order ); ?>
 					</div>
 				<?php endif; ?>
 				<?php if ( $mj_ship ) : ?>
 					<div>
 						<h4 class="mj-card__title"><?php esc_html_e( 'Shipping address', 'peprodev-ups' ); ?></h4>
 						<address><?php echo wp_kses_post( $mj_ship ); ?></address>
+						<?php do_action( 'woocommerce_order_details_after_customer_address', 'shipping', $mj_order ); ?>
 					</div>
 				<?php endif; ?>
 			</div>
 		</section>
+	<?php endif; ?>
+
+	<?php if ( '' !== $mj_cust ) : ?>
+		<section class="mj-card mj-order__hooks mj-order__hooks--customer woocommerce"><?php echo $mj_cust; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- output of other plugins' order hooks ?></section>
 	<?php endif; ?>
 
 	<?php if ( $mj_notes ) : ?>
