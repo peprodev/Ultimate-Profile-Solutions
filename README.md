@@ -3,7 +3,7 @@
 Profile builder, user dashboard and OTP/SMS/Google login and registration for WordPress, with WooCommerce, LearnDash and WPML support. Free and open source (GPLv2 or later).
 
 [![WordPress.org](https://img.shields.io/badge/WordPress.org-peprodev--ups-21759b)](https://wordpress.org/plugins/peprodev-ups/)
-![Version](https://img.shields.io/badge/version-8.2.38-blue)
+![Version](https://img.shields.io/badge/version-8.2.39-blue)
 ![WordPress](https://img.shields.io/badge/WordPress-5.0%2B%20%7C%20tested%207.1-21759b)
 ![PHP](https://img.shields.io/badge/PHP-7.2%2B-777bb4)
 ![License](https://img.shields.io/badge/license-GPLv2%2B-green)
@@ -15,7 +15,7 @@ Developed by **[Pepro Development Group](https://pepro.dev/)** / Lead Developer:
 
 | | |
 |--|--|
-| **Stable version** | 8.2.38 |
+| **Stable version** | 8.2.39 |
 | **Requires WordPress** | 5.0 or later (tested up to 7.1) |
 | **Requires PHP** | 7.2 or later |
 | **WooCommerce** | optional, tested up to 9.8 |

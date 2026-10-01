@@ -5,6 +5,9 @@ defined("ABSPATH") || exit;
 # @Last modified time: 2021/09/15 14:50:35
 
 
+// the Wallet section needs the WooWallet plugin (a direct ?section=wallet link must not fatal without it)
+if (!function_exists("woo_wallet")) return;
+
 global $PeproDevUPS_Profile;
 $PeproDevUPS_Profile->change_dashboard_title(_x("Wallet", "user-dashboard", "peprodev-ups"));
 ?>
