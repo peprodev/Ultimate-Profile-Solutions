@@ -3,7 +3,7 @@
 Profile builder, user dashboard and OTP/SMS/Google login and registration for WordPress, with WooCommerce, LearnDash and WPML support. Free and open source (GPLv2 or later).
 
 [![WordPress.org](https://img.shields.io/badge/WordPress.org-peprodev--ups-21759b)](https://wordpress.org/plugins/peprodev-ups/)
-![Version](https://img.shields.io/badge/version-8.2.40-blue)
+![Version](https://img.shields.io/badge/version-8.2.41-blue)
 ![WordPress](https://img.shields.io/badge/WordPress-5.0%2B%20%7C%20tested%207.1-21759b)
 ![PHP](https://img.shields.io/badge/PHP-7.2%2B-777bb4)
 ![License](https://img.shields.io/badge/license-GPLv2%2B-green)
@@ -15,7 +15,7 @@ Developed by **[Pepro Development Group](https://pepro.dev/)** / Lead Developer:
 
 | | |
 |--|--|
-| **Stable version** | 8.2.40 |
+| **Stable version** | 8.2.41 |
 | **Requires WordPress** | 5.0 or later (tested up to 7.1) |
 | **Requires PHP** | 7.2 or later |
 | **WooCommerce** | optional, tested up to 9.8 |
@@ -46,7 +46,7 @@ Version 8.1.0 added a modern presentation layer; since **8.2.0 it is on by defau
 | Setting | Where | What it changes |
 |--|--|--|
 | Modern login/register form | **PeproDev Profile > Login/Register > Login & Registration** (`admin.php?page=peprodev-ups&section=loginregister#tab_registration`) | Login/Register tabs, OTP code boxes (paste, autofill, auto-submit), a "Login/Register with email / with mobile" switch when both methods are enabled, styled registration fields |
-| Modern user dashboard | **PeproDev Profile > Profile** (`admin.php?page=peprodev-ups&section=profile`) | Restyled dashboard, new Edit profile view (inline WooCommerce address editing, avatar removal, password strength), redesigned order and course views |
+| Modern user dashboard | **PeproDev Profile > Profile** (`admin.php?page=peprodev-ups&section=profile`) | Restyled dashboard, new Edit profile view (inline WooCommerce address editing, avatar removal, password strength), redesigned order and course views; on phones the orders table becomes one card per order with its first products (`peprodev_ui_orders_card_items` filter, default 3) |
 | Colors and font sizes | **PeproDev Profile > Modern UI Design** (`admin.php?page=peprodev-ups&section=uidesign`) | Accent, titles, cards, buttons, tabs, links, sidebar menu, tables and fields; font sizes in px. Empty = built-in design |
 | Learning button and "My courses" texts | **PeproDev Profile > LearnDash** (`admin.php?page=peprodev-ups&section=learndash`) | Texts and links of `[peprodev_learning_button]` and the My courses views |
 

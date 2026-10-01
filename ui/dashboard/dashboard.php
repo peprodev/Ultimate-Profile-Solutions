@@ -108,6 +108,7 @@ function peprodev_ui_dashboard_templates( $templates ) {
 		'dash-orders-view.php' => 'modern/dash-orders-view.php',
 		'dash-course-view.php' => 'modern/dash-course-view.php',
 		'dash-courses.php'     => 'modern/dash-courses.php',
+		'wc/orders.php'        => 'modern/wc-orders.php',
 	) );
 	foreach ( $templates as $i => $name ) {
 		if ( isset( $map[ $name ] ) && file_exists( PEPRODEV_UPS_UI_DIR . '../profile/libs/templates/' . $map[ $name ] ) ) {

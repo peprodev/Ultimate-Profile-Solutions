@@ -5992,3 +5992,10 @@ msgstr ""
 #: login/include/class-activated.php
 msgid "Replace all current rules with the imported data?"
 msgstr ""
+
+#: profile/libs/templates/modern/wc-orders.php
+#, php-format
+msgid "+ %s more item, view the order"
+msgid_plural "+ %s more items, view the order"
+msgstr[0] ""
+msgstr[1] ""

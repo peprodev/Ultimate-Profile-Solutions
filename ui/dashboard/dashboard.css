@@ -2107,3 +2107,146 @@ a.mj-continue__cta {
   max-width: 100%;
 }
 
+/* Orders list: a table on wide screens, a card per order on phones */
+.mj-profile-ui-on .mj-orders-cards {
+  display: none;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (max-width: 720px) {
+  .mj-profile-ui-on .profile-page-wrapper .mj-orders-table {
+    display: none;
+  }
+
+  .mj-profile-ui-on .profile-page-wrapper .mj-orders-cards {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+}
+
+.mj-profile-ui-on .profile-page-wrapper .mj-order-card {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 16px;
+}
+
+.mj-profile-ui-on .mj-order-card__head,
+.mj-profile-ui-on .mj-order-card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.mj-profile-ui-on .mj-order-card__number {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--mj-heading, var(--mj-ink));
+}
+
+.mj-profile-ui-on .mj-order-card__meta {
+  color: var(--mj-muted);
+  font-size: .9rem;
+}
+
+.mj-profile-ui-on .mj-order-card__total {
+  color: var(--mj-ink);
+  font-size: 1rem;
+}
+
+.mj-profile-ui-on .mj-order-card__items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 12px 0 0;
+  border-top: 1px dashed var(--mj-table-border, var(--mj-line));
+  list-style: none;
+}
+
+.mj-profile-ui-on .mj-order-card__items > li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.mj-profile-ui-on .mj-order-card__thumb {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--mj-sand);
+}
+
+.mj-profile-ui-on .mj-order-card__thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mj-profile-ui-on .mj-order-card__name {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: .92rem;
+  color: var(--mj-ink);
+}
+
+.mj-profile-ui-on .mj-order-card__qty {
+  flex: none;
+  color: var(--mj-muted);
+  font-size: .85rem;
+}
+
+.mj-profile-ui-on .profile-page-wrapper a.mj-order-card__more {
+  font-size: .88rem;
+  font-weight: 600;
+}
+
+.mj-profile-ui-on .mj-order-card__extra {
+  font-size: .88rem;
+  color: var(--mj-muted);
+}
+
+.mj-profile-ui-on .mj-order-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.mj-profile-ui-on .profile-page-wrapper .mj-order-card__actions a.button {
+  flex: 1 1 auto;
+  justify-content: center;
+  min-height: 42px;
+  margin: 0;
+  padding: 8px 14px;
+  border: 1px solid var(--mj-line);
+  border-radius: 10px;
+  background: var(--mj-surface);
+  color: var(--mj-ink);
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mj-profile-ui-on .profile-page-wrapper .mj-order-card__actions a.button.mj-btn-primary {
+  border-color: transparent;
+  background: var(--mj-btn-bg, var(--mj-primary));
+  color: var(--mj-btn-text, var(--mj-on-primary));
+}
+

@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.2.41](#version-8241)
 - [Version 8.2.40](#version-8240)
 - [Version 8.2.39](#version-8239)
 - [Version 8.2.38](#version-8238)
@@ -107,6 +108,10 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.2.41
+- Release date: 2026-10-01 | 1405-07-09  [&uarr;](#table-of-contents)
+- **Improved** Modern dashboard orders list (Orders section and `[profile-wc-orders]`): on screens up to 720px the table becomes one card per order with number, status, date, total, the first products (thumbnail, name, quantity; `peprodev_ui_orders_card_items` filter, default 3), a "+ N more items, view the order" link, columns added by other plugins and the order actions
 
 ## Version 8.2.40
 - Release date: 2026-10-01 | 1405-07-09  [&uarr;](#table-of-contents)
