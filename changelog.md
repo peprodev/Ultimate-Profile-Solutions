@@ -8,6 +8,7 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 <summary><strong>Version 8.x.x</strong></summary>
 &nbsp;
 
+- [Version 8.2.38](#version-8238)
 - [Version 8.2.37](#version-8237)
 - [Version 8.2.36](#version-8236)
 - [Version 8.2.35](#version-8235)
@@ -104,6 +105,10 @@ Developed by [Pepro Development Group](https://pepro.dev/), Lead Developer: [Ami
 </details>
 
 ---
+
+## Version 8.2.38
+- Release date: 2026-10-01 | 1405-07-09  [&uarr;](#table-of-contents)
+- **Fixed** Fatal error `Class "PeproDev\PeproCore\RegLogin\PeproDevUPS_WPML" not found` when sending an OTP through SMS.ir (v1 and v2) or Kavenegar (since 8.1.0, the gateway files are namespaced and called the WPML helper without a leading backslash). The release build now fails when a namespaced file uses a global class without a leading backslash
 
 ## Version 8.2.37
 - Release date: 2026-09-30 | 1405-07-08  [&uarr;](#table-of-contents)

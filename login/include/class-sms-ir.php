@@ -94,7 +94,7 @@ class PeproSMS_SMSIR_Gateway extends PeproDevUPS{
     return $htmloutput;
   }
   public function send_sms_ir($numbers = "", $message = "", $otp_code = 0) {
-    $message = str_replace("[OTP]", $otp_code, PeproDevUPS_WPML::translate("sms: sms.ir message", $this->sms_text));
+    $message = str_replace("[OTP]", $otp_code, \PeproDevUPS_WPML::translate("sms: sms.ir message", $this->sms_text));
     if (is_numeric(trim($message))) {
       $ParameterArray = array(array("Parameter" => "OTP", "ParameterValue" => $otp_code));
       return $this->ultraFastSend(array("ParameterArray" => $ParameterArray, "Mobile" => $numbers, "TemplateId" => trim($message)));
@@ -103,7 +103,7 @@ class PeproSMS_SMSIR_Gateway extends PeproDevUPS{
     }
   }
   public function send_sms_ir_v2($numbers = "", $message = "", $otp_code = 0) {
-    $message = str_replace("[OTP]", $otp_code, PeproDevUPS_WPML::translate("sms: sms.ir v2 message", $this->sms2_text));
+    $message = str_replace("[OTP]", $otp_code, \PeproDevUPS_WPML::translate("sms: sms.ir v2 message", $this->sms2_text));
     if (is_numeric(trim($message))) {
       $params = array(
         ["name" => "OTP", "value" => $otp_code],
